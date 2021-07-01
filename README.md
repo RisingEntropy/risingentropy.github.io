@@ -1,4 +1,4 @@
-Welcome to my profile.A student at BIT.
+Welcome to my profile.A student at BIT(Beijing Institute of Technology).
 
 QQ:1724458359
 
