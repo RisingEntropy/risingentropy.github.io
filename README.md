@@ -1,4 +1,8 @@
-Welcome to my profile
+Welcome to my profile.A student at BIT.
+
+QQ:1724458359
+
+e-mail:1724458359@qq.com
 
 # Blog
 
