@@ -1,4 +1,4 @@
-Welcome to my profile.A student at BIT(Beijing Institute of Technology).
+Welcome to my profile.A student at UESTC(University of electronic science and technology of china).
 
 QQ:1724458359
 
