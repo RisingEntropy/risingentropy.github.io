@@ -14,3 +14,7 @@ e-mail:1724458359@qq.com
 [View on github](https://github.com/RisingEntropy/ZoneSpider)
 
 [View on gitee](https://gitee.com/risingentropy/ZoneSpider)
+
+## Netcpy
+[View on github](https://github.com/RisingEntropy/NetCpy)
+[View on gitee](https://gitee.com/risingentropy/net-cpy)
