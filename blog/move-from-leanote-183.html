@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>期望与概率</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-183">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="期望与概率 – Haoyu Deng's page">
+  <meta name="twitter:description" content="期望与概率
+一些概念
+基本事件ω(也称样本点)：
+一次试验可能出现的每一个直接的结果。也就是随机试验不能够再分解的结果。如：
+E1有两个基本事件：E1 ={出现正面}， E2={出现反面}
+E2有六个基本事件： Ei ={出现 i 点}，i=1,2,3,4,5,6
+样本空间Ω：全体基本事件的集合。如：
+E2的样本空间为 Ω={1，2，3，4，5，6}
+随机事件：
+试验的每一个可能结果。用大写字母A,B,C等表示随机事件也就是样本空间的子集，即若干基本事件组成的集合。如：在E2中，“出现偶数点”的事件可表示为A= {2，4，6}
+事件发生：
+当事件A所包含的基本事件有一个出现，就说事件A发生了，否则就说事件A未发生
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="期望与概率 – Haoyu Deng's page">
+  <meta property="og:description" content="期望与概率
+一些概念
+基本事件ω(也称样本点)：
+一次试验可能出现的每一个直接的结果。也就是随机试验不能够再分解的结果。如：
+E1有两个基本事件：E1 ={出现正面}， E2={出现反面}
+E2有六个基本事件： Ei ={出现 i 点}，i=1,2,3,4,5,6
+样本空间Ω：全体基本事件的集合。如：
+E2的样本空间为 Ω={1，2，3，4，5，6}
+随机事件：
+试验的每一个可能结果。用大写字母A,B,C等表示随机事件也就是样本空间的子集，即若干基本事件组成的集合。如：在E2中，“出现偶数点”的事件可表示为A= {2，4，6}
+事件发生：
+当事件A所包含的基本事件有一个出现，就说事件A发生了，否则就说事件A未发生
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="期望与概率">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            期望与概率
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-04-05T04:00:57+00:00">05 Apr 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="期望与概率">期望与概率</h1>
+<h1 id="一些概念">一些概念</h1>
+<h1 id="基本事件ω也称样本点">基本事件ω(也称样本点)：</h1>
+<p>一次试验可能出现的每一个直接的结果。也就是随机试验不能够再分解的结果。如：
+E1有两个基本事件：E1 ={出现正面}， E2={出现反面}
+E2有六个基本事件： Ei ={出现 i 点}，i=1,2,3,4,5,6</p>
+<h1 id="样本空间ω全体基本事件的集合如">样本空间Ω：全体基本事件的集合。如：</h1>
+<p>E2的样本空间为 Ω={1，2，3，4，5，6}</p>
+<h1 id="随机事件">随机事件：</h1>
+<p>试验的每一个可能结果。用大写字母A,B,C等表示随机事件也就是样本空间的子集，即若干基本事件组成的集合。如：在E2中，“出现偶数点”的事件可表示为A= {2，4，6}</p>
+<h1 id="事件发生">事件发生：</h1>
+<p>当事件A所包含的基本事件有一个出现，就说事件A发生了，否则就说事件A未发生</p>
+
+<ul>
+  <li>必然事件：一定发生的事件，也就是样本空间Ω</li>
+  <li>不可能事件：一定不发生的事件，记为Φ</li>
+  <li>事件包含：如果事件A发生必然导致事件B发生．则称事件B包含事件A，记作 A⊂ B 或 B ⊃ A</li>
+  <li>事件的和：事件A与事件B至少有一个发生，这样的一个事件称为事件A 与事件B的和或并，记为A U B 或 A + B</li>
+  <li>事件的积：事件A与事件B同时发生，这样的事件称为事件A与事件B的积或交，记为A∩B 或 AB</li>
+  <li>事件的和与积可以推广到多个事件</li>
+</ul>
+
+<h1 id="事件的差">事件的差：</h1>
+<p>事件A 发生而事件B不发生，这样的事件称为事件A与事件B的差，记为A-B。如A={2,4,6}，B={2,3}，则A-B={4,6}。 A-B就是A的基本事件中去掉含在B中的，余下的基本事件组成的事件。</p>
+<h1 id="互斥事件">互斥事件：</h1>
+<p>若事件A与事件B不能同时发生(即AB=Φ)，则称事件A与事件B为互不相容或互斥。若A与B互不相容，就是A与B不含有公共的基本事件</p>
+<h1 id="对立事件互逆">对立事件(互逆)：</h1>
+<p>若事件A与事件B有且仅有一个发生，且AUB=Ω，A∩B=Φ，称事件A与事件B互为对立事件或互逆事件，
+其中事件B叫做事件A 的逆事件，记作$B=\overline{A}$，事件B叫做事件A的逆事件，记作$A=\overline{B}$</p>
+<h1 id="概率公理">概率公理</h1>
+<p>样本空间 S 是一个集合，它的元素称为基本事件。样本空间的一个子集被称为事件
+根据定义，所有基本事件互斥。
+概率：如果有一种事件到实数的映射 P{}，满足：</p>
+
+<ol>
+  <li>目对任何事件 A， P{A}≥0</li>
+  <li>P{S}=1</li>
+  <li>对两个互斥事件， P{A∪B}=P{A}+P{B}</li>
+</ol>
+
+<p>则可称 P{A}为事件 A 的概率。上述三条称为概率公理。</p>
+<h1 id="条件概率">条件概率</h1>
+<p>定义 设E为一试验，A和B为E中两事件，且$P(A)&gt;0$，则称$P(AB)/P(A)$为事件A发生的条件下事件B发生的条件概率，记作$P(B|A)$，即$P(B|A)= P(AB)/P(A) $,其中，P(AB)并不能简单的认为是$P(A)*P(B)$，而是把AB看做一起的事件看做整体计算。
+eg：
+袋中有5个球，2个黑球，3个白球，现依次取两球且不放回，(1)求第二次取到黑球的概率，(2)若已知第一次取到黑球的条件下，求第二次取到黑球的概率
+显然，B|A第一次取到黑球的条件下，求第二次取到黑球的概率，A事件是第一次取到黑球的事件，B是两次都取到黑球的事件。概率：
+\(A:\frac{2}{5}\)
+\(AB:\frac{A^2_2}{A_5^2}\)
+\(Therefore\)
+\(P(A|B) = \frac{P(AB)}{P(A)} = \frac{\frac{A^2_2}{A_5^2}}{\frac{2}{5}} = \frac{1}{4}\)</p>
+<h1 id="全概率公式">全概率公式</h1>
+<p>定义 设试验E的样本空间为Ω，事件A1,A2,……,An满足：
+1、两两互不相容
+2、ΣAi= Ω
+3、P(Ai)&gt;0
+则称A1,A2,……,An 为 Ω 的一个划分(分割)定理 设 Ω为试验 E 的样本空间，A 为 E 的一个随机事件，B1,B2,……,Bn 为Ω的一个划分，且有 P(Bi)&gt;0，则
+$P(A) = \sum_{i=1}^{n}P(B_i)P(A|B_i)$
+证明：
+$P(A)=\sum_{i=1}^n P(AB_i) = P(A) = \sum_{i=1}^{n}P(B_i)P(A|B_i)$
+设Ω为E的样本空间，A为E的事件，B1,B2,……,Bn互不相容，且P(Bi)&gt;0， ，则
+<img src="/images/posts/ca70f14ab644127b9002313.png" alt="图片标题" />
+eg:袋中有5个球，2个黑球，3个白球，依次取两球，求第二次取到黑球的概率.
+设B1表示“第一次取到黑球”的事件，B2表示“第一次取到白球”的事件，A 表示事件“第二次取黑球”由全概率公式有
+$P(A) = P(A|B_1)P(B_1)+P(A|B_2)P(B_2)=\frac{2}{5}<em>\frac{1}{4}+\frac{3}{5}</em>\frac{1}{2} = \frac{2}{5}$</p>
+<h1 id="期望">期望</h1>
+<p>如果X是一个离散的随机变量，输出值为 x1,x2, …， 和输出值相应的概率为p1, p2, … （概率和为1）, 那么期望值：
+\(E(X) = \sum p_1x_i\)</p>
+<h1 id="期望的运算">期望的运算！！！</h1>
+<p>$E(φ)= ΣφiPi$，这是期望的定义，其中φi是一个取值，而Pi是取这个值的概率
+Ø 期望有“线性”，也就是说对于不相关的两
+个随机变量φ和ξ，$E(φ±ξ)=E(φ)±E(ξ)$；$E(φξ)=E(φ)E(ξ)$；$E(φ/ξ)=E(φ)/E(ξ)$
+Ø 在某些情况下，期望可以表示成一个无穷的等比数列，然后利用极限的思想来求。
+eg:扔掷一枚均匀的骰子，直到投出6为止，问平均需要扔掷几次？
+设Xk为事件：第k次扔掷才投出6，则$P(Xk)=1/6<em>(5/6)^(k-1)$，
+$P(k+1)=5/6</em>P(k)$
+$E(X)=1P(1)+2P(2)+……+kP(k)+……=6$</p>
+<h1 id="全期望公式">全期望公式</h1>
+<p>$E(X)=E(E(Y|X))=\sum P(X=x_i)E(Y|X=x_i)$
+eg:一项工作甲一个人完成，平均需要4小时，而乙有0.4的概率来帮忙，2个人完成平均需要3小时。用X表示完成工作的人数，Y表示完成这项工作的期望时间。则:</p>
+
+<p><img src="/images/posts/ca70f14ab644127b9002313.png" alt="图片标题" /></p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%A6%82%E7%8E%87&url=/blog/move-from-leanote-183"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-183"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-183&amp;media=/images/posts/OI.png&amp;description=%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%A6%82%E7%8E%87"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-183&title=%E6%9C%9F%E6%9C%9B%E4%B8%8E%E6%A6%82%E7%8E%87&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-182">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="期望与概率">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">AI</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-184">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">bzoj1426. 收集邮票</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="期望与概率">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

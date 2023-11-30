@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>二叉树学习</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-1">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="二叉树学习 – Haoyu Deng's page">
+  <meta name="twitter:description" content="二叉树的性质
+1.在二叉树的第i层上至多有$2^{i-1}$个节点
+2.深度为k的二叉树至多有$2^k-1$个节点
+    &amp;gt;满二叉树：深度为k且有$2^k-1$个节点的二叉树，每层上的节点数都是最大节点数。
+
+3.任意二叉树，若叶节点数为$n_0$度为2的节点数为$n_2$则必有$n_0=n_2+1$
+4.具有n个节点的完全二叉树深度为floor($log_2 10$)
+5.对于一棵n个节点的完全二叉树，对任意一个节点有
+    &amp;gt;1.若i=1，则i为根，无父节点。若i》1，则父节点编号为i/2。若2i&amp;gt;n，则i无左孩子，也无右孩子，否则做孩子编号为2i
+    2.若2i+1&amp;gt;1，则i无右孩子，否则右孩子编号为2i+1
+
+二叉树遍历方法
+·先序遍历，即先遍历根节点，再遍历左节点，最后是右节点。
+·中序遍历，即先遍历左节点，再遍历根节点，最后是右节点。
+·后序遍历，即先遍历左节点，然后是右节点，最后是根节点
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="二叉树学习 – Haoyu Deng's page">
+  <meta property="og:description" content="二叉树的性质
+1.在二叉树的第i层上至多有$2^{i-1}$个节点
+2.深度为k的二叉树至多有$2^k-1$个节点
+    &amp;gt;满二叉树：深度为k且有$2^k-1$个节点的二叉树，每层上的节点数都是最大节点数。
+
+3.任意二叉树，若叶节点数为$n_0$度为2的节点数为$n_2$则必有$n_0=n_2+1$
+4.具有n个节点的完全二叉树深度为floor($log_2 10$)
+5.对于一棵n个节点的完全二叉树，对任意一个节点有
+    &amp;gt;1.若i=1，则i为根，无父节点。若i》1，则父节点编号为i/2。若2i&amp;gt;n，则i无左孩子，也无右孩子，否则做孩子编号为2i
+    2.若2i+1&amp;gt;1，则i无右孩子，否则右孩子编号为2i+1
+
+二叉树遍历方法
+·先序遍历，即先遍历根节点，再遍历左节点，最后是右节点。
+·中序遍历，即先遍历左节点，再遍历根节点，最后是右节点。
+·后序遍历，即先遍历左节点，然后是右节点，最后是根节点
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="二叉树学习">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            二叉树学习
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-07-24T03:16:21+00:00">24 Jul 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="二叉树的性质">二叉树的性质</h1>
+<p>1.在二叉树的第i层上至多有$2^{i-1}$个节点
+2.深度为k的二叉树至多有$2^k-1$个节点
+    &gt;满二叉树：深度为k且有$2^k-1$个节点的二叉树，每层上的节点数都是最大节点数。</p>
+
+<p>3.任意二叉树，若叶节点数为$n_0$度为2的节点数为$n_2$则必有$n_0=n_2+1$
+4.具有n个节点的完全二叉树深度为floor($log_2 10$)
+5.对于一棵n个节点的完全二叉树，对任意一个节点有
+    &gt;1.若i=1，则i为根，无父节点。若i》1，则父节点编号为i/2。若2i&gt;n，则i无左孩子，也无右孩子，否则做孩子编号为2i
+    2.若2i+1&gt;1，则i无右孩子，否则右孩子编号为2i+1</p>
+
+<h1 id="二叉树遍历方法">二叉树遍历方法</h1>
+<p>·先序遍历，即先遍历根节点，再遍历左节点，最后是右节点。
+·中序遍历，即先遍历左节点，再遍历根节点，最后是右节点。
+·后序遍历，即先遍历左节点，然后是右节点，最后是根节点</p>
+
+<blockquote>
+  <p>注意，遍历时若条件允许，应考虑递归实现，便于理解。辅助栈+while的方式不太便于理解，但须加强对此的理解</p>
+</blockquote>
+
+<h1 id="已知先序中序-遍历结果求后序结果样例解析一本通p432">已知先序，中序 遍历结果，求后序结果样例解析(一本通P432)</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">string</span> <span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">;</span><span class="c1">//s1先序s2中序</span>
+    <span class="kt">void</span> <span class="nf">cacl</span><span class="p">(</span><span class="kt">int</span> <span class="n">l1</span><span class="p">,</span><span class="kt">int</span> <span class="n">r1</span><span class="p">,</span><span class="kt">int</span> <span class="n">l2</span><span class="p">,</span><span class="kt">int</span> <span class="n">r2</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">l1</span><span class="p">]);</span><span class="c1">//找到先序遍历的根节点在中序遍历中的位置</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&gt;</span><span class="n">l2</span><span class="p">)</span><span class="n">cacl</span><span class="p">(</span><span class="n">l1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">l1</span><span class="o">+</span><span class="n">m</span><span class="o">-</span><span class="n">l2</span><span class="p">,</span><span class="n">l2</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="c1">//递归建树，元素为l1+1(l1已结计算过了)</span>
+    <span class="c1">//位置[l1+1,l1+长度]长度即是m的位置-初始位置</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">r2</span><span class="p">)</span><span class="n">cacl</span><span class="p">(</span><span class="n">l1</span><span class="o">+</span><span class="n">m</span><span class="o">-</span><span class="n">l2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r2</span><span class="p">);</span><span class="c1">//同上</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s1</span><span class="p">[</span><span class="n">l1</span><span class="p">];</span><span class="c1">//输出就行</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<h1 id="拓展二叉树">拓展二叉树</h1>
+<p>即把空节点用.表示。这样以后，就可以通过先序或者后序序列构建整颗二叉树。代码</p>
+<h1 id="略">略</h1>
+
+<h1 id="普通树转二叉树">普通树转二叉树</h1>
+<p>说白了就是自己看情况，不记</p>
+
+<h1 id="相似二叉树">相似二叉树</h1>
+<p>两者都为空熟或者均不为空疏，且左右自树分别相似。
+等价二叉树即不仅相似，而且所有对应节点上的元素均相等。
+SUM of similar binary tree:
+$B_0 = 1$
+$b_n=\sum_{i=0}^{n=1}B_iB_{n-i-1}$</p>
+<h1 id="完全二叉树">完全二叉树</h1>
+<p>一颗深度为k的二叉树，1至k-1层的节点都是满的，即满足$2^{i-1}$，只有最下面的一层的节点数小于$2^{i-1}$,并且最下面一层的节点都集中在该层最左边若干位置，则次二叉树称为完全二叉树</p>
+<h1 id="堆的性质">堆的性质</h1>
+<p>1.设数组A的长度为len，二叉树的节点个数为size，则size&lt;=len，A[i]储存二叉树中编号为i的节点值。A[size]以后的元素不属于相应的堆，树的根为[1]，并且很容易求得i的父节点的编号为i/2，左子节点为2i，节点为2i+1；
+2.对于除根以外的每个节点，父节点的节点值大于等于该节点。即A[parent(i)]&gt;=A[i]。除根节点以外，所有节点的值都不超过父节点的值，可以退出，堆中最大的元素放在根节点中。若每一节点的子树的节点值小于等于该节点的堆叫大根堆。反之，若除根以外的每个节点i都有A[parent(i)]&lt;=A[i]的堆，叫小根堆。</p>
+<h1 id="求完全二叉树堆的父节点">求完全二叉树(堆)的父节点</h1>
+<p>$\frac{i}{2}$</p>
+<h1 id="建堆">建堆</h1>
+<h1 id="1put一个元素一本通p442">1.put一个元素//一本通P442</h1>
+<blockquote>
+  <p>1.在堆尾加入一个元素，并把这个节点设置为当前节点
+2.比较当前节点和它父节点的大小
+若当前节点小于父节点，则交换它们的值，并把父节点(就是加入的那个元素所在的节点)设置为当前节点，转到2；
+若大于父节点等于，转到3
+3.结束</p>
+  <h1 id="2从堆中取出一个元素">2.从堆中取出一个元素</h1>
+  <p>(1)取出堆的根的值
+(2)将最后一个节点len放到根的位置上，覆盖掉堆，堆长度减一
+(3)把根节点(刚才的len)置为当前的父节点pa
+(4)如果pa无儿子(fa&gt;len/2)则转6，否则把pa的两个儿子中最小的那个置为当前的子节点son
+(5)比较pa与son的值
+若pa小于等于son，转6，否则，交换两个节点的值，把pa指向son，转4
+(6)结束</p>
+  <h1 id="stl的heap">STL的heap</h1>
+  <p>在头文件<algorithm>里面
+4个函数
+make_heap(_First,_Last,cmp);
+make_heap(_First,_Last);大根堆
+一般对于int类型，cmp可以为greate<int>()得到小根堆
+push_heap(_First,_Last);
+讲一个元素放入堆中
+pop_heap(_First,_Last)
+调用此函数删除数据
+sort_heap(_First,_Last)
+排序堆，排序 之后不是合法的堆。</int></algorithm></p>
+</blockquote>
+
+<h1 id="finally">FINALLY</h1>
+<h1 id="建堆和put与get操作的时间复杂度是olog_2n建堆操作是onlog_2n于是乎一个便于维护且复杂度较低的数据结构就解决啦">建堆和put与get操作的时间复杂度是O($log_2n$),建堆操作是O($nlog_2n$)，于是乎一个便于维护，且复杂度较低的数据结构就解决啦</h1>
+
+<h1 id="树的重心">树的重心</h1>
+<p>如果我们挑选某个节点为树的根结点的话，剩下的各个子树大小会相对接近，这就是树的重心
+可以用于树的分治算法。
+重心的性质：</p>
+
+<h1 id="求重心">求重心</h1>
+<p>1.先dfs一下，求出以每个点为根节点的子树大小</p>
+
+<h1 id="树的直径">树的直径</h1>
+<p>树的直径就是一棵树上最长的一条链
+1.dfs，详见洛谷网课
+2.dp，</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0&url=/blog/move-from-leanote-1"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-1"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-1&amp;media=/images/posts/OI.png&amp;description=%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-1&title=%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-0">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">C++杂记</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="二叉树学习">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

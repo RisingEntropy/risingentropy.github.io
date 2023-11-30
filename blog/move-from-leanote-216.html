@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>暑假复习计划(自行刷题)</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-216">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="暑假复习计划(自行刷题) – Haoyu Deng's page">
+  <meta name="twitter:description" content="*:重点复习
+**:水水就好了
+练习计划
+大纲
+
+  7月份主要是复习知识点，提高熟练程度，并且适当复习之前学习的省选知识，学会使用省选知识骗分
+  8月份做提高题，把简单的知识玩出新花样
+    具体计划
+    上午听课，按照日期规划把做过的题再复习复习，下午把剩余的习题处理了。晚上总结归纳，并适度拓展。若有空，就自学一些实用性较强的省选知识。周六周日晚上可以打打比赛，提高能力。
+    进度打卡
+  
+  [] 熟悉(7月份)
+  [] 熟悉基础上提高(8月份)
+    联赛内容
+    模拟策略类
+  
+  [] 毒瘤大模拟 //每周1-2道
+    DP类
+  
+  单调队列优化DP*
+  数位DP 7.16 17
+  状压DP* 7.13
+  斜率优化* 7.14/7.16
+  [] 较难的动态规划 //8月2 3 4
+  [] 较难树形DP //8月  4 5 6
+    数据结构
+  
+  单调队列单调栈*//7.17
+  dfs序*//7.17
+  LCA*//7.18
+  [] 分块*//7.18
+  [] 平衡树(fhq treap   spaly)
+  树链剖分//7.19
+  线段树基本操作及部分拓展*//7.20
+  主席树*//7.22
+  [] 并查集拓展一课内容*//7.23
+  线段树拓展操作 8. 7 8
+    数学
+  
+  数论基础(一本通版)
+  [] 高斯消元*
+  [] 组合数学//7.24
+  [] 期望概率*//7.25
+  [] 同余方程
+  [] 简单组合数学*
+  [] 一元线性同余方程组
+  [] 拓展欧几里得算法*//7.26
+  [] 欧拉函数
+  [] 求组合数的方法(杨辉三角，预处理阶乘和阶乘逆元)
+  [] 杨辉三角推论 二项式定理
+  [] 计数原理
+  [] 容斥原理
+  [] 抽屉原理
+  [] 卡特兰数 两类斯特林数
+  [] 矩阵快速幂和高斯消元
+    图论
+  
+  [] 0/1分数规划
+  [] 最短路拓展
+  [] 差分约束//7.27
+  [] 支配树//7.28
+  [] 2-SAT
+  [] tarjan强联通分量等拓展
+  [] 线段树优化建图+kurskal重构树//7.29
+    字符串
+  
+  [] HASH
+  [] AC自动机 //抽空看看
+  [] mancher//7.30
+    杂项类
+  
+  [] 一些基础工具(对拍，高精度等)//自己抽空看看就是
+  模拟退火 //抽空看一下
+    分治(骗分)
+  
+  [] cdq
+  [] 点分治
+  [] 整体二分//7.31 8.1
+    思维题
+  
+  [] 平时抽空积累
+    省选内容
+    省选内容主要用于联赛骗分
+    数据结构
+  
+  [] LCT //7月份抽空熟悉
+  [] 二分图
+  [] 左偏树**
+    数学
+  
+  [] 组合数学
+    图论
+  
+  [] 最小树形图
+  网络流**//七月份抽空熟悉
+    字符串**
+  
+  [] manacher
+  [] PAM
+  [] 后缀树组
+  [] 后缀自动机
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="暑假复习计划(自行刷题) – Haoyu Deng's page">
+  <meta property="og:description" content="*:重点复习
+**:水水就好了
+练习计划
+大纲
+
+  7月份主要是复习知识点，提高熟练程度，并且适当复习之前学习的省选知识，学会使用省选知识骗分
+  8月份做提高题，把简单的知识玩出新花样
+    具体计划
+    上午听课，按照日期规划把做过的题再复习复习，下午把剩余的习题处理了。晚上总结归纳，并适度拓展。若有空，就自学一些实用性较强的省选知识。周六周日晚上可以打打比赛，提高能力。
+    进度打卡
+  
+  [] 熟悉(7月份)
+  [] 熟悉基础上提高(8月份)
+    联赛内容
+    模拟策略类
+  
+  [] 毒瘤大模拟 //每周1-2道
+    DP类
+  
+  单调队列优化DP*
+  数位DP 7.16 17
+  状压DP* 7.13
+  斜率优化* 7.14/7.16
+  [] 较难的动态规划 //8月2 3 4
+  [] 较难树形DP //8月  4 5 6
+    数据结构
+  
+  单调队列单调栈*//7.17
+  dfs序*//7.17
+  LCA*//7.18
+  [] 分块*//7.18
+  [] 平衡树(fhq treap   spaly)
+  树链剖分//7.19
+  线段树基本操作及部分拓展*//7.20
+  主席树*//7.22
+  [] 并查集拓展一课内容*//7.23
+  线段树拓展操作 8. 7 8
+    数学
+  
+  数论基础(一本通版)
+  [] 高斯消元*
+  [] 组合数学//7.24
+  [] 期望概率*//7.25
+  [] 同余方程
+  [] 简单组合数学*
+  [] 一元线性同余方程组
+  [] 拓展欧几里得算法*//7.26
+  [] 欧拉函数
+  [] 求组合数的方法(杨辉三角，预处理阶乘和阶乘逆元)
+  [] 杨辉三角推论 二项式定理
+  [] 计数原理
+  [] 容斥原理
+  [] 抽屉原理
+  [] 卡特兰数 两类斯特林数
+  [] 矩阵快速幂和高斯消元
+    图论
+  
+  [] 0/1分数规划
+  [] 最短路拓展
+  [] 差分约束//7.27
+  [] 支配树//7.28
+  [] 2-SAT
+  [] tarjan强联通分量等拓展
+  [] 线段树优化建图+kurskal重构树//7.29
+    字符串
+  
+  [] HASH
+  [] AC自动机 //抽空看看
+  [] mancher//7.30
+    杂项类
+  
+  [] 一些基础工具(对拍，高精度等)//自己抽空看看就是
+  模拟退火 //抽空看一下
+    分治(骗分)
+  
+  [] cdq
+  [] 点分治
+  [] 整体二分//7.31 8.1
+    思维题
+  
+  [] 平时抽空积累
+    省选内容
+    省选内容主要用于联赛骗分
+    数据结构
+  
+  [] LCT //7月份抽空熟悉
+  [] 二分图
+  [] 左偏树**
+    数学
+  
+  [] 组合数学
+    图论
+  
+  [] 最小树形图
+  网络流**//七月份抽空熟悉
+    字符串**
+  
+  [] manacher
+  [] PAM
+  [] 后缀树组
+  [] 后缀自动机
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="暑假复习计划(自行刷题)">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            暑假复习计划(自行刷题)
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-07-12T05:35:41+00:00">12 Jul 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p>*:重点复习
+**:水水就好了</p>
+<h1 id="练习计划">练习计划</h1>
+<h1 id="大纲">大纲</h1>
+<ul class="task-list">
+  <li>7月份主要是复习知识点，提高熟练程度，并且适当复习之前学习的省选知识，学会使用省选知识骗分</li>
+  <li>8月份做提高题，把简单的知识玩出新花样
+    <h1 id="具体计划">具体计划</h1>
+    <p>上午听课，按照日期规划把做过的题再复习复习，下午把剩余的习题处理了。晚上总结归纳，并适度拓展。若有空，就自学一些实用性较强的省选知识。周六周日晚上可以打打比赛，提高能力。</p>
+    <h1 id="进度打卡">进度打卡</h1>
+  </li>
+  <li>[] 熟悉(7月份)</li>
+  <li>[] 熟悉基础上提高(8月份)
+    <h1 id="联赛内容">联赛内容</h1>
+    <h1 id="模拟策略类">模拟策略类</h1>
+  </li>
+  <li>[] 毒瘤大模拟 //每周1-2道
+    <h1 id="dp类">DP类</h1>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />单调队列优化DP*</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />数位DP 7.16 17</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />状压DP* 7.13</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />斜率优化* 7.14/7.16</li>
+  <li class="task-list-item">[] 较难的动态规划 //8月2 3 4</li>
+  <li class="task-list-item">[] 较难树形DP //8月  4 5 6
+    <h1 id="数据结构">数据结构</h1>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />单调队列单调栈*//7.17</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />dfs序*//7.17</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />LCA*//7.18</li>
+  <li class="task-list-item">[] 分块*//7.18</li>
+  <li class="task-list-item">[] 平衡树(fhq treap   spaly)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />树链剖分//7.19</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />线段树基本操作及部分拓展*//7.20</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />主席树*//7.22</li>
+  <li class="task-list-item">[] 并查集拓展一课内容*//7.23</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />线段树拓展操作 8. 7 8
+    <h1 id="数学">数学</h1>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />数论基础(一本通版)</li>
+  <li class="task-list-item">[] 高斯消元*</li>
+  <li class="task-list-item">[] 组合数学//7.24</li>
+  <li class="task-list-item">[] 期望概率*//7.25</li>
+  <li class="task-list-item">[] 同余方程</li>
+  <li class="task-list-item">[] 简单组合数学*</li>
+  <li class="task-list-item">[] 一元线性同余方程组</li>
+  <li class="task-list-item">[] 拓展欧几里得算法*//7.26</li>
+  <li class="task-list-item">[] 欧拉函数</li>
+  <li class="task-list-item">[] 求组合数的方法(杨辉三角，预处理阶乘和阶乘逆元)</li>
+  <li class="task-list-item">[] 杨辉三角推论 二项式定理</li>
+  <li class="task-list-item">[] 计数原理</li>
+  <li class="task-list-item">[] 容斥原理</li>
+  <li class="task-list-item">[] 抽屉原理</li>
+  <li class="task-list-item">[] 卡特兰数 两类斯特林数</li>
+  <li class="task-list-item">[] 矩阵快速幂和高斯消元
+    <h1 id="图论">图论</h1>
+  </li>
+  <li class="task-list-item">[] 0/1分数规划</li>
+  <li class="task-list-item">[] 最短路拓展</li>
+  <li class="task-list-item">[] 差分约束//7.27</li>
+  <li class="task-list-item">[] 支配树//7.28</li>
+  <li class="task-list-item">[] 2-SAT</li>
+  <li class="task-list-item">[] tarjan强联通分量等拓展</li>
+  <li class="task-list-item">[] 线段树优化建图+kurskal重构树//7.29
+    <h1 id="字符串">字符串</h1>
+  </li>
+  <li class="task-list-item">[] HASH</li>
+  <li class="task-list-item">[] AC自动机 //抽空看看</li>
+  <li class="task-list-item">[] mancher//7.30
+    <h1 id="杂项类">杂项类</h1>
+  </li>
+  <li class="task-list-item">[] 一些基础工具(对拍，高精度等)//自己抽空看看就是</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />模拟退火 //抽空看一下
+    <h1 id="分治骗分">分治(骗分)</h1>
+  </li>
+  <li class="task-list-item">[] cdq</li>
+  <li class="task-list-item">[] 点分治</li>
+  <li class="task-list-item">[] 整体二分//7.31 8.1
+    <h1 id="思维题">思维题</h1>
+  </li>
+  <li class="task-list-item">[] 平时抽空积累
+    <h1 id="省选内容">省选内容</h1>
+    <p>省选内容主要用于联赛骗分</p>
+    <h1 id="数据结构-1">数据结构</h1>
+  </li>
+  <li class="task-list-item">[] LCT //7月份抽空熟悉</li>
+  <li class="task-list-item">[] 二分图</li>
+  <li class="task-list-item">[] 左偏树**
+    <h1 id="数学-1">数学</h1>
+  </li>
+  <li class="task-list-item">[] 组合数学
+    <h1 id="图论-1">图论</h1>
+  </li>
+  <li class="task-list-item">[] 最小树形图</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />网络流**//七月份抽空熟悉
+    <h1 id="字符串-1">字符串**</h1>
+  </li>
+  <li class="task-list-item">[] manacher</li>
+  <li class="task-list-item">[] PAM</li>
+  <li class="task-list-item">[] 后缀树组</li>
+  <li class="task-list-item">[] 后缀自动机</li>
+</ul>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E6%9A%91%E5%81%87%E5%A4%8D%E4%B9%A0%E8%AE%A1%E5%88%92(%E8%87%AA%E8%A1%8C%E5%88%B7%E9%A2%98)&url=/blog/move-from-leanote-216"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-216"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-216&amp;media=/images/posts/OI.png&amp;description=%E6%9A%91%E5%81%87%E5%A4%8D%E4%B9%A0%E8%AE%A1%E5%88%92(%E8%87%AA%E8%A1%8C%E5%88%B7%E9%A2%98)"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-216&title=%E6%9A%91%E5%81%87%E5%A4%8D%E4%B9%A0%E8%AE%A1%E5%88%92(%E8%87%AA%E8%A1%8C%E5%88%B7%E9%A2%98)&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-215">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="暑假复习计划(自行刷题)">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">【爆零】20190629考试</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-217">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【线段树+合并位】</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="暑假复习计划(自行刷题)">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

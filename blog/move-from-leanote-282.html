@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP2011 观光公交  LOJ加强版 心得</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-282">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NOIP2011 观光公交  LOJ加强版 心得 – Haoyu Deng's page">
+  <meta name="twitter:description" content="
+  $O(nlog(n))$的做法真是清奇无比，目前已花8h+的时间。。。 9h成功AC
+主要是写心得，所以放在归纳总结里
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="NOIP2011 观光公交  LOJ加强版 心得 – Haoyu Deng's page">
+  <meta property="og:description" content="
+  $O(nlog(n))$的做法真是清奇无比，目前已花8h+的时间。。。 9h成功AC
+主要是写心得，所以放在归纳总结里
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2011 观光公交  LOJ加强版 心得">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            NOIP2011 观光公交  LOJ加强版 心得
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-11-09T13:46:05+00:00">09 Nov 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <blockquote>
+  <p>$O(nlog(n))$的做法真是清奇无比，<del>目前已花8h+的时间。。。</del> 9h成功AC
+主要是写心得，所以放在归纳总结里</p>
+</blockquote>
+
+<h1 id="题面">题面</h1>
+<p>风景迷人的小城 $Y$ 市，拥有 $n$  个美丽的景点。由于慕名而来的游客越来越多，$Y$ 市特意安排了一辆观光公交车，为游客提供更便捷的交通服务。观光公交车在第$0$ 分钟出现在 $1$ 号景点，随后依次前往 $ 2、3 、4 ……n $号景点。从第 $i$ 号景点开到第 $i+1$ 号景点需要 $D_i$ 分钟。任意时刻，公交车只能往前开，或在景点处等待。</p>
+
+<p>设共有 $m$ 个游客，每位游客需要乘车$1$ 次从一个景点到达另一个景点，第 $i$ 位游客在 $T_i$ 分钟来到景点 $A_i$ ，希望乘车前往景点 $B_i$ （$A_i&lt;B_i$）。为了使所有乘客都能顺利到达目的地，公交车在每站都必须等待需要从该景点出发的所有乘客都上车后才能出发开往下一景点。</p>
+
+<p>假设乘客上下车不需要时间。</p>
+
+<p>一个乘客的旅行时间，等于他到达目的地的时刻减去他来到出发地的时刻。因为只有一辆观光车，有时候还要停下来等其他乘客，乘客们纷纷抱怨旅行时间太长了。于是聪明的司机ZZ给公交车安装了 $k$ 个氮气加速器，每使用一个加速器，可以使其中一个 $D_i$ 减 $1$ 。对于同一个 $D_i$ 可以重复使用加速器，但是必须保证使用后 $D_i$ 大于等于 $0$ 。</p>
+
+<p>那么ZZ该如何安排使用加速器，才能使所有乘客的旅行时间总和最小？</p>
+
+<font color="red">对于 $100\%$ 的数据，$n，m\le 10^5，k\le5\times10^6，D_i\le1000。$ </font>
+
+<hr />
+<h1 id="开题">开题</h1>
+<p>拿到题后有一个“显而易见”的贪心：一条道路不能加速次数过多而导致车等人，所以加速有一个范围，同时每次加速选择一条人数最多的路（我知道这个东西错的很凶）
+所以线段树区间修改，区间查询最大值，同时把过短的边赋为$- \infty$
+复杂度$O(klog(n))$。<del>美滋滋</del>
+然后我就挂了</p>
+<h1 id="错因一">错因一：</h1>
+<p><strong>不考虑一条边会对后面连续的一些边产生影响</strong>
+也就是说区间查询最大值不是最优的决策了
+也就是说我要开始推公式了</p>
+
+<p>分析后可得</p>
+
+\[ans=\sum_{i=2}^nTim_i*cnt_i-\sum T_i\]
+
+<p>这个式子很重要也很有用！
+其中$Tim_i$表示公交车到达第$i$号景点的时间，$cnt_i$表示在$i$景点下车的人数</p>
+
+<p>显然的，如果我们设$Begin_i$为从$i$号景点发车的时间，那么有</p>
+
+\[Tim_i=Begin_{i-1}+D_{i-1}\]
+
+<p>所以分析一波$Begin$的式子
+首先我们设$i$号景点最晚到的旅客的时间为$Maxn_i$
+\(Begin_i=max\left(Maxn_i,Begin_{i-1}+D_{i-1} \right)\)
+发现这是一个递推式，尝试把它拆开</p>
+
+\[Begin_i=max\left(Maxn_i,max(Maxn_{i-1}+D_{i-1},Begin_{i-2}+D_{i-2}+D_{i-1})\right)\]
+
+<p>像这样一直拆下去，就得到了这样一个奇妙的式子
+\(Begin_i=max\left(Maxn_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j+D_{j\to i}\end{Bmatrix}\right)\)
+把$D_{j\to i}$拆成前缀和形式$pre_i-pre_j$,再稍稍变一下形，就有：</p>
+
+\[Begin_i=max\left(Maxn_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_i\right)\\
+=max\left(Maxn_i-pre_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}\right)+pre_i\]
+
+<p>合并后完成变形：
+\(Begin_i=\underset{1\le j\le i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_i\)
+这时再回过头来看答案，可以推一波
+\(\sum_{i=2}^nTim_i*cnt_i-\sum T_i\\
+=\sum_{i=2}^n(Begin_{i-1}+D_{i-1})*cnt_i-\sum T_i\\
+=\sum_{i=2}^n\left(\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_{i-1}+D_{i-1}\right)*cnt_i-\sum T_i\)
+$pre_{i-1}+D_{i-1}$就是$pre_i$，那么我们就维护一下${max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}$就好了，线段树解决</p>
+
+<p>至此脑子烧糊，想不出怎么贪心了
+于是去瞟了网上唯一一份题解，豁然开朗</p>
+
+<p>设$S_i$表示景点$i$公交到达时间和游客最晚时间之差，显然如果$S_i&gt;0$就有提速的余地
+于是推一波这个东西</p>
+
+\[S_i=Tim_i-Maxn_i\\
+=Begin_{i-1}+D_{i-1}-Maxn_i\\
+=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_{i-1}+D_{i-1}-Maxn_i\\
+=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}-(Maxn_i-pre_i)\]
+
+<p>通俗点讲，如果$i$号点前面有比它小的点，那么那个点可以对$i$号点产生影响
+那么现在就很清楚了：一个点能影响后面连续一段比它小的点，一个点是否优秀取决于它区间内除它以外的点的$cnt$总和（因为减小$1$的权值就减小了$\sum\limits_{i=l+1}^rcnt_i$的答案）
+所以把所有区间丢进堆里，权值为$\sum cnt$</p>
+
+<p>现在考虑修改答案（我要吐了md）
+如果我们修改$D_i$，它会让它后面所有的$pre$减小，也就是在线段树上的区间加操作，同时在$k&gt;0$不断加速的过程中，总会有一个点与左端点一样大，那么就分割区间，由于最多操作$2n$个区间，总复杂度$O(nlog(n))$。<del>美滋滋</del>
+然后我又挂了</p>
+<h1 id="错因二">错因二：</h1>
+<p><strong>没有考虑$D_i$减成负数的情况</strong>
+此时$D_i=0$，区间变成$l+1\to r$
+艹
+完成以上工作LOJ 60分（黑线）</p>
+<h1 id="错因三">错因三：</h1>
+<p><strong>没有考虑$cnt_{r+1}$对区间l~r的贡献</strong>
+用人话就是：如果公交可能提前到站，仍会产生贡献，因为会有人在这一站下车，所以说区间最小长度为1</p>
+
+<p>可是怎么还是60分？</p>
+
+<h1 id="错因四">错因四：</h1>
+<p><strong>处理$D_i\to 0$的过程有锅</strong>
+不知道读者发现没有
+因为是让区间左端点最大，而上面的过程显然没有保证。
+不慌，分析一下$S_i$的式子，可以知道需要存一个旧区间的“左端点”值，与当前左端点值取$max$（相当于旧左端点仍然管辖，只是不能直接减小$D_i$了）</p>
+
+<p>还是60分，心态有点小崩</p>
+
+<h1 id="错因五">错因五</h1>
+<p>mmp wtcl
+不能直接存旧左端点值，因为可能这个值会被修改
+所以我们存旧左端点的位置，取$max$时查询一下就好了
+至此收获$\color{green}{Accepted}$
+附上最终代码</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># include&lt;bits/stdc++.h&gt;
+using namespace std;
+inline char nc(){
+	static char buf[100000],*p1=buf,*p2=buf;
+	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+}
+//# define nc getchar
+inline int read(){
+	int x=0,f=1;
+	char ch=nc();
+	for(;!isdigit(ch);ch=nc())if(ch=='-')f=-1;
+	while(isdigit(ch)){x=(x&lt;&lt;1)+(x&lt;&lt;3)+(ch^48);ch=nc();}
+	return x*f;
+}
+typedef long long ll;
+const int N=1e5+3;
+struct tree{
+	int l,r;
+	long long maxn,maxpos,lazy;
+	inline tree friend operator +(tree l,tree r){
+		tree ret={0,0,0,0,0};ret.l=l.l;ret.r=r.r;
+		if(l.maxn&gt;=r.maxn)ret.maxpos=l.maxpos;
+		else ret.maxpos=r.maxpos;
+		ret.maxn=max(l.maxn,r.maxn);return ret;
+	}
+}t[N&lt;&lt;2];
+int cnt[N],maxn[N],sum[N],pre[N],d[N];
+//# define lim(i) (maxn[i+1]-maxn[i])
+struct tour{
+	int tim,l,r;
+}p[N*10];
+inline bool cmp(tour a,tour b){
+	if(a.l==b.l)return a.tim&lt;b.tim;
+	return a.l&lt;b.l;
+}
+int n,m,k;ll T;
+# define lc (p&lt;&lt;1)
+# define rc ((p&lt;&lt;1)|1)
+inline void pushup(int p){
+	if(t[lc].maxn&gt;=t[rc].maxn)t[p].maxpos=t[lc].maxpos;
+	else t[p].maxpos=t[rc].maxpos;
+	t[p].maxn=max(t[lc].maxn,t[rc].maxn);
+}
+inline void pushnow(int p,int w){
+	t[p].maxn+=w;t[p].lazy+=w;
+}
+inline void pushdown(int p){
+	if(t[p].lazy!=0){
+		pushnow(lc,t[p].lazy);pushnow(rc,t[p].lazy);t[p].lazy=0;
+	}
+}
+void build(int p,int l,int r){
+	t[p].l=l;t[p].r=r;t[p].lazy=0;
+	if(l==r){t[p].maxn=maxn[l]-pre[l],t[p].maxpos=l;return;}
+	int mid=(l+r)&gt;&gt;1;
+	build(lc,l,mid);build(rc,mid+1,r);
+	pushup(p);
+}
+void lmy(int p,int pl,int pr,int w){
+	int l=t[p].l,r=t[p].r;
+	if(pl&lt;=l&amp;&amp;r&lt;=pr){pushnow(p,w);return;}
+	int mid=(l+r)&gt;&gt;1;pushdown(p);
+	if(pl&lt;=mid)lmy(lc,pl,pr,w);
+	if(pr&gt;mid)lmy(rc,pl,pr,w);
+	pushup(p);
+}
+tree glf(int p,int pl,int pr){
+	int l=t[p].l,r=t[p].r;
+	if(pl&lt;=l&amp;&amp;r&lt;=pr){return t[p];}
+	pushdown(p);int mid=(l+r)&gt;&gt;1;
+	if(pl&lt;=mid&amp;&amp;pr&gt;mid)return glf(lc,pl,pr)+glf(rc,pl,pr);
+	else if(pl&lt;=mid)return glf(lc,pl,pr);
+	else return glf(rc,pl,pr);
+}
+struct segment{
+	int l,r;ll sum, vis;
+	segment(int _l=0,int _r=0,ll _sum=0,ll _vis=0):l(_l),r(_r),sum(_sum),vis(_vis){}
+	const bool operator &lt;(const segment &amp;b)const{
+		return sum&lt;b.sum;
+	}
+};
+priority_queue&lt;segment&gt;q;
+
+int main(){
+	n=read();m=read();k=read();
+	for(int i=1;i&lt;n;i++)d[i]=read(),pre[i+1]=pre[i]+d[i];
+	for(int i=1;i&lt;=m;i++){
+		p[i].tim=read();p[i].l=read();p[i].r=read();T+=p[i].tim;
+		maxn[p[i].l]=max(maxn[p[i].l],p[i].tim);cnt[p[i].r]++;
+	}
+	build(1,1,n);
+	for(int i=1;i&lt;=n+1;i++)sum[i]=sum[i-1]+cnt[i];
+	for(int i=2,last=1,lastval=maxn[1]-pre[1];i&lt;=n;i++){
+		if(maxn[i]-pre[i]&gt;=lastval)q.push(segment(last,i-1,sum[i]-sum[last],last)),last=i,lastval=maxn[i]-pre[i];
+		if(i==n&amp;&amp;last!=n)q.push(segment(last,i,sum[i]-sum[last],last));
+	}
+	while(k&amp;&amp;!q.empty()){
+		segment now=q.top();q.pop();
+		if(now.l==now.r){
+			if(k&lt;=d[now.l])lmy(1,now.l+1,n,k),d[now.l]-=k,k=0;
+			else k-=d[now.l],lmy(1,now.l+1,n,d[now.l]),d[now.l]=0;
+			continue;
+		}
+		int x=glf(1,now.l+1,now.r).maxn,lmaxn=max(glf(1,now.l,now.l).maxn,glf(1,now.vis,now.vis).maxn);
+		if(k&lt;=min(d[now.l],lmaxn-x)){lmy(1,now.l+1,n,k);d[now.l]-=k;k=0;}
+		else{
+			if(lmaxn-x&gt;=d[now.l]){
+				lmy(1,now.l+1,n,d[now.l]);k-=d[now.l];d[now.l]=0;
+				if(now.l+1&gt;now.r)continue;
+				if(now.l+1&lt;=now.r)q.push(segment(now.l+1,now.r,sum[now.r+1]-sum[now.l+1],now.vis));
+			}else{
+				lmy(1,now.l+1,n,lmaxn-x);k-=lmaxn-x;d[now.l]-=lmaxn-x;
+				if(now.l+1&gt;now.r)continue;
+				int pos=0;
+				pos=glf(1,now.l+1,now.r).maxpos;
+				if(now.l&lt;=pos-1)q.push(segment(now.l,pos-1,sum[pos]-sum[now.l],now.vis));
+				if(pos&lt;=now.r)q.push(segment(pos,now.r,sum[now.r+1]-sum[pos],pos));
+			}
+			
+		}
+	}
+	for(int i=1;i&lt;n;i++)pre[i+1]=pre[i]+d[i];
+	ll ans=-T;
+	for(int i=2;i&lt;=n;i++)ans+=cnt[i]*(glf(1,1,i-1).maxn+pre[i]);
+	printf("%lld",ans);
+	return 0;
+}
+</code></pre></div></div>
+
+<p>$\color{orange}{FIN}$</p>
+
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=NOIP2011%20%E8%A7%82%E5%85%89%E5%85%AC%E4%BA%A4%20%20LOJ%E5%8A%A0%E5%BC%BA%E7%89%88%20%E5%BF%83%E5%BE%97&url=/blog/move-from-leanote-282"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-282"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-282&amp;media=/images/posts/OI.png&amp;description=NOIP2011%20%E8%A7%82%E5%85%89%E5%85%AC%E4%BA%A4%20%20LOJ%E5%8A%A0%E5%BC%BA%E7%89%88%20%E5%BF%83%E5%BE%97"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-282&title=NOIP2011%20%E8%A7%82%E5%85%89%E5%85%AC%E4%BA%A4%20%20LOJ%E5%8A%A0%E5%BC%BA%E7%89%88%20%E5%BF%83%E5%BE%97&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-281">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2011 观光公交  LOJ加强版 心得">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">菜爆了的dhy的模板复习列表</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-283">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">垃圾hxy没复习的东西</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2011 观光公交  LOJ加强版 心得">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>网络流</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-142">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="网络流 – Haoyu Deng's page">
+  <meta name="twitter:description" content="网络流
+概念
+若有向图G=(V,E)满足下列条件
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="网络流 – Haoyu Deng's page">
+  <meta property="og:description" content="网络流
+概念
+若有向图G=(V,E)满足下列条件
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="网络流">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            网络流
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-01-25T06:18:32+00:00">25 Jan 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="网络流">网络流</h1>
+<h1 id="概念">概念</h1>
+<p>若有向图G=(V,E)满足下列条件</p>
+
+<ol>
+  <li>有且仅有一个顶点S，它的入度为零，即d-(S) ==0，这个顶点S便称为源点，或称为发点。</li>
+  <li>有且仅有一个顶点T，它的出度为零，即d+(T) = 0，这个顶点T便称为汇点，或称为收点</li>
+  <li>每一条弧都有非负数，叫做该边的容量。边(vi, vj)的容量用$C_{i,j}$表示</li>
+</ol>
+
+<p>则称之为网络流图，记为G = (V, E, C)
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+<h1 id="可行流">可行流</h1>
+<p>其实就是每一条弧上面的流量$F_{i,j}$都小于这条路的容量。性质如下</p>
+
+<ol>
+  <li>$F_{i,j}\leq C_{i,j}$</li>
+  <li>除源点和汇点以外，其他点均有$F_{i,j} = \sum F_{j,k}$</li>
+  <li>反对称性：即$F_{i,j} = -F_{j,i}$</li>
+</ol>
+
+<h1 id="还有一些概念">还有一些概念</h1>
+<blockquote>
+  <p>饱和弧：网络中Fij =Cij的弧
+非饱和弧：网络中Fij ＜ Cij的弧
+非零流弧：网络中 Fij＞0 的弧
+零流弧：网络中 Fij =0的弧</p>
+</blockquote>
+
+<hr />
+
+<p>前向弧和后向弧之类的东西就看看讲义好了</p>
+
+<hr />
+
+<blockquote>
+  <p>在图G中，一个由不同的边组成的序列e1,e2,…,eg，如果ei是连接Vi-1与Vi(i＝1,2,…,g)的，我们就称这个序列为从V0到Vg的一条<strong>道路</strong>，数g称为路长，V0与Vg称为这条道路的两个<strong>端点</strong>，Vi(1&lt;=i&lt;=g-1)叫做道路的<strong>内点</strong>。</p>
+</blockquote>
+
+<hr />
+
+<h1 id="残量网络">残量网络</h1>
+<p><del>其实就是跑过一次网络流以后剩下的容量，方便计算</del></p>
+
+<ul>
+  <li>为了更方便算法的实现，一般根据原网络定义一个残量网络。其中r(u,v)为残量网络的容量</li>
+  <li>r(u,v) = c(u,v) – f(u,v)</li>
+  <li>通俗地讲：就是对于某一条边（也称弧），还能再有多少流量经过</li>
+  <li>Gf残量网络,Ef表示残量网络的边集</li>
+</ul>
+
+<h1 id="建立后向弧">建立后向弧</h1>
+<p>后向弧为算法纠正自己所犯的错误提供了可能性，它允许算法取消先前的错误的行为。
+图示
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+
+<p>图二中，有些方向相反的边就是后向弧</p>
+
+<font color="red">注意,后向弧只是概念上的,在程序中后向弧与前向弧并无区别.</font>
+<blockquote>
+  <p>我们为所有边设置反向边(容量为0)，并将其流量与正向边同步。为了保持T-&gt;S边流量为0，每当由于增广操作，T-&gt;S边流量上升，其反向边也同步上涨，而显然在残量网络中反向边是沿S-&gt;T方向的，这就又出现了一条增广路，计算机对此无法容忍，下调它的流量，我们的T-&gt;S边流量也随之回到了0，达到了目的</p>
+  <h1 id="割">割</h1>
+  <p>G = (V, E, C)是已知的网络流图，设U是V的一个子集，W =V\U，满足S ∈ U，T∈W。即U、W把V分成两个不相交的集合，且源点和汇点分属不同的集合(其实就是把一个网络流图分成2部分，源点和汇点分别属于不同集合就完了)对于弧尾在U，弧头在W的弧所构成的集合称之为割切，用（U，W）表示。把割切（U，W）中所有弧的容量之和叫做此割切的容量，记为C（U，W），即：
+\(C(U,V) = \sum_{i\in U\ \ j\in V}C_{i,j}\)
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+</blockquote>
+
+<p>图中令$U = {S, V1}$，则$W = {V2, V3, V4, T}$，那么，$C(U, W) = &lt;S, V2&gt; + &lt;V1, V2&gt; + &lt;V1, V3&gt;+&lt;V1, V4&gt;=8+4+4+1=17$</p>
+
+<p>要理解割，网上找的图<a href="https://blog.csdn.net/a519781181/article/details/51908303">装逼之二 最小割与最大流（mincut &amp; maxflow）</a>
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
+<h1 id="增广路算法求最大流">增广路算法求最大流</h1>
+<h1 id="几个定理">几个定理</h1>
+
+<ol>
+  <li>对于已知的网络流图，设任意一可行流为f，任意一割切为(U, W)，必有：$V(f) \leq C(U, W)$</li>
+  <li>可行流f是最大流的充分必要条件是：f中不存在增广路</li>
+  <li>整流定理:如果网络中所有的弧的容量是整数，则存在整数值的最大流</li>
+  <li>最大流最小割定理:最大流等于最小割，即max V(f) = min C(U, W)。(其实就是限制边的集合)</li>
+</ol>
+
+<h1 id="ek算法了解一下就好了">EK算法(了解一下就好了)</h1>
+<p>第1步，令$x=(xij)$是任意整数可行流，可能是零流，给s一个永久标号$(-, ∞)$。
+• 第2步(找增广路)，如果所有标号都已经被检查，转到第4步。
+ 找到一个标号但未检查的点i, 并做如下检查，
+• 对每一个弧(i,j),如果$xij&lt;Cij$, 且j未标号,则给j一个标号$(+i, δ (j) )$,
+其中， $δ (j)=min{Cij-xij , δ (i) }$
+• 对每一个弧(j, i),如果xji&gt;0,且j未标号，则给j一个标号$(-i, δ (j) )$,
+其中，$ δ (j)=min(xji , δ (i) )$
+• 第三步(增广)，由点t开始，使用指示标号构造一个增广路,指示标号的正负
+则表示通过增加还是减少弧流量来增加还是减少弧流量来增大流量，抹去s点
+以外的所有标号，转第二步继续找增广轨。
+• 第四步(构造最小割)，这时现行流是最大的，若把所有标号的集合记为S，所
+有未标号点的集合记为T,便得到最小容量割(S,T)。</p>
+<h1 id="dinic算法按层次计算最大流">Dinic算法——按层次计算最大流</h1>
+<p>基本思想：使用BFS建立层次，并通过阻塞流来增广
+层次图：假设在残留网络中，起点到结点u的距离是dist[u]，就把dist[u]看做是点u的“层次”。保留每个点出发到下个层次的弧，即只保留dist[u]+1=dist[v]的边(u,v),得到的图就是层次图。层次图上任意路径都是：起点-&gt;层次1-&gt;层次2-&gt;…-&gt;T 的顺序，而且每条这样的路都是S-T的最短路。<strong>(其实就是BFS的深度)</strong></p>
+<h1 id="阻塞流">阻塞流</h1>
+<blockquote>
+  <p>就是指不考虑反向弧时的极大流。对应到程序就是从起点开始在层次图上DFS，每找到一条就增广。</p>
+</blockquote>
+
+<p><img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+
+<p><img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" />
+eg板子题：<a href="https://www.luogu.org/problemnew/show/P3376">水谷3376</a></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;algorithm&gt;
+# include &lt;iostream&gt;
+# include &lt;queue&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">4010000</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">,</span><span class="n">c</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">edge</span> <span class="o">&amp;</span><span class="n">e2</span><span class="p">)</span><span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">w</span><span class="o">&gt;</span><span class="n">e2</span><span class="p">.</span><span class="n">w</span><span class="p">;}}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span><span class="c1">//c是容量 f是流量</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">map</span><span class="p">[</span><span class="mi">43</span><span class="p">][</span><span class="mi">43</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">c</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span>  <span class="n">S</span><span class="p">,</span><span class="n">T</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="nf">bfs</span><span class="p">(){</span><span class="c1">//判断是否还能到达汇点的同时分层</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dep</span><span class="p">));</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+    <span class="n">dep</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span><span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="o">||</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+            <span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">T</span><span class="p">)</span><span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span><span class="c1">//到达了汇点</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">cur</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//当前点优化，在一开始的时候和head一样。后面细说</span>
+<span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">){</span><span class="c1">//f是最小惨量</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">T</span><span class="o">||</span><span class="n">f</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">f</span><span class="p">;</span><span class="c1">//到了汇点或者流量已用完</span>
+    <span class="kt">int</span> <span class="n">used</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//当前点已经流出的流量</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span><span class="c1">//这个优化就是防止重复的走到同一个点的情况，因为这一个点已经走过了，没必要在拓展，就把这条边直接不考虑了</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="p">));</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">w</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span><span class="c1">//走不动了</span>
+            <span class="n">used</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span><span class="n">f</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span>
+            <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">^</span><span class="mi">1</span><span class="p">].</span><span class="n">c</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span><span class="c1">//正反边更新</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//流量已经用完了，就不更新了</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">)</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c1">//这个点走不动了</span>
+    <span class="k">return</span> <span class="n">used</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">dinic</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">maxFlow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">bfs</span><span class="p">()){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cur</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">maxFlow</span><span class="o">+=</span><span class="n">dfs</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">INF</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">maxFlow</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span><span class="n">S</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">T</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">c</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">dinic</span><span class="p">());</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>所以Dinic复杂度$O(N^2M)$</p>
+
+<ul>
+  <li>最多有n个阶段，即最多构建n个层次，每个层次用bfs一遍即可得到，1次bfs是M，所有构建层次图总时间O(NM)</li>
+  <li>一次dfs是O（nm），最多n次dfs，所以找可增广需O(N<em>N</em>M)也是整个算法的复杂度</li>
+</ul>
+
+<h1 id="二分图的网络流模型建模">二分图的网络流模型建模</h1>
+<p>eg<a href="http://192.168.110.251/problempage.php?problem_id=2303">「网络流 24 题」搭配飞行员</a>
+把所有正飞行员全部连接到0号点上，容量为1，副飞行员连到n+1号点上，容量为1，求个最大流就行了。
+<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;cstring&gt;
+# include &lt;queue&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">110</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">710</span><span class="p">;</span>
+ <span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">next</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+ <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+ <span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f</span><span class="p">;</span>
+ <span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+ <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">c</span><span class="p">){</span>
+ 	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+ 	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+ 	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+ 	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="kt">int</span> <span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+ <span class="kt">int</span> <span class="n">S</span><span class="p">,</span><span class="n">T</span><span class="p">;</span>
+ <span class="kt">int</span> <span class="n">curr</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+ <span class="kt">bool</span> <span class="nf">bfs</span><span class="p">(){</span><span class="c1">//判断是否还能到达汇点的同时分层</span>
+     <span class="n">memset</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dep</span><span class="p">));</span>
+     <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+     <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+     <span class="n">dep</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+     <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+         <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span><span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+             <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+             <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="o">||</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+             <span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+             <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+             <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">T</span><span class="p">)</span><span class="k">return</span> <span class="nb">true</span><span class="p">;</span><span class="c1">//到达了汇点</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="kt">int</span> <span class="n">cur</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//当前点优化，在一开始的时候和head一样。后面细说</span>
+ <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">){</span><span class="c1">//f是最小惨量</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">T</span><span class="o">||</span><span class="n">f</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">f</span><span class="p">;</span><span class="c1">//到了汇点或者流量已用完</span>
+     <span class="kt">int</span> <span class="n">used</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//当前点已经流出的流量</span>
+     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span><span class="c1">//这个优化就是防止重复的走到同一个点的情况，因为这一个点已经走过了，没必要在拓展，就把这条边直接不考虑了</span>
+         <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">dep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+             <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="p">));</span>
+             <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">w</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span><span class="c1">//走不动了</span>
+             <span class="n">used</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span><span class="n">f</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span>
+             <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">^</span><span class="mi">1</span><span class="p">].</span><span class="n">c</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span><span class="c1">//正反边更新</span>
+             <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//流量已经用完了，就不更新了</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">)</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c1">//这个点走不动了</span>
+     <span class="k">return</span> <span class="n">used</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="kt">int</span> <span class="nf">dinic</span><span class="p">(){</span>
+     <span class="kt">int</span> <span class="n">maxFlow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="k">while</span> <span class="p">(</span><span class="n">bfs</span><span class="p">()){</span>
+         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">S</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cur</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+         <span class="n">maxFlow</span><span class="o">+=</span><span class="n">dfs</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">INF</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="n">maxFlow</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+ 	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+ 	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+ 	<span class="n">S</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">T</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+ 	<span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+	 	<span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	 	<span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	 <span class="p">}</span>
+ 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">add</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+ 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">add</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+ 	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">dinic</span><span class="p">());</span>
+ 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+<h1 id="三分匹配等等">三分匹配等等</h1>
+<p>如<a href="http://192.168.110.251/problempage.php?problem_id=2351"> [USACO07OPEN]吃饭Dining</a>其实就是把奶牛，食物，水连在源点S，奶牛拆成2个点，中间用容量为1的边连接起来，再连接饮料，然后连接汇点T。跑最大流</p>
+<h1 id="最大流量最小费用">最大流量最小费用</h1>
+<p>其实就是把bfs改成spfa或者dijkstra，因为这样走的就是费用最小的一条路，然后跑dinic；
+luogu3381</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;queue&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">5010</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">50010</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f3f3f3f3f</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">intINF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">next</span><span class="p">;</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">cap</span><span class="p">,</span><span class="n">w</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">cap</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">cap</span> <span class="o">=</span> <span class="n">cap</span><span class="p">;</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">S</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="nf">spfa</span><span class="p">(){</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
+	<span class="n">vis</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+	<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+	<span class="n">dis</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+		<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span><span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+		<span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+			<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">&amp;&amp;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cap</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+				<span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
+				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+					<span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+					<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">dis</span><span class="p">[</span><span class="n">T</span><span class="p">]</span><span class="o">!=</span><span class="n">INF</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">curr</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">flow</span><span class="p">){</span>
+	<span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">T</span><span class="o">||</span><span class="n">flow</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">flow</span><span class="p">;</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">used</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==</span><span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">&amp;&amp;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cap</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+			<span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">min</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cap</span><span class="p">));</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">w</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+			<span class="n">flow</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span><span class="n">used</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span>
+			<span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cap</span><span class="o">-=</span><span class="n">w</span><span class="p">;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">^</span><span class="mi">1</span><span class="p">].</span><span class="n">cap</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">flow</span><span class="o">==</span><span class="n">used</span><span class="p">)</span><span class="k">return</span> <span class="n">used</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">used</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">maxflow</span><span class="p">,</span><span class="n">mincost</span><span class="p">,</span><span class="n">mindis</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">dinic</span><span class="p">(){</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">spfa</span><span class="p">()){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+		<span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">INF</span><span class="p">);</span>
+		<span class="n">maxflow</span><span class="o">+=</span><span class="n">w</span><span class="p">;</span>
+		<span class="n">mincost</span><span class="o">+=</span><span class="n">w</span><span class="o">*</span><span class="n">dis</span><span class="p">[</span><span class="n">T</span><span class="p">];</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ci</span><span class="p">,</span><span class="n">wi</span><span class="p">;</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">S</span><span class="o">&gt;&gt;</span><span class="n">T</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">ci</span><span class="o">&gt;&gt;</span><span class="n">wi</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">ci</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">ci</span><span class="p">,</span><span class="n">wi</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">wi</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">dinic</span><span class="p">();</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">maxflow</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="o">&lt;&lt;</span><span class="n">mincost</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E7%BD%91%E7%BB%9C%E6%B5%81&url=/blog/move-from-leanote-142"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-142"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-142&amp;media=/images/posts/OI.png&amp;description=%E7%BD%91%E7%BB%9C%E6%B5%81"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-142&title=%E7%BD%91%E7%BB%9C%E6%B5%81&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-140">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="网络流">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">bzoj1059 ZJOI2007矩阵游戏</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-143">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">20190126考试</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="网络流">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

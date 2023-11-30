@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP注意事项</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-73">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NOIP注意事项 – Haoyu Deng's page">
+  <meta name="twitter:description" content="Think twice , code once!
+并查集初始化！
+多组数据把每一组读完，尤其是在读取的过程中就已经找到答案
+看清有向图还是无向图
+不要压行，这不是游戏
+不要把问题想简单了/复杂了导致结果不正确
+方法不唯一，不要卡死在一种方法上，也不要摇摆飘忽不定
+不管拿到什么题目，先想十分钟有没有什么规律或性质，往往找出规律、性质就能相处相应的算法。
+去背几个质数，hash的题一定写双哈希甚至三哈希，今年人多，CCF估计都会卡你。19260817之类的不太稳或者直接unsigned long long
+复习tarjan 复习线筛 背诵线性递推逆元
+运算明确优先级，没事多加几个括号
+小心卡常，不要用cin
+只要数据范围小，退火算法搞一搞
+区间开始结束坐标i,j搞清楚，什么时候+1，什么时候-1
+最大最小值开大点/开小点
+看清时限，数据范围。计算好复杂度，实在不行暴力也交上去
+不要自己写快写，要遭的
+注意int转化string时，不可以直接val+’0’。不可以！！！！！！
+不会就乱搞，不能不交代码上去
+dijkstra一开始不标记为false，spfa出队时标记false，细节，不要打错了调试很久
+注意数据范围int 还是long long
+tarjan不要忘了把x点的vis标记为false
+头文件！！！！！
+tarjan强联通分量和割点与桥的区别！！
+位运算优先级问题！！！
+一句话说康托展开：
+这个数所在的位置减一的阶乘乘上序列后面比这个位置的数小的数的个数。再把每一位这样算了以后加起来。注意，最高位在数组中的地址是1！！！
+逆康托展开就是除，余多少，这一位就是多少+1，如果这个数已经被用了，往大处找
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="NOIP注意事项 – Haoyu Deng's page">
+  <meta property="og:description" content="Think twice , code once!
+并查集初始化！
+多组数据把每一组读完，尤其是在读取的过程中就已经找到答案
+看清有向图还是无向图
+不要压行，这不是游戏
+不要把问题想简单了/复杂了导致结果不正确
+方法不唯一，不要卡死在一种方法上，也不要摇摆飘忽不定
+不管拿到什么题目，先想十分钟有没有什么规律或性质，往往找出规律、性质就能相处相应的算法。
+去背几个质数，hash的题一定写双哈希甚至三哈希，今年人多，CCF估计都会卡你。19260817之类的不太稳或者直接unsigned long long
+复习tarjan 复习线筛 背诵线性递推逆元
+运算明确优先级，没事多加几个括号
+小心卡常，不要用cin
+只要数据范围小，退火算法搞一搞
+区间开始结束坐标i,j搞清楚，什么时候+1，什么时候-1
+最大最小值开大点/开小点
+看清时限，数据范围。计算好复杂度，实在不行暴力也交上去
+不要自己写快写，要遭的
+注意int转化string时，不可以直接val+’0’。不可以！！！！！！
+不会就乱搞，不能不交代码上去
+dijkstra一开始不标记为false，spfa出队时标记false，细节，不要打错了调试很久
+注意数据范围int 还是long long
+tarjan不要忘了把x点的vis标记为false
+头文件！！！！！
+tarjan强联通分量和割点与桥的区别！！
+位运算优先级问题！！！
+一句话说康托展开：
+这个数所在的位置减一的阶乘乘上序列后面比这个位置的数小的数的个数。再把每一位这样算了以后加起来。注意，最高位在数组中的地址是1！！！
+逆康托展开就是除，余多少，这一位就是多少+1，如果这个数已经被用了，往大处找
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="NOIP注意事项">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            NOIP注意事项
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-10-24T10:15:00+00:00">24 Oct 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="think-twice--code-once">Think twice , code once!</h1>
+<h1 id="并查集初始化">并查集初始化！</h1>
+<h1 id="多组数据把每一组读完尤其是在读取的过程中就已经找到答案">多组数据把每一组读完，尤其是在读取的过程中就已经找到答案</h1>
+<h1 id="看清有向图还是无向图">看清有向图还是无向图</h1>
+<h1 id="不要压行这不是游戏">不要压行，这不是游戏</h1>
+<h1 id="不要把问题想简单了复杂了导致结果不正确">不要把问题想简单了/复杂了导致结果不正确</h1>
+<h1 id="方法不唯一不要卡死在一种方法上也不要摇摆飘忽不定">方法不唯一，不要卡死在一种方法上，也不要摇摆飘忽不定</h1>
+<h1 id="不管拿到什么题目先想十分钟有没有什么规律或性质往往找出规律性质就能相处相应的算法">不管拿到什么题目，先想十分钟有没有什么规律或性质，往往找出规律、性质就能相处相应的算法。</h1>
+<h1 id="去背几个质数hash的题一定写双哈希甚至三哈希今年人多ccf估计都会卡你19260817之类的不太稳或者直接unsigned-long-long">去背几个质数，hash的题一定写双哈希甚至三哈希，今年人多，CCF估计都会卡你。19260817之类的不太稳或者直接unsigned long long</h1>
+<h1 id="复习tarjan-复习线筛-背诵线性递推逆元">复习tarjan 复习线筛 背诵线性递推逆元</h1>
+<h1 id="运算明确优先级没事多加几个括号">运算明确优先级，没事多加几个括号</h1>
+<h1 id="小心卡常不要用cin">小心卡常，不要用cin</h1>
+<h1 id="只要数据范围小退火算法搞一搞">只要数据范围小，退火算法搞一搞</h1>
+<h1 id="区间开始结束坐标ij搞清楚什么时候1什么时候-1">区间开始结束坐标i,j搞清楚，什么时候+1，什么时候-1</h1>
+<h1 id="最大最小值开大点开小点">最大最小值开大点/开小点</h1>
+<h1 id="看清时限数据范围计算好复杂度实在不行暴力也交上去">看清时限，数据范围。计算好复杂度，实在不行暴力也交上去</h1>
+<h1 id="不要自己写快写要遭的">不要自己写快写，要遭的</h1>
+<h1 id="注意int转化string时不可以直接val0不可以">注意int转化string时，不可以直接val+’0’。不可以！！！！！！</h1>
+<h1 id="不会就乱搞不能不交代码上去">不会就乱搞，不能不交代码上去</h1>
+<h1 id="dijkstra一开始不标记为falsespfa出队时标记false细节不要打错了调试很久">dijkstra一开始不标记为false，spfa出队时标记false，细节，不要打错了调试很久</h1>
+<h1 id="注意数据范围int-还是long-long">注意数据范围int 还是long long</h1>
+<h1 id="tarjan不要忘了把x点的vis标记为false">tarjan不要忘了把x点的vis标记为false</h1>
+<h1 id="头文件">头文件！！！！！</h1>
+<h1 id="tarjan强联通分量和割点与桥的区别">tarjan强联通分量和割点与桥的区别！！</h1>
+<h1 id="位运算优先级问题">位运算优先级问题！！！</h1>
+<p>一句话说康托展开：
+这个数所在的位置减一的阶乘乘上序列后面比这个位置的数小的数的个数。再把每一位这样算了以后加起来。注意，最高位在数组中的地址是1！！！
+逆康托展开就是除，余多少，这一位就是多少+1，如果这个数已经被用了，往大处找</p>
+
+<p>inv[1] = 1;
+inv[i] = (p-p/i)*inv[p%i]%p;
+upper_bound<code class="language-plaintext highlighter-rouge">&gt;</code>      lower_bound<code class="language-plaintext highlighter-rouge">&gt;=</code></p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=NOIP%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&url=/blog/move-from-leanote-73"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-73"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-73&amp;media=/images/posts/OI.png&amp;description=NOIP%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-73&title=NOIP%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-72">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP注意事项">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">CF977D Divide by three multipy by two</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-74">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">bzoj 3916</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP注意事项">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

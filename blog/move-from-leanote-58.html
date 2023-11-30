@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>强连通分量</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-58">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="强连通分量 – Haoyu Deng's page">
+  <meta name="twitter:description" content="Kosaraju
+基于两次dfs有向图强连通。
+1.第一步：对原有的有向图G进行DFS，记录节点访问完的顺序，d[i],d[i]表示第i个访问完的结点是d[i]
+1.第二部，选择具有最晚访问完的顶点，对反向图GT进行DFS，删除能够变力道的顶点，构成一个强连通分量。记录一下
+3.如果还有顶点没有删除，继续第二部，否则算法结束。
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+int st[10000];//可以用stl stack 代替 
+int t = 0;//可以用stl stack 代替 
+struct edge{ 
+	int t,next;
+}edges[100000],edges2[100000];
+int head[10000];
+int head2[10000];
+int top2;
+int top;
+int visited[10000];
+void add1(int f,int t){
+	edges[++top].next = head[f];
+	edges[top].t = t;
+	head[f] = top;
+}
+void add2(int f,int t){
+	edges[++top2].next = head2[f];
+	edges[top2].t = t;
+	head2[f] = top2;
+}
+void dfs(int s){
+	visited[s] = true;
+	for(int i = head[s];i!=0;i = edges[i].next){
+		if(!visited[edges[i].t]){
+			dfs(edges[i].t);
+		}
+	}
+	st[++t] = s;
+}
+void dfs2(int s){
+	visited[visited[edges2[s].t] = true;
+	for(int i = head[s];i!=0;i = edges2[i].next){
+		dfs2(edges[2].t);//可以在此记录强连通分量的顶点 
+	}
+}
+int kosaraju(){
+	int sum = 0;
+	for(int i = 1;i&amp;lt;=n;i++){
+		if(!visited[i]){
+			dfs(i);
+		}
+	}
+	memset(visited,false,sizeof(visited));
+	for(int i = n;i&amp;gt;=1;i--){//选择具有最晚访问完的顶点，对反图进行dfs 
+		if(!visited[st[i]]){
+			sum++;
+			dfs2(st[i]);
+		}
+	}
+	//强连通分量数 
+	return sum;
+}
+
+tarjan
+Tarjan算法是基于对图深度优先搜索的算法，每个强连通分量为搜索树中的一棵子树。搜索时，把当前搜索树中未处理的节点加入一个堆栈，回溯时可以判断栈顶到栈中的节点是否为一个强连通分量。
+再Tarjan算法中，有如下定义。
+DFN[ i ] : 在DFS中该节点被搜索的次序(时间戳)
+LOW[ i ] : 为i或i的子树能够追溯到的最早的栈中节点的次序号
+当DFN[i]==LOW[i]时，为i或i的子树可以构成一个强连通分量。
+详细解析见详细的tarjan讲解
+代码：
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+struct edge{
+	int t,next;
+}edges[10000];
+int head[10000];
+int top;
+void add(int f,int t){
+	edges[++top].next = head[f];
+	edges[top].t = t;
+	head[f] = top;
+}
+bool visited[1000];//某个节点是否在栈中
+int dfn[1000];
+int low[1000];
+int dfn_sum;
+int stack[10000];
+int stop;
+int color[10000];//哪个点染什么色，颜色一样的点属于同一个强连通分量 
+int color_val = 0;
+inline int minn(int x,int y){return x&amp;gt;y?y:x;}
+void tarjan(int x){
+	dfn[x] = ++dfn_sum;
+	low[x] = dfn_sum;
+	visited[x] = true;
+	stack[++stop] = x;
+	for(int i = head[x];i!=0;i = edges[i].next){
+		int v = edges[i].t;
+		if(dfn[v]==0){
+			tarjan(v);
+			low[x] = minn(low[x],low[v]);
+		}else if(visited[v]){
+			low[x] = minn(low[x],dfn[v]);//是回溯到的节点靠前，还是本来已经找到的节点靠前 
+		}
+	}
+	if(dfn[x]==low[x]){
+		visited[x] = false;
+		color[x] = ++color_val;
+		while(stack[top]!=x){
+			color[stack[top]] = color_val;
+			visited[stack[top--]] = false;
+		}
+		top--;//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 
+	}
+} 
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="强连通分量 – Haoyu Deng's page">
+  <meta property="og:description" content="Kosaraju
+基于两次dfs有向图强连通。
+1.第一步：对原有的有向图G进行DFS，记录节点访问完的顺序，d[i],d[i]表示第i个访问完的结点是d[i]
+1.第二部，选择具有最晚访问完的顶点，对反向图GT进行DFS，删除能够变力道的顶点，构成一个强连通分量。记录一下
+3.如果还有顶点没有删除，继续第二部，否则算法结束。
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+int st[10000];//可以用stl stack 代替 
+int t = 0;//可以用stl stack 代替 
+struct edge{ 
+	int t,next;
+}edges[100000],edges2[100000];
+int head[10000];
+int head2[10000];
+int top2;
+int top;
+int visited[10000];
+void add1(int f,int t){
+	edges[++top].next = head[f];
+	edges[top].t = t;
+	head[f] = top;
+}
+void add2(int f,int t){
+	edges[++top2].next = head2[f];
+	edges[top2].t = t;
+	head2[f] = top2;
+}
+void dfs(int s){
+	visited[s] = true;
+	for(int i = head[s];i!=0;i = edges[i].next){
+		if(!visited[edges[i].t]){
+			dfs(edges[i].t);
+		}
+	}
+	st[++t] = s;
+}
+void dfs2(int s){
+	visited[visited[edges2[s].t] = true;
+	for(int i = head[s];i!=0;i = edges2[i].next){
+		dfs2(edges[2].t);//可以在此记录强连通分量的顶点 
+	}
+}
+int kosaraju(){
+	int sum = 0;
+	for(int i = 1;i&amp;lt;=n;i++){
+		if(!visited[i]){
+			dfs(i);
+		}
+	}
+	memset(visited,false,sizeof(visited));
+	for(int i = n;i&amp;gt;=1;i--){//选择具有最晚访问完的顶点，对反图进行dfs 
+		if(!visited[st[i]]){
+			sum++;
+			dfs2(st[i]);
+		}
+	}
+	//强连通分量数 
+	return sum;
+}
+
+tarjan
+Tarjan算法是基于对图深度优先搜索的算法，每个强连通分量为搜索树中的一棵子树。搜索时，把当前搜索树中未处理的节点加入一个堆栈，回溯时可以判断栈顶到栈中的节点是否为一个强连通分量。
+再Tarjan算法中，有如下定义。
+DFN[ i ] : 在DFS中该节点被搜索的次序(时间戳)
+LOW[ i ] : 为i或i的子树能够追溯到的最早的栈中节点的次序号
+当DFN[i]==LOW[i]时，为i或i的子树可以构成一个强连通分量。
+详细解析见详细的tarjan讲解
+代码：
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+struct edge{
+	int t,next;
+}edges[10000];
+int head[10000];
+int top;
+void add(int f,int t){
+	edges[++top].next = head[f];
+	edges[top].t = t;
+	head[f] = top;
+}
+bool visited[1000];//某个节点是否在栈中
+int dfn[1000];
+int low[1000];
+int dfn_sum;
+int stack[10000];
+int stop;
+int color[10000];//哪个点染什么色，颜色一样的点属于同一个强连通分量 
+int color_val = 0;
+inline int minn(int x,int y){return x&amp;gt;y?y:x;}
+void tarjan(int x){
+	dfn[x] = ++dfn_sum;
+	low[x] = dfn_sum;
+	visited[x] = true;
+	stack[++stop] = x;
+	for(int i = head[x];i!=0;i = edges[i].next){
+		int v = edges[i].t;
+		if(dfn[v]==0){
+			tarjan(v);
+			low[x] = minn(low[x],low[v]);
+		}else if(visited[v]){
+			low[x] = minn(low[x],dfn[v]);//是回溯到的节点靠前，还是本来已经找到的节点靠前 
+		}
+	}
+	if(dfn[x]==low[x]){
+		visited[x] = false;
+		color[x] = ++color_val;
+		while(stack[top]!=x){
+			color[stack[top]] = color_val;
+			visited[stack[top--]] = false;
+		}
+		top--;//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 
+	}
+} 
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="强连通分量">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            强连通分量
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-09-19T08:15:25+00:00">19 Sep 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="kosaraju">Kosaraju</h1>
+<p>基于两次dfs有向图强连通。
+1.第一步：对原有的有向图G进行DFS，记录节点访问完的顺序，d[i],d[i]表示第i个访问完的结点是d[i]
+1.第二部，选择具有最晚访问完的顶点，对反向图GT进行DFS，删除能够变力道的顶点，构成一个强连通分量。记录一下
+3.如果还有顶点没有删除，继续第二部，否则算法结束。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">st</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//可以用stl stack 代替 </span>
+<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//可以用stl stack 代替 </span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span> 
+	<span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="n">edges2</span><span class="p">[</span><span class="mi">100000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head2</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top2</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">visited</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">add1</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">add2</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top2</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top2</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">s</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">]){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">st</span><span class="p">[</span><span class="o">++</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">visited</span><span class="p">[</span><span class="n">edges2</span><span class="p">[</span><span class="n">s</span><span class="p">].</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">s</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="n">dfs2</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">t</span><span class="p">);</span><span class="c1">//可以在此记录强连通分量的顶点 </span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">kosaraju</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">visited</span><span class="p">));</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span><span class="c1">//选择具有最晚访问完的顶点，对反图进行dfs </span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]]){</span>
+			<span class="n">sum</span><span class="o">++</span><span class="p">;</span>
+			<span class="n">dfs2</span><span class="p">(</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="c1">//强连通分量数 </span>
+	<span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="tarjan">tarjan</h1>
+<p>Tarjan算法是基于对图深度优先搜索的算法，每个强连通分量为搜索树中的一棵子树。搜索时，把当前搜索树中未处理的节点加入一个堆栈，回溯时可以判断栈顶到栈中的节点是否为一个强连通分量。
+再Tarjan算法中，有如下定义。
+DFN[ i ] : 在DFS中该节点被搜索的次序(时间戳)
+<strong>LOW[ i ] : 为i或i的子树能够追溯到的最早的栈中节点的次序号</strong>
+当DFN[i]==LOW[i]时，为i或i的子树可以构成一个强连通分量。
+详细解析见<a href="http://www.cnblogs.com/shadowland/p/5872257.html">详细的tarjan讲解</a>
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
+	<span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="n">visited</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//某个节点是否在栈中</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dfn_sum</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">color</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//哪个点染什么色，颜色一样的点属于同一个强连通分量 </span>
+<span class="kt">int</span> <span class="n">color_val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">minn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&gt;</span><span class="n">y</span><span class="o">?</span><span class="n">y</span><span class="o">:</span><span class="n">x</span><span class="p">;}</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_sum</span><span class="p">;</span>
+	<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn_sum</span><span class="p">;</span>
+	<span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+			<span class="n">tarjan</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+			<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">minn</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]);</span>
+		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]){</span>
+			<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">minn</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]);</span><span class="c1">//是回溯到的节点靠前，还是本来已经找到的节点靠前 </span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+		<span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">color_val</span><span class="p">;</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
+			<span class="n">color</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]]</span> <span class="o">=</span> <span class="n">color_val</span><span class="p">;</span>
+			<span class="n">visited</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="o">--</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">top</span><span class="o">--</span><span class="p">;</span><span class="c1">//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 </span>
+	<span class="p">}</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<h1 id="缩点">缩点</h1>
+
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F&url=/blog/move-from-leanote-58"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-58"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-58&amp;media=/images/posts/OI.png&amp;description=%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-58&title=%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-56">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="强连通分量">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">差分约束系统</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-57">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">kosaraju题解</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="强连通分量">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

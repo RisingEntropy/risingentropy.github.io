@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>fhq treap</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-208">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="fhq treap – Haoyu Deng's page">
+  <meta name="twitter:description" content="fhq treap(神仙数据结构)
+前置知识：treap平衡树 BST
+开始
+首先说一下
+这个东西可以搞一切bst，treap，splay所能搞的东西
+这个东西的学名应该是叫做fhq treap，应该是treap的强化版。
+整个数据结构中只有两个操作：
+  1.分离（split） 就是把一棵树分成两个树(有按排名分裂和权值分裂两种，下面都有代码)
+  2.合并（merge）把两棵树合成一棵树
+操作
+1.插入：
+split(root,a,x,y);
+root=merge(merge(x,new_node(a)),y);
+
+这个比较好理解，我们先把树分为x,y两部分，然后把新的节点a看做是一棵树，先与x合并，合并完之后将合并的整体与y合并
+2.删除
+split(root,a,x,z);
+split(x,a-1,x,y);
+y=merge(ch[y][0],ch[y][1]);
+root=merge(merge(x,y),z);
+
+首先我们把树分为x和z两部分
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="fhq treap – Haoyu Deng's page">
+  <meta property="og:description" content="fhq treap(神仙数据结构)
+前置知识：treap平衡树 BST
+开始
+首先说一下
+这个东西可以搞一切bst，treap，splay所能搞的东西
+这个东西的学名应该是叫做fhq treap，应该是treap的强化版。
+整个数据结构中只有两个操作：
+  1.分离（split） 就是把一棵树分成两个树(有按排名分裂和权值分裂两种，下面都有代码)
+  2.合并（merge）把两棵树合成一棵树
+操作
+1.插入：
+split(root,a,x,y);
+root=merge(merge(x,new_node(a)),y);
+
+这个比较好理解，我们先把树分为x,y两部分，然后把新的节点a看做是一棵树，先与x合并，合并完之后将合并的整体与y合并
+2.删除
+split(root,a,x,z);
+split(x,a-1,x,y);
+y=merge(ch[y][0],ch[y][1]);
+root=merge(merge(x,y),z);
+
+首先我们把树分为x和z两部分
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="fhq treap">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            fhq treap
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-05-27T07:38:17+00:00">27 May 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="fhq-treap神仙数据结构">fhq treap(神仙数据结构)</h1>
+<p>前置知识：treap平衡树 BST</p>
+<h1 id="开始">开始</h1>
+<p>首先说一下
+这个东西可以搞一切bst，treap，splay所能搞的东西
+这个东西的学名应该是叫做fhq treap，应该是treap的强化版。
+整个数据结构中只有两个操作：
+  1.分离（split） 就是把一棵树分成两个树(有按排名分裂和权值分裂两种，下面都有代码)
+  2.合并（merge）把两棵树合成一棵树</p>
+<h1 id="操作">操作</h1>
+<p>1.插入：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>split(root,a,x,y);
+root=merge(merge(x,new_node(a)),y);
+</code></pre></div></div>
+<p>这个比较好理解，我们先把树分为x,y两部分，然后把新的节点a看做是一棵树，先与x合并，合并完之后将合并的整体与y合并
+2.删除</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>split(root,a,x,z);
+split(x,a-1,x,y);
+y=merge(ch[y][0],ch[y][1]);
+root=merge(merge(x,y),z);
+</code></pre></div></div>
+<p>首先我们把树分为x和z两部分</p>
+
+<p>那么x树中的最大权值为a</p>
+
+<p>再把x分为x和y两部分。</p>
+
+<p>此时x中的最大权值为a-1，且权值为a的节点一定是y的根节点。</p>
+
+<p>然后我们可以无视y的根节点，直接把y的左右孩子合并起来，这样就成功的删除了根节点，</p>
+
+<p>最后再把x，y，z合并起来就好</p>
+
+<p>3.查询a的排名</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> split(root,a-1,x,y);
+printf("%d\n",siz[x]+1);
+root=merge(x,y);
+</code></pre></div></div>
+<p>我们首先按照a-1的权值把树分开。</p>
+
+<p>那么x树中最大的应该是a-1。</p>
+
+<p>那么a的排名就是siz[x]+1</p>
+
+<p>4.查询排名为a的数</p>
+
+<p>1 printf(“%d\n”,val[kth(root,a)]);</p>
+
+<p>直接调用查找排名的函数即可，</p>
+
+<p>这个函数应该比较好理解。。
+5.求x的前驱(前驱定义为小于a，且最大的数)</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">val</span><span class="p">[</span><span class="n">kth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">siz</span><span class="p">[</span><span class="n">x</span><span class="p">])]);</span>
+<span class="n">root</span><span class="o">=</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</code></pre></div></div>
+<p>因为要小于a，那么我们按照a-1的权值划分，</p>
+
+<p>x中最大的一定是&lt;=a-1的，</p>
+
+<p>所以我们直接输出x中最大的数就好，</p>
+
+<p>（这里有一个小技巧，因为siz储存的是节点的数目，然后根据二叉查找树的性质，编号最大的就是值最大的）</p>
+
+<p>6.求x的后继(后继定义为大于x，且最小的数)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>split(root,a,x,y);
+printf("%d\n",val[kth(y,1)]);
+root=merge(x,y);
+</code></pre></div></div>
+
+<h1 id="附">附</h1>
+<p>按排名分裂
+当我们遍历到一个节点时，如果它的权值小于k，那么它的左子树会被分到左边的树里，然后我们遍历它的右儿子，如果大于k，则把它的右子树分到右边的树里。如果到达递归边界now==0怎么办呢？这里会有两种情况：
+1.root=0（即第一次split），很明显要给x和y初始化，即x=y=0。
+2.split到了叶子节点，此时无法继续split了，只能返回。此时的x=y=0没什么用，因为x和y会在回溯的时候通过地址符号改变。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">int</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">now</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">siz</span><span class="p">[</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="p">{</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">now</span><span class="p">;</span>
+            <span class="n">split</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">k</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">now</span><span class="p">;</span>
+            <span class="n">split</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="o">-</span><span class="n">siz</span><span class="p">[</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">update</span><span class="p">(</span><span class="n">now</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>按权值分裂
+与按权值分裂类似</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">int</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">now</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">now</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">)</span>
+    <span class="p">{</span> 
+        <span class="n">x</span><span class="o">=</span><span class="n">now</span><span class="p">;</span>
+        <span class="n">split</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">k</span><span class="p">,</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">now</span><span class="p">;</span>
+        <span class="n">split</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">k</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">ch</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">now</span><span class="p">);</span><span class="c1">//update(i)为更新size[i]大小的函数</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>完整fhq代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cp"># include &lt;iostream&gt;
+</span>    <span class="cp"># include &lt;cstdlib&gt;
+</span>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="p">,</span><span class="n">rnd</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">size</span><span class="p">;</span>
+    <span class="p">}</span><span class="n">tree</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span><span class="kt">int</span> <span class="n">top</span><span class="p">,</span><span class="n">root</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">newnode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">tree</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="n">tree</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">size</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">tree</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">rnd</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">top</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="c1">//x&lt;y</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="o">||!</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span><span class="c1">//已经空了</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">rnd</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">rnd</span><span class="p">){</span>
+            <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+            <span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">l</span><span class="p">);</span>
+            <span class="n">pushup</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="k">return</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">int</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span><span class="c1">//以x为权值分为两棵树</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">now</span><span class="p">)</span> <span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="c1">//</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">val</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">now</span><span class="p">,</span><span class="n">split</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+            <span class="k">else</span> 
+                <span class="n">y</span> <span class="o">=</span> <span class="n">now</span><span class="p">,</span><span class="n">split</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">);</span>
+            <span class="n">pushup</span><span class="p">(</span><span class="n">now</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">kth</span><span class="p">(</span><span class="kt">int</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="p">){</span>
+                <span class="n">now</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">now</span><span class="p">;</span>
+                <span class="k">else</span><span class="p">{</span>
+                   <span class="n">k</span><span class="o">-=</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                   <span class="n">now</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+        <span class="n">srand</span><span class="p">(</span><span class="mi">19260817</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">T</span><span class="p">,</span><span class="n">op</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">T</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">){</span>
+            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">op</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newnode</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="n">y</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">2</span><span class="p">){</span>
+                <span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">);</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">r</span><span class="p">);</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">z</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">3</span><span class="p">){</span>
+                <span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">4</span><span class="p">){</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">kth</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="p">)].</span><span class="n">val</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">5</span><span class="p">){</span>
+                <span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">kth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">)].</span><span class="n">val</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">6</span><span class="p">){</span>
+                <span class="n">split</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">kth</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">)].</span><span class="n">val</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<h1 id="文末彩蛋">文末彩蛋</h1>
+<p>treap模板</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-2.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstdlib&gt;
+# include &lt;cstdio&gt;
+</span><span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SIZE</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">Treap</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">,</span><span class="n">dat</span><span class="p">;</span><span class="c1">//key code and weight</span>
+    <span class="kt">int</span> <span class="n">cnt</span><span class="p">,</span><span class="n">size</span><span class="p">;</span><span class="c1">//</span>
+<span class="p">}</span><span class="n">tree</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">tot</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="n">INF</span> <span class="o">=</span> <span class="mh">0x7fffffff</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">New</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="n">tree</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">dat</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">cnt</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">tot</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span><span class="c1">//左旋右旋以后，要更新一下</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">build</span><span class="p">(){</span>
+    <span class="n">New</span><span class="p">(</span><span class="o">-</span><span class="n">INF</span><span class="p">),</span><span class="n">New</span><span class="p">(</span><span class="n">INF</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getRankByVal</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="k">return</span> <span class="n">getRankByVal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">getRankByVal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">)</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getValByRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">rank</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">rank</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zig</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span><span class="c1">//turn to right</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">);</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zag</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span><span class="c1">//turn to left</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">New</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zig</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//就是插入节点以后，右旋上来</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zag</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//插入到右子树，左旋上来</span>
+    <span class="p">}</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getPre</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="c1">//找到val，然后从val的左节点开始，一路向右走</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&lt;</span><span class="n">val</span><span class="o">&amp;&amp;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&gt;</span><span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span><span class="c1">//找前驱，不断更新ans</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">:</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="c1">//左走右走</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getNext</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span><span class="c1">//后继，和上面一样的</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&gt;</span><span class="n">val</span><span class="o">&amp;&amp;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">:</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">==</span><span class="n">val</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">--</span><span class="p">;</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">||</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">){</span><span class="c1">//左右子树有一个不为0</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">==</span><span class="mi">0</span><span class="o">||</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">dat</span><span class="o">&gt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span>
+                <span class="n">zig</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+            <span class="k">else</span>
+                <span class="n">zag</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">)</span><span class="o">:</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">build</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">opt</span><span class="p">,</span><span class="n">x</span><span class="p">;</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">opt</span><span class="p">){</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">remove</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getRankByVal</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getValByRank</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getPre</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getNext</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>splay 模板(无区间反转)</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cp"># include &lt;iostream&gt;
+</span>    <span class="cp"># include &lt;cstdio&gt;
+</span>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">^</span><span class="n">x</span><span class="p">;</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;}</span>
+    <span class="kt">int</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span><span class="kt">int</span> <span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">lzy</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">tot</span><span class="p">;</span><span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">];}</span>
+    <span class="kt">int</span> <span class="nf">which</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">;}</span>
+    <span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">d</span> <span class="o">=</span> <span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">w</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">z</span><span class="p">][</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">pushup</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">splay</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">tar</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">tar</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">z</span><span class="o">!=</span><span class="n">tar</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="n">rotate</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+                <span class="k">else</span> <span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">tar</span><span class="p">)</span><span class="n">root</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">lzy</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">^=</span> <span class="mi">1</span><span class="p">;</span><span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">lzy</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">kth</span><span class="p">(</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">pushdown</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">rank</span><span class="o">&lt;=</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]){</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">&gt;</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]){</span>
+                <span class="n">rank</span><span class="o">-=</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">];</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">curr</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">])</span><span class="n">p</span> <span class="o">=</span> <span class="n">curr</span><span class="p">,</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span><span class="k">else</span> <span class="n">p</span> <span class="o">=</span> <span class="n">curr</span><span class="p">,</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">curr</span><span class="p">){</span>
+            <span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="o">++</span><span class="n">tot</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
+            <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">fa</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+            <span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">sze</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">splay</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]]</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]];</span>
+        <span class="p">}</span>
+        <span class="n">splay</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">reverse</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">kth</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span><span class="n">kth</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
+        <span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">splay</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">pre</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">root</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">succ</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">&gt;</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">root</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">output</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">pushdown</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="n">output</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="n">output</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+        <span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+            <span class="n">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">output</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<h1 id="参考文献">参考文献</h1>
+<p>Chanis博客<a href="https://www.luogu.org/blog/Chanis/fhq-treap">传送门</a>
+范浩强 浅谈数据结构<a href="https://wenku.baidu.com/view/a5f6fefe0066f5335a8121fa.html">地址</a></p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=fhq%20treap&url=/blog/move-from-leanote-208"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-208"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-208&amp;media=/images/posts/OI.png&amp;description=fhq%20treap"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-208&title=fhq%20treap&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-207">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="fhq treap">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">【偏序，cdq】陌上花开</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-209">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【冷门知识点】支配树</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="fhq treap">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

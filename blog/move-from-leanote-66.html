@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>反素数luogu P1463</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-66">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="反素数luogu P1463 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
+如果某个正整数x满足：g(x)&amp;gt;g(i) 0&amp;lt;i&amp;lt;x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
+现在给定一个数N，你能求出不超过N的最大的反质数么？
+输入格式：
+一个数N（1&amp;lt;=N&amp;lt;=2,000,000,000）。
+输出格式：
+不超过N的最大的反质数。
+输入
+1000
+
+输出
+840
+
+解答
+其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
+因数个数公式：
+\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
+代码
+```cpp
+include 
+include 
+include 
+using namespace std;
+int primes[13]={0,2,3,5,7,11,13,17,19,23,29,31,37};//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了
+long long ans = 0;
+long long n;
+int MAX = 0;
+void dfs(int prime_cnt,long long now,int nums){//暴搜
+	if(prime_cnt&amp;gt;=12)return;//如果因数个数大于12,那么不可能了，剪掉
+	if(nums&amp;gt;MAX){//找到了因数多的数
+		MAX = nums;
+		ans = now;
+	}
+	if(MAX==nums&amp;amp;&amp;amp;ans&amp;gt;now){//如果当前数小于已找到的答案，且因数个数相同，那么我们取较小的那个，因为这样更可能获得更多的因数
+	//当初自己迷惑这里，其实是不必要的，因为在范围内，找到因数个数更多的数是，在上面就已经更新了，这里就不会更新了，否则，因数个数相同，取较小的值
+		ans = now;
+	}
+	for(int i = 1;i&amp;lt;=63;i++){
+		if(primes[prime_cnt]now&amp;gt;n)break;//如果超了,舍弃不要
+		dfs(prime_cnt+1,now=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
+	}
+
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="反素数luogu P1463 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
+如果某个正整数x满足：g(x)&amp;gt;g(i) 0&amp;lt;i&amp;lt;x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
+现在给定一个数N，你能求出不超过N的最大的反质数么？
+输入格式：
+一个数N（1&amp;lt;=N&amp;lt;=2,000,000,000）。
+输出格式：
+不超过N的最大的反质数。
+输入
+1000
+
+输出
+840
+
+解答
+其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
+因数个数公式：
+\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
+代码
+```cpp
+include 
+include 
+include 
+using namespace std;
+int primes[13]={0,2,3,5,7,11,13,17,19,23,29,31,37};//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了
+long long ans = 0;
+long long n;
+int MAX = 0;
+void dfs(int prime_cnt,long long now,int nums){//暴搜
+	if(prime_cnt&amp;gt;=12)return;//如果因数个数大于12,那么不可能了，剪掉
+	if(nums&amp;gt;MAX){//找到了因数多的数
+		MAX = nums;
+		ans = now;
+	}
+	if(MAX==nums&amp;amp;&amp;amp;ans&amp;gt;now){//如果当前数小于已找到的答案，且因数个数相同，那么我们取较小的那个，因为这样更可能获得更多的因数
+	//当初自己迷惑这里，其实是不必要的，因为在范围内，找到因数个数更多的数是，在上面就已经更新了，这里就不会更新了，否则，因数个数相同，取较小的值
+		ans = now;
+	}
+	for(int i = 1;i&amp;lt;=63;i++){
+		if(primes[prime_cnt]now&amp;gt;n)break;//如果超了,舍弃不要
+		dfs(prime_cnt+1,now=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
+	}
+
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="反素数luogu P1463">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            反素数luogu P1463
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-10-06T02:28:52+00:00">06 Oct 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
+如果某个正整数x满足：g(x)&gt;g(i) 0<code class="language-plaintext highlighter-rouge">&lt;</code>i<code class="language-plaintext highlighter-rouge">&lt;</code>x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
+现在给定一个数N，你能求出不超过N的最大的反质数么？</p>
+<h1 id="输入格式">输入格式：</h1>
+<p>一个数N（1&lt;=N&lt;=2,000,000,000）。</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>不超过N的最大的反质数。</p>
+<h1 id="输入">输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1000
+</code></pre></div></div>
+<h1 id="输出">输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>840
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
+因数个数公式：
+\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)</p>
+<h1 id="代码">代码</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;string&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">primes</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">};</span><span class="c1">//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">prime_cnt</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">nums</span><span class="p">){</span><span class="c1">//暴搜</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="c1">//如果因数个数大于12,那么不可能了，剪掉</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="o">&gt;</span><span class="n">MAX</span><span class="p">){</span><span class="c1">//找到了因数多的数</span>
+		<span class="n">MAX</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">MAX</span><span class="o">==</span><span class="n">nums</span><span class="o">&amp;&amp;</span><span class="n">ans</span><span class="o">&gt;</span><span class="n">now</span><span class="p">){</span><span class="c1">//如果当前数小于已找到的答案，且因数个数相同，那么我们取较小的那个，因为这样更可能获得更多的因数</span>
+	<span class="c1">//当初自己迷惑这里，其实是不必要的，因为在范围内，找到因数个数更多的数是，在上面就已经更新了，这里就不会更新了，否则，因数个数相同，取较小的值</span>
+		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">63</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">]</span><span class="o">*</span><span class="n">now</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//如果超了,舍弃不要</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="o">*=</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">],</span><span class="n">nums</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="c1">//根据一个数的因数个数公式</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E5%8F%8D%E7%B4%A0%E6%95%B0luogu%20P1463&url=/blog/move-from-leanote-66"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-66"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-66&amp;media=/images/posts/OI.png&amp;description=%E5%8F%8D%E7%B4%A0%E6%95%B0luogu%20P1463"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-66&title=%E5%8F%8D%E7%B4%A0%E6%95%B0luogu%20P1463&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-65">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="反素数luogu P1463">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">约数</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-67">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">luoguP1516</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="反素数luogu P1463">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

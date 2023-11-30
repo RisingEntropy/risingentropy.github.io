@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【斜率优化】特别行动队】</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-237">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【斜率优化】特别行动队】 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+因为懒得调格式问题，直接丢传送门吧。传送门
+解答
+一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+若决策$j$优于$k$，那么用j-k可以的到以下式子:
+\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&amp;gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&amp;gt;2as_i\)
+然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&amp;lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstring&amp;gt; 
+# include &amp;lt;cstdio&amp;gt;
+using namespace std;
+const int MAXN = 1000100;
+int read(){
+	int x = 0,f = 1;
+	char c = getchar();
+	while(c&amp;lt;'0'||c&amp;gt;'9'){if(c=='-')f = -1;c = getchar();}
+	while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){x = x*10+(c^48);c = getchar();}
+	return x*f;
+}
+long long dp[MAXN];
+long long sum[MAXN];
+long long a,b,c;
+double slope(int j,int k){
+	return double(dp[j]+a*(sum[j])*(sum[j])-b*sum[j]-dp[k]-a*(sum[k])*(sum[k])+b*sum[k])/double(sum[j]-sum[k]);
+}
+int q[MAXN],head,tail;
+int n;
+int main(){
+	n = read(),a = read(),b = read(),c = read();
+	long long v;
+	for(int i = 1;i&amp;lt;=n;i++){v = read();sum[i] = sum[i-1]+v;}
+	head = tail = 1;
+	for(int i = 1;i&amp;lt;=n;i++){
+		while(head&amp;lt;tail&amp;amp;&amp;amp;slope(q[head],q[head+1])&amp;gt;=2*a*sum[i])head++;//尤其注意这里的斜率比较问题
+		int j = q[head];
+		dp[i] = dp[j]+a*(sum[i]-sum[j])*(sum[i]-sum[j])+b*(sum[i]-sum[j])+c;
+		while(head&amp;lt;tail&amp;amp;&amp;amp;slope(i,q[tail])&amp;gt;slope(q[tail],q[tail-1]))tail--;
+		q[++tail] = i;
+	}
+	printf(&quot;%lld\n&quot;,dp[n]);
+	return 0;
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【斜率优化】特别行动队】 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+因为懒得调格式问题，直接丢传送门吧。传送门
+解答
+一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+若决策$j$优于$k$，那么用j-k可以的到以下式子:
+\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&amp;gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&amp;gt;2as_i\)
+然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&amp;lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstring&amp;gt; 
+# include &amp;lt;cstdio&amp;gt;
+using namespace std;
+const int MAXN = 1000100;
+int read(){
+	int x = 0,f = 1;
+	char c = getchar();
+	while(c&amp;lt;'0'||c&amp;gt;'9'){if(c=='-')f = -1;c = getchar();}
+	while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){x = x*10+(c^48);c = getchar();}
+	return x*f;
+}
+long long dp[MAXN];
+long long sum[MAXN];
+long long a,b,c;
+double slope(int j,int k){
+	return double(dp[j]+a*(sum[j])*(sum[j])-b*sum[j]-dp[k]-a*(sum[k])*(sum[k])+b*sum[k])/double(sum[j]-sum[k]);
+}
+int q[MAXN],head,tail;
+int n;
+int main(){
+	n = read(),a = read(),b = read(),c = read();
+	long long v;
+	for(int i = 1;i&amp;lt;=n;i++){v = read();sum[i] = sum[i-1]+v;}
+	head = tail = 1;
+	for(int i = 1;i&amp;lt;=n;i++){
+		while(head&amp;lt;tail&amp;amp;&amp;amp;slope(q[head],q[head+1])&amp;gt;=2*a*sum[i])head++;//尤其注意这里的斜率比较问题
+		int j = q[head];
+		dp[i] = dp[j]+a*(sum[i]-sum[j])*(sum[i]-sum[j])+b*(sum[i]-sum[j])+c;
+		while(head&amp;lt;tail&amp;amp;&amp;amp;slope(i,q[tail])&amp;gt;slope(q[tail],q[tail-1]))tail--;
+		q[++tail] = i;
+	}
+	printf(&quot;%lld\n&quot;,dp[n]);
+	return 0;
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【斜率优化】特别行动队】">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【斜率优化】特别行动队】
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-08-25T12:40:23+00:00">25 Aug 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>因为懒得调格式问题，直接丢传送门吧。<a href="https://www.luogu.org/problem/P3628">传送门</a></p>
+<h1 id="解答">解答</h1>
+<p>一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+若决策$j$优于$k$，那么用j-k可以的到以下式子:
+\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&gt;2as_i\)
+然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt; 
+# include &lt;cstdio&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1000100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="mi">48</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
+<span class="kt">double</span> <span class="nf">slope</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
+	<span class="k">return</span> <span class="kt">double</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">-</span><span class="n">b</span><span class="o">*</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">/</span><span class="kt">double</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">q</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">head</span><span class="p">,</span><span class="n">tail</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">a</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">b</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">c</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="n">v</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="p">;}</span>
+	<span class="n">head</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="o">&lt;</span><span class="n">tail</span><span class="o">&amp;&amp;</span><span class="n">slope</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">head</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">head</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">&gt;=</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">head</span><span class="o">++</span><span class="p">;</span><span class="c1">//尤其注意这里的斜率比较问题</span>
+		<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">head</span><span class="p">];</span>
+		<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">+</span><span class="n">c</span><span class="p">;</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="o">&lt;</span><span class="n">tail</span><span class="o">&amp;&amp;</span><span class="n">slope</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">q</span><span class="p">[</span><span class="n">tail</span><span class="p">])</span><span class="o">&gt;</span><span class="n">slope</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">tail</span><span class="p">],</span><span class="n">q</span><span class="p">[</span><span class="n">tail</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="n">tail</span><span class="o">--</span><span class="p">;</span>
+		<span class="n">q</span><span class="p">[</span><span class="o">++</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E3%80%91%E7%89%B9%E5%88%AB%E8%A1%8C%E5%8A%A8%E9%98%9F%E3%80%91&url=/blog/move-from-leanote-237"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-237"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-237&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E3%80%91%E7%89%B9%E5%88%AB%E8%A1%8C%E5%8A%A8%E9%98%9F%E3%80%91"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-237&title=%E3%80%90%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E3%80%91%E7%89%B9%E5%88%AB%E8%A1%8C%E5%8A%A8%E9%98%9F%E3%80%91&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-238">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【斜率优化】特别行动队】">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">暑假计划</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-239">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【概率期望 [LightOJ 1265] Island of Survival</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【斜率优化】特别行动队】">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

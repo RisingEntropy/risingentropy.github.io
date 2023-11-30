@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>OI技巧总结及例题</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-258">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OI技巧总结及例题 – Haoyu Deng's page">
+  <meta name="twitter:description" content="OI技巧总结及例题
+动态规划
+概率期望
+
+  [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
+    斜率优化
+  
+  [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
+    计数类问题
+  
+  [] 状态定义为还剩a,b,c,d…
+    线段覆盖的妙用
+  
+  [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
+    倍增
+    倍增优化
+  
+  [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
+    数学
+  
+  [] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
+  [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
+  [] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    杂七杂八的技巧
+  
+  [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
+  [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    数据结构
+  
+  [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
+  [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
+  []
+    图论
+  
+  [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题
+  [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
+  [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
+  [] dijkstra的重载（&amp;gt;符号）
+    struct node{
+  int u;
+  ll c,t;
+  const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
+      if(c==b.c)return t&amp;gt;b.t;
+      return c&amp;gt;b.c;
+  }
+};
+priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt; &amp;gt;q;
+    
+  
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="OI技巧总结及例题 – Haoyu Deng's page">
+  <meta property="og:description" content="OI技巧总结及例题
+动态规划
+概率期望
+
+  [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
+    斜率优化
+  
+  [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
+    计数类问题
+  
+  [] 状态定义为还剩a,b,c,d…
+    线段覆盖的妙用
+  
+  [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
+    倍增
+    倍增优化
+  
+  [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
+    数学
+  
+  [] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
+  [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
+  [] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    杂七杂八的技巧
+  
+  [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
+  [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    数据结构
+  
+  [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
+  [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
+  []
+    图论
+  
+  [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题
+  [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
+  [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
+  [] dijkstra的重载（&amp;gt;符号）
+    struct node{
+  int u;
+  ll c,t;
+  const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
+      if(c==b.c)return t&amp;gt;b.t;
+      return c&amp;gt;b.c;
+  }
+};
+priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt; &amp;gt;q;
+    
+  
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="OI技巧总结及例题">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            OI技巧总结及例题
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-10-11T13:04:16+00:00">11 Oct 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="oi技巧总结及例题">OI技巧总结及例题</h1>
+<h1 id="动态规划">动态规划</h1>
+<h1 id="概率期望">概率期望</h1>
+<ul>
+  <li>[] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题<a href="https://www.luogu.org/problem/CF398B">CF398B Painting The Wall</a>$\ \ \ \ \ \ \ $ <a href="http://blog.leanote.com/post/denghaoyu/8a76b7a5a11b">题解</a>
+    <h1 id="斜率优化">斜率优化</h1>
+  </li>
+  <li>[] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
+    <h1 id="计数类问题">计数类问题</h1>
+  </li>
+  <li>[] 状态定义为还剩a,b,c,d…
+    <h1 id="线段覆盖的妙用">线段覆盖的妙用</h1>
+  </li>
+  <li>[] 有些题可以转化为线段覆盖的模型。例题<a href="http://192.168.110.251/problempage.php?problem_id=1838">引水入城</a> <a href="">poj1328</a>
+    <h1 id="倍增">倍增</h1>
+    <h1 id="倍增优化">倍增优化</h1>
+  </li>
+  <li>[] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：<a href="http://192.168.110.251/problempage.php?problem_id=4079">01 串</a> <a href="http://blog.leanote.com/post/denghaoyu/%E3%80%90%E5%80%8D%E5%A2%9E%E3%80%9101%E4%B8%B2">题解</a>
+    <h1 id="数学">数学</h1>
+  </li>
+  <li>[] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN</li>
+  <li>[] 递推逆元 <code class="language-plaintext highlighter-rouge">inv[i] = (p-p/i)*inv[p%i]%p</code></li>
+  <li>[] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    <h1 id="杂七杂八的技巧">杂七杂八的技巧</h1>
+  </li>
+  <li>[] 涉及到2个数组交换后相同的题，有可能是逆序对。<a href="http://192.168.110.251/problempage.php?problem_id=1806">例题</a></li>
+  <li>[] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    <h1 id="数据结构">数据结构</h1>
+  </li>
+  <li>[] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。<a href="http://192.168.110.251/problempage.php?problem_id=4768">例题</a></li>
+  <li>[] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。</li>
+  <li>[]
+    <h1 id="图论">图论</h1>
+  </li>
+  <li>[] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 <a href="http://192.168.110.251/problempage.php?problem_id=3841">例题</a></li>
+  <li>[] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑</li>
+  <li>[] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。</li>
+  <li>[] dijkstra的重载（&gt;符号）
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct node{
+  int u;
+  ll c,t;
+  const bool operator &gt;(const node &amp;b)const{//像这样重载 
+      if(c==b.c)return t&gt;b.t;
+      return c&gt;b.c;
+  }
+};
+priority_queue&lt;node,vector&lt;node&gt;,greater&lt;node&gt; &gt;q;
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h1 id="枚举子集">枚举子集</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">S</span><span class="p">;</span><span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">S</span><span class="p">)</span>
+</code></pre></div></div>
+<h1 id="应试答题技巧">应试&amp;答题技巧</h1>
+<h1 id="检查时应记住的一些事项">检查时应记住的一些事项</h1>
+<ul>
+  <li>[] 一些非MAXN、MAXM数组的空间</li>
+  <li>[] 相似的变量名</li>
+  <li>[] long long的一系列操作</li>
+  <li>[] 数组千万清零，尤其是用第0个元素记录长度的，一定清零
+    <h1 id="关于重构代码">关于重构代码</h1>
+  </li>
+  <li>[] 在自己思维混乱，在原来代码上修改数次后</li>
+  <li>[] 修改算法或完全推翻算法时应将相关部分重构
+    <h1 id="考试注意事项">考试注意事项</h1>
+  </li>
+  <li>[] 不要用size做变量名</li>
+  <li>[] 头文件,比如<code class="language-plaintext highlighter-rouge">cstdio</code></li>
+  <li>[] 老版本编译器在结构体内定义比较大小运算符重载记得后面加<code class="language-plaintext highlighter-rouge">const</code> 在结构体外定义cmp函数时也要写成<code class="language-plaintext highlighter-rouge">const [name] &amp;[varname]</code>的形式</li>
+  <li>[] m和n变量名不要反</li>
+  <li>[] 保证暴力不要挂</li>
+  <li>[] 卡常暴力超级读优不要写挂</li>
+  <li>[] 循环变量ij不要打反</li>
+  <li>[] 注意模数是多少，不要多打个0，也不要少打个0eg:$10^8+7$</li>
+  <li>[] 对于一类在环上DP的问题，下一个坐标通过取模处理的时候千万要注意是<img src="/images/posts/db243bdab64417d4300004c.png" alt="title" /></li>
+</ul>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=OI%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93%E5%8F%8A%E4%BE%8B%E9%A2%98&url=/blog/move-from-leanote-258"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-258"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-258&amp;media=/images/posts/OI.png&amp;description=OI%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93%E5%8F%8A%E4%BE%8B%E9%A2%98"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-258&title=OI%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93%E5%8F%8A%E4%BE%8B%E9%A2%98&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-260">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="OI技巧总结及例题">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">【概率期望】CF398B Painting The Wall</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-259">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【倍增 哈希】01串</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="OI技巧总结及例题">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【李超线段树】[JSOI2008]Blue Mary开公司</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-201">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【李超线段树】[JSOI2008]Blue Mary开公司 – Haoyu Deng's page">
+  <meta name="twitter:description" content="传送门
+解答
+抄自：http://www.cnblogs.com/NLDQY/p/10147594.html
+李超线段树板子题。
+什么是李超线段树呢？
+李超线段树是用来解决二维直角坐标系上给定直线求最值的一类题目的线段树
+这一类题目往往很难像传统线段树一样下传lazy_tag，所以就需要用到标记永久化
+标记永久化作为预备知识，就不在此多做赘述了
+说白了就是把函数的编号作为标记打上去。
+然后注意一下修改：
+若新插入的函数斜率比tag所记录的函数斜率更大
+1.若新函数在mid上的y值也大于tag，那我们就可以直接把tag覆盖为新的函数，再用原tag去更新左区间。因为原tag对于右区间肯定是不会有贡献了的，但对于左区间却不一定，所以我们需要再次去进行更新，而原区间tag直接被覆盖，右区间则继续用新函数去尝试更新
+图解：此处输入图片的描述
+2.若新函数在mid上的y值小于tag，则再尝试用新函数去更新右区间，左区间就不用管了。
+因为新函数在mid上已经比tag要小，则新函数对于左区间肯定不会再有贡献，而对于右区间却可能有贡献，所以还要再往右更新，基本原理跟之前差不多，就不再给出图解
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【李超线段树】[JSOI2008]Blue Mary开公司 – Haoyu Deng's page">
+  <meta property="og:description" content="传送门
+解答
+抄自：http://www.cnblogs.com/NLDQY/p/10147594.html
+李超线段树板子题。
+什么是李超线段树呢？
+李超线段树是用来解决二维直角坐标系上给定直线求最值的一类题目的线段树
+这一类题目往往很难像传统线段树一样下传lazy_tag，所以就需要用到标记永久化
+标记永久化作为预备知识，就不在此多做赘述了
+说白了就是把函数的编号作为标记打上去。
+然后注意一下修改：
+若新插入的函数斜率比tag所记录的函数斜率更大
+1.若新函数在mid上的y值也大于tag，那我们就可以直接把tag覆盖为新的函数，再用原tag去更新左区间。因为原tag对于右区间肯定是不会有贡献了的，但对于左区间却不一定，所以我们需要再次去进行更新，而原区间tag直接被覆盖，右区间则继续用新函数去尝试更新
+图解：此处输入图片的描述
+2.若新函数在mid上的y值小于tag，则再尝试用新函数去更新右区间，左区间就不用管了。
+因为新函数在mid上已经比tag要小，则新函数对于左区间肯定不会再有贡献，而对于右区间却可能有贡献，所以还要再往右更新，基本原理跟之前差不多，就不再给出图解
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【李超线段树】[JSOI2008]Blue Mary开公司">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【李超线段树】[JSOI2008]Blue Mary开公司
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-05-08T09:03:33+00:00">08 May 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p><a href="https://www.luogu.org/problemnew/show/P4254">传送门</a></p>
+<h1 id="解答">解答</h1>
+<p>抄自：http://www.cnblogs.com/NLDQY/p/10147594.html
+李超线段树板子题。
+什么是李超线段树呢？
+李超线段树是用来解决二维直角坐标系上给定直线求最值的一类题目的线段树
+这一类题目往往很难像传统线段树一样下传lazy_tag，所以就需要用到标记永久化
+<strong>标记永久化</strong>作为预备知识，就不在此多做赘述了
+说白了就是把函数的编号作为标记打上去。
+然后注意一下修改：
+若新插入的函数斜率比tag所记录的函数斜率更大
+1.若新函数在mid上的y值也大于tag，那我们就可以直接把tag覆盖为新的函数，再用<strong>原tag</strong>去更新左区间。因为原tag对于右区间肯定是不会有贡献了的，但对于左区间却不一定，所以我们需要再次去进行更新，而原区间tag直接被覆盖，右区间则继续用新函数去尝试更新
+图解：此处输入图片的描述
+2.若新函数在mid上的y值小于tag，则再尝试用新函数去更新右区间，左区间就不用管了。
+因为新函数在mid上已经比tag要小，则新函数对于左区间肯定不会再有贡献，而对于右区间却可能有贡献，所以还要再往右更新，基本原理跟之前差不多，就不再给出图解</p>
+
+<p>若新插入的函数斜率比tag所记录的函数斜率更小
+1.若新函数在mid上的值大于tag，我们就覆盖原tag，同时用原tag去更新右区间。由于斜率比原tag要小，则这种情况下，<strong>原tag</strong>对于左区间肯定是不会有贡献的，但对右区间却不一定,所以还需要去尝试更新右区间。
+2.若原区间在mid的值小于tag，则在用新函数去尝试更新左区间，原理和以上大同小异
+不知道怎么回事，我自己的代码总是WA，所以抄了别人的代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;bits/stdc++.h&gt;
+# define N 1000020
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="kt">double</span> <span class="n">dl</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">sgt_tag</span><span class="p">{</span>
+    <span class="cp"># define ls q&lt;&lt;1
+</span>    <span class="cp"># define rs q&lt;&lt;1|1
+</span>    <span class="kt">int</span> <span class="n">tot</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
+    <span class="k">struct</span> <span class="nc">function</span><span class="p">{</span><span class="n">dl</span> <span class="n">k</span><span class="p">,</span><span class="n">b</span><span class="p">;}</span><span class="n">fun</span><span class="p">[</span><span class="n">N</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
+    <span class="kr">inline</span> <span class="n">dl</span> <span class="n">val</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span><span class="k">return</span> <span class="n">fun</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">fun</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">b</span><span class="p">;}</span><span class="c1">//因为起始点是1所以x要-1</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">ins</span><span class="p">(</span><span class="n">dl</span> <span class="n">k</span><span class="p">,</span><span class="n">dl</span> <span class="n">b</span><span class="p">){</span><span class="n">fun</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">].</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">;</span><span class="n">fun</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">;</span><span class="n">change</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">tot</span><span class="p">);}</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">change</span><span class="p">(</span><span class="kt">int</span> <span class="n">q</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">id</span><span class="p">)</span><span class="o">&gt;</span><span class="n">val</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]))</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">id</span><span class="p">;</span>
+            <span class="k">return</span> <span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">mid</span><span class="o">=</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">fun</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">k</span><span class="o">&gt;</span><span class="n">fun</span><span class="p">[</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]].</span><span class="n">k</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span><span class="n">id</span><span class="p">)</span><span class="o">&gt;</span><span class="n">val</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]))</span><span class="n">change</span><span class="p">(</span><span class="n">ls</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]),</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">id</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">change</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span><span class="n">id</span><span class="p">)</span><span class="o">&gt;</span><span class="n">val</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]))</span><span class="n">change</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]),</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="o">=</span><span class="n">id</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">change</span><span class="p">(</span><span class="n">ls</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">id</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">dl</span> <span class="n">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">q</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">)</span><span class="k">return</span> <span class="n">val</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]);</span>
+        <span class="kt">int</span> <span class="n">mid</span><span class="o">=</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">dl</span> <span class="n">ans</span><span class="o">=</span><span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">tag</span><span class="p">[</span><span class="n">q</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">ans</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">query</span><span class="p">(</span><span class="n">ls</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">));</span>
+        <span class="k">else</span> <span class="n">ans</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">query</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="n">T</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="kt">char</span> <span class="n">ch</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">ch</span><span class="p">)){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span><span class="o">=-</span><span class="n">f</span><span class="p">;</span><span class="n">ch</span><span class="o">=</span><span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">ch</span><span class="p">)){</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">ch</span><span class="o">-</span><span class="mi">48</span><span class="p">;</span><span class="n">ch</span><span class="o">=</span><span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">n</span><span class="o">=</span><span class="n">read</span><span class="p">();</span>
+    <span class="nl">begin:</span><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">goto</span> <span class="n">end</span><span class="p">;</span><span class="n">t</span><span class="o">++</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">ch</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">ch</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'P'</span><span class="p">){</span><span class="n">dl</span> <span class="n">k</span><span class="p">,</span><span class="n">b</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lf%lf"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="o">&amp;</span><span class="n">k</span><span class="p">);</span><span class="n">T</span><span class="p">.</span><span class="n">ins</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">b</span><span class="p">);}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'Q'</span><span class="p">){</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="n">read</span><span class="p">();</span><span class="n">dl</span> <span class="n">ans</span><span class="o">=</span><span class="n">T</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">x</span><span class="p">);</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="n">ans</span><span class="o">/</span><span class="mi">100</span><span class="p">);}</span>
+    <span class="k">goto</span> <span class="n">begin</span><span class="p">;</span>
+    <span class="nl">end:</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>我自己的大暴力。维护区间最小值，如果当前函数最大值小于最小值，直接不管，否则向下更新<del>测评机快的话可以过</del></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXT</span> <span class="o">=</span> <span class="mi">50010</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">50000</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span><span class="kt">double</span> <span class="n">mn</span><span class="p">,</span><span class="n">mx</span><span class="p">;}</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXT</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mn</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">mn</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">mn</span><span class="p">);</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">mx</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">mx</span><span class="p">);}</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">double</span> <span class="n">first</span><span class="p">,</span><span class="kt">double</span> <span class="n">p</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>	
+        <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mn</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mx</span><span class="p">,</span><span class="n">first</span><span class="o">+</span><span class="n">p</span><span class="o">*</span><span class="kt">double</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mn</span><span class="o">&gt;</span><span class="n">first</span><span class="o">+</span><span class="n">p</span><span class="o">*</span><span class="kt">double</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="k">return</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">first</span><span class="p">,</span><span class="n">p</span><span class="p">);</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">first</span><span class="p">,</span><span class="n">p</span><span class="p">);</span>
+    <span class="n">pushup</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">double</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mx</span><span class="p">;}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+    <span class="kt">double</span> <span class="n">S</span><span class="p">,</span><span class="n">P</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">D</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'P'</span><span class="p">){</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%lf%lf"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">S</span><span class="p">,</span><span class="o">&amp;</span><span class="n">P</span><span class="p">);</span>
+            <span class="n">modify</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">P</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">D</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,((</span><span class="kt">int</span><span class="p">)(</span><span class="n">query</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">D</span><span class="p">)))</span><span class="o">/</span><span class="mi">100</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%91[JSOI2008]Blue%20Mary%E5%BC%80%E5%85%AC%E5%8F%B8&url=/blog/move-from-leanote-201"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-201"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-201&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%91[JSOI2008]Blue%20Mary%E5%BC%80%E5%85%AC%E5%8F%B8"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-201&title=%E3%80%90%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91%E3%80%91[JSOI2008]Blue%20Mary%E5%BC%80%E5%85%AC%E5%8F%B8&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-199">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【李超线段树】[JSOI2008]Blue Mary开公司">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">【线段树(trie树)】woj2645 hyc的xor/mex</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-203">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【点分治】woj 3968</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【李超线段树】[JSOI2008]Blue Mary开公司">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

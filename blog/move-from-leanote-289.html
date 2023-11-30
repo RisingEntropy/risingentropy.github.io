@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>unknown title</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-289">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="unknown title – Haoyu Deng's page">
+  <meta name="twitter:description" content="C语言机考骗分指北
+为了帮助信通一班（2021010901）的同学们C语言机考获得满分，你们最好最帅的学委写下了这份技巧。本文萌新向，大佬请忽略。祝大家期末取得高分。学委也没有考过机考，所以以下仅供参考，考试时请自行灵活处理。注：因为学委很垃圾，所以这里面可能会有错误，请自行斟酌，对此造成的损失，学委没有能力负责。
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="unknown title – Haoyu Deng's page">
+  <meta property="og:description" content="C语言机考骗分指北
+为了帮助信通一班（2021010901）的同学们C语言机考获得满分，你们最好最帅的学委写下了这份技巧。本文萌新向，大佬请忽略。祝大家期末取得高分。学委也没有考过机考，所以以下仅供参考，考试时请自行灵活处理。注：因为学委很垃圾，所以这里面可能会有错误，请自行斟酌，对此造成的损失，学委没有能力负责。
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            unknown title
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2021-12-17T11:19:29+00:00">17 Dec 2021</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="c语言机考骗分指北">C语言机考骗分指北</h1>
+<p>为了帮助信通一班（2021010901）的同学们C语言机考获得满分，你们最好最帅的学委写下了这份技巧。本文萌新向，大佬请忽略。祝大家期末取得高分。学委也没有考过机考，所以以下仅供参考，考试时请自行灵活处理。注：因为学委很垃圾，所以这里面可能会有错误，请自行斟酌，对此造成的损失，学委没有能力负责。</p>
+
+<h1 id="技巧一打表">技巧一：打表</h1>
+<p>打表，顾名思义就是把结果直接放在程序里面，而不是去求结果。由于码图的测试点很少，所以当你实在做不出某道题的时候，你可以试着乱交一份全错的代码（一定是全错，因为这样它才会把所有输入数据吐出来给你。全错不代表是0分，因为码图好像过了编译就有一定的分数），然后观察结果界面
+<img src="/images/posts/1bc72f9ab644142c0843cc2.png" alt="title" />
+你会发现它其实把输入告诉你了。那么此时，你就把这些输入记下来，然后手算出它的答案。再在程序里面判断是哪个数据，再把相应的结果输出就行。
+例如，码图上的17题，斐波那契数列。通过交一份只输出-1的代码，得到了上面那张图一样的输出。然后可以写下如下程序：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;stdio.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">input</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">46</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1836311903"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">20</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"6765"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"55"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>提交，满分！
+需要注意的是，有些题输入很长，它不会吐完，这时候打表就不好使了。</p>
+<h1 id="技巧二使用excel">技巧二：使用excel</h1>
+<p>excel是很强大的计算工具，在打表的时候有些数据手算算不出来，比如斐波那契数列的第46项。此时你可以使用电脑自带的excel计算！至于excel的使用，请自行学习。</p>
+<h1 id="技巧三使用c的stl">技巧三：使用C++的STL</h1>
+<p>虽然这门课是C语言，但其实也可以使用C++语言的一些库。现在介绍<code class="language-plaintext highlighter-rouge">algorithm</code>这个库。先使用$ # include <algorithm>$ 导入这个库（其实这个语句用法和$# include <stdio.h>$是一样的）。</stdio.h></algorithm></p>
+<h1 id="sort函数">sort函数</h1>
+<p>sort函数的作用是对一个数组排序（可以是int char 等等可以比大小的数据类型，也可以是自定义类型）
+使用方法是：</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span><span class="c1">//a是一个数组，n是要排序的元素的个数</span>
+</code></pre></div></div>
+<p>注意，sort传入的参数是要排序的数组的第一个元素的指针，和要排序的数组的最后一个元素的<strong>后面一个</strong>，即左闭右开的区间！！！！千万注意这一点。
+下面讲排序自定义结构体，如果你上面已经晕了，就不要看下面的了。
+这个函数也可以排序自定义的数据类型，下面的例子排序一个自定义的结构体。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">person</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="p">};</span><span class="c1">//这里定义了一个结构体</span>
+<span class="n">person</span> <span class="n">people</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="c1">//声明一个数组，类型是person</span>
+<span class="kt">bool</span> <span class="nf">cmp</span><span class="p">(</span><span class="n">person</span> <span class="n">p1</span><span class="p">,</span><span class="n">person</span> <span class="n">p2</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">p1</span><span class="p">.</span><span class="n">score</span><span class="o">&lt;</span><span class="n">p2</span><span class="p">.</span><span class="n">score</span><span class="p">;</span>
+<span class="p">}</span><span class="c1">//这里自定义了一个比较函数，里面写上比较大小的规则，sort函数是默认从小到大的，如果要大到小就把&lt;改成&gt;就好了。但是需要注意的是这里一定要写&lt;或者&gt;,绝对不能写&lt;=或者&gt;=</span>
+
+<span class="c1">//在排序的地方调用：</span>
+<span class="n">sort</span><span class="p">(</span><span class="n">people</span><span class="p">,</span><span class="n">people</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="n">cmp</span><span class="p">);</span><span class="c1">//这里对people函数的前n-1个元素排序,注意是n-1！n-1！n-1！</span>
+</code></pre></div></div>
+
+<h1 id="reverse-函数">reverse 函数</h1>
+<p>顾名思义，reverse函数就是把一个数组的元素倒序。用法很简单：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span><span class="c1">//把数组a的第0个到第n-1个元素倒序</span>
+<span class="err">如原来是</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="err">，倒叙过后是</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span>
+</code></pre></div></div>
+<h1 id="unique函数">unique函数</h1>
+<p>这个函数的使用有一些注意！实在看不懂就不要用这个函数！！！
+这个函数的作用是去重。如 1 2 2 3 3 3 3 4,的数组，调用后变成1 2 3 4 2 3 3 3 ，这个函数需要注意的是，这个函数要求去重的数组已经排序了，如果没有排序，像这样：1 2 2 3 2 2，调用以后变成1 2 3 2 2 2，所以这个函数有时会和sort函数一起使用。这个函数去重不是把你的元素删掉，而是<strong>丢到数组的最后面去</strong>，所以才有上面的结果。<strong>这个函数的返回值是有用的！！！！</strong> 返回的是指向去重过后的序列的最后一个位置的指针！！！！例如，对a数组：1 2 2 2 2 3这个数组调用这个函数以后，数组变成1 2 3 2 2 2,返回的是指向3这个元素的指针，即a+3!!!!!!
+使用方法如下:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
+</code></pre></div></div>
+<h1 id="string类">string类</h1>
+<p>需要像前面一样，导入一个库$# include <string>$注意，不是$# include <string.h>$这是两个不一样的库！！！！！！！！！！！！！！！！！！！然后在下面紧接一行</string.h></string></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span><span class="c1">//这一行一定要有！！！！！！</span>
+</code></pre></div></div>
+<p>然后像定义变量一样定义：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"I LOVE UESTC , I LOVE CLASS ONE"</span><span class="p">;</span>
+</code></pre></div></div>
+<p>然后你可以用如下一些操作：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span><span class="c1">//返回这个字符串的长度</span>
+<span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//得到str的第i个字符</span>
+<span class="n">str</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span><span class="c1">//返回一个这个字符串是否为空</span>
+<span class="n">str</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="sc">'a'</span><span class="p">);</span><span class="c1">//把a这个字符添加到str的最后面去</span>
+<span class="n">str</span><span class="o">+=</span><span class="s">"C Pass"</span><span class="p">;</span><span class="c1">//把"C pass"拼接到str后面去。</span>
+<span class="n">str</span><span class="o">==</span><span class="s">"adsasd"</span><span class="p">;</span><span class="c1">//判断两个字符串是否相等</span>
+<span class="n">str</span><span class="o">==</span><span class="n">str1</span><span class="p">;</span><span class="c1">//判断两个string是否相等</span>
+<span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"UESTC"</span><span class="p">);</span><span class="c1">//返回字符串中"UESTC"第一次出现的下标，注意是第一次</span>
+<span class="n">str</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="s">"123"</span><span class="p">);</span><span class="c1">//在pos这个位置前面插入123这个字符串。例如调用str.insert(1,"123");后，str变成I123 LOVE UESTC , I LOVE CLASS ONE</span>
+</code></pre></div></div>
+<p>输出str的方法如下：
+printf(“%s”,str.data());</p>
+<h1 id="判断是否是回文">判断是否是回文</h1>
+<p>就是比较一个字符串本身和它的倒置是否相等
+例如：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">str1</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="s">"aabbaa"</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">str2</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="n">memcpy</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">strlen</span><span class="p">(</span><span class="n">str1</span><span class="p">));</span>
+<span class="n">reverse</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span><span class="n">str2</span><span class="o">+</span><span class="n">strlen</span><span class="p">(</span><span class="n">str2</span><span class="p">));</span>
+<span class="c1">//修改了此处，strcmp字符串一样时返回0，否则返回非0</span>
+<span class="c1">//故前面要加!</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">)){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"是回文"</span><span class="p">);</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"不是回文"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="拓展">拓展</h1>
+<p>如果你有兴趣的话，可以了解一下stringstream这个类。这里怕把大家搞混，所以没有做讲解。其实string这个东西还有很多其他的NB操作，但是为了防止把大家搞混，这里也不讲。有兴趣的请自行了解</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=unknown%20title&url=/blog/move-from-leanote-289"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-289"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-289&amp;media=/images/posts/OI.png&amp;description=unknown%20title"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-289&title=unknown%20title&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-288">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">矩阵与变换研讨</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-290">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">蓝桥杯复键</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

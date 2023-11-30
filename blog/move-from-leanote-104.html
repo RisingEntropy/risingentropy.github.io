@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>unknown title</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-104">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="unknown title – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+题目描述
+有q次操作，每次操作是以下两种：
+1、 加入一个数到集合中
+2、 查询，查询当前数字与集合中的数字的最大异或值，最大and值，最大or值
+输入
+第一行1个正整数Q表示操作次数
+接下来Q行，每行2个数字，第一个数字是操作序号OP（1,2），第二个数字是X表示操作的数字
+输出
+输出查询次数行，每行3个整数，空格隔开，分别表示最大异或值，最大and值，最大or值
+样例输入
+【输入样例1】
+5
+1 2
+1 3
+2 4
+1 5
+2 7
+
+【输出样例1】
+7 0 7
+5 5 7
+
+【样例解释1】
+询问4时，已插入2、3，最大异或值为4^3=7，最大and值为4&amp;amp;3或4&amp;amp;2=0，最大or值为4|3=7
+询问7时，已插入2、3、5，最大异或值为7^2=5，最大and值为7&amp;amp;5=5，最大or值为7|2=7|3=7|5=7
+【输入样例2】
+10
+1 194570
+1 202332
+1 802413
+2 234800
+1 1011194
+2 1021030
+2 715144
+2 720841
+1 7684
+2 85165
+
+【输出样例2】
+1026909 201744 1032061
+879724 984162 1048062
+655316 682376 1043962
+649621 683464 1048571
+926039 85160 1011199
+
+提示
+对于%10的数据1&amp;lt;=Q&amp;lt;=5000
+对于另%10的数据保证 X&amp;lt;1024
+对于另%40的数据保证1&amp;lt;=Q&amp;lt;=100000
+对于所有数据保证1&amp;lt;=Q&amp;lt;=1000000,1&amp;lt;=X&amp;lt;=2^20 保证第一个操作为1操作。
+解答
+·一道01trie的题。对于异或，就是构建一颗trie，然后从高位开始贪心，往1贪。关于构建trie，主要对trie代码实现是否足够熟悉。
+·对于与
+由于与的运算特点，两个都是1的情况才都是1。我们使用bit[x][i]表示x的第i位是多少。那么对于一个bit[x][i]=1, 我们应该选取的那个数的第i位也最好是1,如果有1，那么我们当然就选咯！
+·对于或
+只要有1个1，结果就是1。如果当前的数的i位是1的话，那么就不需要从集合中找一个第i位为1的数了。如果为0的话，就需要从集合中找到第i位是1的数。
+至于以上怎么实现呢？一个一个爆搜？？？$tan\ 90$我们可以通过某些标记，给他构造出来！采用dfs的思想，我们把已知的一个数的每一位变成0或者1，这样可以得到它的”子集”这个子集需要子集理解一下。然后判断集合中是否有需要的数，就只需要看看这个“子集”就可以了，最终会把它给构造出来！
+AC代码
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;cstring&amp;gt;
+# include &amp;lt;cmath&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;set&amp;gt;
+# include &amp;lt;queue&amp;gt;
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;stack&amp;gt;
+# pragma GCC optimize(&quot;Ofast&quot;)
+using namespace std;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;'0'||c&amp;gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){ x = (x&amp;lt;&amp;lt;1)+(x&amp;lt;&amp;lt;3)+c-'0';c = getchar(); }
+    return x*f;
+}
+const int MAXN = (1&amp;lt;&amp;lt;21)+5;
+int trie[MAXN][2];
+bool sub[MAXN];
+int ptr;
+int mark(int x){//其实就是把一个数的每一位，算出“子集”
+    sub[x] = true;
+    for(int i = 19;i&amp;gt;=0;i--)
+        if((x&amp;gt;&amp;gt;i&amp;amp;1)&amp;amp;&amp;amp;(!sub[x^(1&amp;lt;&amp;lt;i)]))
+            mark(x^(1&amp;lt;&amp;lt;i));
+}
+void insert(int x){
+    int p = 0,k;//trie插入操作
+    for(int i = 19;~i;i--){
+        k = x&amp;gt;&amp;gt;i&amp;amp;1?1:0;
+        if(!trie[p][k])
+            trie[p][k] = ++ptr;
+        p = trie[p][k];
+    }
+}
+int queryXor(int x){
+    int ans =0,k,p = 0;
+    for(int i = 19;~i;i--){//trie查询操作
+        k = (x&amp;gt;&amp;gt;i&amp;amp;1?0:1);//注意这里0和1是反的，原因参见异或的运算规律
+        if(trie[p][k]){
+            p = trie[p][k];
+            if(k)ans|=1&amp;lt;&amp;lt;i;
+        }else{
+            p = trie[p][k^1];
+            if(k^1)ans|=1&amp;lt;&amp;lt;i;
+        }
+    }
+    return ans;
+}
+int queryAnd(int x){//查询与
+    int ans = 0;
+     for(int i = 19;~i;i--)
+         if((x&amp;gt;&amp;gt;i&amp;amp;1)&amp;amp;&amp;amp;sub[ans|1&amp;lt;&amp;lt;i])//如果这一位是1，并且集合中存在一个这一位也是1的数
+             ans|=1&amp;lt;&amp;lt;i;
+    return ans;
+}
+int queryOr(int x){//查询或
+    int ans = 0;
+    for(int i = 19;~i;i--)
+        if(!(x&amp;amp;(1&amp;lt;&amp;lt;i))&amp;amp;&amp;amp;sub[ans|1&amp;lt;&amp;lt;i])//如果这一位不为1，就看看集合中存不存在这一位为1的数
+            ans|=1&amp;lt;&amp;lt;i;
+    return ans;
+}
+int main(){
+    int Q;
+    Q = read();
+    int x,y;
+    while(Q--){
+        x = read(),y = read();
+        if(x==1){
+            insert(y);
+            mark(y);
+        }else{//注意要查询的是集合中的符合条件的数，所以要算一下再输出
+            printf(&quot;%d %d %d\n&quot;,queryXor(y)^y,queryAnd(y)&amp;amp;y,queryOr(y)|y);
+        }
+    }
+    return 0;
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="unknown title – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+题目描述
+有q次操作，每次操作是以下两种：
+1、 加入一个数到集合中
+2、 查询，查询当前数字与集合中的数字的最大异或值，最大and值，最大or值
+输入
+第一行1个正整数Q表示操作次数
+接下来Q行，每行2个数字，第一个数字是操作序号OP（1,2），第二个数字是X表示操作的数字
+输出
+输出查询次数行，每行3个整数，空格隔开，分别表示最大异或值，最大and值，最大or值
+样例输入
+【输入样例1】
+5
+1 2
+1 3
+2 4
+1 5
+2 7
+
+【输出样例1】
+7 0 7
+5 5 7
+
+【样例解释1】
+询问4时，已插入2、3，最大异或值为4^3=7，最大and值为4&amp;amp;3或4&amp;amp;2=0，最大or值为4|3=7
+询问7时，已插入2、3、5，最大异或值为7^2=5，最大and值为7&amp;amp;5=5，最大or值为7|2=7|3=7|5=7
+【输入样例2】
+10
+1 194570
+1 202332
+1 802413
+2 234800
+1 1011194
+2 1021030
+2 715144
+2 720841
+1 7684
+2 85165
+
+【输出样例2】
+1026909 201744 1032061
+879724 984162 1048062
+655316 682376 1043962
+649621 683464 1048571
+926039 85160 1011199
+
+提示
+对于%10的数据1&amp;lt;=Q&amp;lt;=5000
+对于另%10的数据保证 X&amp;lt;1024
+对于另%40的数据保证1&amp;lt;=Q&amp;lt;=100000
+对于所有数据保证1&amp;lt;=Q&amp;lt;=1000000,1&amp;lt;=X&amp;lt;=2^20 保证第一个操作为1操作。
+解答
+·一道01trie的题。对于异或，就是构建一颗trie，然后从高位开始贪心，往1贪。关于构建trie，主要对trie代码实现是否足够熟悉。
+·对于与
+由于与的运算特点，两个都是1的情况才都是1。我们使用bit[x][i]表示x的第i位是多少。那么对于一个bit[x][i]=1, 我们应该选取的那个数的第i位也最好是1,如果有1，那么我们当然就选咯！
+·对于或
+只要有1个1，结果就是1。如果当前的数的i位是1的话，那么就不需要从集合中找一个第i位为1的数了。如果为0的话，就需要从集合中找到第i位是1的数。
+至于以上怎么实现呢？一个一个爆搜？？？$tan\ 90$我们可以通过某些标记，给他构造出来！采用dfs的思想，我们把已知的一个数的每一位变成0或者1，这样可以得到它的”子集”这个子集需要子集理解一下。然后判断集合中是否有需要的数，就只需要看看这个“子集”就可以了，最终会把它给构造出来！
+AC代码
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;cstring&amp;gt;
+# include &amp;lt;cmath&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;set&amp;gt;
+# include &amp;lt;queue&amp;gt;
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;stack&amp;gt;
+# pragma GCC optimize(&quot;Ofast&quot;)
+using namespace std;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;'0'||c&amp;gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){ x = (x&amp;lt;&amp;lt;1)+(x&amp;lt;&amp;lt;3)+c-'0';c = getchar(); }
+    return x*f;
+}
+const int MAXN = (1&amp;lt;&amp;lt;21)+5;
+int trie[MAXN][2];
+bool sub[MAXN];
+int ptr;
+int mark(int x){//其实就是把一个数的每一位，算出“子集”
+    sub[x] = true;
+    for(int i = 19;i&amp;gt;=0;i--)
+        if((x&amp;gt;&amp;gt;i&amp;amp;1)&amp;amp;&amp;amp;(!sub[x^(1&amp;lt;&amp;lt;i)]))
+            mark(x^(1&amp;lt;&amp;lt;i));
+}
+void insert(int x){
+    int p = 0,k;//trie插入操作
+    for(int i = 19;~i;i--){
+        k = x&amp;gt;&amp;gt;i&amp;amp;1?1:0;
+        if(!trie[p][k])
+            trie[p][k] = ++ptr;
+        p = trie[p][k];
+    }
+}
+int queryXor(int x){
+    int ans =0,k,p = 0;
+    for(int i = 19;~i;i--){//trie查询操作
+        k = (x&amp;gt;&amp;gt;i&amp;amp;1?0:1);//注意这里0和1是反的，原因参见异或的运算规律
+        if(trie[p][k]){
+            p = trie[p][k];
+            if(k)ans|=1&amp;lt;&amp;lt;i;
+        }else{
+            p = trie[p][k^1];
+            if(k^1)ans|=1&amp;lt;&amp;lt;i;
+        }
+    }
+    return ans;
+}
+int queryAnd(int x){//查询与
+    int ans = 0;
+     for(int i = 19;~i;i--)
+         if((x&amp;gt;&amp;gt;i&amp;amp;1)&amp;amp;&amp;amp;sub[ans|1&amp;lt;&amp;lt;i])//如果这一位是1，并且集合中存在一个这一位也是1的数
+             ans|=1&amp;lt;&amp;lt;i;
+    return ans;
+}
+int queryOr(int x){//查询或
+    int ans = 0;
+    for(int i = 19;~i;i--)
+        if(!(x&amp;amp;(1&amp;lt;&amp;lt;i))&amp;amp;&amp;amp;sub[ans|1&amp;lt;&amp;lt;i])//如果这一位不为1，就看看集合中存不存在这一位为1的数
+            ans|=1&amp;lt;&amp;lt;i;
+    return ans;
+}
+int main(){
+    int Q;
+    Q = read();
+    int x,y;
+    while(Q--){
+        x = read(),y = read();
+        if(x==1){
+            insert(y);
+            mark(y);
+        }else{//注意要查询的是集合中的符合条件的数，所以要算一下再输出
+            printf(&quot;%d %d %d\n&quot;,queryXor(y)^y,queryAnd(y)&amp;amp;y,queryOr(y)|y);
+        }
+    }
+    return 0;
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            unknown title
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-11-06T06:34:18+00:00">06 Nov 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<h1 id="题目描述">题目描述</h1>
+<p>有q次操作，每次操作是以下两种：
+1、 加入一个数到集合中
+2、 查询，查询当前数字与集合中的数字的最大异或值，最大and值，最大or值</p>
+<h1 id="输入">输入</h1>
+<p>第一行1个正整数Q表示操作次数
+接下来Q行，每行2个数字，第一个数字是操作序号OP（1,2），第二个数字是X表示操作的数字</p>
+<h1 id="输出">输出</h1>
+<p>输出查询次数行，每行3个整数，空格隔开，分别表示最大异或值，最大and值，最大or值</p>
+<h1 id="样例输入">样例输入</h1>
+<p>【输入样例1】</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+1 2
+1 3
+2 4
+1 5
+2 7
+</code></pre></div></div>
+<p>【输出样例1】</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7 0 7
+5 5 7
+</code></pre></div></div>
+<p>【样例解释1】
+询问4时，已插入2、3，最大异或值为4^3=7，最大and值为4&amp;3或4&amp;2=0，最大or值为4|3=7
+询问7时，已插入2、3、5，最大异或值为7^2=5，最大and值为7&amp;5=5，最大or值为7|2=7|3=7|5=7
+【输入样例2】</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
+1 194570
+1 202332
+1 802413
+2 234800
+1 1011194
+2 1021030
+2 715144
+2 720841
+1 7684
+2 85165
+</code></pre></div></div>
+<p>【输出样例2】</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1026909 201744 1032061
+879724 984162 1048062
+655316 682376 1043962
+649621 683464 1048571
+926039 85160 1011199
+</code></pre></div></div>
+<p>提示
+对于%10的数据1&lt;=Q&lt;=5000
+对于另%10的数据保证 X&lt;1024
+对于另%40的数据保证1&lt;=Q&lt;=100000
+对于所有数据保证1&lt;=Q&lt;=1000000,1&lt;=X&lt;=2^20 保证第一个操作为1操作。</p>
+<h1 id="解答">解答</h1>
+<p>·一道01trie的题。对于异或，就是构建一颗trie，然后从高位开始贪心，往1贪。关于构建trie，主要对trie代码实现是否足够熟悉。
+·对于与
+由于与的运算特点，两个都是1的情况才都是1。我们使用bit[x][i]表示x的第i位是多少。那么对于一个bit[x][i]=1, 我们应该选取的那个数的第i位也最好是1,如果有1，那么我们当然就选咯！
+·对于或
+只要有1个1，结果就是1。如果当前的数的i位是1的话，那么就不需要从集合中找一个第i位为1的数了。如果为0的话，就需要从集合中找到第i位是1的数。
+至于以上怎么实现呢？一个一个爆搜？？？$tan\ 90$我们可以通过某些标记，给他构造出来！采用dfs的思想，我们把已知的一个数的每一位变成0或者1，这样可以得到它的”子集”这个子集需要子集理解一下。然后判断集合中是否有需要的数，就只需要看看这个“子集”就可以了，最终会把它给构造出来！
+AC代码</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;cstring&gt;
+# include &lt;cmath&gt;
+# include &lt;algorithm&gt;
+# include &lt;set&gt;
+# include &lt;queue&gt;
+# include &lt;iostream&gt;
+# include &lt;stack&gt;
+# pragma GCC optimize("Ofast")
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">21</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">trie</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">sub</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">ptr</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">mark</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="c1">//其实就是把一个数的每一位，算出“子集”</span>
+    <span class="n">sub</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="o">!</span><span class="n">sub</span><span class="p">[</span><span class="n">x</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">)]))</span>
+            <span class="n">mark</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">k</span><span class="p">;</span><span class="c1">//trie插入操作</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span><span class="o">~</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="p">])</span>
+            <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">ptr</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">queryXor</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span><span class="o">~</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span><span class="c1">//trie查询操作</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">);</span><span class="c1">//注意这里0和1是反的，原因参见异或的运算规律</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="p">]){</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="n">ans</span><span class="o">|=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">k</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span><span class="o">|=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">queryAnd</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="c1">//查询与</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span><span class="o">~</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+         <span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">sub</span><span class="p">[</span><span class="n">ans</span><span class="o">|</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">])</span><span class="c1">//如果这一位是1，并且集合中存在一个这一位也是1的数</span>
+             <span class="n">ans</span><span class="o">|=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">queryOr</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="c1">//查询或</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span><span class="o">~</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">))</span><span class="o">&amp;&amp;</span><span class="n">sub</span><span class="p">[</span><span class="n">ans</span><span class="o">|</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">])</span><span class="c1">//如果这一位不为1，就看看集合中存不存在这一位为1的数</span>
+            <span class="n">ans</span><span class="o">|=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">Q</span><span class="p">;</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Q</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+            <span class="n">mark</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//注意要查询的是集合中的符合条件的数，所以要算一下再输出</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">queryXor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">^</span><span class="n">y</span><span class="p">,</span><span class="n">queryAnd</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="n">queryOr</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">|</span><span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=unknown%20title&url=/blog/move-from-leanote-104"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-104"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-104&amp;media=/images/posts/OI.png&amp;description=unknown%20title"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-104&title=unknown%20title&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-105">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">拓扑排序WOJ# 2576 小咸鱼，大梦想</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-107">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">NOIP2018游记(爆零祭)</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

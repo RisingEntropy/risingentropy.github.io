@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>一点小想法</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-291">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="一点小想法 – Haoyu Deng's page">
+  <meta name="twitter:description" content="想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂开了（SEnet也只是简单加权）。那能否让计算机向人眼一样，把颜色信息利用起来呢？
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="一点小想法 – Haoyu Deng's page">
+  <meta property="og:description" content="想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂开了（SEnet也只是简单加权）。那能否让计算机向人眼一样，把颜色信息利用起来呢？
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            一点小想法
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="想法">想法</h1>
+<p>对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂开了（SEnet也只是简单加权）。那能否让计算机向人眼一样，把颜色信息利用起来呢？</p>
+
+<h1 id="思考">思考</h1>
+<p>计算机中，任何一个都可以写成(R,G,B)的形式，换种方式：$Color = x_1<em>R+x_2</em>G+x_3*B$，也就是说，任意一种颜色都是(R,G,B)的线性表出，(R,G,B)是颜色空间的一组基。但是由线性代数知识可知，同一个空间的基不止一个，为什么非要用(R,G,B)表示呢？我能不能选取三个我喜欢的颜色$(C_1,C_2,C_3)$来表示呢？(保证$C_1,C_2,C_3$在(R,G,B)表示下的矩阵可逆)用线性代数知识，可以有一下公式:
+\(\begin{bmatrix}C_1\\ C_2\\C_3\end{bmatrix}=\begin{bmatrix}x_1,y_1,z_1\\x_2,y_2,z_2\\x_3,y_3,z_3\end{bmatrix}\begin{bmatrix}R\\G\\B\end{bmatrix}\)
+由坐标变换:
+\(\begin{bmatrix}R\\G\\B\end{bmatrix}=\begin{bmatrix}x_1,y_1,z_1\\x_2,y_2,z_2\\x_3,y_3,z_3\end{bmatrix}^{-1}\begin{bmatrix}C_1\\ C_2\\C_3\end{bmatrix}\)
+那么任何一个(R,G,B)表示下的颜色，用$(C_1,C_2,C_3)$表示，可以表示为:
+\(\begin{bmatrix}r\ g\ b\end{bmatrix}\begin{bmatrix}R\\G\\B\end{bmatrix}=\begin{bmatrix}r\ g\ b\end{bmatrix}\begin{bmatrix}x_1,y_1,z_1\\x_2,y_2,z_2\\x_3,y_3,z_3\end{bmatrix}^{-1}\begin{bmatrix}C_1\\ C_2\\C_3\end{bmatrix}\)
+，此时，我们就得到了这个颜色在新的颜色系统$(C_1,C_2,C_3)$下的坐标。只要我们$(C_1,C_2,C_3)$选择合理，显然有一个结论</p>
+<blockquote>
+  <p>一个颜色C与$C_i(i = 1,2,3)$越接近，那么它在这个基底上的系数就越大</p>
+</blockquote>
+
+<p>如此，我们就可以通过在这个“变换过的通道”上面的分量值，判断两个颜色是否相近。这样我们就可以非常优秀地通过物体的颜色特征来找到这个物体。<strong>更有用的一个猜想是：因为$C_i $其实是RGB的一个组合，我们这样相当于把RGB三个通道统一起来看了，这和SEnet的权重有一点相似，但是又不完全一样，因为SEnet是把三个通道简单加权，而这里不是简单加权，是根据我需要的物体的色彩特征，考虑颜色特征，而非通道特征</strong></p>
+<h1 id="实验">实验</h1>
+<p>我做了一个小实验，把一个草原的照片中的草提取出来：
+原图：<img src="/images/posts/22749fdab644142b47ea19f.png" alt="title" /></p>
+
+<p>把三个颜色(自选的三个，包括深绿色)作为新的基底后，提取在“深绿色通道的图像”</p>
+
+<p><img src="/images/posts/22749fdab644142b47ea19f.png" alt="title" /></p>
+
+<hr />
+
+<p>可以发现，这个想法很好的把草的特征提取出来了，并且和其他物体区分开了</p>
+<h1 id="代码">代码：</h1>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="c1"># 自己任意选取的三个颜色
+</span><span class="n">base_color1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1">#  深绿色
+</span><span class="n">base_color2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">245</span><span class="p">)</span>  <span class="c1">#  蓝色
+</span><span class="n">base_color3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">155</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">39</span><span class="p">)</span>  <span class="c1">#  浅绿色
+#  已验证构成的矩阵可逆
+</span><span class="n">ori_mat</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">base_color1</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">base_color2</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">base_color3</span><span class="p">)])</span><span class="c1"># 将三个颜色的RGB值组成矩阵
+</span><span class="n">inv_mat</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">ori_mat</span><span class="p">)</span><span class="c1"># 求逆
+</span>
+
+<span class="k">def</span> <span class="nf">pixelTranform</span><span class="p">(</span><span class="n">pix</span><span class="p">):</span><span class="c1"># 将每个像素的RGB值转化为新的颜色通道下的值
+</span>    <span class="n">rgb_mat</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">rgb_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rgb_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pix</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">rgb_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pix</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">rgb_mat</span><span class="p">,</span> <span class="n">inv_mat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"test.jpg"</span><span class="p">)</span>
+<span class="n">resImg</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">))</span>
+<span class="n">resarray</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">img</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">meanGreen</span> <span class="o">=</span> <span class="mi">0</span><span class="c1"># 为了凸显草地，会将整个图的深绿色分量减去一个深绿色分量的平均值
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">width</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">):</span>
+        <span class="n">res_pix</span> <span class="o">=</span> <span class="n">pixelTranform</span><span class="p">(</span><span class="n">img</span><span class="p">.</span><span class="n">getpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)))</span>
+        <span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_pix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_pix</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_pix</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">meanGreen</span> <span class="o">=</span> <span class="n">meanGreen</span> <span class="o">+</span> <span class="n">res_pix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">meanGreen</span> <span class="o">=</span> <span class="n">meanGreen</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">img</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">img</span><span class="p">.</span><span class="n">width</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">):</span>
+        <span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">meanGreen</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="c1"># 新的颜色基底下，减去平均值后，不保证值是正的，所以要处理一下，这里相当于Relu
+</span>
+<span class="n">resarray</span> <span class="o">=</span> <span class="p">(</span><span class="n">resarray</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">resarray</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">resarray</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">resarray</span><span class="p">))</span><span class="c1"># 归一化
+</span>
+<span class="n">resarray</span> <span class="o">=</span> <span class="n">resarray</span> <span class="o">*</span> <span class="mi">255</span><span class="c1"># 映射回255
+</span>
+<span class="n">resarray</span> <span class="o">=</span> <span class="n">resarray</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1"># 储存图像
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">width</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="p">.</span><span class="n">height</span><span class="p">):</span>
+        <span class="n">resImg</span><span class="p">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">(</span><span class="n">resarray</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">resImg</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"result.jpg"</span><span class="p">)</span><span class="c1"># 为了方便，直接保存RGB图，然后后面用matlab只读取R通道，得到深绿色的灰度图
+</span>
+</code></pre></div></div>
+
+<h1 id="更进一步的思考">更进一步的思考</h1>
+<p>一开始的颜色目前我是人工手动选取的，那是否可以作为参数让机器学习到最优参数呢？因为很多东西其实是有颜色特征的（虽然猫有黑色和白色，但是亚洲人的皮肤都是黄皮肤，所以是有应用场景的）。再进一步，能不能让机器不再学习RGB通道图像，而是学习出来的的通道的图像呢？这样会不会有更好的效果以及更低的复杂度。例如上图，<strong>这么处理后，其实草地的颜色特征已经非常明确了，而这么处理后，图形特征不会丢失。至少不会比就在RGB图上学习差</strong>。</p>
+
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95&url=/blog/move-from-leanote-291"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-291"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-291&amp;media=/images/posts/OI.png&amp;description=%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-291&title=%E4%B8%80%E7%82%B9%E5%B0%8F%E6%83%B3%E6%B3%95&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-290">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">蓝桥杯复键</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-292">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">unknown title</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-290">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="蓝桥杯复键">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-290">蓝桥杯复键</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      字符串
+
+  哈希*
+  KMP
+  trie
+  [] AC自动机(写1道做过的题就好了：阿里的打字机+？？？)
+
+
+图论算法
+
+  强连通分量
+  点双联通 边双联通
+  欧拉回路
+  topo sort*
+  最短路
+    数...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-02-10T11:50:30+00:00">10 Feb 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

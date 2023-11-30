@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>hxy的图论总结</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-266">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="hxy的图论总结 – Haoyu Deng's page">
+  <meta name="twitter:description" content="图论の汇总
+
+最短路
+
+  [] Floyd $O(n^3)$     用于处理任意两点间最短路
+好题：奶牛接力 Floyd矩阵快速幂（什么JB玩意）
+也可以求传递闭包（可是我不会）
+  [] Dijkstra $O((n+m)log(m))$
+  [] Bellman-Ford 不会啊
+  [] SPFA ···$O(不能过)$
+    最短路拓展
+  
+  [] 输出最短路路径（数）
+  [] k短路
+    tarjan
+    无向图
+  
+  [] 割点（点双联通）
+  [] 割边（边双联通）
+    有向图
+  
+  [] 强连通分量
+    拓扑排序
+  
+  [] 好题：球的序列（【HNOI2015】菜肴制作）
+    
+      注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现
+      差分约束系统
+      重点在于找出尽可能多的限制，SPFA判负环。
+    
+  
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="hxy的图论总结 – Haoyu Deng's page">
+  <meta property="og:description" content="图论の汇总
+
+最短路
+
+  [] Floyd $O(n^3)$     用于处理任意两点间最短路
+好题：奶牛接力 Floyd矩阵快速幂（什么JB玩意）
+也可以求传递闭包（可是我不会）
+  [] Dijkstra $O((n+m)log(m))$
+  [] Bellman-Ford 不会啊
+  [] SPFA ···$O(不能过)$
+    最短路拓展
+  
+  [] 输出最短路路径（数）
+  [] k短路
+    tarjan
+    无向图
+  
+  [] 割点（点双联通）
+  [] 割边（边双联通）
+    有向图
+  
+  [] 强连通分量
+    拓扑排序
+  
+  [] 好题：球的序列（【HNOI2015】菜肴制作）
+    
+      注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现
+      差分约束系统
+      重点在于找出尽可能多的限制，SPFA判负环。
+    
+  
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="hxy的图论总结">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            hxy的图论总结
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-10-20T03:23:44+00:00">20 Oct 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="图论の汇总">图论の汇总</h1>
+<hr />
+<h1 id="最短路">最短路</h1>
+<ul>
+  <li>[] Floyd $O(n^3)$     用于处理任意两点间最短路
+好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2379">奶牛接力</a> Floyd矩阵快速幂（什么JB玩意）
+也可以求传递闭包（可是我不会）</li>
+  <li>[] Dijkstra $O((n+m)log(m))$</li>
+  <li>[] Bellman-Ford 不会啊</li>
+  <li>[] SPFA ···$O(不能过)$
+    <h1 id="最短路拓展">最短路拓展</h1>
+  </li>
+  <li>[] 输出最短路路径（数）</li>
+  <li>[] k短路
+    <h1 id="tarjan">tarjan</h1>
+    <h1 id="无向图">无向图</h1>
+  </li>
+  <li>[] 割点（点双联通）</li>
+  <li>[] 割边（边双联通）
+    <h1 id="有向图">有向图</h1>
+  </li>
+  <li>[] 强连通分量
+    <h1 id="拓扑排序">拓扑排序</h1>
+  </li>
+  <li>[] 好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3969">球的序列（【HNOI2015】菜肴制作）</a>
+    <blockquote>
+      <p>注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现</p>
+      <h1 id="差分约束系统">差分约束系统</h1>
+      <p>重点在于找出尽可能多的限制，SPFA判负环。</p>
+    </blockquote>
+  </li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2239">奶牛的站位Layout</a>
+    <blockquote>
+      <p>比较板子题了
+朋友关系就是$dis[v]&lt;=dis[u]+w$
+敌对关系就是$dis[v]&gt;=dis[u]+w$,转化成$dis[u]&lt;=dis[v]-w$
+(差分约束只能处理&lt;=)
+编号小的靠前：$dis[i-1]&lt;=dis[i]$</p>
+    </blockquote>
+  </li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3844">出纳员问题</a> 有点毒
+    <blockquote>
+      <p>求解$sum[i]$：知道$i$时间段内所需人数总和，答案即为$sum[24]$
+但是在写限制的时候，0-7小时的情况很麻烦：$sum[24]-sum[i+16]$$+sum[i]&gt;=R[i]$出现了三个变量
+但我们求$sum[24]$，不妨二分它，然后判断是否合法即可</p>
+      <h1 id="二分图">二分图</h1>
+    </blockquote>
+  </li>
+  <li>[] km算法 复杂度$O(nm)$（雾）
+以后复习，先贴代码
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int tot,vis[N],match[N];
+bool find(int u){
+  for(int i=first[u],v;i;i=e[i].nxt){
+      v=e[i].v;if(vis[v]!=tot){
+          vis[v]=tot;
+          if(match[v]==-1||find(match[v])){
+              match[v]=u;return 1;
+          }
+      }
+  }
+  return 0;
+}
+int km(){
+  int ret=0;memset(match,-1,sizeof(match));
+  for(int i=0;i&lt;n;i++){
+      tot++;
+      ret+=find(i);
+  }
+  return ret;
+}
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>可以解决：</p>
+
+<ul>
+  <li>[] 最大匹配</li>
+  <li>[] 最小点覆盖：最大匹配</li>
+  <li>[] 最小边覆盖：2n-最大匹配</li>
+  <li>[] 最大独立集：2n-最大匹配</li>
+  <li>[] 无向图最小边覆盖：只可意会不可证明</li>
+  <li>[] DAG：嗯？？</li>
+</ul>
+
+<p>例题也甩这了</p>
+
+<ol>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2081">glod小行星群</a> 建边同上</li>
+  <li>[] <a href="">POJ - 2446 Chessboard</a>
+    <h1 id="生成树">生成树</h1>
+    <h1 id="普通生成树">普通生成树</h1>
+  </li>
+  <li>[] prim：不会啊</li>
+  <li>[] kruskal
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4323">mst</a>:生成树+树剖</li>
+</ol>
+
+<blockquote>
+  <p>相当于是每条非树边都对kruskal上与之所成环的边都有一个贡献，一条树边所受最小的贡献就是答案。把边权存在点上，树剖解决</p>
+</blockquote>
+
+<h1 id="高级东西">高级东西</h1>
+<ol>
+  <li>[] 基环树：不会啊
+<a href=""></a></li>
+  <li>[] kruskal重构树
+这玩意的两点间lca就是两点间最小瓶颈路（or最大路，取决于sort）但重点不在于这个，而在于它的一些奇妙性质。
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3673">[NOI2018]归程（return）</a></li>
+</ol>
+
+<blockquote>
+  <p>对边权从大到小排序后kruskal，得到一个类似小根堆的重构树，lca为最小瓶颈。
+这个时候它就有一个奇妙的性质：点权$&gt;$水位线$p$的点的子树内可以随意走动，代价为$0$。
+那么问题转化成两个子问题：求$u$点的深度最小的权值$&gt;p$的祖先；求它子树内的所有点中，到1号节点的最短路最小是多少
+问题一倍增解决，问题二dfs时解决，复杂度$O(dij)+O(kruskal)+O(n)+O(q*log(n))$</p>
+</blockquote>
+
+<ul>
+  <li>[] 最短路树
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2423">安全出行Safe Travel</a>
+毒瘤题</li>
+</ul>
+
+<blockquote>
+  <p>跑出最短路生成树，对于每条非树边，会对$u$到$lca_{u,v}$，$v$到$lca_{u,v}$造成贡献（不包括$lca$）
+继续分析：对于任意一个节点$x$，它的$ans$等于
+\(min(dep_{lca}+w_i+dep_u+dep_v-2*dep_{lca}-(dep_x-dep_{lca}))\)
+也就是说$ans_x=min(dep_u+dep_v+w_i)-dep_x$
+其中$i$满足$x \not=lca_{u,v}$且$x\in lca_{u,v}$的子树
+此时直接上树剖是$O(mlog^2(n))$的，也就是$O($卡常$)$,所以我们用到了<strong>贪心</strong>
+把所有的$dep_u+dep_v+w_i$从小到大排序，所以取出来的$u,v$一定更新剩下未被更新的$u$到$lca$，$v$到$lca$上的点，同时为了优化这一过程，我们用<strong>并查集</strong>压缩被更新的点，复杂度做到$O(n+m)$</p>
+</blockquote>
+
+<ul>
+  <li>[] dfs生成树
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4749">【2019CSP-S测试1012】困难的图</a></li>
+</ul>
+
+<blockquote>
+  <p>记住无向图dfs生成树有个性质：没有横叉边，只有返祖边
+因此这道题就是求：返祖边所覆盖的边与其他返祖边没有交集的所有返祖边。
+所以直接在返祖边的$u,v$处打-1,和1的标记，dfs $O(n)$跑一边前缀和，然后$O(n+m)$直接枚举返祖边验证每个环是否合法（$sum\not=1$就不合法，直接跳出来，因此是$O(n)$的）</p>
+</blockquote>
+
+<h1 id="网络流">网络流</h1>
+<p>以防万一还是贴个板子吧</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline bool bfs(){
+	queue&lt;int&gt;q;q.push(S);
+	memset(dis,-1,sizeof(dis));dis[S]=0;
+	while(!q.empty()){
+		int u=q.front();q.pop();
+		for(int i=first[u],v;i;i=e[i].nxt){
+			v=e[i].v;
+			if(e[i].w&amp;&amp;dis[v]==-1){
+				dis[v]=dis[u]+1;
+				if(v==T)return 1;
+				q.push(v);
+			}
+		}
+	}
+	return 0;
+}
+int dfs(int u,int f){
+	if(!f||u==T)return f;
+	int used=0;
+	for(int &amp;i=cur[u],v;i;i=e[i].nxt){//当前弧
+		v=e[i].v;
+		if(e[i].w&amp;&amp;dis[v]==dis[u]+1){
+			int w=dfs(v,min(f,e[i].w));
+			if(!w)continue;
+			f-=w;used+=w;
+			e[i].w-=w;e[i^1].w+=w;
+			if(!f)break;
+		}
+	}
+	return used;
+}
+inline int dinic(){
+	int ret=0;
+	while(bfs()){
+		for(int i=0;i&lt;=T;i++)cur[i]=first[i];
+		ret+=dfs(S,0x7fffffff);
+	}
+	return ret;
+}
+</code></pre></div></div>
+<ul>
+  <li>[] 最大流
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2766">危桥</a>
+好题一道、</li>
+</ul>
+
+<blockquote>
+  <p>直接建图跑最大流会有个问题：a流向b或者b流向a，如图
+<img src="/images/posts/dac3d33ab64412e1f00066f.png" alt="其中红色为危桥" />
+其中红色为危桥,but流量可以为无限大
+这个时候我们让S连向b2，T连向b1，若这样仍满足，那方案一定合法</p>
+</blockquote>
+
+<ul>
+  <li>[] 最小割
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1759">zjoi2009狼与羊的故事</a></li>
+</ul>
+
+<blockquote>
+  <p>既然要把两个东西分开，就$考^{ti}虑^{jie}$最小割
+分开两个方格的代价为1，于是羊-&gt;狼连、羊-&gt;空地、空地-&gt;空地、空地-&gt;狼连边权为1的边。注意边不要连重了</p>
+</blockquote>
+
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2309">「网络流 24 题」太空飞行计划SPJ</a>
+真正的好题</p>
+
+<blockquote>
+  <p>观察到对于一个实验$i$，要不得到$val_i-\sum_j^{j\in i}cost_j$的贡献，要不得到$0$的贡献
+所以<del>根据题解</del>可将题目转化成\(ans=sumval-\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)\)
+其中$\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)$就是求个最小割
+方案输出只需要判断是否出现在增广路中（$dis\not=-1$）（待填坑）</p>
+</blockquote>
+
+<h1 id="2-sat">2-SAT</h1>
+
+<h1 id="分层图">分层图</h1>
+
+<h1 id="杂七杂八的知识都考了的题">杂（七杂八的知识都考了的）题</h1>
+<p>这块实在是太杂了……</p>
+
+<ul>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3668">连通代价</a></li>
+</ul>
+
+<blockquote>
+  <p>直接暴力建边是$O(n^2)$的，但是有用的边只会在$x,y,z$的一维中连续的$a_i,a_{i+1}$相连，所以对三维排序后连续的点之间连边，复杂度$O(3nlog(n)+3n+kruskal)$</p>
+</blockquote>
+
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3841">双调路径</a></p>
+
+<blockquote>
+
+</blockquote>
+
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4260">【ARC084D】Small Multiple</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3993">墨墨的等式</a>
+<a href="https://vjudge.net/problem/HDU-4370">HDU - 4370 0 or 1</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4194">【ARC61E】Snuke’s Subway Trip</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3742">黑白图</a></p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=hxy%E7%9A%84%E5%9B%BE%E8%AE%BA%E6%80%BB%E7%BB%93&url=/blog/move-from-leanote-266"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-266"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-266&amp;media=/images/posts/OI.png&amp;description=hxy%E7%9A%84%E5%9B%BE%E8%AE%BA%E6%80%BB%E7%BB%93"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-266&title=hxy%E7%9A%84%E5%9B%BE%E8%AE%BA%E6%80%BB%E7%BB%93&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-263">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="hxy的图论总结">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">20191017_blog</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-265">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">dhy的图论总结</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="hxy的图论总结">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>4556woj整除</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-206">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="4556woj整除 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+麦克雷有一个 1→n 的排列，他想知道对于一些区间，有多少对区间内的数（x，y），满足x能被y整除。
+输入
+第一行包含 2 个正整数 n，m。表示有 n个数，m 个询问。
+接下来一行包含n 个正整数，表示麦克雷有的数列。
+接下来 m 行每行包含 2 个正整数l，r。表示询问区间[l,r]。
+输出
+共m 行，每行一个整数，表示满足条件的对数。
+样例输入
+10 9
+1 2 3 4 5 6 7 8 9 10
+1 10
+2 9
+3 8
+4 7
+5 6
+2 2
+9 10
+5 10
+4 10
+
+样例输出
+27
+14
+8
+4
+2
+1
+2
+7
+9
+
+提示
+30%: 1≤n,m≤100
+100%: 1≤n,m≤2∗105,1≤pi≤n
+解答
+难题。我们考虑把所有询问离线，然后以r排序，递增，这样来方便回答。然后记last[i]为第i个数所有在前面的因数或者倍数所在的坐标。然后开始回答每个询问，对于r端点为r的询问，我们先把它前面所有因数或者倍数统计(用树状数组维护前缀和，修改的时候起始修改点为last[i][j]即前面的i或者j个因数or倍数，因为这样从哪里开始，数对的个数就多了一个)。然后在根据l统计答案。具体就是当前总的数对的个数-从1到l的数对的个数。至于为什么可以这样呢？解释如下：
+我们发现这满足区间减法，即[l,r]的答案等于[1,r]-[1,l-1]再减去两个数分别在[1,l-1]和[l,r]的数对的个数，它们的共同点就是数对中的一个数的左边始终在[1,l-1]所以直接区间减掉就好了。这题有点难。我智商不够
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int MAXN = (int)2e5+10;
+struct query{
+	int l,r,id;
+};
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;'0'||c&amp;gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){ x = (x&amp;lt;&amp;lt;1)+(x&amp;lt;&amp;lt;3)+(c^'0');c = getchar(); }
+    return x*f;
+}
+vector&amp;lt;int&amp;gt; last[MAXN];
+int sum[MAXN];
+int a[MAXN],p[MAXN];
+int n,m;
+inline int lowbit(int x){return x&amp;amp;-x;}
+inline void modify(int x){while(x&amp;lt;=n){sum[x]++;x+=lowbit(x);}}
+inline int ask(int x){int ret = 0;while(x&amp;gt;0){ret+=sum[x];x-=lowbit(x);}return ret;}
+int ans[MAXN];
+vector&amp;lt;query&amp;gt; qs[MAXN];
+int main(){
+	n = read(),m = read();
+	for(int i = 1;i&amp;lt;=n;i++){
+		a[i] = read();p[a[i]] = i;
+	}
+	for(int i = 1;i&amp;lt;=n;i++){
+		for(int j = i;j&amp;lt;=n;j+=i){
+			if(p[j]&amp;lt;p[i]){//把一个数前面的因数或者倍数标记出来
+				last[p[i]].push_back(p[j]);
+			}else last[p[j]].push_back(p[i]);
+		}
+	}
+	int l,r;
+	for(int i = 1;i&amp;lt;=m;i++){
+		l = read(),r = read();qs[r].push_back(query{l,r,i});//离线所有询问
+	}
+	int cnt = 0;
+	for(int i = 1;i&amp;lt;=n;i++){
+		for(int j = 0;j&amp;lt;last[i].size();j++){
+			cnt++;modify(last[i][j]);//统计[1,r]内所有的数对，从数对的另一个数开始整体加1
+		}
+		for(int j = 0;j&amp;lt;qs[i].size();j++){
+			ans[qs[i][j].id] = cnt-ask(qs[i][j].l-1);//前面说过，直接减掉就好了，这样就包括了左端点在[1,l-1]右端点在[l,r]的情况
+		}
+	}
+	for(int i = 1;i&amp;lt;=m;i++)printf(&quot;%d\n&quot;,ans[i]);
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="4556woj整除 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+麦克雷有一个 1→n 的排列，他想知道对于一些区间，有多少对区间内的数（x，y），满足x能被y整除。
+输入
+第一行包含 2 个正整数 n，m。表示有 n个数，m 个询问。
+接下来一行包含n 个正整数，表示麦克雷有的数列。
+接下来 m 行每行包含 2 个正整数l，r。表示询问区间[l,r]。
+输出
+共m 行，每行一个整数，表示满足条件的对数。
+样例输入
+10 9
+1 2 3 4 5 6 7 8 9 10
+1 10
+2 9
+3 8
+4 7
+5 6
+2 2
+9 10
+5 10
+4 10
+
+样例输出
+27
+14
+8
+4
+2
+1
+2
+7
+9
+
+提示
+30%: 1≤n,m≤100
+100%: 1≤n,m≤2∗105,1≤pi≤n
+解答
+难题。我们考虑把所有询问离线，然后以r排序，递增，这样来方便回答。然后记last[i]为第i个数所有在前面的因数或者倍数所在的坐标。然后开始回答每个询问，对于r端点为r的询问，我们先把它前面所有因数或者倍数统计(用树状数组维护前缀和，修改的时候起始修改点为last[i][j]即前面的i或者j个因数or倍数，因为这样从哪里开始，数对的个数就多了一个)。然后在根据l统计答案。具体就是当前总的数对的个数-从1到l的数对的个数。至于为什么可以这样呢？解释如下：
+我们发现这满足区间减法，即[l,r]的答案等于[1,r]-[1,l-1]再减去两个数分别在[1,l-1]和[l,r]的数对的个数，它们的共同点就是数对中的一个数的左边始终在[1,l-1]所以直接区间减掉就好了。这题有点难。我智商不够
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int MAXN = (int)2e5+10;
+struct query{
+	int l,r,id;
+};
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;'0'||c&amp;gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){ x = (x&amp;lt;&amp;lt;1)+(x&amp;lt;&amp;lt;3)+(c^'0');c = getchar(); }
+    return x*f;
+}
+vector&amp;lt;int&amp;gt; last[MAXN];
+int sum[MAXN];
+int a[MAXN],p[MAXN];
+int n,m;
+inline int lowbit(int x){return x&amp;amp;-x;}
+inline void modify(int x){while(x&amp;lt;=n){sum[x]++;x+=lowbit(x);}}
+inline int ask(int x){int ret = 0;while(x&amp;gt;0){ret+=sum[x];x-=lowbit(x);}return ret;}
+int ans[MAXN];
+vector&amp;lt;query&amp;gt; qs[MAXN];
+int main(){
+	n = read(),m = read();
+	for(int i = 1;i&amp;lt;=n;i++){
+		a[i] = read();p[a[i]] = i;
+	}
+	for(int i = 1;i&amp;lt;=n;i++){
+		for(int j = i;j&amp;lt;=n;j+=i){
+			if(p[j]&amp;lt;p[i]){//把一个数前面的因数或者倍数标记出来
+				last[p[i]].push_back(p[j]);
+			}else last[p[j]].push_back(p[i]);
+		}
+	}
+	int l,r;
+	for(int i = 1;i&amp;lt;=m;i++){
+		l = read(),r = read();qs[r].push_back(query{l,r,i});//离线所有询问
+	}
+	int cnt = 0;
+	for(int i = 1;i&amp;lt;=n;i++){
+		for(int j = 0;j&amp;lt;last[i].size();j++){
+			cnt++;modify(last[i][j]);//统计[1,r]内所有的数对，从数对的另一个数开始整体加1
+		}
+		for(int j = 0;j&amp;lt;qs[i].size();j++){
+			ans[qs[i][j].id] = cnt-ask(qs[i][j].l-1);//前面说过，直接减掉就好了，这样就包括了左端点在[1,l-1]右端点在[l,r]的情况
+		}
+	}
+	for(int i = 1;i&amp;lt;=m;i++)printf(&quot;%d\n&quot;,ans[i]);
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="4556woj整除">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            4556woj整除
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-05-25T07:33:32+00:00">25 May 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>麦克雷有一个 1→n 的排列，他想知道对于一些区间，有多少对区间内的数（x，y），满足x能被y整除。
+输入
+第一行包含 2 个正整数 n，m。表示有 n个数，m 个询问。
+接下来一行包含n 个正整数，表示麦克雷有的数列。
+接下来 m 行每行包含 2 个正整数l，r。表示询问区间[l,r]。
+输出
+共m 行，每行一个整数，表示满足条件的对数。
+样例输入</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 9
+1 2 3 4 5 6 7 8 9 10
+1 10
+2 9
+3 8
+4 7
+5 6
+2 2
+9 10
+5 10
+4 10
+</code></pre></div></div>
+<p>样例输出</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>27
+14
+8
+4
+2
+1
+2
+7
+9
+</code></pre></div></div>
+<p>提示
+30%: 1≤n,m≤100
+100%: 1≤n,m≤2∗105,1≤pi≤n</p>
+<h1 id="解答">解答</h1>
+<p>难题。我们考虑把所有询问离线，然后以<code class="language-plaintext highlighter-rouge">r</code>排序，递增，这样来方便回答。然后记<code class="language-plaintext highlighter-rouge">last[i]</code>为第i个数所有在前面的<code class="language-plaintext highlighter-rouge">因数或者倍数</code>所在的坐标。然后开始回答每个询问，对于<code class="language-plaintext highlighter-rouge">r端点</code>为<code class="language-plaintext highlighter-rouge">r</code>的询问，我们先把它前面所有因数或者倍数统计(用树状数组维护前缀和，修改的时候起始修改点为last[i][j]即前面的i或者j个因数or倍数，因为这样从哪里开始，数对的个数就多了一个)。然后在根据l统计答案。具体就是当前总的数对的个数-从1到l的数对的个数。至于为什么可以这样呢？解释如下：
+我们发现这满足区间减法，即[l,r]的答案等于[1,r]-[1,l-1]再减去两个数分别在[1,l-1]和[l,r]的数对的个数，它们的共同点就是数对中的一个数的左边始终在[1,l-1]所以直接区间减掉就好了。这题有点难。<del>我智商不够</del></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstdio&gt;
+# include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">2e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">query</span><span class="p">{</span>
+	<span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="sc">'0'</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">last</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">lowbit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&amp;-</span><span class="n">x</span><span class="p">;}</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">){</span><span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="n">x</span><span class="o">+=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">x</span><span class="p">);}}</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">ask</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span><span class="n">ret</span><span class="o">+=</span><span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">x</span><span class="o">-=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">x</span><span class="p">);}</span><span class="k">return</span> <span class="n">ret</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">query</span><span class="o">&gt;</span> <span class="n">qs</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span><span class="n">p</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">+=</span><span class="n">i</span><span class="p">){</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="c1">//把一个数前面的因数或者倍数标记出来</span>
+				<span class="n">last</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+			<span class="p">}</span><span class="k">else</span> <span class="n">last</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">l</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">r</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span><span class="n">qs</span><span class="p">[</span><span class="n">r</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">query</span><span class="p">{</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="p">});</span><span class="c1">//离线所有询问</span>
+	<span class="p">}</span>
+	<span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">last</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">cnt</span><span class="o">++</span><span class="p">;</span><span class="n">modify</span><span class="p">(</span><span class="n">last</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span><span class="c1">//统计[1,r]内所有的数对，从数对的另一个数开始整体加1</span>
+		<span class="p">}</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">qs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">ans</span><span class="p">[</span><span class="n">qs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="o">-</span><span class="n">ask</span><span class="p">(</span><span class="n">qs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="c1">//前面说过，直接减掉就好了，这样就包括了左端点在[1,l-1]右端点在[l,r]的情况</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=4556woj%E6%95%B4%E9%99%A4&url=/blog/move-from-leanote-206"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-206"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-206&amp;media=/images/posts/OI.png&amp;description=4556woj%E6%95%B4%E9%99%A4"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-206&title=4556woj%E6%95%B4%E9%99%A4&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-205">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="4556woj整除">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">20190525考试</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-207">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【偏序，cdq】陌上花开</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="4556woj整除">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

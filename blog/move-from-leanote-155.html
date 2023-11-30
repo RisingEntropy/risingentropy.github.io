@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-155">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+追踪每头奶牛的去向是一件棘手的任务，为此农夫约翰安装了一套自动系统。他在每头牛身上安装了一个电子身份标签，奶牛通过扫描器的时候，系统可以读取奶牛的身份信息。目前，每个身份都是由一个字符串组成的，长度为M (1 ≤ M ≤ 2000)，所有的字符都取自N个、小写字母。奶牛们都是顽皮的动物，有时它们会在通过扫描器的时候倒着走，这样一个原来身份为abcb 的奶牛就可能有两个不同的身份了（abcb 和 bcba），而如果身份是 abcba 的话就不会有这个问题了。、约翰想改变奶牛们的身份，使他们不管怎么走读起来都一样。比如说，abcb可以在最后加个 a，变成回文 abcba；也可以在前面加上 bcb，变成回文 bcbabcb；或者去除字母 a，保留的 bcb 也是一条回文。总之，约翰可以在任意位置删除或插入一些字符使原字符串变成回文。不巧的是，身份标签每增加或删除一个字母都要付出相应的费用（0 ≤ 费用代价 ≤ 10000）。给定一头奶牛的身份标签和增加或删除相关字母的费用，找出把原来字符串变成回文字符串的最小费用。注意空字符串也是回文。
+输入
+第一行：两个用空格分开的整数：N和M。
+第二行：一个长度恰好为M的字符串，代表初始的身份标签。
+第三行到第N + 2行：每行为一个用空格分开的三元组：其中包括一个字符和两个整数，分别
+表示增加或删除这个字符的费用。
+输出
+只有一个整数，表示改造这个身份标签的最小费用。
+样例输入
+3 4
+abcb
+a 1000 1100
+b 350 700
+c 200 800
+
+样例输出
+900
+
+解答
+d。。。。dp。用dp[i][j]表示把区间[i,j]全部转化成回文的所需最小价格。但是怎么转移？我们~别人~~想，如果[i+1,j]都被还原成了回文，现在要拓展到[i,j]只需要在末尾加一个或者把这个s[i]删掉就可以了，对于[i,j-1]也是一样，比一下那个小，就选哪个。
+代码：
+```cpp
+//
+// Created by dhy on 19-2-14.
+//
+include 
+include 
+using namespace std;
+const int MAXN = 2005;
+int s[MAXN];int dp[MAXN][MAXN];
+int del[MAXN],add[MAXN];
+int main(){
+    char c;
+    ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+    int n,m;
+    cin»n»m;
+    for(int i = 1;i&amp;lt;=m;i++){
+        cin»c;
+        s[i] = c-‘a’;
+    }
+    int d,a;
+    for(int i = 1;i&amp;lt;=n;i++){
+        cin»c;cin»a»d;
+        del[c-‘a’] = d;
+        add[c-‘a’] = a;
+    }
+    for(int l = 2;l&amp;lt;=m;l++){
+        for(int i = 1;i+l-1&amp;lt;=m;i++){
+            int j = i+l-1;
+            if(s[i]==s[j])dp[i][j] = dp[i+1][j-1];
+            else{
+                dp[i][j] = min(dp[i+1][j]+min(add[s[i]],del[s[i]]),dp[i][j-1]+min(add[s[j]],del[s[j]]));
+            }
+        }
+    }
+    cout«dp[1][m];
+    return 0;
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+追踪每头奶牛的去向是一件棘手的任务，为此农夫约翰安装了一套自动系统。他在每头牛身上安装了一个电子身份标签，奶牛通过扫描器的时候，系统可以读取奶牛的身份信息。目前，每个身份都是由一个字符串组成的，长度为M (1 ≤ M ≤ 2000)，所有的字符都取自N个、小写字母。奶牛们都是顽皮的动物，有时它们会在通过扫描器的时候倒着走，这样一个原来身份为abcb 的奶牛就可能有两个不同的身份了（abcb 和 bcba），而如果身份是 abcba 的话就不会有这个问题了。、约翰想改变奶牛们的身份，使他们不管怎么走读起来都一样。比如说，abcb可以在最后加个 a，变成回文 abcba；也可以在前面加上 bcb，变成回文 bcbabcb；或者去除字母 a，保留的 bcb 也是一条回文。总之，约翰可以在任意位置删除或插入一些字符使原字符串变成回文。不巧的是，身份标签每增加或删除一个字母都要付出相应的费用（0 ≤ 费用代价 ≤ 10000）。给定一头奶牛的身份标签和增加或删除相关字母的费用，找出把原来字符串变成回文字符串的最小费用。注意空字符串也是回文。
+输入
+第一行：两个用空格分开的整数：N和M。
+第二行：一个长度恰好为M的字符串，代表初始的身份标签。
+第三行到第N + 2行：每行为一个用空格分开的三元组：其中包括一个字符和两个整数，分别
+表示增加或删除这个字符的费用。
+输出
+只有一个整数，表示改造这个身份标签的最小费用。
+样例输入
+3 4
+abcb
+a 1000 1100
+b 350 700
+c 200 800
+
+样例输出
+900
+
+解答
+d。。。。dp。用dp[i][j]表示把区间[i,j]全部转化成回文的所需最小价格。但是怎么转移？我们~别人~~想，如果[i+1,j]都被还原成了回文，现在要拓展到[i,j]只需要在末尾加一个或者把这个s[i]删掉就可以了，对于[i,j-1]也是一样，比一下那个小，就选哪个。
+代码：
+```cpp
+//
+// Created by dhy on 19-2-14.
+//
+include 
+include 
+using namespace std;
+const int MAXN = 2005;
+int s[MAXN];int dp[MAXN][MAXN];
+int del[MAXN],add[MAXN];
+int main(){
+    char c;
+    ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
+    int n,m;
+    cin»n»m;
+    for(int i = 1;i&amp;lt;=m;i++){
+        cin»c;
+        s[i] = c-‘a’;
+    }
+    int d,a;
+    for(int i = 1;i&amp;lt;=n;i++){
+        cin»c;cin»a»d;
+        del[c-‘a’] = d;
+        add[c-‘a’] = a;
+    }
+    for(int l = 2;l&amp;lt;=m;l++){
+        for(int i = 1;i+l-1&amp;lt;=m;i++){
+            int j = i+l-1;
+            if(s[i]==s[j])dp[i][j] = dp[i+1][j-1];
+            else{
+                dp[i][j] = min(dp[i+1][j]+min(add[s[i]],del[s[i]]),dp[i][j-1]+min(add[s[j]],del[s[j]]));
+            }
+        }
+    }
+    cout«dp[1][m];
+    return 0;
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-02-14T14:25:02+00:00">14 Feb 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>追踪每头奶牛的去向是一件棘手的任务，为此农夫约翰安装了一套自动系统。他在每头牛身上安装了一个电子身份标签，奶牛通过扫描器的时候，系统可以读取奶牛的身份信息。目前，每个身份都是由一个字符串组成的，长度为M (1 ≤ M ≤ 2000)，所有的字符都取自N个、小写字母。奶牛们都是顽皮的动物，有时它们会在通过扫描器的时候倒着走，这样一个原来身份为abcb 的奶牛就可能有两个不同的身份了（abcb 和 bcba），而如果身份是 abcba 的话就不会有这个问题了。、约翰想改变奶牛们的身份，使他们不管怎么走读起来都一样。比如说，abcb可以在最后加个 a，变成回文 abcba；也可以在前面加上 bcb，变成回文 bcbabcb；或者去除字母 a，保留的 bcb 也是一条回文。总之，约翰可以在任意位置删除或插入一些字符使原字符串变成回文。不巧的是，身份标签每增加或删除一个字母都要付出相应的费用（0 ≤ 费用代价 ≤ 10000）。给定一头奶牛的身份标签和增加或删除相关字母的费用，找出把原来字符串变成回文字符串的最小费用。注意空字符串也是回文。</p>
+<h1 id="输入">输入</h1>
+<p>第一行：两个用空格分开的整数：N和M。
+第二行：一个长度恰好为M的字符串，代表初始的身份标签。
+第三行到第N + 2行：每行为一个用空格分开的三元组：其中包括一个字符和两个整数，分别
+表示增加或删除这个字符的费用。</p>
+<h1 id="输出">输出</h1>
+<p>只有一个整数，表示改造这个身份标签的最小费用。</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 4
+abcb
+a 1000 1100
+b 350 700
+c 200 800
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>900
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>d。。。。dp。用dp[i][j]表示把区间[i,j]全部转化成回文的所需最小价格。但是怎么转移？我们~别人~~想，如果[i+1,j]都被还原成了回文，现在要拓展到[i,j]只需要在末尾加一个或者把这个s[i]删掉就可以了，对于[i,j-1]也是一样，比一下那个小，就选哪个。
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-2-14.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstring&gt;
+# include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">2005</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">s</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">del</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">add</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">);</span><span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">d</span><span class="p">,</span><span class="n">a</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="o">&gt;&gt;</span><span class="n">d</span><span class="p">;</span>
+        <span class="n">del</span><span class="p">[</span><span class="n">c</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">[</span><span class="n">c</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">min</span><span class="p">(</span><span class="n">add</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span><span class="n">del</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]),</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">min</span><span class="p">(</span><span class="n">add</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span><span class="n">del</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]]));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">m</span><span class="p">];</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=P2890%20[USACO07OPEN]%E4%BE%BF%E5%AE%9C%E7%9A%84%E5%9B%9E%E6%96%87Cheapest%20Palindrome&url=/blog/move-from-leanote-155"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-155"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-155&amp;media=/images/posts/OI.png&amp;description=P2890%20[USACO07OPEN]%E4%BE%BF%E5%AE%9C%E7%9A%84%E5%9B%9E%E6%96%87Cheapest%20Palindrome"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-155&title=P2890%20[USACO07OPEN]%E4%BE%BF%E5%AE%9C%E7%9A%84%E5%9B%9E%E6%96%87Cheapest%20Palindrome&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-153">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">CF1114 D</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-156">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">20190215日考试</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

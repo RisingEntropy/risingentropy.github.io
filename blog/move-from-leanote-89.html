@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>luogu P1608 路径统计</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-89">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="luogu P1608 路径统计 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+题目描述
+“RP餐厅”的员工素质就是不一般，在齐刷刷的算出同一个电话号码之后，就准备让HZH,TZY去送快餐了，他们将自己居住的城市画了一张地图，已知在他们的地图上，有N个地方，而且他们目前处在标注为“1”的小镇上，而送餐的地点在标注为“N”的小镇。（有点废话）除此之外还知道这些道路都是单向的，从小镇I到J需要花费D[I,J]的时间，为了更高效快捷的将快餐送到顾客手中，
+他们想走一条从小镇1到小镇N花费最少的一条路，但是他们临出发前，撞到因为在路上堵车而生气的FYY，深受启发，不能仅知道一条路线，万一。。。，于是，他们邀请FYY一起来研究起了下一个问题：这个最少花费的路径有多少条？
+输入输出格式
+输入格式：
+输入文件第一行为两个空格隔开的数N，E，表示这张地图里有多少个小镇及有多少边的信息。
+下面E行，每行三个数I、J、C，表示从I小镇到J小镇有道路相连且花费为C.（注意，数据提供的边信息可能会重复，不过保证I&amp;lt;&amp;gt;J,1&amp;lt;=I,J&amp;lt;=n）。
+输出格式：
+输出文件包含两个数，分别是最少花费和花费最少的路径的总数.
+两个不同的最短路方案要求：路径长度相同（均为最短路长度）且至少有一条边不重合。
+若城市N无法到达则只输出一个(‘No answer’);
+输入输出样例
+输入样例# 1：
+5 4
+1 5 4
+1 2 2
+2 5 2
+4 1 1
+
+输出样例# 1：
+4 2
+
+说明
+对于30%的数据 N&amp;lt;=20;
+对于100%的数据 1&amp;lt;=N&amp;lt;=2000,0&amp;lt;=E&amp;lt;=N*(N-1), 1&amp;lt;=C&amp;lt;=10.
+解答
+这道题正解大家都会不会的看楼上楼下的题解。我今天来交大家一种骗分算法:A*!又名A star。是一种 启发式搜索 以下是定义
+
+  A算法，A（A-Star)算法是一种静态路网中求解最短路径最有效的直接搜索方法，也是解决许多搜索问题的有效算法。算法中的距离估算值与实际值越接近，最终搜索速度越快。   —–百度百科
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="luogu P1608 路径统计 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+题目描述
+“RP餐厅”的员工素质就是不一般，在齐刷刷的算出同一个电话号码之后，就准备让HZH,TZY去送快餐了，他们将自己居住的城市画了一张地图，已知在他们的地图上，有N个地方，而且他们目前处在标注为“1”的小镇上，而送餐的地点在标注为“N”的小镇。（有点废话）除此之外还知道这些道路都是单向的，从小镇I到J需要花费D[I,J]的时间，为了更高效快捷的将快餐送到顾客手中，
+他们想走一条从小镇1到小镇N花费最少的一条路，但是他们临出发前，撞到因为在路上堵车而生气的FYY，深受启发，不能仅知道一条路线，万一。。。，于是，他们邀请FYY一起来研究起了下一个问题：这个最少花费的路径有多少条？
+输入输出格式
+输入格式：
+输入文件第一行为两个空格隔开的数N，E，表示这张地图里有多少个小镇及有多少边的信息。
+下面E行，每行三个数I、J、C，表示从I小镇到J小镇有道路相连且花费为C.（注意，数据提供的边信息可能会重复，不过保证I&amp;lt;&amp;gt;J,1&amp;lt;=I,J&amp;lt;=n）。
+输出格式：
+输出文件包含两个数，分别是最少花费和花费最少的路径的总数.
+两个不同的最短路方案要求：路径长度相同（均为最短路长度）且至少有一条边不重合。
+若城市N无法到达则只输出一个(‘No answer’);
+输入输出样例
+输入样例# 1：
+5 4
+1 5 4
+1 2 2
+2 5 2
+4 1 1
+
+输出样例# 1：
+4 2
+
+说明
+对于30%的数据 N&amp;lt;=20;
+对于100%的数据 1&amp;lt;=N&amp;lt;=2000,0&amp;lt;=E&amp;lt;=N*(N-1), 1&amp;lt;=C&amp;lt;=10.
+解答
+这道题正解大家都会不会的看楼上楼下的题解。我今天来交大家一种骗分算法:A*!又名A star。是一种 启发式搜索 以下是定义
+
+  A算法，A（A-Star)算法是一种静态路网中求解最短路径最有效的直接搜索方法，也是解决许多搜索问题的有效算法。算法中的距离估算值与实际值越接近，最终搜索速度越快。   —–百度百科
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="luogu P1608 路径统计">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            luogu P1608 路径统计
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-11-01T13:46:48+00:00">01 Nov 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<h1 id="题目描述">题目描述</h1>
+<p>“RP餐厅”的员工素质就是不一般，在齐刷刷的算出同一个电话号码之后，就准备让HZH,TZY去送快餐了，他们将自己居住的城市画了一张地图，已知在他们的地图上，有N个地方，而且他们目前处在标注为“1”的小镇上，而送餐的地点在标注为“N”的小镇。（有点废话）除此之外还知道这些道路都是单向的，从小镇I到J需要花费D[I,J]的时间，为了更高效快捷的将快餐送到顾客手中，
+他们想走一条从小镇1到小镇N花费最少的一条路，但是他们临出发前，撞到因为在路上堵车而生气的FYY，深受启发，不能仅知道一条路线，万一。。。，于是，他们邀请FYY一起来研究起了下一个问题：这个最少花费的路径有多少条？</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式：</h1>
+<p>输入文件第一行为两个空格隔开的数N，E，表示这张地图里有多少个小镇及有多少边的信息。
+下面E行，每行三个数I、J、C，表示从I小镇到J小镇有道路相连且花费为C.（注意，数据提供的边信息可能会重复，不过保证I&lt;&gt;J,1&lt;=I,J&lt;=n）。</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>输出文件包含两个数，分别是最少花费和花费最少的路径的总数.
+两个不同的最短路方案要求：路径长度相同（均为最短路长度）且至少有一条边不重合。
+若城市N无法到达则只输出一个(‘No answer’);</p>
+<h1 id="输入输出样例">输入输出样例</h1>
+<h1 id="输入样例-1">输入样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 4
+1 5 4
+1 2 2
+2 5 2
+4 1 1
+</code></pre></div></div>
+<h1 id="输出样例-1">输出样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 2
+</code></pre></div></div>
+<p>说明
+对于30%的数据 N&lt;=20;
+对于100%的数据 1&lt;=N&lt;=2000,0&lt;=E&lt;=N*(N-1), 1&lt;=C&lt;=10.</p>
+<h1 id="解答">解答</h1>
+<p>这道题正解大家都会<del>不会的看楼上楼下的题解</del>。我今天来交大家一种骗分算法:A*!又名A star。是一种 <strong>启发式搜索</strong> 以下是定义</p>
+<blockquote>
+  <p>A<em>算法，A</em>（A-Star)算法是一种静态路网中求解最短路径最有效的直接搜索方法，也是解决许多搜索问题的有效算法。算法中的距离估算值与实际值越接近，最终搜索速度越快。   —–百度百科</p>
+</blockquote>
+
+<p>看了这个你也很懵<del>mengbier</del>对吧？其实这些都是废话。我现在给你举个例子：如果你从昆明到北京，现在你到了成都，已经走了500KM了，然后你有多条路可以走，每条路都有一个路牌，分别写着据北京700KM 750KM 800KM。那么你要走最短的路到北京，你肯定会优先选择700KM的一条而不是其他的路对吧。<del>狗吃骨头都知道跑最短路</del> A* 的思想意识一样的，它分为两个部分：走到当前点的权值和(花费)$h(x)$和估计到达目的地的花费(就是所谓的估计函数)$g(x)$。然后我们优先拓展可能权值和(所谓可能权值和就是$h(x)+g(x)$)最小/最大 的点，这样就可以避免拓展无用的状态，减少时间开销。</p>
+
+<p>这道题我们用A*来做，那就很简单了。首先建立一个反图(用于求取每一个点到n点的最短距离)和正图(后面的A* 遍历用)，然后用<del>spfa他死了</del> dijkstra跑一次最短路以获得每个点到n的最短距离，作为我们的估计函数，这样我们就获得了一个十分准确的估价函数。然后通过bfs每次选取可能花费最小的拓展，如果走到目标点，我们就记录一下(选取花费最小的点需要把bfs里面的队列换成优先队列，即<strong>小根堆</strong>)。</p>
+
+<p>这样做固然可以，但是会T掉很多点，为什么呢？因为虽然用了启发式搜索，还是拓展了一些不可能在最短路上的点，所以我们需要另一利器：剪枝！没错，在bfs上剪枝！那么剪枝条件呢？我们只需要考虑可行性剪枝即可，因为最短路上起点到任意一点的距离加上这个点到终点的距离一点等于最短路权值和(废话)！如果堆顶的点的可能权值(这里的权值其实是确定的，因为我们的估计函数是精确的)都已经大于了最短路了，堆里面的其他元素都不可能在最短路上了那么我们直接返回就行了。关于A* 可以看看我的另一篇题解：<a href="http://denghaoyu.leanote.com/post/luoguP4467-%5BSCOI2007%5Dk%E7%9F%AD%E8%B7%AF">P4467 [SCOI2007]k短路</a> 推荐做一下<a href="https://www.luogu.org/problemnew/show/P1608">P4467</a>.原谅我的博客里借鉴了P4467一位大佬写的题解里面的图</p>
+
+<p>注意A*算法对内存要求比较大，出题人也会卡A* （不然谁去写正解啊）所以在写A*时我推荐使用<code class="language-plaintext highlighter-rouge">algorithm</code> 库里面的<code class="language-plaintext highlighter-rouge">push_heap</code>和<code class="language-plaintext highlighter-rouge">pop_heap</code> 函数或者手打堆，而不要使用<code class="language-plaintext highlighter-rouge">priority_queue</code> 因为<code class="language-plaintext highlighter-rouge">priority_queue</code>内存用的多，不吸氧会T掉，吸氧会MLE。</p>
+
+<p>最后由于A* 不是正解，所以不可避免被卡掉几个点，所以我用了<del>面向数据编程</del>把这道题A了。不然也有80分</p>
+
+<p><img src="/images/posts/bdba0cfab64410c0d001348.png" alt=" " /></p>
+
+<p>以下是80分代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;fstream&gt;
+# include &lt;cstring&gt;
+# include &lt;stdlib.h&gt;
+# include &lt;algorithm&gt;
+# include &lt;cstdio&gt;
+# include &lt;queue&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">2010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">map1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">map2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
+    <span class="n">map1</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">add2</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
+    <span class="n">map2</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">spfa</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">dis</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">vis</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">=-~</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">map1</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">1061109567</span><span class="p">)</span> <span class="p">{</span><span class="c1">//联通的</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="n">map1</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">+</span> <span class="n">map1</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+                        <span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">node</span><span class="o">&amp;</span> <span class="n">n2</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
+        <span class="k">return</span> <span class="n">w</span><span class="o">+</span><span class="n">dis</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">&gt;</span><span class="n">n2</span><span class="p">.</span><span class="n">w</span><span class="o">+</span><span class="n">dis</span><span class="p">[</span><span class="n">n2</span><span class="p">.</span><span class="n">f</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
+<span class="n">node</span> <span class="n">nodes</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
+    <span class="n">make_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">MAXN</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="k">const</span> <span class="n">node</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">){</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">push_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="n">node</span> <span class="nf">pop</span><span class="p">(){</span>
+    <span class="n">pop_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="n">cnt</span><span class="o">--</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="n">node</span> <span class="nf">qtop</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">AStar</span><span class="p">(){</span>
+    <span class="n">node</span> <span class="n">s</span> <span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+    <span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">cnt</span><span class="p">){</span>
+        <span class="n">node</span> <span class="n">top</span> <span class="o">=</span> <span class="n">qtop</span><span class="p">();</span>
+        <span class="n">pop</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">top</span><span class="p">.</span><span class="n">w</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="k">return</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">top</span><span class="p">.</span><span class="n">w</span><span class="o">==</span><span class="n">dis</span><span class="p">[</span><span class="mi">1</span><span class="p">]){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="o">==</span><span class="n">n</span><span class="p">){</span>
+                <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">=-~</span><span class="n">i</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">map2</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">1061109567</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">node</span> <span class="n">to</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+                <span class="n">to</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">to</span><span class="p">.</span><span class="n">w</span> <span class="o">+=</span> <span class="n">map2</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">push</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">map1</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">map1</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">map2</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">map2</span><span class="p">));</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">w</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+        <span class="n">add2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">spfa</span><span class="p">();</span>
+    <span class="n">init</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">1061109567</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"No answer</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">AStar</span><span class="p">();</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="n">dis</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<p>最后，祝NOIP2018 rp++，各位大佬AK NOIP rp++，报送t大或者p大！共勉！</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=luogu%20P1608%20%E8%B7%AF%E5%BE%84%E7%BB%9F%E8%AE%A1&url=/blog/move-from-leanote-89"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-89"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-89&amp;media=/images/posts/OI.png&amp;description=luogu%20P1608%20%E8%B7%AF%E5%BE%84%E7%BB%9F%E8%AE%A1"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-89&title=luogu%20P1608%20%E8%B7%AF%E5%BE%84%E7%BB%9F%E8%AE%A1&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-93">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="luogu P1608 路径统计">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">记录成长</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-96">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">luoguP1865</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="luogu P1608 路径统计">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Treap</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-117">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Treap – Haoyu Deng's page">
+  <meta name="twitter:description" content="为了省事，我已不择手段
+```cpp
+//
+// Created by dhy on 18-12-2.
+//
+include 
+include 
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+c-‘0’;c = getchar(); }
+    return x*f;
+}
+const int SIZE = 100010;
+struct Treap{
+    int l,r;
+    int val,dat;//key code and weight
+    int cnt,size;//
+}tree[SIZE];
+int tot,root,INF = 0x7fffffff;
+int New(int val){
+    tree[++tot].val = val;
+    tree[tot].dat = rand();
+    tree[tot].cnt = tree[tot].size = 1;
+    return tot;
+}
+void update(int p){//左旋右旋以后，要更新一下
+    tree[p].size = tree[tree[p].l].size+tree[tree[p].r].size+tree[p].cnt;
+}
+void build(){
+    New(-INF),New(INF);
+    root = 1;
+    tree[1].r = 2;
+    update(root);
+}
+int getRankByVal(int p,int val){
+    if(p==0)return 0;//
+    if(val==tree[p].val)return tree[tree[p].l].size+1;
+    if(val&amp;lt;tree[p].val)return getRankByVal(tree[p].l,val);
+    return getRankByVal(tree[p].r,val)+tree[tree[p].l].size+tree[p].cnt;
+}
+int getValByRank(int p,int rank){
+    if(p==0)return INF;
+    if(tree[tree[p].l].size&amp;gt;=rank)return getValByRank(tree[p].l,rank);
+    if(tree[tree[p].l].size+tree[p].cnt&amp;gt;=rank)return tree[p].val;
+    return getValByRank(tree[p].r,rank-tree[tree[p].l].size-tree[p].cnt);
+}
+void zig(int &amp;amp;p){//turn to right
+    int q = tree[p].l;
+    tree[p].l = tree[q].r,tree[q].r = p,p = q;
+    update(tree[p].r);update(p);
+}
+void zag(int &amp;amp;p){//turn to left
+    int q = tree[p].r;
+    tree[p].r = tree[q].l;
+    tree[q].l = p;
+    p = q;
+    update(tree[p].l);
+    update(p);
+}
+void insert(int &amp;amp;p,int val){
+    if(p==0){
+        p = New(val);
+        return;
+    }
+    if(val == tree[p].val){
+        tree[p].cnt++;
+        update(p);
+        return;
+    }
+    if(val&amp;lt;tree[p].val){
+        insert(tree[p].l,val);
+        if(tree[p].dat&amp;lt;tree[tree[p].l].dat)zig(p);//就是插入节点以后，右旋上来
+    }else{
+        insert(tree[p].r,val);
+        if(tree[p].dat&amp;lt;tree[tree[p].r].dat)zag(p);//插入到右子树，左旋上来
+    }
+    update(p);
+}
+int getPre(int val){
+    int ans = 1;
+    int p = root;
+    while(p){
+        if(val==tree[p].val){
+            if(tree[p].l&amp;gt;0){
+                p = tree[p].l;
+                while(tree[p].r&amp;gt;0)p = tree[p].r;//找到val，然后从val的左节点开始，一路向右走
+                ans = p;
+            }
+            break;
+        }
+        if(tree[p].val&amp;lt;val&amp;amp;&amp;amp;tree[p].val&amp;gt;tree[ans].val)ans = p;//找前驱，不断更新ans
+        p = val&amp;lt;tree[p].val?tree[p].l:tree[p].r;//左走右走
+    }
+    return tree[ans].val;
+}
+int getNext(int val){
+    int ans = 2;
+    int p = root;
+    while(p){
+        if(val==tree[p].val){
+            if(tree[p].r&amp;gt;0){
+                p = tree[p].r;
+                while(tree[p].l&amp;gt;0)p = tree[p].l;//后继，和上面一样的
+                ans = p;
+            }
+            break;
+        }
+        if(tree[p].val&amp;gt;val&amp;amp;&amp;amp;tree[p].val&amp;lt;tree[ans].val)ans = p;
+        p = val&amp;lt;tree[p].val?tree[p].l:tree[p].r;
+    }
+    return tree[ans].val;
+}
+void remove(int &amp;amp;p,int val){
+    if(p==0)return;
+    if(tree[p].val==val){
+        if(tree[p].cnt&amp;gt;1){
+            tree[p].cnt–;
+            update(p);
+            return;
+        }
+        if(tree[p].l||tree[p].r){//左右子树有一个不为0
+            if(tree[p].r==0||tree[tree[p].l].dat&amp;gt;tree[tree[p].r].dat)
+                zig(p),remove(tree[p].r,val);
+            else
+                zag(p),remove(tree[p].l,val);
+            update(p);
+        }
+        else
+            p = 0;
+        return;
+    }
+    val&amp;lt;tree[p].val?remove(tree[p].l,val):remove(tree[p].r,val);
+    update(p);
+}
+int main(){
+    build();
+    int n = read();
+    while(n–){
+        int opt,x;
+        opt = read(),x = read();
+        switch (opt){
+            case 1:
+                insert(root,x);
+                break;
+            case 2:
+                remove(root,x);
+                break;
+            case 3:
+                printf(“%d\n”,getRankByVal(root,x)-1);
+                break;
+            case 4:
+                printf(“%d\n”,getValByRank(root,x+1));
+                break;
+            case 5:
+                printf(“%d\n”,getPre(x));
+                break;
+            case 6:
+                printf(“%d\n”,getNext(x));
+                break;
+        }
+    }
+    return 0;
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="Treap – Haoyu Deng's page">
+  <meta property="og:description" content="为了省事，我已不择手段
+```cpp
+//
+// Created by dhy on 18-12-2.
+//
+include 
+include 
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+c-‘0’;c = getchar(); }
+    return x*f;
+}
+const int SIZE = 100010;
+struct Treap{
+    int l,r;
+    int val,dat;//key code and weight
+    int cnt,size;//
+}tree[SIZE];
+int tot,root,INF = 0x7fffffff;
+int New(int val){
+    tree[++tot].val = val;
+    tree[tot].dat = rand();
+    tree[tot].cnt = tree[tot].size = 1;
+    return tot;
+}
+void update(int p){//左旋右旋以后，要更新一下
+    tree[p].size = tree[tree[p].l].size+tree[tree[p].r].size+tree[p].cnt;
+}
+void build(){
+    New(-INF),New(INF);
+    root = 1;
+    tree[1].r = 2;
+    update(root);
+}
+int getRankByVal(int p,int val){
+    if(p==0)return 0;//
+    if(val==tree[p].val)return tree[tree[p].l].size+1;
+    if(val&amp;lt;tree[p].val)return getRankByVal(tree[p].l,val);
+    return getRankByVal(tree[p].r,val)+tree[tree[p].l].size+tree[p].cnt;
+}
+int getValByRank(int p,int rank){
+    if(p==0)return INF;
+    if(tree[tree[p].l].size&amp;gt;=rank)return getValByRank(tree[p].l,rank);
+    if(tree[tree[p].l].size+tree[p].cnt&amp;gt;=rank)return tree[p].val;
+    return getValByRank(tree[p].r,rank-tree[tree[p].l].size-tree[p].cnt);
+}
+void zig(int &amp;amp;p){//turn to right
+    int q = tree[p].l;
+    tree[p].l = tree[q].r,tree[q].r = p,p = q;
+    update(tree[p].r);update(p);
+}
+void zag(int &amp;amp;p){//turn to left
+    int q = tree[p].r;
+    tree[p].r = tree[q].l;
+    tree[q].l = p;
+    p = q;
+    update(tree[p].l);
+    update(p);
+}
+void insert(int &amp;amp;p,int val){
+    if(p==0){
+        p = New(val);
+        return;
+    }
+    if(val == tree[p].val){
+        tree[p].cnt++;
+        update(p);
+        return;
+    }
+    if(val&amp;lt;tree[p].val){
+        insert(tree[p].l,val);
+        if(tree[p].dat&amp;lt;tree[tree[p].l].dat)zig(p);//就是插入节点以后，右旋上来
+    }else{
+        insert(tree[p].r,val);
+        if(tree[p].dat&amp;lt;tree[tree[p].r].dat)zag(p);//插入到右子树，左旋上来
+    }
+    update(p);
+}
+int getPre(int val){
+    int ans = 1;
+    int p = root;
+    while(p){
+        if(val==tree[p].val){
+            if(tree[p].l&amp;gt;0){
+                p = tree[p].l;
+                while(tree[p].r&amp;gt;0)p = tree[p].r;//找到val，然后从val的左节点开始，一路向右走
+                ans = p;
+            }
+            break;
+        }
+        if(tree[p].val&amp;lt;val&amp;amp;&amp;amp;tree[p].val&amp;gt;tree[ans].val)ans = p;//找前驱，不断更新ans
+        p = val&amp;lt;tree[p].val?tree[p].l:tree[p].r;//左走右走
+    }
+    return tree[ans].val;
+}
+int getNext(int val){
+    int ans = 2;
+    int p = root;
+    while(p){
+        if(val==tree[p].val){
+            if(tree[p].r&amp;gt;0){
+                p = tree[p].r;
+                while(tree[p].l&amp;gt;0)p = tree[p].l;//后继，和上面一样的
+                ans = p;
+            }
+            break;
+        }
+        if(tree[p].val&amp;gt;val&amp;amp;&amp;amp;tree[p].val&amp;lt;tree[ans].val)ans = p;
+        p = val&amp;lt;tree[p].val?tree[p].l:tree[p].r;
+    }
+    return tree[ans].val;
+}
+void remove(int &amp;amp;p,int val){
+    if(p==0)return;
+    if(tree[p].val==val){
+        if(tree[p].cnt&amp;gt;1){
+            tree[p].cnt–;
+            update(p);
+            return;
+        }
+        if(tree[p].l||tree[p].r){//左右子树有一个不为0
+            if(tree[p].r==0||tree[tree[p].l].dat&amp;gt;tree[tree[p].r].dat)
+                zig(p),remove(tree[p].r,val);
+            else
+                zag(p),remove(tree[p].l,val);
+            update(p);
+        }
+        else
+            p = 0;
+        return;
+    }
+    val&amp;lt;tree[p].val?remove(tree[p].l,val):remove(tree[p].r,val);
+    update(p);
+}
+int main(){
+    build();
+    int n = read();
+    while(n–){
+        int opt,x;
+        opt = read(),x = read();
+        switch (opt){
+            case 1:
+                insert(root,x);
+                break;
+            case 2:
+                remove(root,x);
+                break;
+            case 3:
+                printf(“%d\n”,getRankByVal(root,x)-1);
+                break;
+            case 4:
+                printf(“%d\n”,getValByRank(root,x+1));
+                break;
+            case 5:
+                printf(“%d\n”,getPre(x));
+                break;
+            case 6:
+                printf(“%d\n”,getNext(x));
+                break;
+        }
+    }
+    return 0;
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="Treap">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            Treap
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-12-09T03:29:39+00:00">09 Dec 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p>为了省事，我已不择手段</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-2.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstdlib&gt;
+# include &lt;cstdio&gt;
+</span><span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">SIZE</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">Treap</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">,</span><span class="n">dat</span><span class="p">;</span><span class="c1">//key code and weight</span>
+    <span class="kt">int</span> <span class="n">cnt</span><span class="p">,</span><span class="n">size</span><span class="p">;</span><span class="c1">//</span>
+<span class="p">}</span><span class="n">tree</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">tot</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="n">INF</span> <span class="o">=</span> <span class="mh">0x7fffffff</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">New</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="n">tree</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">dat</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">cnt</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">tot</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span><span class="c1">//左旋右旋以后，要更新一下</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">build</span><span class="p">(){</span>
+    <span class="n">New</span><span class="p">(</span><span class="o">-</span><span class="n">INF</span><span class="p">),</span><span class="n">New</span><span class="p">(</span><span class="n">INF</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getRankByVal</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="k">return</span> <span class="n">getRankByVal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">getRankByVal</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">)</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getValByRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">rank</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">rank</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zig</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span><span class="c1">//turn to right</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">);</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zag</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span><span class="c1">//turn to left</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">New</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zig</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//就是插入节点以后，右旋上来</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zag</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="c1">//插入到右子树，左旋上来</span>
+    <span class="p">}</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getPre</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="c1">//找到val，然后从val的左节点开始，一路向右走</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&lt;</span><span class="n">val</span><span class="o">&amp;&amp;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&gt;</span><span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span><span class="c1">//找前驱，不断更新ans</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">:</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="c1">//左走右走</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getNext</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">p</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span><span class="c1">//后继，和上面一样的</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&gt;</span><span class="n">val</span><span class="o">&amp;&amp;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">:</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">ans</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">==</span><span class="n">val</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">){</span>
+            <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">--</span><span class="p">;</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="o">||</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">){</span><span class="c1">//左右子树有一个不为0</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="o">==</span><span class="mi">0</span><span class="o">||</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">dat</span><span class="o">&gt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span>
+                <span class="n">zig</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+            <span class="k">else</span>
+                <span class="n">zag</span><span class="p">(</span><span class="n">p</span><span class="p">),</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="o">?</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">)</span><span class="o">:</span><span class="n">remove</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">build</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">opt</span><span class="p">,</span><span class="n">x</span><span class="p">;</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">opt</span><span class="p">){</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">remove</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getRankByVal</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getValByRank</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getPre</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getNext</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=Treap&url=/blog/move-from-leanote-117"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-117"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-117&amp;media=/images/posts/OI.png&amp;description=Treap"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-117&title=Treap&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-116">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="Treap">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">POJ3585</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-118">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">POJ 2411Mondriaan's Dream</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="Treap">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

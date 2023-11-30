@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>woj2378 架设电话线</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-186">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="woj2378 架设电话线 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+最近，Farmer John的奶牛们越来越不满于牛棚里一塌糊涂的电话服务，于是，她们要求FJ把那些老旧的电话线换成性能更好的新电话线。新的电话线架设 在已有的N(2 &amp;lt;= N &amp;lt;=100,000)根电话线杆上，第i根电话线杆的高度为 height_i米(1 &amp;lt;= height_i &amp;lt;=100)。电话线总是从一根电话线杆的顶端被引到相邻的那根的顶端，如果这两根电话线杆的高度不同，那么FJ就必须为此支付 C*电话线杆高度差(1 &amp;lt;= C &amp;lt;=100)的费用。当然，你不能移动电话线杆，只能 按原有的顺序在相邻杆间架设电话线。Farmer John认为，加高某些电话线杆能减少架设电话线的总花费，尽管这项工作也需要支出一定的费用。更准确地，如果他把一根电话线杆加高X米的话 ，他得为此付出X^2的费用。请你帮Farmer John计算一下，如果合理地进行这两种工作，他最少要在这 个电话线改造工程上花多少钱。
+输入
+第1行: 2个用空格隔开的整数：N和C
+第2..N+1行: 第i+1行仅有一个整数：height_i
+输出
+第1行: 输出Farmer John完成电话线改造工程所需要的最小花费
+样例输入
+5 2
+2
+3
+5
+1
+4
+
+样例输出
+15
+
+提示
+输出说明:
+最好的改造方法是：Farmer John把第一根电话线杆加高1米，把第四根加 高 2米，使得它们的高度依次为3，3，5，3，4米。这样花在加高电线杆上的钱是 5。此时，拉电话线的费用为2*(0+2+2+1) = 10，总花费为15。
+解答
+单调队列优化DP。我们很容易推出如下方程式：
+\(dp[i][j] = (j-h[i])^2+min(dp[i-1][k]+c\times |i-k|)\)然后hjy讲过，去除这个讨厌的绝对值的办法就是分类讨论。
+然后嘛：\((j-h[i])^2+min\{ dp[i-1][k]-ck\}+cj j\ge k\)
+\((j-h[i])^2+min\{ dp[i-1][k]+ck\}-cj j\le k\)
+然后就完了。
+其实吧也没必要单独使用单调队列，直接遍历的时候就顺便更新了。
+```cpp
+// luogu-judger-enable-o2
+include
+include 
+define MAXN 100005
+const int INF = 0x3f3f3f3f;
+int h[MAXN];
+int dp[MAXN][201];
+inline int read(){
+    int x = 0,f = 1;
+    char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+(c^’0’);c = getchar(); }
+    return xf;
+}
+inline int abs(int a){return a&amp;gt;0?a:-a;}
+inline int min(int a,int b){return a&amp;lt;b?a:b;}
+int main(void){
+    int n = read(),c = read();
+    for(int i = 1;i&amp;lt;=n;i++)h[i] = read();
+    memset(dp,0x3f,sizeof(dp));
+    for(int i = h[1];i&amp;lt;=100;i++) dp[1][i] = (h[1]-i)(h[1]-i);
+    for(int i = 2;i&amp;lt;=n;i++){
+        int k = INF;
+        for(int j = h[i-1];j&amp;lt;=100;j++){
+            k = min(k,dp[i-1][j]-cj);//找min括号里面的部分
+            if(j&amp;gt;=h[i])dp[i][j] = k+cj+(j-h[i])(j-h[i]);//因为不能把电话杆变矮，使用必须大于h[i]
+        }
+        k = INF;
+        for(int j = 100;j&amp;gt;=h[i-1];j–){//倒着来，并且只枚举到h[i]
+        //因为如果h[i]&amp;lt;h[i-1]，对于h[i]可以枚举到，但是对于h[i-1]-h[i]之间的数就枚举不到了。
+        //如果h[i]&amp;gt;h[i-1]，显然不影响，因为我们不能把它变矮
+            k = min(k,dp[i-1][j]+cj);
+            dp[i][j] = min(k-cj+(j-h[i])(j-h[i]),dp[i][j]);
+        }
+    }
+    int ans = 0x3f3f3f3f;
+    for(int i = 1;i&amp;lt;=100;i++)ans = min(ans,dp[n][i]);
+    printf(“%d”,ans);
+    return 0;
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="woj2378 架设电话线 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+最近，Farmer John的奶牛们越来越不满于牛棚里一塌糊涂的电话服务，于是，她们要求FJ把那些老旧的电话线换成性能更好的新电话线。新的电话线架设 在已有的N(2 &amp;lt;= N &amp;lt;=100,000)根电话线杆上，第i根电话线杆的高度为 height_i米(1 &amp;lt;= height_i &amp;lt;=100)。电话线总是从一根电话线杆的顶端被引到相邻的那根的顶端，如果这两根电话线杆的高度不同，那么FJ就必须为此支付 C*电话线杆高度差(1 &amp;lt;= C &amp;lt;=100)的费用。当然，你不能移动电话线杆，只能 按原有的顺序在相邻杆间架设电话线。Farmer John认为，加高某些电话线杆能减少架设电话线的总花费，尽管这项工作也需要支出一定的费用。更准确地，如果他把一根电话线杆加高X米的话 ，他得为此付出X^2的费用。请你帮Farmer John计算一下，如果合理地进行这两种工作，他最少要在这 个电话线改造工程上花多少钱。
+输入
+第1行: 2个用空格隔开的整数：N和C
+第2..N+1行: 第i+1行仅有一个整数：height_i
+输出
+第1行: 输出Farmer John完成电话线改造工程所需要的最小花费
+样例输入
+5 2
+2
+3
+5
+1
+4
+
+样例输出
+15
+
+提示
+输出说明:
+最好的改造方法是：Farmer John把第一根电话线杆加高1米，把第四根加 高 2米，使得它们的高度依次为3，3，5，3，4米。这样花在加高电线杆上的钱是 5。此时，拉电话线的费用为2*(0+2+2+1) = 10，总花费为15。
+解答
+单调队列优化DP。我们很容易推出如下方程式：
+\(dp[i][j] = (j-h[i])^2+min(dp[i-1][k]+c\times |i-k|)\)然后hjy讲过，去除这个讨厌的绝对值的办法就是分类讨论。
+然后嘛：\((j-h[i])^2+min\{ dp[i-1][k]-ck\}+cj j\ge k\)
+\((j-h[i])^2+min\{ dp[i-1][k]+ck\}-cj j\le k\)
+然后就完了。
+其实吧也没必要单独使用单调队列，直接遍历的时候就顺便更新了。
+```cpp
+// luogu-judger-enable-o2
+include
+include 
+define MAXN 100005
+const int INF = 0x3f3f3f3f;
+int h[MAXN];
+int dp[MAXN][201];
+inline int read(){
+    int x = 0,f = 1;
+    char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+(c^’0’);c = getchar(); }
+    return xf;
+}
+inline int abs(int a){return a&amp;gt;0?a:-a;}
+inline int min(int a,int b){return a&amp;lt;b?a:b;}
+int main(void){
+    int n = read(),c = read();
+    for(int i = 1;i&amp;lt;=n;i++)h[i] = read();
+    memset(dp,0x3f,sizeof(dp));
+    for(int i = h[1];i&amp;lt;=100;i++) dp[1][i] = (h[1]-i)(h[1]-i);
+    for(int i = 2;i&amp;lt;=n;i++){
+        int k = INF;
+        for(int j = h[i-1];j&amp;lt;=100;j++){
+            k = min(k,dp[i-1][j]-cj);//找min括号里面的部分
+            if(j&amp;gt;=h[i])dp[i][j] = k+cj+(j-h[i])(j-h[i]);//因为不能把电话杆变矮，使用必须大于h[i]
+        }
+        k = INF;
+        for(int j = 100;j&amp;gt;=h[i-1];j–){//倒着来，并且只枚举到h[i]
+        //因为如果h[i]&amp;lt;h[i-1]，对于h[i]可以枚举到，但是对于h[i-1]-h[i]之间的数就枚举不到了。
+        //如果h[i]&amp;gt;h[i-1]，显然不影响，因为我们不能把它变矮
+            k = min(k,dp[i-1][j]+cj);
+            dp[i][j] = min(k-cj+(j-h[i])(j-h[i]),dp[i][j]);
+        }
+    }
+    int ans = 0x3f3f3f3f;
+    for(int i = 1;i&amp;lt;=100;i++)ans = min(ans,dp[n][i]);
+    printf(“%d”,ans);
+    return 0;
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="woj2378 架设电话线">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            woj2378 架设电话线
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-04-06T06:40:28+00:00">06 Apr 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>最近，Farmer John的奶牛们越来越不满于牛棚里一塌糊涂的电话服务，于是，她们要求FJ把那些老旧的电话线换成性能更好的新电话线。新的电话线架设 在已有的N(2 &lt;= N &lt;=100,000)根电话线杆上，第i根电话线杆的高度为 height_i米(1 &lt;= height_i &lt;=100)。电话线总是从一根电话线杆的顶端被引到相邻的那根的顶端，如果这两根电话线杆的高度不同，那么FJ就必须为此支付 C*电话线杆高度差(1 &lt;= C &lt;=100)的费用。当然，你不能移动电话线杆，只能 按原有的顺序在相邻杆间架设电话线。Farmer John认为，加高某些电话线杆能减少架设电话线的总花费，尽管这项工作也需要支出一定的费用。更准确地，如果他把一根电话线杆加高X米的话 ，他得为此付出X^2的费用。请你帮Farmer John计算一下，如果合理地进行这两种工作，他最少要在这 个电话线改造工程上花多少钱。</p>
+<h1 id="输入">输入</h1>
+<p>第1行: 2个用空格隔开的整数：N和C
+第2..N+1行: 第i+1行仅有一个整数：height_i</p>
+<h1 id="输出">输出</h1>
+<p>第1行: 输出Farmer John完成电话线改造工程所需要的最小花费</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 2
+2
+3
+5
+1
+4
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>15
+</code></pre></div></div>
+<p>提示
+输出说明:
+最好的改造方法是：Farmer John把第一根电话线杆加高1米，把第四根加 高 2米，使得它们的高度依次为3，3，5，3，4米。这样花在加高电线杆上的钱是 5。此时，拉电话线的费用为2*(0+2+2+1) = 10，总花费为15。</p>
+<h1 id="解答">解答</h1>
+<p>单调队列优化DP。我们很容易推出如下方程式：
+\(dp[i][j] = (j-h[i])^2+min(dp[i-1][k]+c\times |i-k|)\)然后<code class="language-plaintext highlighter-rouge">hjy</code>讲过，去除这个讨厌的绝对值的办法就是分类讨论。
+然后嘛：\((j-h[i])^2+min\{ dp[i-1][k]-ck\}+cj j\ge k\)
+\((j-h[i])^2+min\{ dp[i-1][k]+ck\}-cj j\le k\)
+然后就完了。
+其实吧也没必要单独使用单调队列，直接遍历的时候就顺便更新了。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// luogu-judger-enable-o2</span>
+<span class="cp"># include&lt;string.h&gt;
+# include &lt;stdio.h&gt;
+# define MAXN 100005
+</span><span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">h</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">201</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="sc">'0'</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">abs</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">:-</span><span class="n">a</span><span class="p">;}</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">min</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">c</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">j</span><span class="p">);</span><span class="c1">//找min括号里面的部分</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="n">c</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="c1">//因为不能把电话杆变矮，使用必须大于h[i]</span>
+        <span class="p">}</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="n">j</span><span class="o">--</span><span class="p">){</span><span class="c1">//倒着来，并且只枚举到h[i]</span>
+        <span class="c1">//因为如果h[i]&lt;h[i-1]，对于h[i]可以枚举到，但是对于h[i-1]-h[i]之间的数就枚举不到了。</span>
+        <span class="c1">//如果h[i]&gt;h[i-1]，显然不影响，因为我们不能把它变矮</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">c</span><span class="o">*</span><span class="n">j</span><span class="p">);</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=woj2378%20%E6%9E%B6%E8%AE%BE%E7%94%B5%E8%AF%9D%E7%BA%BF&url=/blog/move-from-leanote-186"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-186"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-186&amp;media=/images/posts/OI.png&amp;description=woj2378%20%E6%9E%B6%E8%AE%BE%E7%94%B5%E8%AF%9D%E7%BA%BF"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-186&title=woj2378%20%E6%9E%B6%E8%AE%BE%E7%94%B5%E8%AF%9D%E7%BA%BF&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-184">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="woj2378 架设电话线">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">bzoj1426. 收集邮票</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-185">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">fhq treap</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="woj2378 架设电话线">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

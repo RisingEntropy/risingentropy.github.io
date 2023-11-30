@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>woj1565 硬木地板</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-177">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="woj1565 硬木地板 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+举行计算机科学家盛宴的大厅的地板为 M∗N(1≤M≤9,1≤N≤9)的矩形。现在必须要铺上硬木地板砖。可以使用的地板砖形状有两种：
+1)2∗1 的矩形砖
+2)2∗2 中去掉一个 1∗1 的角形砖
+你需要计算用这些砖铺满地板共有多少种不同的方案。
+注意：必须盖满，地板砖数量足够多，不能存在同时被多个板砖覆盖的部分。
+输入
+一行，两个整数： M,N
+输出
+输出方案总数，如果不可能那么输出 0 。
+样例输入
+2 3
+
+样例输出
+5
+
+解答
+状态压缩DP。每块砖会影响2行。如图
+
+然后就是dfs转移状态就好了。见注释：
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+long long dp[11][1000];
+int w,h,states;
+# define add(a,k) (a|(1&amp;lt;&amp;lt;k))
+# define exist(a,k) (!(a&amp;amp;(1&amp;lt;&amp;lt;k)))
+void dfs(int line,int s1,int s2,int d){//s1当前行，s2下一行
+	if(d==w){
+		dp[line+1][s2]+=dp[line][s1];
+		return;
+	} 
+	if(exist(s1,d)){
+		if(exist(s2,d)){
+			dfs(line,s1,add(s2,d),d+1);//竖着2个的
+			if(d+1&amp;lt;w&amp;amp;&amp;amp;exist(s2,d+1))dfs(line,s1,add(add(s2,d),d+1),d+1);//缺角的
+			if(d&amp;gt;0&amp;amp;&amp;amp;exist(s2,d-1))dfs(line,s1,add(add(s2,d),d-1),d+1);//缺角的
+		}
+		if(d&amp;lt;w-1&amp;amp;&amp;amp;exist(s1,d+1)){
+			dfs(line,s1,s2,d+2);//横着的
+			if(exist(s2,d))dfs(line,s1,add(s2,d),d+2);//缺角的
+			if(exist(s2,d+1))dfs(line,s1,add(s2,d+1),d+2);//缺角的
+		}
+	}else{
+		dfs(line,s1,s2,d+1);
+	}
+	return;
+}
+int main(){
+	cin&amp;gt;&amp;gt;h&amp;gt;&amp;gt;w;
+	states = 1&amp;lt;&amp;lt;w;
+	dp[1][0]= 1;
+	dfs(1,0,0,0); 
+	for(int i = 2;i&amp;lt;=h;i++){
+		for(int j = 0;j&amp;lt;states;j++){
+			dfs(i,j,0,0);
+		}
+	}
+	if(w*h==1){
+		cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+		return 0;
+	}
+	cout&amp;lt;&amp;lt;dp[h+1][0];
+	return 0;
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="woj1565 硬木地板 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+举行计算机科学家盛宴的大厅的地板为 M∗N(1≤M≤9,1≤N≤9)的矩形。现在必须要铺上硬木地板砖。可以使用的地板砖形状有两种：
+1)2∗1 的矩形砖
+2)2∗2 中去掉一个 1∗1 的角形砖
+你需要计算用这些砖铺满地板共有多少种不同的方案。
+注意：必须盖满，地板砖数量足够多，不能存在同时被多个板砖覆盖的部分。
+输入
+一行，两个整数： M,N
+输出
+输出方案总数，如果不可能那么输出 0 。
+样例输入
+2 3
+
+样例输出
+5
+
+解答
+状态压缩DP。每块砖会影响2行。如图
+
+然后就是dfs转移状态就好了。见注释：
+# include &amp;lt;iostream&amp;gt;
+using namespace std;
+long long dp[11][1000];
+int w,h,states;
+# define add(a,k) (a|(1&amp;lt;&amp;lt;k))
+# define exist(a,k) (!(a&amp;amp;(1&amp;lt;&amp;lt;k)))
+void dfs(int line,int s1,int s2,int d){//s1当前行，s2下一行
+	if(d==w){
+		dp[line+1][s2]+=dp[line][s1];
+		return;
+	} 
+	if(exist(s1,d)){
+		if(exist(s2,d)){
+			dfs(line,s1,add(s2,d),d+1);//竖着2个的
+			if(d+1&amp;lt;w&amp;amp;&amp;amp;exist(s2,d+1))dfs(line,s1,add(add(s2,d),d+1),d+1);//缺角的
+			if(d&amp;gt;0&amp;amp;&amp;amp;exist(s2,d-1))dfs(line,s1,add(add(s2,d),d-1),d+1);//缺角的
+		}
+		if(d&amp;lt;w-1&amp;amp;&amp;amp;exist(s1,d+1)){
+			dfs(line,s1,s2,d+2);//横着的
+			if(exist(s2,d))dfs(line,s1,add(s2,d),d+2);//缺角的
+			if(exist(s2,d+1))dfs(line,s1,add(s2,d+1),d+2);//缺角的
+		}
+	}else{
+		dfs(line,s1,s2,d+1);
+	}
+	return;
+}
+int main(){
+	cin&amp;gt;&amp;gt;h&amp;gt;&amp;gt;w;
+	states = 1&amp;lt;&amp;lt;w;
+	dp[1][0]= 1;
+	dfs(1,0,0,0); 
+	for(int i = 2;i&amp;lt;=h;i++){
+		for(int j = 0;j&amp;lt;states;j++){
+			dfs(i,j,0,0);
+		}
+	}
+	if(w*h==1){
+		cout&amp;lt;&amp;lt;0&amp;lt;&amp;lt;endl;
+		return 0;
+	}
+	cout&amp;lt;&amp;lt;dp[h+1][0];
+	return 0;
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="woj1565 硬木地板">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            woj1565 硬木地板
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-03-23T03:40:41+00:00">23 Mar 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>举行计算机科学家盛宴的大厅的地板为 M∗N(1≤M≤9,1≤N≤9)的矩形。现在必须要铺上硬木地板砖。可以使用的地板砖形状有两种：
+1)2∗1 的矩形砖
+2)2∗2 中去掉一个 1∗1 的角形砖
+你需要计算用这些砖铺满地板共有多少种不同的方案。
+注意：必须盖满，地板砖数量足够多，不能存在同时被多个板砖覆盖的部分。</p>
+<h1 id="输入">输入</h1>
+<p>一行，两个整数： M,N</p>
+<h1 id="输出">输出</h1>
+<p>输出方案总数，如果不可能那么输出 0 。</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 3
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>状态压缩DP。每块砖会影响2行。如图
+<img src="/images/posts/c95ab2bab64417e5f0001db.png" alt="图片标题" />
+然后就是dfs转移状态就好了。见注释：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">11</span><span class="p">][</span><span class="mi">1000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">states</span><span class="p">;</span>
+<span class="cp"># define add(a,k) (a|(1&lt;&lt;k))
+# define exist(a,k) (!(a&amp;(1&lt;&lt;k)))
+</span><span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">line</span><span class="p">,</span><span class="kt">int</span> <span class="n">s1</span><span class="p">,</span><span class="kt">int</span> <span class="n">s2</span><span class="p">,</span><span class="kt">int</span> <span class="n">d</span><span class="p">){</span><span class="c1">//s1当前行，s2下一行</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">==</span><span class="n">w</span><span class="p">){</span>
+		<span class="n">dp</span><span class="p">[</span><span class="n">line</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">s2</span><span class="p">]</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">line</span><span class="p">][</span><span class="n">s1</span><span class="p">];</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span> 
+	<span class="k">if</span><span class="p">(</span><span class="n">exist</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">d</span><span class="p">)){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">exist</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">)){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">add</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="c1">//竖着2个的</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">w</span><span class="o">&amp;&amp;</span><span class="n">exist</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">add</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="c1">//缺角的</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">exist</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">add</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="c1">//缺角的</span>
+		<span class="p">}</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">exist</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span><span class="c1">//横着的</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">exist</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">))</span><span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">add</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span><span class="c1">//缺角的</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">exist</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">add</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">d</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span><span class="c1">//缺角的</span>
+		<span class="p">}</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">,</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">h</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span>
+	<span class="n">states</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">w</span><span class="p">;</span>
+	<span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> 
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">h</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">h</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=woj1565%20%E7%A1%AC%E6%9C%A8%E5%9C%B0%E6%9D%BF&url=/blog/move-from-leanote-177"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-177"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-177&amp;media=/images/posts/OI.png&amp;description=woj1565%20%E7%A1%AC%E6%9C%A8%E5%9C%B0%E6%9D%BF"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-177&title=woj1565%20%E7%A1%AC%E6%9C%A8%E5%9C%B0%E6%9D%BF&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-178">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="woj1565 硬木地板">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">woj1566 骑士</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-180">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">高斯消元</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="woj1565 硬木地板">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

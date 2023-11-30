@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>luogu P3396 哈希冲突</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-91">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="luogu P3396 哈希冲突 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+题目背景
+此题约为NOIP提高组Day2T2难度。
+题目描述
+众所周知，模数的hash会产生冲突。例如，如果模的数p=7，那么4和11便冲突了。
+B君对hash冲突很感兴趣。他会给出一个正整数序列value[]。
+自然，B君会把这些数据存进hash池。第value[k]会被存进(k%p)这个池。这样就能造成很多冲突。
+B君会给定许多个p和x，询问在模p时，x这个池内数的总和。
+另外，B君会随时更改value[k]。每次更改立即生效。
+保证1&amp;lt;=p&amp;lt;n1&amp;lt;=p&amp;lt;n.
+输入输出格式
+输入格式：
+第一行，两个正整数n,m，其中n代表序列长度，m代表B君的操作次数。
+第一行，n个正整数，代表初始序列。
+接下来m行，首先是一个字符cmd，然后是两个整数x,y。
+若cmd=’A’，则询问在模x时，y池内数的总和。
+若cmd=’C’，则将value[x]修改为y。
+输出格式：
+对于每个询问输出一个正整数，进行回答。
+输入输出样例
+输入样例# 1：
+10 5
+1 2 3 4 5 6 7 8 9 10
+A 2 1
+C 1 20
+A 3 1
+C 5 1
+A 5 0
+
+输出样例# 1：
+25
+41
+11
+
+说明
+样例解释
+A 2 1的答案是1+3+5+7+9=25.
+A 3 1的答案是20+4+7+10=41.
+A 5 0的答案是1+10=11.数据规模
+对于10%的数据，有n&amp;lt;=1000,m&amp;lt;=1000.
+对于60%的数据，有n&amp;lt;=100000.m&amp;lt;=100000.
+对于100%的数据，有n&amp;lt;=150000,m&amp;lt;=150000.
+保证所有数据合法，且1&amp;lt;=value[i]&amp;lt;=1000.
+解答
+其实这道题数据比较水暴力模拟91分。暴力对抗随机数据好像比较强。暴力代码：
+// luogu-judger-enable-o2
+# pragma GCC optimize(&quot;Ofast&quot;)
+# include &amp;lt;cstdio&amp;gt;
+inline int read(){
+    char ch = getchar();
+    int f = 1 ,x = 0;
+    while(ch &amp;gt; '9' || ch &amp;lt; '0'){if(ch == '-')f = -1; ch = getchar();}
+    while(ch &amp;gt;= '0' &amp;amp;&amp;amp; ch &amp;lt;= '9'){x = (x &amp;lt;&amp;lt; 1) + (x &amp;lt;&amp;lt; 3) + ch - '0';ch = getchar();}
+    return x * f;
+}
+const int MAXN =  150000;
+int a[MAXN];
+long long F[400][400];
+int main(void){
+    int n,m;
+    n = read(),m = read();
+    for(int i = 1;i&amp;lt;=n;i++){
+        a[i] = read();
+    }
+    char c;
+    int x,y;
+    int ans = 0;
+    char s[3];
+    while(m--){
+        scanf(&quot;%s&quot;,s);
+        if(s[0]=='A'){
+            x = read(),y = read();
+            ans = 0;
+            for(int i = y;i&amp;lt;=n;i+=x){
+                ans+=a[i];
+            }
+            printf(&quot;%d\n&quot;,ans);
+        }else{
+            x = read();
+            y = read();
+            a[x] = y;
+        }
+    }
+    return 0;
+}
+
+但是我们还是来想正解吧。正解是分块优雅的暴力 它非常的骚。分块有如下特点
+
+  就是对于一定数据范围内(一般取$\sqrt n$)，我们把它打表打出来，然后$O(1)$查询。又或者直接把一组数据分成$\sqrt n (+1)$块，每块$\lfloor \sqrt(n)\rfloor$个数据，然后直接乱搞.—–沃·镃基硕·德
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="luogu P3396 哈希冲突 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+题目背景
+此题约为NOIP提高组Day2T2难度。
+题目描述
+众所周知，模数的hash会产生冲突。例如，如果模的数p=7，那么4和11便冲突了。
+B君对hash冲突很感兴趣。他会给出一个正整数序列value[]。
+自然，B君会把这些数据存进hash池。第value[k]会被存进(k%p)这个池。这样就能造成很多冲突。
+B君会给定许多个p和x，询问在模p时，x这个池内数的总和。
+另外，B君会随时更改value[k]。每次更改立即生效。
+保证1&amp;lt;=p&amp;lt;n1&amp;lt;=p&amp;lt;n.
+输入输出格式
+输入格式：
+第一行，两个正整数n,m，其中n代表序列长度，m代表B君的操作次数。
+第一行，n个正整数，代表初始序列。
+接下来m行，首先是一个字符cmd，然后是两个整数x,y。
+若cmd=’A’，则询问在模x时，y池内数的总和。
+若cmd=’C’，则将value[x]修改为y。
+输出格式：
+对于每个询问输出一个正整数，进行回答。
+输入输出样例
+输入样例# 1：
+10 5
+1 2 3 4 5 6 7 8 9 10
+A 2 1
+C 1 20
+A 3 1
+C 5 1
+A 5 0
+
+输出样例# 1：
+25
+41
+11
+
+说明
+样例解释
+A 2 1的答案是1+3+5+7+9=25.
+A 3 1的答案是20+4+7+10=41.
+A 5 0的答案是1+10=11.数据规模
+对于10%的数据，有n&amp;lt;=1000,m&amp;lt;=1000.
+对于60%的数据，有n&amp;lt;=100000.m&amp;lt;=100000.
+对于100%的数据，有n&amp;lt;=150000,m&amp;lt;=150000.
+保证所有数据合法，且1&amp;lt;=value[i]&amp;lt;=1000.
+解答
+其实这道题数据比较水暴力模拟91分。暴力对抗随机数据好像比较强。暴力代码：
+// luogu-judger-enable-o2
+# pragma GCC optimize(&quot;Ofast&quot;)
+# include &amp;lt;cstdio&amp;gt;
+inline int read(){
+    char ch = getchar();
+    int f = 1 ,x = 0;
+    while(ch &amp;gt; '9' || ch &amp;lt; '0'){if(ch == '-')f = -1; ch = getchar();}
+    while(ch &amp;gt;= '0' &amp;amp;&amp;amp; ch &amp;lt;= '9'){x = (x &amp;lt;&amp;lt; 1) + (x &amp;lt;&amp;lt; 3) + ch - '0';ch = getchar();}
+    return x * f;
+}
+const int MAXN =  150000;
+int a[MAXN];
+long long F[400][400];
+int main(void){
+    int n,m;
+    n = read(),m = read();
+    for(int i = 1;i&amp;lt;=n;i++){
+        a[i] = read();
+    }
+    char c;
+    int x,y;
+    int ans = 0;
+    char s[3];
+    while(m--){
+        scanf(&quot;%s&quot;,s);
+        if(s[0]=='A'){
+            x = read(),y = read();
+            ans = 0;
+            for(int i = y;i&amp;lt;=n;i+=x){
+                ans+=a[i];
+            }
+            printf(&quot;%d\n&quot;,ans);
+        }else{
+            x = read();
+            y = read();
+            a[x] = y;
+        }
+    }
+    return 0;
+}
+
+但是我们还是来想正解吧。正解是分块优雅的暴力 它非常的骚。分块有如下特点
+
+  就是对于一定数据范围内(一般取$\sqrt n$)，我们把它打表打出来，然后$O(1)$查询。又或者直接把一组数据分成$\sqrt n (+1)$块，每块$\lfloor \sqrt(n)\rfloor$个数据，然后直接乱搞.—–沃·镃基硕·德
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="luogu P3396 哈希冲突">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            luogu P3396 哈希冲突
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-11-01T02:33:13+00:00">01 Nov 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>题目背景
+此题约为NOIP提高组Day2T2难度。</p>
+<h1 id="题目描述">题目描述</h1>
+<p>众所周知，模数的hash会产生冲突。例如，如果模的数p=7，那么4和11便冲突了。
+B君对hash冲突很感兴趣。他会给出一个正整数序列value[]。
+自然，B君会把这些数据存进hash池。第value[k]会被存进(k%p)这个池。这样就能造成很多冲突。
+B君会给定许多个p和x，询问在模p时，x这个池内数的总和。
+另外，B君会随时更改value[k]。每次更改立即生效。
+保证1<code class="language-plaintext highlighter-rouge">&lt;</code>=p<code class="language-plaintext highlighter-rouge">&lt;</code>n1<code class="language-plaintext highlighter-rouge">&lt;</code>=p<code class="language-plaintext highlighter-rouge">&lt;</code>n.</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式：</h1>
+<p>第一行，两个正整数n,m，其中n代表序列长度，m代表B君的操作次数。
+第一行，n个正整数，代表初始序列。
+接下来m行，首先是一个字符cmd，然后是两个整数x,y。
+若cmd=’A’，则询问在模x时，y池内数的总和。
+若cmd=’C’，则将value[x]修改为y。</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>对于每个询问输出一个正整数，进行回答。</p>
+<h1 id="输入输出样例">输入输出样例</h1>
+<h1 id="输入样例-1">输入样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 5
+1 2 3 4 5 6 7 8 9 10
+A 2 1
+C 1 20
+A 3 1
+C 5 1
+A 5 0
+</code></pre></div></div>
+<h1 id="输出样例-1">输出样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>25
+41
+11
+</code></pre></div></div>
+<h1 id="说明">说明</h1>
+<h1 id="样例解释">样例解释</h1>
+<p>A 2 1的答案是1+3+5+7+9=25.
+A 3 1的答案是20+4+7+10=41.
+A 5 0的答案是1+10=11.数据规模
+对于10%的数据，有n&lt;=1000,m&lt;=1000.
+对于60%的数据，有n&lt;=100000.m&lt;=100000.
+对于100%的数据，有n&lt;=150000,m&lt;=150000.
+保证所有数据合法，且1&lt;=value[i]&lt;=1000.</p>
+<h1 id="解答">解答</h1>
+<p>其实这道题数据比较水<del>暴力模拟91分</del>。暴力对抗随机数据好像比较强。暴力代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// luogu-judger-enable-o2</span>
+<span class="cp"># pragma GCC optimize("Ofast")
+# include &lt;cstdio&gt;
+</span><span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span>  <span class="mi">150000</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">F</span><span class="p">[</span><span class="mi">400</span><span class="p">][</span><span class="mi">400</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'A'</span><span class="p">){</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">+=</span><span class="n">x</span><span class="p">){</span>
+                <span class="n">ans</span><span class="o">+=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>但是我们还是来想正解吧。正解是分块<del>优雅的暴力</del> 它非常的骚。分块有如下特点</p>
+<blockquote>
+  <p>就是对于一定数据范围内(一般取$\sqrt n$)，我们把它打表打出来，然后$O(1)$查询。又或者直接把一组数据分成$\sqrt n (+1)$块，每块$\lfloor \sqrt(n)\rfloor$个数据，然后直接乱搞.—–沃·镃基硕·德</p>
+</blockquote>
+
+<p>我们把n分成两部分：小于$\sqrt(n)$的一部分，其余的一部分。然后对于小于根号n的部分。为什么呢？如果我们预处理全部的部分，那么查询复杂度是$O(n^2)$的。如果我们预处理出F[i][j]表示%i意义下，结果为j的值得和是多少，这样预处理复杂度也是$O(n^2)$的，虽然这样查询是$O(1)$。<strong>对于这种查询和预处理/修改复杂度差别比较大的或者差不多但是都不够理想的(例如树状数组维护单点或者区间修改的前缀和)，我们通常用分块来做<del>乱搞</del></strong> 
+于是乎对于这道题，我们预处理$\sqrt n$的部分，其余的直接暴力(暴力：你是不是看不起我???)至于修改，我们要把预处理的数组和原数组都同时修改了，修改代码如下</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">x</span><span class="o">%</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">y</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+</code></pre></div></div>
+<p>注意，在读入’A’和’C’的时候，<strong>不可以getchar()</strong> 因为这样会把换行符和回车读进来，要读入成一个字符串！
+AC代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// luogu-judger-enable-o2</span>
+<span class="cp"># pragma GCC optimize("Ofast")
+# include &lt;cstdio&gt;
+</span><span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span>  <span class="mi">150000</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">F</span><span class="p">[</span><span class="mi">400</span><span class="p">][</span><span class="mi">400</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">F</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">%</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'A'</span><span class="p">){</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">){</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">+=</span><span class="n">x</span><span class="p">){</span>
+                    <span class="n">ans</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="p">}</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">x</span><span class="o">%</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">y</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=luogu%20P3396%20%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81&url=/blog/move-from-leanote-91"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-91"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-91&amp;media=/images/posts/OI.png&amp;description=luogu%20P3396%20%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-91&title=luogu%20P3396%20%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-87">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="luogu P3396 哈希冲突">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">luoguP4467 [SCOI2007]k短路</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-92">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">Windy 数</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="luogu P3396 哈希冲突">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>20190215日考试</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-156">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="20190215日考试 – Haoyu Deng's page">
+  <meta name="twitter:description" content="T1：
+一句话题意：给你一个序列，判断他能否通过栈变得有序且从小到大。
+就是个判断出栈顺序是否合法。
+解答
+我太弱了，居然连判断出栈顺序是否合法都不会了。基础太差了，我太弱了。
+代码:
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;stdio.h&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int MAXN = 100010;
+int a[MAXN],b[MAXN];
+int stack[MAXN];int top;
+int main(){
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;amp;n)!=EOF){
+        for(int i = 1;i&amp;lt;=n;i++)scanf(&quot;%d&quot;,&amp;amp;a[i]),b[i] = a[i];
+        sort(a+1,a+1+n);
+        int A = 1,B = 1;
+        bool flag = true;
+        while(B&amp;lt;=n){
+            if(a[A]==b[B])A++,B++;
+            else if(top&amp;amp;&amp;amp;stack[top]==b[B])top--,B++;
+            else if(A&amp;lt;=n)stack[++top] = a[A++];
+            else {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)printf(&quot;Y\n&quot;);else printf(&quot;J\n&quot;);
+    }
+    return 0;
+}
+
+T2
+在平面上有N个点，L需要你选取四个点出来，要求4个点构成一个正方形
+ 问：有多少中不同的方案（2个方案不同当且仅当所用点不全相同，坐标相同的2个点视为不同的点）
+大水题，但是我却只有30分，因为正方形四个顶点坐标公式推错了。。怪不得考不起好高中。。。我太撇了。
+md公式搞错了一个地方
+```cpp
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+using namespace std;
+const int MAXN = 20010;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+c-‘0’;c = getchar(); }
+    return xf;
+}
+vector&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; point;
+multiset&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; map;
+int main(){
+    int n = read();
+    int x,y;
+    for(int i = 1;i&amp;lt;=n;i++){
+        x = read(),y = read();
+        point.push_back(make_pair(x,y));
+        map.insert(make_pair(x,y));
+    }
+    int ans = 0;
+    sort(point.begin(),point.end());
+    for(int i = 0;i&amp;lt;n;i++){
+        for(int j = i+1;j&amp;lt;n;j++){
+            int x1 = point[i].first,y1 = point[i].second;
+            int x2 = point[j].first,y2 = point[j].second;
+            if(i==j)continue;
+            int x3,x4,y3,y4;
+            int sum = x1+x2,delta = y2-y1;
+            x3 = (sum+delta)/2;x4=sum-x3;
+            if(x32!=sum+delta)continue;//卡上精度了，坐标不可能是小数
+            sum = y1+y2,delta = x2-x1;
+            y4 = (sum+delta)/2,y3 = sum-y4;
+            if(y4*2!=sum+delta)continue;
+            if(map.find(make_pair(x3,y3))!=map.end()&amp;amp;&amp;amp;map.find(make_pair(x4,y4))!=map.end()){
+                ans+=1;
+            }
+        }
+    }
+    printf(“%d”,ans/2);
+    return 0;
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="20190215日考试 – Haoyu Deng's page">
+  <meta property="og:description" content="T1：
+一句话题意：给你一个序列，判断他能否通过栈变得有序且从小到大。
+就是个判断出栈顺序是否合法。
+解答
+我太弱了，居然连判断出栈顺序是否合法都不会了。基础太差了，我太弱了。
+代码:
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;stdio.h&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int MAXN = 100010;
+int a[MAXN],b[MAXN];
+int stack[MAXN];int top;
+int main(){
+    int n;
+    while(scanf(&quot;%d&quot;,&amp;amp;n)!=EOF){
+        for(int i = 1;i&amp;lt;=n;i++)scanf(&quot;%d&quot;,&amp;amp;a[i]),b[i] = a[i];
+        sort(a+1,a+1+n);
+        int A = 1,B = 1;
+        bool flag = true;
+        while(B&amp;lt;=n){
+            if(a[A]==b[B])A++,B++;
+            else if(top&amp;amp;&amp;amp;stack[top]==b[B])top--,B++;
+            else if(A&amp;lt;=n)stack[++top] = a[A++];
+            else {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)printf(&quot;Y\n&quot;);else printf(&quot;J\n&quot;);
+    }
+    return 0;
+}
+
+T2
+在平面上有N个点，L需要你选取四个点出来，要求4个点构成一个正方形
+ 问：有多少中不同的方案（2个方案不同当且仅当所用点不全相同，坐标相同的2个点视为不同的点）
+大水题，但是我却只有30分，因为正方形四个顶点坐标公式推错了。。怪不得考不起好高中。。。我太撇了。
+md公式搞错了一个地方
+```cpp
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+using namespace std;
+const int MAXN = 20010;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&amp;lt;’0’||c&amp;gt;’9’){ if(c==’-‘)f = -1;c = getchar(); }
+    while(c&amp;gt;=’0’&amp;amp;&amp;amp;c&amp;lt;=’9’){ x = (x«1)+(x«3)+c-‘0’;c = getchar(); }
+    return xf;
+}
+vector&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; point;
+multiset&amp;lt;pair&amp;lt;int,int&amp;gt; &amp;gt; map;
+int main(){
+    int n = read();
+    int x,y;
+    for(int i = 1;i&amp;lt;=n;i++){
+        x = read(),y = read();
+        point.push_back(make_pair(x,y));
+        map.insert(make_pair(x,y));
+    }
+    int ans = 0;
+    sort(point.begin(),point.end());
+    for(int i = 0;i&amp;lt;n;i++){
+        for(int j = i+1;j&amp;lt;n;j++){
+            int x1 = point[i].first,y1 = point[i].second;
+            int x2 = point[j].first,y2 = point[j].second;
+            if(i==j)continue;
+            int x3,x4,y3,y4;
+            int sum = x1+x2,delta = y2-y1;
+            x3 = (sum+delta)/2;x4=sum-x3;
+            if(x32!=sum+delta)continue;//卡上精度了，坐标不可能是小数
+            sum = y1+y2,delta = x2-x1;
+            y4 = (sum+delta)/2,y3 = sum-y4;
+            if(y4*2!=sum+delta)continue;
+            if(map.find(make_pair(x3,y3))!=map.end()&amp;amp;&amp;amp;map.find(make_pair(x4,y4))!=map.end()){
+                ans+=1;
+            }
+        }
+    }
+    printf(“%d”,ans/2);
+    return 0;
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="20190215日考试">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            20190215日考试
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-02-15T05:03:24+00:00">15 Feb 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <p>T1：
+一句话题意：给你一个序列，判断他能否通过栈变得有序且从小到大。
+就是个判断出栈顺序是否合法。</p>
+<h1 id="解答">解答</h1>
+<p>我太弱了，居然连判断出栈顺序是否合法都不会了。基础太差了，我太弱了。
+代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;algorithm&gt;
+# include &lt;stdio.h&gt;
+# include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">A</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">B</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">A</span><span class="p">]</span><span class="o">==</span><span class="n">b</span><span class="p">[</span><span class="n">B</span><span class="p">])</span><span class="n">A</span><span class="o">++</span><span class="p">,</span><span class="n">B</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">top</span><span class="o">&amp;&amp;</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">==</span><span class="n">b</span><span class="p">[</span><span class="n">B</span><span class="p">])</span><span class="n">top</span><span class="o">--</span><span class="p">,</span><span class="n">B</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">)</span><span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">A</span><span class="o">++</span><span class="p">];</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"Y</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span><span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">"J</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="t2">T2</h1>
+<p>在平面上有N个点，L需要你选取四个点出来，要求4个点构成一个正方形
+ 问：有多少中不同的方案（2个方案不同当且仅当所用点不全相同，坐标相同的2个点视为不同的点）
+大水题，但是我却只有30分，因为正方形四个顶点坐标公式推错了。。怪不得考不起好高中。。。我太撇了。
+md公式搞错了一个地方</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;algorithm&gt;
+# include &lt;iostream&gt;
+# include &lt;stack&gt;
+# include &lt;set&gt;
+# include &lt;queue&gt;
+# include &lt;cstring&gt;
+# include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">20010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">point</span><span class="p">;</span>
+<span class="n">multiset</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">map</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="n">point</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
+        <span class="n">map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">point</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">point</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">,</span><span class="n">y1</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">first</span><span class="p">,</span><span class="n">y2</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">x3</span><span class="p">,</span><span class="n">x4</span><span class="p">,</span><span class="n">y3</span><span class="p">,</span><span class="n">y4</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">x1</span><span class="o">+</span><span class="n">x2</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">;</span>
+            <span class="n">x3</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="n">x4</span><span class="o">=</span><span class="n">sum</span><span class="o">-</span><span class="n">x3</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">x3</span><span class="o">*</span><span class="mi">2</span><span class="o">!=</span><span class="n">sum</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span><span class="c1">//卡上精度了，坐标不可能是小数</span>
+            <span class="n">sum</span> <span class="o">=</span> <span class="n">y1</span><span class="o">+</span><span class="n">y2</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">;</span>
+            <span class="n">y4</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y3</span> <span class="o">=</span> <span class="n">sum</span><span class="o">-</span><span class="n">y4</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">y4</span><span class="o">*</span><span class="mi">2</span><span class="o">!=</span><span class="n">sum</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span><span class="n">y3</span><span class="p">))</span><span class="o">!=</span><span class="n">map</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span><span class="n">y4</span><span class="p">))</span><span class="o">!=</span><span class="n">map</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
+                <span class="n">ans</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<h1 id="t3">T3</h1>
+<p>初始有一个空集，依次插入个数 。有 次询问 ，表示询问第 个数加入集合后的排名为的数是多少
+权值线段树，但是我没写过，只好把treap拿来抄。。。。太弱了</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;algorithm&gt;
+# include &lt;iostream&gt;
+# include &lt;stack&gt;
+# include &lt;set&gt;
+# include &lt;queue&gt;
+# include &lt;cstring&gt;
+# include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">60010</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dat</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">cnt</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">}</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">tot</span><span class="p">,</span><span class="n">root</span><span class="p">;</span>
+<span class="k">const</span>  <span class="kt">long</span> <span class="kt">long</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x7f7f7f7f7f7f</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">NEW</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span><span class="p">){</span>
+    <span class="n">tree</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">dat</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">tot</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">size</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">build</span><span class="p">(){</span>
+    <span class="n">NEW</span><span class="p">(</span><span class="o">-</span><span class="n">INF</span><span class="p">),</span><span class="n">NEW</span><span class="p">(</span><span class="n">INF</span><span class="p">);</span>
+    <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">getValByRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">rank</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">&gt;=</span><span class="n">rank</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">getValByRank</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">rank</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">size</span><span class="o">-</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zig</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span><span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">);</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">zag</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">;</span>
+    <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">q</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span><span class="n">q</span><span class="p">;</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">);</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zig</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">dat</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">dat</span><span class="p">)</span><span class="n">zag</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">NEW</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span><span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">val</span><span class="p">){</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">rotate</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="n">insert</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">].</span><span class="n">r</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">rotate</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+    <span class="n">srand</span><span class="p">(</span><span class="mi">19260817</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">maxm</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">build</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">bj</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">bj</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">maxm</span><span class="o">&gt;=</span><span class="n">bj</span><span class="p">){</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getValByRank</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">maxm</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">bj</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="n">maxm</span> <span class="o">=</span> <span class="n">bj</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getValByRank</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>总得分:230。哎，要不是T2多打了个abs，我就可以AK人生第一场比赛了。。。。。。。。。。</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=20190215%E6%97%A5%E8%80%83%E8%AF%95&url=/blog/move-from-leanote-156"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-156"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-156&amp;media=/images/posts/OI.png&amp;description=20190215%E6%97%A5%E8%80%83%E8%AF%95"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-156&title=20190215%E6%97%A5%E8%80%83%E8%AF%95&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-155">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="20190215日考试">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">P2890 [USACO07OPEN]便宜的回文Cheapest Palindrome</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-157">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">CF1114E</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="20190215日考试">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

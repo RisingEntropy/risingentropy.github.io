@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【最短路 杂题】woj3841 双调路径</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-268">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【最短路 杂题】woj3841 双调路径 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+如今的道路收费发展很快。道路的密度越来越大，因此选择最佳路径是很现实的问题。城市的道路是双向的，每条道路有固定的旅行时间以及需要支付的费用。
+路径是连续经过的道路组成的。总时间是各条道路旅行时间的和，总费用是各条道路所支付费用的总和。一条路径越快，或者费用越低，该路径就越好。严格地说，如果一条路径比别的路径更快，而且不需要支付更多费用，它就比较好。反过来也如此理解。如果没有一条路径比某路径更好，则该路径被称为最小路径。
+这样的最小的路径有可能不止一条，或者根本不存在路径。
+问题：读入网络，计算最小路径的总数。费用时间都相同的两条最小路径只算作一条。你只要输出不同种类的最小路径数即可。
+输入
+第一行有四个整数，城市总数 n，道路总数 m，起点和终点城市 s,e
+接下来的 m 行每行描述了一条道路的信息，包括四个整数，两个端点 p,r ，费用 c，以及时间 t ；
+两个城市之间可能有多条路径连接。
+输出
+仅一个数，表示最小路径的总数。
+样例输入
+4 5 1 4
+2 1 2 1
+3 4 3 1
+2 3 1 2
+3 1 1 4
+2 4 2 4
+
+样例输出
+2
+
+解答
+屑题面，题目的意思是当一条路径时间最小，而代价不多于其他路径的的路径以及代价最小时间不多于其他路径的路径叫最有路径，如果一条时间小，一条代价小，那么不够成比较关系，都统计。然后就是带状态spfa，dis[i][j]表示阿紫j时间到达i节点的最小话费，直接转移就是了。
+然后会发现被卡了，因为如果$i&amp;lt;i_1 j&amp;lt;j_1$那么dis[i][j]肯定比dis[i1][j1]劣，然后树状数组优化DP转移就OK了。
+代码:
+```cpp
+include 
+include 
+include 
+include 
+include 
+using namespace std;
+const int MAXT = 10010;
+const int MAXN = 110;
+const int MAXM = 310;
+typedef pair&amp;lt;int,int&amp;gt; pii;
+inline char nc(){
+	static char buf[100000],p1=buf,p2=buf;
+	return p1==p2&amp;amp;&amp;amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+}
+template
+void read(T &amp;amp;x){
+	x = 0;T f = 1;
+	char c =nc();
+	while(c&amp;lt;'0'||c&amp;gt;'9'){if(c=='-')f = -1;c = nc();}
+	while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){x = x*10+(c^48);c = nc();}
+	x*=f;
+}
+struct edge{int f,t,w,time,next;}edges[MAXM&amp;lt;&amp;lt;2];
+int head[MAXN],top = 1;
+void add(int f,int t,int w,int time){
+	edges[++top].next = head[f];
+	edges[top].w = w;
+	edges[top].t = t;
+	edges[top].time = time;
+	head[f] = top;
+}
+int n,m,s,e;
+int dis[MAXN][MAXT];
+bool vis[MAXN][MAXT];
+int sum[MAXN][MAXT];
+inline int lowbit(int x){return x&amp;amp;-x;}
+inline int query(int pos,int x){x++;int ret = 0x3f3f3f3f;while(x)ret=min(ret,sum[pos][x]),x-=lowbit(x);return ret;}
+inline void modify(int pos,int x,int v){x++;while(x&amp;lt;MAXT)sum[pos][x]=min(sum[pos][x],v),x+=lowbit(x);}
+queue q;
+void spfa(int s){
+	q.push(make_pair(s,0));
+	memset(dis,0x3f,sizeof(dis));
+	dis[s][0] = 0;
+	vis[s][0] = true;
+	modify(s,0,0);
+	while(!q.empty()){
+		int top = q.front().first;int time = q.front().second;
+		q.pop();
+		vis[top][time] = false;
+		for(int i = head[top];i;i = edges[i].next){
+			int t = edges[i].t;
+			if(time+edges[i].time&amp;lt;=10000&amp;amp;&amp;amp;query(t,time+edges[i].time)&amp;gt;dis[top][time]+edges[i].w){
+				modify(t,time+edges[i].time,dis[top][time]+edges[i].w);
+				dis[t][time+edges[i].time] = dis[top][time]+edges[i].w;
+				if(!vis[t][time+edges[i].time]){
+					q.push(make_pair(t,time+edges[i].time));
+					vis[t][time+edges[i].time] = true;
+				}
+			}
+		}			
+	}
+}
+int main(){
+	# ifdef BEYONDSTARS
+		freopen(&quot;testdata.in&quot;,&quot;r&quot;,stdin);
+	# endif
+	read(n),read(m),read(s),read(e);
+	int f,t,c,time;
+	for(int i = 1;i&amp;lt;=m;i++){
+		read(f),read(t),read(c),read(time);
+		add(f,t,c,time);add(t,f,c,time);
+	}
+	memset(sum,0x3f,sizeof(sum));
+	spfa(s);
+	int mn = 0x3f3f3f3f,ans = 0;
+	for(int i = 0;i&amp;lt;=10000;i++){//就是这里，题面很迷
+		if(mn&amp;gt;dis[e][i]){
+			mn = dis[e][i];ans++;
+		}
+	}
+	cout&amp;lt;&amp;lt;ans;
+	return 0;
+}
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【最短路 杂题】woj3841 双调路径 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+如今的道路收费发展很快。道路的密度越来越大，因此选择最佳路径是很现实的问题。城市的道路是双向的，每条道路有固定的旅行时间以及需要支付的费用。
+路径是连续经过的道路组成的。总时间是各条道路旅行时间的和，总费用是各条道路所支付费用的总和。一条路径越快，或者费用越低，该路径就越好。严格地说，如果一条路径比别的路径更快，而且不需要支付更多费用，它就比较好。反过来也如此理解。如果没有一条路径比某路径更好，则该路径被称为最小路径。
+这样的最小的路径有可能不止一条，或者根本不存在路径。
+问题：读入网络，计算最小路径的总数。费用时间都相同的两条最小路径只算作一条。你只要输出不同种类的最小路径数即可。
+输入
+第一行有四个整数，城市总数 n，道路总数 m，起点和终点城市 s,e
+接下来的 m 行每行描述了一条道路的信息，包括四个整数，两个端点 p,r ，费用 c，以及时间 t ；
+两个城市之间可能有多条路径连接。
+输出
+仅一个数，表示最小路径的总数。
+样例输入
+4 5 1 4
+2 1 2 1
+3 4 3 1
+2 3 1 2
+3 1 1 4
+2 4 2 4
+
+样例输出
+2
+
+解答
+屑题面，题目的意思是当一条路径时间最小，而代价不多于其他路径的的路径以及代价最小时间不多于其他路径的路径叫最有路径，如果一条时间小，一条代价小，那么不够成比较关系，都统计。然后就是带状态spfa，dis[i][j]表示阿紫j时间到达i节点的最小话费，直接转移就是了。
+然后会发现被卡了，因为如果$i&amp;lt;i_1 j&amp;lt;j_1$那么dis[i][j]肯定比dis[i1][j1]劣，然后树状数组优化DP转移就OK了。
+代码:
+```cpp
+include 
+include 
+include 
+include 
+include 
+using namespace std;
+const int MAXT = 10010;
+const int MAXN = 110;
+const int MAXM = 310;
+typedef pair&amp;lt;int,int&amp;gt; pii;
+inline char nc(){
+	static char buf[100000],p1=buf,p2=buf;
+	return p1==p2&amp;amp;&amp;amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+}
+template
+void read(T &amp;amp;x){
+	x = 0;T f = 1;
+	char c =nc();
+	while(c&amp;lt;'0'||c&amp;gt;'9'){if(c=='-')f = -1;c = nc();}
+	while(c&amp;gt;='0'&amp;amp;&amp;amp;c&amp;lt;='9'){x = x*10+(c^48);c = nc();}
+	x*=f;
+}
+struct edge{int f,t,w,time,next;}edges[MAXM&amp;lt;&amp;lt;2];
+int head[MAXN],top = 1;
+void add(int f,int t,int w,int time){
+	edges[++top].next = head[f];
+	edges[top].w = w;
+	edges[top].t = t;
+	edges[top].time = time;
+	head[f] = top;
+}
+int n,m,s,e;
+int dis[MAXN][MAXT];
+bool vis[MAXN][MAXT];
+int sum[MAXN][MAXT];
+inline int lowbit(int x){return x&amp;amp;-x;}
+inline int query(int pos,int x){x++;int ret = 0x3f3f3f3f;while(x)ret=min(ret,sum[pos][x]),x-=lowbit(x);return ret;}
+inline void modify(int pos,int x,int v){x++;while(x&amp;lt;MAXT)sum[pos][x]=min(sum[pos][x],v),x+=lowbit(x);}
+queue q;
+void spfa(int s){
+	q.push(make_pair(s,0));
+	memset(dis,0x3f,sizeof(dis));
+	dis[s][0] = 0;
+	vis[s][0] = true;
+	modify(s,0,0);
+	while(!q.empty()){
+		int top = q.front().first;int time = q.front().second;
+		q.pop();
+		vis[top][time] = false;
+		for(int i = head[top];i;i = edges[i].next){
+			int t = edges[i].t;
+			if(time+edges[i].time&amp;lt;=10000&amp;amp;&amp;amp;query(t,time+edges[i].time)&amp;gt;dis[top][time]+edges[i].w){
+				modify(t,time+edges[i].time,dis[top][time]+edges[i].w);
+				dis[t][time+edges[i].time] = dis[top][time]+edges[i].w;
+				if(!vis[t][time+edges[i].time]){
+					q.push(make_pair(t,time+edges[i].time));
+					vis[t][time+edges[i].time] = true;
+				}
+			}
+		}			
+	}
+}
+int main(){
+	# ifdef BEYONDSTARS
+		freopen(&quot;testdata.in&quot;,&quot;r&quot;,stdin);
+	# endif
+	read(n),read(m),read(s),read(e);
+	int f,t,c,time;
+	for(int i = 1;i&amp;lt;=m;i++){
+		read(f),read(t),read(c),read(time);
+		add(f,t,c,time);add(t,f,c,time);
+	}
+	memset(sum,0x3f,sizeof(sum));
+	spfa(s);
+	int mn = 0x3f3f3f3f,ans = 0;
+	for(int i = 0;i&amp;lt;=10000;i++){//就是这里，题面很迷
+		if(mn&amp;gt;dis[e][i]){
+			mn = dis[e][i];ans++;
+		}
+	}
+	cout&amp;lt;&amp;lt;ans;
+	return 0;
+}
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【最短路 杂题】woj3841 双调路径">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【最短路 杂题】woj3841 双调路径
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-10-21T11:27:05+00:00">21 Oct 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>如今的道路收费发展很快。道路的密度越来越大，因此选择最佳路径是很现实的问题。城市的道路是双向的，每条道路有固定的旅行时间以及需要支付的费用。
+路径是连续经过的道路组成的。总时间是各条道路旅行时间的和，总费用是各条道路所支付费用的总和。一条路径越快，或者费用越低，该路径就越好。严格地说，如果一条路径比别的路径更快，而且不需要支付更多费用，它就比较好。反过来也如此理解。如果没有一条路径比某路径更好，则该路径被称为最小路径。
+这样的最小的路径有可能不止一条，或者根本不存在路径。
+问题：读入网络，计算最小路径的总数。费用时间都相同的两条最小路径只算作一条。你只要输出不同种类的最小路径数即可。</p>
+<h1 id="输入">输入</h1>
+<p>第一行有四个整数，城市总数 n，道路总数 m，起点和终点城市 s,e
+接下来的 m 行每行描述了一条道路的信息，包括四个整数，两个端点 p,r ，费用 c，以及时间 t ；
+两个城市之间可能有多条路径连接。</p>
+<h1 id="输出">输出</h1>
+<p>仅一个数，表示最小路径的总数。
+样例输入</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 5 1 4
+2 1 2 1
+3 4 3 1
+2 3 1 2
+3 1 1 4
+2 4 2 4
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>屑题面，题目的意思是当一条路径时间最小，而代价不多于其他路径的的路径以及代价最小时间不多于其他路径的路径叫最有路径，如果一条时间小，一条代价小，那么不够成比较关系，都统计。然后就是带状态spfa，dis[i][j]表示阿紫j时间到达i节点的最小话费，直接转移就是了。
+然后会发现被卡了，因为如果$i&lt;i_1 j&lt;j_1$那么dis[i][j]肯定比dis[i1][j1]劣，然后树状数组优化DP转移就OK了。
+代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;algorithm&gt;
+# include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;cstdio&gt;
+# include &lt;queue&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXT</span> <span class="o">=</span> <span class="mi">10010</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">110</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">310</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pii</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">char</span> <span class="nf">nc</span><span class="p">(){</span>
+	<span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="o">*</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">,</span><span class="o">*</span><span class="n">p2</span><span class="o">=</span><span class="n">buf</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">p2</span><span class="o">=</span><span class="p">(</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">)</span><span class="o">+</span><span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="n">stdin</span><span class="p">),</span><span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="p">)</span><span class="o">?</span><span class="n">EOF</span><span class="o">:*</span><span class="n">p1</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="kt">void</span> <span class="nf">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">T</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span><span class="n">nc</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="mi">48</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
+	<span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">next</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">top</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="kt">int</span> <span class="n">time</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">;</span>
+	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">e</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXT</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXT</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXT</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">lowbit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&amp;-</span><span class="n">x</span><span class="p">;}</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span><span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="n">ret</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span><span class="n">sum</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">x</span><span class="p">]),</span><span class="n">x</span><span class="o">-=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="k">return</span> <span class="n">ret</span><span class="p">;}</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span><span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">MAXT</span><span class="p">)</span><span class="n">sum</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">v</span><span class="p">),</span><span class="n">x</span><span class="o">+=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">x</span><span class="p">);}</span>
+<span class="n">queue</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">spfa</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+	<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
+	<span class="n">dis</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">vis</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="n">modify</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+		<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">;</span><span class="kt">int</span> <span class="n">time</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
+		<span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+		<span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+			<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="o">&lt;=</span><span class="mi">10000</span><span class="o">&amp;&amp;</span><span class="n">query</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">)</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">time</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
+				<span class="n">modify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">,</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">time</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">);</span>
+				<span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="n">time</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
+				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">]){</span>
+					<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">));</span>
+					<span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">time</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>			
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="cp"># ifdef BEYONDSTARS
+</span>		<span class="n">freopen</span><span class="p">(</span><span class="s">"testdata.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+	<span class="cp"># endif
+</span>	<span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">time</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">time</span><span class="p">);</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">time</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">sum</span><span class="p">));</span>
+	<span class="n">spfa</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">mn</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">,</span><span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">10000</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//就是这里，题面很迷</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">mn</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">i</span><span class="p">]){</span>
+			<span class="n">mn</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">e</span><span class="p">][</span><span class="n">i</span><span class="p">];</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20%E6%9D%82%E9%A2%98%E3%80%91woj3841%20%E5%8F%8C%E8%B0%83%E8%B7%AF%E5%BE%84&url=/blog/move-from-leanote-268"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-268"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-268&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20%E6%9D%82%E9%A2%98%E3%80%91woj3841%20%E5%8F%8C%E8%B0%83%E8%B7%AF%E5%BE%84"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-268&title=%E3%80%90%E6%9C%80%E7%9F%AD%E8%B7%AF%20%E6%9D%82%E9%A2%98%E3%80%91woj3841%20%E5%8F%8C%E8%B0%83%E8%B7%AF%E5%BE%84&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-269">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【最短路 杂题】woj3841 双调路径">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">一些错误及技巧总结</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-267">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">20191021复习总结</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【最短路 杂题】woj3841 双调路径">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

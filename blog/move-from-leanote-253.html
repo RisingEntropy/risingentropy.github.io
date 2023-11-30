@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【区间DP】glod在奔跑中吃草</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-253">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【区间DP】glod在奔跑中吃草 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+在一块又长又直的田里有N个草丛，可以将田看作是一个线性数轴，将草丛看作是数轴上的一个整数点。
+Bessie从某个特殊的位置L (1 &amp;lt;= L &amp;lt;= 1,000,000)开始，可以沿着两个方向在穿越数轴（可以反向），到达所有的草丛并吃掉它。她移动的速度是一定的（一个单位时间移动一个单位距离），当她到达草丛时就立即吃掉它。
+草丛变质后就不能吃了，我们称草丛的”变质期”就是从Bessie开始移动到吃掉该草丛前的这段时间。当所有的草丛都吃掉后，Bessie想让变质期尽可能地小。
+找到在Bessie吃掉所有的草丛后，使得所有草丛的变质期之和最小。
+输入
+第1行：两个用空格隔开的整数：N（&amp;lt;=1000）和L
+第2行至N+1行：每行包括一个整数P，表示草丛的位置(1 &amp;lt;= P &amp;lt;= 1,000,000)。
+输出
+1行：一个整数，表示Bessie在吃掉所有的草丛后，使得所有草丛的变质期之和最小。
+样例输入
+4 10
+1
+9
+11
+19
+
+样例输出
+44
+
+提示
+输入解释：
+4个草丛的位置：1, 9, 11和19，Bessie开始的位置在10。
+输出解释：
+Bessie可以按下列路线：
+开始在10的位置，时间为0
+移动到9的位置，时间为1
+移动到11的位置，时间为3
+移动到19的位置，时间为11
+移动到1的位置，时间为29
+得到所有的草丛的变质期为1+3+11+29 = 44，也许还有另外的路线可以得到同样的答案，但不能使得它更小。
+标签
+usaco2006nov-glod
+解答
+区间DP+记忆化搜索，dp[l][r][0/1]表示已经吃完区间$[l,r]$之后，当前在左边/右边，给全局造成的变质期的和最小。
+那么显然有如下转移方程式：
+\(dp[l][r][0] = min(dp[l-1][r][0]+dis[l,l-1]*(n-(r-l+1)),dp[l][r+1][0]+dis[r,r+1]*(n-(r-l+1)))\)
+代码：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;cstring&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+using namespace std;
+const int MAXN = 1010;
+const int INF = 1e9;
+int dp[MAXN][MAXN][2];
+int pos[MAXN];
+int n;
+int dfs(int l,int r,int d){
+	if(l==1&amp;amp;&amp;amp;r==n)return 0;
+	if(dp[l][r][d]!=-1)return dp[l][r][d];
+	int ret = INF;
+	int p;
+	if(d==0)p = l;else p = r;
+	if(l!=1){
+		ret = min(ret,dfs(l-1,r,0)+(pos[p]-pos[l-1])*(n-1-(r-l)));
+	}
+	if(r!=n){
+		ret = min(ret,dfs(l,r+1,1)+(pos[r+1]-pos[p])*(n-1-(r-l)));
+	}
+	return dp[l][r][d] = ret;
+}
+int main(){
+	int L;scanf(&quot;%d %d&quot;,&amp;amp;n,&amp;amp;L);
+	for(int i = 1;i&amp;lt;=n;i++)scanf(&quot;%d&quot;,&amp;amp;pos[i]);
+	pos[++n] = L;sort(pos+1,pos+1+n);
+	int p;
+	for(int i = 1;i&amp;lt;=n;i++)if(pos[i]==L){p = i;break;}
+	memset(dp,-1,sizeof(dp));
+	printf(&quot;%d&quot;,dfs(p,p,0));
+	return 0;
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【区间DP】glod在奔跑中吃草 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+在一块又长又直的田里有N个草丛，可以将田看作是一个线性数轴，将草丛看作是数轴上的一个整数点。
+Bessie从某个特殊的位置L (1 &amp;lt;= L &amp;lt;= 1,000,000)开始，可以沿着两个方向在穿越数轴（可以反向），到达所有的草丛并吃掉它。她移动的速度是一定的（一个单位时间移动一个单位距离），当她到达草丛时就立即吃掉它。
+草丛变质后就不能吃了，我们称草丛的”变质期”就是从Bessie开始移动到吃掉该草丛前的这段时间。当所有的草丛都吃掉后，Bessie想让变质期尽可能地小。
+找到在Bessie吃掉所有的草丛后，使得所有草丛的变质期之和最小。
+输入
+第1行：两个用空格隔开的整数：N（&amp;lt;=1000）和L
+第2行至N+1行：每行包括一个整数P，表示草丛的位置(1 &amp;lt;= P &amp;lt;= 1,000,000)。
+输出
+1行：一个整数，表示Bessie在吃掉所有的草丛后，使得所有草丛的变质期之和最小。
+样例输入
+4 10
+1
+9
+11
+19
+
+样例输出
+44
+
+提示
+输入解释：
+4个草丛的位置：1, 9, 11和19，Bessie开始的位置在10。
+输出解释：
+Bessie可以按下列路线：
+开始在10的位置，时间为0
+移动到9的位置，时间为1
+移动到11的位置，时间为3
+移动到19的位置，时间为11
+移动到1的位置，时间为29
+得到所有的草丛的变质期为1+3+11+29 = 44，也许还有另外的路线可以得到同样的答案，但不能使得它更小。
+标签
+usaco2006nov-glod
+解答
+区间DP+记忆化搜索，dp[l][r][0/1]表示已经吃完区间$[l,r]$之后，当前在左边/右边，给全局造成的变质期的和最小。
+那么显然有如下转移方程式：
+\(dp[l][r][0] = min(dp[l-1][r][0]+dis[l,l-1]*(n-(r-l+1)),dp[l][r+1][0]+dis[r,r+1]*(n-(r-l+1)))\)
+代码：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;algorithm&amp;gt;
+# include &amp;lt;cstring&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+using namespace std;
+const int MAXN = 1010;
+const int INF = 1e9;
+int dp[MAXN][MAXN][2];
+int pos[MAXN];
+int n;
+int dfs(int l,int r,int d){
+	if(l==1&amp;amp;&amp;amp;r==n)return 0;
+	if(dp[l][r][d]!=-1)return dp[l][r][d];
+	int ret = INF;
+	int p;
+	if(d==0)p = l;else p = r;
+	if(l!=1){
+		ret = min(ret,dfs(l-1,r,0)+(pos[p]-pos[l-1])*(n-1-(r-l)));
+	}
+	if(r!=n){
+		ret = min(ret,dfs(l,r+1,1)+(pos[r+1]-pos[p])*(n-1-(r-l)));
+	}
+	return dp[l][r][d] = ret;
+}
+int main(){
+	int L;scanf(&quot;%d %d&quot;,&amp;amp;n,&amp;amp;L);
+	for(int i = 1;i&amp;lt;=n;i++)scanf(&quot;%d&quot;,&amp;amp;pos[i]);
+	pos[++n] = L;sort(pos+1,pos+1+n);
+	int p;
+	for(int i = 1;i&amp;lt;=n;i++)if(pos[i]==L){p = i;break;}
+	memset(dp,-1,sizeof(dp));
+	printf(&quot;%d&quot;,dfs(p,p,0));
+	return 0;
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【区间DP】glod在奔跑中吃草">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【区间DP】glod在奔跑中吃草
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-09-29T06:04:43+00:00">29 Sep 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>在一块又长又直的田里有N个草丛，可以将田看作是一个线性数轴，将草丛看作是数轴上的一个整数点。
+Bessie从某个特殊的位置L (1 &lt;= L &lt;= 1,000,000)开始，可以沿着两个方向在穿越数轴（可以反向），到达所有的草丛并吃掉它。她移动的速度是一定的（一个单位时间移动一个单位距离），当她到达草丛时就立即吃掉它。
+草丛变质后就不能吃了，我们称草丛的”变质期”就是从Bessie开始移动到吃掉该草丛前的这段时间。当所有的草丛都吃掉后，Bessie想让变质期尽可能地小。
+找到在Bessie吃掉所有的草丛后，使得所有草丛的变质期之和最小。</p>
+<h1 id="输入">输入</h1>
+<p>第1行：两个用空格隔开的整数：N（&lt;=1000）和L
+第2行至N+1行：每行包括一个整数P，表示草丛的位置(1 &lt;= P &lt;= 1,000,000)。</p>
+<h1 id="输出">输出</h1>
+<p>1行：一个整数，表示Bessie在吃掉所有的草丛后，使得所有草丛的变质期之和最小。</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 10
+1
+9
+11
+19
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>44
+</code></pre></div></div>
+<h1 id="提示">提示</h1>
+<p>输入解释：
+4个草丛的位置：1, 9, 11和19，Bessie开始的位置在10。
+输出解释：
+Bessie可以按下列路线：
+开始在10的位置，时间为0
+移动到9的位置，时间为1
+移动到11的位置，时间为3
+移动到19的位置，时间为11
+移动到1的位置，时间为29
+得到所有的草丛的变质期为1+3+11+29 = 44，也许还有另外的路线可以得到同样的答案，但不能使得它更小。
+标签
+usaco2006nov-glod</p>
+<h1 id="解答">解答</h1>
+<p>区间DP+记忆化搜索，dp[l][r][0/1]表示已经吃完区间$[l,r]$之后，当前在左边/右边，给全局造成的变质期的和最小。
+那么显然有如下转移方程式：
+\(dp[l][r][0] = min(dp[l-1][r][0]+dis[l,l-1]*(n-(r-l+1)),dp[l][r+1][0]+dis[r,r+1]*(n-(r-l+1)))\)
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;algorithm&gt;
+# include &lt;cstring&gt;
+# include &lt;cstdio&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mf">1e9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">pos</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">==</span><span class="n">n</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">d</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">p</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">p</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="k">else</span> <span class="n">p</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">!=</span><span class="mi">1</span><span class="p">){</span>
+		<span class="n">ret</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span><span class="n">dfs</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">-</span><span class="n">pos</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)));</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">!=</span><span class="n">n</span><span class="p">){</span>
+		<span class="n">ret</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span><span class="n">dfs</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pos</span><span class="p">[</span><span class="n">p</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="p">)));</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">L</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">L</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="n">pos</span><span class="p">[</span><span class="o">++</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">;</span><span class="n">sort</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">p</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">L</span><span class="p">){</span><span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="k">break</span><span class="p">;}</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">dfs</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E5%8C%BA%E9%97%B4DP%E3%80%91glod%E5%9C%A8%E5%A5%94%E8%B7%91%E4%B8%AD%E5%90%83%E8%8D%89&url=/blog/move-from-leanote-253"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-253"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-253&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E5%8C%BA%E9%97%B4DP%E3%80%91glod%E5%9C%A8%E5%A5%94%E8%B7%91%E4%B8%AD%E5%90%83%E8%8D%89"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-253&title=%E3%80%90%E5%8C%BA%E9%97%B4DP%E3%80%91glod%E5%9C%A8%E5%A5%94%E8%B7%91%E4%B8%AD%E5%90%83%E8%8D%89&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-252">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【区间DP】glod在奔跑中吃草">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">【NOIP专题】NOIP2015</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-251">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">BM算法</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【区间DP】glod在奔跑中吃草">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

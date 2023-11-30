@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>NOIP2018游记(爆零祭)</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-107">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NOIP2018游记(爆零祭) – Haoyu Deng's page">
+  <meta name="twitter:description" content="Day-2
+今天比较颓废，上午在机房做热身赛，觉得自己好菜啊！尝试写个dp，我的dp从来就没怎么连过。水平也停留在某本白色的代码不等宽的书上。中午去华莱士买了一个2.99元的鸡排，好油腻啊，下次不吃了。可能是我太瘦了为什么你们什么都会，而我只会摸鱼？下午也就是继续水比赛，感谢各位大佬的指导啊！我终于半推导出了一个状态转移方程，但是因为搞完了位运算优先级较低，出现了1+2=5这种尴尬的东西。。。。晚上也就是复习板子。。。。颓废啊！我能拿省一吗？
+Day-1
+啊啊啊，上午又是颓废的一上午，想看看exgcd解同余方程组，但是好像没看懂，呜呜呜呜，我要凉了。前几年都考了同余方程，今年单独要是提高一点，同余方程组！我就彻底晾凉了。上午tarjan也是看的很迷，tarjan桥和割点也都没做题，也没时间了，还有线段树要复习。啊啊啊啊啊凉了，下午晚上肝！
+Day0
+上午考试，遇到构造题，又是连暴力都不会写，T2连暴力都卡常。还说信心赛，我感觉要凉。突然发现自己数据结构忘了好多，连树状数组都把单点更新想成区间更新了。哎，下午看看树状数组和线段树吧。还有T1大数学题，好怕推不出来啊！晚上到了电子科大附加住下了，看了看考场，吃了顿饭，和七林同学聊了会QQ，看了看板子，就睡了。晚上我爸呼噜声也很大，没怎么睡好。
+Day1
+今天上午考了，凉凉。开考前我把板子打了，结果spfa出锅了，快读也莫名其妙出锅了。T1是个洛谷上的原题，我在CF上也见过，但是就是硬生生想了半小时左右才想出来，本来想去对拍一下的，结果发现暴力程序不会写。。。。最后还是没有去拍一下。T2我一眼看出是个背包，但是dp基本没联系过，凉凉，暴力走起，但是最后洛谷上测评只有75分，但愿€€£能多给点分，求出题人不要卡我，不过这道题真的神奇，暴力吊唁正解。然后T3，我看了半天才读懂题意，然后猜也猜得到是个二分+树链剖分，因为最短路径最长。但是我不会啊，题都半天才读懂，一开始写了一个spfa，但是不知道怎么回事，没有环还是爆了，就是一个死循环，然后看了一眼，跑最长路，肯定没搞啊，每条边经过一次，当时也慌了，T2大样例都炸了，没办法，直接写个dfs暴力骗5分跑了。后来才知道T3骗分可以骗分，我好瓜啊，骗个55我1=就稳了。期望得分:100+70+5 = 175.
+Day2
+今天的题简直了，数据结构咕咕了，大模拟咕咕了。不知道€€£在搞啥。T1瞎贪心，最后看到那个环，想到了tarjan，最后发现tarjan也没用，要上dp，我的dp又差，没办法，骗个大概60分就走人。T2数学题，真不知道怎么做，dzyo也没推出来，真的凉凉。T3一眼就看出来树形dp，但是前3天才自学，还只是翻了翻书，题也没做几道，然后就写炸了。写个瞎贪心就跑。考完最终期望最高得分：60+20+48=128；
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="NOIP2018游记(爆零祭) – Haoyu Deng's page">
+  <meta property="og:description" content="Day-2
+今天比较颓废，上午在机房做热身赛，觉得自己好菜啊！尝试写个dp，我的dp从来就没怎么连过。水平也停留在某本白色的代码不等宽的书上。中午去华莱士买了一个2.99元的鸡排，好油腻啊，下次不吃了。可能是我太瘦了为什么你们什么都会，而我只会摸鱼？下午也就是继续水比赛，感谢各位大佬的指导啊！我终于半推导出了一个状态转移方程，但是因为搞完了位运算优先级较低，出现了1+2=5这种尴尬的东西。。。。晚上也就是复习板子。。。。颓废啊！我能拿省一吗？
+Day-1
+啊啊啊，上午又是颓废的一上午，想看看exgcd解同余方程组，但是好像没看懂，呜呜呜呜，我要凉了。前几年都考了同余方程，今年单独要是提高一点，同余方程组！我就彻底晾凉了。上午tarjan也是看的很迷，tarjan桥和割点也都没做题，也没时间了，还有线段树要复习。啊啊啊啊啊凉了，下午晚上肝！
+Day0
+上午考试，遇到构造题，又是连暴力都不会写，T2连暴力都卡常。还说信心赛，我感觉要凉。突然发现自己数据结构忘了好多，连树状数组都把单点更新想成区间更新了。哎，下午看看树状数组和线段树吧。还有T1大数学题，好怕推不出来啊！晚上到了电子科大附加住下了，看了看考场，吃了顿饭，和七林同学聊了会QQ，看了看板子，就睡了。晚上我爸呼噜声也很大，没怎么睡好。
+Day1
+今天上午考了，凉凉。开考前我把板子打了，结果spfa出锅了，快读也莫名其妙出锅了。T1是个洛谷上的原题，我在CF上也见过，但是就是硬生生想了半小时左右才想出来，本来想去对拍一下的，结果发现暴力程序不会写。。。。最后还是没有去拍一下。T2我一眼看出是个背包，但是dp基本没联系过，凉凉，暴力走起，但是最后洛谷上测评只有75分，但愿€€£能多给点分，求出题人不要卡我，不过这道题真的神奇，暴力吊唁正解。然后T3，我看了半天才读懂题意，然后猜也猜得到是个二分+树链剖分，因为最短路径最长。但是我不会啊，题都半天才读懂，一开始写了一个spfa，但是不知道怎么回事，没有环还是爆了，就是一个死循环，然后看了一眼，跑最长路，肯定没搞啊，每条边经过一次，当时也慌了，T2大样例都炸了，没办法，直接写个dfs暴力骗5分跑了。后来才知道T3骗分可以骗分，我好瓜啊，骗个55我1=就稳了。期望得分:100+70+5 = 175.
+Day2
+今天的题简直了，数据结构咕咕了，大模拟咕咕了。不知道€€£在搞啥。T1瞎贪心，最后看到那个环，想到了tarjan，最后发现tarjan也没用，要上dp，我的dp又差，没办法，骗个大概60分就走人。T2数学题，真不知道怎么做，dzyo也没推出来，真的凉凉。T3一眼就看出来树形dp，但是前3天才自学，还只是翻了翻书，题也没做几道，然后就写炸了。写个瞎贪心就跑。考完最终期望最高得分：60+20+48=128；
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2018游记(爆零祭)">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            NOIP2018游记(爆零祭)
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-11-07T06:09:20+00:00">07 Nov 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="day-2">Day-2</h1>
+<p>今天比较颓废，上午在机房做热身赛，觉得自己好菜啊！尝试写个dp，我的dp从来就没怎么连过。水平也停留在某本白色的代码不等宽的书上。中午去华莱士买了一个2.99元的鸡排，好油腻啊，下次不吃了。<del>可能是我太瘦了</del>为什么你们什么都会，而我只会摸鱼？下午也就是继续水比赛，感谢各位大佬的指导啊！我终于半推导出了一个状态转移方程，但是因为搞完了位运算优先级较低，出现了1+2=5这种尴尬的东西。。。。晚上也就是复习板子。。。。颓废啊！我能拿省一吗？</p>
+<h1 id="day-1">Day-1</h1>
+<p>啊啊啊，上午又是颓废的一上午，想看看exgcd解同余方程组，但是好像没看懂，呜呜呜呜，我要凉了。前几年都考了同余方程，今年单独要是提高一点，同余方程组！我就彻底晾凉了。上午tarjan也是看的很迷，tarjan桥和割点也都没做题，也没时间了，还有线段树要复习。啊啊啊啊啊凉了，下午晚上肝！</p>
+<h1 id="day0">Day0</h1>
+<p>上午考试，遇到构造题，又是连暴力都不会写，T2连暴力都卡常。还说信心赛，我感觉要凉。突然发现自己数据结构忘了好多，连树状数组都把单点更新想成区间更新了。哎，下午看看树状数组和线段树吧。还有T1大数学题，好怕推不出来啊！晚上到了电子科大附加住下了，看了看考场，吃了顿饭，和七林同学聊了会QQ，看了看板子，就睡了。晚上我爸呼噜声也很大，没怎么睡好。</p>
+<h1 id="day1">Day1</h1>
+<p>今天上午考了，凉凉。开考前我把板子打了，结果spfa出锅了，快读也莫名其妙出锅了。T1是个洛谷上的原题，我在CF上也见过，但是就是硬生生想了半小时左右才想出来，本来想去对拍一下的，结果发现暴力程序不会写。。。。最后还是没有去拍一下。T2我一眼看出是个背包，但是dp基本没联系过，凉凉，暴力走起，但是最后洛谷上测评只有75分，但愿€€£能多给点分，求出题人不要卡我，不过这道题真的神奇，暴力吊唁正解。然后T3，我看了半天才读懂题意，然后猜也猜得到是个二分+树链剖分，因为<code class="language-plaintext highlighter-rouge">最短路径最长</code>。但是我不会啊，题都半天才读懂，一开始写了一个spfa，但是不知道怎么回事，没有环还是爆了，就是一个死循环，然后看了一眼，跑最长路，肯定没搞啊，每条边经过一次，当时也慌了，T2大样例都炸了，没办法，直接写个dfs暴力骗5分跑了。后来才知道T3骗分可以骗分，我好瓜啊，骗个55我1=就稳了。期望得分:100+70+5 = 175.</p>
+<h1 id="day2">Day2</h1>
+<p>今天的题简直了，数据结构咕咕了，大模拟咕咕了。不知道€€£在搞啥。T1瞎贪心，最后看到那个环，想到了tarjan，最后发现tarjan也没用，要上dp，我的dp又差，没办法，骗个大概60分就走人。T2数学题，真不知道怎么做，dzyo也没推出来，真的凉凉。T3一眼就看出来树形dp，但是前3天才自学，还只是翻了翻书，题也没做几道，然后就写炸了。写个瞎贪心就跑。考完最终期望<strong>最高</strong>得分：60+20+48=128；</p>
+
+<p>两天总分撑破天：175+128 = 303</p>
+<h1 id="day5">Day5</h1>
+<p>NOIp2018已经结束了，自己测了一下，只有250分，省一无望。算了，我还有时间，明年年再来，OIer never give up!以后我要减少洛谷上面的题占我的刷题量的比例，上面的数据太水了，把我给卡到了。总之加油吧！内心好不安啊</p>
+<h1 id="day7">Day7</h1>
+<p>或许我们的青春就要在无尽的困苦，磨难和各种不利条件下才可以跃迁出属于我们的色彩,过去的失败与无奈终究属于过去，而未来才是可以切切实实把握住的东西。我想，我们既然选择了OI这条路，就意味着放弃假期，放弃惬意，从此与集体格格不入，成为了自闭症患者。活动中总是找不到我的身影，因为我要赶作业，这样才有空学OI。课间找不到我的身影，因为我要赶作业。饭后体育场上找不到我的身影，因为我要赶作业。但是，既然我选择了OI，就意味着承担这一切的压力。或许，我们会躲在角落里偷偷哭泣，甚至连这样一个角落也没有，只有把无尽苦泪堆积在心中。我们会感受从头到脚的绝望与无助，但，这就是OI。This is what it is like! You choose it,you take the burden.只有当走出考场，仿佛是利剑回鞘，胜利在握，抑或又是那暴力乱搞吊打标算的时候，才会体会到OI的含义–坚持与希望！这接下来的一年，我会很苦，但愿一年以后我会回到这篇游记，并告诉自己，我已经达到了我的目标！几年前在车上第一次看到OI时内心的憧憬与自信将会是引导我的标杆，我相信，有一天，我会站在NOI的颁奖台上，拿着金牌，眼含泪水，宣告那个大梦想的成功实现！愿高斯费马带领我在树上找到自己的方向，在图上走出我这个金属特有的耀眼的焰色反应，用动态规划找到我的未来。写完Day7，我就忘却了NOIP2018吧！远方还在召唤，路依然遥远艰辛，但路漫漫其修远兮，吾将上下而求索！加油！</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=NOIP2018%E6%B8%B8%E8%AE%B0(%E7%88%86%E9%9B%B6%E7%A5%AD)&url=/blog/move-from-leanote-107"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-107"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-107&amp;media=/images/posts/OI.png&amp;description=NOIP2018%E6%B8%B8%E8%AE%B0(%E7%88%86%E9%9B%B6%E7%A5%AD)"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-107&title=NOIP2018%E6%B8%B8%E8%AE%B0(%E7%88%86%E9%9B%B6%E7%A5%AD)&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-104">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2018游记(爆零祭)">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">unknown title</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-106">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">luoguP3387 【模板】缩点</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="NOIP2018游记(爆零祭)">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

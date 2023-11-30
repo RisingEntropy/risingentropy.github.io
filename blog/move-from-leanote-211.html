@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【最小树形图】bzoj 4349 最小树形图</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-211">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【最小树形图】bzoj 4349 最小树形图 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+小C现在正要攻打科学馆腹地——计算机第三机房。而信息组的同学们已经建好了一座座堡垒，准备迎战。小C作为一种高度智慧的可怕生物，早已对同学们的信息了如指掌。
+攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
+当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
+现在，要你求消灭全机房要用掉代价最小多少。
+Input
+第一行一个数N，(N&amp;lt;=50),表示机房修建的堡垒数。
+接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0&amp;lt;Ai&amp;lt;=1000)。第二个数Bi(0&amp;lt;Bi&amp;lt;100)表示i号堡垒需要被攻打Bi次。
+接下来一个数k，表示总共有k组依赖关系。
+接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
+不需要攻打的城堡不允许攻打。
+Output
+一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。
+Sample Input
+3 										
+10．00  1
+1.80  1 
+2.50	 2
+2
+1  3  2.00
+3  2  1.50
+
+Sample Output
+15.50
+
+解答
+最小树形图板题题目名称暴露了一切。出题人牛逼
+建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下
+```cpp
+//
+// Created by dhy on 19-6-2.
+//
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【最小树形图】bzoj 4349 最小树形图 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+小C现在正要攻打科学馆腹地——计算机第三机房。而信息组的同学们已经建好了一座座堡垒，准备迎战。小C作为一种高度智慧的可怕生物，早已对同学们的信息了如指掌。
+攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
+当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
+现在，要你求消灭全机房要用掉代价最小多少。
+Input
+第一行一个数N，(N&amp;lt;=50),表示机房修建的堡垒数。
+接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0&amp;lt;Ai&amp;lt;=1000)。第二个数Bi(0&amp;lt;Bi&amp;lt;100)表示i号堡垒需要被攻打Bi次。
+接下来一个数k，表示总共有k组依赖关系。
+接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
+不需要攻打的城堡不允许攻打。
+Output
+一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。
+Sample Input
+3 										
+10．00  1
+1.80  1 
+2.50	 2
+2
+1  3  2.00
+3  2  1.50
+
+Sample Output
+15.50
+
+解答
+最小树形图板题题目名称暴露了一切。出题人牛逼
+建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下
+```cpp
+//
+// Created by dhy on 19-6-2.
+//
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【最小树形图】bzoj 4349 最小树形图">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【最小树形图】bzoj 4349 最小树形图
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-06-02T11:10:48+00:00">02 Jun 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>小C现在正要攻打科学馆腹地——计算机第三机房。而信息组的同学们已经建好了一座座堡垒，准备迎战。小C作为一种高度智慧的可怕生物，早已对同学们的信息了如指掌。
+攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
+当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
+现在，要你求消灭全机房要用掉代价最小多少。</p>
+<h1 id="input">Input</h1>
+<p>第一行一个数N，(N<code class="language-plaintext highlighter-rouge">&lt;</code>=50),表示机房修建的堡垒数。
+接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0<code class="language-plaintext highlighter-rouge">&lt;</code>Ai<code class="language-plaintext highlighter-rouge">&lt;=</code>1000)。第二个数Bi(0<code class="language-plaintext highlighter-rouge">&lt;</code>Bi<code class="language-plaintext highlighter-rouge">&lt;</code>100)表示i号堡垒需要被攻打Bi次。
+接下来一个数k，表示总共有k组依赖关系。
+接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
+不需要攻打的城堡不允许攻打。</p>
+<h1 id="output">Output</h1>
+<p>一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。</p>
+<h1 id="sample-input">Sample Input</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 										
+10．00  1
+1.80  1 
+2.50	 2
+2
+1  3  2.00
+3  2  1.50
+</code></pre></div></div>
+<p>Sample Output</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>15.50
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>最小树形图板题<del>题目名称暴露了一切</del>。出题人牛逼
+建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-6-2.</span>
+<span class="c1">//</span>
+
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;cstdio&gt;
+# include &lt;cstring&gt;
+# include &lt;iomanip&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp"># define LL long long
+</span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">double</span> <span class="n">w</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">id</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">double</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">mark</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">double</span> <span class="n">cost</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">times</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">double</span> <span class="n">w</span><span class="p">){</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="n">INF</span> <span class="o">=</span> <span class="mf">1e19</span><span class="p">;</span>
+<span class="kt">double</span> <span class="nf">zhuliu</span><span class="p">(</span><span class="kt">int</span> <span class="n">root</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">){</span>
+    <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">!=</span><span class="n">t</span><span class="o">&amp;&amp;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+                <span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
+                <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">INF</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">!=</span><span class="n">root</span><span class="p">)</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+        <span class="n">dis</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="n">res</span><span class="o">+=</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">t</span><span class="o">!=</span><span class="n">root</span><span class="o">&amp;&amp;</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">i</span><span class="p">){</span>
+                <span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="c1">//it will come back to itself</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">t</span><span class="o">!=</span><span class="n">root</span><span class="p">){</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="n">u</span><span class="o">!=</span><span class="n">t</span><span class="p">;</span><span class="n">u</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">u</span><span class="p">]){</span><span class="c1">//mark the ring</span>
+                    <span class="n">id</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">!=</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">-=</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span><span class="n">root</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">root</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">double</span> <span class="n">w</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">||</span><span class="n">mark</span><span class="p">[</span><span class="n">f</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+        <span class="n">cost</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">cost</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">w</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">res</span><span class="o">+=</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">res</span> <span class="o">+=</span> <span class="n">zhuliu</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">top</span><span class="p">);</span>
+    <span class="n">cout</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">ios</span><span class="o">::</span><span class="n">fixed</span><span class="p">);</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">res</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%E3%80%91bzoj%204349%20%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE&url=/blog/move-from-leanote-211"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-211"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-211&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%E3%80%91bzoj%204349%20%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-211&title=%E3%80%90%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE%E3%80%91bzoj%204349%20%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-212">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【最小树形图】bzoj 4349 最小树形图">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">最小树形图</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-213">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">【2-SAT】poj 3207Ikki's Story IV - Panda's Trick</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【最小树形图】bzoj 4349 最小树形图">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

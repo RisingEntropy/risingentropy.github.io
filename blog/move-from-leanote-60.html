@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>割点与桥</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-60">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="割点与桥 – Haoyu Deng's page">
+  <meta name="twitter:description" content="一些概念(bing搜的)
+一、定义
+
+  1.点连通度与边连通度:在一个无向连通图中，如果有个顶点集合V.副除顶点集合V以及与V中顶点相连(至少有一端在V中)的所有边后原图不连通，就称这个点集v为割点集合。
+2.一个图的点连通度:最小割点集合中的顶点数。
+如果有一个边集合 ，删除这个边集合以后.原图不连通.就称这 个点集为割边集合。
+3.一个图的边连通度:最小割边集合中的边数。
+4.双连通图、割点与桥:如果一个无向连通图的点连通度大于1，则称该图是点双连通的point hicomnected),简称双连通或重连通(即刪去任意一点原图仍然连通)。 一个图有割点，当且仅当这个图的点连通度为1时,割点集合的唯一元素被称为割点(cut point)(即删去制点原图不连通)一个图可能有多个割点。
+5.有割点的图不一定有割边
+6.割点集合的唯一元素被称为割点
+如果一个无向连同图的边连同度大于1，则称该图是双边连同的，简称双联通或重连通。一个图有桥，当且仅当这个图的边连通度为1时，割边的唯一元素被称为桥。有割边的图也不一定有割点如图
+
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="割点与桥 – Haoyu Deng's page">
+  <meta property="og:description" content="一些概念(bing搜的)
+一、定义
+
+  1.点连通度与边连通度:在一个无向连通图中，如果有个顶点集合V.副除顶点集合V以及与V中顶点相连(至少有一端在V中)的所有边后原图不连通，就称这个点集v为割点集合。
+2.一个图的点连通度:最小割点集合中的顶点数。
+如果有一个边集合 ，删除这个边集合以后.原图不连通.就称这 个点集为割边集合。
+3.一个图的边连通度:最小割边集合中的边数。
+4.双连通图、割点与桥:如果一个无向连通图的点连通度大于1，则称该图是点双连通的point hicomnected),简称双连通或重连通(即刪去任意一点原图仍然连通)。 一个图有割点，当且仅当这个图的点连通度为1时,割点集合的唯一元素被称为割点(cut point)(即删去制点原图不连通)一个图可能有多个割点。
+5.有割点的图不一定有割边
+6.割点集合的唯一元素被称为割点
+如果一个无向连同图的边连同度大于1，则称该图是双边连同的，简称双联通或重连通。一个图有桥，当且仅当这个图的边连通度为1时，割边的唯一元素被称为桥。有割边的图也不一定有割点如图
+
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="割点与桥">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            割点与桥
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-09-22T03:02:42+00:00">22 Sep 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="一些概念bing搜的">一些概念(bing搜的)</h1>
+<p>一、定义</p>
+<blockquote>
+  <p>1.点连通度与边连通度:在一个<strong>无向连通图</strong>中，如果有个顶点集合V.副除顶点集合V以及与V中顶点相连(至少有一端在V中)的所有边后原图不连通，就称这个点集v为割点集合。
+2.一个图的点连通度:最小割点集合中的顶点数。
+如果有一个边集合 ，删除这个边集合以后.原图不连通.就称这 个点集为割边集合。
+3.一个图的边连通度:最小割边集合中的边数。
+4.双连通图、割点与桥:如果一个无向连通图的点连通度大于1，则称该图是点双连通的point hicomnected),简称双连通或重连通(即刪去任意一点原图仍然连通)。 一个图有割点，当且仅当这个图的点连通度为1时,割点集合的唯一元素被称为割点(cut point)(即删去制点原图不连通)一个图可能有多个割点。
+<strong>5.有割点的图不一定有割边</strong>
+6.割点集合的唯一元素被称为割点
+如果一个无向连同图的边连同度大于1，则称该图是双边连同的，简称双联通或重连通。一个图有桥，当且仅当这个图的边连通度为1时，割边的唯一元素被称为桥。有割边的图也不一定有割点如图
+<img src="/images/posts/bb62a76ab644145bb003edf.png" alt="有割边却没有割点" /></p>
+</blockquote>
+
+<font color="red">错误猜想：两个割点之间的边一定是割边。割边的两个端点一定是割点，如图：
+</font>
+<p><img src="/images/posts/bb62a76ab644145bb003edf.png" alt="eg1" />   <img src="/images/posts/bb62a76ab644145bb003edf.png" alt="eg2" /></p>
+
+<h1 id="计算割点与桥">计算割点与桥</h1>
+<h1 id="tarjan算法">tarjan算法</h1>
+<p>流程与tarjan求强连通分量类似求low与dfn。但要加一个特判，根节点如果有两个及以上的儿子，那么他也是割点。
+判定定理：
+对于一个点 u，有以下两种情况：
+如果 u 是根节点，那么当它有多于一个子树时，它就是割点
+如果 u 不是根节点，并且 u 为 v 在搜索树中的父亲，当 dfn[ u ] ≤ low[ v ] 时，它就是割点
+【割边】</p>
+<h1 id="计算桥">计算桥</h1>
+<p>其实很简单，一条无向边(u,v)是桥，当且仅当(u,v)是树枝变，且满足dfn[u]<code class="language-plaintext highlighter-rouge">&lt;</code>low[v]。因为v想要到达u的父亲，必须经过(u,v)这条边，所以删除这条边以后，图不连同.</p>
+<font color="red">注意：因为前向星在存无向图的时候，把一条边拆分成2条边储存，所以判断(u,v)是否为后向边的时候注意判断是正边，反边，还是新的一条边</font>
+<p>找反边：edges[i]的反边是edges[i^1]//就是奇数减一，偶数加一
+判定定理：
+<strong>如果一条搜索树上的边，连接着两个结点xy，且x是y的父亲，且满足low[y]&gt;dfn[x]，那么就是割边了</strong>
+code:板子里面</p>
+
+<h1 id="双连通分量">双连通分量</h1>
+<blockquote>
+  <p>若一个无向图中的去掉任意一个节点（一条边）都不会改变此图的连通性，即不存在割点（桥），则称作点（边）双连通图。一个无向图中的每一个极大点（边）双连通子图称作此无向图的点（边）双连通分量。</p>
+</blockquote>
+
+<p>—百度百科</p>
+
+<h1 id="边双连通分量">边双连通分量</h1>
+<p>若一个无向图中的去掉任意一条边都不会改变此图的连通性，即不存在桥，则称作边双连通图。一个无向图中的每一个极大边双连通子图称作此无向图的边双连通分量。</p>
+<h1 id="点双连通分量">点双连通分量</h1>
+<p>若一个无向图中的去掉任意一个节点都不会改变此图的连通性，即不存在割点，则称作点双连通图。一个无向图中的每一个极大点双连通子图称作此无向图的点双连通分量。</p>
+
+<h1 id="求取">求取</h1>
+<p>找到一条树枝边或者后向边(非横叉边)，把这条边入栈。当u是一个个点时，同时把边从栈顶一个个取出，直到遇到边(u,v)为止。取出的这些边与其相连的点，组成一个点双联通分量
+点：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//tarjan find cut point</span>
+<span class="n">edge</span> <span class="n">stack</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bcc_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
+<span class="kt">int</span> <span class="n">bcc_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bcc</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//每个双连通分量有哪些点 </span>
+<span class="kt">bool</span> <span class="n">iscut</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
+    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">child</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+    	<span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="c1">//下一个点没有被访问过; </span>
+        	<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">tarjan</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+            <span class="n">child</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">]);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+            	<span class="n">iscut</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            	<span class="o">++</span><span class="n">bcc_cnt</span><span class="p">;</span>
+            	<span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+            	<span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
+            		<span class="n">edge</span> <span class="n">e</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="o">--</span><span class="p">];</span>
+            		<span class="k">if</span><span class="p">(</span><span class="n">bcc_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc_cnt</span><span class="p">){</span>
+            			<span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">);</span>
+            			<span class="n">bcc_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+            		<span class="p">}</span>
+            		<span class="k">if</span><span class="p">(</span><span class="n">bcc_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc_cnt</span><span class="p">){</span><span class="c1">//取出这些边与其相邻的点，组成一个双连通分量 </span>
+            			<span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">);</span>
+            			<span class="n">bcc_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+            		<span class="p">}</span>
+            		<span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">f</span> <span class="o">==</span> <span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">e</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">v</span><span class="p">){</span>
+            			<span class="k">break</span><span class="p">;</span><span class="c1">//直到取出边(u,v) </span>
+            		<span class="p">}</span>
+            	<span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        	<span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">v</span><span class="o">!=</span><span class="n">fa</span><span class="p">){</span>
+        		<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+           		<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">])</span> <span class="p">;</span>
+        	<span class="p">}</span>
+		<span class="p">}</span>
+		
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">fa</span><span class="o">&lt;=&amp;&amp;</span><span class="n">child</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+		<span class="n">iscut</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> 
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">findbcc</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+	<span class="c1">//初始化一些东西，如果全局变量的话不需要</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+			<span class="n">tarjan</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="c1">//-1应该是一个虚拟根节点 </span>
+		<span class="p">}</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+<p>边：
+边双连通分量的求解非常简单，因为边双连通分量之间没有公共边，而且桥不在任意一个边双连通分量中，所以算法十分简单，即先一次DFS找到所有桥，再一次DFS（排除了桥）找到边双连通分量。 
+PS：当然可以用一次DFS实现。 
+code:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//tarjan find cut point</span>
+<span class="n">edge</span> <span class="n">stack</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bcc_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
+<span class="kt">int</span> <span class="n">bcc_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bcc</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//每个双连通分量有哪些点 </span>
+<span class="kt">bool</span> <span class="n">isbridge</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
+    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+    	<span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="c1">//下一个点没有被访问过; </span>
+            <span class="n">tarjan</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">]);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+            	<span class="n">isbridgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">isbridge</span><span class="p">[</span><span class="n">i</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        	<span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">v</span><span class="o">!=</span><span class="n">fa</span><span class="p">){</span>
+        		<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+           		<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">])</span> <span class="p">;</span>
+        	<span class="p">}</span>
+		<span class="p">}</span>
+		
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">){</span>
+	<span class="n">dfn</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="n">bcc_num</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">isbridge</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]){</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">find_ebcc</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+	<span class="c1">//做一些初始化，把数组初始化了 </span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">n</span><span class="p">]){</span>
+			<span class="n">tarjan</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dfn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dfn</span><span class="p">));</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+			<span class="n">bcc_cnt</span><span class="o">++</span><span class="p">;</span>
+			<span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="有桥连通图变双连通图">有桥连通图变双连通图</h1>
+<p>求出所有的桥，然后删除这些桥边，剩下的每一个都是双连通子图。把每个双连通子图收缩为一个顶点，再把桥边加回来，这个图一定是一棵树，边连同度为1.
+统计出树中度为1的节点个数，即叶节点的个数，记为leaf,则至少在树上添加(leaf+1)/2条边，可使它连同.
+所有结论：当叶子数=1时，将一个有桥图通过加边变成双连通图至少添加的边数为0，否则为(leaf+1)/2</p>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E5%89%B2%E7%82%B9%E4%B8%8E%E6%A1%A5&url=/blog/move-from-leanote-60"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-60"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-60&amp;media=/images/posts/OI.png&amp;description=%E5%89%B2%E7%82%B9%E4%B8%8E%E6%A1%A5"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-60&title=%E5%89%B2%E7%82%B9%E4%B8%8E%E6%A1%A5&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-57">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="割点与桥">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">kosaraju题解</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-59">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">luogu P2341受欢迎的牛</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="割点与桥">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

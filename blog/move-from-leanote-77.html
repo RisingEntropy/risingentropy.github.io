@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>OKR-A Horrible Poem 题解 luogu3538</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-77">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OKR-A Horrible Poem 题解 luogu3538 – Haoyu Deng's page">
+  <meta name="twitter:description" content="题面
+题目描述
+Bytie boy has to learn a fragment of a certain poem by heart. The poem, following the best lines of modern art, is a long string consisting of lowercase English alphabet letters only. Obviously, it sounds horrible, but that is the least of Bytie’s worries.
+First and foremost, he completely forgot which fragment is he supposed to learn. And they all look quite difficult to memorize…
+There is hope, however: some parts of the poem exhibit certain regularity. In particular, every now and then a fragment, say , is but a multiple repetition of another fragment, say  (in other words, , i.e., , where  is an integer). In such case we say that  is a full period of  (in particular, every string is its own full period).
+If a given fragment has a short full period, Bytie’s task will be easy. The question remains… which fragment was that?
+Make a gift for Bytie - write a program that will read the whole poem as well as a list of fragments that Bytie suspects might be the one he is supposed to memorize, and for each of them determines its shortest full period.
+给出一个由小写英文字母组成的字符串S，再给出q个询问，要求回答S某个子串的最短循环节。
+如果字符串B是字符串A的循环节，那么A可以由B重复若干次得到。
+输入输出格式
+输入格式：
+In the first line of the standard input there is a single integer  ().
+In the second line there is a string of length  consisting of lowercase English alphabet letters-the poem.
+We number the positions of its successive characters from 1 to .
+The next line holds a single integer  () denoting the number of fragments.
+Then the following  lines give queries, one per line.
+Each query is a pair of integers  and  (), separated by a single space, such that the answer to the query should be the length of the shortest full period of the poem’s fragment that begins at position  and ends at position .
+In tests worth in total 42% of the points  holds in addition.
+In some of those, worth 30% of points in total,  holds as well.
+输出格式：
+Your program should print  lines on the standard output.
+The -th of these lines should hold a single integer - the answer to the -th query.
+输入输出样例
+输入样例# 1：
+8
+aaabcabc
+3
+1 3
+3 8
+4 8
+
+输出样例# 1：
+1
+3
+5
+
+解答
+其实解决这道题的工具是哈希，但是精髓是线性筛素数。没错，这道题带有浓郁的数学味道。首先我们要明白一下几个东西(题解里告诉我的)
+
+  1.如果$s$是$[l,r]$的循环节，那么$len_{[l,r]}$一定是$s$长度的倍数
+2.如果$s$是$[l,r]$的循环节，那么[l,r-s]=[l+s,r]，正确性其实可以自己想一想，不难。
+3.如果要使s的长度最小，我们可以枚举$len_{[l,r]}$的因数，从小到大枚举。
+4.如果$s$是一个循环节，那么$ks k\in Z^*$也是一个循环节(前提是长度要小于区间长度)
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="OKR-A Horrible Poem 题解 luogu3538 – Haoyu Deng's page">
+  <meta property="og:description" content="题面
+题目描述
+Bytie boy has to learn a fragment of a certain poem by heart. The poem, following the best lines of modern art, is a long string consisting of lowercase English alphabet letters only. Obviously, it sounds horrible, but that is the least of Bytie’s worries.
+First and foremost, he completely forgot which fragment is he supposed to learn. And they all look quite difficult to memorize…
+There is hope, however: some parts of the poem exhibit certain regularity. In particular, every now and then a fragment, say , is but a multiple repetition of another fragment, say  (in other words, , i.e., , where  is an integer). In such case we say that  is a full period of  (in particular, every string is its own full period).
+If a given fragment has a short full period, Bytie’s task will be easy. The question remains… which fragment was that?
+Make a gift for Bytie - write a program that will read the whole poem as well as a list of fragments that Bytie suspects might be the one he is supposed to memorize, and for each of them determines its shortest full period.
+给出一个由小写英文字母组成的字符串S，再给出q个询问，要求回答S某个子串的最短循环节。
+如果字符串B是字符串A的循环节，那么A可以由B重复若干次得到。
+输入输出格式
+输入格式：
+In the first line of the standard input there is a single integer  ().
+In the second line there is a string of length  consisting of lowercase English alphabet letters-the poem.
+We number the positions of its successive characters from 1 to .
+The next line holds a single integer  () denoting the number of fragments.
+Then the following  lines give queries, one per line.
+Each query is a pair of integers  and  (), separated by a single space, such that the answer to the query should be the length of the shortest full period of the poem’s fragment that begins at position  and ends at position .
+In tests worth in total 42% of the points  holds in addition.
+In some of those, worth 30% of points in total,  holds as well.
+输出格式：
+Your program should print  lines on the standard output.
+The -th of these lines should hold a single integer - the answer to the -th query.
+输入输出样例
+输入样例# 1：
+8
+aaabcabc
+3
+1 3
+3 8
+4 8
+
+输出样例# 1：
+1
+3
+5
+
+解答
+其实解决这道题的工具是哈希，但是精髓是线性筛素数。没错，这道题带有浓郁的数学味道。首先我们要明白一下几个东西(题解里告诉我的)
+
+  1.如果$s$是$[l,r]$的循环节，那么$len_{[l,r]}$一定是$s$长度的倍数
+2.如果$s$是$[l,r]$的循环节，那么[l,r-s]=[l+s,r]，正确性其实可以自己想一想，不难。
+3.如果要使s的长度最小，我们可以枚举$len_{[l,r]}$的因数，从小到大枚举。
+4.如果$s$是一个循环节，那么$ks k\in Z^*$也是一个循环节(前提是长度要小于区间长度)
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="OKR-A Horrible Poem 题解 luogu3538">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            OKR-A Horrible Poem 题解 luogu3538
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2018-10-26T03:21:02+00:00">26 Oct 2018</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="题面">题面</h1>
+<p>题目描述
+Bytie boy has to learn a fragment of a certain poem by heart. The poem, following the best lines of modern art, is a long string consisting of lowercase English alphabet letters only. Obviously, it sounds horrible, but that is the least of Bytie’s worries.
+First and foremost, he completely forgot which fragment is he supposed to learn. And they all look quite difficult to memorize…
+There is hope, however: some parts of the poem exhibit certain regularity. In particular, every now and then a fragment, say , is but a multiple repetition of another fragment, say  (in other words, , i.e., , where  is an integer). In such case we say that  is a full period of  (in particular, every string is its own full period).
+If a given fragment has a short full period, Bytie’s task will be easy. The question remains… which fragment was that?
+Make a gift for Bytie - write a program that will read the whole poem as well as a list of fragments that Bytie suspects might be the one he is supposed to memorize, and for each of them determines its shortest full period.
+给出一个由小写英文字母组成的字符串S，再给出q个询问，要求回答S某个子串的最短循环节。
+如果字符串B是字符串A的循环节，那么A可以由B重复若干次得到。</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式：</h1>
+<p>In the first line of the standard input there is a single integer  ().
+In the second line there is a string of length  consisting of lowercase English alphabet letters-the poem.
+We number the positions of its successive characters from 1 to .
+The next line holds a single integer  () denoting the number of fragments.
+Then the following  lines give queries, one per line.
+Each query is a pair of integers  and  (), separated by a single space, such that the answer to the query should be the length of the shortest full period of the poem’s fragment that begins at position  and ends at position .
+In tests worth in total 42% of the points  holds in addition.
+In some of those, worth 30% of points in total,  holds as well.</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>Your program should print  lines on the standard output.
+The -th of these lines should hold a single integer - the answer to the -th query.</p>
+<h1 id="输入输出样例">输入输出样例</h1>
+<h1 id="输入样例-1">输入样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
+aaabcabc
+3
+1 3
+3 8
+4 8
+</code></pre></div></div>
+<h1 id="输出样例-1">输出样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+3
+5
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实解决这道题的工具是哈希，但是精髓是线性筛素数。没错，这道题带有浓郁的数学味道。首先我们要明白一下几个东西(题解里告诉我的)</p>
+<blockquote>
+  <p>1.如果$s$是$[l,r]$的循环节，那么$len_{[l,r]}$一定是$s$长度的倍数
+2.如果$s$是$[l,r]$的循环节，那么[l,r-s]=[l+s,r]，正确性其实可以自己想一想，不难。
+3.如果要使s的长度最小，我们可以枚举$len_{[l,r]}$的因数，从小到大枚举。
+4.如果$s$是一个循环节，那么$ks k\in Z^*$也是一个循环节(前提是长度要小于区间长度)</p>
+</blockquote>
+
+<p>那么怎么获得$len_{[l,r]}$的因数呢？这是一个问题，能想到这里，这道题就可以A了。首先，我们可以直接枚举，但是这样的复杂度是$O(\sqrt{n})$的，介于这道题死不要脸卡常(必须写快读，否则卡不过)，所以$O(\sqrt(n)$的复杂度过不了。那么我们看看算数基本定理，发现我们可以通过把长度拆分成若干质因数，然后通过不同质因数的组合，得到大小不同的质因数。
+那么第一步，就是写出一个线筛：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">prime</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="n">prime_table</span><span class="p">[</span><span class="o">++</span><span class="n">prime_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">prime_cnt</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span><span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这里面我们用min_prime_factor[i]来表示i的最小质因数是多少，然后通过i/min_prime_factor[i]就可以表示另一个因数(可能是个合数)，然后又对另一个因数拆分，就可以得到i从大到小的不同因数啦(代码里面有说吗后面的一个储存i的质因数的数组factor为什么是递增的(不一定严格递增，但是不影响))。
+接下来就是第二步啦！
+第二步也很简单，就是判断$len_{[i,j]}$的每一个因数的长度是否可以构成一个循环节，如果可以，就把它分解了看看它的因数是不是可以，因为如果k是一个循环节，那么2k,3k也一定可以构成循环节。
+一下就是我写的烂的不得了的代码咯，略略略！</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp"># include &lt;cstring&gt;
+# include &lt;cstdio&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">500010</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">Hash</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">13131</span><span class="p">;</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">poww</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">prime_table</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">not_prime</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//min_prime_factor[i]表示i的最小质因子是多少</span>
+<span class="kt">int</span> <span class="n">factor</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">factor_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">prime_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span><span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">)</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">prime</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="n">prime_table</span><span class="p">[</span><span class="o">++</span><span class="n">prime_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">prime_cnt</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">prime_table</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span><span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">calPow</span><span class="p">(){</span>
+    <span class="n">poww</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">poww</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">poww</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">base</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">cal_hash</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">base</span><span class="o">+</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">getHash</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span><span class="c1">//返回以s开始，包括s的，长度为n的区间的哈希</span>
+    <span class="k">return</span> <span class="n">Hash</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">Hash</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">poww</span><span class="p">[</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">judge</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">len</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">getHash</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="n">len</span><span class="p">)</span><span class="o">==</span><span class="n">getHash</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">len</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">prime</span><span class="p">();</span>
+    <span class="n">calPow</span><span class="p">();</span>
+    <span class="n">cal_hash</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">judge</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="mi">1</span><span class="p">)){</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">factor_cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">len</span><span class="o">!=</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">factor</span><span class="p">[</span><span class="o">++</span><span class="n">factor_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">len</span><span class="p">];</span>
+                <span class="n">len</span> <span class="o">=</span> <span class="n">len</span> <span class="o">/</span> <span class="n">min_prime_factor</span><span class="p">[</span><span class="n">len</span><span class="p">];</span><span class="c1">//可以保证factor里面因数是递减的，原因应该可以想明白</span>
+                <span class="c1">//因为min_prime_factor[i]储存的是i的最小质因数，不断这样计算下去，facotr里面的数会越来越小。</span>
+            <span class="p">}</span>
+            <span class="n">len</span> <span class="o">=</span> <span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">factor_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">judge</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">len</span><span class="o">/</span><span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">])){</span>
+                    <span class="n">len</span> <span class="o">/=</span> <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=OKR-A%20Horrible%20Poem%20%E9%A2%98%E8%A7%A3%20luogu3538&url=/blog/move-from-leanote-77"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-77"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-77&amp;media=/images/posts/OI.png&amp;description=OKR-A%20Horrible%20Poem%20%E9%A2%98%E8%A7%A3%20luogu3538"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-77&title=OKR-A%20Horrible%20Poem%20%E9%A2%98%E8%A7%A3%20luogu3538&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-76">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="OKR-A Horrible Poem 题解 luogu3538">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">CF1036B</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-75">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">bzoj3620</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="OKR-A Horrible Poem 题解 luogu3538">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

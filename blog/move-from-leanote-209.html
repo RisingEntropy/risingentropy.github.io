@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>【冷门知识点】支配树</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-209">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【冷门知识点】支配树 – Haoyu Deng's page">
+  <meta name="twitter:description" content="支配树
+在一个有向图中，有一个起点R，对于任意点W，对于R-&amp;gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
+支配树的性质
+1.支配树是以R为根的一棵树
+2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&amp;gt;i的必经点
+3.对于任意的i，它是子树中每个点的必经点
+求得
+半必经点
+在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&amp;gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
+通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。
+半必经点性质
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="【冷门知识点】支配树 – Haoyu Deng's page">
+  <meta property="og:description" content="支配树
+在一个有向图中，有一个起点R，对于任意点W，对于R-&amp;gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
+支配树的性质
+1.支配树是以R为根的一棵树
+2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&amp;gt;i的必经点
+3.对于任意的i，它是子树中每个点的必经点
+求得
+半必经点
+在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&amp;gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
+通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。
+半必经点性质
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="【冷门知识点】支配树">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            【冷门知识点】支配树
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-05-31T12:53:29+00:00">31 May 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="支配树">支配树</h1>
+<p>在一个有向图中，有一个起点R，对于任意点W，对于R-&gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树</p>
+<h1 id="支配树的性质">支配树的性质</h1>
+<p>1.支配树是以R为根的一棵树
+2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&gt;i的必经点
+3.对于任意的i，它是子树中每个点的必经点</p>
+<h1 id="求得">求得</h1>
+<h1 id="半必经点">半必经点</h1>
+<p>在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
+通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。</p>
+<h1 id="半必经点性质">半必经点性质</h1>
+
+<ol>
+  <li>semi[x]一定是x的祖先</li>
+  <li>semi[x]一定是确定的</li>
+  <li>半必经点不一定是必经点</li>
+  <li>semi[x]深度不小于idom[x]，即idom[x]在semi[x]祖先链上</li>
+</ol>
+
+<p><del>证明的话，咕咕了</del></p>
+<h1 id="半必经点的作用">半必经点的作用</h1>
+<p>保留dfs树的树边，连接semi[i]-&gt;i构建新图。不改变原图支配关系，且构成一个dag图。</p>
+<h1 id="计算">计算</h1>
+<p>对于点x，有边(y,x)
+• 若dfn[y]$&lt;$dfn[x](树边或前向边） 且dfn[y]$&lt;$dfn[semi[x]] ,semi[x]=y
+• 根据定义显然
+• 若dfn[y]&gt;dfn[x]（后向边或横叉边），找到y的一个祖先semi值最小
+的z且dfn[z]&gt;dfn[x]，用semi[z]更新semi[x]</p>
+<h1 id="计算idom">计算idom</h1>
+<h1 id="性质">性质</h1>
+
+<ol>
+  <li>idom[x]的深度不大于semi[x]</li>
+  <li>设点集P是semi[x]（不包含）到x路径上的点，t是P中semi最小的点(1、若semi[t]=semi[x],则idom[x]=semi[x]2、若semi[t]!=semi[x],则idom[x]=idom[t])</li>
+</ol>
+
+<h1 id="算法">算法</h1>
+
+<ol>
+  <li>按dfs序搜索原图得到dfn，从dfn大到小考虑节点</li>
+  <li>利用带权并查集维护每个点到祖先链上semi值最小值</li>
+  <li>设当前计算semi[x],对于（y,x）若dfn[y]&gt;dfn[x],则直接根据 更新（y的semi已经计算完）若dfn[y]$&lt;$dfn[x]，则semi[y]没有更新，y是并查集独立点， 同样更新</li>
+  <li>用x=semi[y]-&gt;y更新y的idom，直接查询y祖先链上最小值</li>
+  <li>最后将semi[x]!=idom[x]的节点idom按dfn从小到大刷新一次</li>
+</ol>
+
+<h1 id="代码实现">代码实现</h1>
+<p>wdnmd 并查集打错了，跳了一晚上
+HDU4694</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-6-7.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;vector&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">graph</span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">G</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+    <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">f</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">clear</span><span class="p">(){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="n">G</span><span class="p">,</span><span class="n">rG</span><span class="p">,</span><span class="n">sG</span><span class="p">,</span><span class="n">tree</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">id</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">semi</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">idom</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">belong</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">reset</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ans</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dfn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dfn</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">fa</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fa</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">semi</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">semi</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">idom</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">idom</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">belong</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">belong</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+    <span class="n">dfn_cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">G</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">rG</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">sG</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">tree</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">getdfn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">){</span>
+    <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span><span class="n">id</span><span class="p">[</span><span class="n">dfn_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">G</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">G</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+        <span class="n">getdfn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]]]]</span><span class="o">&lt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]]])</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]];</span><span class="c1">//wdnmd就是这里</span>
+    <span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span><span class="n">fx</span><span class="p">;</span><span class="k">return</span> <span class="n">fx</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">dfn_cnt</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">rG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//尝试更新semi</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">rG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+            <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]]]</span><span class="o">&lt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]])</span>
+                <span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]];</span>
+        <span class="p">}</span>
+        <span class="n">sG</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">);</span><span class="c1">//建图</span>
+        <span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">sG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//图上使用更新fa[x]为semi的点，更新为新找到的那个点</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">sG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span><span class="o">==</span><span class="n">now</span><span class="p">)</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span><span class="err">如果</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">semit</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="err">，说明</span><span class="n">idom</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="c1">//此时semi=now</span>
+            <span class="k">else</span> <span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="err">否则就是</span><span class="n">idom</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="err">，实现的时候写成</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">t</span><span class="err">，后面在处理</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">dfn_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">semi</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">idom</span><span class="p">[</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]];</span><span class="c1">//处理</span>
+        <span class="n">tree</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">getans</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
+    <span class="n">ans</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">sum</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">getans</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">sum</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+        <span class="n">reset</span><span class="p">();</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="n">rG</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">belong</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">semi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">getdfn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">tarjan</span><span class="p">();</span>
+        <span class="n">getans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span><span class="n">puts</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=%E3%80%90%E5%86%B7%E9%97%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E3%80%91%E6%94%AF%E9%85%8D%E6%A0%91&url=/blog/move-from-leanote-209"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-209"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-209&amp;media=/images/posts/OI.png&amp;description=%E3%80%90%E5%86%B7%E9%97%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E3%80%91%E6%94%AF%E9%85%8D%E6%A0%91"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-209&title=%E3%80%90%E5%86%B7%E9%97%A8%E7%9F%A5%E8%AF%86%E7%82%B9%E3%80%91%E6%94%AF%E9%85%8D%E6%A0%91&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-208">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【冷门知识点】支配树">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">fhq treap</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-210">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">说明</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="【冷门知识点】支配树">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

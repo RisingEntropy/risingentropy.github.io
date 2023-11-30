@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>20190330考试</title>
+  <meta name='description' content='Haoyu Deng's personal page'>
+
+  <link rel="canonical" href="/blog/move-from-leanote-181">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="20190330考试 – Haoyu Deng's page">
+  <meta name="twitter:description" content="T1重置序reset
+一个芯片可以有N种不同的状态，不妨设为0到N-1。其中，0状态是准备状态。当芯片出现错误时，可能会处于任意状态。因此需要一个重置序列来将它变成准备状态。你的任务就是寻找这个重置序列。
+当芯片处于状态i时接收了命令j，它会立刻转变成状态d[i,j]。对于任意初始状态，你找到的重置序列都应最终将它变成准备状态。在此基础上，你找到的重置序列应该最短。
+输入
+第一行两个整数$n,m（2&amp;lt;=n&amp;lt;=8，1&amp;lt;=m&amp;lt;=16）$，表示状态数和命令数。
+接下来n行每行m个整数，表示状态i在接收到命令j时会变成状态d[i,j]。注意，状态和命令都是从0开始编号的。其中，0是唯一一个准备状态。保证$0&amp;lt;=d[i,j]&amp;lt;n$。
+输出
+输出一个序列表示最短操作序列。用16进制数来表示操作$(0-9,a-f)$。数码之间、行尾都不应有多余字符。如果有多组解，输出字典序最小的一组。如果无解，输出-1。
+样例输入
+3 4
+2 1 1 2
+1 0 0 0
+0 0 0 1
+
+样例输出
+101
+
+提示
+【样例说明】
+三种状态都会通过这个序列最终变成状态0：
+0-&amp;gt;1-&amp;gt;1-&amp;gt;0
+1-&amp;gt;0-&amp;gt;2-&amp;gt;0
+2-&amp;gt;0-&amp;gt;2-&amp;gt;0
+算是状态压缩dp吧。。。观察发现n的范围非常小，我们用一个整数作为状态，状态里面每个位表示芯片状态是否存在。然后就考虑转移，我们枚举转移，又由于字典序最小，直接bfs就好了。初始状态为$(1«n)-1$目标状态$1$，因为只剩一个0状态了，也就是0位上为1。
+代码：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;queue&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int N = 10,S = 1&amp;lt;&amp;lt;16;
+int q[S],op[S],fa[S],G[N][N*2],front,tail,f[S];
+int n,m;
+void print(int x){
+	if(op[x]==-1)return;
+	print(fa[x]);
+	printf(&quot;%x&quot;,op[x]);
+}
+int bfs(int s){
+	f[s] = 1;
+	front = tail = 1;
+	op[tail] = -1;fa[tail] = 0;
+	q[tail++] = s;
+	while(tail!=front){
+		int t = q[front];
+		if(t==1)return front;
+		for(int i = 0;i&amp;lt;m;i++){
+			int x = 0;
+			for(int j = 0;j&amp;lt;n;j++){
+				if(t&amp;amp;(1&amp;lt;&amp;lt;j))x|=1&amp;lt;&amp;lt;G[j][i];
+			}
+			if(x&amp;amp;&amp;amp;!f[x]){
+				f[x] = 1;
+				q[tail] = x;
+				fa[tail] = front;
+				op[tail] = i;
+				tail++;
+			}
+		}
+		front++;
+	}
+	return 0;
+}
+int main(){
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	for(int i = 0;i&amp;lt;n;i++)
+		for(int j = 0;j&amp;lt;m;j++)
+			cin&amp;gt;&amp;gt;G[i][j];
+	int ans = bfs((1&amp;lt;&amp;lt;n)-1);
+	if(ans)print(ans);else cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+">
+  <meta name="twitter:image:src" content="/images/posts/OI.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="20190330考试 – Haoyu Deng's page">
+  <meta property="og:description" content="T1重置序reset
+一个芯片可以有N种不同的状态，不妨设为0到N-1。其中，0状态是准备状态。当芯片出现错误时，可能会处于任意状态。因此需要一个重置序列来将它变成准备状态。你的任务就是寻找这个重置序列。
+当芯片处于状态i时接收了命令j，它会立刻转变成状态d[i,j]。对于任意初始状态，你找到的重置序列都应最终将它变成准备状态。在此基础上，你找到的重置序列应该最短。
+输入
+第一行两个整数$n,m（2&amp;lt;=n&amp;lt;=8，1&amp;lt;=m&amp;lt;=16）$，表示状态数和命令数。
+接下来n行每行m个整数，表示状态i在接收到命令j时会变成状态d[i,j]。注意，状态和命令都是从0开始编号的。其中，0是唯一一个准备状态。保证$0&amp;lt;=d[i,j]&amp;lt;n$。
+输出
+输出一个序列表示最短操作序列。用16进制数来表示操作$(0-9,a-f)$。数码之间、行尾都不应有多余字符。如果有多组解，输出字典序最小的一组。如果无解，输出-1。
+样例输入
+3 4
+2 1 1 2
+1 0 0 0
+0 0 0 1
+
+样例输出
+101
+
+提示
+【样例说明】
+三种状态都会通过这个序列最终变成状态0：
+0-&amp;gt;1-&amp;gt;1-&amp;gt;0
+1-&amp;gt;0-&amp;gt;2-&amp;gt;0
+2-&amp;gt;0-&amp;gt;2-&amp;gt;0
+算是状态压缩dp吧。。。观察发现n的范围非常小，我们用一个整数作为状态，状态里面每个位表示芯片状态是否存在。然后就考虑转移，我们枚举转移，又由于字典序最小，直接bfs就好了。初始状态为$(1«n)-1$目标状态$1$，因为只剩一个0状态了，也就是0位上为1。
+代码：
+# include &amp;lt;iostream&amp;gt;
+# include &amp;lt;cstdio&amp;gt;
+# include &amp;lt;queue&amp;gt;
+# include &amp;lt;vector&amp;gt;
+using namespace std;
+const int N = 10,S = 1&amp;lt;&amp;lt;16;
+int q[S],op[S],fa[S],G[N][N*2],front,tail,f[S];
+int n,m;
+void print(int x){
+	if(op[x]==-1)return;
+	print(fa[x]);
+	printf(&quot;%x&quot;,op[x]);
+}
+int bfs(int s){
+	f[s] = 1;
+	front = tail = 1;
+	op[tail] = -1;fa[tail] = 0;
+	q[tail++] = s;
+	while(tail!=front){
+		int t = q[front];
+		if(t==1)return front;
+		for(int i = 0;i&amp;lt;m;i++){
+			int x = 0;
+			for(int j = 0;j&amp;lt;n;j++){
+				if(t&amp;amp;(1&amp;lt;&amp;lt;j))x|=1&amp;lt;&amp;lt;G[j][i];
+			}
+			if(x&amp;amp;&amp;amp;!f[x]){
+				f[x] = 1;
+				q[tail] = x;
+				fa[tail] = front;
+				op[tail] = i;
+				tail++;
+			}
+		}
+		front++;
+	}
+	return 0;
+}
+int main(){
+	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
+	for(int i = 0;i&amp;lt;n;i++)
+		for(int j = 0;j&amp;lt;m;j++)
+			cin&amp;gt;&amp;gt;G[i][j];
+	int ans = bfs((1&amp;lt;&amp;lt;n)-1);
+	if(ans)print(ans);else cout&amp;lt;&amp;lt;-1&amp;lt;&amp;lt;endl;
+	return 0;
+}
+
+">
+  <meta property="og:image" content="/images/posts/OI.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="/images/posts/OI.png" alt="20190330考试">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+            
+              <a href="/tag/oi" class="post-tags__tag">OI</a>
+            
+              <a href="/tag/former blog" class="post-tags__tag">former blog</a>
+            
+          </div>
+          
+
+          <h1 class="post__title">
+            20190330考试
+          </h1>
+
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Haoyu Deng</div>
+              <time class="post__date" datetime="2019-03-30T08:19:41+00:00">30 Mar 2019</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="t1重置序reset">T1重置序reset</h1>
+<p>一个芯片可以有N种不同的状态，不妨设为0到N-1。其中，0状态是准备状态。当芯片出现错误时，可能会处于任意状态。因此需要一个重置序列来将它变成准备状态。你的任务就是寻找这个重置序列。
+当芯片处于状态i时接收了命令j，它会立刻转变成状态d[i,j]。对于任意初始状态，你找到的重置序列都应最终将它变成准备状态。在此基础上，你找到的重置序列应该最短。</p>
+<h1 id="输入">输入</h1>
+<p>第一行两个整数$n,m（2&lt;=n&lt;=8，1&lt;=m&lt;=16）$，表示状态数和命令数。
+接下来n行每行m个整数，表示状态i在接收到命令j时会变成状态d[i,j]。注意，状态和命令都是从0开始编号的。其中，0是唯一一个准备状态。保证$0&lt;=d[i,j]&lt;n$。</p>
+<h1 id="输出">输出</h1>
+<p>输出一个序列表示最短操作序列。用16进制数来表示操作$(0-9,a-f)$。数码之间、行尾都不应有多余字符。如果有多组解，输出字典序最小的一组。如果无解，输出-1。
+样例输入</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 4
+2 1 1 2
+1 0 0 0
+0 0 0 1
+</code></pre></div></div>
+<p>样例输出</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>101
+</code></pre></div></div>
+<p>提示
+【样例说明】
+三种状态都会通过这个序列最终变成状态0：
+0-&gt;1-&gt;1-&gt;0
+1-&gt;0-&gt;2-&gt;0
+2-&gt;0-&gt;2-&gt;0
+算是状态压缩dp吧。。。观察发现n的范围非常小，我们用一个整数作为状态，状态里面每个位表示芯片状态是否存在。然后就考虑转移，我们枚举转移，又由于字典序最小，直接bfs就好了。初始状态为$(1«n)-1$目标状态$1$，因为只剩一个0状态了，也就是0位上为1。
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstdio&gt;
+# include &lt;queue&gt;
+# include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span><span class="n">S</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">16</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">q</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">op</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">S</span><span class="p">],</span><span class="n">G</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span><span class="n">front</span><span class="p">,</span><span class="n">tail</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">S</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+	<span class="n">print</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%x"</span><span class="p">,</span><span class="n">op</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+	<span class="n">f</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">front</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">op</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">q</span><span class="p">[</span><span class="n">tail</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">tail</span><span class="o">!=</span><span class="n">front</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">front</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">front</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+				<span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="p">))</span><span class="n">x</span><span class="o">|=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">G</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+			<span class="p">}</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;&amp;!</span><span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+				<span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+				<span class="n">q</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+				<span class="n">fa</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">front</span><span class="p">;</span>
+				<span class="n">op</span><span class="p">[</span><span class="n">tail</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+				<span class="n">tail</span><span class="o">++</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">front</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+			<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">bfs</span><span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="n">print</span><span class="p">(</span><span class="n">ans</span><span class="p">);</span><span class="k">else</span> <span class="n">cout</span><span class="o">&lt;&lt;-</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="t2">T2</h1>
+<p>你的防线成功升级，从原来的一根线变成了一棵树。这棵树有 N 个炮台，炮台与炮台之间 有 N-1 条隧道。你要选择一些炮台安装哨戒炮。在第 i 个炮台上安装哨戒炮得到的防御力为 vi。上次说过，哨戒炮离得太近会产生神奇的效果。具体来说，对于炮台 i，如果它安装了 哨戒炮且和 k 个哨戒炮用隧道直接相连，那么其防御力会变化 k*di。其中 di 为炮台 i 的抗 干扰属性值。如果为正，干扰对其有正的作用；为负，干扰对其有负的作用；为 0，则完全 不受干扰。
+你的整套防线的防御力为所有哨戒炮的防御力之和。求防线的最大防御力</p>
+<h1 id="输入-1">输入</h1>
+<p>第一行一个整数 N，表示炮台数量。
+第二行 N 个整数表示 vi。
+第三行 N 个整数表示 di。
+接下来 N-1 行每行两个整数描述一条隧道。</p>
+<h1 id="输出-1">输出</h1>
+<p>输出一行一个整数表示答案
+样例输入</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+1 1
+0 0
+1 2
+</code></pre></div></div>
+<p>样例输出</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+<p>提示
+对于 20%的数据，$N &lt;= 20$。
+对于 40%的数据，$N &lt;= 100$。
+对于 70%的数据，$N &lt;= 5000$。
+对于 100%的数据，$N &lt;= 100000$
+最水的一道题，树形dp，但是注意long long ，不开long Long 只有10分，见祖宗</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+</span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">next</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">top</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+	<span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+	<span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+	<span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">max</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
+	<span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+		<span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]));</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="t3里程表">T3里程表</h1>
+<p>Farmer John’s cows are on a road trip! The odometer on their car displays an integer mileage value, starting at X (100 &lt;= X &lt;= 10^18) miles at the beginning of their trip and ending at Y (X &lt;= Y &lt;= 10^18) miles at the end of their trip. Whenever the odometer displays an ‘interesting’ number (including at the start and end of the trip) the cows will moo. A number is ‘interesting’ if when you look at all its digits except for leading zeros, at least half of these should be the same. For example, the numbers 3223 and 110 are interesting, while the numbers 97791 and 123 are not.
+Help FJ count how many times the cows will moo during the trip.
+农民约翰的牛正开始一个美妙的旅程。牛车的里程表上显示一个整数表示里程，旅程开始时里程数为$X(100 &lt;= X &lt;= 10^18)$，结束时里程数为$Y(X &lt;= Y &lt;= 10^18)$。每当里程表显示一个有趣的数时（包括起点和终点数），牛们会发出愉快的叫声。
+对于一个里程数的每一位，如果有至少一半的数字时相同的，则这个里程数一个有趣的数。例如：3223和110是有趣的数，而$97791$ 和 $123$则不是。
+请计算，整个旅程中，牛们会发出多少吃愉快的叫声。
+输入
+Line 1: The first line will contain two integers, X and Y, separated by a space.
+输出
+Line 1: A single integer containing how many times the cows will moo during the trip.
+样例输入</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>110 133
+</code></pre></div></div>
+<p>样例输出</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>14
+</code></pre></div></div>
+<p>提示
+The trip starts with the odometer at 110 and ends at 133.
+The cows moo when the odometer reads 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 121, 122, 131, and 133.
+标签
+USACO2014 US Open, Silver
+数位dp，第一次计算出1-9每个数字出现次数超过一半的数的个数，再求出2个数各占一半的数的个数，然后一减就好了。
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp2</span><span class="p">[</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">][</span><span class="mi">20</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">nm</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs1</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">,</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span><span class="kt">bool</span> <span class="n">lead</span><span class="p">,</span><span class="kt">bool</span> <span class="n">limit</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span><span class="k">return</span> <span class="n">cnt</span><span class="o">*</span><span class="mi">2</span><span class="o">&gt;=</span><span class="n">len</span><span class="p">;}</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lead</span><span class="o">&amp;&amp;!</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">num</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">len</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">num</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">len</span><span class="p">];</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">limit</span><span class="o">?</span><span class="n">nm</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">:</span><span class="mi">9</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">mx</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">ans</span><span class="o">+=</span><span class="n">dfs1</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="p">,</span><span class="n">cnt</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">num</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="o">!</span><span class="n">lead</span><span class="o">||</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">)),</span><span class="n">len</span><span class="o">-</span><span class="p">(</span><span class="n">lead</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">),</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">lead</span><span class="p">,</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">==</span><span class="n">mx</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lead</span><span class="o">&amp;&amp;!</span><span class="n">limit</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">num</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span><span class="kt">int</span> <span class="n">num2</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt1</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt2</span><span class="p">,</span><span class="kt">int</span> <span class="n">len</span><span class="p">,</span><span class="kt">int</span> <span class="n">lead</span><span class="p">,</span><span class="kt">int</span> <span class="n">limit</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">cnt1</span><span class="o">*</span><span class="mi">2</span><span class="o">==</span><span class="n">len</span><span class="o">&amp;&amp;</span><span class="n">cnt1</span><span class="o">==</span><span class="n">cnt2</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lead</span><span class="o">&amp;&amp;!</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">dp2</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">cnt1</span><span class="p">][</span><span class="n">cnt2</span><span class="p">][</span><span class="n">len</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">dp2</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">cnt1</span><span class="p">][</span><span class="n">cnt2</span><span class="p">][</span><span class="n">len</span><span class="p">];</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">limit</span><span class="o">?</span><span class="n">nm</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">:</span><span class="mi">9</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">lead</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">dfs2</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">,</span><span class="n">cnt1</span><span class="p">,</span><span class="n">cnt2</span><span class="p">,</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">false</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">num1</span><span class="o">&lt;=</span><span class="n">mx</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">num1</span><span class="o">!=</span><span class="mi">0</span><span class="o">||!</span><span class="n">lead</span><span class="p">))</span><span class="n">ans</span><span class="o">+=</span><span class="n">dfs2</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">,</span><span class="n">cnt1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">cnt2</span><span class="p">,</span><span class="n">len</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">num1</span><span class="o">==</span><span class="n">mx</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">num2</span><span class="o">&lt;=</span><span class="n">mx</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">num2</span><span class="o">!=</span><span class="mi">0</span><span class="o">||!</span><span class="n">lead</span><span class="p">))</span><span class="n">ans</span><span class="o">+=</span><span class="n">dfs2</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">,</span><span class="n">cnt1</span><span class="p">,</span><span class="n">cnt2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">len</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">num2</span><span class="o">==</span><span class="n">mx</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">lead</span><span class="o">&amp;&amp;!</span><span class="n">limit</span><span class="p">)</span><span class="n">dp2</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">cnt1</span><span class="p">][</span><span class="n">cnt2</span><span class="p">][</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">work</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">){</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+		<span class="n">nm</span><span class="p">[</span><span class="o">++</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span><span class="n">x</span><span class="o">/=</span><span class="mi">10</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">9</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">dfs1</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">len</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">9</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">9</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+			<span class="n">memset</span><span class="p">(</span><span class="n">dp2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp2</span><span class="p">)),</span><span class="n">ans</span><span class="o">-=</span><span class="n">dfs2</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">len</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dp2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp2</span><span class="p">));</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">l</span><span class="o">&gt;&gt;</span><span class="n">r</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">work</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">-</span><span class="n">work</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter"
+        href="https://twitter.com/intent/tweet?text=20190330%E8%80%83%E8%AF%95&url=/blog/move-from-leanote-181"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/move-from-leanote-181"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=/blog/move-from-leanote-181&amp;media=/images/posts/OI.png&amp;description=20190330%E8%80%83%E8%AF%95"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    <li class="share__item">
+      <a class="share__link share__linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/move-from-leanote-181&title=20190330%E8%80%83%E8%AF%95&summary=&source=Haoyu%20Deng's%20page"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      <div class="post__navigation animate">
+  
+  <a class="post__prev" href="/blog/move-from-leanote-179">
+    <div class="prev__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="20190330考试">
+    </div>
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">SDOI2007线性方程组</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="/blog/move-from-leanote-182">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">AI</h2>
+    </div>
+    <div class="next__image">
+      <img loading="lazy" src="/images/posts/OI.png" alt="20190330考试">
+    </div>
+  </a>
+  
+</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts is-related animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              <a class="section__link" href="/blog">
+                
+                
+                  
+                    <a href="/tags#OI" class="section__link related-tag">See all<span> OI</span> <i class="ion ion-md-arrow-forward"></i></a>
+                  
+                
+                  
+                
+              
+              </a>
+            </div>
+          </div>
+          <div class="row">
+
+          
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-293">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="科研训练">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-293">科研训练</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      #  寒假30篇论文计划
+- [] 1、SEWResnet
+- [] 2、Resnet
+- [] 3、Spikeformer
+- [] 4、TVConv
+- [] 5、
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-07-11T12:09:06+00:00">11 Jul 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-292">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="unknown title">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-292">unknown title</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      We used SOTA architecture to demonstrate that the improvement is due to the deployment of TCJA rather than a change i...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-04-16T15:45:11+00:00">16 Apr 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+              
+            
+            
+            
+      
+            
+      
+            
+
+              <div class="article col col-4 col-d-6 col-t-12">
+                <div class="article__inner">
+              
+                  
+                  <div class="image-wrap">
+                    <a class="article__image" href="/blog/move-from-leanote-291">
+                      <img loading="lazy" src="/images/posts/OI.png" alt="一点小想法">
+                    </a>
+                  </div>
+                  
+              
+                  <div class="article__content">
+              
+                    
+                    <div class="article-tags__box">
+                      
+                      <a href="/tag/oi" class="article__tag">OI</a>
+                      
+                      <a href="/tag/former blog" class="article__tag">former blog</a>
+                      
+                    </div>
+                    
+              
+                    <h2 class="article__title">
+                      <a href="/blog/move-from-leanote-291">一点小想法</a>
+                    </h2>
+              
+                    <p class="article__excerpt">
+                      # 想法
+对于人眼来说，看东西颜色是非常重要的。天空中飘着红色带点黄色的东西，只需要瞟一眼，就可以知道那是国旗。而计算机处理图像是按照（R,G,B）分立成3个通道的方式处理的，也就是说，计算机没有把颜色作为一个整体处理，把三个通道割裂...
+                    </p>
+              
+                    <div class="article__meta">
+                      <div class="article__author-image">
+                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
+                      </div>
+                      <div class="article-info">
+                        <div class="article__author-name">Haoyu Deng</div>
+                        <span class="article__date"><time datetime="2022-03-08T12:00:31+00:00">08 Mar 2022</time></span>
+                      </div>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+            
+                
+                  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>
