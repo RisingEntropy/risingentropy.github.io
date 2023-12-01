@@ -24,6 +24,7 @@ eg1 :第k大的数woj 1903
 但是直接建立n颗树的话会炸空间，于是乎只好利用历史信息来做了。如下图
 
 以下是抄的代码(回去有空写自己的代码)
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 using namespace std;
@@ -101,6 +102,7 @@ eg1 :第k大的数woj 1903
 但是直接建立n颗树的话会炸空间，于是乎只好利用历史信息来做了。如下图
 
 以下是抄的代码(回去有空写自己的代码)
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 using namespace std;
@@ -332,7 +334,7 @@ int main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="主席树">主席树</h1>
+      <h1 id="section">主席树</h1>
 <p>eg1 :第k大的数woj 1903
 题意：n个数，m次查询，查询任意区间第k大。
 首先我们发现这个题满足区间减法。如果[1,l-1]中有k个比x小的数，[1,r]中有k2个比x小的数，那么[l,r]中一共有k2-k个数比x小。基本思想就是我们做n个权值线段树，然后树相减。什么情况下可以相减呢？他们必须是同构的(就是长得一样).抄几张图
@@ -341,69 +343,70 @@ int main(){
 <img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="title" />
 但是直接建立n颗树的话会炸空间，于是乎只好利用历史信息来做了。如下图
 <img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="1" />
-以下是抄的代码(回去有空写自己的代码)</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+以下是抄的代码(回去有空写自己的代码)
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;algorithm&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">5</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">L</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">HASH</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">build</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">root</span> <span class="o">=</span> <span class="o">++</span><span class="n">top</span><span class="p">;</span>
-	<span class="n">sum</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
-		<span class="n">L</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span>
-		<span class="n">R</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>		
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">root</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">pre</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">root</span> <span class="o">=</span> <span class="o">++</span><span class="n">top</span><span class="p">;</span>
-	<span class="n">L</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">pre</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">pre</span><span class="p">];</span>
-	<span class="n">sum</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">pre</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span>
-		<span class="n">L</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">pre</span><span class="p">],</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-		<span class="k">else</span> <span class="n">R</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">pre</span><span class="p">],</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">root</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">r</span><span class="p">){</span>
-		<span class="k">return</span> <span class="n">l</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">L</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">L</span><span class="p">[</span><span class="n">f</span><span class="p">]];</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">num</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">){</span>
-		<span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">L</span><span class="p">[</span><span class="n">f</span><span class="p">],</span><span class="n">L</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span>
-	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="n">num</span><span class="p">,</span><span class="n">R</span><span class="p">[</span><span class="n">f</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>	
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">HASH</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="p">}</span>
-	<span class="n">sort</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-	<span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">);</span><span class="c1">//先建颗树</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">d</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">HASH</span><span class="p">;</span>
-		<span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">x</span><span class="p">);</span><span class="c1">//更新</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">l</span><span class="o">&gt;&gt;</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
-		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">);</span><span class="c1">//同构树相减</span>
-		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">HASH</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 1e5+5;
+int L[MAXN&lt;&lt;5],R[MAXN&lt;&lt;5],sum[MAXN&lt;&lt;5];
+int top;
+int a[MAXN],tree[MAXN],HASH[MAXN];
+int build(int l,int r){
+	int root = ++top;
+	sum[root] = 0;
+	int mid = l+r&gt;&gt;1;
+	if(l&lt;r){
+		L[root] = build(l,mid);
+		R[root] = build(mid+1,r);		
+	}
+	return root;
+}
+int update(int pre,int l,int r,int x){
+	int root = ++top;
+	L[root] = L[pre],R[root] = R[pre];
+	sum[root] = sum[pre]+1;
+	if(l&lt;r){
+		int mid = l+r&gt;&gt;1;
+		if(x&lt;=mid)
+		L[root] = update(L[pre],l,mid,x);
+		else R[root] = update(R[pre],mid+1,r,x);
+	}
+	return root;
+}
+int query(int k,int f,int t,int l,int r){
+	if(l&gt;=r){
+		return l;
+	}
+	int mid = l+r&gt;&gt;1;
+	int num = sum[L[t]]-sum[L[f]];
+	if(num&gt;=k){
+		return query(k,L[f],L[t],l,mid);
+	}else{
+		return query(k-num,R[f],R[t],mid+1,r);
+	}
+}
+int main(){
+	ios::sync_with_stdio(false);
+	int n,m;cin&gt;&gt;n&gt;&gt;m;	
+	for(int i = 1;i&lt;=n;i++){
+		cin&gt;&gt;a[i];HASH[i] = a[i];
+	}
+	sort(HASH+1,HASH+n+1);
+	int d = unique(HASH+1,HASH+n+1)-HASH-1;
+	tree[0] = build(1,d);//先建颗树
+	for(int i = 1;i&lt;=n;i++){
+		int x = lower_bound(HASH+1,HASH+1+d,a[i])-HASH;
+		tree[i] = update(tree[i-1],1,d,x);//更新
+	}
+	int l,r,k;
+	while(m--){
+		cin&gt;&gt;l&gt;&gt;r&gt;&gt;k;
+		int x = query(k,tree[l-1],tree[r],1,d);//同构树相减
+		cout&lt;&lt;HASH[x]&lt;&lt;endl;
+	}
+}
+</code></p>
 
     </div>
 

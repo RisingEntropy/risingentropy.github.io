@@ -15,8 +15,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="最小生成树 – Haoyu Deng's page">
   <meta name="twitter:description" content="最小生成树(Minimum Spanning Tree MST)用于解决最小代价问题，例如用N-1条边链接N个城市，求最小”花费”
-定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
-1.Prim算法
+#  定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
+# 1.Prim算法
 最小生成树其实就是连接所有点的最短边权值和（好装逼啊）
 Prime算法采用类似dijkstra 和 ford算法一样的蓝白点思想，白点代表已经进入算法最小点的点，蓝点代表未进入最小生成树的点。
 描述：
@@ -28,8 +28,8 @@ MST表示最小生成树的权值之和。
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="最小生成树 – Haoyu Deng's page">
   <meta property="og:description" content="最小生成树(Minimum Spanning Tree MST)用于解决最小代价问题，例如用N-1条边链接N个城市，求最小”花费”
-定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
-1.Prim算法
+#  定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
+# 1.Prim算法
 最小生成树其实就是连接所有点的最短边权值和（好装逼啊）
 Prime算法采用类似dijkstra 和 ford算法一样的蓝白点思想，白点代表已经进入算法最小点的点，蓝点代表未进入最小生成树的点。
 描述：
@@ -204,10 +204,10 @@ MST表示最小生成树的权值之和。
   <article class="post">
 
     <div class="post__content">
-      <h1 id="最小生成树minimum-spanning-tree-mst用于解决最小代价问题例如用n-1条边链接n个城市求最小花费">最小生成树(Minimum Spanning Tree MST)用于解决最小代价问题，例如用N-1条边链接N个城市，求最小”花费”</h1>
-<h1 id="定理1n个点用n-1条边连成一个连通块形成的图形只可能是树">定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树</h1>
-<h1 id="1prim算法">1.Prim算法</h1>
-<p>最小生成树其实就是连接所有点的最短边权值和（好装逼啊）
+      <h1 id="minimum-spanning-tree-mstn-1n">最小生成树(Minimum Spanning Tree MST)用于解决最小代价问题，例如用N-1条边链接N个城市，求最小”花费”</h1>
+<p>#  定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
+# 1.Prim算法
+最小生成树其实就是连接所有点的最短边权值和（好装逼啊）
 Prime算法采用类似dijkstra 和 ford算法一样的蓝白点思想，白点代表已经进入算法最小点的点，蓝点代表未进入最小生成树的点。
 描述：
 以1为起点生成最小数,min[v]表示<strong>蓝点v</strong>与白点相连的最小边权。
@@ -222,33 +222,35 @@ MST表示最小生成树的权值之和。</p>
 4for与白点相连的所有蓝点V</li>
 </ol>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
-         <span class="n">min</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span>
-</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">cpp  
+    if(w[u][v]&lt;min[v])
+         min[v] = w[u][v]
+</code></p>
 
 <p>算法结束
 解析：
 其实min[u]储存的是当前白点与其连接的蓝点的距离，mst才是最短权值和</p>
 
-<h1 id="kruskal克努斯卡尔算法">Kruskal(克努斯卡尔)算法</h1>
+<h1 id="kruskal">Kruskal(克努斯卡尔)算法</h1>
 <p>Kruskal算法把一个连通块当做一个集合。Kruskal首先将说有的边按从小到大的顺序排序，并认为每一个点都是孤立的，分别属于m个集合。然后按顺序枚举每一条边，如果这两条边连接着不同的集合，那么就把这两条边加入最小生成树，这两个不同的集合就合并成了一个集合，如果这条边连接的两个点属于同一集合，就跳过。直到选取了n-1条边为止。</p>
 
 <p>算法描述：//超好理解的有没有
 初始化并查集：father[x] = x;
 tot = 0;
 将所有的边从小到大排序。
-计数器k=0</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="err">循环所有从小到大的边</span>
-<span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="err">这一条</span><span class="n">u</span><span class="err">，</span><span class="n">v</span><span class="err">不属于同一集合的边</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="c1">//已经排序，所以必定为最小</span>
-    <span class="p">{</span>
-        <span class="mi">1</span><span class="err">合并</span><span class="n">uv</span><span class="err">所在的集合，相当于把边</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="err">加入最小生成树</span>
-        <span class="mi">2</span><span class="n">tot</span> <span class="o">=</span> <span class="n">tot</span><span class="o">+</span><span class="n">W</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">V0</span><span class="p">)</span>
-        <span class="mi">3</span><span class="n">k</span><span class="o">++</span>
-        <span class="mi">4</span><span class="err">如果</span><span class="n">k</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="err">，说明最小生成树已经生成，则</span><span class="k">break</span><span class="err">；</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
+计数器k=0
+<code class="language-plaintext highlighter-rouge">cpp
+for(int i = 1;i&lt;=m;i++)循环所有从小到大的边
+{
+    if(这一条u，v不属于同一集合的边(u,v)//已经排序，所以必定为最小
+    {
+        1合并uv所在的集合，相当于把边(u,v)加入最小生成树
+        2tot = tot+W(U,V0)
+        3k++
+        4如果k==n-1，说明最小生成树已经生成，则break；
+    }
+}
+</code></p>
 
     </div>
 

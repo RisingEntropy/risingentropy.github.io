@@ -194,11 +194,11 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="aov网络">AOV网络</h1>
+      <h1 id="aov">AOV网络</h1>
 <p>1.定义：在现代化管理中，人们常用有向图来描述和分析一项工程的计划和实施过程，一个工程常被分为多个小的子工程，这些子工程被称为活动（Activity)，在有向图中若以顶点表示活动，有向边表示活动之间的先后关系，这样的图简称为AOV网
 说白了AOV就是一个有向无环图(DAG)</p>
 
-<h1 id="2拓补排序算法">2.拓补排序算法</h1>
+<h1 id="section">2.拓补排序算法</h1>
 <p>AOV网中，把所有活动排成一个序列，使得每个活动的前去活动都排在该活动之前，这个过程称为拓补排序，所得到的活动序列叫拓补序列。
 <strong>一个AOV网的拓补序列不唯一，但是所有活动的前驱活动必须在此之前</strong>
 对于每一个点
@@ -211,22 +211,23 @@
 ·如果在有环的图上拓扑排序
 ·环上的点以及环指向的点不会被访问到
 ·
-算法实现</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="mi">1</span><span class="err">数据结构：</span><span class="n">indgree</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="err">顶点</span><span class="n">i</span><span class="err">的入度</span>
-                <span class="n">stack</span><span class="err">栈</span>
-    <span class="mi">2</span><span class="err">初始化</span><span class="n">top</span><span class="o">=</span><span class="mi">0</span><span class="err">栈顶指针置零</span>
-    <span class="mi">3</span><span class="err">将初始状态所有入度为</span><span class="mi">0</span><span class="err">的顶点压栈</span>
-    <span class="mi">4</span><span class="n">I</span> <span class="o">=</span> <span class="mi">0</span><span class="err">计数器</span>
-    <span class="k">while</span><span class="p">(</span><span class="err">栈非空</span><span class="p">){</span>
-        <span class="mi">1</span> <span class="err">顶点出栈，输出</span><span class="n">v</span><span class="err">；</span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="n">v</span><span class="err">的每一个后继顶点</span><span class="n">u</span><span class="p">)</span>
-        <span class="mi">1</span> <span class="n">indgree</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-        <span class="mx">2if</span> <span class="n">indgree</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="err">顶点入栈</span><span class="p">(</span><span class="err">好像</span><span class="n">bfs</span><span class="err">啊啊啊啊</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="err">然后算法结束了</span>
-</code></pre></div></div>
+算法实现
+<code class="language-plaintext highlighter-rouge">cpp
+    1数据结构：indgree[i],顶点i的入度
+                stack栈
+    2初始化top=0栈顶指针置零
+    3将初始状态所有入度为0的顶点压栈
+    4I = 0计数器
+    while(栈非空){
+        1 顶点出栈，输出v；i++;
+        for(v的每一个后继顶点u)
+        1 indgree[u]--;
+        2if indgree[u] = 0顶点入栈(好像bfs啊啊啊啊)
+    }
+    然后算法结束了
+</code></p>
 
-<h1 id="关键路径">关键路径</h1>
+<h1 id="section-1">关键路径</h1>
 <p>1.定义:在现代化管理中，人们常用有向图来描述和分析一项工程的计划和实施过程，一个工程常被分为多个小的子工程，这些子工程被称为活动（Activity)，在带权有向图中若以顶点表示事件，有向边表示活动，边上的权值表示该活动持续的时间，这样的图简称为AOE网。——————百毒百科
 源点：整个工程的开始
 汇点：整个工程的结束，只有入边，没有出边。其余事件编号为2-(n-1)

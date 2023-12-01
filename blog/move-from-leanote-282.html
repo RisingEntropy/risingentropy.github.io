@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NOIP2011 观光公交  LOJ加强版 心得 – Haoyu Deng's page">
   <meta name="twitter:description" content="
-  $O(nlog(n))$的做法真是清奇无比，目前已花8h+的时间。。。 9h成功AC
+  $O(nlog(n))$的做法真是清奇无比，~~目前已花8h+的时间。。。~~ 9h成功AC
 主要是写心得，所以放在归纳总结里
 
 ">
@@ -24,7 +24,7 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="NOIP2011 观光公交  LOJ加强版 心得 – Haoyu Deng's page">
   <meta property="og:description" content="
-  $O(nlog(n))$的做法真是清奇无比，目前已花8h+的时间。。。 9h成功AC
+  $O(nlog(n))$的做法真是清奇无比，~~目前已花8h+的时间。。。~~ 9h成功AC
 主要是写心得，所以放在归纳总结里
 
 ">
@@ -197,11 +197,11 @@
 
     <div class="post__content">
       <blockquote>
-  <p>$O(nlog(n))$的做法真是清奇无比，<del>目前已花8h+的时间。。。</del> 9h成功AC
+  <p>$O(nlog(n))$的做法真是清奇无比，~~目前已花8h+的时间。。。~~ 9h成功AC
 主要是写心得，所以放在归纳总结里</p>
 </blockquote>
 
-<h1 id="题面">题面</h1>
+<h1 id="section">题面</h1>
 <p>风景迷人的小城 $Y$ 市，拥有 $n$  个美丽的景点。由于慕名而来的游客越来越多，$Y$ 市特意安排了一辆观光公交车，为游客提供更便捷的交通服务。观光公交车在第$0$ 分钟出现在 $1$ 号景点，随后依次前往 $ 2、3 、4 ……n $号景点。从第 $i$ 号景点开到第 $i+1$ 号景点需要 $D_i$ 分钟。任意时刻，公交车只能往前开，或在景点处等待。</p>
 
 <p>设共有 $m$ 个游客，每位游客需要乘车$1$ 次从一个景点到达另一个景点，第 $i$ 位游客在 $T_i$ 分钟来到景点 $A_i$ ，希望乘车前往景点 $B_i$ （$A_i&lt;B_i$）。为了使所有乘客都能顺利到达目的地，公交车在每站都必须等待需要从该景点出发的所有乘客都上车后才能出发开往下一景点。</p>
@@ -215,13 +215,13 @@
 <font color="red">对于 $100\%$ 的数据，$n，m\le 10^5，k\le5\times10^6，D_i\le1000。$ </font>
 
 <hr />
-<h1 id="开题">开题</h1>
-<p>拿到题后有一个“显而易见”的贪心：一条道路不能加速次数过多而导致车等人，所以加速有一个范围，同时每次加速选择一条人数最多的路（我知道这个东西错的很凶）
+<p># 开题
+拿到题后有一个“显而易见”的贪心：一条道路不能加速次数过多而导致车等人，所以加速有一个范围，同时每次加速选择一条人数最多的路（我知道这个东西错的很凶）
 所以线段树区间修改，区间查询最大值，同时把过短的边赋为$- \infty$
-复杂度$O(klog(n))$。<del>美滋滋</del>
-然后我就挂了</p>
-<h1 id="错因一">错因一：</h1>
-<p><strong>不考虑一条边会对后面连续的一些边产生影响</strong>
+复杂度$O(klog(n))$。~~美滋滋~~
+然后我就挂了
+#  错因一：
+<strong>不考虑一条边会对后面连续的一些边产生影响</strong>
 也就是说区间查询最大值不是最优的决策了
 也就是说我要开始推公式了</p>
 
@@ -274,20 +274,20 @@ $pre_{i-1}+D_{i-1}$就是$pre_i$，那么我们就维护一下${max}\begin{Bmatr
 所以把所有区间丢进堆里，权值为$\sum cnt$</p>
 
 <p>现在考虑修改答案（我要吐了md）
-如果我们修改$D_i$，它会让它后面所有的$pre$减小，也就是在线段树上的区间加操作，同时在$k&gt;0$不断加速的过程中，总会有一个点与左端点一样大，那么就分割区间，由于最多操作$2n$个区间，总复杂度$O(nlog(n))$。<del>美滋滋</del>
-然后我又挂了</p>
-<h1 id="错因二">错因二：</h1>
-<p><strong>没有考虑$D_i$减成负数的情况</strong>
+如果我们修改$D_i$，它会让它后面所有的$pre$减小，也就是在线段树上的区间加操作，同时在$k&gt;0$不断加速的过程中，总会有一个点与左端点一样大，那么就分割区间，由于最多操作$2n$个区间，总复杂度$O(nlog(n))$。~~美滋滋~~
+然后我又挂了
+#  错因二：
+<strong>没有考虑$D_i$减成负数的情况</strong>
 此时$D_i=0$，区间变成$l+1\to r$
 艹
-完成以上工作LOJ 60分（黑线）</p>
-<h1 id="错因三">错因三：</h1>
-<p><strong>没有考虑$cnt_{r+1}$对区间l~r的贡献</strong>
+完成以上工作LOJ 60分（黑线）
+#  错因三：
+<strong>没有考虑$cnt_{r+1}$对区间l~r的贡献</strong>
 用人话就是：如果公交可能提前到站，仍会产生贡献，因为会有人在这一站下车，所以说区间最小长度为1</p>
 
 <p>可是怎么还是60分？</p>
 
-<h1 id="错因四">错因四：</h1>
+<h1 id="section-1">错因四：</h1>
 <p><strong>处理$D_i\to 0$的过程有锅</strong>
 不知道读者发现没有
 因为是让区间左端点最大，而上面的过程显然没有保证。
@@ -295,25 +295,26 @@ $pre_{i-1}+D_{i-1}$就是$pre_i$，那么我们就维护一下${max}\begin{Bmatr
 
 <p>还是60分，心态有点小崩</p>
 
-<h1 id="错因五">错因五</h1>
+<h1 id="section-2">错因五</h1>
 <p>mmp wtcl
 不能直接存旧左端点值，因为可能这个值会被修改
 所以我们存旧左端点的位置，取$max$时查询一下就好了
 至此收获$\color{green}{Accepted}$
-附上最终代码</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># include&lt;bits/stdc++.h&gt;
+附上最终代码
+```
+# include&lt;bits/stdc++.h&gt;
 using namespace std;
 inline char nc(){
-	static char buf[100000],*p1=buf,*p2=buf;
-	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+	static char buf[100000],<em>p1=buf,</em>p2=buf;
+	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:<em>p1++;
 }
 //# define nc getchar
 inline int read(){
 	int x=0,f=1;
 	char ch=nc();
-	for(;!isdigit(ch);ch=nc())if(ch=='-')f=-1;
-	while(isdigit(ch)){x=(x&lt;&lt;1)+(x&lt;&lt;3)+(ch^48);ch=nc();}
-	return x*f;
+	for(;!isdigit(ch);ch=nc())if(ch==’-‘)f=-1;
+	while(isdigit(ch)){x=(x«1)+(x«3)+(ch^48);ch=nc();}
+	return x</em>f;
 }
 typedef long long ll;
 const int N=1e5+3;
@@ -326,7 +327,7 @@ struct tree{
 		else ret.maxpos=r.maxpos;
 		ret.maxn=max(l.maxn,r.maxn);return ret;
 	}
-}t[N&lt;&lt;2];
+}t[N«2];
 int cnt[N],maxn[N],sum[N],pre[N],d[N];
 //# define lim(i) (maxn[i+1]-maxn[i])
 struct tour{
@@ -337,8 +338,8 @@ inline bool cmp(tour a,tour b){
 	return a.l&lt;b.l;
 }
 int n,m,k;ll T;
-# define lc (p&lt;&lt;1)
-# define rc ((p&lt;&lt;1)|1)
+# define lc (p«1)
+# define rc ((p«1)|1)
 inline void pushup(int p){
 	if(t[lc].maxn&gt;=t[rc].maxn)t[p].maxpos=t[lc].maxpos;
 	else t[p].maxpos=t[rc].maxpos;
@@ -355,14 +356,14 @@ inline void pushdown(int p){
 void build(int p,int l,int r){
 	t[p].l=l;t[p].r=r;t[p].lazy=0;
 	if(l==r){t[p].maxn=maxn[l]-pre[l],t[p].maxpos=l;return;}
-	int mid=(l+r)&gt;&gt;1;
+	int mid=(l+r)»1;
 	build(lc,l,mid);build(rc,mid+1,r);
 	pushup(p);
 }
 void lmy(int p,int pl,int pr,int w){
 	int l=t[p].l,r=t[p].r;
 	if(pl&lt;=l&amp;&amp;r&lt;=pr){pushnow(p,w);return;}
-	int mid=(l+r)&gt;&gt;1;pushdown(p);
+	int mid=(l+r)»1;pushdown(p);
 	if(pl&lt;=mid)lmy(lc,pl,pr,w);
 	if(pr&gt;mid)lmy(rc,pl,pr,w);
 	pushup(p);
@@ -370,7 +371,7 @@ void lmy(int p,int pl,int pr,int w){
 tree glf(int p,int pl,int pr){
 	int l=t[p].l,r=t[p].r;
 	if(pl&lt;=l&amp;&amp;r&lt;=pr){return t[p];}
-	pushdown(p);int mid=(l+r)&gt;&gt;1;
+	pushdown(p);int mid=(l+r)»1;
 	if(pl&lt;=mid&amp;&amp;pr&gt;mid)return glf(lc,pl,pr)+glf(rc,pl,pr);
 	else if(pl&lt;=mid)return glf(lc,pl,pr);
 	else return glf(rc,pl,pr);
@@ -382,9 +383,9 @@ struct segment{
 		return sum&lt;b.sum;
 	}
 };
-priority_queue&lt;segment&gt;q;
+priority_queue<segment>q;</segment></p>
 
-int main(){
+<p>int main(){
 	n=read();m=read();k=read();
 	for(int i=1;i&lt;n;i++)d[i]=read(),pre[i+1]=pre[i]+d[i];
 	for(int i=1;i&lt;=m;i++){
@@ -418,16 +419,15 @@ int main(){
 				pos=glf(1,now.l+1,now.r).maxpos;
 				if(now.l&lt;=pos-1)q.push(segment(now.l,pos-1,sum[pos]-sum[now.l],now.vis));
 				if(pos&lt;=now.r)q.push(segment(pos,now.r,sum[now.r+1]-sum[pos],pos));
-			}
-			
-		}
-	}
-	for(int i=1;i&lt;n;i++)pre[i+1]=pre[i]+d[i];
-	ll ans=-T;
-	for(int i=2;i&lt;=n;i++)ans+=cnt[i]*(glf(1,1,i-1).maxn+pre[i]);
-	printf("%lld",ans);
-	return 0;
+			}</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	}
 }
+for(int i=1;i&lt;n;i++)pre[i+1]=pre[i]+d[i];
+ll ans=-T;
+for(int i=2;i&lt;=n;i++)ans+=cnt[i]*(glf(1,1,i-1).maxn+pre[i]);
+printf("%lld",ans);
+return 0; } ```
 </code></pre></div></div>
 
 <p>$\color{orange}{FIN}$</p>

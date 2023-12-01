@@ -19,22 +19,25 @@
 有一天，他在咸阳游历的时候，朋友告诉他在咸阳最大的拍卖行（聚宝商行）将要举行一场拍卖会，其中有一件宝物引起了他极大的兴趣，那就是无字天书。
 但是，他的行程安排得很满，他已经买好了去邯郸的长途马车票，不巧的是出发时间是在拍卖会快要结束的时候。于是，他决定事先做好准备，将自己的金币数好并用一个个的小钱袋装好，以便在他现有金币的支付能力下，任何数目的金币他都能用这些封闭好的小钱的组合来付账。
 鬼谷子也是一个非常节俭的人，他想方设法使自己在满足上述要求的前提下，所用的钱袋数最少，并且不有两个钱袋装有相同的大于1的金币数。假设他有m个金币，你能猜到他会用多少个钱袋，并且每个钱袋装多少个金币吗？
-输入输出格式
-输入格式：
+# 输入输出格式
+#  输入格式：
 包含一个整数，表示鬼谷子现有的总的金币数目m。其中，1≤m ≤1000000000。
-输出格式：
+#  输出格式：
 两行，第一行一个整数h，表示所用钱袋个数
 第二行表示每个钱袋所装的金币个数，由小到大输出，空格隔开
-输入输出样例
-输入样例# 1：
+# 输入输出样例
+#  输入样例# 1： 
+
 3
 
-输出样例# 1：
+#  输出样例# 1： 
+
 2
 1 2
 
-解答
-这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我一下子就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:
+# 解答
+这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我~~一下子~~就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:
+cpp
 # include &amp;lt;stdlib.h&amp;gt;
 # include &amp;lt;cstdio&amp;gt;//打表程序
 using namespace std;
@@ -61,6 +64,7 @@ int main(void){
 }
 
 但是这样是WA掉的，因为原因很简单，如果是5，那么这样算出来的是1,4,但实际上答案是1,2,2。但是由于这道题数据相当水，可以过80分！那么正解是什么呢？我们如果想到二进制拆分了，那么离正解也不远了。首先，n/2肯定是要在里面的不然怎么凑？那么我们就把问题转化到了n/2，对于n/2也一样，因为我们已经把问题转化到了一个一样的子问题。那么我们就可以写下如下代码：
+cpp
 # pragma GCC optimize(&quot;Ofast&quot;)
 # include &amp;lt;fstream&amp;gt;
 # include &amp;lt;stdlib.h&amp;gt;
@@ -99,22 +103,25 @@ int main(void){
 有一天，他在咸阳游历的时候，朋友告诉他在咸阳最大的拍卖行（聚宝商行）将要举行一场拍卖会，其中有一件宝物引起了他极大的兴趣，那就是无字天书。
 但是，他的行程安排得很满，他已经买好了去邯郸的长途马车票，不巧的是出发时间是在拍卖会快要结束的时候。于是，他决定事先做好准备，将自己的金币数好并用一个个的小钱袋装好，以便在他现有金币的支付能力下，任何数目的金币他都能用这些封闭好的小钱的组合来付账。
 鬼谷子也是一个非常节俭的人，他想方设法使自己在满足上述要求的前提下，所用的钱袋数最少，并且不有两个钱袋装有相同的大于1的金币数。假设他有m个金币，你能猜到他会用多少个钱袋，并且每个钱袋装多少个金币吗？
-输入输出格式
-输入格式：
+# 输入输出格式
+#  输入格式：
 包含一个整数，表示鬼谷子现有的总的金币数目m。其中，1≤m ≤1000000000。
-输出格式：
+#  输出格式：
 两行，第一行一个整数h，表示所用钱袋个数
 第二行表示每个钱袋所装的金币个数，由小到大输出，空格隔开
-输入输出样例
-输入样例# 1：
+# 输入输出样例
+#  输入样例# 1： 
+
 3
 
-输出样例# 1：
+#  输出样例# 1： 
+
 2
 1 2
 
-解答
-这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我一下子就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:
+# 解答
+这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我~~一下子~~就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:
+cpp
 # include &amp;lt;stdlib.h&amp;gt;
 # include &amp;lt;cstdio&amp;gt;//打表程序
 using namespace std;
@@ -141,6 +148,7 @@ int main(void){
 }
 
 但是这样是WA掉的，因为原因很简单，如果是5，那么这样算出来的是1,4,但实际上答案是1,2,2。但是由于这道题数据相当水，可以过80分！那么正解是什么呢？我们如果想到二进制拆分了，那么离正解也不远了。首先，n/2肯定是要在里面的不然怎么凑？那么我们就把问题转化到了n/2，对于n/2也一样，因为我们已经把问题转化到了一个一样的子问题。那么我们就可以写下如下代码：
+cpp
 # pragma GCC optimize(&quot;Ofast&quot;)
 # include &amp;lt;fstream&amp;gt;
 # include &amp;lt;stdlib.h&amp;gt;
@@ -338,81 +346,85 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题目描述">题目描述</h1>
+      <h1 id="section">题目描述</h1>
 <p>鬼谷子非常聪明，正因为这样，他非常繁忙，经常有各诸侯车的特派员前来向他咨询时政。
 有一天，他在咸阳游历的时候，朋友告诉他在咸阳最大的拍卖行（聚宝商行）将要举行一场拍卖会，其中有一件宝物引起了他极大的兴趣，那就是无字天书。
 但是，他的行程安排得很满，他已经买好了去邯郸的长途马车票，不巧的是出发时间是在拍卖会快要结束的时候。于是，他决定事先做好准备，将自己的金币数好并用一个个的小钱袋装好，以便在他现有金币的支付能力下，任何数目的金币他都能用这些封闭好的小钱的组合来付账。
-鬼谷子也是一个非常节俭的人，他想方设法使自己在满足上述要求的前提下，所用的钱袋数最少，并且不有两个钱袋装有相同的大于1的金币数。假设他有m个金币，你能猜到他会用多少个钱袋，并且每个钱袋装多少个金币吗？</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>包含一个整数，表示鬼谷子现有的总的金币数目m。其中，1≤m ≤1000000000。</p>
-<h1 id="输出格式">输出格式：</h1>
-<p>两行，第一行一个整数h，表示所用钱袋个数
-第二行表示每个钱袋所装的金币个数，由小到大输出，空格隔开</p>
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+鬼谷子也是一个非常节俭的人，他想方设法使自己在满足上述要求的前提下，所用的钱袋数最少，并且不有两个钱袋装有相同的大于1的金币数。假设他有m个金币，你能猜到他会用多少个钱袋，并且每个钱袋装多少个金币吗？
+# 输入输出格式
+#  输入格式：
+包含一个整数，表示鬼谷子现有的总的金币数目m。其中，1≤m ≤1000000000。
+#  输出格式：
+两行，第一行一个整数h，表示所用钱袋个数
+第二行表示每个钱袋所装的金币个数，由小到大输出，空格隔开
+# 输入输出样例
+#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+3
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+2
 1 2
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我<del>一下子</del>就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;stdlib.h&gt;
+</code>
+# 解答
+这道题是个骗分的好题！你想想，要把它拆了，加起来和还正好等于它本身，并且还可以构成它自己，首先我~~一下子~~就想到了二进制拆分，然后直接上lowbit运算，直接把这个数拆了，那么就有了如下代码:
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;stdlib.h&gt;
 # include &lt;cstdio&gt;//打表程序
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
-    	<span class="n">ans</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="o">&amp;-</span><span class="n">n</span><span class="p">;</span>
-    	<span class="n">n</span><span class="o">-=</span><span class="n">n</span><span class="o">&amp;-</span><span class="n">n</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">cnt</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-    	<span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>但是这样是WA掉的，因为原因很简单，如果是5，那么这样算出来的是1,4,但实际上答案是1,2,2。但是由于这道题数据相当水，可以过80分！那么正解是什么呢？我们如果想到二进制拆分了，那么离正解也不远了。首先，n/2肯定是要在里面的不然怎么凑？那么我们就把问题转化到了n/2，对于n/2也一样，因为我们已经把问题转化到了一个一样的子问题。那么我们就可以写下如下代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># pragma GCC optimize("Ofast")
+using namespace std;
+inline int read(){
+    char ch = getchar();
+    int f = 1 ,x = 0;
+    while(ch &gt; '9' || ch &lt; '0'){if(ch == '-')f = -1; ch = getchar();}
+    while(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + ch - '0';ch = getchar();}
+    return x * f;
+}
+int ans[64];
+int cnt;
+int main(void){
+    int n = read();
+    while(n&gt;0){
+    	ans[++cnt] = n&amp;-n;
+    	n-=n&amp;-n;
+    }
+    printf("%d\n",cnt);
+    for(int i = 1;i&lt;=cnt;i++){
+    	printf("%d ",ans[i]);
+    }
+    return 0;
+}
+</code>
+但是这样是WA掉的，因为原因很简单，如果是5，那么这样算出来的是1,4,但实际上答案是1,2,2。但是由于这道题数据相当水，可以过80分！那么正解是什么呢？我们如果想到二进制拆分了，那么离正解也不远了。首先，n/2肯定是要在里面的不然怎么凑？那么我们就把问题转化到了n/2，对于n/2也一样，因为我们已经把问题转化到了一个一样的子问题。那么我们就可以写下如下代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# pragma GCC optimize("Ofast")
 # include &lt;fstream&gt;
 # include &lt;stdlib.h&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;//打表程序
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
-        <span class="n">ans</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
-        <span class="n">n</span><span class="o">/=</span><span class="mi">2</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">cnt</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+inline int read(){
+    char ch = getchar();
+    int f = 1 ,x = 0;
+    while(ch &gt; '9' || ch &lt; '0'){if(ch == '-')f = -1; ch = getchar();}
+    while(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + ch - '0';ch = getchar();}
+    return x * f;
+}
+int ans[100];
+int cnt = 0;
+int main(void){
+    int n = read();
+    while(n&gt;0){
+        ans[++cnt] = (n+1)/2;
+        n/=2;
+    }
+    printf("%d\n",cnt);
+    for(int i = cnt;i&gt;=1;i--){
+        printf("%d ",ans[i]);
+    }
+    return 0;
+}
+</code></p>
 
     </div>
 

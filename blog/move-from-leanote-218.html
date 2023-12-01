@@ -16,11 +16,11 @@
   <meta name="twitter:title" content="【扫描线\待复习】 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 输入n个矩形，求他们总共占地面积（也就是求一下面积的并）
-输入
+#  输入
 可能有多组数据，读到n=0为止(不超过500组)
 每组数据第一行一个数n，表示矩形个数(n&amp;lt;=100)
 接下来n行每行4个实数x1,y1,x2,y1(0 &amp;lt;= x1 &amp;lt; x2 &amp;lt;= 100000;0 &amp;lt;= y1 &amp;lt; y2 &amp;lt;= 100000)，表示矩形的左下角坐标和右上角坐标. 他们的边是平行于x坐标轴，和y坐标轴。
-输出
+#  输出
 一行表示答案，保留2位小数
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -29,11 +29,11 @@
   <meta property="og:title" content="【扫描线\待复习】 – Haoyu Deng's page">
   <meta property="og:description" content="题面
 输入n个矩形，求他们总共占地面积（也就是求一下面积的并）
-输入
+#  输入
 可能有多组数据，读到n=0为止(不超过500组)
 每组数据第一行一个数n，表示矩形个数(n&amp;lt;=100)
 接下来n行每行4个实数x1,y1,x2,y1(0 &amp;lt;= x1 &amp;lt; x2 &amp;lt;= 100000;0 &amp;lt;= y1 &amp;lt; y2 &amp;lt;= 100000)，表示矩形的左下角坐标和右上角坐标. 他们的边是平行于x坐标轴，和y坐标轴。
-输出
+#  输出
 一行表示答案，保留2位小数
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -204,88 +204,91 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<p>输入n个矩形，求他们总共占地面积（也就是求一下面积的并）</p>
-<h1 id="输入">输入</h1>
-<p>可能有多组数据，读到n=0为止(不超过500组)
+      <h1 id="section">题面</h1>
+<p>输入n个矩形，求他们总共占地面积（也就是求一下面积的并）
+#  输入
+可能有多组数据，读到n=0为止(不超过500组)
 每组数据第一行一个数n，表示矩形个数(n&lt;=100)
-接下来n行每行4个实数x1,y1,x2,y1(0 &lt;= x1 &lt; x2 &lt;= 100000;0 &lt;= y1 &lt; y2 &lt;= 100000)，表示矩形的左下角坐标和右上角坐标. 他们的边是平行于x坐标轴，和y坐标轴。</p>
-<h1 id="输出">输出</h1>
-<p>一行表示答案，保留2位小数</p>
+接下来n行每行4个实数x1,y1,x2,y1(0 &lt;= x1 &lt; x2 &lt;= 100000;0 &lt;= y1 &lt; y2 &lt;= 100000)，表示矩形的左下角坐标和右上角坐标. 他们的边是平行于x坐标轴，和y坐标轴。
+#  输出
+一行表示答案，保留2位小数</p>
 
-<p>样例输入</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+<p>样例输入
+<code class="language-plaintext highlighter-rouge">
+2
 10 10 20 20
 15 15 25 25.5
-</code></pre></div></div>
-<p>样例输出</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>180.00
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>用线段树维护当前扫描到的矩形的下底，如图所示(图片来自<a href="http://hzwer.com/879.html">hzwer</a>)</p>
+</code>
+样例输出
+<code class="language-plaintext highlighter-rouge">
+180.00
+</code>
+# 解答
+用线段树维护当前扫描到的矩形的下底，如图所示(图片来自<a href="http://hzwer.com/879.html">hzwer</a>)</p>
 
 <p><img src="https://cdn.risingentropy.top/images/posts/d316ffcab64415c300022df.png" alt="图片标题" /></p>
 
 <p>然后从下到上计算面积。其他的我今天不想写
 <a href="https://blog.csdn.net/zsc2014030403015/article/details/47259577">参考博客</a></p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+<p><code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
 # define clear(x) memset(x,0,sizeof(x))
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">210</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">line</span><span class="p">{</span>
-	<span class="kt">double</span> <span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">flag</span><span class="p">;</span>
-	<span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">line</span> <span class="o">&amp;</span><span class="n">l2</span><span class="p">)</span><span class="k">const</span><span class="p">{</span><span class="k">return</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">l2</span><span class="p">.</span><span class="n">y</span><span class="p">;}</span>
-<span class="p">}</span><span class="n">lines</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">double</span> <span class="n">HASH</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">col</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="n">size</span><span class="p">])</span><span class="n">sum</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="n">HASH</span><span class="p">[</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">HASH</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
-	<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">)</span><span class="n">sum</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">else</span> <span class="n">sum</span><span class="p">[</span><span class="n">size</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">size</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">sum</span><span class="p">[</span><span class="n">size</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">int</span> <span class="n">L</span><span class="p">,</span><span class="kt">int</span> <span class="n">R</span><span class="p">,</span><span class="kt">int</span> <span class="n">flag</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">size</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;=</span><span class="n">l</span><span class="o">&amp;&amp;</span><span class="n">R</span><span class="o">&gt;=</span><span class="n">r</span><span class="p">){</span>
-		<span class="n">col</span><span class="p">[</span><span class="n">size</span><span class="p">]</span><span class="o">+=</span><span class="n">flag</span><span class="p">;</span>
-		<span class="n">pushup</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-		<span class="k">return</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">flag</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">size</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">R</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">flag</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">size</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">);</span>
-	<span class="n">pushup</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
-		<span class="kt">double</span> <span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x1</span><span class="o">&gt;&gt;</span><span class="n">y1</span><span class="o">&gt;&gt;</span><span class="n">x2</span><span class="o">&gt;&gt;</span><span class="n">y2</span><span class="p">;</span>
-			<span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">x1</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="p">;</span>
-			<span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">x2</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span><span class="p">;</span>
-			<span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">y</span> <span class="o">=</span> <span class="n">y1</span><span class="p">;</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">y</span> <span class="o">=</span> <span class="n">y2</span><span class="p">;</span>
-			<span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">flag</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-			<span class="n">HASH</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x1</span><span class="p">;</span><span class="n">HASH</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x2</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">sort</span><span class="p">(</span><span class="n">lines</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-		<span class="n">sort</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-		<span class="n">clear</span><span class="p">(</span><span class="n">col</span><span class="p">),</span><span class="n">clear</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
-		<span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="p">;</span>
-			<span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x2</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c1">//处理两条直线重复的地方 </span>
-			<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">)</span><span class="n">update</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flag</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-			<span class="n">ans</span><span class="o">+=</span><span class="n">sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">y</span><span class="o">-</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">);</span>
-		<span class="p">}</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"%.2f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 210;
+struct line{
+	double x1,x2,y;
+	int flag;
+	bool operator&lt;(const line &amp;l2)const{return y&lt;l2.y;}
+}lines[MAXN];
+double HASH[MAXN],sum[MAXN&lt;&lt;2];
+int col[MAXN&lt;&lt;2];
+void pushup(int size,int l,int r){
+	if(col[size])sum[size] = HASH[r+1]-HASH[l];
+	else if(l==r)sum[size] = 0;
+	else sum[size] = sum[size&lt;&lt;1]+sum[size&lt;&lt;1|1];
+}
+void update(int L,int R,int flag,int l,int r,int size){
+	if(L&lt;=l&amp;&amp;R&gt;=r){
+		col[size]+=flag;
+		pushup(size,l,r);
+		return;
+	}
+	int mid = l+r&gt;&gt;1;
+	if(L&lt;=mid)update(L,R,flag,l,mid,size&lt;&lt;1);
+	if(R&gt;mid)update(L,R,flag,mid+1,r,size&lt;&lt;1|1);
+	pushup(size,l,r);
+}
+int main(){
+	int n;
+	while(cin&gt;&gt;n){
+		if(n==0)break;
+		double x1,x2,y1,y2;
+		for(int i = 1;i&lt;=n;i++){
+			cin&gt;&gt;x1&gt;&gt;y1&gt;&gt;x2&gt;&gt;y2;
+			lines[i*2-1].x1 = lines[i*2].x1 = x1;
+			lines[i*2-1].x2 = lines[i*2].x2 = x2;
+			lines[i*2-1].y = y1;lines[i*2].y = y2;
+			lines[i*2-1].flag = 1;lines[i*2].flag = -1;
+			HASH[2*i-1] = x1;HASH[2*i] = x2;
+		}
+		sort(lines+1,lines+2*n+1);
+		sort(HASH+1,HASH+2*n+1);
+		clear(col),clear(sum);
+		double ans = 0;
+		for(int i = 1;i&lt;=2*n;i++){
+			int l = lower_bound(HASH+1,HASH+2*n+1,lines[i].x1)-HASH;
+			int r = lower_bound(HASH+1,HASH+2*n+1,lines[i].x2)-HASH-1;//处理两条直线重复的地方 
+			if(l&lt;=r)update(l,r,lines[i].flag,1,2*n,1);
+			ans+=sum[1]*(lines[i+1].y-lines[i].y);
+		}
+		printf("%.2f\n",ans);
+	}
+}
+</code></p>
 
     </div>
 

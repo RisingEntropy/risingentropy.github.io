@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="差分约束luoguP3275 [SCOI2011]糖果 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-题目描述
+# 题目描述
 幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww需要满足小朋友们的K个要求。幼儿园的糖果总是有限的，lxhgww想知道他至少需要准备多少个糖果，才能使得每个小朋友都能够分到糖果，并且满足小朋友们所有的要求。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -23,7 +23,7 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="差分约束luoguP3275 [SCOI2011]糖果 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-题目描述
+# 题目描述
 幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww需要满足小朋友们的K个要求。幼儿园的糖果总是有限的，lxhgww想知道他至少需要准备多少个糖果，才能使得每个小朋友都能够分到糖果，并且满足小朋友们所有的要求。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -194,24 +194,25 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="题目描述">题目描述</h1>
-<p>幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww需要满足小朋友们的K个要求。幼儿园的糖果总是有限的，lxhgww想知道他至少需要准备多少个糖果，才能使得每个小朋友都能够分到糖果，并且满足小朋友们所有的要求。</p>
+      <h1 id="section">题面</h1>
+<p># 题目描述
+幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww需要满足小朋友们的K个要求。幼儿园的糖果总是有限的，lxhgww想知道他至少需要准备多少个糖果，才能使得每个小朋友都能够分到糖果，并且满足小朋友们所有的要求。</p>
 
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>输入的第一行是两个整数N，K。接下来K行，表示这些点需要满足的关系，每行3个数字，X，A，B。如果X=1， 表示第A个小朋友分到的糖果必须和第B个小朋友分到的糖果一样多；如果X=2，<br />
+<h1 id="section-1">输入输出格式</h1>
+<p>#  输入格式：
+输入的第一行是两个整数N，K。接下来K行，表示这些点需要满足的关系，每行3个数字，X，A，B。如果X=1， 表示第A个小朋友分到的糖果必须和第B个小朋友分到的糖果一样多；如果X=2，<br />
 表示第A个小朋友分到的糖果必须少于第B个小朋友分到的糖果；如果X=3，
 表示第A个小朋友分到的糖果必须不少于第B个小朋友分到的糖果；如果X=4，
 表示第A个小朋友分到的糖果必须多于第B个小朋友分到的糖果；如果X=5，
 表示第A个小朋友分到的糖果必须不多于第B个小朋友分到的糖果；</p>
 
-<h1 id="输出格式">输出格式：</h1>
+<h1 id="section-2">输出格式：</h1>
 <p>输出一行，表示lxhgww老师至少需要准备的糖果数，如果不能满足小朋友们的所有要求，就输出-1。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 7
+<h1 id="section-3">输入输出样例</h1>
+<p>#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+5 7
 1 1 2
 2 3 2
 4 4 1
@@ -219,122 +220,125 @@
 5 4 5
 2 3 5
 4 5 1
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11
-</code></pre></div></div>
-<p>说明
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+11
+</code>
+说明
 【数据范围】
 对于30%的数据，保证 N&lt;=100
 对于100%的数据，保证 N&lt;=100000
-对于所有的数据，保证 K&lt;=100000，1&lt;=X&lt;=5，1&lt;=A, B&lt;=N</p>
-<h1 id="解答">解答</h1>
-<p>一道非常裸的查封约束。对于差分约束：
+对于所有的数据，保证 K&lt;=100000，1&lt;=X&lt;=5，1&lt;=A, B&lt;=N
+# 解答
+一道非常裸的查封约束。对于差分约束：
 如果$X_i-X_j\leq C_i$那么我们连一条从$X_j$出发到$X_i$长度为$C_i$的边，跑最短路
 如果$X_i-X_j\geq C_i$那么我们连一条$X_j$连向$X_i$长度为$C_i$的边，跑最长路。
 如果图中<strong>有环则无解</strong>！
-差分约束主要是要找出题面中的<strong>隐含条件</strong>，要仔细考虑。如果无负环，则尽量跑dijkstra(它不支持最长路)，防止卡spfa。对于这道题</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-	<span class="p">}</span>
-</code></pre></div></div>
-<p>这里一定要倒着来，不然luogu上# 6点过不了，据说是与spfa的顺序有关，我太菜了，不懂。
-然后就是AC代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+差分约束主要是要找出题面中的<strong>隐含条件</strong>，要仔细考虑。如果无负环，则尽量跑dijkstra(它不支持最长路)，防止卡spfa。对于这道题
+<code class="language-plaintext highlighter-rouge">cpp
+	for(int i = 1;i&lt;=n;i++){
+		add(0,i,1);
+	}
+</code>
+这里一定要倒着来，不然luogu上# 6点过不了，据说是与spfa的顺序有关，我太菜了，不懂。
+然后就是AC代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;cstring&gt;
 # include &lt;cmath&gt;
 # include &lt;algorithm&gt;
 # include &lt;queue&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">read</span><span class="p">(){</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-	<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="mi">10</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">tot</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">spfa</span><span class="p">(){</span>
-	<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
-	<span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">vis</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-	<span class="n">dis</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-		<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-		<span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-		<span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">tot</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"-1"</span><span class="p">);</span>
-			<span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-		<span class="p">}</span>
-		<span class="n">tot</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
-				<span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
-					<span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-					<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="n">k</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">x</span><span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">a</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">b</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">2</span><span class="p">){</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">){</span>
-				<span class="n">printf</span><span class="p">(</span><span class="s">"-1"</span><span class="p">);</span>
-				<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="p">}</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">3</span><span class="p">){</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">4</span><span class="p">){</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">){</span>
-				<span class="n">printf</span><span class="p">(</span><span class="s">"-1"</span><span class="p">);</span>
-				<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-			<span class="p">}</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-			<span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="n">spfa</span><span class="p">();</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+long long read(){
+	long long x = 0,f = 1;
+	static char c = getchar();
+	while(c&lt;'0'||c&gt;'9'){if(c=='-')f = -1;c = getchar();}
+	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar();}
+	return x*f;
+}
+const int MAXN = 100010;
+struct edge{
+    int t,w,next;
+}edges[MAXN*10];
+int head[MAXN];
+int top;
+int n;
+void add(int f,int t,int w) {
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int dis[MAXN];
+int tot[MAXN];
+bool vis[MAXN];
+void spfa(){
+	memset(vis,false,sizeof(vis));
+	queue&lt;int&gt; q;
+	int s = 0;
+	vis[s] = true;
+	dis[s] = 0;
+	q.push(s);
+	while(!q.empty()){
+		int top = q.front();
+		q.pop();
+		vis[top] = false;
+		if(tot[top]==n-1){
+			printf("-1");
+			exit(0);
+		}
+		tot[top]++;
+		for(int i = head[top];i!=0;i = edges[i].next){
+			int t = edges[i].t;
+			if(dis[t]&lt;dis[top]+edges[i].w){
+				dis[t] = dis[top]+edges[i].w;
+				if(!vis[t]){
+					vis[t] = true;
+					q.push(t);
+				}
+			}
+		}
+	}
+}
+int main(){
+	int k;
+	n = read();
+	k = read();
+	int x,a,b;
+	for(int i = 1;i&lt;=k;i++){
+		x= read(),a = read(),b = read();
+		if(x==1){
+			add(a,b,0);
+			add(b,a,0);
+		}else if(x==2){
+			if(a==b){
+				printf("-1");
+				return 0;
+			}
+			add(a,b,1);
+		}else if(x==3){
+			add(b,a,0);
+		}else if(x==4){
+			if(a==b){
+				printf("-1");
+				return 0;
+			}
+			add(b,a,1);
+		}else{
+			add(a,b,0);
+		}
+	}
+	for(int i = 1;i&lt;=n;i++){
+		add(0,i,1);
+	}
+	spfa();
+	long long ans = 0;
+	for(int i = 1;i&lt;=n;i++)ans+=dis[i];
+	printf("%lld",ans);
+	return 0;
+}
+</code></p>
 
     </div>
 

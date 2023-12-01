@@ -15,12 +15,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Splay – Haoyu Deng's page">
   <meta name="twitter:description" content="Splay
-Splay可牛逼了，可以处理区间问题
+~~Splay可牛逼了，可以处理区间问题~~
 splay说白了就是转着玩。每个点轮流转到根节点
 文艺平衡树
 ```cpp
-include 
-include 
+# include 
+# include 
 using namespace std;
 const int MAXN = 100010;
 int a[MAXN];
@@ -114,16 +114,16 @@ int succ(int x){
 void output(int x){
 	pushdown(x);
 	if(tree[x][0])output(tree[x][0]);
-	if(val[x]&amp;amp;&amp;amp;val[x]&amp;lt;=n)printf(“%d “,val[x]);
+	if(val[x]&amp;amp;&amp;amp;val[x]&amp;lt;=n)printf(&quot;%d &quot;,val[x]);
 	if(tree[x][1])output(tree[x][1]);
 }
 int main(){
 	int m;
-	scanf(“%d%d”,&amp;amp;n,&amp;amp;m);
+	scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);
 	int x,y;
 	for(int i = 0;i&amp;lt;=n+1;i++)insert(i);
-	while(m–){
-		scanf(“%d%d”,&amp;amp;x,&amp;amp;y);
+	while(m--){
+		scanf(&quot;%d%d&quot;,&amp;amp;x,&amp;amp;y);
 		reverse(x,y);
 	}
 	output(root);
@@ -135,12 +135,12 @@ int main(){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="Splay – Haoyu Deng's page">
   <meta property="og:description" content="Splay
-Splay可牛逼了，可以处理区间问题
+~~Splay可牛逼了，可以处理区间问题~~
 splay说白了就是转着玩。每个点轮流转到根节点
 文艺平衡树
 ```cpp
-include 
-include 
+# include 
+# include 
 using namespace std;
 const int MAXN = 100010;
 int a[MAXN];
@@ -234,16 +234,16 @@ int succ(int x){
 void output(int x){
 	pushdown(x);
 	if(tree[x][0])output(tree[x][0]);
-	if(val[x]&amp;amp;&amp;amp;val[x]&amp;lt;=n)printf(“%d “,val[x]);
+	if(val[x]&amp;amp;&amp;amp;val[x]&amp;lt;=n)printf(&quot;%d &quot;,val[x]);
 	if(tree[x][1])output(tree[x][1]);
 }
 int main(){
 	int m;
-	scanf(“%d%d”,&amp;amp;n,&amp;amp;m);
+	scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);
 	int x,y;
 	for(int i = 0;i&amp;lt;=n+1;i++)insert(i);
-	while(m–){
-		scanf(“%d%d”,&amp;amp;x,&amp;amp;y);
+	while(m--){
+		scanf(&quot;%d%d&quot;,&amp;amp;x,&amp;amp;y);
 		reverse(x,y);
 	}
 	output(root);
@@ -419,121 +419,122 @@ int main(){
 
     <div class="post__content">
       <h1 id="splay">Splay</h1>
-<p><del>Splay可牛逼了，可以处理区间问题</del>
+<p>~~Splay可牛逼了，可以处理区间问题~~
 splay说白了就是转着玩。每个点轮流转到根节点
-文艺平衡树</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">^</span><span class="n">x</span><span class="p">;</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span><span class="kt">int</span> <span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">lzy</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">tot</span><span class="p">;</span><span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">];}</span>
-<span class="kt">int</span> <span class="nf">which</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">d</span> <span class="o">=</span> <span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">w</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">z</span><span class="p">][</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-	<span class="n">pushup</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">splay</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">tar</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">tar</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">z</span><span class="o">!=</span><span class="n">tar</span><span class="p">){</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="n">rotate</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-			<span class="k">else</span> <span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-		<span class="p">}</span>
-		<span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">tar</span><span class="p">)</span><span class="n">root</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">lzy</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
-		<span class="n">swap</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
-		<span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">^=</span> <span class="mi">1</span><span class="p">;</span><span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
-		<span class="n">lzy</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">kth</span><span class="p">(</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
-		<span class="n">pushdown</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">rank</span><span class="o">&lt;=</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]){</span>
-			<span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">&gt;</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]){</span>
-			<span class="n">rank</span><span class="o">-=</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">];</span>
-			<span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">curr</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">])</span><span class="n">p</span> <span class="o">=</span> <span class="n">curr</span><span class="p">,</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span><span class="k">else</span> <span class="n">p</span> <span class="o">=</span> <span class="n">curr</span><span class="p">,</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-	<span class="p">}</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">curr</span><span class="p">){</span>
-		<span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">curr</span> <span class="o">=</span> <span class="o">++</span><span class="n">tot</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="n">tree</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">;</span>
-		<span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="n">fa</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-		<span class="n">cnt</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="n">sze</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">splay</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">root</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]]</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
-		<span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="n">x</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">curr</span><span class="p">]];</span>
-	<span class="p">}</span>
-	<span class="n">splay</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">reverse</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">kth</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span><span class="n">kth</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
-	<span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-	<span class="n">splay</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-	<span class="n">lzy</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">pre</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">root</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">root</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-	<span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">succ</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">root</span><span class="p">]</span><span class="o">&gt;</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">root</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">root</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="n">curr</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">curr</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-	<span class="k">return</span> <span class="n">curr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">output</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="n">pushdown</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="n">output</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="n">output</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-		<span class="n">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="n">output</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+文艺平衡树
+```cpp
+# include <iostream>
+# include <cstdio>
+using namespace std;
+const int MAXN = 100010;
+int a[MAXN];
+int root;
+inline void swap(int &amp;x,int &amp;y){x = x^y;y = y^x;x = x^y;}
+int tree[MAXN][2];int sze[MAXN];int cnt[MAXN];
+int val[MAXN];int lzy[MAXN];int tot;int fa[MAXN];
+int n;
+inline void pushup(int x){sze[x] = sze[tree[x][0]]+sze[tree[x][1]]+cnt[x];}
+int which(int x){return tree[fa[x]][1]==x;}
+void rotate(int x){
+	int y = fa[x];int z = fa[y],d = which(x),w = tree[x][d^1];
+	tree[y][d] = w;fa[w] = y;
+	tree[z][which(y)] = x;fa[x] = z;
+	tree[x][d^1] = y;fa[y] = x;
+	pushup(y);pushup(x);
+}
+void splay(int x,int tar = 0){
+	while(fa[x]!=tar){
+		int y = fa[x];int z = fa[y];
+		if(z!=tar){
+			if(which(x)==which(y))rotate(y);
+			else rotate(x);
+		}
+		rotate(x);
+	}
+	if(!tar)root = x;
+}
+void pushdown(int x){
+	if(lzy[x]){
+		swap(tree[x][1],tree[x][0]);
+		lzy[tree[x][0]]^= 1;lzy[tree[x][1]]^=1;
+		lzy[x] = 0;
+	}
+}
+int kth(int rank){
+	int curr = root;
+	while(1){
+		pushdown(curr);
+		if(tree[curr][0]&amp;&amp;rank&lt;=sze[tree[curr][0]]){
+			curr = tree[curr][0];
+		}else if(rank&gt;sze[tree[curr][0]]+cnt[curr]){
+			rank-=sze[tree[curr][0]]+cnt[curr];
+			curr = tree[curr][1];
+		}else return curr;
+	}
+}
+void insert(int x){
+	int curr = root;int p = 0;
+	while(curr&amp;&amp;val[curr]!=x){
+		if(x&gt;val[curr])p = curr,curr = tree[curr][1];else p = curr,curr = tree[curr][0];
+	}
+	if(curr){
+		cnt[curr]++;
+	}else{
+		curr = ++tot;
+		if(p)tree[p][x&gt;val[p]] = curr;
+		tree[curr][0] = tree[curr][1] = 0;
+		fa[curr] = p;val[curr] = x;
+		cnt[curr] = sze[curr] = 1;
+	}
+	splay(curr);
+}
+void find(int x){
+	int curr = root;
+	while(tree[curr][x&gt;val[curr]]&amp;&amp;val[curr]!=x){
+		curr = tree[curr][x&gt;val[curr]];
+	}
+	splay(curr);
+}
+void reverse(int l,int r){
+	int x = kth(l), y =kth(r+2);
+	splay(x);
+	splay(y,x);
+	lzy[tree[y][0]]^=1;
+}
+int pre(int x){
+	find(x);
+	if(val[root]&lt;x)return root;
+	int curr = tree[root][0];
+	while(tree[curr][1])curr = tree[curr][1];
+	return curr;
+}
+int succ(int x){
+	find(x);
+	if(val[root]&gt;x)return root;
+	int curr = tree[root][1];
+	while(tree[curr][0])curr = tree[curr][0];
+	return curr;
+}
+void output(int x){
+	pushdown(x);
+	if(tree[x][0])output(tree[x][0]);
+	if(val[x]&amp;&amp;val[x]&lt;=n)printf("%d ",val[x]);
+	if(tree[x][1])output(tree[x][1]);
+}
+int main(){
+	int m;
+	scanf("%d%d",&amp;n,&amp;m);
+	int x,y;
+	for(int i = 0;i&lt;=n+1;i++)insert(i);
+	while(m--){
+		scanf("%d%d",&amp;x,&amp;y);
+		reverse(x,y);
+	}
+	output(root);
+	return 0;
+}</cstdio></iostream></p>
 
-</code></pre></div></div>
+<p>```</p>
 
     </div>
 

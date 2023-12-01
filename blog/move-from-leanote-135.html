@@ -19,12 +19,13 @@
 插入一条无向边，输出当前有多少个“封闭集”
 所谓“封闭集”，指的是一个边的非空子集 S，满足从任意一个点出发，都可以回到这个点（注意每个点可以经过多次，但是每条边需要经过一次。同时，一个孤立点视为可以回到自己。）
 初始的时候图中没有边。
-输入
+#  输入
 第一行两个整数 N,M 表示这张图的点数以及要插入的边数。
 接下来 M 行，每行两个整数，表示要插入的一条边的两端。注意保证没有自环，但是可能有重边
-输出
+#  输出
 M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $100000009$ 取模。
-样例输入
+#  样例输入
+
 3 4
 1 2
 1 3
@@ -32,6 +33,7 @@ M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $1
 2 3
 
 样例输出
+
 0
 0
 1
@@ -41,9 +43,10 @@ M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $1
 对于 30%：N, M &amp;lt;= 10
 对于 60%：N, M &amp;lt;= 1000
 对于 100%：N, M &amp;lt;= 200000
-解答
+# 解答
 很简单的一个水题，但是不好想。我们考虑两种边:在树上的边，和非树上的边。树上的边保证整个图连同，而非树上的边加一条进去，就多一个封闭集。考虑和集合子集一样，每一条非树边有选和不选两种情况。所以共有$2^n$种情况，但是呢？又不能一条都不选，所以是$2^n-1$
 代码：
+cpp
 # include &amp;lt;queue&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;set&amp;gt;
@@ -99,12 +102,13 @@ int main(){
 插入一条无向边，输出当前有多少个“封闭集”
 所谓“封闭集”，指的是一个边的非空子集 S，满足从任意一个点出发，都可以回到这个点（注意每个点可以经过多次，但是每条边需要经过一次。同时，一个孤立点视为可以回到自己。）
 初始的时候图中没有边。
-输入
+#  输入
 第一行两个整数 N,M 表示这张图的点数以及要插入的边数。
 接下来 M 行，每行两个整数，表示要插入的一条边的两端。注意保证没有自环，但是可能有重边
-输出
+#  输出
 M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $100000009$ 取模。
-样例输入
+#  样例输入
+
 3 4
 1 2
 1 3
@@ -112,6 +116,7 @@ M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $1
 2 3
 
 样例输出
+
 0
 0
 1
@@ -121,9 +126,10 @@ M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $1
 对于 30%：N, M &amp;lt;= 10
 对于 60%：N, M &amp;lt;= 1000
 对于 100%：N, M &amp;lt;= 200000
-解答
+# 解答
 很简单的一个水题，但是不好想。我们考虑两种边:在树上的边，和非树上的边。树上的边保证整个图连同，而非树上的边加一条进去，就多一个封闭集。考虑和集合子集一样，每一条非树边有选和不选两种情况。所以共有$2^n$种情况，但是呢？又不能一条都不选，所以是$2^n-1$
 代码：
+cpp
 # include &amp;lt;queue&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;set&amp;gt;
@@ -338,81 +344,84 @@ int main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>给定一张无向图，请支持以下操作：
 插入一条无向边，输出当前有多少个“封闭集”
 所谓“封闭集”，指的是一个边的非空子集 S，满足从任意一个点出发，都可以回到这个点（注意每个点可以经过多次，但是每条边需要经过一次。同时，一个孤立点视为可以回到自己。）
-初始的时候图中没有边。</p>
-<h1 id="输入">输入</h1>
-<p>第一行两个整数 N,M 表示这张图的点数以及要插入的边数。
-接下来 M 行，每行两个整数，表示要插入的一条边的两端。注意保证没有自环，但是可能有重边</p>
-<h1 id="输出">输出</h1>
-<p>M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $100000009$ 取模。</p>
-<h1 id="样例输入">样例输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 4
+初始的时候图中没有边。
+#  输入
+第一行两个整数 N,M 表示这张图的点数以及要插入的边数。
+接下来 M 行，每行两个整数，表示要插入的一条边的两端。注意保证没有自环，但是可能有重边
+#  输出
+M 行，每插入一条边，输出当前“封闭集”的数量，结果对 $100000009$ 取模。
+#  样例输入
+<code class="language-plaintext highlighter-rouge">
+3 4
 1 2
 1 3
 2 3
 2 3
-</code></pre></div></div>
-<p>样例输出</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code>
+样例输出
+<code class="language-plaintext highlighter-rouge">
+0
 0
 1
 3
-</code></pre></div></div>
-<p>提示
+</code>
+提示
 对于 30%：N, M &lt;= 10
 对于 60%：N, M &lt;= 1000
-对于 100%：N, M &lt;= 200000</p>
-<h1 id="解答">解答</h1>
-<p>很简单的一个水题，但是不好想。我们考虑两种边:在树上的边，和非树上的边。树上的边保证整个图连同，而非树上的边加一条进去，就多一个封闭集。考虑和集合子集一样，每一条非树边有选和不选两种情况。所以共有$2^n$种情况，但是呢？又不能一条都不选，所以是$2^n-1$
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;queue&gt;
+对于 100%：N, M &lt;= 200000
+# 解答
+很简单的一个水题，但是不好想。我们考虑两种边:在树上的边，和非树上的边。树上的边保证整个图连同，而非树上的边加一条进去，就多一个封闭集。考虑和集合子集一样，每一条非树边有选和不选两种情况。所以共有$2^n$种情况，但是呢？又不能一条都不选，所以是$2^n-1$
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;queue&gt;
 # include &lt;cstdio&gt;
 # include &lt;set&gt;
 # include &lt;iostream&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">100000009</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">200010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span> <span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;}</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="o">?</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">:</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">find</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);}</span>
-<span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">judge</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);}</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">unionn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="n">fa</span><span class="p">[</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">quick</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
-    <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">bas</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">bas</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-        <span class="n">bas</span> <span class="o">=</span> <span class="n">bas</span><span class="o">*</span><span class="n">bas</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-        <span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">not_tree_edge</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">init</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">f</span><span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">judge</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">)){</span>
-            <span class="n">not_tree_edge</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
-            <span class="n">unionn</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">quick</span><span class="p">(</span><span class="n">not_tree_edge</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
+    return x*f;
+}
+const long long mod = 100000009;
+const int MAXN = 200010;
+int fa[MAXN];
+int n ,m;
+inline void init(){for(int i = 1;i&lt;=n;i++)fa[i] = i;}
+inline int find(int x){return fa[x]==x?fa[x]:fa[x]=find(fa[x]);}
+inline bool judge(int x,int y){return find(x)==find(y);}
+inline void unionn(int x,int y){fa[find(y)] = find(x);}
+long long quick(int p){
+    long long ans = 1,bas = 2;
+    while(p){
+        if(p&amp;1)ans = ans*bas%mod;
+        bas = bas*bas%mod;
+        p&gt;&gt;=1;
+    }
+    return ans;
+}
+int main(){
+    n = read(),m = read();
+    int not_tree_edge = 0;
+    init();
+    for(int i = 1;i&lt;=m;i++){
+        int f= read(),t = read();
+        if(judge(f,t)){
+            not_tree_edge++;
+        } else{
+            unionn(f,t);
+        }
+        printf("%lld\n",quick(not_tree_edge)-1);
+    }
+    return 0;
+}
+</code></p>
 
     </div>
 

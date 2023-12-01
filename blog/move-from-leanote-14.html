@@ -18,6 +18,7 @@
 原理：
 质数的倍数一点不是质数
 代码：
+cpp
 int prime[10000001];
 bool judge[10000001];
 int tot = 0;
@@ -44,6 +45,7 @@ void ph(int N){
 原理：
 质数的倍数一点不是质数
 代码：
+cpp
 int prime[10000001];
 bool judge[10000001];
 int tot = 0;
@@ -230,27 +232,28 @@ void ph(int N){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="埃式筛法">埃式筛法</h1>
+      <h1 id="section">埃式筛法</h1>
 <p>原理：
 质数的倍数一点不是质数
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">prime</span><span class="p">[</span><span class="mi">10000001</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">judge</span><span class="p">[</span><span class="mi">10000001</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">ph</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">judge</span><span class="p">,</span><span class="nb">true</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">judge</span><span class="p">));</span>
-    <span class="n">judge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">judge</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="c1">//如果i是质数</span>
-           <span class="n">prime</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">N</span><span class="o">&amp;&amp;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">tot</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">judge</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//这一段是为了判重，即比一个合数大的质数和该合数的乘积可用一个更大的合数和比其小的质数相乘得到。若这里条件成立，说明之前或之后会被判断一次，这以后的合数也可以不管了</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+int prime[10000001];
+bool judge[10000001];
+int tot = 0;
+void ph(int N){
+    memset(judge,true, sizeof(judge));
+    judge[1] = false;
+    for(int i = 2;i&lt;=N;i++){
+        if(judge[i]){//如果i是质数
+           prime[++tot] = i;
+        }
+        for(int j = 1;i*prime[j]&lt;=N&amp;&amp;j&lt;=tot;j++){
+            judge[i*prime[j]] = false;
+            if(i%prime[j]==0)break;//这一段是为了判重，即比一个合数大的质数和该合数的乘积可用一个更大的合数和比其小的质数相乘得到。若这里条件成立，说明之前或之后会被判断一次，这以后的合数也可以不管了
+        }
+    }
+}
+</code></p>
 
     </div>
 

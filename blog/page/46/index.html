@@ -291,8 +291,8 @@
 1.设定起始点，放入A集合，将起始点连接的边放入可选的边的集合中去。
 2.循环n-1次，
     1.找出可选的边集合中另一个端点在b集合中且边权最小的一条，将它加入最小生成树
-堆优化O(n log m)
-把边按边...
+# 堆优化O(n log m)
+把边...
       </p>
 
       <div class="c-blog-card__meta">
@@ -337,13 +337,16 @@
       </h2>
 
       <p class="c-blog-card__excerpt">
-        //
+        ```cpp
+//
 // Created by dhy on 18-8-5.
 //
-# include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;algorithm&gt;
-u...
+# include 
+# include 
+# include 
+using namespace std;
+int map[200][200];
+in...
       </p>
 
       <div class="c-blog-card__meta">
@@ -390,13 +393,12 @@ u...
       <p class="c-blog-card__excerpt">
         剪枝
 避免访问那些已经不可能成功的后继状态
-最优性剪枝
+# 最优性剪枝
 若当前价值加估价已经大于目前最优解，则剪掉，估价越高效果越好
-引入随机
+# 引入随机
 解空间非常大的时候，可以引入随机来减少解空间
-预处理
-预处理一些数据，方便之后剪枝dfs与bfs结合
-折半...
+# 预处理
+预处理一些数据，方便之后剪枝dfs与bf...
       </p>
 
       <div class="c-blog-card__meta">

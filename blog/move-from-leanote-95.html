@@ -15,15 +15,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="luoguP1352没有上司的舞会 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-题目描述
+# 题目描述
 某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。
-输入输出格式
+# 输入输出格式
 输入格式：
 第一行一个整数N。(1&amp;lt;=N&amp;lt;=6000)
 接下来N行，第i+1行表示i号职员的快乐指数Ri。(-128&amp;lt;=Ri&amp;lt;=127)
 接下来N-1行，每行输入一对整数L,K。表示K是L的直接上司。
 最后一行输入0 0
-输出格式：
+# 输出格式：
 输出最大的快乐指数。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -31,15 +31,15 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="luoguP1352没有上司的舞会 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-题目描述
+# 题目描述
 某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。
-输入输出格式
+# 输入输出格式
 输入格式：
 第一行一个整数N。(1&amp;lt;=N&amp;lt;=6000)
 接下来N行，第i+1行表示i号职员的快乐指数Ri。(-128&amp;lt;=Ri&amp;lt;=127)
 接下来N-1行，每行输入一对整数L,K。表示K是L的直接上司。
 最后一行输入0 0
-输出格式：
+# 输出格式：
 输出最大的快乐指数。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -210,21 +210,22 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="题目描述">题目描述</h1>
-<p>某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<p>输入格式：
+      <h1 id="section">题面</h1>
+<p># 题目描述
+某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上司来参加舞会了，那么这个职员就无论如何也不肯来参加舞会了。所以，请你编程计算，邀请哪些职员可以使快乐指数最大，求最大的快乐指数。
+# 输入输出格式
+输入格式：
 第一行一个整数N。(1&lt;=N&lt;=6000)
 接下来N行，第i+1行表示i号职员的快乐指数Ri。(-128&lt;=Ri&lt;=127)
 接下来N-1行，每行输入一对整数L,K。表示K是L的直接上司。
-最后一行输入0 0</p>
-<h1 id="输出格式">输出格式：</h1>
-<p>输出最大的快乐指数。</p>
+最后一行输入0 0
+# 输出格式：
+输出最大的快乐指数。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+<h1 id="section-1">输入输出样例</h1>
+<p>#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+7
 1
 1
 1
@@ -239,12 +240,13 @@
 4 5
 3 5
 0 0
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>这题怎么大家都用dp来做啊。看到这道题，首先看到：如果上司去了，那么职员就不去了。嗯？这不是<a href="https://www.luogu.org/problemnew/show/P1330">阳光封锁大学</a>么？二分图匹配？？不会！怎么办？染色啊！如下图(我们用黑色表示要去，白色表示不去)</p>
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+5
+</code>
+# 解答
+这题怎么大家都用dp来做啊。看到这道题，首先看到：如果上司去了，那么职员就不去了。嗯？这不是<a href="https://www.luogu.org/problemnew/show/P1330">阳光封锁大学</a>么？二分图匹配？？不会！怎么办？染色啊！如下图(我们用黑色表示要去，白色表示不去)</p>
 
 
     </div>

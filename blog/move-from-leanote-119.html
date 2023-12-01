@@ -196,12 +196,12 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p><a href="http://codeforces.com/contest/1093/problem/C">神奇的传送门</a>
 题目翻译如下：
 给你一个长度为$\frac{n}{2} n$是偶数的序列$b_1,b_2,b_3…b_\frac{n}{2}$，构造一个非严格单调增的序列$a_1,a_2,a_3….a_n$使得$b_i = a_i + a_{n-i+1}$成立</p>
 
-<h1 id="解答">解答</h1>
+<h1 id="section-1">解答</h1>
 <p>其实不难发现，$a[\frac{n}{2}] = \lfloor b[n]/2\rfloor \ \ \ \ a[\frac{n}{2}+1] = \lceil b[n]/2 \rceil$
 然后把这两个构造出来以后，就可以从倒数第二个开始构造了。构造的方法如下</p>
 
@@ -211,35 +211,36 @@
 </ol>
 
 <p>综上，整个数组就构造完了。然后输出就好咯！
-代码:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 18-12-15.</span>
-<span class="c1">//</span>
-<span class="cp"># include &lt;iostream&gt;
+代码:
+<code class="language-plaintext highlighter-rouge">cpp
+//
+// Created by dhy on 18-12-15.
+//
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;string&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">2e6</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="n">ans</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">ans</span><span class="p">[</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="n">mid</span><span class="p">];</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="n">mid</span><span class="o">+</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">,</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-        <span class="kt">long</span> <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">diff</span><span class="o">&gt;</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">ans</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="k">else</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>注意一下<code class="language-plaintext highlighter-rouge">ans</code>数组不要开小了，我一开始不知道哪根筋不对了，把<code class="language-plaintext highlighter-rouge">ans</code>开成了$MAXN/2$然后肯定是WA了呀，于是乎就在<code class="language-plaintext highlighter-rouge">test 12</code>WA 了两次。</p>
+using namespace std;
+const int MAXN = (int)2e6+10;
+long long a[MAXN];
+long long ans[MAXN];
+int main(){
+    int n;
+    cin&gt;&gt;n;
+    int mid = n/2;
+    for(int i = 1;i&lt;=n&gt;&gt;1;i++)cin&gt;&gt;a[i];
+    ans[mid] = a[mid]&gt;&gt;1;
+    ans[mid+1] = a[mid]-ans[mid];
+    for(int i = mid-1,j=mid+2;i&gt;=1&amp;&amp;j&lt;=n;i--,j++){
+        ans[j] = ans[j-1];
+        long long diff = a[i]-ans[j];
+        if(diff&gt;ans[i+1])ans[i] = ans[i+1],ans[j] = a[i]-ans[i];
+        else ans[i] = diff;
+    }
+    for(int i = 1;i&lt;=n;i++)cout&lt;&lt;ans[i]&lt;&lt;' ';
+    return 0;
+}
+</code>
+注意一下<code class="language-plaintext highlighter-rouge">ans</code>数组不要开小了，我一开始不知道哪根筋不对了，把<code class="language-plaintext highlighter-rouge">ans</code>开成了$MAXN/2$然后肯定是WA了呀，于是乎就在<code class="language-plaintext highlighter-rouge">test 12</code>WA 了两次。</p>
 
 <p>第一次做出CF的C题，好开心啊！</p>
 

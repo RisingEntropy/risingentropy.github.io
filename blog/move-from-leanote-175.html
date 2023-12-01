@@ -190,24 +190,24 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="树链剖分">树链剖分</h1>
+      <h1 id="section">树链剖分</h1>
 
 <ul>
   <li>树链的定义：退化成树链的树</li>
   <li>链表是线性的如果知道长度，就可以用线性数据结构来处理。（线段树）</li>
 </ul>
 
-<h1 id="轻重边">轻、重边</h1>
+<h1 id="section-1">轻、重边</h1>
 <ul>
   <li>定义siz(x)表示以x为根的子树节点数。</li>
   <li>v是u的儿子节点中siz最大的节点数。那么边（u，v）称为重边,其他的边都称为轻边。</li>
 </ul>
 
-<h1 id="性质">性质</h1>
+<h1 id="section-2">性质</h1>
 <p>对于轻边（u，v），siz（v）&lt;=siz(u)/2
-•从根到某一点的路径上，不超过O(logn)条轻边，不超过O（logn）条重路径。</p>
-<h1 id="实现">实现</h1>
-<p>两次dfs
+•从根到某一点的路径上，不超过O(logn)条轻边，不超过O（logn）条重路径。
+#  实现
+两次dfs
 第一次找出重边</p>
 
 <p>第二次连重边成重链</p>
@@ -217,159 +217,161 @@
   <li>不在当前重链的节点，都以该节点为起点向下重新拉成一条重链</li>
 </ul>
 
-<h1 id="板子题">板子题：</h1>
-<p>woj1749 树的统计</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 19-3-17.</span>
-<span class="c1">//</span>
-<span class="cp"># include &lt;iostream&gt;
-# include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">30010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">w</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//former weight</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="k">class</span> <span class="nc">SegmentTree</span><span class="p">{</span>
-<span class="nl">private:</span>
-    <span class="k">struct</span> <span class="nc">node</span><span class="p">{</span><span class="kt">int</span> <span class="n">max</span><span class="p">,</span><span class="n">sum</span><span class="p">;}</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="nl">public:</span>
-    <span class="kt">void</span> <span class="n">build</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">max</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">];</span><span class="k">return</span><span class="p">;}</span>
-        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-        <span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span><span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-        <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">max</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">max</span><span class="p">);</span>
-        <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">void</span> <span class="n">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>
-            <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">max</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span><span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
-        <span class="k">else</span> <span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
-        <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">max</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">max</span><span class="p">);</span>
-        <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">sum</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="o">+</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">querySum</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">sum</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">r</span><span class="o">||</span><span class="n">y</span><span class="o">&lt;</span><span class="n">l</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">ret</span><span class="o">+=</span><span class="n">querySum</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">ret</span><span class="o">+=</span><span class="n">querySum</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">queryMax</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">max</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">r</span><span class="o">||</span><span class="n">y</span><span class="o">&lt;</span><span class="n">l</span><span class="p">)</span><span class="k">return</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">ret</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span><span class="n">queryMax</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">ret</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span><span class="n">queryMax</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
-        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-<span class="n">SegmentTree</span> <span class="n">segmentTree</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">father</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">track</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">size</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">heavyson</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">dfs1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-    <span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">fa</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">size</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">sonSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">dfs1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-        <span class="n">size</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+=</span><span class="n">size</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">sonSize</span><span class="p">)</span><span class="n">sonSize</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">heavyson</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">tpp</span><span class="p">){</span>
-    <span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">tpp</span><span class="p">;</span>
-    <span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="p">;</span>
-    <span class="n">a</span><span class="p">[</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">heavyson</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="k">return</span><span class="p">;</span>
-    <span class="n">dfs2</span><span class="p">(</span><span class="n">heavyson</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">tpp</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">||</span><span class="n">t</span><span class="o">==</span><span class="n">heavyson</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">dfs2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">modifyPoint</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
-    <span class="n">segmentTree</span><span class="p">.</span><span class="n">modify</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">v</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">queryMax</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">segmentTree</span><span class="p">.</span><span class="n">queryMax</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]],</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]));</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]];</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">segmentTree</span><span class="p">.</span><span class="n">queryMax</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]));</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">querySum</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">segmentTree</span><span class="p">.</span><span class="n">querySum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]],</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]];</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="o">+</span><span class="n">segmentTree</span><span class="p">.</span><span class="n">querySum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-<span class="p">}</span>
+<h1 id="section-3">板子题：</h1>
+<p>woj1749 树的统计
+```cpp
+//
+// Created by dhy on 19-3-17.
+//
+# include <iostream>
+# include <cstdio>
+using namespace std;
+const int MAXN = 30010;
+const int INF = 0x3f3f3f3f;
+struct edge{
+    int t,w,next;
+}edges[MAXN&lt;&lt;1];
+int head[MAXN];
+int top;
+void add(int f,int t,int w) {
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int w[MAXN];//former weight
+int a[MAXN];
+class SegmentTree{
+private:
+    struct node{int max,sum;}tree[MAXN&lt;&lt;2];
+public:
+    void build(int k,int l,int r){
+        if(l==r){tree[k].sum = tree[k].max = a[l];return;}
+        int mid = l+r&gt;&gt;1;
+        build(k&lt;&lt;1,l,mid);build(k&lt;&lt;1|1,mid+1,r);
+        tree[k].max = max(tree[k&lt;&lt;1].max,tree[k&lt;&lt;1|1].max);
+        tree[k].sum = tree[k&lt;&lt;1].sum+tree[k&lt;&lt;1|1].sum;
+    }
+    void modify(int k,int l,int r,int pos,int v){
+        if(l==r){
+            tree[k].sum = tree[k].max = v;return;
+        }
+        int mid = l+r&gt;&gt;1;
+        if(pos&lt;=mid)modify(k&lt;&lt;1,l,mid,pos,v);
+        else modify(k&lt;&lt;1|1,mid+1,r,pos,v);
+        tree[k].max = max(tree[k&lt;&lt;1].max,tree[k&lt;&lt;1|1].max);
+        tree[k].sum = tree[k&lt;&lt;1].sum+tree[k&lt;&lt;1|1].sum;
+    }
+    int querySum(int k,int l,int r,int x,int y){
+        if(l&gt;=x&amp;&amp;r&lt;=y)return tree[k].sum;
+        if(x&gt;r||y&lt;l)return 0;
+        int mid = l+r&gt;&gt;1;
+        int ret = 0;
+        if(x&lt;=mid)ret+=querySum(k&lt;&lt;1,l,mid,x,y);
+        if(y&gt;mid)ret+=querySum(k&lt;&lt;1|1,mid+1,r,x,y);
+        return ret;
+    }
+    int queryMax(int k,int l,int r,int x,int y){
+        if(l&gt;=x&amp;&amp;r&lt;=y)return tree[k].max;
+        if(x&gt;r||y&lt;l)return -INF;
+        int mid = l+r&gt;&gt;1;
+        int ret = -INF;
+        if(x&lt;=mid)ret = max(ret,queryMax(k&lt;&lt;1,l,mid,x,y));
+        if(y&gt;mid)ret = max(ret,queryMax(k&lt;&lt;1|1,mid+1,r,x,y));
+        return ret;
+    }
+};
+SegmentTree segmentTree;
+int father[MAXN],track[MAXN],dep[MAXN],size[MAXN];
+int dfn,id[MAXN],heavyson[MAXN];
+void dfs1(int x,int fa){
+    dep[x] = dep[fa]+1;
+    size[x] = 1;
+    father[x] = fa;
+    int sonSize = 0;
+    for(int i = head[x];i;i = edges[i].next){
+        int t = edges[i].t;
+        if(t==fa)continue;
+        dfs1(t,x);
+        size[x]+=size[t];
+        if(size[t]&gt;sonSize)sonSize = size[t],heavyson[x] = t;
+    }
+}
+void dfs2(int x,int tpp){
+    track[x] = tpp;
+    id[x] = ++dfn;
+    a[id[x]] = w[x];
+    if(!heavyson[x])return;
+    dfs2(heavyson[x],tpp);
+    for(int i = head[x];i;i = edges[i].next){
+        int t = edges[i].t;
+        if(t==father[x]||t==heavyson[x])continue;
+        dfs2(t,t);
+    }
+}
+void modifyPoint(int x,int v){
+    segmentTree.modify(1,1,dfn,id[x],v);
+}
+int queryMax(int x,int y){
+    int ans = -INF;
+    while(track[x]!=track[y]){
+        if(dep[track[x]]&lt;dep[track[y]])swap(x,y);
+        ans = max(ans,segmentTree.queryMax(1,1,dfn,id[track[x]],id[x]));
+        x = father[track[x]];
+    }
+    if(dep[x]&lt;dep[y])swap(x,y);
+    return max(ans,segmentTree.queryMax(1,1,dfn,id[y],id[x]));
+}
+int querySum(int x,int y){
+    int ans = 0;
+    while(track[x]!=track[y]){
+        if(dep[track[x]]&lt;dep[track[y]])swap(x,y);
+        ans += segmentTree.querySum(1,1,dfn,id[track[x]],id[x]);
+        x = father[track[x]];
+    }
+    if(dep[x]&lt;dep[y])swap(x,y);
+    return ans+segmentTree.querySum(1,1,dfn,id[y],id[x]);
+}</cstdio></iostream></p>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
-        <span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="kt">int</span> <span class="n">Q</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">Q</span><span class="p">);</span>
-    <span class="n">dfs1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="n">dfs2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-    <span class="n">segmentTree</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">);</span>
-    <span class="kt">char</span> <span class="n">cmd</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Q</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">cmd</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'C'</span><span class="p">){</span>
-            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">u</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
-            <span class="n">modifyPoint</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
-        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">'M'</span><span class="p">){</span>
-                <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">u</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
-                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">queryMax</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">));</span>
-            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">u</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">);</span>
-                <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">querySum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">));</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>注意查询和修改的时候的</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span><span class="p">(</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">y</span><span class="p">]])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">ans</span> <span class="o">+=</span> <span class="n">segmentTree</span><span class="p">.</span><span class="n">querySum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dfn</span><span class="p">,</span><span class="n">id</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]],</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">track</span><span class="p">[</span><span class="n">x</span><span class="p">]];</span>
-    <span class="p">}</span>
-</code></pre></div></div>
-<p>关键的一行<code class="language-plaintext highlighter-rouge">if(dep[track[x]]&lt;dep[track[y]])swap(x,y);</code>不要写成<code class="language-plaintext highlighter-rouge">if(dep[x]&lt;dep[y])swap(x,y);</code>了</p>
+<p>int main(){
+    int n;scanf(“%d”,&amp;n);
+    int f,t;
+    for(int i = 1;i&lt;n;i++){
+        scanf(“%d %d”,&amp;f,&amp;t);
+        add(f,t,1);add(t,f,1);
+    }
+    for(int i = 1;i&lt;=n;i++)scanf(“%d”,&amp;w[i]);
+    int Q;scanf(“%d”,&amp;Q);
+    dfs1(1,1);dfs2(1,1);
+    segmentTree.build(1,1,dfn);
+    char cmd[10];int u,v;
+    while(Q–){
+        scanf(“%s”,cmd);
+        if(cmd[0]==’C’){
+            scanf(“%d %d”,&amp;u,&amp;v);
+            modifyPoint(u,v);
+        }else{
+            if(cmd[1]==’M’){
+                scanf(“%d %d”,&amp;u,&amp;v);
+                printf(“%d\n”,queryMax(u,v));
+            }else{
+                scanf(“%d %d”,&amp;u,&amp;v);
+                printf(“%d\n”,querySum(u,v));
+            }
+        }
+    }
+    return 0;
+}
+<code class="language-plaintext highlighter-rouge">
+注意查询和修改的时候的
+</code>cpp
+while(track[x]!=track[y]){
+        if(dep[track[x]]&lt;dep[track[y]])swap(x,y);
+        ans += segmentTree.querySum(1,1,dfn,id[track[x]],id[x]);
+        x = father[track[x]];
+    }
+```
+关键的一行<code class="language-plaintext highlighter-rouge">if(dep[track[x]]&lt;dep[track[y]])swap(x,y);</code>不要写成<code class="language-plaintext highlighter-rouge">if(dep[x]&lt;dep[y])swap(x,y);</code>了</p>
 
     </div>
 

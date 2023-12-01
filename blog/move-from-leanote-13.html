@@ -192,27 +192,28 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题目描述">题目描述</h1>
+      <h1 id="section">题目描述</h1>
 <p>有一个邮递员要送东西，邮局在节点1.他总共要送N-1样东西，其目的地分别是2~N。由于这个城市的交通比较繁忙，因此所有的道路都是单行的，共有M条道路，通过每条道路需要一定的时间。这个邮递员每次只能带一样东西。求送完这N-1样东西并且最终回到邮局最少需要多少时间。</p>
 
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>第一行包括两个整数N和M。</p>
+<h1 id="section-1">输入输出格式</h1>
+<p>#  输入格式：
+第一行包括两个整数N和M。</p>
 
 <p>第2到第M+1行，每行三个数字U、V、W，表示从A到B有一条需要W时间的道路。 满足1&lt;=U,V&lt;=N,1&lt;=W&lt;=10000,输入保证任意两点都能互相到达。</p>
 
-<h1 id="数据规模">【数据规模】</h1>
+<h1 id="section-2">【数据规模】</h1>
 
 <p>对于30%的数据，有1≤N≤200;</p>
 
 <p>对于100%的数据，有1≤N≤1000,1≤M≤100000。</p>
 
-<h1 id="输出格式">输出格式：</h1>
+<h1 id="section-3">输出格式：</h1>
 <p>输出仅一行，包含一个整数，为最少需要的时间。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 10
+<h1 id="section-4">输入输出样例</h1>
+<p>#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+5 10
 2 3 5
 1 5 5
 3 5 6
@@ -223,135 +224,138 @@
 4 5 3
 3 5 6
 5 4 2
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>83
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>其实非常简单的一道题。因为道路是单向的，又要知道1到所有点的距离和所有点到1 的距离，所以直接建反向边就行了。这样只需要跑两次spfa。
-代码:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+83
+</code>
+# 解答
+其实非常简单的一道题。因为道路是单向的，又要知道1到所有点的距离和所有点到1 的距离，所以直接建反向边就行了。这样只需要跑两次spfa。
+代码:
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;queue&gt;
 # include &lt;cstring&gt;
 # include &lt;iostream&gt;
 # include &lt;vector&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges1</span><span class="p">[</span><span class="n">MAXM</span><span class="p">],</span><span class="n">edges2</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">head2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top1</span><span class="p">,</span><span class="n">top2</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">dis1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dis2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">vis1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">vis2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add1</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-    <span class="n">edges1</span><span class="p">[</span><span class="o">++</span><span class="n">top1</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span>  <span class="n">head1</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges1</span><span class="p">[</span><span class="n">top1</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges1</span><span class="p">[</span><span class="n">top1</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head1</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">add2</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-    <span class="n">edges2</span><span class="p">[</span><span class="o">++</span><span class="n">top2</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges2</span><span class="p">[</span><span class="n">top2</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges2</span><span class="p">[</span><span class="n">top2</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top2</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dijkstra1</span><span class="p">(){</span><span class="c1">//正图</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dis1</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis1</span><span class="p">));</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">vis1</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis1</span><span class="p">));</span>
-    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">p</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">,</span><span class="n">greater</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
-    <span class="n">dis1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
-        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">vis1</span><span class="p">[</span><span class="n">top</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">vis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head1</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
-                <span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">dis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">));</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dijkstra2</span><span class="p">(){</span><span class="c1">//反图</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dis2</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis2</span><span class="p">));</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">vis2</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis2</span><span class="p">));</span>
-    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">p</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">,</span><span class="n">greater</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
-    <span class="n">dis2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
-        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">vis2</span><span class="p">[</span><span class="n">top</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">vis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head2</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
-                <span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">dis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">));</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span>
-        <span class="n">add1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
-        <span class="n">add2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">dijkstra1</span><span class="p">();</span>
-    <span class="n">dijkstra2</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span>  <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">dis1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">dis2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>无脑压行版：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+using namespace std;
+const int MAXN = 1010;
+const int MAXM = 100010;
+struct edge{
+    int t,w,next;
+}edges1[MAXM],edges2[MAXM];
+int head1[MAXN],head2[MAXN];
+int top1,top2;
+int dis1[MAXN];
+int dis2[MAXN];
+bool vis1[MAXN];
+bool vis2[MAXN];
+typedef pair&lt;int,int&gt; p;
+void add1(int f,int t,int w){
+    edges1[++top1].next =  head1[f];
+    edges1[top1].t = t;
+    edges1[top1].w = w;
+    head1[f] = top1;
+}
+void add2(int f,int t,int w){
+    edges2[++top2].next = head2[f];
+    edges2[top2].t = t;
+    edges2[top2].w = w;
+    head2[f] = top2;
+}
+void dijkstra1(){//正图
+    memset(dis1,0x3f,sizeof(dis1));
+    memset(vis1,false,sizeof(vis1));
+    priority_queue&lt;p,vector&lt;p&gt;,greater&lt;p&gt; &gt; q;
+    dis1[1] = 0;
+    q.push(make_pair(0,1));
+    while(!q.empty()){
+        int top = q.top().second;
+        q.pop();
+        if(vis1[top])continue;
+        vis1[top] = true;
+        for(int i = head1[top];i!=0;i = edges1[i].next){
+            int t = edges1[i].t;
+            if(dis1[t]&gt;dis1[top]+edges1[i].w){
+                dis1[t]=dis1[top]+edges1[i].w;
+                q.push(make_pair(dis1[t],t));
+            }
+        }
+    }
+}
+void dijkstra2(){//反图
+    memset(dis2,0x3f,sizeof(dis2));
+    memset(vis2,false,sizeof(vis2));
+    priority_queue&lt;p,vector&lt;p&gt;,greater&lt;p&gt; &gt; q;
+    dis2[1] = 0;
+    q.push(make_pair(0,1));
+    while(!q.empty()){
+        int top = q.top().second;
+        q.pop();
+        if(vis2[top])continue;
+        vis2[top] = true;
+        for(int i = head2[top];i!=0;i = edges2[i].next){
+            int t = edges2[i].t;
+            if(dis2[t]&gt;dis2[top]+edges2[i].w){
+                dis2[t]=dis2[top]+edges2[i].w;
+                q.push(make_pair(dis2[t],t));
+            }
+        }
+    }
+}
+int main(void){
+    int n,m;
+    cin&gt;&gt;n&gt;&gt;m;
+    int f,t,w;
+    for(int i = 1;i&lt;=m;i++){
+        cin&gt;&gt;f&gt;&gt;t&gt;&gt;w;
+        add1(f,t,w);
+        add2(t,f,w);
+    }
+    dijkstra1();
+    dijkstra2();
+    int ans = 0;
+    for(int i =  2;i&lt;=n;i++)ans+=dis1[i]+dis2[i];
+    cout&lt;&lt;ans;
+    return 0;
+}
+</code>
+无脑压行版：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;queue&gt;
 # include &lt;cstring&gt;
 # include &lt;iostream&gt;
 # include &lt;vector&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span><span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span> <span class="p">}</span><span class="n">edges1</span><span class="p">[</span><span class="n">MAXM</span><span class="p">],</span><span class="n">edges2</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">head2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">top1</span><span class="p">,</span><span class="n">top2</span><span class="p">;</span><span class="kt">int</span> <span class="n">dis1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">dis2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">bool</span> <span class="n">vis1</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">bool</span> <span class="n">vis2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add1</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span> <span class="n">edges1</span><span class="p">[</span><span class="o">++</span><span class="n">top1</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span>  <span class="n">head1</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">edges1</span><span class="p">[</span><span class="n">top1</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span><span class="n">edges1</span><span class="p">[</span><span class="n">top1</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span><span class="n">head1</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top1</span><span class="p">;</span> <span class="p">}</span>
-<span class="kt">void</span> <span class="nf">add2</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span><span class="n">edges2</span><span class="p">[</span><span class="o">++</span><span class="n">top2</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">edges2</span><span class="p">[</span><span class="n">top2</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span><span class="n">edges2</span><span class="p">[</span><span class="n">top2</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span><span class="n">head2</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top2</span><span class="p">;</span> <span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dijkstra1</span><span class="p">(){</span><span class="c1">//正图</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dis1</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis1</span><span class="p">));</span><span class="n">memset</span><span class="p">(</span><span class="n">vis1</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis1</span><span class="p">));</span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">p</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">,</span><span class="n">greater</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span><span class="n">dis1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span><span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span><span class="k">if</span><span class="p">(</span><span class="n">vis1</span><span class="p">[</span><span class="n">top</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span><span class="n">vis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head1</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">)</span><span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">dis1</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">dis1</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dijkstra2</span><span class="p">(){</span><span class="c1">//反图</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dis2</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis2</span><span class="p">));</span><span class="n">memset</span><span class="p">(</span><span class="n">vis2</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis2</span><span class="p">));</span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">p</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">,</span><span class="n">greater</span><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span><span class="n">dis2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span><span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span><span class="k">if</span><span class="p">(</span><span class="n">vis2</span><span class="p">[</span><span class="n">top</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span><span class="n">vis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head2</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span> <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">)</span><span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">dis2</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">dis2</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span><span class="n">add1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">);</span><span class="n">add2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
-    <span class="n">dijkstra1</span><span class="p">();</span><span class="n">dijkstra2</span><span class="p">();</span><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span>  <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">dis1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">dis2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 1010;const int MAXM = 100010;struct edge{ int t,w,next; }edges1[MAXM],edges2[MAXM];
+int head1[MAXN],head2[MAXN];int top1,top2;int dis1[MAXN];int dis2[MAXN];bool vis1[MAXN];bool vis2[MAXN];typedef pair&lt;int,int&gt; p;
+void add1(int f,int t,int w){ edges1[++top1].next =  head1[f];edges1[top1].t = t;edges1[top1].w = w;head1[f] = top1; }
+void add2(int f,int t,int w){edges2[++top2].next = head2[f];edges2[top2].t = t;edges2[top2].w = w;head2[f] = top2; }
+void dijkstra1(){//正图
+    memset(dis1,0x3f,sizeof(dis1));memset(vis1,false,sizeof(vis1));priority_queue&lt;p,vector&lt;p&gt;,greater&lt;p&gt; &gt; q;dis1[1] = 0;q.push(make_pair(0,1));
+    while(!q.empty()){
+        int top = q.top().second;q.pop();if(vis1[top])continue;vis1[top] = true;
+        for(int i = head1[top];i!=0;i = edges1[i].next){
+            int t = edges1[i].t;if(dis1[t]&gt;dis1[top]+edges1[i].w)dis1[t]=dis1[top]+edges1[i].w,q.push(make_pair(dis1[t],t));
+        }
+    }
+}
+void dijkstra2(){//反图
+    memset(dis2,0x3f,sizeof(dis2));memset(vis2,false,sizeof(vis2));priority_queue&lt;p,vector&lt;p&gt;,greater&lt;p&gt; &gt; q;dis2[1] = 0;q.push(make_pair(0,1));
+    while(!q.empty()){
+        int top = q.top().second;q.pop();if(vis2[top])continue;vis2[top] = true;
+        for(int i = head2[top];i!=0;i = edges2[i].next){ int t = edges2[i].t;if(dis2[t]&gt;dis2[top]+edges2[i].w)dis2[t]=dis2[top]+edges2[i].w,q.push(make_pair(dis2[t],t));
+        }
+    }
+}
+int main(void){
+    int n,m;cin&gt;&gt;n&gt;&gt;m;int f,t,w;
+    for(int i = 1;i&lt;=m;i++)cin&gt;&gt;f&gt;&gt;t&gt;&gt;w;add1(f,t,w);add2(t,f,w);
+    dijkstra1();dijkstra2();int ans = 0;for(int i =  2;i&lt;=n;i++)ans+=dis1[i]+dis2[i];cout&lt;&lt;ans;
+    return 0;
+}
+</code></p>
 
     </div>
 

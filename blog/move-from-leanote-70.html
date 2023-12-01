@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="luogu P4932 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-题目描述
+# 题目描述
 __stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个Edge。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -23,7 +23,7 @@ __stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="luogu P4932 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-题目描述
+# 题目描述
 __stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个Edge。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -194,81 +194,81 @@ __stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="题目描述">题目描述</h1>
-<p>__stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个Edge。</p>
+      <h1 id="section">题面</h1>
+<p># 题目描述
+__stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个Edge。</p>
 
-<p>如果你没能成功完成任务，那么__stdcall会让你痛苦一下，你这个测试点就没分了。</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>一行六个整数，n，a，b，c，d，x[0]。
+<p>如果你没能成功完成任务，那么__stdcall会让你痛苦一下，你这个测试点就没分了。
+# 输入输出格式
+#  输入格式：
+一行六个整数，n，a，b，c，d，x[0]。
 n是点的个数，每个点的权值需要用如下的方式生成。
 你需要使用a，b，c，d和x[0]生成一个数组x，生成方式是这样的。
 $X_i=(a*X_{i-1}^2+bX_i-1+c)\ mod\ d$
 x[i]就是第i个点的权值，点的标号是1到n。</p>
 
-<h1 id="输出格式">输出格式：</h1>
-<p>输出一个整数，表示一共有多少个Edge。</p>
-<h1 id="样例1">样例1</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8 98 24 20 100 44
-</code></pre></div></div>
-<h1 id="输出1">输出1</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12
-</code></pre></div></div>
-<h1 id="样例2">样例2</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1000 952537 601907 686180 1000000 673601
-</code></pre></div></div>
-<h1 id="输出2">输出2</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>249711
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>首先要生成一个x数组对吧？该取模取模。但是注意取模的式子应该是这样的：((a%d<em>x[i-1]%d</em>x[i-1]%d+b*x[i-1]%d+c%d)%d+d)%d 就是为了防止它变成负数。
-然后注意观察,a xor b中1的个数的奇偶性与a和b中1的个数的奇偶性有关，<strong>当且仅当</strong> a和b中1的个数为奇数时，a xor b中的1的个数是奇数，否则为偶数。对此的解释：</p>
-<blockquote>
-  <p>我们考虑两种情况，a中的1和b中的1是否在同一位置(能否对上)。
+<h1 id="section-1">输出格式：</h1>
+<p>输出一个整数，表示一共有多少个Edge。
+#  样例1
+<code class="language-plaintext highlighter-rouge">
+8 98 24 20 100 44
+</code>
+#  输出1
+<code class="language-plaintext highlighter-rouge">
+12
+</code>
+#  样例2
+<code class="language-plaintext highlighter-rouge">
+1000 952537 601907 686180 1000000 673601
+</code>
+#  输出2
+<code class="language-plaintext highlighter-rouge">
+249711
+</code>
+# 解答
+首先要生成一个x数组对吧？该取模取模。但是注意取模的式子应该是这样的：((a%d<em>x[i-1]%d</em>x[i-1]%d+b*x[i-1]%d+c%d)%d+d)%d 就是为了防止它变成负数。
+然后注意观察,a xor b中1的个数的奇偶性与a和b中1的个数的奇偶性有关，<strong>当且仅当</strong> a和b中1的个数为奇数时，a xor b中的1的个数是奇数，否则为偶数。对此的解释：
+&gt;我们考虑两种情况，a中的1和b中的1是否在同一位置(能否对上)。
 1.如果能对上的个数为奇数，如果a中1的个数为奇数，b中个数为偶数，我们先把对上的1的个数忽略。如果a中1的个数为奇数，那么忽略以后a中1的个数为偶数，b中也为偶数，所有a xor b中1的个数为偶数。如果a中1的个数为偶数，b中也为偶数，忽略掉以后，a中1的个数为奇数，b中也为奇数，那么a xor b中的1的个数为偶数。用这种思想，可以得到以上结论</p>
-</blockquote>
 
-<p><del>语文不太好，如果说的不清楚见谅</del>不懂可以私信问我
+<p>~~语文不太好，如果说的不清楚见谅~~不懂可以私信问我
 然后，就简单了，只需要把含有1的个数为奇数的数统计出来，用这个数量乘以含有1为偶数的数的数量想乘，就是答案。这样做复杂度是O(nlogv)。楼下也提到过。但是还是会T掉。那么怎么办呢？经过冥思苦想，我们发现可以把一个数拆了，拆成高低各16位，这样，把这$2^{16}$个数打表，打出来以后，就直接把一个数拆了，然后分别查询高低位里面的1的个数，最后加起来(获得高16位可以直接右移16，获得低16位可以&amp;0xFFFF这个应该能理解吧，不能理解问我)。然后乘一下就行。
-以下是AC代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// luogu-judger-enable-o2</span>
-<span class="cp"># include &lt;iostream&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="mf">1e7</span><span class="o">+</span><span class="mi">50</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">bits_table</span><span class="p">[</span><span class="mi">69545</span><span class="p">];</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">popbit</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span><span class="p">){</span><span class="c1">//用lowbit计算有多少个1</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="p">){</span>
-        <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">k</span><span class="o">-=</span><span class="p">(</span><span class="n">k</span><span class="o">&amp;-</span><span class="n">k</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">gen</span><span class="p">(){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">((</span><span class="n">a</span><span class="o">%</span><span class="n">d</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">%</span><span class="n">d</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">%</span><span class="n">d</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">%</span><span class="n">d</span><span class="o">+</span><span class="n">c</span><span class="o">%</span><span class="n">d</span><span class="p">)</span><span class="o">%</span><span class="n">d</span><span class="o">+</span><span class="n">d</span><span class="p">)</span><span class="o">%</span><span class="n">d</span><span class="p">;</span>
+以下是AC代码：
+```cpp
+// luogu-judger-enable-o2
+# include <iostream>
+using namespace std;
+int n,a,b,c,d;
+long long x[(int)1e7+50];
+int bits_table[69545];
+inline int popbit(long long k){//用lowbit计算有多少个1
+    int ans = 0;
+    while(k){
+        ans++;
+        k-=(k&amp;-k);
+    }
+    return ans;
+}
+void gen(){
+    for(int i = 1;i&lt;=n;i++)x[i]=((a%d*x[i-1]%d*x[i-1]%d+b*x[i-1]%d+c%d)%d+d)%d;</iostream></p>
 
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">65535</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">bits_table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">popbit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="c1">//高低16位中1的个数</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="o">&gt;&gt;</span><span class="n">b</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="o">&gt;&gt;</span><span class="n">d</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="n">gen</span><span class="p">();</span>
-    <span class="kt">long</span> <span class="kt">long</span> <span class="n">single</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">long</span> <span class="kt">long</span> <span class="n">even</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="n">bits_table</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">16</span><span class="p">];</span><span class="c1">//高16位 </span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="n">bits_table</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&amp;</span><span class="mh">0xFFFF</span><span class="p">];</span><span class="c1">//低16位 </span>
-        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">single</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">else</span> <span class="n">even</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">single</span><span class="o">*</span><span class="n">even</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(int i = 1;i&lt;=65535;i++){
+    bits_table[i] = popbit(i);//高低16位中1的个数
+} } int main(void){
+ios::sync_with_stdio(false);
+cin&gt;&gt;n&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d&gt;&gt;x[0];
+gen();
+long long single = 0;
+long long even = 0;
+for(int i = 1;i&lt;=n;i++){
+    int t = 0;
+    t += bits_table[x[i]&gt;&gt;16];//高16位 
+    t += bits_table[x[i]&amp;0xFFFF];//低16位 
+    if(t&amp;1)single++;
+    else even++;
+}
+cout&lt;&lt;single*even&lt;&lt;endl;
+return 0; } ```
 </code></pre></div></div>
 
     </div>

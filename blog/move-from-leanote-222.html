@@ -192,7 +192,7 @@ Sylvia 是一个热爱学习的女孩子。
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p><code class="language-plaintext highlighter-rouge">Sylvia</code> 是一个热爱学习的女孩子。</p>
 
 <p>前段时间， <code class="language-plaintext highlighter-rouge">Sylvia</code> 参加了学校的军训。众所周知，军训的时候需要站方阵。 <code class="language-plaintext highlighter-rouge">Sylvia</code> 所在的方阵中有$n × m$名学生，方阵的行数为 $n$，列数为 $m$。</p>
@@ -219,70 +219,73 @@ Sylvia 是一个热爱学习的女孩子。
 接下来 $q$ 行按照事件发生顺序描述了 $q$ 件事件。每一行是两个整数 $x, y$， 用一个空 格分隔， 表示这个离队事件中离队的学生当时排在第 $x$ 行第$ y $列
 输出
 按照事件输入的顺序，每一个事件输出一行一个整数，表示这个离队事件中离队学 生的编号。
-样例输入</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 2 3
+样例输入
+<code class="language-plaintext highlighter-rouge">
+2 2 3
 1 1
 2 2
 1 2
-</code></pre></div></div>
-<p>样例输出</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code>
+样例输出
+<code class="language-plaintext highlighter-rouge">
+1
 1
 4
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>很不错额一道线段树的好题，前两天才学了线段树分治以及动态开点的线段树，刚好来写一下这道题。听大佬们说可以<code class="language-plaintext highlighter-rouge">splay</code>水过，但是我太弱了，太久没有写<code class="language-plaintext highlighter-rouge">spay</code>这种一写一下午的东西了。我们建立$n+1$个线段树，分别维护$n$行及最后一列。每次操作就从相应的一行中找到第y个数，如果第y个数的下标大雨了了n，说明已经出去了超过那么多人了，只有从那个节点所代表的的vector里面找出$pos-m$个数，对于最后一列，同样使用一个vector维护，查询的时候如果线段树里面的人数已经少于要查询的人数了，就从vector里面取那么多个人粗来就好啦。
-代码</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</code>
+# 解答
+很不错额一道线段树的好题，前两天才学了线段树分治以及动态开点的线段树，刚好来写一下这道题。听大佬们说可以<code class="language-plaintext highlighter-rouge">splay</code>水过，但是我太弱了，太久没有写<code class="language-plaintext highlighter-rouge">spay</code>这种一写一下午的东西了。我们建立$n+1$个线段树，分别维护$n$行及最后一列。每次操作就从相应的一行中找到第y个数，如果第y个数的下标大雨了了n，说明已经出去了超过那么多人了，只有从那个节点所代表的的vector里面找出$pos-m$个数，对于最后一列，同样使用一个vector维护，查询的时候如果线段树里面的人数已经少于要查询的人数了，就从vector里面取那么多个人粗来就好啦。
+代码
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;vector&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">3e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="mi">20</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="mi">20</span><span class="p">],</span><span class="n">cnt</span><span class="p">,</span><span class="n">root</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">pos</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">mx</span><span class="p">;</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="mi">20</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span><span class="k">return</span> <span class="n">l</span><span class="p">;}</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]];</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tmp</span><span class="o">&gt;=</span><span class="n">w</span><span class="p">)</span><span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
-	<span class="k">else</span> <span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">w</span><span class="o">-</span><span class="n">tmp</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">k</span><span class="p">)</span><span class="n">k</span> <span class="o">=</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
-	<span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
-	<span class="k">else</span> <span class="n">modify</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">work1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">y</span><span class="p">){</span>
-	<span class="n">pos</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-	<span class="n">modify</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">pos</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">?</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">pos</span><span class="o">*</span><span class="n">m</span><span class="o">:</span><span class="n">v</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="p">];</span>
-	<span class="n">v</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">y</span><span class="o">?</span><span class="n">y</span><span class="o">:</span><span class="n">ans</span><span class="p">);</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">work2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-	<span class="n">pos</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-	<span class="n">modify</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">pos</span><span class="p">);</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">pos</span><span class="o">&lt;</span><span class="n">m</span><span class="o">?</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="o">+</span><span class="n">pos</span><span class="o">:</span><span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="o">-</span><span class="n">m</span><span class="p">];</span>
-	<span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span>	<span class="n">work1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">ans</span><span class="p">));</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>
-	<span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="n">q</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="n">m</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">work1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
-		<span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">work2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = (int)3e5+10;
+int tree[MAXN*20][2],sum[MAXN*20],cnt,root[MAXN];
+int pos;
+int n,m,q,mx;
+vector&lt;long long&gt; v[MAXN*20];
+int query(int k,int l,int r,int w){
+	if(l==r){return l;}
+	int mid = l+r&gt;&gt;1;int tmp = mid-l+1-sum[tree[k][0]];
+	if(tmp&gt;=w)return query(tree[k][0],l,mid,w);
+	else return query(tree[k][1],mid+1,r,w-tmp);
+}
+void modify(int &amp;k,int l,int r,int pos){
+	if(!k)k = ++cnt;
+	sum[k]++;
+	if(l==r)return;
+	int mid = l+r&gt;&gt;1;
+	if(pos&lt;=mid)modify(tree[k][0],l,mid,pos);
+	else modify(tree[k][1],mid+1,r,pos);
+}
+long long work1(int x,long long y){
+	pos = query(root[n+1],1,mx,x);
+	modify(root[n+1],1,mx,pos);
+	long long ans = pos&lt;=n?(long long)pos*m:v[n+1][pos-1-n];
+	v[n+1].push_back(y?y:ans);
+	return ans;
+}
+long long work2(int x,int y){
+	pos = query(root[x],1,mx,y);
+	modify(root[x],1,mx,pos);
+	long long ans = pos&lt;m?(long long)(x-1)*m+pos:v[x][pos-m];
+	v[x].push_back(	work1(x,ans));
+	return ans;
+}
+int main(){
+	scanf("%d%d%d",&amp;n,&amp;m,&amp;q);
+	mx = max(m,n)+q;
+	int x,y;
+	while(q--){
+		scanf("%d%d",&amp;x,&amp;y);
+		if(y==m)printf("%lld\n",work1(x,0));
+		else printf("%lld\n",work2(x,y));
+	}
+	return 0;
+}
+</code></p>
 
     </div>
 

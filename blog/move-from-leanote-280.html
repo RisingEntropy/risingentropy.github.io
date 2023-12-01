@@ -192,87 +192,90 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>对于给出的n个询问，每次求有多少个数对(x,y)，满足a≤x≤b，c≤y≤d，且gcd(x,y) = k，gcd(x,y)函数为x和y的最大公约数。</p>
 
-<h1 id="输入">输入</h1>
+<h1 id="section-1">输入</h1>
 <p>第一行一个整数n，接下来n行每行五个整数，分别表示a、b、c、d、k</p>
 
-<h1 id="输出">输出</h1>
+<h1 id="section-2">输出</h1>
 <p>共n行，每行一个整数表示满足要求的数对(x,y)的个数</p>
 
-<h1 id="样例输入">样例输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+<h1 id="section-3">样例输入</h1>
+<p><code class="language-plaintext highlighter-rouge">
+2
 2 5 1 5 1
 1 5 1 5 2
-</code></pre></div></div>
-<h1 id="样例输出">样例输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>14
+</code>
+#  样例输出
+<code class="language-plaintext highlighter-rouge">
+14
 3
-</code></pre></div></div>
-<p>提示
-100%的数据满足：1≤n≤50000，1≤a≤b≤50000，1≤c≤d≤50000，1≤k≤50000</p>
-<h1 id="解答">解答</h1>
-<p>第一次自己把数学题的式子推出来Orz。
+</code>
+提示
+100%的数据满足：1≤n≤50000，1≤a≤b≤50000，1≤c≤d≤50000，1≤k≤50000
+# 解答
+第一次自己把数学题的式子推出来Orz。
 题目要求求：$\sum \limits_{i=1}^{n}\sum\limits_{j=1}^{m}[gcd(i,j)=k]$
 \(\sum\limits_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{k}\rfloor}[gcd(i,j)=1]\\\sum\limits_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{k}\rfloor}\sum_{d|gcd(i,j)}\mu(d)\\\sum\limits_{d=1}^{min(n,m)}\mu(d)\sum\limits_{i=1}^{\lfloor\frac{n}{kd}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{kd}\rfloor}1\\\sum\limits_{d=1}^{min(n,m)}\mu(d)\lfloor\frac{n}{kd}\rfloor\lfloor\frac{m}{kd}\rfloor\)
 对于后面下取整的式子可以整除分块，然后前面那一坨$\mu$可以做一个前缀和，在整除分块的时候同时计算了。
 然后进行容斥，$ans(b,d)-ans(a,c-1)-ans(b-1,d)+ans(b-1,c-1)$
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;algorithm&gt;
-# include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">50010</span><span class="p">;</span>
-<span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">LL</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">char</span> <span class="nf">nc</span><span class="p">(){</span>
-	<span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="o">*</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">,</span><span class="o">*</span><span class="n">p2</span><span class="o">=</span><span class="n">buf</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">p2</span><span class="o">=</span><span class="p">(</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">)</span><span class="o">+</span><span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="n">stdin</span><span class="p">),</span><span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="p">)</span><span class="o">?</span><span class="n">EOF</span><span class="o">:*</span><span class="n">p1</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="cp"># define nc getchar
-</span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">T</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span>  <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="mi">48</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
-	<span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">prime</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">mu</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">cnt</span><span class="p">,</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">getprime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
-	<span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="n">prime</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;}</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">cnt</span><span class="o">&amp;&amp;</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-			<span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
-			<span class="k">else</span> <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">=-</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">calc</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
-	<span class="n">LL</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="kt">int</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">limit</span><span class="p">;</span><span class="n">l</span> <span class="o">=</span> <span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span>
-		<span class="n">r</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">l</span><span class="p">),</span><span class="n">b</span><span class="o">/</span><span class="p">(</span><span class="n">b</span><span class="o">/</span><span class="n">l</span><span class="p">));</span>
-		<span class="n">ans</span><span class="o">+=</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">/</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">sum</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">getprime</span><span class="p">(</span><span class="mi">50000</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">T</span><span class="p">;</span><span class="n">read</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">read</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">d</span><span class="p">),</span><span class="n">read</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">calc</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">calc</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">calc</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">+</span><span class="n">calc</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">));</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+代码：
+```cpp
+# include <algorithm>
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+using namespace std;
+const int MAXN = 50010;
+typedef long long LL;
+inline char nc(){
+	static char buf[100000],*p1=buf,*p2=buf;
+	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+}
+# define nc getchar
+template<typename T="">
+inline void read(T &amp;x){
+	x = 0;T f = 1;
+	char c = nc();
+	while(c&lt;'0'||c&gt;'9'){if(c=='-')f =  -1;c = nc();}
+	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = x*10+(c^48);c = nc();}
+	x*=f;
+}
+int prime[MAXN],mu[MAXN],cnt,sum[MAXN];
+bool vis[MAXN];
+void getprime(int n){
+	mu[1] = 1;
+	for(int i = 2;i&lt;=n;i++){
+		if(!vis[i]){prime[++cnt] = i;mu[i] = -1;}
+		for(int j = 1;j&lt;=cnt&amp;&amp;prime[j]*i&lt;=n;j++){
+			vis[i*prime[j]] = true;
+			if(i%prime[j]==0)break;
+			else mu[i*prime[j]]=-mu[i];
+		}
+	}
+	for(int i = 1;i&lt;=n;i++)sum[i] = sum[i-1]+mu[i];
+}
+int calc(int a,int b,int k){
+	LL ans = 0;int limit = min(a,b);
+	for(int l = 1,r;l&lt;=limit;l = r+1){
+		r = min(a/(a/l),b/(b/l));
+		ans+=(a/(l*k))*(b/(l*k))*(sum[r]-sum[l-1]);
+	}
+	return ans;
+}
+int main(){
+	getprime(50000);
+	int T;read(T);
+	int a,b,c,d,k;
+	while(T--){
+		read(a),read(b),read(c),read(d),read(k);
+		printf("%d\n",calc(b,d,k)-calc(b,c-1,k)-calc(a-1,d,k)+calc(a-1,c-1,k));
+	}
+	return 0;
+}</typename></cstdio></cstring></iostream></algorithm></p>
 
-</code></pre></div></div>
+<p>```</p>
 
     </div>
 

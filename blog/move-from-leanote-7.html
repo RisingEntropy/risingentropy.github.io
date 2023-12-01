@@ -16,6 +16,7 @@
   <meta name="twitter:title" content="最小环问题 – Haoyu Deng's page">
   <meta name="twitter:description" content="最小环问题说白了就是暴力Floyed算法————沃·兹基·硕德
 emm，上代码
+cpp
 for(int k = 1;k&amp;lt;=n;k++)
     for(int i = 1;i&amp;lt;=k-1;i++){
         for(int j = i+1;k&amp;lt;=k-1;j++){
@@ -27,7 +28,7 @@ for(int k = 1;k&amp;lt;=n;k++)
             }
     }
 
-强连通分量
+# 强连通分量
 (1)kosaraju算法：
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -36,6 +37,7 @@ for(int k = 1;k&amp;lt;=n;k++)
   <meta property="og:title" content="最小环问题 – Haoyu Deng's page">
   <meta property="og:description" content="最小环问题说白了就是暴力Floyed算法————沃·兹基·硕德
 emm，上代码
+cpp
 for(int k = 1;k&amp;lt;=n;k++)
     for(int i = 1;i&amp;lt;=k-1;i++){
         for(int j = i+1;k&amp;lt;=k-1;j++){
@@ -47,7 +49,7 @@ for(int k = 1;k&amp;lt;=n;k++)
             }
     }
 
-强连通分量
+# 强连通分量
 (1)kosaraju算法：
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -218,21 +220,22 @@ for(int k = 1;k&amp;lt;=n;k++)
   <article class="post">
 
     <div class="post__content">
-      <h1 id="最小环问题说白了就是暴力floyed算法沃兹基硕德">最小环问题说白了就是暴力Floyed算法————沃·兹基·硕德</h1>
-<p>emm，上代码</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">)</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">answer</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">g</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">g</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
-        <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-                <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">dis</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span><span class="c1">//老套路</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div></div>
-<h1 id="强连通分量">强连通分量</h1>
-<p>(1)kosaraju算法：</p>
+      <h1 id="floyed">最小环问题说白了就是暴力Floyed算法————沃·兹基·硕德</h1>
+<p>emm，上代码
+<code class="language-plaintext highlighter-rouge">cpp
+for(int k = 1;k&lt;=n;k++)
+    for(int i = 1;i&lt;=k-1;i++){
+        for(int j = i+1;k&lt;=k-1;j++){
+            answer = min(ans,dis[i][j]+g[j][k]+g[k][i]);
+        }
+        for(int i = 1;i&lt;=n;i++)
+            for(int j = 1;j&lt;=n;j++){
+                dis[i][j] = min(dis[i][j],dis[i][k]+dis[k][j]);//老套路
+            }
+    }
+</code>
+# 强连通分量
+(1)kosaraju算法：</p>
 
 <ol>
   <li>第一次对图进行DFS遍历，并在遍历的过程中，记录每一个点的退出顺序，</li>

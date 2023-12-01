@@ -15,10 +15,11 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="20190824测试 – Haoyu Deng's page">
   <meta name="twitter:description" content="试题地址：njfls的一套NOIP模拟
-T1
+# T1
 大水模拟题，但是要用到一下结论 $\sum\limits_{i=0}^{\infty}d^i = \frac{1}{1-d}(0&amp;lt;d&amp;lt;1)$
-说白了就是等比数列求和公式趋近于正无穷的情况。虽然我还是谢了模拟
+说白了就是等比数列求和公式趋近于正无穷的情况。~~虽然我还是谢了模拟~~
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -57,7 +58,7 @@ int main(){
 	return 0;
 }
 
-T2
+# T2
 最难的一道题。首先我们可以考虑可以把成倍数关系的数放到一条链上面如下图所示
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -65,10 +66,11 @@ T2
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="20190824测试 – Haoyu Deng's page">
   <meta property="og:description" content="试题地址：njfls的一套NOIP模拟
-T1
+# T1
 大水模拟题，但是要用到一下结论 $\sum\limits_{i=0}^{\infty}d^i = \frac{1}{1-d}(0&amp;lt;d&amp;lt;1)$
-说白了就是等比数列求和公式趋近于正无穷的情况。虽然我还是谢了模拟
+说白了就是等比数列求和公式趋近于正无穷的情况。~~虽然我还是谢了模拟~~
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -107,7 +109,7 @@ int main(){
 	return 0;
 }
 
-T2
+# T2
 最难的一道题。首先我们可以考虑可以把成倍数关系的数放到一条链上面如下图所示
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -278,233 +280,236 @@ T2
   <article class="post">
 
     <div class="post__content">
-      <p>试题地址：<a href="https://share.weiyun.com/5rpkqSC">njfls的一套NOIP模拟</a></p>
-<h1 id="t1">T1</h1>
-<p>大水模拟题，但是要用到一下结论 $\sum\limits_{i=0}^{\infty}d^i = \frac{1}{1-d}(0&lt;d&lt;1)$
-说白了就是等比数列求和公式趋近于正无穷的情况。<del>虽然我还是谢了模拟</del>
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+      <p>试题地址：<a href="https://share.weiyun.com/5rpkqSC">njfls的一套NOIP模拟</a>
+# T1
+大水模拟题，但是要用到一下结论 $\sum\limits_{i=0}^{\infty}d^i = \frac{1}{1-d}(0&lt;d&lt;1)$
+说白了就是等比数列求和公式趋近于正无穷的情况。~~虽然我还是谢了模拟~~
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;cmath&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="n">acos</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-<span class="kt">double</span> <span class="n">theta</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">g</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">file</span><span class="p">(){</span>
-	<span class="n">freopen</span><span class="p">(</span><span class="s">"physics.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
-	<span class="n">freopen</span><span class="p">(</span><span class="s">"physics.out"</span><span class="p">,</span><span class="s">"w"</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">double</span> <span class="nf">work</span><span class="p">(){</span>
-	<span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-	<span class="kt">double</span> <span class="n">SIN</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">PI</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mi">180</span><span class="p">);</span>
-	<span class="kt">double</span> <span class="n">COS</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">PI</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">180.0</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">v</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">){</span>
-		<span class="kt">double</span> <span class="n">t</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">SIN</span><span class="o">/</span><span class="n">g</span><span class="o">*</span><span class="mf">2.0</span><span class="p">;</span>
-		<span class="n">ans</span> <span class="o">+=</span> <span class="n">v</span><span class="o">*</span><span class="n">COS</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
-		<span class="n">v</span><span class="o">*=</span><span class="n">d</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">file</span><span class="p">();</span>
-	<span class="kt">int</span> <span class="n">T</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">scanf</span><span class="p">(</span><span class="s">"%lf%lf%lf%lf"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">theta</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span><span class="o">&amp;</span><span class="n">d</span><span class="p">,</span><span class="o">&amp;</span><span class="n">g</span><span class="p">);</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">&lt;</span><span class="n">eps</span><span class="p">){</span>
-			<span class="kt">double</span> <span class="n">t</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">PI</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">180.0</span><span class="p">)</span><span class="o">/</span><span class="n">g</span><span class="o">*</span><span class="mf">2.0</span><span class="p">;</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"%.5lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">t</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">PI</span><span class="o">*</span><span class="n">theta</span><span class="o">/</span><span class="mf">180.0</span><span class="p">));</span>
-		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"%.5lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">work</span><span class="p">());</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="t2">T2</h1>
-<p>最难的一道题。首先我们可以考虑可以把成倍数关系的数放到一条链上面如下图所示</p>
+using namespace std;
+const double eps = 1e-6;
+const double PI = acos(-1);
+double theta,v,d,g;
+void file(){
+	freopen("physics.in","r",stdin);
+	freopen("physics.out","w",stdout);
+}
+double work(){
+	double ans = 0.0;
+	double SIN = sin(PI*theta/180);
+	double COS = cos(PI*theta/180.0);
+	while(v&gt;eps){
+		double t = v*SIN/g*2.0;
+		ans += v*COS*t;
+		v*=d;
+	}
+	return ans;
+}
+int main(){
+	file();
+	int T;scanf("%d",&amp;T);
+	while(T--){
+		scanf("%lf%lf%lf%lf",&amp;theta,&amp;v,&amp;d,&amp;g);
+		if(fabs(d)&lt;eps){
+			double t = v*sin(PI*theta/180.0)/g*2.0;
+			printf("%.5lf\n",t*v*cos(PI*theta/180.0));
+		}else{
+			printf("%.5lf\n",work());
+		}
+	}
+	return 0;
+}
+</code>
+# T2
+最难的一道题。首先我们可以考虑可以把成倍数关系的数放到一条链上面如下图所示</p>
 
 <p><img src="https://cdn.risingentropy.top/images/posts/d612d08ab64417884006e1c.png" alt="图片标题" />
 然后我们发现对于一条长度不为1的链，其实就是个类似于二分图的东西，于是乎它的贡献就是2，对于所有长度不为1的链的总贡献就是$2^c$现在考虑单独的点，既可以在A也可以在B，我们不妨记所有长度不为1的链的点的个数为$sum$，那么我们的答案就是\(s^c\times {sum-n \choose m-\frac{c}{2}}\).难点就在于如何计算长度不为1的链的条数，有一种做法是$O(n)$的枚举，但是显然过不了所有的点的，所以我们考虑log级别的算法，我们发现链长都是$2^k$的长度的，可以考虑枚举这个$k$,然后计算这个长度内所有的点数就好了,计算的时候注意代码细节。然后由于数量很大，所以需要使用<code class="language-plaintext highlighter-rouge">lucas</code>定理进行计算组合数。
-代码：(有大量代码细节！！！)</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
+代码：(有大量代码细节！！！)
+```cpp
+# include <iostream>
+# include <cstring>
+# include <cstdio>
 # define int long long
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">10000020</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">10000019</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">&gt;=</span><span class="n">mod</span><span class="o">?</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">-</span><span class="n">mod</span><span class="o">:</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="nf">sub</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="o">+</span><span class="n">mod</span><span class="o">:</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="nf">mul</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="mi">1LL</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="n">fac</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">rev</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">tmp</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">fp</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
-	<span class="n">fac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">fac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mod</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1ll</span><span class="o">*</span><span class="n">fac</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-	<span class="n">rev</span><span class="p">[</span><span class="n">mod</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">mod</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1ll</span><span class="o">*</span><span class="p">(</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">C</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="n">m</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">mul</span><span class="p">(</span><span class="n">mul</span><span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="n">rev</span><span class="p">[</span><span class="n">n</span><span class="p">]),</span><span class="n">rev</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">n</span><span class="p">]);</span>
-<span class="p">}</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">lucas</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="p">)</span><span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">mul</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="n">mod</span><span class="p">,</span><span class="n">m</span><span class="o">%</span><span class="n">mod</span><span class="p">),</span><span class="n">lucas</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">mod</span><span class="p">,</span><span class="n">m</span><span class="o">/</span><span class="n">mod</span><span class="p">));</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">calc</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">l</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">r</span><span class="p">){</span>
-	<span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="p">((</span><span class="n">l</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">r</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">));</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">A</span><span class="o">||</span><span class="n">x</span><span class="o">&gt;</span><span class="n">A</span><span class="o">+</span><span class="n">sum</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">mul</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">lucas</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">A</span><span class="p">,</span><span class="n">sum</span><span class="p">));</span>
-<span class="p">}</span>
-<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">init</span><span class="p">();</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">q</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;(</span><span class="mi">1ll</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">l</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="mi">1ll</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="mi">1ll</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span><span class="n">num</span> <span class="o">=</span> <span class="n">calc</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-		<span class="n">A</span><span class="o">+=</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2ll</span><span class="p">)</span><span class="o">*</span><span class="n">num</span><span class="p">;</span>
-		<span class="p">(</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1ll</span><span class="p">)</span><span class="o">?</span><span class="n">sum</span><span class="o">+=</span><span class="n">num</span><span class="o">:</span><span class="n">tmp</span> <span class="o">=</span> <span class="n">mul</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">fp</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">num</span><span class="o">%</span><span class="p">(</span><span class="n">mod</span><span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
-	<span class="p">}</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">query</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+using namespace std;
+const int MAXN = 10000020;
+const int mod = 10000019;
+int add(int a,int b){return a+b&gt;=mod?a+b-mod:a+b;}
+int sub(int a,int b){return a-b&lt;0?a-b+mod:a-b;}
+int mul(int a,int b){return 1LL*a*b%mod;}
+int fac[MAXN],rev[MAXN];
+long long n,sum,A,q,tmp=1;
+int fp(int b,int p){
+	int ans = 1;
+	while(p){
+		if(p&amp;1)ans = ans*b%mod;
+		b = b*b%mod;
+		p&gt;&gt;=1;
+	}
+	return ans;
+}
+void init(){
+	fac[0] = 1;fac[1] = 1;
+	for(int i = 2;i&lt;mod;i++)fac[i] = 1ll*fac[i-1]*i%mod;
+	rev[mod-1] = fp(fac[mod-1],mod-2);
+	for(int i = mod-2;i&gt;=0;i--)rev[i] = 1ll*(rev[i+1]*(i+1))%mod;
+}
+inline int C(int n,int m){
+	if(n&gt;m)return 0;
+	return mul(mul(fac[m],rev[n]),rev[m-n]);
+}
+inline int lucas(long long n,long long m){
+	if(!n)return 1;
+	return mul(C(n%mod,m%mod),lucas(n/mod,m/mod));
+}
+int calc(long long l,long long r){
+	return (r-l+1)/2+((l&amp;1)&amp;&amp;(r&amp;1));
+}
+int query(int x){
+	if(x&lt;A||x&gt;A+sum)return 0;
+	return mul(tmp,lucas(x-A,sum));
+}
+signed main(){
+	init();
+	scanf("%lld%lld",&amp;n,&amp;q);
+	for(int i = 1;(1ll&lt;&lt;(i-1))&lt;=n;i++){
+		long long l = n/(1ll&lt;&lt;i)+1,r = n/(1ll&lt;&lt;(i-1)),num = calc(l,r);
+		A+=(i/2ll)*num;
+		(i&amp;1ll)?sum+=num:tmp = mul(tmp,fp(2,num%(mod-1)));
+	}
+	long long x;
+	while(q--){
+		scanf("%lld",&amp;x);
+		printf("%lld\n",query(x));
+	}
+	return 0;
+}</cstdio></cstring></iostream></p>
 
-</code></pre></div></div>
-<h1 id="t3">T3</h1>
-<p>写挂了的线段树分治的板子题。艹我真的太菜了，什么都可以写挂，一个并查集写挂了，顺带把留给T2的时间也耗完了
-代码:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-# include &lt;vector&gt;
+<p><code class="language-plaintext highlighter-rouge">
+# T3
+写挂了的线段树分治的板子题。艹我真的太菜了，什么都可以写挂，一个并查集写挂了，顺带把留给T2的时间也耗完了
+代码:
+</code>cpp
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+# include <vector>
 # include &lt;map&gt;
 # define clear(x) memset(x,0,sizeof(x))
 # define int long long
-</span><span class="c1">//艹全局long long </span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">200010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">file</span><span class="p">(){</span>
-	<span class="n">freopen</span><span class="p">(</span><span class="s">"geography.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
-	<span class="n">freopen</span><span class="p">(</span><span class="s">"geography.out"</span><span class="p">,</span><span class="s">"w"</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="k">struct</span> <span class="nc">Q</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-	<span class="n">Q</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">)</span><span class="o">:</span><span class="n">f</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="n">t</span><span class="p">(</span><span class="n">t</span><span class="p">){}</span>
-	<span class="n">Q</span><span class="p">(){}</span>
-<span class="p">}</span><span class="n">qs</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">qcnt</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">opt</span><span class="p">{</span>
-	<span class="kt">int</span> <span class="n">op</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-	<span class="n">opt</span><span class="p">(</span><span class="kt">int</span> <span class="n">op</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">)</span><span class="o">:</span><span class="n">op</span><span class="p">(</span><span class="n">op</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="n">t</span><span class="p">(</span><span class="n">t</span><span class="p">){}</span>
-	<span class="n">opt</span><span class="p">(){}</span>
-<span class="p">}</span><span class="n">ops</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">op_cnt</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">re</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">sze</span><span class="p">;}</span><span class="n">stk</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="o">?</span><span class="n">x</span><span class="o">:</span><span class="n">find</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);}</span>
-<span class="kt">void</span> <span class="nf">unite</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">fy</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">fx</span><span class="o">==</span><span class="n">fy</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span><span class="o">&lt;</span><span class="n">sze</span><span class="p">[</span><span class="n">fy</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">fx</span><span class="p">,</span><span class="n">fy</span><span class="p">);</span>
-	<span class="n">fa</span><span class="p">[</span><span class="n">fy</span><span class="p">]</span> <span class="o">=</span> <span class="n">fx</span><span class="p">;</span>
-	<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">{</span><span class="n">fy</span><span class="p">,</span><span class="n">sze</span><span class="p">[</span><span class="n">fy</span><span class="p">]};</span>
-	<span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">{</span><span class="n">fx</span><span class="p">,</span><span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]};</span>
-	<span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">fy</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">undo</span><span class="p">(</span><span class="kt">int</span> <span class="n">curr</span><span class="p">){</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">stop</span><span class="o">&gt;</span><span class="n">curr</span><span class="p">){</span>
-		<span class="n">node</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">stk</span><span class="p">[</span><span class="n">stop</span><span class="o">--</span><span class="p">];</span>
-		<span class="n">fa</span><span class="p">[</span><span class="n">pre</span><span class="p">.</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-		<span class="n">sze</span><span class="p">[</span><span class="n">pre</span><span class="p">.</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="n">sze</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">id</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">id</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">id</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">rev</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="k">return</span> <span class="n">re</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">res</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">stop</span><span class="p">,</span><span class="n">cur_ans</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">qs</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">qs</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]].</span><span class="n">t</span><span class="p">;</span>
-		<span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="n">fy</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">fx</span><span class="o">==</span><span class="n">fy</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
-		<span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="p">(</span><span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">fy</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">*</span><span class="n">rev</span><span class="p">(</span><span class="n">sze</span><span class="p">[</span><span class="n">fx</span><span class="p">]))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">*</span><span class="n">rev</span><span class="p">(</span><span class="n">sze</span><span class="p">[</span><span class="n">fy</span><span class="p">]))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">ans</span><span class="o">%=</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">unite</span><span class="p">(</span><span class="n">fx</span><span class="p">,</span><span class="n">fy</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>
-		<span class="n">res</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-		<span class="n">undo</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span><span class="n">ans</span> <span class="o">=</span> <span class="n">cur_ans</span><span class="p">;</span>
-		<span class="k">return</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="n">dfs</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span><span class="n">dfs</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-	<span class="n">undo</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span><span class="n">ans</span> <span class="o">=</span> <span class="n">cur_ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="n">map</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">tme</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="n">exid</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ps</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+//艹全局long long 
+using namespace std;
+const int MAXN = 200010;
+const int mod = 1000000007;
+int n,m;
+void file(){
+	freopen("geography.in","r",stdin);
+	freopen("geography.out","w",stdout);
+}
+struct Q{int f,t;
+	Q(int f,int t):f(f),t(t){}
+	Q(){}
+}qs[MAXN];int qcnt;
+struct opt{
+	int op,f,t;
+	opt(int op,int f,int t):op(op),f(f),t(t){}
+	opt(){}
+}ops[MAXN];int op_cnt;
+int re[MAXN];
+struct node{int x,sze;}stk[MAXN];int stop;
+int fa[MAXN],sze[MAXN];
+int find(int x){return fa[x]==x?x:find(fa[x]);}
+void unite(int x,int y){
+	int fx = find(x),fy = find(y);
+	if(fx==fy)return;
+	if(sze[fx]&lt;sze[fy])swap(fx,fy);
+	fa[fy] = fx;
+	stk[++stop] = node{fy,sze[fy]};
+	stk[++stop] = node{fx,sze[fx]};
+	sze[fx] = sze[fx]+sze[fy];
+}
+void undo(int curr){
+	while(stop&gt;curr){
+		node pre = stk[stop--];
+		fa[pre.x] = pre.x;
+		sze[pre.x] = pre.sze;
+	}
+}
+vector<int> tree[MAXN&lt;&lt;2];
+void modify(int k,int l,int r,int x,int y,int id){
+	if(l&gt;=x&amp;&amp;r&lt;=y)return (void)tree[k].push_back(id);
+	int mid = l+r&gt;&gt;1;
+	if(x&lt;=mid)modify(k&lt;&lt;1,l,mid,x,y,id);
+	if(y&gt;mid)modify(k&lt;&lt;1|1,mid+1,r,x,y,id);
+}
+int rev(int x){
+	return re[x];
+}
+int ans = 1;
+int res[MAXN];
+void dfs(int k,int l,int r){
+	int curr = stop,cur_ans = ans;
+	for(int i = 0;i&lt;tree[k].size();i++){
+		int f = qs[tree[k][i]].f,t = qs[tree[k][i]].t;
+		int fx = find(f),fy = find(t);
+		if(fx==fy)continue;
+		ans = ans*(sze[fx]+sze[fy])%mod;
+		ans = (ans*rev(sze[fx]))%mod;
+		ans = (ans*rev(sze[fy]))%mod;
+		ans%=mod;
+		unite(fx,fy);
+	}
+	if(l==r){
+		res[l] = ans;
+		undo(curr);ans = cur_ans;
+		return;
+	}
+	int mid = l+r&gt;&gt;1;
+	dfs(k&lt;&lt;1,l,mid);dfs(k&lt;&lt;1|1,mid+1,r);
+	undo(curr);ans = cur_ans;
+}
+map&lt;pair&lt;int,int&gt; ,int&gt; tme;
+bool exid[MAXN];
+pair&lt;int,int&gt; ps[MAXN];</int></vector></cstdio></cstring></iostream></p>
 
-<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span><span class="n">sze</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">op</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-	<span class="n">re</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">re</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mod</span><span class="o">-</span><span class="n">mod</span><span class="o">/</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">re</span><span class="p">[</span><span class="n">mod</span><span class="o">%</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">op</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
-		<span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">op</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">op</span><span class="p">,</span><span class="n">f</span><span class="o">=</span>  <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
-			<span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-			<span class="n">tme</span><span class="p">[</span><span class="n">make_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">)]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-			<span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-			<span class="n">qs</span><span class="p">[</span><span class="o">++</span><span class="n">qcnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-			<span class="kt">int</span> <span class="n">st</span> <span class="o">=</span> <span class="n">tme</span><span class="p">[</span><span class="n">make_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">)];</span>
-			<span class="n">modify</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">st</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">qcnt</span><span class="p">);</span>
-			<span class="n">tme</span><span class="p">[</span><span class="n">make_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">tme</span><span class="p">[</span><span class="n">make_pair</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">)]){</span>
-			<span class="n">qs</span><span class="p">[</span><span class="o">++</span><span class="n">qcnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
-			<span class="n">modify</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">tme</span><span class="p">[</span><span class="n">make_pair</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">)],</span><span class="n">m</span><span class="p">,</span><span class="n">qcnt</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<p>signed main(){
+	scanf(“%lld%lld”,&amp;n,&amp;m);
+	for(int i = 1;i&lt;=n;i++)fa[i] = i,sze[i] = 1;
+	int op,f,t;
+	re[1] = 1;
+	for(int i = 2;i&lt;=n;i++)re[i] = (mod-mod/i)*re[mod%i]%mod;
+	for(int i = 1;i&lt;=m;i++){
+		scanf(“%lld%lld%lld”,&amp;op,&amp;f,&amp;t);
+		ops[i] = opt(op,f,t);
+	}
+	for(int i = 1;i&lt;=m;i++){
+		op = ops[i].op,f=  ops[i].f,t = ops[i].t;
+		if(op==1){
+			ps[i] = make_pair(f,t);
+			tme[make_pair(f,t)] = i;
+		}else{
+			ps[i] = make_pair(f,t);
+			qs[++qcnt] = Q(f,t);
+			int st = tme[make_pair(f,t)];
+			modify(1,1,m,st,i-1,qcnt);
+			tme[make_pair(f,t)] = 0;
+		}
+	}
+	for(int i = 1;i&lt;=m;i++){
+		if(tme[make_pair(ops[i].f,ops[i].t)]){
+			qs[++qcnt] = Q(ops[i].f,ops[i].t);
+			modify(1,1,m,tme[make_pair(ops[i].f,ops[i].t)],m,qcnt);
+		}
+	}
+	dfs(1,1,m);
+	for(int i = 1;i&lt;=m;i++)printf(“%d\n”,res[i]);
+	return 0;
+}
+```</p>
 
     </div>
 

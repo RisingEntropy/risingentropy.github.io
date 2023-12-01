@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="左偏树">左偏树</h1>
+      <h1 id="section">左偏树</h1>
 <p>左偏树是可并堆得一种实现方式。</p>
 
 <ul>
@@ -201,13 +201,13 @@
   <li>左偏树的基本操作：合并</li>
 </ul>
 
-<h1 id="左偏树的性质">左偏树的性质</h1>
+<h1 id="section-1">左偏树的性质</h1>
 <ul>
   <li>满足左偏的性质：左儿子斜深度大于右孩子斜深度</li>
   <li>堆性质：键值满足堆性质</li>
 </ul>
 
-<h1 id="左偏树的结论">左偏树的结论</h1>
+<h1 id="section-2">左偏树的结论</h1>
 <ul>
   <li>每个节点的左右子树都是一颗左偏树</li>
   <li>当前节点的斜深度=右孩子斜深度+1</li>
@@ -215,7 +215,7 @@
   <li>一棵N个结点的左偏树，斜深度最大为$log(N+1)-1$</li>
 </ul>
 
-<h1 id="支持的操作">支持的操作</h1>
+<h1 id="section-3">支持的操作</h1>
 <ul>
   <li>初始化一颗空树</li>
   <li>加入一个元素</li>
@@ -224,77 +224,79 @@
   <li>删除最大最小节点</li>
 </ul>
 
-<h1 id="操作">操作</h1>
-<p>合并(核心操作)</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">k1</span><span class="p">,</span><span class="kt">int</span> <span class="n">k2</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">k1</span><span class="o">==</span><span class="mi">0</span><span class="o">||</span><span class="n">k2</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">k1</span><span class="o">+</span><span class="n">k2</span><span class="p">;</span><span class="c1">//k1 或 k2至少有一颗是空树</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">w</span><span class="o">&gt;</span><span class="n">tree</span><span class="p">[</span><span class="n">k2</span><span class="p">].</span><span class="n">w</span><span class="p">)</span><span class="n">swap</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">);</span><span class="c1">//满足左边根的边权大于右边</span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">r</span><span class="p">);</span><span class="c1">//合并，左偏树在右节点合并</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">l</span><span class="p">].</span><span class="n">d</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k2</span><span class="p">]].</span><span class="n">d</span><span class="p">)</span><span class="n">swap</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">r</span><span class="p">);</span><span class="c1">//维护左偏的性质 </span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">d</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">].</span><span class="n">r</span><span class="p">].</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="c1">//父节点的斜深度等于右儿子的斜深度+1 </span>
-	<span class="k">return</span> <span class="n">k1</span><span class="p">;</span> 
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="例题">例题</h1>
-<p>woj2161 国王游戏
+<h1 id="section-4">操作</h1>
+<p>合并(核心操作)
+<code class="language-plaintext highlighter-rouge">cpp
+int merge(int k1,int k2){
+	if(k1==0||k2==0)return k1+k2;//k1 或 k2至少有一颗是空树
+	if(tree[k1].w&gt;tree[k2].w)swap(k1,k2);//满足左边根的边权大于右边
+	tree[k1].r = merge(k2,tree[k1].r);//合并，左偏树在右节点合并
+	if(tree[tree[k1].l].d&lt;tree[tree[k2]].d)swap(tree[k1].l,tree[k1].r);//维护左偏的性质 
+	tree[k1].d = tree[tree[k1].r].d+1;//父节点的斜深度等于右儿子的斜深度+1 
+	return k1; 
+}
+</code>
+# 例题
+woj2161 国王游戏
 题意：2个操作
 1.合并2个集合
-2.查询1个点所在集合的最小值，并删除该点，如果这个点已经被删除则输出0</p>
-<h1 id="解答">解答</h1>
-<p>左偏树板子题。合并集合：并查集。最大最小值：左偏树.数组vis记录是否被杀死。杀人就是把它的子树合并起来。代码(这题卡常)</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstring&gt;
+2.查询1个点所在集合的最小值，并删除该点，如果这个点已经被删除则输出0
+# 解答
+左偏树板子题。合并集合：并查集。最大最小值：左偏树.数组vis记录是否被杀死。杀人就是把它的子树合并起来。代码(这题卡常)
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstring&gt;
 # include &lt;vector&gt;
 # include &lt;queue&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1000010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">root</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="o">?</span><span class="n">x</span><span class="o">:</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);}</span>
-<span class="kt">int</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">k1</span><span class="p">,</span><span class="kt">int</span> <span class="n">k2</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">k1</span><span class="o">==</span><span class="mi">0</span><span class="o">||</span><span class="n">k2</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">k1</span><span class="o">+</span><span class="n">k2</span><span class="p">;</span><span class="c1">//k1 或 k2至少有一颗是空树</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">k2</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">);</span><span class="c1">//满足左边根的边权大于右边</span>
-	<span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span><span class="c1">//合并，左偏树在右节点合并</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">1</span><span class="p">]])</span><span class="n">swap</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span><span class="c1">//维护左偏的性质 </span>
-	<span class="n">dep</span><span class="p">[</span><span class="n">k1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="c1">//父节点的斜深度等于右儿子的斜深度+1 </span>
-	<span class="k">return</span> <span class="n">k1</span><span class="p">;</span> 
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">del</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-    	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="n">fa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">root</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">m</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
-    <span class="kt">char</span> <span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">m</span><span class="o">--</span><span class="p">){</span>
-    	<span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
-    	<span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'M'</span><span class="p">){</span>
-    		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-    		<span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">||</span><span class="n">vis</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-    		<span class="n">x</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">y</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-    		<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
-    		<span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-    		<span class="n">root</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">root</span><span class="p">[</span><span class="n">y</span><span class="p">]);</span>
-    	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-    		<span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
-    		<span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
-    			<span class="n">printf</span><span class="p">(</span><span class="s">"0</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-    			<span class="n">x</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    			<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">val</span><span class="p">[</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">]]);</span>
-    			<span class="n">vis</span><span class="p">[</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    			<span class="n">del</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-    		<span class="p">}</span>
-    	<span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 1000010;
+int fa[MAXN],root[MAXN],tree[MAXN][2],dep[MAXN];
+bool vis[MAXN];
+int val[MAXN];
+int find(int x){return fa[x]==x?x:fa[x] = find(fa[x]);}
+int merge(int k1,int k2){
+	if(k1==0||k2==0)return k1+k2;//k1 或 k2至少有一颗是空树
+	if(val[k1]&gt;val[k2])swap(k1,k2);//满足左边根的边权大于右边
+	tree[k1][1] = merge(k2,tree[k1][1]);//合并，左偏树在右节点合并
+	if(dep[tree[k1][0]]&lt;dep[tree[k1][1]])swap(tree[k1][0],tree[k1][1]);//维护左偏的性质 
+	dep[k1] = dep[tree[k1][1]]+1;//父节点的斜深度等于右儿子的斜深度+1 
+	return k1; 
+}
+void del(int &amp;x){
+	x = merge(tree[x][0],tree[x][1]);
+}
+int main(){
+    int n;scanf("%d",&amp;n);
+    for(int i = 1;i&lt;=n;i++){
+    	scanf("%d",&amp;val[i]);fa[i] = i;root[i] = i;
+    }
+    int m;scanf("%d",&amp;m);
+    char c[5];int x,y;
+	while(m--){
+    	scanf("%s",c);
+    	if(c[0]=='M'){
+    		scanf("%d%d",&amp;x,&amp;y);
+    		if(vis[x]||vis[y])continue;
+    		x = find(x),y = find(y);
+    		if(x == y)continue;
+    		fa[x] = y;
+    		root[y] = merge(root[x],root[y]);
+    	}else{
+    		scanf("%d",&amp;x);
+    		if(vis[x]){
+    			printf("0\n");
+    		}else{
+    			x = find(x);
+    			printf("%d\n",val[root[x]]);
+    			vis[root[x]] = true;
+    			del(root[x]);
+    		}
+    	}
+    }
+    return 0;
+}
+</code></p>
 
 
     </div>

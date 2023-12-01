@@ -16,7 +16,7 @@
   <meta name="twitter:title" content="图的学习 – Haoyu Deng's page">
   <meta name="twitter:description" content="定义
 点用边连接起来就是图，严格的讲，图是一种数据结构，定义为graph = (V,E),V是一个有限非空集合，代表定点，E是边的集合
-概念
+# 概念
 1节点的度：无向图中与节点相连接的边的数目，叫节点的度
 2节点的入度：在有向图中，以这个节点为终点的有向边的数目
 3节点的出度：以该节点为起点的有向边的数目
@@ -25,15 +25,13 @@
 8：回路：起点和终点相同的路径，称为回路or环
 9.完全图：一个n阶的完全无向图含有n(n-1)/2条边；一个n阶的完全有向图含有n(n-1)条边
 10.强连通分量：有向图中任意两点都连通的最大子图。特别地，单个点也算强连通分量
-表示方法
+# 表示方法
 1.二维数组邻接矩阵表示:
 int G[101][101];
 G[i][j]表示i到j的边的权值，有如下定义：
-
-  G[i][j]当其值为1or权值时，i到j连通
+&amp;gt;G[i][j]当其值为1or权值时，i到j连通
 G[i][j]为0或$\infty$时，i、j不连通
 全是废话，你自己懂的
-
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -41,7 +39,7 @@ G[i][j]为0或$\infty$时，i、j不连通
   <meta property="og:title" content="图的学习 – Haoyu Deng's page">
   <meta property="og:description" content="定义
 点用边连接起来就是图，严格的讲，图是一种数据结构，定义为graph = (V,E),V是一个有限非空集合，代表定点，E是边的集合
-概念
+# 概念
 1节点的度：无向图中与节点相连接的边的数目，叫节点的度
 2节点的入度：在有向图中，以这个节点为终点的有向边的数目
 3节点的出度：以该节点为起点的有向边的数目
@@ -50,15 +48,13 @@ G[i][j]为0或$\infty$时，i、j不连通
 8：回路：起点和终点相同的路径，称为回路or环
 9.完全图：一个n阶的完全无向图含有n(n-1)/2条边；一个n阶的完全有向图含有n(n-1)条边
 10.强连通分量：有向图中任意两点都连通的最大子图。特别地，单个点也算强连通分量
-表示方法
+# 表示方法
 1.二维数组邻接矩阵表示:
 int G[101][101];
 G[i][j]表示i到j的边的权值，有如下定义：
-
-  G[i][j]当其值为1or权值时，i到j连通
+&amp;gt;G[i][j]当其值为1or权值时，i到j连通
 G[i][j]为0或$\infty$时，i、j不连通
 全是废话，你自己懂的
-
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -228,52 +224,47 @@ G[i][j]为0或$\infty$时，i、j不连通
   <article class="post">
 
     <div class="post__content">
-      <h1 id="定义">定义</h1>
-<p>点用边连接起来就是图，严格的讲，图是一种数据结构，定义为graph = (V,E),V是一个有限非空集合，代表定点，E是边的集合</p>
-<h1 id="概念">概念</h1>
-<p>1节点的度：无向图中与节点相连接的边的数目，叫节点的度
+      <h1 id="section">定义</h1>
+<p>点用边连接起来就是图，严格的讲，图是一种数据结构，定义为graph = (V,E),V是一个有限非空集合，代表定点，E是边的集合
+# 概念
+1节点的度：无向图中与节点相连接的边的数目，叫节点的度
 2节点的入度：在有向图中，以这个节点为终点的有向边的数目
 3节点的出度：以该节点为起点的有向边的数目
 4权值：边的费用
 5：连通：若图中节点U，V之间存在一条从U通过若干条边、点之后到达V的通路，则称U、V是连通的
 8：回路：起点和终点相同的路径，称为回路or环
 <strong>9.完全图：一个n阶的完全无向图含有n<em>(n-1)/2条边；一个n阶的完全有向图含有n</em>(n-1)条边</strong>
-<strong>10.强连通分量：有向图中任意两点都连通的<em>最大</em>子图。特别地，单个点也算强连通分量</strong></p>
-<h1 id="表示方法">表示方法</h1>
-<p>1.二维数组邻接矩阵表示:
+<strong>10.强连通分量：有向图中任意两点都连通的<em>最大</em>子图。特别地，单个点也算强连通分量</strong>
+# 表示方法
+1.二维数组邻接矩阵表示:
 int G[101][101];
-G[i][j]表示i到j的边的权值，有如下定义：</p>
-<blockquote>
-  <p>G[i][j]当其值为1or权值时，i到j连通
+G[i][j]表示i到j的边的权值，有如下定义：
+&gt;G[i][j]当其值为1or权值时，i到j连通
 G[i][j]为0或$\infty$时，i、j不连通
 全是废话，你自己懂的</p>
-</blockquote>
 
-<p>2数组模拟邻接表存储(其实和数组储存树差不多)</p>
-<blockquote>
-  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">graph</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">next</span><span class="p">,</span><span class="n">to</span><span class="p">,</span><span class="n">dis</span><span class="p">;</span>
-<span class="p">}</span><span class="n">G</span><span class="p">[</span><span class="mi">5000</span><span class="err">}</span><span class="p">;</span>
-</code></pre></div>  </div>
-  <p>然后老套路</p>
-</blockquote>
+<p>2数组模拟邻接表存储(其实和数组储存树差不多)
+&gt;<code class="language-plaintext highlighter-rouge">cpp
+struct graph{
+    int next,to,dis;
+}G[5000};
+</code>
+然后老套路</p>
 
-<h1 id="图的遍历">图的遍历：</h1>
+<h1 id="section-1">图的遍历：</h1>
 
 <blockquote>
   <p>1广度优先dfs//个人认为有向无环图不需要判断visited,但是有向或有环的话必须
  2.宽度优先bfs(基本不用，麻烦得一批)复杂度O(m+n)很短了</p>
 </blockquote>
 
-<h1 id="一笔画问题欧拉回路不重复走过所有路径的回路">一笔画问题(欧拉回路)不重复走过所有路径的回路</h1>
-<p>俩定理(图论还是小学奥数？人性堕落还是道德沦陷？鬼知道)</p>
-<blockquote>
-  <p>1.存在欧拉回路的调价：图是连通的，有且仅有2个奇点
+<h1 id="section-2">一笔画问题(欧拉回路)不重复走过所有路径的回路</h1>
+<p>俩定理(图论还是小学奥数？人性堕落还是道德沦陷？鬼知道)
+ &gt;1.存在欧拉回路的调价：图是连通的，有且仅有2个奇点
  2.存在欧拉回路的调价:图是联通的，存在0个奇点
  注意G[i][j]=G[j][i] = Unreachable 对应两个点访问过就标记不可达，否则StackOverflowError</p>
-</blockquote>
 
-<h1 id="哈密尔顿环">哈密尔顿环</h1>
+<h1 id="section-3">哈密尔顿环</h1>
 <p>不重复走过所有路径，并能回到原点的回路</p>
 
 

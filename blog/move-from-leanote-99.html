@@ -14,7 +14,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="省事板子 – Haoyu Deng's page">
-  <meta name="twitter:description" content="const int MAXN = 101;
+  <meta name="twitter:description" content="cpp
+const int MAXN = 101;
 struct edge{
     int t,w,next;
 }edges[MAXN&amp;lt;&amp;lt;1];
@@ -28,6 +29,7 @@ void add(int f,int t,int w) {
 }
 
 SPFA
+cpp
 void spfa(){
 	memset(dis,-1,sizeof(dis));
 	memset(vis,false,sizeof(vis));
@@ -54,6 +56,7 @@ void spfa(){
 }
 
 dijkstra自己多写dij，免得写错
+cpp
 struct node{
 	int f,w;
 	bool operator&amp;lt;(const node &amp;amp;n2)const{
@@ -86,6 +89,7 @@ void dijkstra(){
 	}
 }
 
+
 int read(){
     int x = 0,f = 1;
     static char c = getchar();
@@ -95,6 +99,7 @@ int read(){
 }
 
 dzyo读优
+
 inline char nc() {
 	static char ibuf[RLEN],*ib,*ob;
 	(ib==ob) &amp;amp;&amp;amp; (ob=(ib=ibuf)+fread(ibuf,1,RLEN,stdin));
@@ -113,7 +118,8 @@ inline int rd() {
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="省事板子 – Haoyu Deng's page">
-  <meta property="og:description" content="const int MAXN = 101;
+  <meta property="og:description" content="cpp
+const int MAXN = 101;
 struct edge{
     int t,w,next;
 }edges[MAXN&amp;lt;&amp;lt;1];
@@ -127,6 +133,7 @@ void add(int f,int t,int w) {
 }
 
 SPFA
+cpp
 void spfa(){
 	memset(dis,-1,sizeof(dis));
 	memset(vis,false,sizeof(vis));
@@ -153,6 +160,7 @@ void spfa(){
 }
 
 dijkstra自己多写dij，免得写错
+cpp
 struct node{
 	int f,w;
 	bool operator&amp;lt;(const node &amp;amp;n2)const{
@@ -185,6 +193,7 @@ void dijkstra(){
 	}
 }
 
+
 int read(){
     int x = 0,f = 1;
     static char c = getchar();
@@ -194,6 +203,7 @@ int read(){
 }
 
 dzyo读优
+
 inline char nc() {
 	static char ibuf[RLEN],*ib,*ob;
 	(ib==ob) &amp;amp;&amp;amp; (ob=(ib=ibuf)+fread(ibuf,1,RLEN,stdin));
@@ -376,88 +386,93 @@ inline int rd() {
   <article class="post">
 
     <div class="post__content">
-      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">101</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>SPFA</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">spfa</span><span class="p">(){</span>
-	<span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
-	<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
-	<span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">vis</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-	<span class="n">dis</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-		<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-		<span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-		<span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
-				<span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
-					<span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-					<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>dijkstra自己多写dij，免得写错</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
-	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-	<span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">node</span> <span class="o">&amp;</span><span class="n">n2</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
-		<span class="k">return</span> <span class="n">w</span><span class="o">&gt;</span><span class="n">n2</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">};</span>
-<span class="kt">void</span> <span class="nf">dijkstra</span><span class="p">(){</span>
-	<span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
-	<span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="o">-</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
-	<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
-	<span class="n">node</span> <span class="n">temp</span><span class="p">;</span>
-	<span class="n">temp</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">dis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">temp</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
-	<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
-		<span class="n">node</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-		<span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-		<span class="n">vis</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
-				<span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-				<span class="n">temp</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-				<span class="n">temp</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-				<span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int read(){
+      <p><code class="language-plaintext highlighter-rouge">cpp
+const int MAXN = 101;
+struct edge{
+    int t,w,next;
+}edges[MAXN&lt;&lt;1];
+int head[MAXN];
+int top;
+void add(int f,int t,int w) {
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+</code>
+SPFA
+<code class="language-plaintext highlighter-rouge">cpp
+void spfa(){
+	memset(dis,-1,sizeof(dis));
+	memset(vis,false,sizeof(vis));
+	queue&lt;int&gt; q;
+	int s = 0;
+	vis[s] = true;
+	dis[s] = 0;
+	q.push(s);
+	while(!q.empty()){
+		int top = q.front();
+		q.pop();
+		vis[top] = false;
+		for(int i = head[top];i!=0;i = edges[i].next){
+			int t = edges[i].t;
+			if(dis[t]&lt;dis[top]+edges[i].w){
+				dis[t] = dis[top]+edges[i].w;
+				if(!vis[t]){
+					vis[t] = true;
+					q.push(t);
+				}
+			}
+		}
+	}
+}
+</code>
+dijkstra自己多写dij，免得写错
+<code class="language-plaintext highlighter-rouge">cpp
+struct node{
+	int f,w;
+	bool operator&lt;(const node &amp;n2)const{
+		return w&gt;n2.w;
+	}
+};
+void dijkstra(){
+	priority_queue&lt;node&gt; q;
+	memset(dis,-0x3f,sizeof(dis));
+	memset(vis,false,sizeof(vis));
+	node temp;
+	temp.f = 0;
+	dis[0] = 0;
+	temp.w = 1;
+	q.push(temp);
+	while(!q.empty()){
+		node top = q.top();
+		q.pop();
+		if(vis[top.f])continue;
+		vis[top.f] = true;
+		for(int i = head[top.f];i!=0;i = edges[i].next){
+			int t = edges[i].t;
+			if(dis[t]&lt;dis[top.f]+edges[i].w){
+				dis[t]=dis[top.f]+edges[i].w;
+				temp.f = t;
+				temp.w = dis[top.f]+edges[i].w;
+				q.push(temp);
+			}
+		}
+	}
+}
+</code>
+<code class="language-plaintext highlighter-rouge">
+int read(){
     int x = 0,f = 1;
     static char c = getchar();
     while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
     while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+(c^'0');c = getchar(); }
     return x*f;
 }
-</code></pre></div></div>
-<p>dzyo读优</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline char nc() {
+</code>
+dzyo读优
+<code class="language-plaintext highlighter-rouge">
+inline char nc() {
 	static char ibuf[RLEN],*ib,*ob;
 	(ib==ob) &amp;&amp; (ob=(ib=ibuf)+fread(ibuf,1,RLEN,stdin));
 	return (ib==ob) ? -1 : *ib++;
@@ -468,11 +483,12 @@ inline int rd() {
 	while(isdigit(ch)) {i=(i&lt;&lt;1)+(i&lt;&lt;3)+ch-'0'; ch=nc();}
 	return i*f;
 }
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-struct IO
+</code>
+```</p>
+
+<p>struct IO
 {
-    streambuf *ib,*ob;
+    streambuf <em>ib,</em>ob;
     int buf[50];
     inline void init()
     {
@@ -483,19 +499,19 @@ struct IO
     inline int read()
     {
         char ch=ib-&gt;sbumpc();int i=0,f=1;
-        while(!isdigit(ch)){if(ch=='-')f=-1;ch=ib-&gt;sbumpc();}
-        while(isdigit(ch)){i=(i&lt;&lt;1)+(i&lt;&lt;3)+ch-'0';ch=ib-&gt;sbumpc();}
+        while(!isdigit(ch)){if(ch==’-‘)f=-1;ch=ib-&gt;sbumpc();}
+        while(isdigit(ch)){i=(i«1)+(i«3)+ch-‘0’;ch=ib-&gt;sbumpc();}
         return i*f;
     }
     inline void W(int x)
     {
-        if(!x){ob-&gt;sputc('0');return;}
-        if(x&lt;0){ob-&gt;sputc('-');x=-x;}
+        if(!x){ob-&gt;sputc(‘0’);return;}
+        if(x&lt;0){ob-&gt;sputc(‘-‘);x=-x;}
         while(x){buf[++buf[0]]=x%10,x/=10;}
-        while(buf[0])ob-&gt;sputc(buf[buf[0]--]+'0');
+        while(buf[0])ob-&gt;sputc(buf[buf[0]–]+’0’);
     }
 }io;
-</code></pre></div></div>
+```</p>
 
     </div>
 

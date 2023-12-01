@@ -14,7 +14,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ST快速查询区间最值板子 – Haoyu Deng's page">
-  <meta name="twitter:description" content="int max = ....;
+  <meta name="twitter:description" content="cpp
+int max = ....;
 int logN = 20;//自己改，值是log2 N
 int a[],F[max][logN],int log2[];
 cin&amp;gt;&amp;gt;a;
@@ -38,7 +39,8 @@ for(int j :1...logN)
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="ST快速查询区间最值板子 – Haoyu Deng's page">
-  <meta property="og:description" content="int max = ....;
+  <meta property="og:description" content="cpp
+int max = ....;
 int logN = 20;//自己改，值是log2 N
 int a[],F[max][logN],int log2[];
 cin&amp;gt;&amp;gt;a;
@@ -226,25 +228,26 @@ for(int j :1...logN)
   <article class="post">
 
     <div class="post__content">
-      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="p">....;</span>
-<span class="kt">int</span> <span class="n">logN</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span><span class="c1">//自己改，值是log2 N</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[],</span><span class="n">F</span><span class="p">[</span><span class="n">max</span><span class="p">][</span><span class="n">logN</span><span class="p">],</span><span class="kt">int</span> <span class="n">log2</span><span class="p">[];</span>
-<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">;</span>
-<span class="n">log2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="mf">1.</span><span class="p">..</span><span class="n">N</span><span class="p">){</span>
-    <span class="n">log</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">log</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">:</span><span class="mf">1.</span><span class="p">..</span><span class="n">logN</span><span class="p">)</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
-    <span class="k">for</span><span class="p">(</span><span class="err">每个询问</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">s</span><span class="p">,</span><span class="n">e</span><span class="p">;</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="o">&gt;&gt;</span><span class="n">e</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">tem</span> <span class="o">=</span> <span class="n">logN</span><span class="p">[</span><span class="n">e</span><span class="o">-</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span><span class="c1">// log2(e-s+1)的向下取整的值</span>
-        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">tem</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">e</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">tem</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">tem</span><span class="p">]);</span>
-        <span class="p">}</span>
-</code></pre></div></div>
+      <p><code class="language-plaintext highlighter-rouge">cpp
+int max = ....;
+int logN = 20;//自己改，值是log2 N
+int a[],F[max][logN],int log2[];
+cin&gt;&gt;a;
+log2[0] = -1;
+for(1...N){
+    log[i] = log[i/2]+1;
+    F[i][0] = a[i];
+}
+for(int j :1...logN)
+    for(int i = 1;i+(1&lt;&lt;j)-1&lt;=N;i++)
+        F[i][j] = max(F[i][j-1],F[i+(1&lt;&lt;j-1)][j-1]);
+    for(每个询问){
+        int s,e;
+        cin&gt;&gt;s&gt;&gt;e;
+        int tem = logN[e-s+1];// log2(e-s+1)的向下取整的值
+        cout&lt;&lt;max(f[s][tem],F[e-(1&lt;&lt;tem)+1][tem]);
+        }
+</code></p>
 
     </div>
 

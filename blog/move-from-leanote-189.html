@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>一棵n个点的树，每个点的初始权值为1。对于这棵树有q个操作，每个操作为以下四种操作之一：</p>
 
 <ul>
@@ -223,138 +223,137 @@
 输入样例# 1： 
 3 2
 1 2
-2 3</p>
-<ul>
-  <li>1 3 4
+2 3
+* 1 3 4
 / 1 1
 输出样例# 1： 
 4
 说明
-10%的数据保证，1&lt;=n，q&lt;=2000</li>
-</ul>
+10%的数据保证，1&lt;=n，q&lt;=2000</p>
 
 <p>另外15%的数据保证，1&lt;=n，q&lt;=5*10^4，没有-操作，并且初始树为一条链</p>
 
 <p>另外35%的数据保证，1&lt;=n，q&lt;=5*10^4，没有-操作</p>
 
-<p>100%的数据保证，1&lt;=n，q&lt;=10^5，0&lt;=c&lt;=10^4</p>
-<h1 id="解答">解答</h1>
-<p>lct板子题。就是打标记<del>不就是打标记嘛，我就是打不出来。。。。</del>注意，因为乘法优先级高于加法，所有先处理乘法标记，处理加法，这样才不会因为加法标记而影响乘法。</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstdio&gt;
+<p>100%的数据保证，1&lt;=n，q&lt;=10^5，0&lt;=c&lt;=10^4
+#  解答
+lct板子题。就是打标记~~不就是打标记嘛，我就是打不出来。。。。~~注意，因为乘法优先级高于加法，所有先处理乘法标记，处理加法，这样才不会因为加法标记而影响乘法。
+```cpp
+# include <iostream>
+# include <cstdio>
 # define YL 51061
 # define lc c[x][0]
 # define rc c[x][1]
 # define mul(x) x*=c;x%=YL
 # define add(x,c) x+=c;x%=YL
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">51061</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">tag</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">add</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">mul</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">,</span><span class="n">stk</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="nf">isroot</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="o">!</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">||</span><span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="n">tree</span><span class="p">[</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="o">!=</span><span class="n">tree</span><span class="p">[</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]][</span><span class="mi">0</span><span class="p">]);}</span>
-<span class="kt">int</span> <span class="nf">which</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">sum</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="n">sum</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span><span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="mi">1</span><span class="p">;}</span>
+using namespace std;
+const int MAXN = 100010;
+const long long mod = 51061;
+long long tree[MAXN][2],sze[MAXN],sum[MAXN],tag[MAXN],add[MAXN],mul[MAXN],fa[MAXN],val[MAXN];
+int top,stk[MAXN];
+bool isroot(int x){return !fa[x]||(x!=tree[fa[x]][1]&amp;&amp;x!=tree[fa[x]][0]);}
+int which(int x){return tree[fa[x]][1]==x;}
+void pushup(int x){sum[x]=sum[tree[x][1]]+sum[tree[x][0]]+val[x]%mod;sze[x]=sze[tree[x][1]]+sze[tree[x][0]]+1;}</cstdio></iostream></p>
 
-<span class="kt">void</span> <span class="nf">pushdownadd</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">){</span>
-    <span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-    <span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">pushdownmul</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">){</span>
-    <span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-    <span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-    <span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-    <span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">v</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="mi">1</span><span class="p">)</span><span class="n">pushdownmul</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]),</span><span class="n">pushdownmul</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]),</span><span class="n">mul</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1ll</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="n">pushdownadd</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]),</span><span class="n">pushdownadd</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]),</span><span class="n">add</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">tag</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
-        <span class="n">swap</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="n">tag</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span><span class="n">tag</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
-        <span class="n">tag</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">rotate</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">z</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">d</span> <span class="o">=</span> <span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">w</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">];</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isroot</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="n">tree</span><span class="p">[</span><span class="n">z</span><span class="p">][</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">d</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">fa</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-    <span class="n">pushup</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="p">}</span>
- <span class="kt">void</span> <span class="nf">splay</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-     <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="o">!</span><span class="n">isroot</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
-     <span class="k">while</span><span class="p">(</span><span class="n">top</span><span class="p">)</span><span class="n">pushdown</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">top</span><span class="o">--</span><span class="p">]);</span>
-     <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isroot</span><span class="p">(</span><span class="n">x</span><span class="p">)){</span>
-        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isroot</span><span class="p">(</span><span class="n">y</span><span class="p">)){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">which</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="n">which</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="n">rotate</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="k">else</span> <span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="n">rotate</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-     <span class="p">}</span>
-     <span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
- <span class="p">}</span>
- <span class="kt">void</span> <span class="nf">access</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">x</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
-         <span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">pushup</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-     <span class="p">}</span>
- <span class="p">}</span>
- <span class="kt">void</span> <span class="nf">makeroot</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-     <span class="n">access</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">tag</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
- <span class="p">}</span>
- <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-     <span class="n">access</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-     <span class="k">while</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="n">pushdown</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">x</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-     <span class="n">splay</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="k">return</span> <span class="n">x</span><span class="p">;</span>
- <span class="p">}</span>
- <span class="kt">void</span> <span class="nf">split</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-     <span class="n">makeroot</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">access</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">splay</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
- <span class="p">}</span>
- <span class="kt">void</span> <span class="nf">link</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-     <span class="n">makeroot</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
- <span class="p">}</span>
- <span class="kt">void</span> <span class="nf">cut</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-     <span class="k">if</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">!=</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="k">return</span><span class="p">;</span>
-     <span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-     <span class="k">if</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">y</span><span class="o">||</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="k">return</span><span class="p">;</span>
-     <span class="n">tree</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">pushup</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
- <span class="p">}</span>
- <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-     <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">q</span><span class="p">;</span>
-     <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mul</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="p">;</span>
-        <span class="n">link</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-     <span class="p">}</span>
-     <span class="kt">char</span> <span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-     <span class="kt">long</span> <span class="kt">long</span> <span class="n">op</span><span class="p">,</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">,</span><span class="n">u3</span><span class="p">,</span><span class="n">u4</span><span class="p">;</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">q</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'+'</span><span class="p">){</span>
-            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">u1</span><span class="o">&gt;&gt;</span><span class="n">u2</span><span class="o">&gt;&gt;</span><span class="n">u3</span><span class="p">;</span>
-            <span class="n">u3</span><span class="o">%=</span><span class="n">mod</span><span class="p">;</span>
-            <span class="n">split</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">);</span><span class="n">pushdownadd</span><span class="p">(</span><span class="n">u2</span><span class="p">,</span><span class="n">u3</span><span class="p">);</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'-'</span><span class="p">){</span>
-            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">u1</span><span class="o">&gt;&gt;</span><span class="n">u2</span><span class="o">&gt;&gt;</span><span class="n">u3</span><span class="o">&gt;&gt;</span><span class="n">u4</span><span class="p">;</span>
-            <span class="n">cut</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">);</span><span class="n">link</span><span class="p">(</span><span class="n">u3</span><span class="p">,</span><span class="n">u4</span><span class="p">);</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'*'</span><span class="p">){</span>
-            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">u1</span><span class="o">&gt;&gt;</span><span class="n">u2</span><span class="o">&gt;&gt;</span><span class="n">u3</span><span class="p">;</span>
-            <span class="n">u3</span><span class="o">%=</span><span class="n">mod</span><span class="p">;</span>
-            <span class="n">split</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">);</span><span class="n">pushdownmul</span><span class="p">(</span><span class="n">u2</span><span class="p">,</span><span class="n">u3</span><span class="p">);</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">'/'</span><span class="p">){</span>
-            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">u1</span><span class="o">&gt;&gt;</span><span class="n">u2</span><span class="p">;</span>
-            <span class="n">split</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">u2</span><span class="p">);</span>
-            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">sum</span><span class="p">[</span><span class="n">u2</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-        <span class="p">}</span>
-     <span class="p">}</span>
-     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
- <span class="p">}</span>
-</code></pre></div></div>
-<p>就是我现在还不知道为什么link的时候pushup就挂了，不pushup就切了</p>
+<p>void pushdownadd(int x,long long v){
+    sum[x] = sum[x]+sze[x]<em>v%mod;
+    val[x] = val[x]+v%mod;
+    add[x] = add[x]+v%mod;
+}
+void pushdownmul(int x,long long v){
+    sum[x] = sum[x]</em>v%mod;
+    val[x] = val[x]<em>v%mod;
+    mul[x] = mul[x]</em>v%mod;
+    add[x] = add[x]<em>v%mod;
+}
+void pushdown(int x){
+    if(mul[x]!=1)pushdownmul(tree[x][1],mul[x]),pushdownmul(tree[x][0],mul[x]),mul[x] = 1ll;
+    if(add[x])pushdownadd(tree[x][1],add[x]),pushdownadd(tree[x][0],add[x]),add[x] = 0;
+    if(tag[x]){
+        swap(tree[x][1],tree[x][0]);
+        tag[tree[x][0]]^=1;tag[tree[x][1]]^=1;
+        tag[x] = 0;
+    }
+}
+void rotate(int x){
+    int y = fa[x],z = fa[y],d = which(x),w = tree[x][d^1];
+    if(!isroot(y))tree[z][which(y)] = x;
+    fa[x] = z;fa[y] = x;
+    tree[y][d] = w;
+    tree[x][d^1] = y;fa[w] = y;
+    pushup(y);pushup(x);
+}
+ void splay(int x){
+     top = 0;stk[++top] = x;
+     for(int y = x;!isroot(y);y = fa[y])stk[++top] = fa[y];
+     while(top)pushdown(stk[top–]);
+     while(!isroot(x)){
+        int y = fa[x];
+        if(!isroot(y)){
+            if(which(x)==which(y))rotate(y);else rotate(x);
+        }
+        rotate(x);
+     }
+     pushup(x);
+ }
+ void access(int x){
+     for(int y = 0;x;y = x,x = fa[x]){
+         splay(x);tree[x][1] = y;pushup(x);
+     }
+ }
+ void makeroot(int x){
+     access(x);splay(x);tag[x]^=1;
+ }
+ int find(int x){
+     access(x);splay(x);
+     while(tree[x][0])pushdown(x),x = tree[x][0];
+     splay(x);return x;
+ }
+ void split(int x,int y){
+     makeroot(x);access(y);splay(y);
+ }
+ void link(int x,int y){
+     makeroot(x);fa[x] = y;
+ }
+ void cut(int x,int y){
+     if(find(x)!=find(y))return;
+     split(x,y);
+     if(fa[x]!=y||tree[x][1])return;
+     tree[y][0] = fa[x] = 0;pushup(y);
+ }
+ int main(){
+     int n,q;cin»n»q;
+     int f,t;
+    for(int i = 1;i&lt;=n;i++)val[i] = sum[i] = mul[i] = 1;
+     for(int i = 1;i&lt;n;i++){
+        cin»f»t;
+        link(f,t);
+     }
+     char c[5];
+     long long op,u1,u2,u3,u4;
+     for(int i = 1;i&lt;=q;i++){
+        scanf(“%s”,c);
+        if(c[0]==’+’){
+            cin»u1»u2»u3;
+            u3%=mod;
+            split(u1,u2);pushdownadd(u2,u3);
+        }else if(c[0]==’-‘){
+            cin»u1»u2»u3»u4;
+            cut(u1,u2);link(u3,u4);
+        }else if(c[0]==’</em>’){
+            cin»u1»u2»u3;
+            u3%=mod;
+            split(u1,u2);pushdownmul(u2,u3);
+        }else if(c[0]==’/’){
+            cin»u1»u2;
+            split(u1,u2);
+            cout«sum[u2]%mod«endl;
+        }
+     }
+     return 0;
+ }
+```
+就是我现在还不知道为什么link的时候pushup就挂了，不pushup就切了</p>
 
     </div>
 

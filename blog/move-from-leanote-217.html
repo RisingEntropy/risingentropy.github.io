@@ -16,15 +16,17 @@
   <meta name="twitter:title" content="【线段树+合并位】 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 构造一个长度为n的非负整数序列x，满足m个条件，第i个条件为x[li]|x[li+1]|…|x[ri]=pi。
-输入
+#  输入
 第一行两个整数n,m。接下来m行每行三个整数li,ri,pi。
-输出
+#  输出
 如果存在这样的序列x，第一行输出Yes，第二行输出n个不超过2^30-1的非负整数表示x[1]~x[n]，否则输出一行No。
-样例输入
+#  样例输入 
+````
 2 1
 1 2 1
 
-样例输出
+#  样例输出
+
 Yes
 1 1
 
@@ -34,17 +36,18 @@ Yes
 对于100%的数据，n,m&amp;lt;=100000，1&amp;lt;=li&amp;lt;=ri&amp;lt;=n，0&amp;lt;=pi&amp;lt;2^30。
 标签
 洛谷2017八连测R2
-解答
+# 解答
 首先按照套路，可以想到建立31颗线段树，但是这样子带个31的大常数，复杂度直逼$O(nlog^2n)$但似乎测评机跑得快，可以切。但是想到31颗线段树的做法之后，可以考虑如何优化。我们发现每一位之间是独立的，也就是说，我们可以把一颗线段树合并起来，并且借用位之间的联系，方便各种区间查询和修改。
 然后我们发现要是对区间内某些数的每一位进行修改，就只需要或上p就行了，那么接下来我们考虑如何进行标记合并，我们发现如果遇上一下情况
-\(\ \ \ \ 1010111\)
-\(|\ \ \ \ 1010101\)
-\(------------------\)
+$$\ \ \ \ 1010111$$
+$$|\ \ \ \ 1010101$$
+$$------------------$$
 这样的标记怎么办呢？虽然它们是矛盾的，但是我们暂时不管矛盾的地方，要想把这两个p的信息全部传递下来，也就是所有的0都要传递下来，我们必须使用与运算，这样就可以把信息全部传递下来了。最后由于在传递信息的时候没有考虑是否矛盾的情况，所以我们需要$O(nlogn)$地判断一次是否矛盾。总复杂度$O(NlogN)$
 代码：
-# include &amp;lt;iostream&amp;gt;
-# include &amp;lt;cstring&amp;gt;
-# include &amp;lt;cstdio&amp;gt;
+cpp
+# include 
+# include 
+# include 
 using namespace std;
 const int MAXN = 123333;
 int n,m;
@@ -98,7 +101,7 @@ int main(){
 	for(int i = 1;i&amp;lt;=n;i++)cout&amp;lt;&amp;lt;query(1,1,n,i,i)&amp;lt;&amp;lt;' ';
 	return 0;
 }
-
+```
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -106,15 +109,17 @@ int main(){
   <meta property="og:title" content="【线段树+合并位】 – Haoyu Deng's page">
   <meta property="og:description" content="题面
 构造一个长度为n的非负整数序列x，满足m个条件，第i个条件为x[li]|x[li+1]|…|x[ri]=pi。
-输入
+#  输入
 第一行两个整数n,m。接下来m行每行三个整数li,ri,pi。
-输出
+#  输出
 如果存在这样的序列x，第一行输出Yes，第二行输出n个不超过2^30-1的非负整数表示x[1]~x[n]，否则输出一行No。
-样例输入
+#  样例输入 
+````
 2 1
 1 2 1
 
-样例输出
+#  样例输出
+
 Yes
 1 1
 
@@ -124,17 +129,18 @@ Yes
 对于100%的数据，n,m&amp;lt;=100000，1&amp;lt;=li&amp;lt;=ri&amp;lt;=n，0&amp;lt;=pi&amp;lt;2^30。
 标签
 洛谷2017八连测R2
-解答
+# 解答
 首先按照套路，可以想到建立31颗线段树，但是这样子带个31的大常数，复杂度直逼$O(nlog^2n)$但似乎测评机跑得快，可以切。但是想到31颗线段树的做法之后，可以考虑如何优化。我们发现每一位之间是独立的，也就是说，我们可以把一颗线段树合并起来，并且借用位之间的联系，方便各种区间查询和修改。
 然后我们发现要是对区间内某些数的每一位进行修改，就只需要或上p就行了，那么接下来我们考虑如何进行标记合并，我们发现如果遇上一下情况
-\(\ \ \ \ 1010111\)
-\(|\ \ \ \ 1010101\)
-\(------------------\)
+$$\ \ \ \ 1010111$$
+$$|\ \ \ \ 1010101$$
+$$------------------$$
 这样的标记怎么办呢？虽然它们是矛盾的，但是我们暂时不管矛盾的地方，要想把这两个p的信息全部传递下来，也就是所有的0都要传递下来，我们必须使用与运算，这样就可以把信息全部传递下来了。最后由于在传递信息的时候没有考虑是否矛盾的情况，所以我们需要$O(nlogn)$地判断一次是否矛盾。总复杂度$O(NlogN)$
 代码：
-# include &amp;lt;iostream&amp;gt;
-# include &amp;lt;cstring&amp;gt;
-# include &amp;lt;cstdio&amp;gt;
+cpp
+# include 
+# include 
+# include 
 using namespace std;
 const int MAXN = 123333;
 int n,m;
@@ -188,7 +194,7 @@ int main(){
 	for(int i = 1;i&amp;lt;=n;i++)cout&amp;lt;&amp;lt;query(1,1,n,i,i)&amp;lt;&amp;lt;' ';
 	return 0;
 }
-
+```
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -358,91 +364,94 @@ int main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<p>构造一个长度为n的非负整数序列x，满足m个条件，第i个条件为x[li]|x[li+1]|…|x[ri]=pi。</p>
-<h1 id="输入">输入</h1>
-<p>第一行两个整数n,m。接下来m行每行三个整数li,ri,pi。</p>
-<h1 id="输出">输出</h1>
-<p>如果存在这样的序列x，第一行输出Yes，第二行输出n个不超过2^30-1的非负整数表示x[1]~x[n]，否则输出一行No。</p>
-<h1 id="样例输入">样例输入</h1>
-<pre><code class="language-`">2 1
+      <h1 id="section">题面</h1>
+<p>构造一个长度为n的非负整数序列x，满足m个条件，第i个条件为x[li]|x[li+1]|…|x[ri]=pi。
+#  输入
+第一行两个整数n,m。接下来m行每行三个整数li,ri,pi。
+#  输出
+如果存在这样的序列x，第一行输出Yes，第二行输出n个不超过2^30-1的非负整数表示x[1]~x[n]，否则输出一行No。
+#  样例输入 
+````
+2 1
 1 2 1
-</code></pre>
-<h1 id="样例输出">样例输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Yes
+<code class="language-plaintext highlighter-rouge">
+#  样例输出
+</code>
+Yes
 1 1
-</code></pre></div></div>
-<p>提示
+<code class="language-plaintext highlighter-rouge">
+提示
 对于30%的数据，n,m&lt;=1000。
 对于另外30%的数据，pi&lt;=1。
 对于100%的数据，n,m&lt;=100000，1&lt;=li&lt;=ri&lt;=n，0&lt;=pi&lt;2^30。
 标签
-洛谷2017八连测R2</p>
-<h1 id="解答">解答</h1>
-<p>首先按照套路，可以想到建立31颗线段树，但是这样子带个31的大常数，复杂度直逼$O(nlog^2n)$但似乎测评机跑得快，可以切。但是想到31颗线段树的做法之后，可以考虑如何优化。我们发现每一位之间是独立的，也就是说，我们可以把一颗线段树合并起来，并且借用位之间的联系，方便各种区间查询和修改。
+洛谷2017八连测R2
+# 解答
+首先按照套路，可以想到建立31颗线段树，但是这样子带个31的大常数，复杂度直逼$O(nlog^2n)$但似乎测评机跑得快，可以切。但是想到31颗线段树的做法之后，可以考虑如何优化。我们发现每一位之间是独立的，也就是说，我们可以把一颗线段树合并起来，并且借用位之间的联系，方便各种区间查询和修改。
 然后我们发现要是对区间内某些数的每一位进行修改，就只需要或上p就行了，那么接下来我们考虑如何进行标记合并，我们发现如果遇上一下情况
-\(\ \ \ \ 1010111\)
-\(|\ \ \ \ 1010101\)
-\(------------------\)
+$$\ \ \ \ 1010111$$
+$$|\ \ \ \ 1010101$$
+$$------------------$$
 这样的标记怎么办呢？虽然它们是矛盾的，但是我们暂时不管矛盾的地方，要想把这两个p的信息全部传递下来，也就是所有的0都要传递下来，我们必须使用与运算，这样就可以把信息全部传递下来了。最后由于在传递信息的时候没有考虑是否矛盾的情况，所以我们需要$O(nlogn)$地判断一次是否矛盾。总复杂度$O(NlogN)$
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">123333</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span><span class="n">tag</span><span class="p">;}</span><span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">pushup</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">].</span><span class="n">v</span><span class="o">|</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">].</span><span class="n">v</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span><span class="o">&amp;=</span><span class="n">v</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="n">work</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span><span class="p">);</span><span class="n">work</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span><span class="p">);}</span>
-<span class="kt">void</span> <span class="nf">build</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">30</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span><span class="p">;}</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span><span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
-	<span class="n">pushup</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">){</span><span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span><span class="o">&amp;=</span><span class="n">v</span><span class="p">;</span><span class="k">return</span><span class="p">;}</span>
-	<span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
-	<span class="n">pushup</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">v</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">res</span><span class="o">=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="n">mid</span><span class="p">)</span><span class="n">res</span><span class="o">|=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">|</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">li</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">ri</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">qi</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">res</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-	<span class="n">build</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">li</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="n">ri</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="n">qi</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="n">modify</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">li</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">qi</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-	<span class="p">}</span>
-	<span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">li</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ri</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">tmp</span><span class="o">!=</span><span class="n">qi</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-			<span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="o">==</span><span class="nb">false</span><span class="p">){</span>
-		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"No"</span><span class="p">;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Yes"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">query</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+代码：
+</code>cpp
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+using namespace std;
+const int MAXN = 123333;
+int n,m;
+struct node{int v,tag;}tree[MAXN&lt;&lt;2];
+void pushup(int k){tree[k].v = tree[k&lt;&lt;1].v|tree[k&lt;&lt;1|1].v;}
+void work(int k,int v){tree[k].v&amp;=v;}
+void pushdown(int k){work(k&lt;&lt;1,tree[k].v);work(k&lt;&lt;1|1,tree[k].v);}
+void build(int k,int l,int r){
+	if(l==r){tree[k].v = (1&lt;&lt;30)-1;return;}
+	int mid = l+r&gt;&gt;1;
+	build(k&lt;&lt;1,l,mid);build(k&lt;&lt;1|1,mid+1,r);
+	pushup(k);
+}
+void modify(int k,int l,int r,int x,int y,int v){
+	if(l&gt;=x&amp;&amp;r&lt;=y){tree[k].v&amp;=v;return;}
+	pushdown(k);
+	int mid = l+r&gt;&gt;1;
+	if(x&lt;=mid)modify(k&lt;&lt;1,l,mid,x,y,v);
+	if(y&gt;mid)modify(k&lt;&lt;1|1,mid+1,r,x,y,v);
+	pushup(k);
+}
+int query(int k,int l,int r,int x,int y){
+	if(l&gt;=x&amp;&amp;r&lt;=y)return tree[k].v;
+	int mid = l+r&gt;&gt;1;
+	int res = 0;
+	pushdown(k);
+	if(x&lt;=mid)res=query(k&lt;&lt;1,l,mid,x,y);
+	if(y&gt;mid)res|=query(k&lt;&lt;1|1,mid+1,r,x,y);
+	return res;
+}
+int li[MAXN],ri[MAXN],qi[MAXN];
+int res[MAXN];
+int main(){
+	int n,m;cin&gt;&gt;n&gt;&gt;m;
+	build(1,1,n);
+	for(int i = 1;i&lt;=m;i++){
+		cin&gt;&gt;li[i]&gt;&gt;ri[i]&gt;&gt;qi[i];
+		modify(1,1,n,li[i],ri[i],qi[i]);
+	}
+	bool flag = true;
+	for(int i = 1;i&lt;=m;i++){
+		int tmp = query(1,1,n,li[i],ri[i]);
+		if(tmp!=qi[i]){
+			flag = false;break;
+		}
+	}
+	if(flag==false){
+		cout&lt;&lt;"No";return 0;
+	}
+	cout&lt;&lt;"Yes"&lt;&lt;endl;
+	for(int i = 1;i&lt;=n;i++)cout&lt;&lt;query(1,1,n,i,i)&lt;&lt;' ';
+	return 0;
+}
+```</cstdio></cstring></iostream></p>
 
     </div>
 

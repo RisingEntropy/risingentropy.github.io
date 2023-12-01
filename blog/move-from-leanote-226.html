@@ -16,22 +16,24 @@
   <meta name="twitter:title" content="【数论】bzoj1209 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 有一个密码箱，0到n-1中的某些整数是它的密码，且满足。如果a和b都是它的密码，那么（a+b）%n也是它的密码（a，b）可以相等。%表示整除取余。某人试了k次密码，前k-1次都失败了，最后一次成功了 问该密码箱最多有多少不同的密码
-输入
+#  输入
 第一行2个整数表示n，k 第二行为k个空格隔开的非负整数。表示每次式的密码 数据保证有合法解
-输出
+#  输出
 一个数，表示结果
-样例输入
+#  样例输入
+
 42 5
 28 31 18 38 24
 
-样例输出
+#  样例输出
+
 14
 
 提示
 10%数据n&amp;lt;=10000,k&amp;lt;=100 10%数据n&amp;lt;=10^9,n&amp;lt;=100; 前60%数据k&amp;lt;=1000 100%数据 1&amp;lt;=k&amp;lt;=250 000 ,k&amp;lt;=n&amp;lt;=10^14
 标签
 数学一本通
-解答
+# 解答
 首先有几个显然的结论
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -40,22 +42,24 @@
   <meta property="og:title" content="【数论】bzoj1209 – Haoyu Deng's page">
   <meta property="og:description" content="题面
 有一个密码箱，0到n-1中的某些整数是它的密码，且满足。如果a和b都是它的密码，那么（a+b）%n也是它的密码（a，b）可以相等。%表示整除取余。某人试了k次密码，前k-1次都失败了，最后一次成功了 问该密码箱最多有多少不同的密码
-输入
+#  输入
 第一行2个整数表示n，k 第二行为k个空格隔开的非负整数。表示每次式的密码 数据保证有合法解
-输出
+#  输出
 一个数，表示结果
-样例输入
+#  样例输入
+
 42 5
 28 31 18 38 24
 
-样例输出
+#  样例输出
+
 14
 
 提示
 10%数据n&amp;lt;=10000,k&amp;lt;=100 10%数据n&amp;lt;=10^9,n&amp;lt;=100; 前60%数据k&amp;lt;=1000 100%数据 1&amp;lt;=k&amp;lt;=250 000 ,k&amp;lt;=n&amp;lt;=10^14
 标签
 数学一本通
-解答
+# 解答
 首先有几个显然的结论
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -226,25 +230,27 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<p>有一个密码箱，0到n-1中的某些整数是它的密码，且满足。如果a和b都是它的密码，那么（a+b）%n也是它的密码（a，b）可以相等。%表示整除取余。某人试了k次密码，前k-1次都失败了，最后一次成功了 问该密码箱最多有多少不同的密码</p>
-<h1 id="输入">输入</h1>
-<p>第一行2个整数表示n，k 第二行为k个空格隔开的非负整数。表示每次式的密码 数据保证有合法解</p>
-<h1 id="输出">输出</h1>
-<p>一个数，表示结果</p>
-<h1 id="样例输入">样例输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 5
+      <h1 id="section">题面</h1>
+<p>有一个密码箱，0到n-1中的某些整数是它的密码，且满足。如果a和b都是它的密码，那么（a+b）%n也是它的密码（a，b）可以相等。%表示整除取余。某人试了k次密码，前k-1次都失败了，最后一次成功了 问该密码箱最多有多少不同的密码
+#  输入
+第一行2个整数表示n，k 第二行为k个空格隔开的非负整数。表示每次式的密码 数据保证有合法解
+#  输出
+一个数，表示结果
+#  样例输入
+<code class="language-plaintext highlighter-rouge">
+42 5
 28 31 18 38 24
-</code></pre></div></div>
-<h1 id="样例输出">样例输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>14
-</code></pre></div></div>
-<p>提示
+</code>
+#  样例输出
+<code class="language-plaintext highlighter-rouge">
+14
+</code>
+提示
 10%数据n&lt;=10000,k&lt;=100 10%数据n&lt;=10^9,n&lt;=100; 前60%数据k&lt;=1000 100%数据 1&lt;=k&lt;=250 000 ,k&lt;=n&lt;=10^14
 标签
-数学一本通</p>
-<h1 id="解答">解答</h1>
-<p>首先有几个显然的结论</p>
+数学一本通
+# 解答
+首先有几个显然的结论</p>
 
 <ol>
   <li>如果$x$是答案，那么$kx\ mod\ n$也是答案即$kx-tn$也一定是答案</li>
@@ -252,42 +258,43 @@
 </ol>
 
 <p>于是有了上述结论就可以开始计算了。首先计算出每一个数与$n$的$gcd$记为$a[i]$，然后枚举$a[k]$的因数，若存在$x$不为其他$a$的项的因数，那么$x$及其倍数就是答案。有一点细节在代码里面
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">250100</span><span class="p">;</span> 
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">tot</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">tot</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
-			<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">k</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">n</span><span class="p">);</span>
-	<span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">k</span><span class="p">);</span><span class="n">tot</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">i</span><span class="p">)){</span>
-				<span class="n">ans</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">i</span><span class="p">;</span>
-				<span class="k">break</span><span class="p">;</span>
-			<span class="p">}</span>
-			<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">i</span><span class="p">))</span><span class="n">ans</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 250100; 
+long long gcd(long long a,long long b){return b==0?a:gcd(b,a%b);}
+long long a[MAXN];
+int tot;
+bool check(int x){
+	for(int i = 1;i&lt;=tot;i++)
+		if(a[i]%x==0)
+			return false;
+	return true;
+}
+int main(){
+	long long n,k;
+	scanf("%lld%lld",&amp;n,&amp;k);
+	for(int i = 1;i&lt;=k;i++)scanf("%lld",&amp;a[i]);
+	for(int i = 1;i&lt;=k;i++)a[i] = gcd(a[i],n);
+	sort(a+1,a+k);tot = unique(a+1,a+k)-a-1;
+	long long ans = 0;
+	for(long long i = 1;i*i&lt;=a[k];i++){
+		if(a[k]%i==0){
+			if(check(i)){
+				ans = n/i;
+				break;
+			}
+			else if(check(a[k]/i))ans = n/a[k]*i;
+		}
+	}
+	printf("%lld",ans);
+	return 0;
+}
+</code></p>
 
     </div>
 

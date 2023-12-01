@@ -194,7 +194,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>参与考古挖掘的小明得到了一份藏宝图，藏宝图上标出了 $n$ 个深埋在地下的宝藏屋， 也给出了这 $n$ 个宝藏屋之间可供开发的 $m$ 条道路和它们的长度。
 小明决心亲自前往挖掘所有宝藏屋中的宝藏。但是，每个宝藏屋距离地面都很远， 也就是说，从地面打通一条到某个宝藏屋的道路是很困难的，而开发宝藏屋之间的道路 则相对容易很多。</p>
 
@@ -216,30 +216,34 @@ L代表这条道路的长度，K代表从赞助商帮你打通的宝藏屋到这
 一个正整数，表示最小的总代价。</p>
 
 <p>输入输出样例
-输入样例# 1：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 5 
+输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+4 5 
 1 2 1 
 1 3 3 
 1 4 1 
 2 3 4 
 3 4 1 
-</code></pre></div></div>
-<p>输出样例# 1：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
-</code></pre></div></div>
-<p>输入样例# 2：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 5 
+</code>
+输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+4
+</code>
+输入样例# 2： 
+<code class="language-plaintext highlighter-rouge">
+4 5 
 1 2 1 
 1 3 3 
 1 4 1 
 2 3 4 
 3 4 2  
-</code></pre></div></div>
-<p>输出样例# 2：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
-</code></pre></div></div>
-<h1 id="样例解释">样例解释</h1>
-<p>【样例解释1】
+</code>
+输出样例# 2： 
+<code class="language-plaintext highlighter-rouge">
+5
+</code>
+# 样例解释
+【样例解释1】
 小明选定让赞助商打通了 11 号宝藏屋。小明开发了道路 $1 \to 2$，挖掘了 $2$ 号宝 藏。开发了道路 $1 \to 4$，挖掘了 $4$ 号宝藏。还开发了道路 $4 \to 3$，挖掘了 3 3号宝 藏。工程总代价为：$1 \times 1 + 1 \times 1 + 1 \times 2 = 4$
 <img src="https://cdn.risingentropy.top/images/posts/be42335ab6441194a004be0.png" alt="图片标题" />
 【样例解释2】
@@ -249,88 +253,89 @@ L代表这条道路的长度，K代表从赞助商帮你打通的宝藏屋到这
 对于 $20\%$的数据： 保证输入是一棵树，$1 \le n \le 8，v \le 5000$ 且所有的$ v $都相等。
 对于 $40\%$的数据： $1 \le n \le 8$，$0 \le m \le 1000$，$v \le 5000$ 且所有的$ v $都相等。
 对于 $70\%$的数据：$ 1 \le n \le 8$，$0 \le m \le 1000$，$v \le 5000$
-对于 $100\%$的数据：$ 1 \le n \le 12$，$0 \le m \le 1000$，$v \le 50000$</p>
-<h1 id="解答">解答</h1>
-<p>状压dp！？不会呀,我太弱了，dp基本就不会！怎么办啊，我要骗分啊！<del>不骗分，怎么拿省一？？？</del> 此时，一种<del>邪恶</del>灵活的思想涌上心头——————模拟退火！万岁！那么模拟退火有两个问题需要考虑：
+对于 $100\%$的数据：$ 1 \le n \le 12$，$0 \le m \le 1000$，$v \le 50000$
+# 解答
+状压dp！？不会呀,我太弱了，dp基本就不会！怎么办啊，我要骗分啊！~~不骗分，怎么拿省一？？？~~ 此时，一种~~邪恶~~灵活的思想涌上心头——————模拟退火！万岁！那么模拟退火有两个问题需要考虑：
 1.板子
 2.计算新解
-1板子的话，十分简单(见我另一篇题解)。如何计算新解是关键，也是对思维要求较高的<del>退火算法思维要求已经够低了</del>，对于这道题，我们考虑如何变化解。我们可以把这些点构造成一个序列，在序列中的位置就是它们依次被加入到结果中顺序。我们一开始把每个点的编号设为他在序列中的位置。那么我们有两种方式可以解决。1是使用<code class="language-plaintext highlighter-rouge">STL</code>中的<code class="language-plaintext highlighter-rouge">random_shuffle(Iterator begin,Iterator end)</code>函数来获得一个随机序列(因为这个数据范围只有<code class="language-plaintext highlighter-rouge">12</code>个点<code class="language-plaintext highlighter-rouge">12!</code>也q恰恰好可以卡过去，只是时间卡的有点死)。2是使用rand()随机交换两个位置的数，然后我们就可以$O(n^2)$的计算解(因为这个数据范围非常小，可以直接这样搞)，然后就是退火的老套路咯。其实不降温也可以。。。。
-这里解释一下node里面的dis函数的计算原理，就是随机获得一个序列以后，把这个序列看做每个点加到结果里面的顺序，然后找一个点，使当前计算的点连接到那个点产生的价格最小。<strong>别忘了把dep更新！！！</strong></p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+1板子的话，十分简单(见我另一篇题解)。如何计算新解是关键，也是对思维要求较高的~~退火算法思维要求已经够低了~~，对于这道题，我们考虑如何变化解。我们可以把这些点构造成一个序列，在序列中的位置就是它们依次被加入到结果中顺序。我们一开始把每个点的编号设为他在序列中的位置。那么我们有两种方式可以解决。1是使用<code class="language-plaintext highlighter-rouge">STL</code>中的<code class="language-plaintext highlighter-rouge">random_shuffle(Iterator begin,Iterator end)</code>函数来获得一个随机序列(因为这个数据范围只有<code class="language-plaintext highlighter-rouge">12</code>个点<code class="language-plaintext highlighter-rouge">12!</code>也q恰恰好可以卡过去，只是时间卡的有点死)。2是使用rand()随机交换两个位置的数，然后我们就可以$O(n^2)$的计算解(因为这个数据范围非常小，可以直接这样搞)，然后就是退火的老套路咯。其实不降温也可以。。。。
+这里解释一下node里面的dis函数的计算原理，就是随机获得一个序列以后，把这个序列看做每个点加到结果里面的顺序，然后找一个点，使当前计算的点连接到那个点产生的价格最小。<strong>别忘了把dep更新！！！</strong>
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdlib&gt;
 # include &lt;cmath&gt;
 # include &lt;ctime&gt;
 # include &lt;algorithm&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mi">999999999</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">q</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
- 	<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">map</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
-	<span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">int</span> <span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-	<span class="n">node</span><span class="p">(){</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span><span class="n">dep</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="n">node</span> <span class="p">(</span><span class="n">node</span> <span class="o">&amp;</span><span class="n">n2</span><span class="p">){</span>
-		<span class="n">memcpy</span><span class="p">(</span><span class="n">n2</span><span class="p">.</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">d</span><span class="p">));</span><span class="n">memset</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dep</span><span class="p">));</span>
-		<span class="n">swap</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">dis</span><span class="p">(){</span>
-		<span class="n">dep</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-		<span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
-			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-				<span class="k">if</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">!=</span><span class="mh">0x3f3f3f3f</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">*</span><span class="n">dep</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">temp</span><span class="p">){</span>
-					<span class="n">temp</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">*</span><span class="n">dep</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">temp</span> <span class="o">==</span> <span class="n">INF</span><span class="p">){</span>
-				<span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
-			<span class="p">}</span><span class="k">else</span> <span class="n">ans</span><span class="o">+=</span><span class="n">temp</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">};</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">19260817</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.997</span><span class="p">;</span>
-<span class="n">node</span> <span class="n">current_ans</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">SA</span><span class="p">(){</span>
-	<span class="kt">double</span> <span class="n">curr_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">){</span>
-		<span class="n">node</span> <span class="n">new_ans</span><span class="p">(</span><span class="n">current_ans</span><span class="p">);</span>
-		<span class="kt">int</span> <span class="n">del</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">()</span><span class="o">-</span><span class="n">current_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">();</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">del</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-			<span class="n">current_ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">del</span><span class="o">/</span><span class="n">curr_T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
-			<span class="n">current_ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">curr_T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">w</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-		<span class="n">map</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">999999999</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">clock</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;</span><span class="mf">0.9</span><span class="p">){</span>
-		<span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">SA</span><span class="p">());</span>
-	<span class="p">}</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int INF = 999999999;
+int n,m,q;
+int read(){
+	int x = 0,f = 1;static char c = getchar();
+	while(c&lt;'0'||c&gt;'9'){if(c=='-')f = -1;c = getchar();}
+	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar();}
+ 	return x*f;
+}
+const int MAXN = 13;
+int map[MAXN][MAXN];
+struct node{
+	int d[MAXN];int dep[MAXN];
+	node(){
+		for(int i = 1;i&lt;=n;i++)d[i] = i,dep[i] = 0;
+	}
+	node (node &amp;n2){
+		memcpy(n2.d,d,sizeof(d));memset(dep,0,sizeof(dep));
+		swap(d[rand()%n+1],d[rand()%n+1]);
+	}
+	int dis(){
+		dep[1] = 1;
+		int ans;
+		for(int i = 2;i&lt;=n;i++){
+			int temp = INF;
+			for(int j = 1;j&lt;i;j++){
+				if(map[d[j]][d[i]]!=0x3f3f3f3f&amp;&amp;map[d[j]][d[i]]*dep[j]&lt;temp){
+					temp = map[d[j]][d[i]]*dep[j];
+				}
+			}
+			if(temp == INF){
+				return temp;
+			}else ans+=temp;
+		}
+		return ans;
+	}
+};
+const double T = 19260817;
+const double delta = 0.997;
+node current_ans;
+int SA(){
+	double curr_T = T;
+	while(T&gt;0.01){
+		node new_ans(current_ans);
+		int del = new_ans.dis()-current_ans.dis();
+		if(del&lt;0){
+			current_ans = new_ans;
+		}else if(exp(-del/curr_T)*RAND_MAX&gt;rand()){
+			current_ans = new_ans;
+		}
+		curr_T*=delta;
+	}
+}
+int main(){
+	n = read();
+	m = read();
+	int f,t,w;
+	for(int i = 1;i&lt;=m;i++){
+		f = read(),t = read(),w = read();
+		map[f][t] = map[t][f] = w;
+	}
+	int ans = 999999999;
+	while((double)clock()/(double)CLOCKS_PER_SEC&lt;0.9){
+		ans = min(ans,SA());
+	}
+	printf("%d",ans);
+    return 0;
+}
+</code></p>
 
     </div>
 

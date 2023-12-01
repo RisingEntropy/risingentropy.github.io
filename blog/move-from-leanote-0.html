@@ -15,6 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="C++杂记 – Haoyu Deng's page">
   <meta name="twitter:description" content="设置小数精度
+cpp
 cout&amp;lt;&amp;lt;setiosflags(ios::fixed)&amp;lt;&amp;lt;setprecision(3)&amp;lt;&amp;lt;ans;
 
 ">
@@ -23,6 +24,7 @@ cout&amp;lt;&amp;lt;setiosflags(ios::fixed)&amp;lt;&amp;lt;setprecision(3)&amp;l
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="C++杂记 – Haoyu Deng's page">
   <meta property="og:description" content="设置小数精度
+cpp
 cout&amp;lt;&amp;lt;setiosflags(ios::fixed)&amp;lt;&amp;lt;setprecision(3)&amp;lt;&amp;lt;ans;
 
 ">
@@ -194,16 +196,17 @@ cout&amp;lt;&amp;lt;setiosflags(ios::fixed)&amp;lt;&amp;lt;setprecision(3)&amp;l
   <article class="post">
 
     <div class="post__content">
-      <h1 id="设置小数精度">设置小数精度</h1>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">setiosflags</span><span class="p">(</span><span class="n">ios</span><span class="o">::</span><span class="n">fixed</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
-</code></pre></div></div>
+      <h1 id="section">设置小数精度</h1>
+<p><code class="language-plaintext highlighter-rouge">cpp
+cout&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(3)&lt;&lt;ans;
+</code></p>
 
-<h1 id="1优化流输出使其与scanfprintf一样快">1.优化流输出，使其与scanf/printf一样快</h1>
+<h1 id="scanfprintf">1.优化流输出，使其与scanf/printf一样快</h1>
 <blockquote>
   <p>ios::sync_with_stdio(false);//关闭iostream输入输出缓存，使其和printf等函数相差无几</p>
 </blockquote>
 
-<h1 id="2格式化输出">2.格式化输出:</h1>
+<h1 id="section-1">2.格式化输出:</h1>
 <p>I/O流常用控制符：
 使用控制符时，在程序开头加投文件# include <code class="language-plaintext highlighter-rouge">&lt;</code>iomanip<code class="language-plaintext highlighter-rouge">&gt;</code> C++有两种方法控制格式输出：1、用格式控制符；2、用流对象的成员函数 格式控制符：
 dec                                 设置基数为10
@@ -281,10 +284,11 @@ setfill(char) 设置填充字符
 setprecision(int) 设置输出浮点数的精确度
 setw(int) 设置域宽格式变量</iomanip></p>
 
-<h1 id="3优先队列小根堆">3.优先队列小根堆</h1>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
-</code></pre></div></div>
-<p>自定义结构体放入优先队列：
+<h1 id="section-2">3.优先队列小根堆</h1>
+<p><code class="language-plaintext highlighter-rouge">cpp
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt; q;
+</code>
+自定义结构体放入优先队列：
 重载&lt;运算符</p>
 
     </div>

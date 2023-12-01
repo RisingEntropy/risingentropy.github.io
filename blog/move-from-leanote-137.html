@@ -17,11 +17,9 @@
   <meta name="twitter:description" content="求法
 1.tarjan 的离线求法，用并查集维护。不多赘述
 2.欧拉序：
-
-  树的欧拉序是对树进行DFS的一种序列。有两种形式：
+&amp;gt;树的欧拉序是对树进行DFS的一种序列。有两种形式：
 1、在每个结点进和出都加进序列。
 2、只要到达每一个结点就把他加进序列。
-
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -30,11 +28,9 @@
   <meta property="og:description" content="求法
 1.tarjan 的离线求法，用并查集维护。不多赘述
 2.欧拉序：
-
-  树的欧拉序是对树进行DFS的一种序列。有两种形式：
+&amp;gt;树的欧拉序是对树进行DFS的一种序列。有两种形式：
 1、在每个结点进和出都加进序列。
 2、只要到达每一个结点就把他加进序列。
-
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -204,14 +200,12 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="求法">求法</h1>
+      <h1 id="section">求法</h1>
 <p>1.tarjan 的离线求法，用并查集维护。不多赘述
-2.欧拉序：</p>
-<blockquote>
-  <p>树的欧拉序是对树进行DFS的一种序列。有两种形式：
+2.欧拉序：
+&gt;树的欧拉序是对树进行DFS的一种序列。有两种形式：
 1、在每个结点进和出都加进序列。
 2、只要到达每一个结点就把他加进序列。</p>
-</blockquote>
 
 <p>eg：</p>
 
@@ -226,135 +220,130 @@
 表
 • 4.然后就可以查询了</p>
 
-<h1 id="倍增求法">倍增求法</h1>
+<h1 id="section-1">倍增求法</h1>
 <p>思想：求出每个点深度，把更深的向上
 跳成深度一致，然后一个点一个点向上
 跳，
 跳到了一个点上就是最近公共祖先。这
 样太慢，就有了倍增法
-算法步骤</p>
-<blockquote>
-  <p>1.对树dfs，算出每个节点的父亲，深度
+算法步骤
+&gt;1.对树dfs，算出每个节点的父亲，深度
 2.计算出每个点的第2^j祖先是谁
 3.查询</p>
-</blockquote>
 
 <p>eg:woj2723
-代码如下：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+代码如下：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">edge</span> <span class="o">&amp;</span><span class="n">e2</span><span class="p">)</span><span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">e2</span><span class="p">.</span><span class="n">w</span><span class="p">;}}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">top</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">father</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">25</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">wei</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">25</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dep</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span> <span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="n">edge</span> <span class="n">edges2</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="o">?</span><span class="n">x</span><span class="o">:</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">find</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);}</span>
-<span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">judge</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);}</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">unionn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="n">fa</span><span class="p">[</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span><span class="o">=</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);}</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">^</span><span class="n">x</span><span class="p">;</span><span class="n">x</span><span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="n">y</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">kruskal</span><span class="p">(){</span>
-    <span class="n">sort</span><span class="p">(</span><span class="n">edges2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">edges2</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">m</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">judge</span><span class="p">(</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">)){</span>
-            <span class="n">unionn</span><span class="p">(</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
-            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">add</span><span class="p">(</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">);</span>
-            <span class="n">add</span><span class="p">(</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">fa</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">fa</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
-            <span class="n">wei</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
-            <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">initLCA</span><span class="p">(){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">24</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">father</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">father</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-            <span class="n">wei</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">wei</span><span class="p">[</span><span class="n">father</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">LCA</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dep</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">dep</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">dep</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">24</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">delta</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="p">)){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">24</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span> <span class="n">father</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">i</span><span class="p">]){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span><span class="n">father</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">wei</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">ans</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-     <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-         <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">w</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-         <span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span><span class="n">edges2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-     <span class="p">}</span>
-     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-     <span class="n">kruskal</span><span class="p">();</span>
-     <span class="n">initLCA</span><span class="p">();</span>
-     <span class="kt">int</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-     <span class="k">while</span><span class="p">(</span><span class="n">Q</span><span class="o">--</span><span class="p">){</span>
-         <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-         <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">LCA</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">));</span>
-     <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><strong>注意<code class="language-plaintext highlighter-rouge">LCA</code>函数里面那个 if(x==y)return ans;很重要</strong>
+using namespace std;
+const int MAXN = 100010;
+struct edge{int t,f,w,next;bool operator&lt;(const edge &amp;e2)const {return w&lt;e2.w;}}edges[MAXN&lt;&lt;1];
+int head[MAXN],top;
+int father[MAXN][25];
+int wei[MAXN][25];
+int dep[MAXN];
+int n ,m;
+bool vis[MAXN];
+int fa[MAXN];
+edge edges2[MAXN];
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
+    return x*f;
+}
+inline int find(int x){return fa[x]==x?x:fa[x]=find(fa[x]);}
+inline bool judge(int x,int y){return find(x)==find(y);}
+inline void unionn(int x,int y){fa[find(y)]=find(x);}
+inline void swap(int &amp;x,int &amp;y){x = x^y;y = y^x;x= x^y;}
+void add(int f,int t,int w){
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+void kruskal(){
+    sort(edges2+1,edges2+1+m);
+    int cnt = 0;
+    for(int i = 1;i&lt;=m;i++){
+        if(!judge(edges2[i].f,edges2[i].t)){
+            unionn(edges2[i].f,edges2[i].t);
+            cnt++;
+            add(edges2[i].f,edges2[i].t,edges2[i].w);
+            add(edges2[i].t,edges2[i].f,edges2[i].w);
+        }
+        if(cnt==n-1)return;
+    }
+}
+void dfs(int fa,int x){
+    vis[x] = true;dep[x] = dep[fa]+1;
+    father[x][0] = fa;
+    for(int i = head[x];i;i = edges[i].next){
+        int t = edges[i].t;
+        if(!vis[t]){
+            wei[t][0] = edges[i].w;
+            dfs(x,t);
+        }
+    }
+}
+void initLCA(){
+    for(int i = 1;i&lt;=n;i++)if(!vis[i])dfs(0,i);
+    for(int i = 1;i&lt;=24;i++){
+        for(int j = 1;j&lt;=n;j++){
+            father[j][i] = father[father[j][i-1]][i-1];
+            wei[j][i] = max(wei[j][i-1],wei[father[j][i-1]][i-1]);
+        }
+    }
+}
+int LCA(int x,int y){
+    if(dep[x]&lt;dep[y])swap(x,y);
+    int ans = 0;
+    int delta = dep[x]-dep[y];
+    for(int i = 0;i&lt;=24;i++){
+        if(delta&amp;(1&lt;&lt;i)){
+            ans = max(wei[x][i],ans);
+            x = father[x][i];
+        }
+    }
+    if(x==y)return ans;
+    for(int i = 24;i&gt;=0;i--){
+        if(father[x][i]!= father[y][i]){
+            ans = max(wei[x][i],ans);
+            ans = max(wei[y][i],ans);
+            x = father[x][i], y =father[y][i];
+        }
+    }
+    ans = max(wei[x][0],ans);
+    ans = max(wei[y][0],ans);
+    return ans;
+}
+int main(){
+     n = read(),m = read();
+     for(int i = 1;i&lt;=m;i++){
+         int f = read(),t = read(),w = read();
+         edges2[i].f = f,edges2[i].t = t,edges2[i].w = w;
+     }
+     for(int i = 1;i&lt;=n;i++)fa[i] = i;
+     kruskal();
+     initLCA();
+     int Q = read();
+     while(Q--){
+         int f = read(),t = read();
+         printf("%d\n",LCA(f,t));
+     }
+    return 0;
+}
+</code>
+<strong>注意<code class="language-plaintext highlighter-rouge">LCA</code>函数里面那个 if(x==y)return ans;很重要</strong>
 一个有用的拓展：
 多个点的LCA查询
 解法
-结论：多个点的LCA就是其中<strong>dfs</strong>序最小和最大的LCA</p>
-<h1 id="补充">补充</h1>
-<p>欧拉序求LCA：</p>
-<blockquote>
-  <blockquote>
-    <p>求某两点的LCA。显然这两点之间的区间中，深度最小点就是LCA。这可以用RMQ解决。</p>
-  </blockquote>
-</blockquote>
+结论：多个点的LCA就是其中<strong>dfs</strong>序最小和最大的LCA
+# 补充
+欧拉序求LCA：
+»求某两点的LCA。显然这两点之间的区间中，深度最小点就是LCA。这可以用RMQ解决。</p>
 
 <hr />
 
@@ -366,17 +355,13 @@
 
 <hr />
 <blockquote>
-  <p>换根操作：这种欧拉序相当于以根为起点围着树跑了一圈，那么我们就可以把欧拉序写成一个环就是：</p>
-  <blockquote>
-    <p>1   2   3   2   4   2   5   2   1   6   7   6   8   6   1   2   3   2   4   2   5   2   1   6   7   6   8   6</p>
-  </blockquote>
+  <p>换根操作：这种欧拉序相当于以根为起点围着树跑了一圈，那么我们就可以把欧拉序写成一个环就是：
+&gt; 1   2   3   2   4   2   5   2   1   6   7   6   8   6   1   2   3   2   4   2   5   2   1   6   7   6   8   6</p>
 </blockquote>
 
 <blockquote>
-  <p>以某个点为跟的欧拉序就是以某个点在上面的欧拉序中第一次出现的位置为起点向前走（2*n-1）步，例如以4为根的欧拉序就是</p>
-  <blockquote>
-    <p>1   2   3   2   4   2   5   2   1   6   7   6   8   6   1   2   3   2   4   2   5   2   1   6   7   6   8   6</p>
-  </blockquote>
+  <p>以某个点为跟的欧拉序就是以某个点在上面的欧拉序中第一次出现的位置为起点向前走（2*n-1）步，例如以4为根的欧拉序就是
+&gt; 1   2   3   2   4   2   5   2   1   6   7   6   8   6   1   2   3   2   4   2   5   2   1   6   7   6   8   6</p>
 </blockquote>
 
     </div>

@@ -18,8 +18,8 @@
 //
 // Created by dhy on 18-8-8.
 //
-include 
-include 
+# include 
+# include 
 using namespace std;
 const int OK = 1;
 const int REPEAT = 2;
@@ -33,7 +33,7 @@ int top = 0;
 void insert(string str){
     int num,root = 1;
     for(int i = 0;str[i];i++){
-        num = str[i] - ‘a’;
+        num = str[i] - 'a';
         if(nodes[root].son[num]==0)//no son
             nodes[root].son[num] = ++top;
         root = nodes[root].son[num];
@@ -43,7 +43,7 @@ void insert(string str){
 int search(string str){
     int num = 0,root = 1;
     for(int i = 0;str[i];i++){
-        num = str[i]-‘a’;
+        num = str[i]-'a';
         if(nodes[root].son[num]==0)return WRONG;
         root = nodes[root].son[num];
     }
@@ -60,8 +60,8 @@ int search(string str){
 //
 // Created by dhy on 18-8-8.
 //
-include 
-include 
+# include 
+# include 
 using namespace std;
 const int OK = 1;
 const int REPEAT = 2;
@@ -75,7 +75,7 @@ int top = 0;
 void insert(string str){
     int num,root = 1;
     for(int i = 0;str[i];i++){
-        num = str[i] - ‘a’;
+        num = str[i] - 'a';
         if(nodes[root].son[num]==0)//no son
             nodes[root].son[num] = ++top;
         root = nodes[root].son[num];
@@ -85,7 +85,7 @@ void insert(string str){
 int search(string str){
     int num = 0,root = 1;
     for(int i = 0;str[i];i++){
-        num = str[i]-‘a’;
+        num = str[i]-'a';
         if(nodes[root].son[num]==0)return WRONG;
         root = nodes[root].son[num];
     }
@@ -262,66 +262,67 @@ int search(string str){
   <article class="post">
 
     <div class="post__content">
-      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 18-8-8.</span>
-<span class="c1">//</span>
-<span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">OK</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">REPEAT</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">WRONG</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">son</span><span class="p">[</span><span class="mi">27</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">exist</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">visited</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-<span class="p">}</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1000000</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">num</span><span class="p">,</span><span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="c1">//no son</span>
-            <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">top</span><span class="p">;</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">exist</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">search</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">WRONG</span><span class="p">;</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">exist</span><span class="p">)</span><span class="k">return</span> <span class="n">WRONG</span><span class="p">;</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">visited</span><span class="p">)</span><span class="k">return</span> <span class="n">REPEAT</span><span class="p">;</span>
-    <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">visited</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">OK</span><span class="p">;</span>
+      <p>```cpp
+//
+// Created by dhy on 18-8-8.
+//
+# include <iostream>
+# include <cstring>
+using namespace std;
+const int OK = 1;
+const int REPEAT = 2;
+const int WRONG = 3;
+struct node{
+    int son[27];
+    int exist = false;
+    bool visited = false;
+}nodes[1000000];
+int top = 0;
+void insert(string str){
+    int num,root = 1;
+    for(int i = 0;str[i];i++){
+        num = str[i] - 'a';
+        if(nodes[root].son[num]==0)//no son
+            nodes[root].son[num] = ++top;
+        root = nodes[root].son[num];
+    }
+    nodes[root].exist = true;
+}
+int search(string str){
+    int num = 0,root = 1;
+    for(int i = 0;str[i];i++){
+        num = str[i]-'a';
+        if(nodes[root].son[num]==0)return WRONG;
+        root = nodes[root].son[num];
+    }
+    if(!nodes[root].exist)return WRONG;
+    else if(nodes[root].visited)return REPEAT;
+    nodes[root].visited = true;
+    return OK;</cstring></iostream></p>
 
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">str</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">nodes</span><span class="p">));</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">str</span><span class="p">;</span>
-        <span class="n">insert</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span> <span class="n">str</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">state</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="n">OK</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"OK"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="n">WRONG</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"WRONG"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">==</span><span class="n">REPEAT</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"REPEAT"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<p>}
+int main(void){
+    int n,m;
+    ios::sync_with_stdio(false);
+    cin»n;
+    string str;
+    memset(nodes,0,sizeof(nodes));
+    for(int i = 1;i&lt;=n;i++){
+        cin»str;
+        insert(str);
+    }
+    cin»m;
+    for(int i = 1;i&lt;=m;i++){
+        cin» str;
+        int state = search(str);
+        if(state==OK)cout«“OK”«endl;
+        if(state==WRONG)cout«“WRONG”«endl;
+        if(state==REPEAT)cout«“REPEAT”«endl;
+    }
+    return 0;
+}</p>
 
-</code></pre></div></div>
+<p>```</p>
 
     </div>
 

@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="P1273 有线电视网 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-题目描述
+# 题目描述
 某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -23,7 +23,7 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="P1273 有线电视网 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-题目描述
+# 题目描述
 某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -194,9 +194,9 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="题目描述">题目描述</h1>
-<p>某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。</p>
+      <h1 id="section">题面</h1>
+<p># 题目描述
+某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。</p>
 
 <p>从转播站到转播站以及从转播站到所有用户终端的信号传输费用都是已知的，一场转播的总费用等于传输信号的费用总和。</p>
 
@@ -204,9 +204,9 @@
 
 <p>写一个程序找出一个方案使得有线电视网在不亏本的情况下使观看转播的用户尽可能多。</p>
 
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>输入文件的第一行包含两个用空格隔开的整数N和M，其中2≤N≤3000，1≤M≤N-1，N为整个有线电视网的结点总数，M为用户终端的数量。</p>
+<h1 id="section-1">输入输出格式</h1>
+<p>#  输入格式：
+输入文件的第一行包含两个用空格隔开的整数N和M，其中2≤N≤3000，1≤M≤N-1，N为整个有线电视网的结点总数，M为用户终端的数量。</p>
 
 <p>第一个转播站即树的根结点编号为1，其他的转播站编号为2到N-M，用户终端编号为N-M+1到N。</p>
 
@@ -216,92 +216,93 @@
 
 <p>K表示该转播站下接K个结点(转播站或用户)，每个结点对应一对整数A与C，A表示结点编号，C表示从当前转播站传输信号到结点A的费用。最后一行依次表示所有用户为观看比赛而准备支付的钱数。</p>
 
-<h1 id="输出格式">输出格式：</h1>
+<h1 id="section-2">输出格式：</h1>
 <p>输出文件仅一行，包含一个整数，表示上述问题所要求的最大用户数。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 3
+<h1 id="section-3">输入输出样例</h1>
+<p>#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+5 3
 2 2 2 5 3
 2 3 2 4 3
 3 4 2
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
-</code></pre></div></div>
-<p>说明</p>
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+2
+</code>
+说明</p>
 
 <p>说明
 样例解释
 【样例解释】
 <img src="https://cdn.risingentropy.top/images/posts/c39fe3bab64416ed80019e1.png" alt="enter image description here" />
-如图所示，共有五个结点。结点①为根结点，即现场直播站，②为一个中转站，③④⑤为用户端，共M个，编号从N-M+1到N，他们为观看比 赛分别准备的钱数为3、4、2，从结点①可以传送信号到结点②，费用为2，也可以传送信号到结点⑤，费用为3（第二行数据所示），从结点②可以传输信号到结点③，费用为2。也可传输信号到结点④，费用为3（第三行数据所示），如果要让所有用户（③④⑤）都能看上比赛，则信号传输的总费用为： 2+3+2+3=10，大于用户愿意支付的总费用3+4+2=9，有线电视网就亏本了，而只让③④两个用户看比赛就不亏本了。</p>
-<h1 id="解答">解答</h1>
-<p>骚题一道。我们从答案可行性角度来想。我们用<code class="language-plaintext highlighter-rouge">dp[i][j]</code>表示从<code class="language-plaintext highlighter-rouge">i</code>个节点开始，选择<code class="language-plaintext highlighter-rouge">j</code>个节点获得的最大利润。这个利润是什么意思呢？就是总价值减去成本。那么状态转移方程式就是\(dp[i][j] = max(dp[i][j],dp[i][j-k]+dp[t][k]-w[edge])\)
-代码</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">3010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">3010</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">son</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">cost</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-    <span class="n">dp</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">&gt;=</span><span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span><span class="n">son</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">dp</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cost</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="k">return</span><span class="p">;}</span>
-    <span class="n">son</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">);</span><span class="n">son</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">+=</span><span class="n">son</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">son</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">son</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">--</span><span class="p">){</span>
-                <span class="n">dp</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+如图所示，共有五个结点。结点①为根结点，即现场直播站，②为一个中转站，③④⑤为用户端，共M个，编号从N-M+1到N，他们为观看比 赛分别准备的钱数为3、4、2，从结点①可以传送信号到结点②，费用为2，也可以传送信号到结点⑤，费用为3（第二行数据所示），从结点②可以传输信号到结点③，费用为2。也可传输信号到结点④，费用为3（第三行数据所示），如果要让所有用户（③④⑤）都能看上比赛，则信号传输的总费用为： 2+3+2+3=10，大于用户愿意支付的总费用3+4+2=9，有线电视网就亏本了，而只让③④两个用户看比赛就不亏本了。
+# 解答
+骚题一道。我们从答案可行性角度来想。我们用<code class="language-plaintext highlighter-rouge">dp[i][j]</code>表示从<code class="language-plaintext highlighter-rouge">i</code>个节点开始，选择<code class="language-plaintext highlighter-rouge">j</code>个节点获得的最大利润。这个利润是什么意思呢？就是总价值减去成本。那么状态转移方程式就是\(dp[i][j] = max(dp[i][j],dp[i][j-k]+dp[t][k]-w[edge])\)
+代码
+```cpp</p>
 
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span>
-            <span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="mh">0xc0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
-    <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
+<h1 id="include-iostream">include <iostream></iostream></h1>
+<p># include <cstring>
+using namespace std;
+const int MAXN = 3010;
+const int MAXM = 3010&lt;&lt;1;
+struct edge{
+    int t,w,next;
+}edges[MAXM];
+int head[MAXN];
+int top;
+void add(int f,int t,int w){
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int dp[MAXN][MAXN];
+int son[MAXN];
+int n,m;
+int cost[MAXN];
+void dfs(int f,int fa){
+    dp[f][0] = 0;
+    if(f&gt;=n-m+1){son[f] = 1;dp[f][1] = cost[f];return;}
+    son[f] = 0;
+    for(int i = head[f];i!=0;i = edges[i].next){
+        int t = edges[i].t;
+        if(t==fa)continue;
+        dfs(t,f);son[f]+=son[t];
+        for(int j = son[f];j&gt;=0;j--){
+            for(int k = son[t];k&gt;=0;k--){
+                dp[f][j] = max(dp[f][j],dp[f][j-k]+dp[t][k]-edges[i].w);
+            }
+        }</cstring></p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>} } int main(){
+cin&gt;&gt;n&gt;&gt;m;
+int k,a,c;
+for(int i = 1;i&lt;=n-m;i++){
+    cin&gt;&gt;k;
+    for(int j = 1;j&lt;=k;j++){
+        cin&gt;&gt;a&gt;&gt;c;
+        add(i,a,c);
+    }
+}
+for(int i = n-m+1;i&lt;=n;i++){
+    cin&gt;&gt;cost[i];
+}
+memset(dp,0xc0, sizeof(dp));
+dfs(1,0);
+int ans = 0;
+for(int i = 1;i&lt;=m;i++){
+    if(dp[1][i]&gt;=0){
+        ans = i;
+    }
+}
+cout&lt;&lt;ans;
+return 0; };
 </code></pre></div></div>
+
+<p>```</p>
 
     </div>
 

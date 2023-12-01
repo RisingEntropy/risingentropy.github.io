@@ -192,104 +192,108 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>给定一个长度为$n$的由$[′0′..′9′]$成的字符串s$，v[i,j]$表示由字符串$s$第i到第$j$位组成的十进制数字。</p>
 
 <p>将它的某一个上升序列定义为：将这个字符串切割成m段不含前导′0′的串，切点分别为$k_1,k_2…k_{m−1}$，使得$v[1,k1]&lt;v[k_1+1,k_2]&lt;…&lt;v[k_{m−2},k_{m−1}]$。</p>
 
-<p>请你求出该字符串s的上升序列个数，答案对$10^9+7$取模。</p>
-<h1 id="输入">输入</h1>
-<p>第一行一个整数$n$,表示字符串长度；</p>
+<p>请你求出该字符串s的上升序列个数，答案对$10^9+7$取模。
+# 输入
+第一行一个整数$n$,表示字符串长度；</p>
 
-<p>第二行$n$个$[′0′..′9′]$内的字符，表示给出的字符串$s$。</p>
-<h1 id="输出">输出</h1>
-<p>仅一行表示给出字符串$s$的上升序列个数对$10^9+7$取模的值。</p>
-<h1 id="样例">样例</h1>
-<h1 id="输入1">输入1</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+<p>第二行$n$个$[′0′..′9′]$内的字符，表示给出的字符串$s$。
+# 输出
+仅一行表示给出字符串$s$的上升序列个数对$10^9+7$取模的值。
+# 样例
+#  输入1
+<code class="language-plaintext highlighter-rouge">
+6
 123434
-</code></pre></div></div>
-<h1 id="输出1">输出1</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
-</code></pre></div></div>
-<h1 id="输入2">输入2</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
+</code>
+#  输出1
+<code class="language-plaintext highlighter-rouge">
+8
+</code>
+#  输入2
+<code class="language-plaintext highlighter-rouge">
+8
 20152016
-</code></pre></div></div>
-<h1 id="输出2">输出2</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>一道非常好的题</p>
-<h1 id="做法130-ptr">做法1.$30 ptr$</h1>
-<p>dfs爆搜，枚举每一个断点，剪剪枝，就过了，其实不剪枝也可以，因为$10!$不是特别大</p>
-<h1 id="做法2100ptr">做法2.$100ptr$</h1>
-<p>dp我一开始看到这道题的时候想到了加乘号那道题，用$sum[i][i]$数组表示$s[i…j]$构成的一些数，然后设计出如下方程式
+</code>
+# 输出2
+<code class="language-plaintext highlighter-rouge">
+4
+</code>
+# 解答
+一道非常好的题
+# 做法1.$30 ptr$
+dfs爆搜，枚举每一个断点，剪剪枝，就过了，其实不剪枝也可以，因为$10!$不是特别大
+# 做法2.$100ptr$
+dp我一开始看到这道题的时候想到了加乘号那道题，用$sum[i][i]$数组表示$s[i…j]$构成的一些数，然后设计出如下方程式
 \(dp[i][k] = \sum dp[i-k][len]\)
 表示i结尾，最后一个数长度为k的方案数，其中保证i-k结尾长度为len的数大小小于i结尾，长度为k的数，复杂度$O(n^3)$
 但是这个思路是对的，我们考虑如何优化到n=5000的情况。用$dp[i][j]$表示i到j这个数为结尾的数的可能性的和(其实代码表示的是当且所有合法状态的和，为什么呢？因为这样可以用前缀和优化转移)。
 那么dp[i][j]可以由哪些状态转移过来呢？首先如果前面一个数长度小于这个数，那么肯定可以转移，因为长度短，大小一定小。也就是说[i-1-(j-i+1)+1,i-1]都可以转过来，并且也不会去改变它的值，这里就可用前缀和优化，后面在细说。那么对于i-1-(j-i+1)+1可不可以转移过来呢？我们就要比大小了，怎么比？考虑一位一K=位地来(就向我写的DBigNumbers一样)，复杂度$O(n)$，但是这样有点爆炸啊，复杂度$O(n^3)$,5000的范围就是870
 0K也帮不了我，但是考虑改了事时限，改成了2s，我们考虑套个log是可以的。那从哪里优化log呢？首先，遍历状态是不可的，那么只能是比大小的时候优化！怎么优化呢？是个技巧.<strong>我们做个哈希，然后二分</strong>对于两个数[a,b][c,d]如果前半部分哈希值相等，说明前面一半是一样的。那么就在后面找不一样的地方。否则在前面找。找到以后，比较那个不一样的地方的大小就好了，复杂度$O(logN)$
 至于之前说的前缀和优化，我们发现[i-1-(j-i+1)+1,i-1]里面所有状态都可以直接转移，不需要一个一个计算，那么我们直接dp[i-1][j] - dp[i-1-(j-i+1)][j]就可以得到这些状态的结果的和了。但是在计算完dp[i][j]以后，要把dp[i-1][j]的值加进去，这样才是完整的维护前缀和。最后dp[n][n]就是答案。
-代码如下</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 19-1-20.</span>
-<span class="c1">//</span>
+代码如下
+```cpp
+//
+// Created by dhy on 19-1-20.
+//</p>
 
-<span class="cp"># include &lt;iostream&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">5010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">1e9</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
-<span class="kt">char</span> <span class="n">c</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">hsh</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">cmp</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">==</span><span class="n">c</span><span class="p">[</span><span class="n">b</span><span class="p">])</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">&lt;</span><span class="n">c</span><span class="p">[</span><span class="n">b</span><span class="p">])</span><span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">else</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">cmp1</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="c1">//二分比大小</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">!=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">return</span> <span class="n">cmp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">hsh</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span><span class="o">==</span><span class="n">hsh</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]){</span><span class="c1">//can't transfer when equal</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">hsh</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">a</span><span class="o">+</span><span class="n">mid</span><span class="p">]</span><span class="o">==</span><span class="n">hsh</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="o">+</span><span class="n">mid</span><span class="p">])</span><span class="n">l</span> <span class="o">=</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-        <span class="k">else</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">cmp</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">l</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span><span class="c1">//这个地方是长度相等的时候即状态数计算，也是前缀和，只不过为了方便，打成函数</span>
-    <span class="k">return</span> <span class="p">((</span><span class="n">dp</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">dp</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">r</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//预处理把哈希处理出来</span>
-        <span class="n">hsh</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">hsh</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">hsh</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">'0'</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<h1 id="include-iostream">include <iostream></iostream></h1>
+<p>using namespace std;
+const int MAXN = 5010;
+const int mod = (int)1e9+7;
+char c[MAXN];
+int hsh[MAXN][MAXN];
+long long dp[MAXN][MAXN];
+int cmp(int a,int b){
+    if(c[a]==c[b])return 0;
+    if(c[a]&lt;c[b])return -1;
+    else return 1;
+}
+int cmp1(int a,int b,int i,int j){//二分比大小
+    if(c[a]!=c[i])return cmp(a,i);
+    if(hsh[a][b]==hsh[i][j]){//can’t transfer when equal
+        return 0;
+    }
+    int l = 1,r = b-a;
+    while(l&lt;r){
+        int mid = (l+r)»1;
+        if(hsh[a][a+mid]==hsh[i][i+mid])l = mid+1;
+        else r = mid;
+    }
+    return cmp(a+l,i+l);
+}
+int work(int l,int r){//这个地方是长度相等的时候即状态数计算，也是前缀和，只不过为了方便，打成函数
+    return ((dp[l][r]-dp[l-1][r])%mod+mod)%mod;
+}
+int n;
+int main(){
+    cin»n;
+    cin»c+1;
+    for(int i = 1;i&lt;=n;i++){//预处理把哈希处理出来
+        hsh[i][i] = c[i]-‘0’;
+        for(int j = i+1;j&lt;=n;j++){
+            hsh[i][j] = (hsh[i][j-1]*10+c[j]-‘0’)%mod;
+        }
+    }
+    for(int i = 1;i&lt;=n;i++)dp[1][i] = 1;</p>
 
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span> <span class="o">=</span> <span class="n">r</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="n">i</span><span class="p">;</span><span class="c1">//可以直接转移的区间</span>
-            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">dp</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="n">dp</span><span class="p">[</span><span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">)][</span><span class="n">r</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span><span class="c1">//转移，前缀和优化</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">cmp1</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">){</span><span class="c1">//对于长度相等的两个区间可否转移，小于即可转移</span>
-                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">work</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">'0'</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//如果是0开头，就不是合法的状态，计数清空</span>
-            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span><span class="c1">//顺便维护前缀和</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">n</span><span class="p">];</span><span class="c1">//计算答案</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(int i = 2;i&lt;=n;i++){
+    for(int j = i;j&lt;=n;j++){
+        int r = i-1,l = r-j+i;//可以直接转移的区间
+        dp[i][j] = ((dp[r][r]-dp[max(l,0)][r])%mod+mod)%mod;//转移，前缀和优化
+        if(l&gt;=1&amp;&amp;cmp1(l,r,i,j)==-1){//对于长度相等的两个区间可否转移，小于即可转移
+            dp[i][j] = (dp[i][j]+work(l,r))%mod;
+        }
+        if(c[i]=='0')dp[i][j] = 0;//如果是0开头，就不是合法的状态，计数清空
+        dp[i][j] = (dp[i-1][j]+dp[i][j])%mod;//顺便维护前缀和
+    }
+}
+cout&lt;&lt;dp[n][n];//计算答案
+return 0; } ```
 </code></pre></div></div>
 
     </div>

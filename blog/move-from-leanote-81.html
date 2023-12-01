@@ -24,22 +24,24 @@ Ollie：1 3
 Stan：1 0
 Stan赢得了游戏的胜利。
 现在，假设他们完美地操作，谁会取得胜利呢？
-输入输出格式
-输入格式：
+# 输入输出格式
+#  输入格式：
 第一行为测试数据的组数C。下面有C行，每行为一组数据，包含两个正整数M, N。（M, N不超过长整型。）
-输出格式：
+#  输出格式：
 对每组输入数据输出一行，如果Stan胜利，则输出“Stan wins”；否则输出“Ollie wins”
-输入输出样例
-输入样例# 1：
+# 输入输出样例
+#  输入样例# 1： 
+
 2
 25 7
 24 15
 
-输出样例# 1：
+#  输出样例# 1： 
+
 Stan wins
 Ollie wins
 
-解答
+# 解答
 一下均假设SG(n,m)函数中n&amp;gt;m
 这道题可以爆搜，但是因为我在学博弈论，看了题解，所以用博弈论来做
 对于SG(n,m)当中，如果m==0的话，说明对于此局面先手必负。因为上一个人经过计算已经得到0了。所以SG(n,0) = 0;
@@ -52,6 +54,7 @@ Ollie wins
 如果SG(m,n%m)==1,即n(先手必胜)局面，设k为n/m(整除),那么SG(n,n-(k-1)*m)==mex{SG(n%m,m)} == 0，对于其他的SG函数，均为2,3,4,5…即n(先手必胜)局面。
 特别判断一下如果n/m==1,那么此状态的SG函数就等于!SG(n,n%m)(如果这里理解不了，可以看一下p和n的互相转化)。否则，SG函数就等于1;
 所以写一个类似于gcd的函数就出来了。
+cpp
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 using namespace std;
@@ -99,22 +102,24 @@ Ollie：1 3
 Stan：1 0
 Stan赢得了游戏的胜利。
 现在，假设他们完美地操作，谁会取得胜利呢？
-输入输出格式
-输入格式：
+# 输入输出格式
+#  输入格式：
 第一行为测试数据的组数C。下面有C行，每行为一组数据，包含两个正整数M, N。（M, N不超过长整型。）
-输出格式：
+#  输出格式：
 对每组输入数据输出一行，如果Stan胜利，则输出“Stan wins”；否则输出“Ollie wins”
-输入输出样例
-输入样例# 1：
+# 输入输出样例
+#  输入样例# 1： 
+
 2
 25 7
 24 15
 
-输出样例# 1：
+#  输出样例# 1： 
+
 Stan wins
 Ollie wins
 
-解答
+# 解答
 一下均假设SG(n,m)函数中n&amp;gt;m
 这道题可以爆搜，但是因为我在学博弈论，看了题解，所以用博弈论来做
 对于SG(n,m)当中，如果m==0的话，说明对于此局面先手必负。因为上一个人经过计算已经得到0了。所以SG(n,0) = 0;
@@ -127,6 +132,7 @@ Ollie wins
 如果SG(m,n%m)==1,即n(先手必胜)局面，设k为n/m(整除),那么SG(n,n-(k-1)*m)==mex{SG(n%m,m)} == 0，对于其他的SG函数，均为2,3,4,5…即n(先手必胜)局面。
 特别判断一下如果n/m==1,那么此状态的SG函数就等于!SG(n,n%m)(如果这里理解不了，可以看一下p和n的互相转化)。否则，SG函数就等于1;
 所以写一个类似于gcd的函数就出来了。
+cpp
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 using namespace std;
@@ -328,7 +334,7 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>欧几里德的两个后代Stan和Ollie正在玩一种数字游戏，这个游戏是他们的祖先欧几里德发明的。给定两个正整数M和N，<strong>从Stan开始</strong>，从其中较大的一个数，减去较小的数的正整数倍，当然，得到的数不能小于0。然后是Ollie，对刚才得到的数，和M，N中较小的那个数，再进行同样的操作……直到一个人得到了0，他就取得了胜利。下面是他们用(25，7)两个数游戏的过程：
 Start：25 7
 Stan：11 7
@@ -337,24 +343,26 @@ Stan：4 3
 Ollie：1 3
 Stan：1 0
 Stan赢得了游戏的胜利。
-现在，假设他们完美地操作，谁会取得胜利呢？</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>第一行为测试数据的组数C。下面有C行，每行为一组数据，包含两个正整数M, N。（M, N不超过长整型。）</p>
-<h1 id="输出格式">输出格式：</h1>
-<p>对每组输入数据输出一行，如果Stan胜利，则输出“Stan wins”；否则输出“Ollie wins”</p>
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+现在，假设他们完美地操作，谁会取得胜利呢？
+# 输入输出格式
+#  输入格式：
+第一行为测试数据的组数C。下面有C行，每行为一组数据，包含两个正整数M, N。（M, N不超过长整型。）
+#  输出格式：
+对每组输入数据输出一行，如果Stan胜利，则输出“Stan wins”；否则输出“Ollie wins”
+# 输入输出样例
+#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+2
 25 7
 24 15
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stan wins
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+Stan wins
 Ollie wins
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>一下均假设SG(n,m)函数中n&gt;m
+</code>
+# 解答
+一下均假设SG(n,m)函数中n&gt;m
 这道题可以爆搜，但是因为我在学博弈论，看了题解，所以用博弈论来做
 对于SG(n,m)当中，如果m==0的话，说明对于此局面先手必负。因为上一个人经过计算已经得到0了。所以SG(n,0) = 0;
 那么我们现在来计算SG函数，由\(SG(n,m) = mex(\{SG(n,n-m),SG(n,n-2m),SG(n,n-3m)....SG(n\%m,n)\})\)
@@ -365,39 +373,40 @@ Ollie wins
 那么如果SG(m,n%m)==0 即是当前局面是p(先手必负)，那么对于SG(n,m-kn)都是1，2,3,4，即n(先手必胜)局面。 
 如果SG(m,n%m)==1,即n(先手必胜)局面，设k为n/m(整除),那么SG(n,n-(k-1)*m)==mex{SG(n%m,m)} == 0，对于其他的SG函数，均为2,3,4,5…即n(先手必胜)局面。
 特别判断一下如果n/m==1,那么此状态的SG函数就等于!SG(n,n%m)(如果这里理解不了，可以看一下p和n的互相转化)。否则，SG函数就等于1;
-所以写一个类似于gcd的函数就出来了。</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+所以写一个类似于gcd的函数就出来了。
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdio&gt;
 # include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">read</span><span class="p">(){</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-	<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">bool</span> <span class="nf">SG</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">m</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">m</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="o">%</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">else</span><span class="p">{</span><span class="k">return</span> <span class="nb">true</span><span class="p">;}</span>
-<span class="p">}</span>
-<span class="kr">inline</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">max</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
-<span class="kr">inline</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">min</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">c</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">--</span><span class="p">){</span>
-		<span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-		<span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">SG</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))){</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"Stan wins</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">"Ollie wins</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+long long read(){
+	long long x = 0,f = 1;
+	static char c = getchar();
+	while(c&lt;'0'||c&gt;'9'){if(c=='-')f = -1;c = getchar();}
+	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = x*10+c-'0';c = getchar();}
+	return x*f;
+}
+bool SG(long long n,long long m){
+	if(m==0)return false;
+	if(n/m == 1)return !(m,n%m);
+	else{return true;}
+}
+inline long long max(long long a,long long b){return a&gt;b?a:b;}
+inline long long min(long long a,long long b){return a&lt;b?a:b;}
+int main(void){
+	long long c = read();
+	long long n,m;
+	while(c--){
+		n = read();
+		m = read();
+		if(SG(max(m,n),min(n,m))){
+			printf("Stan wins\n");
+		}else{
+			printf("Ollie wins\n");
+		}
+	}
+	return 0;
+}
+</code></p>
 
     </div>
 

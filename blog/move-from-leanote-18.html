@@ -18,59 +18,59 @@
 //
 // Created by dhy on 18-8-5.
 //
-include 
-include 
-include 
+# include 
+# include 
+# include 
 using namespace std;
 int map[200][200];
 int F[150][150];
 int main(void){
-    map[‘A’][‘A’] = 5;
-    map[‘A’][‘C’] = -1;
-    map[‘A’][‘G’] = -2;
-    map[‘A’][‘T’] = -1;
-    map[‘A’][’-‘] = -3;
-    map[‘C’][‘A’] = -1;
-    map[‘C’][‘C’] = 5;
-    map[‘C’][‘G’] = -3;
-    map[‘C’][‘T’] = -2;
-    map[‘C’][’-‘] = -4;
-    map[‘G’][‘A’] = -2;
-    map[‘G’][‘C’] = -3;
-    map[‘G’][‘G’] = 5;
-    map[‘G’][‘T’] = -2;
-    map[‘G’][’-‘] = -2;
-    map[‘T’][‘A’] = -1;
-    map[‘T’][‘C’] = -2;
-    map[‘T’][‘G’] = -2;
-    map[‘T’][‘T’] = 5;
-    map[‘T’][’-‘] = -1;
-    map[’-‘][‘A’] = -3;
-    map[’-‘][‘C’] = -4;
-    map[’-‘][‘G’] = -2;
-    map[’-‘][‘T’] = -1;
+    map['A']['A'] = 5;
+    map['A']['C'] = -1;
+    map['A']['G'] = -2;
+    map['A']['T'] = -1;
+    map['A']['-'] = -3;
+    map['C']['A'] = -1;
+    map['C']['C'] = 5;
+    map['C']['G'] = -3;
+    map['C']['T'] = -2;
+    map['C']['-'] = -4;
+    map['G']['A'] = -2;
+    map['G']['C'] = -3;
+    map['G']['G'] = 5;
+    map['G']['T'] = -2;
+    map['G']['-'] = -2;
+    map['T']['A'] = -1;
+    map['T']['C'] = -2;
+    map['T']['G'] = -2;
+    map['T']['T'] = 5;
+    map['T']['-'] = -1;
+    map['-']['A'] = -3;
+    map['-']['C'] = -4;
+    map['-']['G'] = -2;
+    map['-']['T'] = -1;
     string str1,str2;
     ios::sync_with_stdio(false);
     int k;
-    cin»k»str1»k»str2;
+    cin&amp;gt;&amp;gt;k&amp;gt;&amp;gt;str1&amp;gt;&amp;gt;k&amp;gt;&amp;gt;str2;
     for(int i = 1;i&amp;lt;=str1.size();i++){
         for(int j = 1;j&amp;lt;=str2.size();j++)
             F[i][j] = -9999000;
     }
-    str1.insert(0,1,’0’);
-    str2.insert(0,1,’0’);
+    str1.insert(0,1,'0');
+    str2.insert(0,1,'0');
     for(int i = 1;i&amp;lt;str1.size();i++)
-        F[i][0] = F[i-1][0]+map[str1[i]][’-‘];
+        F[i][0] = F[i-1][0]+map[str1[i]]['-'];
     for(int i = 1;i&amp;lt;str2.size();i++)
-        F[0][i] = F[0][i-1]+map[str2[i]][’-‘];
+        F[0][i] = F[0][i-1]+map[str2[i]]['-'];
     for(int i = 1;i&amp;lt;str1.size();i++)
         for(int j = 1;j&amp;lt;str2.size();j++){
             F[i][j] = max(F[i][j],F[i-1][j-1]+map[str1[i]][str2[j]]);//两个基因都不加空碱基
-            F[i][j] = max(F[i][j],F[i-1][j]+map[str1[i]][’-‘]);//
+            F[i][j] = max(F[i][j],F[i-1][j]+map[str1[i]]['-']);//
             //要加，第一个碱基对加空碱基，就是第一个基因的i-1和第二个的第j个配对，再加上
-            F[i][j] = max(F[i][j],F[i][j-1]+map[str2[j]][’-‘]);
+            F[i][j] = max(F[i][j],F[i][j-1]+map[str2[j]]['-']);
         }
-    cout«F[str1.size()-1][str2.size()-1];
+    cout&amp;lt;&amp;lt;F[str1.size()-1][str2.size()-1];
     return 0;
 }
 ">
@@ -82,59 +82,59 @@ int main(void){
 //
 // Created by dhy on 18-8-5.
 //
-include 
-include 
-include 
+# include 
+# include 
+# include 
 using namespace std;
 int map[200][200];
 int F[150][150];
 int main(void){
-    map[‘A’][‘A’] = 5;
-    map[‘A’][‘C’] = -1;
-    map[‘A’][‘G’] = -2;
-    map[‘A’][‘T’] = -1;
-    map[‘A’][’-‘] = -3;
-    map[‘C’][‘A’] = -1;
-    map[‘C’][‘C’] = 5;
-    map[‘C’][‘G’] = -3;
-    map[‘C’][‘T’] = -2;
-    map[‘C’][’-‘] = -4;
-    map[‘G’][‘A’] = -2;
-    map[‘G’][‘C’] = -3;
-    map[‘G’][‘G’] = 5;
-    map[‘G’][‘T’] = -2;
-    map[‘G’][’-‘] = -2;
-    map[‘T’][‘A’] = -1;
-    map[‘T’][‘C’] = -2;
-    map[‘T’][‘G’] = -2;
-    map[‘T’][‘T’] = 5;
-    map[‘T’][’-‘] = -1;
-    map[’-‘][‘A’] = -3;
-    map[’-‘][‘C’] = -4;
-    map[’-‘][‘G’] = -2;
-    map[’-‘][‘T’] = -1;
+    map['A']['A'] = 5;
+    map['A']['C'] = -1;
+    map['A']['G'] = -2;
+    map['A']['T'] = -1;
+    map['A']['-'] = -3;
+    map['C']['A'] = -1;
+    map['C']['C'] = 5;
+    map['C']['G'] = -3;
+    map['C']['T'] = -2;
+    map['C']['-'] = -4;
+    map['G']['A'] = -2;
+    map['G']['C'] = -3;
+    map['G']['G'] = 5;
+    map['G']['T'] = -2;
+    map['G']['-'] = -2;
+    map['T']['A'] = -1;
+    map['T']['C'] = -2;
+    map['T']['G'] = -2;
+    map['T']['T'] = 5;
+    map['T']['-'] = -1;
+    map['-']['A'] = -3;
+    map['-']['C'] = -4;
+    map['-']['G'] = -2;
+    map['-']['T'] = -1;
     string str1,str2;
     ios::sync_with_stdio(false);
     int k;
-    cin»k»str1»k»str2;
+    cin&amp;gt;&amp;gt;k&amp;gt;&amp;gt;str1&amp;gt;&amp;gt;k&amp;gt;&amp;gt;str2;
     for(int i = 1;i&amp;lt;=str1.size();i++){
         for(int j = 1;j&amp;lt;=str2.size();j++)
             F[i][j] = -9999000;
     }
-    str1.insert(0,1,’0’);
-    str2.insert(0,1,’0’);
+    str1.insert(0,1,'0');
+    str2.insert(0,1,'0');
     for(int i = 1;i&amp;lt;str1.size();i++)
-        F[i][0] = F[i-1][0]+map[str1[i]][’-‘];
+        F[i][0] = F[i-1][0]+map[str1[i]]['-'];
     for(int i = 1;i&amp;lt;str2.size();i++)
-        F[0][i] = F[0][i-1]+map[str2[i]][’-‘];
+        F[0][i] = F[0][i-1]+map[str2[i]]['-'];
     for(int i = 1;i&amp;lt;str1.size();i++)
         for(int j = 1;j&amp;lt;str2.size();j++){
             F[i][j] = max(F[i][j],F[i-1][j-1]+map[str1[i]][str2[j]]);//两个基因都不加空碱基
-            F[i][j] = max(F[i][j],F[i-1][j]+map[str1[i]][’-‘]);//
+            F[i][j] = max(F[i][j],F[i-1][j]+map[str1[i]]['-']);//
             //要加，第一个碱基对加空碱基，就是第一个基因的i-1和第二个的第j个配对，再加上
-            F[i][j] = max(F[i][j],F[i][j-1]+map[str2[j]][’-‘]);
+            F[i][j] = max(F[i][j],F[i][j-1]+map[str2[j]]['-']);
         }
-    cout«F[str1.size()-1][str2.size()-1];
+    cout&amp;lt;&amp;lt;F[str1.size()-1][str2.size()-1];
     return 0;
 }
 ">
@@ -306,66 +306,67 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 18-8-5.</span>
-<span class="c1">//</span>
-<span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;algorithm&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">map</span><span class="p">[</span><span class="mi">200</span><span class="p">][</span><span class="mi">200</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="mi">150</span><span class="p">][</span><span class="mi">150</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'A'</span><span class="p">][</span><span class="sc">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'A'</span><span class="p">][</span><span class="sc">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'A'</span><span class="p">][</span><span class="sc">'G'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'A'</span><span class="p">][</span><span class="sc">'T'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'A'</span><span class="p">][</span><span class="sc">'-'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'C'</span><span class="p">][</span><span class="sc">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'C'</span><span class="p">][</span><span class="sc">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'C'</span><span class="p">][</span><span class="sc">'G'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'C'</span><span class="p">][</span><span class="sc">'T'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'C'</span><span class="p">][</span><span class="sc">'-'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'G'</span><span class="p">][</span><span class="sc">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'G'</span><span class="p">][</span><span class="sc">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'G'</span><span class="p">][</span><span class="sc">'G'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'G'</span><span class="p">][</span><span class="sc">'T'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'G'</span><span class="p">][</span><span class="sc">'-'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'T'</span><span class="p">][</span><span class="sc">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'T'</span><span class="p">][</span><span class="sc">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'T'</span><span class="p">][</span><span class="sc">'G'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'T'</span><span class="p">][</span><span class="sc">'T'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'T'</span><span class="p">][</span><span class="sc">'-'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'-'</span><span class="p">][</span><span class="sc">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'-'</span><span class="p">][</span><span class="sc">'C'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'-'</span><span class="p">][</span><span class="sc">'G'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">map</span><span class="p">[</span><span class="sc">'-'</span><span class="p">][</span><span class="sc">'T'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">;</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="o">&gt;&gt;</span><span class="n">str1</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="o">&gt;&gt;</span><span class="n">str2</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">str1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">str2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999000</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">str1</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="sc">'0'</span><span class="p">);</span>
-    <span class="n">str2</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="sc">'0'</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">map</span><span class="p">[</span><span class="n">str1</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="sc">'-'</span><span class="p">];</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">map</span><span class="p">[</span><span class="n">str2</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="sc">'-'</span><span class="p">];</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">str2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">map</span><span class="p">[</span><span class="n">str1</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">str2</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span><span class="c1">//两个基因都不加空碱基</span>
-            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">map</span><span class="p">[</span><span class="n">str1</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="sc">'-'</span><span class="p">]);</span><span class="c1">//</span>
-            <span class="c1">//要加，第一个碱基对加空碱基，就是第一个基因的i-1和第二个的第j个配对，再加上</span>
-            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">map</span><span class="p">[</span><span class="n">str2</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="sc">'-'</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">str1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">str2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+      <p>```cpp
+//
+// Created by dhy on 18-8-5.
+//
+# include <iostream>
+# include <cstring>
+# include <algorithm>
+using namespace std;
+int map[200][200];
+int F[150][150];
+int main(void){
+    map['A']['A'] = 5;
+    map['A']['C'] = -1;
+    map['A']['G'] = -2;
+    map['A']['T'] = -1;
+    map['A']['-'] = -3;
+    map['C']['A'] = -1;
+    map['C']['C'] = 5;
+    map['C']['G'] = -3;
+    map['C']['T'] = -2;
+    map['C']['-'] = -4;
+    map['G']['A'] = -2;
+    map['G']['C'] = -3;
+    map['G']['G'] = 5;
+    map['G']['T'] = -2;
+    map['G']['-'] = -2;
+    map['T']['A'] = -1;
+    map['T']['C'] = -2;
+    map['T']['G'] = -2;
+    map['T']['T'] = 5;
+    map['T']['-'] = -1;
+    map['-']['A'] = -3;
+    map['-']['C'] = -4;
+    map['-']['G'] = -2;
+    map['-']['T'] = -1;
+    string str1,str2;
+    ios::sync_with_stdio(false);
+    int k;
+    cin&gt;&gt;k&gt;&gt;str1&gt;&gt;k&gt;&gt;str2;
+    for(int i = 1;i&lt;=str1.size();i++){
+        for(int j = 1;j&lt;=str2.size();j++)
+            F[i][j] = -9999000;
+    }
+    str1.insert(0,1,'0');
+    str2.insert(0,1,'0');
+    for(int i = 1;i&lt;str1.size();i++)
+        F[i][0] = F[i-1][0]+map[str1[i]]['-'];
+    for(int i = 1;i&lt;str2.size();i++)
+        F[0][i] = F[0][i-1]+map[str2[i]]['-'];
+    for(int i = 1;i&lt;str1.size();i++)
+        for(int j = 1;j&lt;str2.size();j++){
+            F[i][j] = max(F[i][j],F[i-1][j-1]+map[str1[i]][str2[j]]);//两个基因都不加空碱基
+            F[i][j] = max(F[i][j],F[i-1][j]+map[str1[i]]['-']);//
+            //要加，第一个碱基对加空碱基，就是第一个基因的i-1和第二个的第j个配对，再加上
+            F[i][j] = max(F[i][j],F[i][j-1]+map[str2[j]]['-']);
+        }
+    cout&lt;&lt;F[str1.size()-1][str2.size()-1];
+    return 0;
+}</algorithm></cstring></iostream></p>
 
-</code></pre></div></div>
+<p>```</p>
 
     </div>
 

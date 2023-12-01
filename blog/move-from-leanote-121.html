@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作：</p>
 
 <p>插入$x$数
@@ -209,8 +209,9 @@
 对于操作$3,4,5,6$每行输出一个数，表示对应答案</p>
 
 <p>输入输出样例
-输入样例# 1：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
+输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+10
 1 106465
 4 1
 1 317721
@@ -221,14 +222,15 @@
 6 81968
 1 492737
 5 493598
-</code></pre></div></div>
-<p>输出样例# 1：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>106465
+</code>
+输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+106465
 84185
 492737
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>相信各种平衡树大佬们都会写的溜地不得了了，我来一种暴力吊打表算的办法吧!
+</code>
+# 解答
+相信各种平衡树大佬们都会写的溜地不得了了，我来一种暴力吊打表算的办法吧!
 这是我在一个晚自习肝完作业后想到的。我们先考虑另一个问题，如果这里的$x$的范围不是$[-10^7,10^7]$而是$[1,100]$，那么还会有必要写平衡树吗？答案是否定的，我们可以直接用一个数组来存$x$出现的次数(记为cnt[x])。操作流程如下</p>
 
 <ol>
@@ -240,139 +242,144 @@
   <li>对于6操作，同5一样，只不过是从x+1开始跑到100</li>
 </ol>
 
-<p>对于$[1,100]$的x可以这么做，那能不能在$[-10^7,10^7]$上也这么跑暴力呢？显然，是可以的，我们把数据离散化一下，离散化的步骤如下</p>
-<blockquote>
-  <p>把所有询问全部离线(就算这道题强制在线也不管，因为这样的离线根本不影响)，然后把操作数从大到小排序，从大到小为每个数赋予一个离散化以后的值i(i从1开始递增)，之后，全部使用离散化以后的i代替操作数来操作。注意一下，对于4操作，其实离散化是没有用的，为了实现简便，我们就照样这么做，但是在计算的时候，就按照原来的值来做就好了</p>
-</blockquote>
+<p>对于$[1,100]$的x可以这么做，那能不能在$[-10^7,10^7]$上也这么跑暴力呢？显然，是可以的，我们把数据离散化一下，离散化的步骤如下
+  &gt;把所有询问全部离线(就算这道题强制在线也不管，因为这样的离线根本不影响)，然后把操作数从大到小排序，从大到小为每个数赋予一个离散化以后的值i(i从1开始递增)，之后，全部使用离散化以后的i代替操作数来操作。注意一下，对于4操作，其实离散化是没有用的，为了实现简便，我们就照样这么做，但是在计算的时候，就按照原来的值来做就好了</p>
 
 <p>这样就离散化好了，然后再按操作顺序排个序，然后从头开始愉快地回答询问。我们用nums[i]表示离散化之后的数i对应的离散化之前的数是多少。
   然后对于询问1，我们只需要cnt[i]++;就好了
   对于询问2，如果cnt[i]&gt;0我们就cnt[i]–;好了
   对于询问3，4,5，做法和上面所说的一样，直接上暴力
   以下是部分代码
-操作1</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>操作2</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kt">void</span> <span class="nf">del</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>操作3</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">Id</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//直接从1开始往后怼</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>操作4</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getVal</span><span class="p">(</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ans</span><span class="o">&lt;</span><span class="n">rank</span><span class="p">)</span><span class="c1">//从头开始往后怼</span>
-        <span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="o">++</span><span class="n">pos</span><span class="p">];</span>
-    <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>操作5</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getPre</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Id</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">Id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">Id</span><span class="p">];</span><span class="k">else</span> <span class="n">Id</span><span class="o">--</span><span class="p">;</span><span class="c1">//上面以及提到过的暴力跑法</span>
-    <span class="k">return</span> <span class="mi">444</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>操作6</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getBack</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Id</span><span class="o">&lt;=</span><span class="n">id</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">Id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">Id</span><span class="p">];</span><span class="k">else</span> <span class="n">Id</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">444</span><span class="p">;</span>
-<span class="p">}</span>
+操作1
+<code class="language-plaintext highlighter-rouge">cpp
+void insert(int val){
+    int id = val;
+    cnt[id]++;
+}
+</code>
+操作2
+<code class="language-plaintext highlighter-rouge">cpp
+  void del(int val){
+    int id = val;
+    if(cnt[id]&gt;0)cnt[id]--;
+}
+</code>
+操作3
+<code class="language-plaintext highlighter-rouge">cpp
+int getRank(int val){
+    int Id = val;
+    int ans = 0;
+    for(int i = 0;i&lt;Id;i++)ans+=cnt[i];//直接从1开始往后怼
+    return ans+1;
+}
+</code>
+操作4
+<code class="language-plaintext highlighter-rouge">cpp
+int getVal(int rank){
+    int ans = cnt[1];
+    int pos = 1;
+    while(ans&lt;rank)//从头开始往后怼
+        ans+=cnt[++pos];
+    return nums[pos];
+}
+</code>
+操作5
+<code class="language-plaintext highlighter-rouge">cpp
+int getPre(int val){
+    int Id = val-1;
+    while(Id&gt;=1)if(cnt[Id]&gt;0)return nums[Id];else Id--;//上面以及提到过的暴力跑法
+    return 444;
+}
+</code>
+操作6
+```cpp
+int getBack(int val){
+    int Id = val+1;
+    while(Id&lt;=id)if(cnt[Id]&gt;0)return nums[Id];else Id++;
+    return 444;
+}</p>
 
-</code></pre></div></div>
-<p><strong>注意了</strong>，这个做法会TLE掉好几个点，需要吸氧才能过去。但是<code class="language-plaintext highlighter-rouge">NOIplus</code>不能开O2怎么办呢？其实我也想到了解决办法，就是使用树状数组来维护cnt数组，然后使用线段树来查找前缀和为x的点，但是因为我比较懒，所以没有去实现，读者可以自己试一下，这样就把$O(n)$的查询前驱后继改成了$O(logN)$。
-总体代码如下</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;algorithm&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="sc">'0'</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1000010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">nums</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">id</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">op</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">opt</span><span class="p">,</span><span class="n">val</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">op</span> <span class="o">&amp;</span><span class="n">op2</span><span class="p">)</span><span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">val</span><span class="o">&lt;</span><span class="n">op2</span><span class="p">.</span><span class="n">val</span><span class="p">;}</span>
-<span class="p">}</span><span class="n">ops</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="nf">cmp</span><span class="p">(</span><span class="k">const</span> <span class="n">op</span> <span class="o">&amp;</span><span class="n">op1</span><span class="p">,</span><span class="k">const</span> <span class="n">op</span> <span class="o">&amp;</span><span class="n">op2</span><span class="p">){</span>
-    <span class="k">return</span> <span class="n">op1</span><span class="p">.</span><span class="n">time</span><span class="o">&lt;</span><span class="n">op2</span><span class="p">.</span><span class="n">time</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">del</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="n">cnt</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">getRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">Id</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">getVal</span><span class="p">(</span><span class="kt">int</span> <span class="n">rank</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ans</span><span class="o">&lt;</span><span class="n">rank</span><span class="p">)</span>
-        <span class="n">ans</span><span class="o">+=</span><span class="n">cnt</span><span class="p">[</span><span class="o">++</span><span class="n">pos</span><span class="p">];</span>
-    <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">getPre</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Id</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">Id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">Id</span><span class="p">];</span><span class="k">else</span> <span class="n">Id</span><span class="o">--</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">2333</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">getBack</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">Id</span> <span class="o">=</span> <span class="n">val</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Id</span><span class="o">&lt;=</span><span class="n">id</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">Id</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">Id</span><span class="p">];</span><span class="k">else</span> <span class="n">Id</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">23333</span><span class="p">;</span>
-<span class="p">}</span>
+<p><code class="language-plaintext highlighter-rouge">
+**注意了**，这个做法会TLE掉好几个点，需要吸氧才能过去。但是`NOIplus`不能开O2怎么办呢？其实我也想到了解决办法，就是使用树状数组来维护cnt数组，然后使用线段树来查找前缀和为x的点，但是因为我比较懒，所以没有去实现，读者可以自己试一下，这样就把$O(n)$的查询前驱后继改成了$O(logN)$。
+总体代码如下
+</code>cpp
+# include <algorithm>
+# include <cstring>
+# include <cstdio>
+using namespace std;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+(c^'0');c = getchar(); }
+    return x*f;
+}
+const int MAXN = 1000010;
+int nums[MAXN],id;
+struct op{
+    int opt,val,time,id;
+    bool operator&lt;(const op &amp;op2)const {return val&lt;op2.val;}
+}ops[MAXN];
+bool cmp(const op &amp;op1,const op &amp;op2){
+    return op1.time&lt;op2.time;
+}
+int cnt[MAXN];
+int n;
+void insert(int val){
+    int id = val;
+    cnt[id]++;
+}
+void del(int val){
+    int id = val;
+    if(cnt[id]&gt;0)cnt[id]--;
+}
+int getRank(int val){
+    int Id = val;
+    int ans = 0;
+    for(int i = 0;i&lt;Id;i++)ans+=cnt[i];
+    return ans+1;
+}
+int getVal(int rank){
+    int ans = cnt[1];
+    int pos = 1;
+    while(ans&lt;rank)
+        ans+=cnt[++pos];
+    return nums[pos];
+}
+int getPre(int val){
+    int Id = val-1;
+    while(Id&gt;=1)if(cnt[Id]&gt;0)return nums[Id];else Id--;
+    return 2333;
+}
+int getBack(int val){
+    int Id = val+1;
+    while(Id&lt;=id)if(cnt[Id]&gt;0)return nums[Id];else Id++;
+    return 23333;
+}</cstdio></cstring></algorithm></p>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">time</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-    <span class="n">sort</span><span class="p">(</span><span class="n">ops</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ops</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-    <span class="n">ops</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="mh">0x7f7f7f7f</span><span class="p">;</span><span class="c1">//这里是为了方便后面离散化赋新值</span>
-    <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">val</span><span class="o">==</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">id</span><span class="p">;</span>
-        <span class="k">else</span> <span class="n">nums</span><span class="p">[</span><span class="o">++</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">val</span><span class="p">,</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">sort</span><span class="p">(</span><span class="n">ops</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ops</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="n">cmp</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span><span class="n">insert</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">);</span><span class="k">continue</span><span class="p">;}</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span><span class="n">del</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">);</span><span class="k">continue</span><span class="p">;}</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span> <span class="o">==</span> <span class="mi">3</span><span class="p">){</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getRank</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">));</span><span class="k">continue</span><span class="p">;}</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span> <span class="o">==</span> <span class="mi">4</span><span class="p">){</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getVal</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">val</span><span class="p">));</span><span class="k">continue</span><span class="p">;}</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">opt</span> <span class="o">==</span> <span class="mi">5</span><span class="p">){</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getPre</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">));</span><span class="k">continue</span><span class="p">;}</span>
-        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getBack</span><span class="p">(</span><span class="n">ops</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<p>int main(void){
+    n = read();
+    for(int i = 1;i&lt;=n;i++)ops[i].opt = read(),ops[i].val = read(),ops[i].time = i;
+    sort(ops+1,ops+n+1);
+    ops[0].val = 0x7f7f7f7f;//这里是为了方便后面离散化赋新值
+    id = 0;
+    for(int i = 1;i&lt;=n;i++){
+        if(ops[i].val==ops[i-1].val)ops[i].id = ops[i-1].id;
+        else nums[++id] = ops[i].val,ops[i].id = id;
+    }
+    int cnt = 0;
+    sort(ops+1,ops+1+n,cmp);
+    for(int i = 1;i&lt;=n;i++){
+        if(ops[i].opt==1){insert(ops[i].id);continue;}
+        else if(ops[i].opt == 2){del(ops[i].id);continue;}
+        else if(ops[i].opt == 3){printf(“%d\n”,getRank(ops[i].id));continue;}
+        else if(ops[i].opt == 4){printf(“%d\n”,getVal(ops[i].val));continue;}
+        else if(ops[i].opt == 5){printf(“%d\n”,getPre(ops[i].id));continue;}
+        else printf(“%d\n”,getBack(ops[i].id));
+    }
+    return 0;
+}
+```</p>
 
     </div>
 

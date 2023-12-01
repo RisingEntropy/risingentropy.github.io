@@ -15,16 +15,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CF1114 D – Haoyu Deng's page">
   <meta name="twitter:description" content="CF1114D
-题面
+# 题面
 Flood Fill
-一句话题意
+# 一句话题意
 给你一个序列，每次可以把连续的每个数组都相等的一部分变成任意数字，问多少次可以把这个序列变成数字完全相同的。
-解答
+# 解答
 我只会区间DP，不会那个神仙的回文$NlogN$做法。$dp[i][j]$表示把$[i,j]$这个区间全部改成一样的，需要多少次。首先初始状态肯定是$dp[i][i]=0$
 dp[i][j]可以从2个地方转移过来$dp[i+1][j]$和$dp[i][j-1]$但是这里为了方便(后面就知道了)，我们从$dp[i][j]$转移到$dp[i-1][j]$和$dp[i][j+1]$.我们用$dp[i][j][0/1]$表示与这个区间最左边的一块颜色相同还是与最右边的一块颜色相同。这样就可以有如下转移方程式:\(dp[i-1][j][0] = min(dp[i-1][j][0],dp[i][j][0/1]+color!=a[i-1]);\)
 \(dp[i][j+1][1] = min(dp[i][j+1][1],dp[i][j][0/1]+color!=a[j+1]\)
 目标状态:$min(dp[1][n][1],dp[1][n][0])$
 代码：
+cpp
 //
 // Created by dhy on 19-2-13.
 //
@@ -63,16 +64,17 @@ int main(){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="CF1114 D – Haoyu Deng's page">
   <meta property="og:description" content="CF1114D
-题面
+# 题面
 Flood Fill
-一句话题意
+# 一句话题意
 给你一个序列，每次可以把连续的每个数组都相等的一部分变成任意数字，问多少次可以把这个序列变成数字完全相同的。
-解答
+# 解答
 我只会区间DP，不会那个神仙的回文$NlogN$做法。$dp[i][j]$表示把$[i,j]$这个区间全部改成一样的，需要多少次。首先初始状态肯定是$dp[i][i]=0$
 dp[i][j]可以从2个地方转移过来$dp[i+1][j]$和$dp[i][j-1]$但是这里为了方便(后面就知道了)，我们从$dp[i][j]$转移到$dp[i-1][j]$和$dp[i][j+1]$.我们用$dp[i][j][0/1]$表示与这个区间最左边的一块颜色相同还是与最右边的一块颜色相同。这样就可以有如下转移方程式:\(dp[i-1][j][0] = min(dp[i-1][j][0],dp[i][j][0/1]+color!=a[i-1]);\)
 \(dp[i][j+1][1] = min(dp[i][j+1][1],dp[i][j][0/1]+color!=a[j+1]\)
 目标状态:$min(dp[1][n][1],dp[1][n][0])$
 代码：
+cpp
 //
 // Created by dhy on 19-2-13.
 //
@@ -275,48 +277,49 @@ int main(){
 
     <div class="post__content">
       <h1 id="cf1114d">CF1114D</h1>
-<h1 id="题面">题面</h1>
-<p><a href="http://codeforces.com/contest/1114/problem/D">Flood Fill</a></p>
-<h1 id="一句话题意">一句话题意</h1>
-<p>给你一个序列，每次可以把连续的每个数组都相等的一部分变成任意数字，问多少次可以把这个序列变成数字完全相同的。</p>
-<h1 id="解答">解答</h1>
-<p>我只会区间DP，不会那个神仙的回文$NlogN$做法。$dp[i][j]$表示把$[i,j]$这个区间全部改成一样的，需要多少次。首先初始状态肯定是$dp[i][i]=0$
+<p># 题面
+<a href="http://codeforces.com/contest/1114/problem/D">Flood Fill</a>
+# 一句话题意
+给你一个序列，每次可以把连续的每个数组都相等的一部分变成任意数字，问多少次可以把这个序列变成数字完全相同的。
+# 解答
+我只会区间DP，不会那个神仙的回文$NlogN$做法。$dp[i][j]$表示把$[i,j]$这个区间全部改成一样的，需要多少次。首先初始状态肯定是$dp[i][i]=0$
 dp[i][j]可以从2个地方转移过来$dp[i+1][j]$和$dp[i][j-1]$但是这里为了方便(后面就知道了)，我们从$dp[i][j]$转移到$dp[i-1][j]$和$dp[i][j+1]$.我们用$dp[i][j][0/1]$表示与这个区间最左边的一块颜色相同还是与最右边的一块颜色相同。这样就可以有如下转移方程式:\(dp[i-1][j][0] = min(dp[i-1][j][0],dp[i][j][0/1]+color!=a[i-1]);\)
 \(dp[i][j+1][1] = min(dp[i][j+1][1],dp[i][j][0/1]+color!=a[j+1]\)
 目标状态:$min(dp[1][n][1],dp[1][n][0])$
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
-<span class="c1">// Created by dhy on 19-2-13.</span>
-<span class="c1">//</span>
-<span class="cp"># include &lt;iostream&gt;
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+//
+// Created by dhy on 19-2-13.
+//
+# include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">5010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">iostream</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">);</span><span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">col</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">;</span><span class="n">col</span><span class="o">++</span><span class="p">){</span>
-                <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">col</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">:</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]));</span>
-                <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]));</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 5010;
+int a[MAXN];
+int dp[MAXN][MAXN][2];
+int main(){
+    iostream::sync_with_stdio(false);
+    cin.tie(nullptr);cout.tie(nullptr);
+    int n;cin&gt;&gt;n;
+    for(int i = 1;i&lt;=n;i++)cin&gt;&gt;a[i];
+    n = unique(a+1,a+n+1)-a-1;
+    memset(dp,0x3f,sizeof(dp));
+    for(int i = 1;i&lt;=n;i++)
+        dp[i][i][0] = dp[i][i][1] = 0;
+    for(int j = 1;j&lt;=n;j++){
+        for(int i = j;i&gt;=1;i--){
+            for(int col = 0;col&lt;2;col++){
+                int c = (col==0?a[i]:a[j]);
+                if(i&gt;1)dp[i-1][j][0] = min(dp[i-1][j][0],dp[i][j][col]+(c!=a[i-1]));
+                if(j&lt;n)dp[i][j+1][1] = min(dp[i][j+1][1],dp[i][j][col]+(c!=a[j+1]));
+            }
+        }
+    }
+    cout&lt;&lt;min(dp[1][n][0],dp[1][n][1]);
+    return 0;
+}
+</code></p>
 
     </div>
 

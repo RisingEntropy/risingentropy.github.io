@@ -15,21 +15,22 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="中国剩余定理(CRT) – Haoyu Deng's page">
   <meta name="twitter:description" content="中国剩余定理
-内容：
+#  内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
 \(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
-证明
+# 证明
 因为$M_i$是除了$m_i$以外所有模数的倍数，所以$\forall k\neq i,a_iM_it_i\equiv 0(mod\ m_k)$。又因为$a_iM_it_i\equiv a_i(mod m_i)$所以CRT成立。
 \(Q.E.D.\)
 其实我觉得还是挺显然的。
-应用
+# 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
 \(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -79,6 +80,7 @@ poj3900 拓展欧几里得解同余方程组
 \(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
 然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -124,8 +126,9 @@ int main() {
 }
 
 生理周期poj1006
-可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解方便卡常。
+可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解~~方便卡常~~。
 代码:
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -179,21 +182,22 @@ int main(){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="中国剩余定理(CRT) – Haoyu Deng's page">
   <meta property="og:description" content="中国剩余定理
-内容：
+#  内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
 \(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
-证明
+# 证明
 因为$M_i$是除了$m_i$以外所有模数的倍数，所以$\forall k\neq i,a_iM_it_i\equiv 0(mod\ m_k)$。又因为$a_iM_it_i\equiv a_i(mod m_i)$所以CRT成立。
 \(Q.E.D.\)
 其实我觉得还是挺显然的。
-应用
+# 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
 \(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -243,6 +247,7 @@ poj3900 拓展欧几里得解同余方程组
 \(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
 然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -288,8 +293,9 @@ int main() {
 }
 
 生理周期poj1006
-可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解方便卡常。
+可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解~~方便卡常~~。
 代码:
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -506,56 +512,57 @@ int main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="中国剩余定理">中国剩余定理</h1>
-<h1 id="内容">内容：</h1>
-<p>设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
+      <h1 id="section">中国剩余定理</h1>
+<p>#  内容：
+设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
 \(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
-有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$</p>
-<h1 id="证明">证明</h1>
-<p>因为$M_i$是除了$m_i$以外所有模数的倍数，所以$\forall k\neq i,a_iM_it_i\equiv 0(mod\ m_k)$。又因为$a_iM_it_i\equiv a_i(mod m_i)$所以CRT成立。
+有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
+# 证明
+因为$M_i$是除了$m_i$以外所有模数的倍数，所以$\forall k\neq i,a_iM_it_i\equiv 0(mod\ m_k)$。又因为$a_iM_it_i\equiv a_i(mod m_i)$所以CRT成立。
 \(Q.E.D.\)
-其实我觉得还是挺显然的。</p>
-<h1 id="应用">应用</h1>
-<p><a href="https://www.luogu.org/problem/P1495">P1495 曹冲养猪</a>
+其实我觉得还是挺显然的。
+# 应用
+<a href="https://www.luogu.org/problem/P1495">P1495 曹冲养猪</a>
 观察题目不难列出如下柿子:
 \(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用<code class="language-plaintext highlighter-rouge">long long</code>
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">M</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">exgcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
-		<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="k">return</span> <span class="n">a</span><span class="p">;</span>
-	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">exgcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="p">}</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">MM</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">MM</span><span class="o">*=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">MM</span><span class="o">/</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="n">exgcd</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-		<span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="p">}</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="p">((</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">%</span><span class="n">MM</span><span class="o">+</span><span class="n">MM</span><span class="p">)</span><span class="o">%</span><span class="n">MM</span><span class="p">)</span><span class="o">%</span><span class="n">MM</span><span class="p">;</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">x</span><span class="p">;</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>poj3900 拓展欧几里得解同余方程组
+using namespace std;
+const int MAXN = 1010;
+long long a[MAXN],b[MAXN],M[MAXN],t[MAXN];
+int exgcd(long long a,long long b,long long &amp;x,long long &amp;y){
+	if(b==0){
+		x = 1,y = 0;return a;
+	}else{
+		exgcd(b,a%b,x,y);
+		int t = x;x = y;y = t-(a/b)*y;
+	}
+}
+int main(){
+	int n;cin&gt;&gt;n;
+	for(int i = 1;i&lt;=n;i++){
+		cin&gt;&gt;a[i]&gt;&gt;b[i];
+	}
+	long long MM = 1;
+	for(int i = 1;i&lt;=n;i++)MM*=a[i];
+	long long x,y;
+	for(int i = 1;i&lt;=n;i++){
+		M[i] = MM/a[i];
+		exgcd(M[i],a[i],x,y);
+		t[i] = (x%a[i]+a[i])%a[i];
+	}
+	x = 0;
+	for(int i = 1;i&lt;=n;i++)x = (x+((b[i]*M[i]*t[i])%MM+MM)%MM)%MM;
+	cout&lt;&lt;x;
+	return 0;
+}
+</code>
+poj3900 拓展欧几里得解同余方程组
 由于这道题不保证互质，所以CRT就不能用了。需要使用拓展欧几里得算法。拓展欧几里得定理的主要思想就是合并方程组。
 拓展欧几里得算法的原理如下：
 要合并\(x\equiv r_1(mod\ a_1)\\x\equiv r_2(mod\ a_2)\)
@@ -570,101 +577,103 @@ int main(){
 进一步化简
 \(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
 然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # define clear(x) memset(x,0,sizeof(x))
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">M</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">m</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">exgcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-		<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">return</span> <span class="n">a</span><span class="p">;</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span> <span class="o">=</span> <span class="n">exgcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-		<span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
-		<span class="n">y</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-		<span class="k">return</span> <span class="n">d</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">a1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">d</span><span class="p">;</span>
-		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a1</span><span class="o">&gt;&gt;</span><span class="n">b1</span><span class="p">;</span>
-		<span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a2</span><span class="o">&gt;&gt;</span><span class="n">b2</span><span class="p">;</span>
-			<span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span> <span class="o">=</span> <span class="n">exgcd</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-			<span class="k">if</span><span class="p">((</span><span class="n">b2</span><span class="o">-</span><span class="n">b1</span><span class="p">)</span><span class="o">%</span><span class="n">d</span><span class="p">)</span><span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-			<span class="k">else</span><span class="p">{</span>
-				<span class="n">x</span><span class="o">*=</span><span class="p">(</span><span class="n">b2</span><span class="o">-</span><span class="n">b1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">;</span>
-				<span class="kt">long</span> <span class="kt">long</span> <span class="n">n1</span> <span class="o">=</span> <span class="n">a2</span><span class="o">/</span><span class="n">d</span><span class="p">;</span>
-				<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="n">n1</span><span class="o">+</span><span class="n">n1</span><span class="p">)</span><span class="o">%</span><span class="n">n1</span><span class="p">;</span>
-				<span class="n">b1</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">a1</span><span class="o">+</span><span class="n">b1</span><span class="p">;</span>
-				<span class="n">a1</span> <span class="o">=</span> <span class="n">a1</span><span class="o">*</span><span class="n">a2</span><span class="o">/</span><span class="n">d</span><span class="p">;</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">b1</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-		<span class="k">else</span> <span class="n">cout</span><span class="o">&lt;&lt;-</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>生理周期poj1006
-可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解<del>方便卡常</del>。
-代码:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+using namespace std;
+const int MAXN = (int)1e5+10;
+long long M[MAXN],t[MAXN],m[MAXN],a[MAXN];
+long long exgcd(long long a,long long b,long long &amp;x,long long &amp;y) {
+	if(b==0) {
+		x = 1,y = 0;
+		return a;
+	} else {
+		long long d = exgcd(b,a%b,x,y);
+		long long t = x;
+		x = y;
+		y = t - (a/b)*y;
+		return d;
+	}
+}
+long long gcd(long long a,long long b){return b==0?a:gcd(b,a%b);}
+int main() {
+	int n;
+	while(scanf("%d",&amp;n)!=EOF) {
+		long long a1,b1,a2,b2,x,y,d;
+		cin&gt;&gt;a1&gt;&gt;b1;
+		bool flag = true;
+		for(int i = 1;i&lt;n;i++){
+			cin&gt;&gt;a2&gt;&gt;b2;
+			long long d = exgcd(a1,a2,x,y);
+			if((b2-b1)%d)flag = false;
+			else{
+				x*=(b2-b1)/d;
+				long long n1 = a2/d;
+				x = (x%n1+n1)%n1;
+				b1 = x*a1+b1;
+				a1 = a1*a2/d;
+			}
+		}
+		if(flag)cout&lt;&lt;b1&lt;&lt;endl;
+		else cout&lt;&lt;-1&lt;&lt;endl;
+	}
+	return 0;
+}
+</code>
+生理周期poj1006
+可以说是中国剩余定理的板子题，建议不要打数组，把几个值全部变量定义来，这样可以加深对CRT的理解~~方便卡常~~。
+代码:
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">P</span> <span class="o">=</span> <span class="mi">23</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">E</span> <span class="o">=</span> <span class="mi">28</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">I</span> <span class="o">=</span> <span class="mi">33</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">E</span><span class="o">*</span><span class="n">I</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
-		<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="k">return</span> <span class="n">a</span><span class="p">;</span>
-	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span><span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">p</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">d</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">cases</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="o">&amp;</span><span class="n">i</span><span class="p">,</span><span class="o">&amp;</span><span class="n">d</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">e</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">d</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
-		<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="p">{</span><span class="c1">//P</span>
-			<span class="n">gcd</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">P</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-			<span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-			<span class="n">ans</span><span class="o">+=</span> <span class="n">M</span><span class="o">/</span><span class="n">P</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
-			<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">%</span><span class="n">M</span><span class="o">+</span><span class="n">M</span><span class="p">)</span><span class="o">%</span><span class="n">M</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="p">{</span><span class="c1">//E</span>
-			<span class="n">gcd</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">E</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-			<span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-			<span class="n">ans</span><span class="o">+=</span><span class="n">M</span><span class="o">/</span><span class="n">E</span><span class="o">*</span><span class="n">e</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
-			<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">%</span><span class="n">M</span><span class="o">+</span><span class="n">M</span><span class="p">)</span><span class="o">%</span><span class="n">M</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="p">{</span><span class="c1">//I</span>
-			<span class="n">gcd</span><span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">I</span><span class="p">,</span><span class="n">I</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
-			<span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-			<span class="n">ans</span> <span class="o">+=</span> <span class="n">M</span><span class="o">/</span><span class="n">I</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
-			<span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">%</span><span class="n">M</span><span class="o">+</span><span class="n">M</span><span class="p">)</span><span class="o">%</span><span class="n">M</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="o">&lt;=</span><span class="n">d</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">M</span><span class="p">;</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"Case %d: the next triple peak occurs in %d days.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="o">++</span><span class="n">cases</span><span class="p">,</span><span class="n">ans</span><span class="o">-</span><span class="n">d</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 10;
+const int P = 23;
+const int E = 28;
+const int I = 33;
+const int M = P*E*I;
+int gcd(int a,int b,int &amp;x,int &amp;y){
+	if(b==0){
+		x = 1,y = 0;return a;
+	}else{
+		gcd(b,a%b,x,y);
+		int t = x;x = y;y = t - (a/b)*x;
+	}
+}
+int main(){
+	int p,e,i,d;
+	int cases = 0;
+	while(scanf("%d%d%d%d",&amp;p,&amp;e,&amp;i,&amp;d)!=EOF){
+		if(p==-1&amp;&amp;e==-1&amp;&amp;i==-1&amp;&amp;d==-1)break;
+		int x,y,t,ans = 0;
+		{//P
+			gcd(M/P,P,x,y);
+			t = x;
+			ans+= M/P*p*t;
+			ans = (ans%M+M)%M;
+		}
+		{//E
+			gcd(M/E,E,x,y);
+			t = x;
+			ans+=M/E*e*t;
+			ans = (ans%M+M)%M;
+		}
+		{//I
+			gcd(M/I,I,x,y);
+			t = x;
+			ans += M/I*i*t;
+			ans = (ans%M+M)%M;
+		}
+		if(ans&lt;=d)ans+=M;
+		printf("Case %d: the next triple peak occurs in %d days.\n",++cases,ans-d);
+	}
+	return 0;
+}
+</code></p>
 
     </div>
 

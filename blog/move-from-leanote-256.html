@@ -17,7 +17,7 @@
   <meta name="twitter:description" content="容斥原理
 公式
 $|\bigcup\limits_{i = 1}^na_i| = \sum\limits_{k = 1}^{n}(-1)^{k-1}\times\sum\limits_{1\leq i_1\le i_2\le i_3…i_k\leq n}|\bigcap\limits_{i = 1}^k a_{i_k}|$
-例题
+# 例题
 woj2592 cost 数：
 “给你一个有n个正整数的数列{an}。一个正整数x若满足在数列{an}中存在一个正整数ai，使x≡17（mod ai），那么x就是一个‘cost数’。请问1到m的正整数中，有多少个‘cost数’？”
 ">
@@ -28,7 +28,7 @@ woj2592 cost 数：
   <meta property="og:description" content="容斥原理
 公式
 $|\bigcup\limits_{i = 1}^na_i| = \sum\limits_{k = 1}^{n}(-1)^{k-1}\times\sum\limits_{1\leq i_1\le i_2\le i_3…i_k\leq n}|\bigcap\limits_{i = 1}^k a_{i_k}|$
-例题
+# 例题
 woj2592 cost 数：
 “给你一个有n个正整数的数列{an}。一个正整数x若满足在数列{an}中存在一个正整数ai，使x≡17（mod ai），那么x就是一个‘cost数’。请问1到m的正整数中，有多少个‘cost数’？”
 ">
@@ -200,58 +200,59 @@ woj2592 cost 数：
   <article class="post">
 
     <div class="post__content">
-      <h1 id="容斥原理">容斥原理</h1>
+      <h1 id="section">容斥原理</h1>
 <p>公式
-$|\bigcup\limits_{i = 1}^na_i| = \sum\limits_{k = 1}^{n}(-1)^{k-1}\times\sum\limits_{1\leq i_1\le i_2\le i_3…i_k\leq n}|\bigcap\limits_{i = 1}^k a_{i_k}|$</p>
-<h1 id="例题">例题</h1>
-<p>woj2592 cost 数：
+$|\bigcup\limits_{i = 1}^na_i| = \sum\limits_{k = 1}^{n}(-1)^{k-1}\times\sum\limits_{1\leq i_1\le i_2\le i_3…i_k\leq n}|\bigcap\limits_{i = 1}^k a_{i_k}|$
+# 例题
+woj2592 cost 数：
 “给你一个有n个正整数的数列{an}。一个正整数x若满足在数列{an}中存在一个正整数ai，使x≡17（mod ai），那么x就是一个‘cost数’。请问1到m的正整数中，有多少个‘cost数’？”</p>
 
-<h1 id="解答">解答</h1>
+<h1 id="section-1">解答</h1>
 <p>考虑$n==3$的情况，若要计算$[1,m]$中对$a_i$取模为17的数的个数，直接$(m-17)/a_i$就好了若要计算对A和B取模同时为17的数的个数，直接$(m-17)/lcm(A,B)$
 同样的，对于更多的数也是如此。
-然后这道题就是个比较显然的容斥原理，枚举每个数选还是不选，如果选的数的个数为偶数个，则乘上-1的系数。注意剪枝，因为如果搜索的过程中，lcm已经大于m了，直接<code class="language-plaintext highlighter-rouge">return</code>，然后从大的开始搜。</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;algorithm&gt;
+然后这道题就是个比较显然的容斥原理，枚举每个数选还是不选，如果选的数的个数为偶数个，则乘上-1的系数。注意剪枝，因为如果搜索的过程中，lcm已经大于m了，直接<code class="language-plaintext highlighter-rouge">return</code>，然后从大的开始搜。
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;algorithm&gt;
 # include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">char</span> <span class="nf">nc</span><span class="p">(){</span>
-	<span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="n">buf</span><span class="p">,</span><span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
-	<span class="k">return</span> <span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">p2</span><span class="o">=</span><span class="p">(</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">)</span><span class="o">+</span><span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="n">stdin</span><span class="p">),</span><span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="p">)</span><span class="o">?</span><span class="n">EOF</span><span class="o">:*</span><span class="n">p1</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="kt">void</span> <span class="nf">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">T</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="mi">48</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kr">inline</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);}</span>
-<span class="kr">inline</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">getlcm</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">/</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);}</span>
-<span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="nf">cmp</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">;}</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">step</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">lcm</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">lcm</span><span class="o">&gt;</span><span class="n">m</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">step</span><span class="o">==</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">lcm</span><span class="o">!=</span><span class="mi">1</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">cnt</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">17</span><span class="p">)</span><span class="o">/</span><span class="n">lcm</span><span class="p">;</span><span class="k">return</span><span class="p">;}</span>
-	<span class="n">dfs</span><span class="p">(</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">cnt</span><span class="p">,</span><span class="n">lcm</span><span class="p">);</span>
-	<span class="n">dfs</span><span class="p">(</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">cnt</span><span class="o">*-</span><span class="mi">1</span><span class="p">,</span><span class="n">getlcm</span><span class="p">(</span><span class="n">lcm</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">step</span><span class="p">]));</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="cp"># ifdef BEYONDSTARS
-</span>		<span class="n">freopen</span><span class="p">(</span><span class="s">"testdata.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
-	<span class="cp"># endif
-</span>	<span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">read</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">read</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-	<span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="n">cmp</span><span class="p">);</span>
-	<span class="n">dfs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="n">dfs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">res</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 40;
+inline char nc(){
+	static char buf[100000],*p1 = buf,*p2 = buf;
+	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
+}
+template&lt;typename T&gt;
+void read(T &amp;x){
+	x = 0;T f = 1;
+	char c = nc();
+	while(c&lt;'0'||c&gt;'9'){if(c=='-')f = -1;c = nc();}
+	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = x*10+(c^48);c = nc();}
+}
+long long a[MAXN];
+inline long long gcd(long long a,long long b){return b==0?a:gcd(b,a%b);}
+inline long long getlcm(long long a,long long b){return a*b/gcd(a,b);}
+int res = 0;
+long long n,m;
+bool cmp(long long a,long long b){return a&gt;b;}
+void dfs(int step,int cnt,long long lcm){
+	if(lcm&gt;m)return;
+	if(step==n+1){if(lcm!=1)res+=cnt*(m-17)/lcm;return;}
+	dfs(step+1,cnt,lcm);
+	dfs(step+1,cnt*-1,getlcm(lcm,a[step]));
+}
+int main(){
+	# ifdef BEYONDSTARS
+		freopen("testdata.in","r",stdin);
+	# endif
+	read(n);read(m);
+	for(int i = 1;i&lt;=n;i++)read(a[i]);
+	sort(a+1,a+1+n,cmp);
+	dfs(2,1,a[1]);dfs(2,-1,1);
+	printf("%d",res+1);
+	return 0;
+}
+</code></p>
 
     </div>
 

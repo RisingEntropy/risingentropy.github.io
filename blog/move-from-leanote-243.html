@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FFT&NTT – Haoyu Deng's page">
   <meta name="twitter:description" content="FFT
-学习了FFT 法法塔 感受到了人和人之间是有不少差距的Orz。
+学习了FFT ~~法法塔~~ 感受到了人和人之间是有不少差距的Orz。
 首先要介绍一个单位根，说的玄妙，其实就把它看做一个角度好了，然后在坐标系里面以自己角的大小为步长，进行旋转，然后它会回到自己就完了。如果我口胡太严重了，就去看这篇博客好了，写的很好，但是我感觉它代码有问题。
 首先介绍一下单位根($\omega_n^1$)的一些性质：
 $\omega_n^k = (\omega_n^1)^k$
@@ -52,10 +52,10 @@ FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
 板子代码：
 ```cpp
-include 
-include 
-include 
-include 
+# include 
+# include 
+# include 
+# include 
 using namespace std;
 const int MAXN = (int)4e6+10;
 const double PI = acos(-1);
@@ -64,19 +64,19 @@ struct complex{
 	complex(double a = 0.0,double b = 0.0):x(a),y(b){}
 	complex operator+(complex b){return complex(x+b.x,y+b.y);}
 	complex operator-(complex b){return complex(x-b.x,y-b.y);}
-	complex operator(complex b){return complex(xb.x-yb.y,xb.y+yb.x);}
+	complex operator*(complex b){return complex(x*b.x-y*b.y,x*b.y+y*b.x);}
 }f[MAXN],g[MAXN];
 int n,m,len;
 int R[MAXN],lg;
-void init(){for(int i = 0;i&amp;lt;len;i++)R[i] = (R[i»1]»1)|((i&amp;amp;1)«(lg-1));}
+void init(){for(int i = 0;i&amp;lt;len;i++)R[i] = (R[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1)|((i&amp;amp;1)&amp;lt;&amp;lt;(lg-1));}
 void DFT(complex *f,int op){
 	for(int i = 0;i&amp;lt;len;i++)if(i&amp;lt;R[i])swap(f[i],f[R[i]]);
-	for(int j = 1;j&amp;lt;len;j«=1){
-		complex base = complex(cos(PI/j),opsin(PI/j));
-		for(int k = 0;k&amp;lt;len;k+=(j«1)){
+	for(int j = 1;j&amp;lt;len;j&amp;lt;&amp;lt;=1){
+		complex base = complex(cos(PI/j),op*sin(PI/j));
+		for(int k = 0;k&amp;lt;len;k+=(j&amp;lt;&amp;lt;1)){
 			complex t(1,0);
-			for(int l = 0;l&amp;lt;j;l++,t = tbase){
-				complex nx = f[k+l],ny = f[j+k+l]t;
+			for(int l = 0;l&amp;lt;j;l++,t = t*base){
+				complex nx = f[k+l],ny = f[j+k+l]*t;
 				f[k+l] = nx+ny;
 				f[k+j+l] = nx-ny;
 			}
@@ -89,7 +89,7 @@ void DFT(complex *f,int op){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="FFT&NTT – Haoyu Deng's page">
   <meta property="og:description" content="FFT
-学习了FFT 法法塔 感受到了人和人之间是有不少差距的Orz。
+学习了FFT ~~法法塔~~ 感受到了人和人之间是有不少差距的Orz。
 首先要介绍一个单位根，说的玄妙，其实就把它看做一个角度好了，然后在坐标系里面以自己角的大小为步长，进行旋转，然后它会回到自己就完了。如果我口胡太严重了，就去看这篇博客好了，写的很好，但是我感觉它代码有问题。
 首先介绍一下单位根($\omega_n^1$)的一些性质：
 $\omega_n^k = (\omega_n^1)^k$
@@ -126,10 +126,10 @@ FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
 板子代码：
 ```cpp
-include 
-include 
-include 
-include 
+# include 
+# include 
+# include 
+# include 
 using namespace std;
 const int MAXN = (int)4e6+10;
 const double PI = acos(-1);
@@ -138,19 +138,19 @@ struct complex{
 	complex(double a = 0.0,double b = 0.0):x(a),y(b){}
 	complex operator+(complex b){return complex(x+b.x,y+b.y);}
 	complex operator-(complex b){return complex(x-b.x,y-b.y);}
-	complex operator(complex b){return complex(xb.x-yb.y,xb.y+yb.x);}
+	complex operator*(complex b){return complex(x*b.x-y*b.y,x*b.y+y*b.x);}
 }f[MAXN],g[MAXN];
 int n,m,len;
 int R[MAXN],lg;
-void init(){for(int i = 0;i&amp;lt;len;i++)R[i] = (R[i»1]»1)|((i&amp;amp;1)«(lg-1));}
+void init(){for(int i = 0;i&amp;lt;len;i++)R[i] = (R[i&amp;gt;&amp;gt;1]&amp;gt;&amp;gt;1)|((i&amp;amp;1)&amp;lt;&amp;lt;(lg-1));}
 void DFT(complex *f,int op){
 	for(int i = 0;i&amp;lt;len;i++)if(i&amp;lt;R[i])swap(f[i],f[R[i]]);
-	for(int j = 1;j&amp;lt;len;j«=1){
-		complex base = complex(cos(PI/j),opsin(PI/j));
-		for(int k = 0;k&amp;lt;len;k+=(j«1)){
+	for(int j = 1;j&amp;lt;len;j&amp;lt;&amp;lt;=1){
+		complex base = complex(cos(PI/j),op*sin(PI/j));
+		for(int k = 0;k&amp;lt;len;k+=(j&amp;lt;&amp;lt;1)){
 			complex t(1,0);
-			for(int l = 0;l&amp;lt;j;l++,t = tbase){
-				complex nx = f[k+l],ny = f[j+k+l]t;
+			for(int l = 0;l&amp;lt;j;l++,t = t*base){
+				complex nx = f[k+l],ny = f[j+k+l]*t;
 				f[k+l] = nx+ny;
 				f[k+j+l] = nx-ny;
 			}
@@ -327,7 +327,7 @@ void DFT(complex *f,int op){
 
     <div class="post__content">
       <h1 id="fft">FFT</h1>
-<p>学习了FFT <del>法法塔</del> 感受到了人和人之间是有不少差距的Orz。
+<p>学习了FFT ~~法法塔~~ 感受到了人和人之间是有不少差距的Orz。
 首先要介绍一个单位根，说的玄妙，其实就把它看做一个角度好了，然后在坐标系里面以自己角的大小为步长，进行旋转，然后它会回到自己就完了。如果我口胡太严重了，就去看这篇<a href="https://www.luogu.org/blog/command-block/fft-xue-xi-bi-ji">博客</a>好了，写的很好，但是我感觉它代码有问题。
 首先介绍一下单位根($\omega_n^1$)的一些性质：
 $\omega_n^k = (\omega_n^1)^k$
@@ -362,125 +362,128 @@ w_n^{k+n/2} = -w_n^{k}\\
 therefore \\
 FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
-板子代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-# include &lt;cmath&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">4e6</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="n">acos</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-<span class="k">struct</span> <span class="nc">complex</span><span class="p">{</span>
-	<span class="kt">double</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="n">complex</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span><span class="kt">double</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span><span class="o">:</span><span class="n">x</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">y</span><span class="p">(</span><span class="n">b</span><span class="p">){}</span>
-	<span class="n">complex</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">complex</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">complex</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">);}</span>
-	<span class="n">complex</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="n">complex</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">complex</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">);}</span>
-	<span class="n">complex</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="n">complex</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">complex</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">);}</span>
-<span class="p">}</span><span class="n">f</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">len</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">R</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">lg</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">|</span><span class="p">((</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">lg</span><span class="o">-</span><span class="mi">1</span><span class="p">));}</span>
-<span class="kt">void</span> <span class="nf">DFT</span><span class="p">(</span><span class="n">complex</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">op</span><span class="p">){</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">){</span>
-		<span class="n">complex</span> <span class="n">base</span> <span class="o">=</span> <span class="n">complex</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">PI</span><span class="o">/</span><span class="n">j</span><span class="p">),</span><span class="n">op</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">PI</span><span class="o">/</span><span class="n">j</span><span class="p">));</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">k</span><span class="o">+=</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)){</span>
-			<span class="n">complex</span> <span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">j</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">base</span><span class="p">){</span>
-				<span class="n">complex</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">],</span><span class="n">ny</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
-				<span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">+</span><span class="n">ny</span><span class="p">;</span>
-				<span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">j</span><span class="o">+</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">-</span><span class="n">ny</span><span class="p">;</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
+板子代码：
+```cpp
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+# include <cmath>
+using namespace std;
+const int MAXN = (int)4e6+10;
+const double PI = acos(-1);
+struct complex{
+	double x,y;
+	complex(double a = 0.0,double b = 0.0):x(a),y(b){}
+	complex operator+(complex b){return complex(x+b.x,y+b.y);}
+	complex operator-(complex b){return complex(x-b.x,y-b.y);}
+	complex operator*(complex b){return complex(x*b.x-y*b.y,x*b.y+y*b.x);}
+}f[MAXN],g[MAXN];
+int n,m,len;
+int R[MAXN],lg;
+void init(){for(int i = 0;i&lt;len;i++)R[i] = (R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;(lg-1));}
+void DFT(complex *f,int op){
+	for(int i = 0;i&lt;len;i++)if(i&lt;R[i])swap(f[i],f[R[i]]);
+	for(int j = 1;j&lt;len;j&lt;&lt;=1){
+		complex base = complex(cos(PI/j),op*sin(PI/j));
+		for(int k = 0;k&lt;len;k+=(j&lt;&lt;1)){
+			complex t(1,0);
+			for(int l = 0;l&lt;j;l++,t = t*base){
+				complex nx = f[k+l],ny = f[j+k+l]*t;
+				f[k+l] = nx+ny;
+				f[k+j+l] = nx-ny;
+			}
+		}
+	}
+}</cmath></cstdio></cstring></iostream></p>
 
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lf"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lf"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">);</span>
-	<span class="n">m</span><span class="o">+=</span><span class="n">n</span><span class="p">;</span><span class="n">lg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">n</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">n</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">)</span><span class="n">lg</span><span class="o">++</span><span class="p">;</span>
-	<span class="n">len</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span><span class="n">init</span><span class="p">();</span>
-	<span class="n">DFT</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="n">DFT</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-	<span class="n">DFT</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,(</span><span class="kt">int</span><span class="p">)(</span><span class="n">fabs</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">+</span><span class="mf">0.5</span><span class="p">));</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="ntt">NTT</h1>
-<p>上面的做法因为要使用三角函数和复数，复数又要用到double，卡精度卡的厉害。于是考虑能不能优化。现引出原根的概念：
+<p>int main(){
+	scanf(“%d%d”,&amp;n,&amp;m);
+	for(int i = 0;i&lt;=n;i++)scanf(“%lf”,&amp;f[i].x);
+	for(int i = 0;i&lt;=m;i++)scanf(“%lf”,&amp;g[i].x);
+	m+=n;lg = 0;
+	for(n = 1;n&lt;=m;n«=1)lg++;
+	len = n;init();
+	DFT(f,1);DFT(g,1);
+	for(int i = 0;i&lt;=n;i++)f[i] = f[i]<em>g[i];
+	DFT(f,-1);
+	for(int i = 0;i&lt;=m;i++)printf(“%d “,(int)(fabs(f[i].x)/n+0.5));
+	return 0;
+}
+<code class="language-plaintext highlighter-rouge">
+# NTT
+上面的做法因为要使用三角函数和复数，复数又要用到double，卡精度卡的厉害。于是考虑能不能优化。现引出原根的概念：
 设$p = r*2^k+1$k足够大，设原根为$g$,则$g^{0~n-1}$为互不相同的整数。然后定义剩余系下的原根$\omega_n^1 = g^{(p-1)/n}$可以证明它是一个整数，且$g^{0~n-1}$为互不相同的整数。
 然后这个原根拥有和FFT的复数一样的性质。用就行了。但是要注意一点，不同的模数对应不同的原根，如998244353对应的原根是3，3在模998244353意义下的的逆元是332748118。原根的求法如下：
 原根的判定：如果$g^k\equiv 1(mod p)$中k的最小解为(mod-1)，则g是一个原根。
 求法就是枚举1-100(因为大部分原根都小于100)，然后判断就行了。判断的过程就是枚举(mod-1)的因数，如果它满足上述条件，说明这个数不是模mod意义下的原根。
-然后代码里面有一些细节，比如FFT里面的</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">complex</span> <span class="n">base</span> <span class="o">=</span> <span class="n">comple</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">PI</span><span class="o">/</span><span class="n">j</span><span class="p">),</span><span class="n">op</span><span class="o">*</span><span class="p">(</span><span class="n">PI</span><span class="o">/</span><span class="n">j</span><span class="p">))</span>
-</code></pre></div></div>
-<p>来实现DFT和IDFT的过程，但是使用NTT就更简单了，直接计算原根的k次方或者原根的逆元的k次方来实现。具体代码就是：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="n">base</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">1</span><span class="o">?</span><span class="n">g</span><span class="o">:</span><span class="n">revg</span><span class="p">,</span><span class="n">mod</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="p">));</span>
-</code></pre></div></div>
-<p>至于为什么j要乘以2，我也没搞清楚，这两天状态太差了。
-代码实现如下：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-# include &lt;cstring&gt;
-# include &lt;cstdio&gt;
-# include &lt;cmath&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">998244353</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">4e6</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">G</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">R</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">f</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">invG</span> <span class="o">=</span> <span class="mi">332748118</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">()</span> <span class="p">{</span> 
-    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span> <span class="o">&lt;</span> <span class="sc">'0'</span> <span class="o">||</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="sc">'9'</span><span class="p">)</span> <span class="p">{</span><span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span> <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">)</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">c</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fp</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span> <span class="o">=</span> <span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">){</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">len</span><span class="p">,</span><span class="n">lg</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">|</span><span class="p">((</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">lg</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">NTT</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">op</span><span class="p">){</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">swap</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">){</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">base</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">op</span><span class="o">==</span><span class="mi">1</span><span class="o">?</span><span class="n">G</span><span class="o">:</span><span class="n">invG</span><span class="p">,(</span><span class="n">mod</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">));</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">k</span><span class="o">+=</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)){</span>
-			<span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">j</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">base</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">){</span>
-				<span class="kt">int</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">],</span><span class="n">ny</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-				<span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="n">ny</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-				<span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="n">ny</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-	<span class="n">m</span><span class="o">+=</span><span class="n">n</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="n">len</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">len</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">len</span><span class="o">&lt;&lt;=</span><span class="mi">1</span><span class="p">)</span><span class="n">lg</span><span class="o">++</span><span class="p">;</span><span class="n">init</span><span class="p">();</span>
-	<span class="n">NTT</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="n">NTT</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-	<span class="n">NTT</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-	<span class="kt">long</span> <span class="kt">long</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%lld "</span><span class="p">,(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">rev</span><span class="o">%</span><span class="n">mod</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+然后代码里面有一些细节，比如FFT里面的
+</code>cpp
+complex base = comple(cos(PI/j),op</em>(PI/j))
+<code class="language-plaintext highlighter-rouge">
+来实现DFT和IDFT的过程，但是使用NTT就更简单了，直接计算原根的k次方或者原根的逆元的k次方来实现。具体代码就是：
+</code>cpp
+long long base = fp(op==1?g:revg,mod-1/(j*2));
+<code class="language-plaintext highlighter-rouge">
+至于为什么j要乘以2，我也没搞清楚，这两天状态太差了。
+代码实现如下：
+</code>cpp
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+# include <cmath>
+using namespace std;
+const long long mod = 998244353;
+const int MAXN = 4e6+10;
+const long long G = 3;
+int n,m,R[MAXN];
+long long f[MAXN],g[MAXN],invG = 332748118;
+inline int read() { 
+    char c = getchar(); int x = 0, f = 1;
+    while(c &lt; '0' || c &gt; '9') {if(c == '-') f = -1; c = getchar();}
+    while(c &gt;= '0' &amp;&amp; c &lt;= '9') x = x * 10 + c - '0', c = getchar();
+    return x * f;
+}
+long long fp(long long b,long long p = mod-2){
+	long long ans = 1;
+	while(p){
+		if(p&amp;1)ans = ans*b%mod;
+		b = b*b%mod;
+		p&gt;&gt;=1;
+	}
+	return ans;
+}
+int len,lg;
+void init(){
+	for(int i = 0;i&lt;len;i++)R[i] = (R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;(lg-1));
+}
+void NTT(long long *f,int op){
+	for(int i = 0;i&lt;len;i++)if(i&lt;R[i])swap(f[i],f[R[i]]);
+	for(int j = 1;j&lt;len;j&lt;&lt;=1){
+		long long base = fp(op==1?G:invG,(mod-1)/(j&lt;&lt;1));
+		for(int k = 0;k&lt;len;k+=(j&lt;&lt;1)){
+			long long t = 1;
+			for(int l = 0;l&lt;j;l++,t = (t*base)%mod){
+				int nx = f[k+l],ny = f[j+k+l]*t%mod;
+				f[k+l] = (nx+ny)%mod;
+				f[j+k+l] = (nx-ny+mod)%mod;
+			}
+		}
+	}
+}
+int main(){
+	scanf("%d%d",&amp;n,&amp;m);
+	for(int i = 0;i&lt;=n;i++)f[i] = read();
+	for(int i = 0;i&lt;=m;i++)g[i] = read();
+	m+=n;
+	for(len = 1;len&lt;=m;len&lt;&lt;=1)lg++;init();
+	NTT(f,1);NTT(g,1);
+	for(int i = 0;i&lt;len;i++)f[i] = f[i]*g[i]%mod;
+	NTT(f,-1);
+	long long rev = fp(len,mod-2);
+	for(int i = 0;i&lt;=m;i++)printf("%lld ",(f[i]*rev%mod+mod)%mod);
+	return 0;
+}
+```</cmath></cstdio></cstring></iostream></p>
 
     </div>
 

@@ -15,14 +15,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Poj 2559 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-Description
+# Description
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="Poj 2559 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-Description
+# Description
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -192,8 +192,8 @@ Description
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="description">Description</h1>
+      <h1 id="section">题面</h1>
+<p># Description</p>
 
 <p>A histogram is a polygon composed of a sequence of rectangles aligned at a common base line. The rectangles have equal widths but may have different heights. For example, the figure on the left shows the histogram that consists of rectangles with the heights 2, 1, 4, 5, 1, 3, 3, measured in units where 1 is the width of the rectangles: 
 <img src="https://cdn.risingentropy.top/images/posts/c429a7cab644154ed0006ba.png" alt="图片标题" /></p>
@@ -204,18 +204,20 @@ Input</p>
 <p>The input contains several test cases. Each test case describes a histogram and starts with an integer n, denoting the number of rectangles it is composed of. You may assume that 1&lt;=n&lt;=100000. Then follow n integers h1,…,hn, where 0&lt;=hi&lt;=1000000000. These numbers denote the heights of the rectangles of the histogram in left-to-right order. The width of each rectangle is 1. A zero follows the input for the last test case.
 Output</p>
 
-<p>For each test case output on a single line the area of the largest rectangle in the specified histogram. Remember that this rectangle must be aligned at the common base line.</p>
-<h1 id="sample-input">Sample Input</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7 2 1 4 5 1 3 3
+<p>For each test case output on a single line the area of the largest rectangle in the specified histogram. Remember that this rectangle must be aligned at the common base line.
+# Sample Input
+<code class="language-plaintext highlighter-rouge">
+7 2 1 4 5 1 3 3
 4 1000 1000 1000 1000
 0
-</code></pre></div></div>
-<h1 id="sample-output">Sample Output</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
+</code>
+# Sample Output
+<code class="language-plaintext highlighter-rouge">
+8
 4000
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>单调栈的做法
+</code>
+# 解答
+单调栈的做法
 我们考虑一个一个地向这个栈里面加入矩形，有两种情况：</p>
 
 <ol>
@@ -224,48 +226,49 @@ Output</p>
 </ol>
 
 <p>最后，我们需要在后面加一块高为0的矩形，目的是为了防止最后栈里面还有一些矩形。
-代码如下</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+代码如下
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;stack&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">stk</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">w</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">p</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="c1">//poj卡常</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&amp;&amp;</span><span class="n">n</span><span class="p">){</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="n">a</span><span class="p">[</span><span class="o">++</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//插入一块高度为0的矩形</span>
-		<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		    <span class="k">if</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">&lt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">w</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">//如果插入的矩形高度高于，那么直接加</span>
-		    <span class="k">else</span><span class="p">{</span><span class="c1">//如果不高于，那么计算一组解</span>
-		        <span class="kt">int</span> <span class="n">wei</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		        <span class="k">while</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-                    <span class="n">wei</span><span class="o">+=</span><span class="n">w</span><span class="p">[</span><span class="n">p</span><span class="p">];</span>
-                    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">wei</span><span class="o">*</span><span class="n">stk</span><span class="p">[</span><span class="n">p</span><span class="p">]);</span>
-                    <span class="n">p</span><span class="o">--</span><span class="p">;</span>
-		        <span class="p">}</span>
-		        <span class="n">stk</span><span class="p">[</span><span class="o">++</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">w</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">wei</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-		    <span class="p">}</span>
-		<span class="p">}</span>
-		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 100010;
+long long a[MAXN];
+long long stk[MAXN];
+long long w[MAXN];
+int p;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
+    return x*f;
+}
+int main(){
+	int n;
+	ios::sync_with_stdio(false);//poj卡常
+	while(cin&gt;&gt;n&amp;&amp;n){
+		for(int i = 1;i&lt;=n;i++)cin&gt;&gt;a[i];
+		p = 0;
+		a[++n] = 0;//插入一块高度为0的矩形
+		long long ans = 0;
+		for(int i = 1;i&lt;=n;i++){
+		    if(stk[p]&lt;a[i])stk[++p] = a[i],w[p] = 1;//如果插入的矩形高度高于，那么直接加
+		    else{//如果不高于，那么计算一组解
+		        int wei = 0;
+		        while(stk[p]&gt;a[i]){
+                    wei+=w[p];
+                    ans = max(ans,wei*stk[p]);
+                    p--;
+		        }
+		        stk[++p] = a[i],w[p] = wei+1;
+		    }
+		}
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></p>
 
     </div>
 

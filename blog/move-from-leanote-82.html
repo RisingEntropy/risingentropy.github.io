@@ -18,8 +18,8 @@
 作为体育委员，C君负责这次运动会仪仗队的训练。仪仗队是由学生组成的N * N的方阵，为了保证队伍在行进中整齐划一，C君会跟在仪仗队的左后方，根据其视线所及的学生人数来判断队伍是否整齐(如下图)。 
 
 现在，C君希望你告诉他队伍整齐时能看到的学生人数。
-输入输出格式
-输入格式：
+#  输入输出格式
+#  输入格式：
 共一个数N
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -30,8 +30,8 @@
 作为体育委员，C君负责这次运动会仪仗队的训练。仪仗队是由学生组成的N * N的方阵，为了保证队伍在行进中整齐划一，C君会跟在仪仗队的左后方，根据其视线所及的学生人数来判断队伍是否整齐(如下图)。 
 
 现在，C君希望你告诉他队伍整齐时能看到的学生人数。
-输入输出格式
-输入格式：
+#  输入输出格式
+#  输入格式：
 共一个数N
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -202,56 +202,60 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>作为体育委员，C君负责这次运动会仪仗队的训练。仪仗队是由学生组成的N * N的方阵，为了保证队伍在行进中整齐划一，C君会跟在仪仗队的左后方，根据其视线所及的学生人数来判断队伍是否整齐(如下图)。 
 <img src="https://cdn.risingentropy.top/images/posts/bd7a8b4ab644138b80012bb.png" alt="" />
-现在，C君希望你告诉他队伍整齐时能看到的学生人数。</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>共一个数N</p>
+现在，C君希望你告诉他队伍整齐时能看到的学生人数。
+#  输入输出格式
+#  输入格式：
+共一个数N</p>
 
-<h1 id="输出格式">输出格式：</h1>
-<p>共一个数，即C君应看到的学生人数。</p>
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例1">输入样例1:</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
-</code></pre></div></div>
-<h1 id="输出样例1">输出样例1:</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>分析一下这道题，我们发现当点$(x,y)$中，gcd(x,y)=1的时候，这个点才可以被看见(原因的话，从斜率的角度来看)。那么对于每一个y，我们只需要求出$\varphi(y)$就可以了。那么答案就是：
+<h1 id="section-1">输出格式：</h1>
+<p>共一个数，即C君应看到的学生人数。
+# 输入输出样例
+#  输入样例1:
+<code class="language-plaintext highlighter-rouge">
+4
+</code>
+#  输出样例1:
+<code class="language-plaintext highlighter-rouge">
+9
+</code>
+# 解答
+分析一下这道题，我们发现当点$(x,y)$中，gcd(x,y)=1的时候，这个点才可以被看见(原因的话，从斜率的角度来看)。那么对于每一个y，我们只需要求出$\varphi(y)$就可以了。那么答案就是：
 \(3+2\times \sum_{i=2}^{N}\varphi(i)\)
 这里面的3是左下角那三个点可以被看见，特判一下。乘以2是因为这个图形有对称性。</p>
 
-<p>那么利用Eratosthenes筛法(就是最<del>脑残</del>简单的素数筛法)，直接在$O(N\ logN)$的复杂度内求出2~N中的每个数的欧拉函数。(其实这样做的道理就是当a<code class="language-plaintext highlighter-rouge">&lt;</code>b且a、b互质的时候，a与b的倍数也互质，再结合欧拉函数的求法可以直接这样求出很多数的欧拉函数)代码如下</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">){</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">+=</span><span class="n">i</span><span class="p">){</span>
-                <span class="n">phi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre></div></div>
-<p>然后统计答案就行，注意，统计答案的时候y应该从2到N-1。因为(1,1)(1,0)(0,1)这三个点已经被统计，而当$y=N$的时候，就已经是对角线了，所以不计入答案。
-AC代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">phi</span><span class="p">[</span><span class="mi">40100</span><span class="p">];</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">;</span><span class="k">return</span> <span class="mi">0</span><span class="p">;}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">)</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">+=</span><span class="n">i</span><span class="p">)</span>
-                <span class="n">phi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span> <span class="o">+=</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span><span class="o">!</span><span class="p">[</span><span class="err">图片标题</span><span class="p">](</span><span class="n">https</span><span class="o">:</span><span class="c1">//cdn.risingentropy.top/images/posts/bd7a8b4ab644138b80012bb.png)</span>
-</code></pre></div></div>
+<p>那么利用Eratosthenes筛法(就是最~~脑残~~简单的素数筛法)，直接在$O(N\ logN)$的复杂度内求出2~N中的每个数的欧拉函数。(其实这样做的道理就是当a<code class="language-plaintext highlighter-rouge">&lt;</code>b且a、b互质的时候，a与b的倍数也互质，再结合欧拉函数的求法可以直接这样求出很多数的欧拉函数)代码如下
+<code class="language-plaintext highlighter-rouge">cpp
+ for(int i = 2;i&lt;=n;i++){
+        if(phi[i]==i){
+            for(int j = i;j&lt;=n;j+=i){
+                phi[j] = phi[j]/i*(i-1);
+            }
+        }
+    }
+</code>
+然后统计答案就行，注意，统计答案的时候y应该从2到N-1。因为(1,1)(1,0)(0,1)这三个点已经被统计，而当$y=N$的时候，就已经是对角线了，所以不计入答案。
+AC代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
+using namespace std;
+int phi[40100];
+int main(void){
+    int n;cin&gt;&gt;n;
+    int ans = 0;
+    if(n==1){cout&lt;&lt;0;return 0;}
+    for(int i = 2;i&lt;=n;i++)phi[i] = i;
+    for(int i = 2;i&lt;=n;i++)
+        if(phi[i]==i)
+            for(int j = i;j&lt;=n;j+=i)
+                phi[j] = phi[j]/i*(i-1);
+    for(int i = 2;i&lt;n;i++)ans += phi[i];
+    cout&lt;&lt;ans*2+3;
+    return 0;
+}![图片标题](https://cdn.risingentropy.top/images/posts/bd7a8b4ab644138b80012bb.png)
+</code></p>
 
     </div>
 

@@ -192,7 +192,7 @@ Berland地区的腐败现象非常常见。
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>Berland地区的腐败现象非常常见。</p>
 
 <p>马上有一场选举，你事先知道了选民和政党的数量，分别为  $n$  和  $m$  ，对于每一位选民，你知道他将要选举哪一个政党，不过，每一位选民都会在接受一定数额的金钱之后改变他的主意。如果你给第  $i$  位选民  $c_i$  数额的比特币，他就会选举任何你希望他选举的政党。</p>
@@ -211,8 +211,9 @@ Berland地区的腐败现象非常常见。
 
 <p>一个整数，使联合党赢得选举所需花费的最少比特币数额。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入样例# 1： 
+<h1 id="section-1">输入输出样例</h1>
+<p><code class="language-plaintext highlighter-rouge">
+输入样例# 1： 
 1 2
 1 100
 输出样例# 1： 
@@ -235,73 +236,74 @@ Berland地区的腐败现象非常常见。
 5 900
 输出样例# 3： 
 600
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>其实这个题很明显是个贪心的题<del>动态规划我不会</del>。但是这个题的贪心非常有意思，体现了<strong>正难则反</strong>的思想。一开始，我的贪心策略是用一个堆存所有的党派，每个党派里面又用堆来存支持者，然后从支持者人数多的党派里面选取价格最小的来行贿。很明显，这样的贪心策略是不正确的！那么什么是正确的贪心策略呢？首先我们可以发现如果从投票者作为出发点，来进行贪心，这样似乎很有难度。那么我们考虑从答案出发，枚举最后的答案。假设目前枚举的答案是A，除了1号党派以外，其他所有党派的支持人数都应该<strong>严格小于</strong>1号党派。也就是说，我们必须把其它所有支持人数大于A的党派里面价格最小的几个行贿了。如果最后1号党派的支持人数仍然没有达到A,那么我们就应该从小到大，把可以行贿(可以行贿的意思是之前没有行贿过)的人全部行贿了，直到最后支持者人数为A。我们只需要从1…n/2来枚举每个答案就行了。
+</code>
+# 解答
+其实这个题很明显是个贪心的题~~动态规划我不会~~。但是这个题的贪心非常有意思，体现了<strong>正难则反</strong>的思想。一开始，我的贪心策略是用一个堆存所有的党派，每个党派里面又用堆来存支持者，然后从支持者人数多的党派里面选取价格最小的来行贿。很明显，这样的贪心策略是不正确的！那么什么是正确的贪心策略呢？首先我们可以发现如果从投票者作为出发点，来进行贪心，这样似乎很有难度。那么我们考虑从答案出发，枚举最后的答案。假设目前枚举的答案是A，除了1号党派以外，其他所有党派的支持人数都应该<strong>严格小于</strong>1号党派。也就是说，我们必须把其它所有支持人数大于A的党派里面价格最小的几个行贿了。如果最后1号党派的支持人数仍然没有达到A,那么我们就应该从小到大，把可以行贿(可以行贿的意思是之前没有行贿过)的人全部行贿了，直到最后支持者人数为A。我们只需要从1…n/2来枚举每个答案就行了。
 但是要注意一个个坑：
 1.如果只有1号党派，那么最后应该判断一下cost是否被更改过，如果没有，应该输出0.
-以下是AC代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+以下是AC代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;
 # include &lt;queue&gt;
 # include &lt;vector&gt;
 # include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">voter</span><span class="p">;</span><span class="c1">//第一个表示价格，第二个表示id</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">voter</span><span class="o">&gt;</span> <span class="n">parties</span><span class="p">[</span><span class="mi">3010</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">used</span><span class="p">[</span><span class="mi">3010</span><span class="p">];</span>
-<span class="n">voter</span> <span class="n">voters</span><span class="p">[</span><span class="mi">3010</span><span class="p">];</span>
-<span class="kr">inline</span> <span class="kt">long</span> <span class="kt">long</span> <span class="nf">min</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">b</span><span class="o">:</span><span class="n">a</span><span class="p">;}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">pi</span><span class="p">,</span><span class="n">ci</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">pi</span><span class="o">&gt;&gt;</span><span class="n">ci</span><span class="p">;</span>
-        <span class="n">parties</span><span class="p">[</span><span class="n">pi</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span><span class="n">i</span><span class="p">));</span>
-        <span class="n">voters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">sort</span><span class="p">(</span><span class="n">voters</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">voters</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">sort</span><span class="p">(</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">());</span>
-    <span class="p">}</span>
-    <span class="kt">long</span> <span class="kt">long</span> <span class="n">cost</span> <span class="o">=</span> <span class="mh">0x7fffffffffff</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">supporter</span> <span class="o">=</span> <span class="n">parties</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">supporter</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">supporter</span><span class="o">++</span><span class="p">){</span><span class="c1">//枚举每一个最后的支持者</span>
-        <span class="kt">long</span> <span class="kt">long</span> <span class="n">current_cost</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">current_supporter</span> <span class="o">=</span> <span class="n">parties</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
-        <span class="n">memset</span><span class="p">(</span><span class="n">used</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">used</span><span class="p">));</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">parties</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">used</span><span class="p">[</span><span class="n">parties</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;=</span><span class="n">supporter</span><span class="p">){</span>
-                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">k</span><span class="o">++</span><span class="p">){</span><span class="c1">//把多出的部分的人必须行贿</span>
-                    <span class="n">current_cost</span><span class="o">+=</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
-                    <span class="n">used</span><span class="p">[</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">].</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                    <span class="n">current_supporter</span><span class="o">++</span><span class="p">;</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">parties</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">supporter</span><span class="p">){</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">current_supporter</span><span class="o">&lt;=</span><span class="n">supporter</span><span class="p">){</span><span class="c1">//就是说把多出来的人全部行贿以后，还是不够，那么就要从小到大来行贿了</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">&amp;&amp;</span><span class="n">current_supporter</span><span class="o">&lt;</span><span class="n">supporter</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">[</span><span class="n">voters</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">]){</span><span class="c1">//从小到大排序，把对应编号的voter标记为使用过</span>
-					<span class="n">current_supporter</span><span class="o">++</span><span class="p">;</span>
-                    <span class="n">current_cost</span><span class="o">+=</span><span class="n">voters</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
-                    <span class="n">used</span><span class="p">[</span><span class="n">voters</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">cost</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span><span class="n">current_cost</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">cost</span><span class="o">==</span><span class="mh">0x7fffffffffff</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="n">cost</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+typedef pair&lt;int,int&gt; voter;//第一个表示价格，第二个表示id
+vector&lt;voter&gt; parties[3010];
+int used[3010];
+voter voters[3010];
+inline long long min(long long a,long long b){return a&gt;b?b:a;}
+int main(void){
+    ios::sync_with_stdio(false);
+    int n,m;
+    cin&gt;&gt;n&gt;&gt;m;
+    int pi,ci;
+    for(int i = 1;i&lt;=n;i++){
+        cin&gt;&gt;pi&gt;&gt;ci;
+        parties[pi].push_back(make_pair(ci,i));
+        voters[i] = make_pair(ci,i);
+    }
+    sort(voters+1,voters+n+1);
+    for(int i = 1;i&lt;=m;i++){
+        sort(parties[i].begin(),parties[i].end());
+    }
+    long long cost = 0x7fffffffffff;
+    for(int supporter = parties[1].size();supporter&lt;=n+1&gt;&gt;1;supporter++){//枚举每一个最后的支持者
+        long long current_cost = 0;
+        int current_supporter = parties[1].size();
+        memset(used,false,sizeof(used));
+        for(int i = 0;i&lt;parties[1].size();i++){
+            used[parties[1][i].second] = true;
+        }
+        for(int i = 2;i&lt;=m;i++){
+            if(parties[i].size()&gt;=supporter){
+                for(int k = 0;k&lt;parties[i].size();k++){//把多出的部分的人必须行贿
+                    current_cost+=parties[i][k].first;
+                    used[parties[i][k].second] = true;
+                    current_supporter++;
+                    if(parties[i].size()-k-1&lt;supporter){
+                        break;
+                    }
+                }
+            }
+        }
+        if(current_supporter&lt;=supporter){//就是说把多出来的人全部行贿以后，还是不够，那么就要从小到大来行贿了
+            for(int i = 1;i&lt;=n&amp;&amp;current_supporter&lt;supporter;i++){
+                if(!used[voters[i].second]){//从小到大排序，把对应编号的voter标记为使用过
+					current_supporter++;
+                    current_cost+=voters[i].first;
+                    used[voters[i].second] = true;
+                }
+            }
+        }
+        cost = min(cost,current_cost);
+    }
+    cout&lt;&lt;(cost==0x7fffffffffff?0:cost);
+    return 0;
+}
+</code></p>
 
     </div>
 

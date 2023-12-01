@@ -15,6 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="双向bfs – Haoyu Deng's page">
   <meta name="twitter:description" content="其实很简单，就是两边一起搜。板子如下luogu UVA439
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 # include &amp;lt;queue&amp;gt;
@@ -69,6 +70,7 @@ int main(void){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="双向bfs – Haoyu Deng's page">
   <meta property="og:description" content="其实很简单，就是两边一起搜。板子如下luogu UVA439
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 # include &amp;lt;queue&amp;gt;
@@ -286,55 +288,56 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <p>其实很简单，就是两边一起搜。板子如下luogu UVA439</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+      <p>其实很简单，就是两边一起搜。板子如下luogu UVA439
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 # include &lt;queue&gt;
 # include &lt;cstring&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">qs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span><span class="p">{</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
-<span class="kt">int</span> <span class="n">dy</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
-<span class="kt">bool</span> <span class="n">ma</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">9</span><span class="p">][</span><span class="mi">9</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">distance</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">9</span><span class="p">][</span><span class="mi">9</span><span class="p">];</span>
-<span class="kt">bool</span> <span class="nf">expand</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">;</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="n">qs</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">top</span><span class="p">().</span><span class="n">first</span><span class="p">;</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="n">qs</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
-	<span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="n">tx</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="n">ty</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">tx</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">tx</span><span class="o">&lt;=</span><span class="mi">9</span><span class="o">&amp;&amp;</span><span class="n">ty</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">ty</span><span class="o">&lt;=</span><span class="mi">9</span><span class="o">&amp;&amp;!</span><span class="n">ma</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]){</span>
-			<span class="n">ma</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-			<span class="n">qs</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">));</span>
-			<span class="n">dis</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-			<span class="k">if</span><span class="p">(</span><span class="n">ma</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]){</span>
-				<span class="n">ans</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span><span class="o">+</span><span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">];</span>
-				<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">gx</span><span class="p">,</span><span class="n">gy</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="o">&gt;&gt;</span><span class="n">gx</span><span class="o">&gt;&gt;</span><span class="n">gy</span><span class="p">;</span>
-	<span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
-	<span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span><span class="n">gy</span><span class="p">));</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">||</span><span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
-	    <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">;</span>
-	    <span class="k">if</span><span class="p">(</span><span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">()){</span>
-	        <span class="k">if</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span><span class="k">return</span><span class="p">;}</span>
-	    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-	    <span class="k">if</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="k">return</span><span class="p">;</span>
-	    <span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+queue&lt;pair&lt;int,int&gt;&gt; qs[2];
+int dx ={ 1,2,2,1,-1,-2,-2,-1};
+int dy = {2,1,-1,-2,-2,-1,1,2};
+bool ma[2][9][9];
+int ans = 0;
+int distance[2][9][9];
+bool expand(int k){
+	int x,y,tx,ty;
+	x = qs[k].top().first;
+	y = qs[k].top().second;
+	int d = distance[k][x][y];
+	for(int i = 0;i&lt;8;i++){
+		tx = x+dx[i];
+		ty = y+dy[i];
+		if(tx&gt;0&amp;&amp;tx&lt;=9&amp;&amp;ty&gt;0&amp;&amp;ty&lt;=9&amp;&amp;!ma[k][tx][ty]){
+			ma[k][tx][ty] = true;
+			qs[k].push(make_pair(tx,ty));
+			dis[k][tx][ty] = d+1;
+			if(ma[1-k][tx][ty]){
+				ans = distance[k][tx][ty]+distance[1-k][tx][ty];
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+int main(void){
+	int x,gx,gy,y;
+	ios::sync_with_stdio(false);
+	cin&gt;&gt;x&gt;&gt;y&gt;&gt;gx&gt;&gt;gy;
+	qs[0].push(make_pair(x,y));
+	qs[1].push(make_pair(gx,gy));
+	while(qs[0].size()&gt;0||qs[1].size&gt;0){
+	    pair&lt;int,int&gt; p;
+	    if(qs[0].size()&gt;qs[1].size()){
+	        if(expand(1)){return;}
+	    }else{
+	    if(expand(0))return;
+	    }
+	}
+	return 0;
+}
+</code></p>
 
     </div>
 

@@ -192,103 +192,112 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="c语言机考骗分指北">C语言机考骗分指北</h1>
+      <h1 id="c">C语言机考骗分指北</h1>
 <p>为了帮助信通一班（2021010901）的同学们C语言机考获得满分，你们最好最帅的学委写下了这份技巧。本文萌新向，大佬请忽略。祝大家期末取得高分。学委也没有考过机考，所以以下仅供参考，考试时请自行灵活处理。注：因为学委很垃圾，所以这里面可能会有错误，请自行斟酌，对此造成的损失，学委没有能力负责。</p>
 
-<h1 id="技巧一打表">技巧一：打表</h1>
+<h1 id="section">技巧一：打表</h1>
 <p>打表，顾名思义就是把结果直接放在程序里面，而不是去求结果。由于码图的测试点很少，所以当你实在做不出某道题的时候，你可以试着乱交一份全错的代码（一定是全错，因为这样它才会把所有输入数据吐出来给你。全错不代表是0分，因为码图好像过了编译就有一定的分数），然后观察结果界面
 <img src="https://cdn.risingentropy.top/images/posts/1bc72f9ab644142c0843cc2.png" alt="title" />
 你会发现它其实把输入告诉你了。那么此时，你就把这些输入记下来，然后手算出它的答案。再在程序里面判断是哪个数据，再把相应的结果输出就行。
-例如，码图上的17题，斐波那契数列。通过交一份只输出-1的代码，得到了上面那张图一样的输出。然后可以写下如下程序：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;stdio.h&gt;
-</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">int</span> <span class="n">input</span><span class="p">;</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">input</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">46</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1836311903"</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">20</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"6765"</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1"</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"1"</span><span class="p">);</span>
-    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"55"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>提交，满分！
-需要注意的是，有些题输入很长，它不会吐完，这时候打表就不好使了。</p>
-<h1 id="技巧二使用excel">技巧二：使用excel</h1>
-<p>excel是很强大的计算工具，在打表的时候有些数据手算算不出来，比如斐波那契数列的第46项。此时你可以使用电脑自带的excel计算！至于excel的使用，请自行学习。</p>
-<h1 id="技巧三使用c的stl">技巧三：使用C++的STL</h1>
-<p>虽然这门课是C语言，但其实也可以使用C++语言的一些库。现在介绍<code class="language-plaintext highlighter-rouge">algorithm</code>这个库。先使用$ # include <algorithm>$ 导入这个库（其实这个语句用法和$# include <stdio.h>$是一样的）。</stdio.h></algorithm></p>
-<h1 id="sort函数">sort函数</h1>
-<p>sort函数的作用是对一个数组排序（可以是int char 等等可以比大小的数据类型，也可以是自定义类型）
-使用方法是：</p>
+例如，码图上的17题，斐波那契数列。通过交一份只输出-1的代码，得到了上面那张图一样的输出。然后可以写下如下程序：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;stdio.h&gt;
+int main()
+{
+    int input;
+    scanf("%d",&amp;input);
+    if(input == 46)printf("1836311903");
+    else if(input == 20)printf("6765");
+    else if(input == 2)printf("1");
+    else if(input == 1)printf("1");
+    else if(input == 10)printf("55");
+    return 0;
+}
+</code>
+提交，满分！
+需要注意的是，有些题输入很长，它不会吐完，这时候打表就不好使了。
+#   技巧二：使用excel
+excel是很强大的计算工具，在打表的时候有些数据手算算不出来，比如斐波那契数列的第46项。此时你可以使用电脑自带的excel计算！至于excel的使用，请自行学习。
+#   技巧三：使用C++的STL
+虽然这门课是C语言，但其实也可以使用C++语言的一些库。现在介绍<code class="language-plaintext highlighter-rouge">algorithm</code>这个库。先使用$ # include <algorithm>$ 导入这个库（其实这个语句用法和$# include <stdio.h>$是一样的）。
+#   sort函数
+sort函数的作用是对一个数组排序（可以是int char 等等可以比大小的数据类型，也可以是自定义类型）
+使用方法是：</stdio.h></algorithm></p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span><span class="c1">//a是一个数组，n是要排序的元素的个数</span>
-</code></pre></div></div>
-<p>注意，sort传入的参数是要排序的数组的第一个元素的指针，和要排序的数组的最后一个元素的<strong>后面一个</strong>，即左闭右开的区间！！！！千万注意这一点。
+<p><code class="language-plaintext highlighter-rouge">cpp
+sort(a,a+n);//a是一个数组，n是要排序的元素的个数
+</code>
+注意，sort传入的参数是要排序的数组的第一个元素的指针，和要排序的数组的最后一个元素的<strong>后面一个</strong>，即左闭右开的区间！！！！千万注意这一点。
 下面讲排序自定义结构体，如果你上面已经晕了，就不要看下面的了。
-这个函数也可以排序自定义的数据类型，下面的例子排序一个自定义的结构体。</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">person</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
-<span class="p">};</span><span class="c1">//这里定义了一个结构体</span>
-<span class="n">person</span> <span class="n">people</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="c1">//声明一个数组，类型是person</span>
-<span class="kt">bool</span> <span class="nf">cmp</span><span class="p">(</span><span class="n">person</span> <span class="n">p1</span><span class="p">,</span><span class="n">person</span> <span class="n">p2</span><span class="p">){</span>
-    <span class="k">return</span> <span class="n">p1</span><span class="p">.</span><span class="n">score</span><span class="o">&lt;</span><span class="n">p2</span><span class="p">.</span><span class="n">score</span><span class="p">;</span>
-<span class="p">}</span><span class="c1">//这里自定义了一个比较函数，里面写上比较大小的规则，sort函数是默认从小到大的，如果要大到小就把&lt;改成&gt;就好了。但是需要注意的是这里一定要写&lt;或者&gt;,绝对不能写&lt;=或者&gt;=</span>
+这个函数也可以排序自定义的数据类型，下面的例子排序一个自定义的结构体。
+```cpp
+struct person{
+    int score;
+    int age;
+};//这里定义了一个结构体
+person people[100];//声明一个数组，类型是person
+bool cmp(person p1,person p2){
+    return p1.score&lt;p2.score;
+}//这里自定义了一个比较函数，里面写上比较大小的规则，sort函数是默认从小到大的，如果要大到小就把<改成>就好了。但是需要注意的是这里一定要写<或者>,绝对不能写&lt;=或者&gt;=</或者></改成></p>
 
-<span class="c1">//在排序的地方调用：</span>
-<span class="n">sort</span><span class="p">(</span><span class="n">people</span><span class="p">,</span><span class="n">people</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="n">cmp</span><span class="p">);</span><span class="c1">//这里对people函数的前n-1个元素排序,注意是n-1！n-1！n-1！</span>
-</code></pre></div></div>
+<p>//在排序的地方调用：
+sort(people,people+n,cmp);//这里对people函数的前n-1个元素排序,注意是n-1！n-1！n-1！
+```</p>
 
-<h1 id="reverse-函数">reverse 函数</h1>
-<p>顾名思义，reverse函数就是把一个数组的元素倒序。用法很简单：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span><span class="c1">//把数组a的第0个到第n-1个元素倒序</span>
-<span class="err">如原来是</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="err">，倒叙过后是</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span>
-</code></pre></div></div>
-<h1 id="unique函数">unique函数</h1>
-<p>这个函数的使用有一些注意！实在看不懂就不要用这个函数！！！
+<h1 id="reverse-">reverse 函数</h1>
+<p>顾名思义，reverse函数就是把一个数组的元素倒序。用法很简单：
+<code class="language-plaintext highlighter-rouge">cpp
+reverse(a,a+n);//把数组a的第0个到第n-1个元素倒序
+如原来是1,2,3,4，倒叙过后是4,3,2,1
+</code>
+#   unique函数
+这个函数的使用有一些注意！实在看不懂就不要用这个函数！！！
 这个函数的作用是去重。如 1 2 2 3 3 3 3 4,的数组，调用后变成1 2 3 4 2 3 3 3 ，这个函数需要注意的是，这个函数要求去重的数组已经排序了，如果没有排序，像这样：1 2 2 3 2 2，调用以后变成1 2 3 2 2 2，所以这个函数有时会和sort函数一起使用。这个函数去重不是把你的元素删掉，而是<strong>丢到数组的最后面去</strong>，所以才有上面的结果。<strong>这个函数的返回值是有用的！！！！</strong> 返回的是指向去重过后的序列的最后一个位置的指针！！！！例如，对a数组：1 2 2 2 2 3这个数组调用这个函数以后，数组变成1 2 3 2 2 2,返回的是指向3这个元素的指针，即a+3!!!!!!
-使用方法如下:</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
-</code></pre></div></div>
-<h1 id="string类">string类</h1>
-<p>需要像前面一样，导入一个库$# include <string>$注意，不是$# include <string.h>$这是两个不一样的库！！！！！！！！！！！！！！！！！！！然后在下面紧接一行</string.h></string></p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span><span class="c1">//这一行一定要有！！！！！！</span>
-</code></pre></div></div>
-<p>然后像定义变量一样定义：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"I LOVE UESTC , I LOVE CLASS ONE"</span><span class="p">;</span>
-</code></pre></div></div>
-<p>然后你可以用如下一些操作：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span><span class="c1">//返回这个字符串的长度</span>
-<span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//得到str的第i个字符</span>
-<span class="n">str</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span><span class="c1">//返回一个这个字符串是否为空</span>
-<span class="n">str</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="sc">'a'</span><span class="p">);</span><span class="c1">//把a这个字符添加到str的最后面去</span>
-<span class="n">str</span><span class="o">+=</span><span class="s">"C Pass"</span><span class="p">;</span><span class="c1">//把"C pass"拼接到str后面去。</span>
-<span class="n">str</span><span class="o">==</span><span class="s">"adsasd"</span><span class="p">;</span><span class="c1">//判断两个字符串是否相等</span>
-<span class="n">str</span><span class="o">==</span><span class="n">str1</span><span class="p">;</span><span class="c1">//判断两个string是否相等</span>
-<span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">"UESTC"</span><span class="p">);</span><span class="c1">//返回字符串中"UESTC"第一次出现的下标，注意是第一次</span>
-<span class="n">str</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="s">"123"</span><span class="p">);</span><span class="c1">//在pos这个位置前面插入123这个字符串。例如调用str.insert(1,"123");后，str变成I123 LOVE UESTC , I LOVE CLASS ONE</span>
-</code></pre></div></div>
-<p>输出str的方法如下：
-printf(“%s”,str.data());</p>
-<h1 id="判断是否是回文">判断是否是回文</h1>
-<p>就是比较一个字符串本身和它的倒置是否相等
-例如：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="n">str1</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="s">"aabbaa"</span><span class="p">;</span>
-<span class="kt">char</span> <span class="n">str2</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-<span class="n">memcpy</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">strlen</span><span class="p">(</span><span class="n">str1</span><span class="p">));</span>
-<span class="n">reverse</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span><span class="n">str2</span><span class="o">+</span><span class="n">strlen</span><span class="p">(</span><span class="n">str2</span><span class="p">));</span>
-<span class="c1">//修改了此处，strcmp字符串一样时返回0，否则返回非0</span>
-<span class="c1">//故前面要加!</span>
-<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">)){</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"是回文"</span><span class="p">);</span>
-<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"不是回文"</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="拓展">拓展</h1>
-<p>如果你有兴趣的话，可以了解一下stringstream这个类。这里怕把大家搞混，所以没有做讲解。其实string这个东西还有很多其他的NB操作，但是为了防止把大家搞混，这里也不讲。有兴趣的请自行了解</p>
+使用方法如下:
+<code class="language-plaintext highlighter-rouge">cpp
+unique(a,a+n);
+</code>
+#   string类
+需要像前面一样，导入一个库$# include <string>$注意，不是$# include <string.h>$这是两个不一样的库！！！！！！！！！！！！！！！！！！！然后在下面紧接一行
+```cpp
+using namespace std;//这一行一定要有！！！！！！
+```
+然后像定义变量一样定义：
+```cpp
+string str = "I LOVE UESTC , I LOVE CLASS ONE";
+```
+然后你可以用如下一些操作：
+```cpp
+str.length();//返回这个字符串的长度
+str[i];//得到str的第i个字符
+str.empty();//返回一个这个字符串是否为空
+str.push_back('a');//把a这个字符添加到str的最后面去
+str+="C Pass";//把"C pass"拼接到str后面去。
+str=="adsasd";//判断两个字符串是否相等
+str==str1;//判断两个string是否相等
+str.find("UESTC");//返回字符串中"UESTC"第一次出现的下标，注意是第一次
+str.insert(pos,"123");//在pos这个位置前面插入123这个字符串。例如调用str.insert(1,"123");后，str变成I123 LOVE UESTC , I LOVE CLASS ONE
+```
+输出str的方法如下：
+printf("%s",str.data());
+#   判断是否是回文
+就是比较一个字符串本身和它的倒置是否相等
+例如：
+```cpp
+char str1[10] = "aabbaa";
+char str2[10];
+memcpy(str2,str1,strlen(str1));
+reverse(str2,str2+strlen(str2));
+//修改了此处，strcmp字符串一样时返回0，否则返回非0
+//故前面要加!
+if(!strcmp(str1,str2)){
+    printf("是回文");
+}else{
+    printf("不是回文");
+}
+```
+#   拓展
+如果你有兴趣的话，可以了解一下stringstream这个类。这里怕把大家搞混，所以没有做讲解。其实string这个东西还有很多其他的NB操作，但是为了防止把大家搞混，这里也不讲。有兴趣的请自行了解</string.h></string></p>
 
     </div>
 

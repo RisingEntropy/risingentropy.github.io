@@ -15,30 +15,26 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="并查集 – Haoyu Deng's page">
   <meta name="twitter:description" content="反复查找元素在哪个集合里面。解决数据量极大的问题
-定义
+# 定义
 并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集合。这期间需要反复查找某元素被分为的若干集合。并、查、集三字由此而来。
 并查集本身不具备数据结构，通常使用数组，链表和树实现，数组比较多。不同的数据结构选择可能会在查找和合并的操作效率上有很大差别。
-支持的操作
+# 支持的操作
 并查集的树结构记录了一组分离的动态集合S={S1,S2,S3…};每个集合通过一个代表加以识别，代表即该元素中的某个元素，哪一个成员会被选作代表是无所谓的，重要的是：如果某一动态集合的代表两次，且两次请求间不修改集合，则两次得到的答案应该是相同的；
 建立并查集：
-
-  make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过
-
+&amp;gt;make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="并查集 – Haoyu Deng's page">
   <meta property="og:description" content="反复查找元素在哪个集合里面。解决数据量极大的问题
-定义
+# 定义
 并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集合。这期间需要反复查找某元素被分为的若干集合。并、查、集三字由此而来。
 并查集本身不具备数据结构，通常使用数组，链表和树实现，数组比较多。不同的数据结构选择可能会在查找和合并的操作效率上有很大差别。
-支持的操作
+# 支持的操作
 并查集的树结构记录了一组分离的动态集合S={S1,S2,S3…};每个集合通过一个代表加以识别，代表即该元素中的某个元素，哪一个成员会被选作代表是无所谓的，重要的是：如果某一动态集合的代表两次，且两次请求间不修改集合，则两次得到的答案应该是相同的；
 建立并查集：
-
-  make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过
-
+&amp;gt;make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -208,16 +204,14 @@
   <article class="post">
 
     <div class="post__content">
-      <p>反复查找元素在哪个集合里面。解决数据量极大的问题</p>
-<h1 id="定义">定义</h1>
-<p>并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集合。这期间需要反复查找某元素被分为的若干集合。并、查、集三字由此而来。
-<strong>并查集本身不具备数据结构，通常使用数组，链表和树实现，数组比较多。不同的数据结构选择可能会在查找和合并的操作效率上有很大差别。</strong></p>
-<h1 id="支持的操作">支持的操作</h1>
-<p>并查集的树结构记录了一组分离的动态集合S={S1,S2,S3…};每个集合通过一个代表加以识别，代表即该元素中的某个元素，哪一个成员会被选作代表是无所谓的，重要的是：如果某一动态集合的代表两次，且两次请求间不修改集合，则两次得到的答案应该是相同的；
-建立并查集：</p>
-<blockquote>
-  <p>make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过</p>
-</blockquote>
+      <p>反复查找元素在哪个集合里面。解决数据量极大的问题
+# 定义
+并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集合。这期间需要反复查找某元素被分为的若干集合。并、查、集三字由此而来。
+<strong>并查集本身不具备数据结构，通常使用数组，链表和树实现，数组比较多。不同的数据结构选择可能会在查找和合并的操作效率上有很大差别。</strong>
+# 支持的操作
+并查集的树结构记录了一组分离的动态集合S={S1,S2,S3…};每个集合通过一个代表加以识别，代表即该元素中的某个元素，哪一个成员会被选作代表是无所谓的，重要的是：如果某一动态集合的代表两次，且两次请求间不修改集合，则两次得到的答案应该是相同的；
+建立并查集：
+&gt;make(x)建立一个新的集合，其仅有的成员(也是代表)就是x。由于各集合是分离的，要求x在其他集合中没有出现过</p>
 
 <blockquote>
   <p>union(x,y)合并包含x，y的集合为一个新集合。假定此操作前这两个集合是分离的。结果的集合代表是Sx$\bigcup$Sy的某个成员。一般来说，在不同的实现中通常都以Sx或Sy的代表作为新集合的代表。此后，新集合S代表了原来的Sx和Sy。</p>
@@ -229,38 +223,42 @@
 
 <p>集合代表其实应该就是每个集合的根节点————沃·镃基·硕德</p>
 
-<h1 id="路径压缩实现">路径压缩实现</h1>
+<h1 id="section">路径压缩实现</h1>
 <p>就是把父节点指来指去。当这棵树是链的时候，可见判断两个元素是否属于同一集合需要O(n)的时间//Orz常数时间Orz Orz
 本质就是在找完根节点之后，在递归回来的路上顺便把路径上的元素的父亲都指向根节点
 实现代码(样例)
 1初始化
-father[i]表示第i个元素的父节点的位置</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="mf">1.</span><span class="p">..</span><span class="n">N</span><span class="p">)</span><span class="n">father</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span><span class="c1">//每一个元素都属于单独的一个集合，所以每个元素都以自己作为根节点</span>
-</code></pre></div></div>
-<p>寻找一个根节点并压缩路径</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">)</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
-    <span class="k">return</span> <span class="n">father</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>合并俩集合</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">union</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-    <span class="n">father</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+father[i]表示第i个元素的父节点的位置
+<code class="language-plaintext highlighter-rouge">cpp
+for(1...N)father[i] = i; i//每一个元素都属于单独的一个集合，所以每个元素都以自己作为根节点
+</code>
+寻找一个根节点并压缩路径
+<code class="language-plaintext highlighter-rouge">cpp
+int find(int x){
+    if(father[x]!=x)father[x] = find(father[x]);
+    return father[x];
+}
+</code>
+合并俩集合
+<code class="language-plaintext highlighter-rouge">cpp
+void union(int x,int y){
+    x = find(x);
+    y = find(y);
+    father[y] = x;
+}
+</code></p>
 
 <p>判断元素是否属于同一集合</p>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">judge</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="并查集可以用于求无向图的连通分量参加一本通p505">并查集可以用于求无向图的连通分量，参加一本通P505</h1>
+<p><code class="language-plaintext highlighter-rouge">cpp
+bool judge(int x,int y){
+    x = find(x);
+    y = find(y);
+    if(x==y)return true;
+    return false;
+}
+</code>
+#  并查集可以用于求无向图的连通分量，参加一本通P505</p>
 
 
     </div>

@@ -15,43 +15,50 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="bzoj 3916 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-题目描述
+# 题目描述
 有三个好朋友喜欢在一起玩游戏,A君写下一个字符串S,B君将其复制一遍得到T,C君在T的任意位置(包括首尾)插入一个字符得到U.现在你得到了U,请你找出S.
-输入输出格式
-输入格式
+# 输入输出格式
+#  输入格式
 第一行一个数N,表示U的长度.
 第二行一个字符串U,保证U由大写字母组成
-输出格式
+#  输出格式
 输出一行,若S不存在,输出”NOT POSSIBLE”.若S不唯一,输出”NOT UNIQUE”.否则输出S.
-样例
-样例1
-输入
+# 样例
+#  样例1
+#  输入
+
 7
 ABXCABC
 
-输出
+#  输出
+
 ABC
 
-样例2
-输入
+#  样例2
+#  输入
+
 6
 ABCDEF
 
-输出
+#  输出
+
 NOT POSSIBLE
 
-样例三
-输入
+#  样例三
+#  输入
+
 9
 ABABABABA
 
-输出
+#  输出
+
 NOT UNIQUE
 
-解答
-其实就是乱搞哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
+# 解答
+其实就是~~乱搞~~哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
 至于这个一半是什么意思呢？其实就是如果这个字符串的长度是偶数的话，明细是不可能的。如果是奇数的话，那么原来串S的长度就是$\lfloor \frac{N}{2}\rfloor$这道题要注意哈希的长度的开始与结束点
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 using namespace std;
 const int MAXN = 2000001+10;
@@ -126,43 +133,50 @@ int main() {
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="bzoj 3916 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-题目描述
+# 题目描述
 有三个好朋友喜欢在一起玩游戏,A君写下一个字符串S,B君将其复制一遍得到T,C君在T的任意位置(包括首尾)插入一个字符得到U.现在你得到了U,请你找出S.
-输入输出格式
-输入格式
+# 输入输出格式
+#  输入格式
 第一行一个数N,表示U的长度.
 第二行一个字符串U,保证U由大写字母组成
-输出格式
+#  输出格式
 输出一行,若S不存在,输出”NOT POSSIBLE”.若S不唯一,输出”NOT UNIQUE”.否则输出S.
-样例
-样例1
-输入
+# 样例
+#  样例1
+#  输入
+
 7
 ABXCABC
 
-输出
+#  输出
+
 ABC
 
-样例2
-输入
+#  样例2
+#  输入
+
 6
 ABCDEF
 
-输出
+#  输出
+
 NOT POSSIBLE
 
-样例三
-输入
+#  样例三
+#  输入
+
 9
 ABABABABA
 
-输出
+#  输出
+
 NOT UNIQUE
 
-解答
-其实就是乱搞哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
+# 解答
+其实就是~~乱搞~~哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
 至于这个一半是什么意思呢？其实就是如果这个字符串的长度是偶数的话，明细是不可能的。如果是奇数的话，那么原来串S的长度就是$\lfloor \frac{N}{2}\rfloor$这道题要注意哈希的长度的开始与结束点
 代码：
+cpp
 # include &amp;lt;iostream&amp;gt;
 using namespace std;
 const int MAXN = 2000001+10;
@@ -400,112 +414,119 @@ int main() {
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<h1 id="题目描述">题目描述</h1>
-<p>有三个好朋友喜欢在一起玩游戏,A君写下一个字符串S,B君将其复制一遍得到T,C君在T的任意位置(包括首尾)插入一个字符得到U.现在你得到了U,请你找出S.</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式</h1>
-<p>第一行一个数N,表示U的长度.
-第二行一个字符串U,保证U由大写字母组成</p>
-<h1 id="输出格式">输出格式</h1>
-<p>输出一行,若S不存在,输出”NOT POSSIBLE”.若S不唯一,输出”NOT UNIQUE”.否则输出S.</p>
-<h1 id="样例">样例</h1>
-<h1 id="样例1">样例1</h1>
-<h1 id="输入">输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+      <h1 id="section">题面</h1>
+<p># 题目描述
+有三个好朋友喜欢在一起玩游戏,A君写下一个字符串S,B君将其复制一遍得到T,C君在T的任意位置(包括首尾)插入一个字符得到U.现在你得到了U,请你找出S.
+# 输入输出格式
+#  输入格式
+第一行一个数N,表示U的长度.
+第二行一个字符串U,保证U由大写字母组成
+#  输出格式
+输出一行,若S不存在,输出”NOT POSSIBLE”.若S不唯一,输出”NOT UNIQUE”.否则输出S.
+# 样例
+#  样例1
+#  输入
+<code class="language-plaintext highlighter-rouge">
+7
 ABXCABC
-</code></pre></div></div>
-<h1 id="输出">输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABC
-</code></pre></div></div>
-<h1 id="样例2">样例2</h1>
-<h1 id="输入-1">输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+</code>
+#  输出
+<code class="language-plaintext highlighter-rouge">
+ABC
+</code>
+#  样例2
+#  输入
+<code class="language-plaintext highlighter-rouge">
+6
 ABCDEF
-</code></pre></div></div>
-<h1 id="输出-1">输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NOT POSSIBLE
-</code></pre></div></div>
-<h1 id="样例三">样例三</h1>
-<h1 id="输入-2">输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9
+</code>
+#  输出
+<code class="language-plaintext highlighter-rouge">
+NOT POSSIBLE
+</code>
+#  样例三
+#  输入
+<code class="language-plaintext highlighter-rouge">
+9
 ABABABABA
-</code></pre></div></div>
-<h1 id="输出-2">输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NOT UNIQUE
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>其实就是<del>乱搞</del>哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
+</code>
+#  输出
+<code class="language-plaintext highlighter-rouge">
+NOT UNIQUE
+</code>
+# 解答
+其实就是~~乱搞~~哈希，枚举每一位，看看这一位是不是加进去的，判断方法是：这一位以前的和以后的hash是不是和另一半相等.
 至于这个一半是什么意思呢？其实就是如果这个字符串的长度是偶数的话，明细是不可能的。如果是奇数的话，那么原来串S的长度就是$\lfloor \frac{N}{2}\rfloor$这道题要注意哈希的长度的开始与结束点
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">2000001</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">Hash</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span><span class="c1">//基数</span>
-<span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">pow</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//基数的n次方mod mod的值</span>
-<span class="kt">void</span> <span class="nf">work_pow</span><span class="p">(){</span>
-    <span class="n">pow</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">pow</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pow</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">base</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">calHash</span><span class="p">(){</span>
-    <span class="n">Hash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">base</span><span class="o">+</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'A'</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="c1">//这里还是注意一下每个字母代表的值，如果A代表0的话A不了，不知道为什么</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">work_pow</span><span class="p">();</span>
-    <span class="n">calHash</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
-        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"NOT POSSIBLE"</span><span class="p">;</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="kt">unsigned</span>  <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="p">;</span>
-    <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//枚举每一位</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-        <span class="k">else</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
-        <span class="p">}</span><span class="k">else</span> <span class="n">y</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">Hash</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Hash</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">pow</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">];</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="o">&amp;&amp;</span><span class="n">ans</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
-                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"NOT UNIQUE"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-                <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
-                <span class="n">pos</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-                <span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                <span class="n">ans</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span><span class="c1">//原串在后面</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
-        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"NOT POSSIBLE"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
+using namespace std;
+const int MAXN = 2000001+10;
+unsigned long long Hash[MAXN];
+int n;
+const int base = 37;//基数
+char str[MAXN];
+unsigned long long pow[MAXN];//基数的n次方mod mod的值
+void work_pow(){
+    pow[0] = 1;
+    for(int i = 1;i&lt;=n;i++){
+        pow[i] = pow[i-1]*base;
+    }
+}
+void calHash(){
+    Hash[0] = 0;
+    for(int i = 1;i&lt;=n;i++){
+        Hash[i] = Hash[i-1]*base+str[i]-'A'+1;//这里还是注意一下每个字母代表的值，如果A代表0的话A不了，不知道为什么
+    }
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin&gt;&gt;n;
+    cin&gt;&gt;str+1;
+    work_pow();
+    calHash();
+    if(!n&amp;1){
+        cout&lt;&lt;"NOT POSSIBLE";
+        return 0;
+    }
+    unsigned long long x = 0;
+    unsigned long long y = 0;
+    bool found = false;
+    unsigned  long long ans ;
+    int pos = 0;
+    for(int i = 1;i&lt;=n;i++){//枚举每一位
+        if(i&lt;=n/2) x = Hash[n/2+1]-Hash[i]*pow[n/2-i+1]+Hash[i-1]*pow[n/2-i+1];
+        else x = Hash[n/2];
+        if(i&lt;=n/2+1){
+            y = Hash[n]-Hash[n/2+1]*pow[n/2];
+        }else y = Hash[n] - Hash[i]*pow[n-i]+(Hash[i-1] - Hash[n/2]*pow[i-n/2-1])*pow[n-i];
+        if(x==y){
+            if(found&amp;&amp;ans!=x){
+                cout&lt;&lt;"NOT UNIQUE"&lt;&lt;endl;
+                return 0;
+            } else{
+                pos = i;
+                found = true;
+                ans = x;
+            }
+        }
+    }
+    if(found) {
+        if (pos &lt;= (n &gt;&gt; 1)+1) {//原串在后面
+            for (int i = (n &gt;&gt; 1) + 2; i &lt;= n; i++) {
+                cout &lt;&lt; str[i];
+            }
+        } else {
+            for (int i = 1; i &lt;= n &gt;&gt; 1; i++) {
+                cout &lt;&lt; str[i];
+            }
+        }
+    }else {
+        cout&lt;&lt;"NOT POSSIBLE"&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></p>
 
     </div>
 

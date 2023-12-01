@@ -194,52 +194,50 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>如图：有n个重物，每个重物系在一条足够长的绳子上。每条绳子自上而下穿过桌面上的洞，然后系在一起。图中X处就是公共的绳结。假设绳子是完全弹性的（不会造成能量损失），桌子足够高（因而重物不会垂到地上），且忽略所有的摩擦。
 问绳结X最终平衡于何处。</p>
 
 <p><img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
-<p>注意：桌面上的洞都比绳结X小得多，所以即使某个重物特别重，绳结X也不可能穿过桌面上的洞掉下来，最多是卡在某个洞口处。</p>
-<h1 id="输入输出格式">输入输出格式</h1>
-<h1 id="输入格式">输入格式：</h1>
-<p>文件的第一行为一个正整数n（1≤n≤1000），表示重物和洞的数目。接下来的n行，每行是3个整数：Xi.Yi.Wi，分别表示第i个洞的坐标以及第 i个重物的重量。($-10000≤x,y≤10000, 0&lt;w≤1000$ )</p>
+<p>注意：桌面上的洞都比绳结X小得多，所以即使某个重物特别重，绳结X也不可能穿过桌面上的洞掉下来，最多是卡在某个洞口处。
+# 输入输出格式
+#  输入格式：
+文件的第一行为一个正整数n（1≤n≤1000），表示重物和洞的数目。接下来的n行，每行是3个整数：Xi.Yi.Wi，分别表示第i个洞的坐标以及第 i个重物的重量。($-10000≤x,y≤10000, 0&lt;w≤1000$ )</p>
 
-<h1 id="输出格式">输出格式：</h1>
+<h1 id="section-1">输出格式：</h1>
 <p>你的程序必须输出两个浮点数（保留小数点后三位），分别表示处于最终平衡状态时绳结X的横坐标和纵坐标。两个数以一个空格隔开。</p>
 
-<h1 id="输入输出样例">输入输出样例</h1>
-<h1 id="输入样例-1">输入样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+<h1 id="section-2">输入输出样例</h1>
+<p>#  输入样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+3
 0 0 1
 0 2 1
 1 1 1
-</code></pre></div></div>
-<h1 id="输出样例-1">输出样例# 1：</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.577 1.000
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>正解：计算几何+正交分解(翘了那么久的课，怎么可能会嘛)
+</code>
+#  输出样例# 1： 
+<code class="language-plaintext highlighter-rouge">
+0.577 1.000
+</code>
+# 解答
+正解：计算几何+正交分解(翘了那么久的课，怎么可能会嘛)
 AC算法传说中的模拟退火算法！
-关于模拟退火，可以参见<a href="https://baike.baidu.com/item/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB">百度百科</a></p>
-<h1 id="simulate-annealing">Simulate Annealing</h1>
-<p>首先，你要准备以下几个参数</p>
-<blockquote>
-  <p>初始温$度T$，降温系数$\Delta T$以及一个初始解(初始状态)</p>
-</blockquote>
+关于模拟退火，可以参见<a href="https://baike.baidu.com/item/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB">百度百科</a>
+# Simulate Annealing
+首先，你要准备以下几个参数
+&gt;初始温$度T$，降温系数$\Delta T$以及一个初始解(初始状态)</p>
 
-<p>然后开始计算<del>乱搞</del>,计算流程如下</p>
-<blockquote>
-  <p>1.随机变化解，变化幅度为$T$
+<p>然后开始计算~~乱搞~~,计算流程如下
+&gt;1.随机变化解，变化幅度为$T$
 2.计算新解与目前最优解的差为$\Delta E$
 2.判断当前解是否更优，即$\Delta$是否小于0，如果更优($Delta$小于0)，接受这个解
 3.如果这个解不是更优的，以一定概率*接受它
 4.降温</p>
-</blockquote>
 
 <p>上文中提到的一定概率，经过无数科学家们的计算与分析实验，发现当此概率为\(e^{\frac{\Delta E}{kT}}\)时，最容易找到最优解，其中$\Delta E$是与当前最优解的差，$T$是当前温度，$k$是一个随机数。</p>
 
-<h1 id="为什么sa可能计算出最优解">为什么SA可能计算出最优解</h1>
+<h1 id="sa">为什么SA可能计算出最优解</h1>
 <p>以下仅为个人理解
 我们把求解的过程比作在函数上找极点，如图
 <img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
@@ -252,87 +250,89 @@ AC算法传说中的模拟退火算法！
 <p>但是也有它不适应的情况：解的变化随着解空间变大得太厉害了：
 <img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
-<p>所以模拟退火仅限于函数峰不是特别多的情况<del>(单调函数和单峰函数用二分三分啊，为什么要用SA?)</del>
-对于函数峰特别多的情况，分块跑SA再合并</p>
-<h1 id="一些小技巧">一些小技巧</h1>
-<p>尽量多跑SA，但是又不能超时，那我就卡着时间来：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="n">clock</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span><span class="c1">//注意这里不用太贪心，把时间卡太死了，不然一下就是全部TLE。。。</span>
-    <span class="n">simulate_annealing</span><span class="p">();</span>
-</code></pre></div></div>
-<p>调参方法：
+<p>所以模拟退火仅限于函数峰不是特别多的情况~~(单调函数和单峰函数用二分三分啊，为什么要用SA?)~~
+对于函数峰特别多的情况，分块跑SA再合并
+#  一些小技巧
+尽量多跑SA，但是又不能超时，那我就卡着时间来：
+<code class="language-plaintext highlighter-rouge">cpp
+long s = clock(0);
+while(double(clock()-s)/CLOCKS_PER_SEC&lt;=0.7)//注意这里不用太贪心，把时间卡太死了，不然一下就是全部TLE。。。
+    simulate_annealing();
+</code>
+调参方法：
 调小降温系数，调大初始温度，调大初始解。但是修改会导致运行时间变长。最好还是卡时间！
-以下是洛谷上AC代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+以下是洛谷上AC代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstdlib&gt;
 # include &lt;cmath&gt;
 # include &lt;time.h&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
-    <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;</span> <span class="sc">'9'</span> <span class="o">||</span> <span class="n">ch</span> <span class="o">&lt;</span> <span class="sc">'0'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">ch</span> <span class="o">&gt;=</span> <span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">ch</span> <span class="o">&lt;=</span> <span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
-    <span class="kt">double</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">wei</span><span class="p">;</span>
-<span class="p">}</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1010</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-<span class="kt">long</span> <span class="n">s</span> <span class="p">;</span>
-<span class="kt">double</span> <span class="nf">abbs</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">?-</span><span class="n">a</span><span class="o">:</span><span class="n">a</span><span class="p">;}</span>
-<span class="kt">double</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">,</span><span class="kt">double</span> <span class="n">y</span><span class="p">){</span>
-    <span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">double</span> <span class="n">dis</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">);</span>
-        <span class="n">dis</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dis</span><span class="p">);</span>
-        <span class="n">ans</span><span class="o">+=</span><span class="n">dis</span><span class="o">*</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wei</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">double</span> <span class="n">T</span> <span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.99789999</span><span class="p">;</span>
-<span class="kt">double</span> <span class="n">ans_x</span><span class="p">,</span><span class="n">ans_y</span><span class="p">,</span><span class="n">ans</span> <span class="o">=</span> <span class="mf">1e15</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
-<span class="kt">double</span> <span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">double</span> <span class="n">ep</span> <span class="o">=</span> <span class="mf">1e-14</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">simulated_annealing</span><span class="p">(){</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="mi">1926</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">&gt;</span><span class="n">ep</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">nx</span> <span class="o">=</span> <span class="n">ans_x</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">RAND_MAX</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">;</span>
-        <span class="n">ny</span> <span class="o">=</span> <span class="n">ans_y</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">new_ans</span> <span class="o">=</span> <span class="n">cal</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">);</span>
-        <span class="kt">double</span> <span class="n">DE</span> <span class="o">=</span> <span class="n">new_ans</span><span class="o">-</span><span class="n">ans</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">DE</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-            <span class="n">ans_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
-            <span class="n">ans_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">DE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-            <span class="n">ans_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
-            <span class="n">ans_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">SA</span><span class="p">(){</span>
-    <span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span>
-    <span class="n">simulated_annealing</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wei</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">SA</span><span class="p">();</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%.3lf %.3lf"</span><span class="p">,</span><span class="n">ans_x</span><span class="p">,</span><span class="n">ans_y</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+inline int read(){
+    char ch = getchar();
+    int f = 1 ,x = 0;
+    while(ch &gt; '9' || ch &lt; '0'){if(ch == '-')f = -1; ch = getchar();}
+    while(ch &gt;= '0' &amp;&amp; ch &lt;= '9'){x = (x &lt;&lt; 1) + (x &lt;&lt; 3) + ch - '0';ch = getchar();}
+    return x * f;
+}
+struct node{
+    double x,y;
+    int wei;
+}nodes[1010];
+int n;
+long s ;
+double abbs(double a){return a&lt;0?-a:a;}
+double cal(double x,double y){
+    double ans = 0.0;
+    for(int i = 1;i&lt;=n;i++){
+        double dis = (x-nodes[i].x)*(x-nodes[i].x)+(y-nodes[i].y)*(y-nodes[i].y);
+        dis = sqrt(dis);
+        ans+=dis*nodes[i].wei;
+    }
+    return ans;
+}
+double T ;
+const double delta = 0.99789999;
+double ans_x,ans_y,ans = 1e15+7;
+double nx,ny;
+const double ep = 1e-14;
+void simulated_annealing(){
+    T = 1926;
+    while(T&gt;ep) {
+        nx = ans_x+(rand() * 2 - RAND_MAX) * T;
+        ny = ans_y+(rand()*2-RAND_MAX)*T;
+        double new_ans = cal(nx,ny);
+        double DE = new_ans-ans;
+        if(DE&lt;0){
+            ans = new_ans;
+            ans_x = nx;
+            ans_y = ny;
+        }else if(exp(-DE/T)*RAND_MAX&gt;rand()){
+            ans = new_ans;
+            ans_x = nx;
+            ans_y = ny;
+        }
+        T*=delta;
+    }
+}
+void SA(){
+    while(double(clock()-s)/CLOCKS_PER_SEC&lt;=0.7)
+    simulated_annealing();
+}
+int main() {
+    n = read();
+    s = clock();
+    for(int i = 1;i&lt;=n;i++){
+        nodes[i].x = read();
+        nodes[i].y = read();
+        nodes[i].wei = read();
+    }
+    SA();
+    printf("%.3lf %.3lf",ans_x,ans_y);
+    return 0;
+}
+</code></p>
 
     </div>
 

@@ -16,12 +16,13 @@
   <meta name="twitter:title" content="woj3604 [POI2014]HOT_Hotels(数据有加强） – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 有一个树形结构的宾馆，n (1≤n≤100 000)个房间，n-1条无向边，每条边的长度相同，任意两个房间可以相互到达。吉丽要给他的三个妹子各开（一个）房（间）。三个妹子住的房间要互不相同（否则要打起来了），为了让吉丽满意，你需要让三个房间两两距离相同。 有多少种方案能让吉丽满意？
-输入
+#  输入
 第一行一个数n。
 接下来n-1行，每行两个数x,y，表示x和y之间有一条边相连。
-输出
+#  输出
 让吉丽满意的方案数。
-样例输入
+#  样例输入
+
 7
 1 2
 5 7
@@ -30,19 +31,20 @@
 5 6
 4 5
 
-样例输出
+#  样例输出 
+
 5
 
-解答
+# 解答
 神仙状态。
 画画图可以发现有如下两种可能：
 
 (此时5是根)
 
 (此时1是根)
-然后就是推到状态看题解
+然后就是推到状态~~看题解~~
 我们用$f[i][j]$表示在$i$的子树中距离$i$的长度为$j$的点有多少个，那么显然，$f[i][j] = \sum f[t][j-1]$。
-另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么显然$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
+另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么~~显然~~$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
 
 图中，g[2][0] 表示的点有2个，那么￥g[2][0] = 2￥，那么因为$2-&amp;gt;1=1$，所以$1$号点的状态就是$g[1][d-(j-1)]=g[1][d-j+1]$(向上挪了一步，所以距离要减1）。
 所以他是这么转移的。
@@ -51,6 +53,7 @@
 
 一下子就明白了，6 2 3 构成3个符合条件的的hotel。，我们发现如果可以从子树中把f和j继承过来就好了，然后跑一波长链剖分。(如果不会可以看这篇博客，如果不会指针，可以看zxyoi神仙的博客)
 注意一下代码细节
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -123,12 +126,13 @@ signed main(){
   <meta property="og:title" content="woj3604 [POI2014]HOT_Hotels(数据有加强） – Haoyu Deng's page">
   <meta property="og:description" content="题面
 有一个树形结构的宾馆，n (1≤n≤100 000)个房间，n-1条无向边，每条边的长度相同，任意两个房间可以相互到达。吉丽要给他的三个妹子各开（一个）房（间）。三个妹子住的房间要互不相同（否则要打起来了），为了让吉丽满意，你需要让三个房间两两距离相同。 有多少种方案能让吉丽满意？
-输入
+#  输入
 第一行一个数n。
 接下来n-1行，每行两个数x,y，表示x和y之间有一条边相连。
-输出
+#  输出
 让吉丽满意的方案数。
-样例输入
+#  样例输入
+
 7
 1 2
 5 7
@@ -137,19 +141,20 @@ signed main(){
 5 6
 4 5
 
-样例输出
+#  样例输出 
+
 5
 
-解答
+# 解答
 神仙状态。
 画画图可以发现有如下两种可能：
 
 (此时5是根)
 
 (此时1是根)
-然后就是推到状态看题解
+然后就是推到状态~~看题解~~
 我们用$f[i][j]$表示在$i$的子树中距离$i$的长度为$j$的点有多少个，那么显然，$f[i][j] = \sum f[t][j-1]$。
-另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么显然$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
+另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么~~显然~~$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
 
 图中，g[2][0] 表示的点有2个，那么￥g[2][0] = 2￥，那么因为$2-&amp;gt;1=1$，所以$1$号点的状态就是$g[1][d-(j-1)]=g[1][d-j+1]$(向上挪了一步，所以距离要减1）。
 所以他是这么转移的。
@@ -158,6 +163,7 @@ signed main(){
 
 一下子就明白了，6 2 3 构成3个符合条件的的hotel。，我们发现如果可以从子树中把f和j继承过来就好了，然后跑一波长链剖分。(如果不会可以看这篇博客，如果不会指针，可以看zxyoi神仙的博客)
 注意一下代码细节
+cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 # include &amp;lt;cstdio&amp;gt;
@@ -392,35 +398,37 @@ signed main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
-<p>有一个树形结构的宾馆，n (1≤n≤100 000)个房间，n-1条无向边，每条边的长度相同，任意两个房间可以相互到达。吉丽要给他的三个妹子各开（一个）房（间）。三个妹子住的房间要互不相同（否则要打起来了），为了让吉丽满意，你需要让三个房间两两距离相同。 有多少种方案能让吉丽满意？</p>
-<h1 id="输入">输入</h1>
-<p>第一行一个数n。
-接下来n-1行，每行两个数x,y，表示x和y之间有一条边相连。</p>
-<h1 id="输出">输出</h1>
-<p>让吉丽满意的方案数。</p>
-<h1 id="样例输入">样例输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>7
+      <h1 id="section">题面</h1>
+<p>有一个树形结构的宾馆，n (1≤n≤100 000)个房间，n-1条无向边，每条边的长度相同，任意两个房间可以相互到达。吉丽要给他的三个妹子各开（一个）房（间）。三个妹子住的房间要互不相同（否则要打起来了），为了让吉丽满意，你需要让三个房间两两距离相同。 有多少种方案能让吉丽满意？
+#  输入
+第一行一个数n。
+接下来n-1行，每行两个数x,y，表示x和y之间有一条边相连。
+#  输出
+让吉丽满意的方案数。
+#  样例输入
+<code class="language-plaintext highlighter-rouge">
+7
 1 2
 5 7
 2 5
 2 3
 5 6
 4 5
-</code></pre></div></div>
-<h1 id="样例输出">样例输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>神仙状态。
+</code>
+#  样例输出 
+<code class="language-plaintext highlighter-rouge">
+5
+</code>
+# 解答
+神仙状态。
 画画图可以发现有如下两种可能：
 <img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 (此时5是根)
 <img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 (此时1是根)
-然后就是推到状态<del>看题解</del>
+然后就是推到状态~~看题解~~
 我们用$f[i][j]$表示在$i$的子树中距离$i$的长度为$j$的点有多少个，那么显然，$f[i][j] = \sum f[t][j-1]$。
-另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么<del>显然</del>$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
+另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么~~显然~~$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
 <img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 图中，g[2][0] 表示的点有2个，那么￥g[2][0] = 2￥，那么因为$2-&gt;1=1$，所以$1$号点的状态就是$g[1][d-(j-1)]=g[1][d-j+1]$(向上挪了一步，所以距离要减1）。
 所以他是这么转移的。
@@ -428,72 +436,73 @@ signed main(){
 对于一个点$i$显然。$g[i][0]$就是答案的一部分，因为此时$i$已经是LCA了。然后我们新加入一个子节点是，对答案的贡献通过乘法原理可以计算的到是$g[i][j]*f[t][j-1]$至于为什么，可以看一下下面这个图
 <img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 一下子就明白了，6 2 3 构成3个符合条件的的hotel。，我们发现如果可以从子树中把f和j继承过来就好了，然后跑一波长链剖分。(如果不会可以看这篇<a href="https://www.cnblogs.com/cjyyb/p/9479258.html">博客</a>，如果不会指针，可以看zxyoi神仙的<a href="https://blog.csdn.net/zxyoi_dreamer/article/details/84828291">博客</a>)
-注意一下代码细节</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+注意一下代码细节
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;vector&gt;
 # define int long long 
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">300100</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">len</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">lson</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
-<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">q</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">dfs1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
-        <span class="n">dfs1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">len</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">len</span><span class="p">[</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">]])</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">len</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">len</span><span class="p">[</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">tmp</span><span class="p">[</span><span class="n">MAXN</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">],</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="o">*</span><span class="n">g</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="o">*</span><span class="n">id</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="n">f</span><span class="p">[</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">g</span><span class="p">[</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">work</span><span class="p">(</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">);</span>
-	<span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">ans</span><span class="o">+=</span><span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
-		<span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="n">fa</span><span class="o">||</span><span class="n">to</span><span class="o">==</span><span class="n">lson</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
-		<span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span><span class="n">id</span><span class="o">+=</span><span class="n">len</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-		<span class="n">g</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span><span class="n">id</span><span class="o">+=</span><span class="n">len</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-		<span class="n">work</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
-		<span class="k">for</span><span class="p">(</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//处理答案</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">g</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-            <span class="n">ans</span> <span class="o">+=</span> <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">];</span><span class="c1">//为了处理三个点均是x的子节点和1个不是x的子节点的情况。不可能2个都不是x的子节点，因为这是一棵树</span>
-        <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">[</span><span class="n">t</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//处理转移</span>
-            <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">g</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-            <span class="n">f</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">scanf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">fr</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">fr</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span><span class="n">add</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">fr</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">dfs1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">,</span><span class="n">id</span><span class="o">+=</span><span class="n">len</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span><span class="n">id</span><span class="o">+=</span><span class="n">len</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">work</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXN = 300100;
+int len[MAXN],lson[MAXN];
+struct edge{
+    int t,w,next;
+}edges[MAXN&lt;&lt;2];
+int head[MAXN];
+int top;
+void add(int f,int t,int w = 0) {
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int n,q;
+void dfs1(int x,int fa){
+    for(int i = head[x];i;i = edges[i].next){
+        int t = edges[i].t;
+        if(t==fa)continue;
+        dfs1(t,x);
+        if(len[t]&gt;len[lson[x]])lson[x] = t;
+    }
+    len[x] = len[lson[x]]+1;
+}
+long long tmp[MAXN&lt;&lt;2],*f[MAXN],*g[MAXN],*id = tmp;
+long long ans;
+void work(int x,int fa){
+	if(lson[x])f[lson[x]] = f[x]+1,g[lson[x]] = g[x]-1,work(lson[x],x);
+	f[x][0] = 1;ans+=g[x][0];
+	for(int i = head[x];i;i = edges[i].next){
+		int t = edges[i].t;
+		if(t==fa||to==lson[x])continue;
+		f[t] = id;id+=len[t]&lt;&lt;1;
+		g[t] = id;id+=len[t]&lt;&lt;1;
+		work(t,x);
+		for( int j = 0; j &lt; len[t]; j++){//处理答案
+            if(j) ans += f[x][j - 1] * g[t][j];
+            ans += g[x][j + 1] * f[t][j];//为了处理三个点均是x的子节点和1个不是x的子节点的情况。不可能2个都不是x的子节点，因为这是一棵树
+        }
+        for( int j = 0; j &lt; len[t]; j++){//处理转移
+            g[x][j + 1] += f[x][j + 1] * f[t][j];
+            if(j) g[x][j - 1] += g[t][j];
+            f[x][j + 1] += f[t][j];
+        }
+    }
+}
+signed main(){
+    scanf("%lld",&amp;n);
+    int fr,t;
+    for(int i = 1;i&lt;n;i++){
+        scanf("%lld%lld",&amp;fr,&amp;t);add(fr,t);add(t,fr);
+    }
+    dfs1(1,0);
+    f[1] = id,id+=len[1]&lt;&lt;1;
+    g[1] = id;id+=len[1]&lt;&lt;1;
+    work(1,0);
+    printf("%lld",ans);
+    return 0;
+}
+</code></p>
 
     </div>
 

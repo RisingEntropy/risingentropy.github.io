@@ -198,16 +198,16 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="范围缩小时对mid值的改变">范围缩小时，对mid值的改变</h1>
+      <h1 id="mid">范围缩小时，对mid值的改变</h1>
 <p>前提while(l <code class="language-plaintext highlighter-rouge">&lt;</code> r)
 1.缩小范围时，r = mid,l = mid+1 ,则，mid = (l+r)»1;
 2.缩小范围时，l = mid,r = mid-1,则，mid = (l+r+1)»1;</p>
 <font color="red">注意,有负数解的时候，只能用&gt;&gt;1而不能/2因为除法向0取整，会导致漏解</font>
 
-<h1 id="二分判无解">二分判无解</h1>
-<p>因为mid = (l+r)»1不会取到r这个值，mid(l+r+1)»1不会取到l这个值所以可以利用这一性质判断无解，把二分区间[1,n]扩大到[1,n+1]和[0,n]，把a数组的一个越界下表包含进来。如果二分终于扩大后的这个越界下标上，则说明a不存在所求的数。</p>
-<h1 id="实数域上二分">实数域上二分</h1>
-<p>超简单，直接判断while(l+精度<code class="language-plaintext highlighter-rouge">&lt;</code>r)就行
+<h1 id="section">二分判无解</h1>
+<p>因为mid = (l+r)»1不会取到r这个值，mid(l+r+1)»1不会取到l这个值所以可以利用这一性质判断无解，把二分区间[1,n]扩大到[1,n+1]和[0,n]，把a数组的一个越界下表包含进来。如果二分终于扩大后的这个越界下标上，则说明a不存在所求的数。
+# 实数域上二分
+超简单，直接判断while(l+精度<code class="language-plaintext highlighter-rouge">&lt;</code>r)就行
 或者 for(int i = 0;i&lt;=100;i++){
     //do sth
     //这种方法精度比楼上高Orz

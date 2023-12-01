@@ -192,118 +192,117 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="题面">题面</h1>
+      <h1 id="section">题面</h1>
 <p>现在给出了一个简单无向加权图。你不满足于求出这个图的最小生成树，而希望知道这个图中有多少个不同的 最小生成树。（如果两颗最小生成树中至少有一条边不同，则这两个最小生成树就是不同的）。由于不同的最小生 成树可能很多，所以你只需要输出方案数对31011的模就可以了。</p>
 
-<h1 id="输入">输入</h1>
+<h1 id="section-1">输入</h1>
 <p>第一行包含两个数，n和m，其中1&lt;=n&lt;=100;1&lt;=m&lt;=1000;表示该无向图的节点数和边数。每个节点用1~n的整数编号。接下来的m行，每行包含两个整数：a,b,c，表示节点a,b之间的边的权值为c，其中1&lt;=c&lt;=1,000,000,000。数据保证不会出现自回边和重边。注意：具有相同权值的边不会超过10条。</p>
 
-<h1 id="输出">输出</h1>
+<h1 id="section-2">输出</h1>
 <p>输出不同的最小生成树有多少个。你只需要输出数量对31011的模就可以了。</p>
 
-<h1 id="样例输入">样例输入</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 6
+<h1 id="section-3">样例输入</h1>
+<p><code class="language-plaintext highlighter-rouge">
+4 6
 1 2 1
 1 3 1
 1 4 1
 2 3 2
 2 4 1
 3 4 1
-</code></pre></div></div>
-<h1 id="样例输出">样例输出</h1>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
-</code></pre></div></div>
-<h1 id="解答">解答</h1>
-<p>其实就是搜索。有一个结论：</p>
-<blockquote>
-  <p>边不同的最小生成树中，边权相同的边个数量是相等的。</p>
-</blockquote>
+</code>
+#  样例输出
+<code class="language-plaintext highlighter-rouge">
+8
+</code>
+# 解答
+其实就是搜索。有一个结论：
+&gt;边不同的最小生成树中，边权相同的边个数量是相等的。</p>
 
-<p>证明(复制于<a href="https://www.luogu.org/blog/taoran/solution-p4208">taoran的博客</a>)：</p>
-<blockquote>
-  <p>一开始集合中为空，然后向集合中加边，先加最小的边，无论怎样都会加到不能再加，就相当于把边都加入后把环删除，此时凡是能用这种边连通的点都联通了，之后把相连通的点缩为一个点考虑，第二次同理加当前最小的边（整体第二小的边）……然后感性理解一下呗qwq</p>
-</blockquote>
+<p>证明(复制于<a href="https://www.luogu.org/blog/taoran/solution-p4208">taoran的博客</a>)：
+&gt;一开始集合中为空，然后向集合中加边，先加最小的边，无论怎样都会加到不能再加，就相当于把边都加入后把环删除，此时凡是能用这种边连通的点都联通了，之后把相连通的点缩为一个点考虑，第二次同理加当前最小的边（整体第二小的边）……然后感性理解一下呗qwq</p>
 
 <p>做法：
 我们可以把边权相等的一些边放到一起作为一个集合，然后在每个集合里面枚举每一条边，看看是否可以放到最小生成树里面。注意并查集不可以路径压缩，因为这样会丢失树的形态的信息。
-代码：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdlib&gt;
+代码：
+<code class="language-plaintext highlighter-rouge">cpp
+# include &lt;cstdlib&gt;
 # include &lt;iostream&gt;
 # include &lt;vector&gt;
 # include &lt;cmath&gt;
 # include &lt;string&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;
-</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">110</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">w</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">edge</span> <span class="o">&amp;</span><span class="n">e2</span><span class="p">){</span><span class="k">return</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">e2</span><span class="p">.</span><span class="n">w</span><span class="p">;}}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
-<span class="k">struct</span> <span class="nc">range</span><span class="p">{</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">cnt</span><span class="p">;}</span><span class="n">ranges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">range_cnt</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">?</span><span class="n">x</span><span class="o">:</span><span class="n">find</span><span class="p">(</span><span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]);}</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fa</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;}</span>
-<span class="kt">bool</span> <span class="nf">kruskal</span><span class="p">(){</span>
-    <span class="n">sort</span><span class="p">(</span><span class="n">edges</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">edges</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">m</span><span class="p">);</span>
-    <span class="n">init</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">!=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">w</span><span class="p">){</span><span class="n">ranges</span><span class="p">[</span><span class="o">++</span><span class="n">range_cnt</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="n">ranges</span><span class="p">[</span><span class="n">range_cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;}</span>
-        <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">);</span><span class="kt">int</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">fx</span><span class="o">!=</span><span class="n">fy</span><span class="p">){</span>
-            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">ranges</span><span class="p">[</span><span class="n">range_cnt</span><span class="p">].</span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">fa</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">ranges</span><span class="p">[</span><span class="n">range_cnt</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">cnt</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="n">res</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">==</span><span class="n">ranges</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">==</span><span class="n">ranges</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">cnt</span><span class="p">)</span><span class="n">res</span><span class="o">++</span><span class="p">;</span>
-        <span class="k">return</span> <span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">pos</span><span class="p">].</span><span class="n">f</span><span class="p">);</span><span class="kt">int</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">pos</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">fx</span><span class="o">!=</span><span class="n">fy</span><span class="p">){</span>
-        <span class="n">fa</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span><span class="p">;</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">fa</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">fx</span><span class="p">;</span><span class="c1">//记得把并查集还原</span>
-        <span class="n">fa</span><span class="p">[</span><span class="n">fy</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">cnt</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">w</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span>
-        <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">init</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">kruskal</span><span class="p">()){</span>
-        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">init</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">31011</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">range_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">l</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">res</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">l</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">r</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">f</span><span class="p">;</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
-            <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="n">fy</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">fx</span><span class="o">!=</span><span class="n">fy</span><span class="p">){</span>
-                <span class="n">fa</span><span class="p">[</span><span class="n">fx</span><span class="p">]</span> <span class="o">=</span> <span class="n">fy</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+using namespace std;
+const int MAXM = 1010;
+const int MAXN = 110;
+struct edge{int f,t;long long w;bool operator&lt;(const edge &amp;e2){return w&lt;e2.w;}}edges[MAXM];
+struct range{int l,r,cnt;}ranges[MAXM];
+int range_cnt;
+int fa[MAXN];
+int n,m;
+int find(int x){return x==fa[x]?x:find(fa[x]);}
+inline void init(){for(int i = 1;i&lt;=n;i++)fa[i] = i;}
+bool kruskal(){
+    sort(edges+1,edges+1+m);
+    init();
+    int cnt = 0;
+    for(int i = 1;i&lt;=m;i++){
+        if(edges[i].w!=edges[i-1].w){ranges[++range_cnt].l = i;ranges[range_cnt-1].r = i - 1;}
+        int fx = find(edges[i].f);int fy = find(edges[i].t);
+        if(fx!=fy){
+            cnt++;
+            ranges[range_cnt].cnt++;
+            fa[fx] = fy;
+        }
+    }
+    ranges[range_cnt].r = m;
+    return cnt==n-1;
+}
+int res;
+void dfs(int x,int pos,int cnt){
+    if(pos==ranges[x].r+1){
+        if(cnt==ranges[x].cnt)res++;
+        return ;
+    }
+    int fx = find(edges[pos].f);int fy = find(edges[pos].t);
+    if(fx!=fy){
+        fa[fx] = fy;
+        dfs(x,pos+1,cnt+1);
+        fa[fx] = fx;//记得把并查集还原
+        fa[fy] = fy;
+    }
+    dfs(x,pos+1,cnt);
+}
+int main(){
+    ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+    cin&gt;&gt;n&gt;&gt;m;
+    int f,t;long long w;
+    for(int i = 1;i&lt;=m;i++){
+        cin&gt;&gt;f&gt;&gt;t&gt;&gt;w;
+        edges[i].f = f;edges[i].t = t;edges[i].w = w;
+    }
+    init();
+    if(!kruskal()){
+        cout&lt;&lt;0&lt;&lt;endl;
+        return 0;
+    }
+    init();
+    int ans = 1;int mod = 31011;
+    for(int i = 1;i&lt;=range_cnt;i++){
+        res = 0;dfs(i,ranges[i].l,0);ans = ans*res%mod;
+        for(int j = ranges[i].l;j&lt;=ranges[i].r;j++){
+            int f = edges[j].f;int t = edges[j].t;
+            int fx = find(f),fy = find(t);
+            if(fx!=fy){
+                fa[fx] = fy;
+            }
+        }
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}
+</code></p>
 
     </div>
 
