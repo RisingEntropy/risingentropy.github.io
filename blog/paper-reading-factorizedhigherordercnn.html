@@ -7,25 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Papaer Reading: Factorized Higher-Order CNNs with an Application to Spatio-Temporal Emotion Estimation</title>
-  <meta name='description' content='Haoyu Deng's personal page'>
+  <meta name='description' content='A Tensor Methods Based Osptimization'>
 
   <link rel="canonical" href="/blog/paper-reading-factorizedhigherordercnn">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Papaer Reading: Factorized Higher-Order CNNs with an Application to Spatio-Temporal Emotion Estimation – Haoyu Deng's page">
-  <meta name="twitter:description" content="Introduction &amp;amp; Motivation &amp;amp; Background &amp;amp; Related Works
-传统的卷积神经网络优化主要有两个方面：通过张量低秩分解来压缩核参数；通过设计如MobileNet之类的网络结构来优化。作者希望设计一种方法来综合二者。作者关注：1、张量方法——要么基于参数压缩来优化，要么基于计算量优化；2、基于neural architecture的优化，如深度可分离卷积。
-Method
-">
+  <meta name="twitter:description" content="A Tensor Methods Based Osptimization">
   <meta name="twitter:image:src" content="/images/posts/factorized.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="Papaer Reading: Factorized Higher-Order CNNs with an Application to Spatio-Temporal Emotion Estimation – Haoyu Deng's page">
-  <meta property="og:description" content="Introduction &amp;amp; Motivation &amp;amp; Background &amp;amp; Related Works
-传统的卷积神经网络优化主要有两个方面：通过张量低秩分解来压缩核参数；通过设计如MobileNet之类的网络结构来优化。作者希望设计一种方法来综合二者。作者关注：1、张量方法——要么基于参数压缩来优化，要么基于计算量优化；2、基于neural architecture的优化，如深度可分离卷积。
-Method
-">
+  <meta property="og:description" content="A Tensor Methods Based Osptimization">
   <meta property="og:image" content="/images/posts/factorized.png">
 
   <!-- Fonts -->
@@ -194,8 +188,18 @@ Method
 
     <div class="post__content">
       <h2 id="introduction--motivation--background--related-works">Introduction &amp; Motivation &amp; Background &amp; Related Works</h2>
+
 <p>传统的卷积神经网络优化主要有两个方面：通过张量低秩分解来压缩核参数；通过设计如MobileNet之类的网络结构来优化。作者希望设计一种方法来综合二者。作者关注：1、张量方法——要么基于参数压缩来优化，要么基于计算量优化；2、基于neural architecture的优化，如深度可分离卷积。</p>
+
 <h2 id="method">Method</h2>
+
+<h3 id="11x1卷积等价于张量与和参数在通道维度进行张量简并">1、1x1卷积等价于张量与和参数在通道维度进行张量简并</h3>
+
+<p>tensor contraction: 张量缩并/张量缩约，即让张量降两阶。
+张量n模积定义为$\mathcal{P}=\tau\times_{n}M=\mathcal{P}<em>{i_0,\cdots,i_N}=\sum\limits</em>{k=0}^{I_n}\tau_{i_0,\cdots,i_{n-1},k,i_{n+1},\cdots,i_N}M_{i_n,k}$，其中$\tau\in\mathcal{R}^{I_0\times I_1\times \cdots\times I_N},M\in R^{J\times I_n}$，两个张量进行简并说白了就是在某一维度上的纤维（fiber）都乘以矩阵M，$v\in R^{1,i_n},M\in R^{i_n,k},vM\in R^{1,k}$。</p>
+
+<p>然后就能发现，1x1卷积就是一种张量n模积，有如下形式
+<img src="https://cdn.risingentropy.top/images/posts/20231202002438.png" alt="20231202002438" /></p>
 
 <h2 id="困惑">困惑</h2>
 
@@ -226,7 +230,7 @@ Method
     </li>
     <li class="share__item">
       <a class="share__link share__linkedin"
-        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/paper-reading-factorizedhigherordercnn&title=Papaer%20Reading:%20Factorized%20Higher-Order%20CNNs%20with%20an%20Application%20to%20Spatio-Temporal%20Emotion%20Estimation&summary=&source=Haoyu%20Deng's%20page"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/paper-reading-factorizedhigherordercnn&title=Papaer%20Reading:%20Factorized%20Higher-Order%20CNNs%20with%20an%20Application%20to%20Spatio-Temporal%20Emotion%20Estimation&summary=A%20Tensor%20Methods%20Based%20Osptimization&source=Haoyu%20Deng's%20page"
         onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
         title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
     </li>
