@@ -18,7 +18,7 @@
 Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 0 出发，他必须恰好在 T 时刻到达节点 N−1
 现在给出该有向图，你能告诉 Windy 总共有多少种不同的路径吗？
 注意：Windy 不能在某个节点逗留，且通过某有向边的时间严格为给定的时间。
-#  输入
+输入
 第一行包含两个整数，N,T
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -29,7 +29,7 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
 Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 0 出发，他必须恰好在 T 时刻到达节点 N−1
 现在给出该有向图，你能告诉 Windy 总共有多少种不同的路径吗？
 注意：Windy 不能在某个节点逗留，且通过某有向边的时间严格为给定的时间。
-#  输入
+输入
 第一行包含两个整数，N,T
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -200,30 +200,29 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 0 出发，他必须恰好在 T 时刻到达节点 N−1
 现在给出该有向图，你能告诉 Windy 总共有多少种不同的路径吗？
-注意：Windy 不能在某个节点逗留，且通过某有向边的时间严格为给定的时间。
-#  输入
-第一行包含两个整数，N,T</p>
+注意：Windy 不能在某个节点逗留，且通过某有向边的时间严格为给定的时间。</p>
+<h1 id="输入">输入</h1>
+<p>第一行包含两个整数，N,T</p>
 
 <p>接下来有 N 行，每行一个长度为 N 的字符串。第 i 行第 j 列为 0 表示从节点 i 到节点 j 没有边，为 1 到 9 表示从节点 i 到节点 j 需要耗费的时间。</p>
 
-<h1 id="section-1">输出</h1>
+<h1 id="输出">输出</h1>
 <p>包含一个整数，可能的路径数，这个数可能很大，只需输出这个数除以 2009 的余数。</p>
 
-<h1 id="section-2">样例输入</h1>
-<p>```
-样例输入 1
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>样例输入 1
 2 2
 11
 00
 样例输出 1
 1
 样例说明 1
-0→0→1</p>
+0→0→1 
 
-<p>样例输入 2
+样例输入 2
 5 30
 12045
 07105
@@ -232,71 +231,70 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
 12345
 样例输出 2
 852
-<code class="language-plaintext highlighter-rouge">
-# 解答
-其实很简单的一道题，只需要你做过[牛继电器](https://www.luogu.org/problem/P2886)，发现边权不大，拆点就好了额。
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实很简单的一道题，只需要你做过<a href="https://www.luogu.org/problem/P2886">牛继电器</a>，发现边权不大，拆点就好了额。
 解答一下下为什么可以用矩阵快速幂来代替floyd计算经过k条边的最短路？
-首先假设我们有两个矩阵$A$和$B$分别表示经过$x$和$y$条边的最短路的长度。那么要得到经过$x+y$条边的最短路，显然是：$min\{A[i][k]+B[k][j]\}$，然后最开始我们可以轻易计算出经过1条边的最短路，那么是不是计算k次就可得到答案了呢？于是乎矩阵快速幂一下就好了。Orz
-代码:
-</code>cpp
-# include <iostream>
-# include <cstring>
-# include <cstdio>
+首先假设我们有两个矩阵$A$和$B$分别表示经过$x$和$y$条边的最短路的长度。那么要得到经过$x+y$条边的最短路，显然是：$min{A[i][k]+B[k][j]}$，然后最开始我们可以轻易计算出经过1条边的最短路，那么是不是计算k次就可得到答案了呢？于是乎矩阵快速幂一下就好了。Orz
+代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;cstdio&gt;
 # define clear(x) memset(x,0,sizeof(x))
-using namespace std;
-const int MAXN = 101;
-const int mod = 2009;
-int n;
-struct matrix{
-	int map[MAXN][MAXN];
-	void clean(){
-		clear(map);
-		for(int i = 1;i&lt;=n*9;i++)map[i][i] = 1;
-	}
-	matrix operator*(const matrix &amp;m2){
-		matrix res;clear(res.map);
-		for(int i = 1;i&lt;=n*9;i++){
-			for(int j = 1;j&lt;=n*9;j++){
-				for(int k = 1;k&lt;=n*9;k++){
-					res.map[i][j]+=map[i][k]*m2.map[k][j];
-				}
-				res.map[i][j]%=mod;
-			}
-		}
-		return res;
-	}
-};
-matrix fp(matrix b,int p){
-	matrix res;res.clean();
-	while(p){
-		if(p&amp;1)res = res*b;
-		b = b*b;
-		p&gt;&gt;=1;
-	}
-	return res;
-}
-char s[MAXN];
-matrix map;
-int main(){
-	int T;
-	scanf("%d%d",&amp;n,&amp;T);
-	for(int i = 1;i&lt;=n;i++){
-		for(int j = 1;j&lt;=8;j++){
-			map.map[i+j*n][i+(j-1)*n] = 1;
-		}
-	}
-	int d;
-	for(int i = 1;i&lt;=n;i++){
-		for(int j = 1;j&lt;=n;j++){
-			scanf("%1d",&amp;d);
-			map.map[i][j+(d-1)*n] = 1;
-		}
-	}
-	matrix res = fp(map,T);
-	printf("%d",res.map[1][n]);
-	return 0;
-}
-```</cstdio></cstring></iostream></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">101</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">2009</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">matrix</span><span class="p">{</span>
+	<span class="kt">int</span> <span class="n">map</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+	<span class="kt">void</span> <span class="n">clean</span><span class="p">(){</span>
+		<span class="n">clear</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">matrix</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="n">matrix</span> <span class="o">&amp;</span><span class="n">m2</span><span class="p">){</span>
+		<span class="n">matrix</span> <span class="n">res</span><span class="p">;</span><span class="n">clear</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">map</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+				<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">*</span><span class="mi">9</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+					<span class="n">res</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">m2</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+				<span class="p">}</span>
+				<span class="n">res</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">%=</span><span class="n">mod</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+<span class="n">matrix</span> <span class="nf">fp</span><span class="p">(</span><span class="n">matrix</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
+	<span class="n">matrix</span> <span class="n">res</span><span class="p">;</span><span class="n">res</span><span class="p">.</span><span class="n">clean</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="n">matrix</span> <span class="n">map</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+	<span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">T</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">8</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">map</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="kt">int</span> <span class="n">d</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">scanf</span><span class="p">(</span><span class="s">"%1d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+			<span class="n">map</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">matrix</span> <span class="n">res</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">map</span><span class="p">,</span><span class="n">T</span><span class="p">);</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">res</span><span class="p">.</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="p">]);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

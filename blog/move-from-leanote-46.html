@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="kmp">KMP基本思想</h1>
+      <h1 id="kmp基本思想">KMP基本思想</h1>
 <p>设主串（下文中称为A串）为：a b a a b a b</p>
 
 <p>模式串（下文中称为B串）为：a b a b</p>
@@ -215,43 +215,41 @@ B	 	 	a	b	a	b
 <img src="https://cdn.risingentropy.top/images/posts/bda8e11ab644129e20019dc.png" alt="图片标题" />
 这样的话，很多操作都被省去了，时间复杂度就会大大地得到优化</p>
 
-<p>代码如下：
-<code class="language-plaintext highlighter-rouge">cpp
-j=0;                                             //起初匹配了B的第0位 
-for(i=1;i&lt;=n;++i)                                //枚举A中的每一位 
-{
-	while(j&amp;&amp;A[i]!=B[j+1])  j=next[j];           //如果失配,则不断把B向右移,直到成功匹配 
-	if(A[i]==B[j+1])  j++;                       //如果这一位是成功匹配了的,那j就移到下一位 
-	if(j==m)                                     //如果成功匹配 
-	{
-		printf("%d\n",i-j+1);                    //输出成功匹配的第一位 
-		j=next[j];                               //B继续向右移 
-	}
-}
-</code>
-# next数组才是kmp的精髓
-接下来就是求kmp next的关键
+<p>代码如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                                             <span class="c1">//起初匹配了B的第0位 </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>                                <span class="c1">//枚举A中的每一位 </span>
+<span class="p">{</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>  <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>           <span class="c1">//如果失配,则不断把B向右移,直到成功匹配 </span>
+	<span class="k">if</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>  <span class="n">j</span><span class="o">++</span><span class="p">;</span>                       <span class="c1">//如果这一位是成功匹配了的,那j就移到下一位 </span>
+	<span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">m</span><span class="p">)</span>                                     <span class="c1">//如果成功匹配 </span>
+	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>                    <span class="c1">//输出成功匹配的第一位 </span>
+		<span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>                               <span class="c1">//B继续向右移 </span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="next数组才是kmp的精髓">next数组才是kmp的精髓</h1>
+<p>接下来就是求kmp next的关键
 那么问题又来了，我们怎么确定next数组的值呢</p>
 
 <p>因为next[i]记录的是B串中1到（i-1）中最长的前缀与后缀的重复长度，那我们不妨换一种角度，把求next数组看做是B自己与自己匹配</p>
 
 <p>为什么呢？假设我们用B1，B2来代替主串和模式串，那么B1，B2肯定是全部相等的（都为B），那1到（i-1）的部分也肯定是相等的，那next[i]也可以表示成1到（i-1）中B2的前缀与B1的后缀相同的最长的重复长度</p>
 
-<p>那就可以用刚才的方法来求next数组
-<code class="language-plaintext highlighter-rouge">cpp
-j=0;                                             //起初匹配了B的第0位 
-next[1]=0;                                       //第1位的next值为0 
-for(i=2;i&lt;=m;++i)                                //枚举B的每一位 
-{
-	while(j&amp;&amp;B[i]!=B[j+1])  j=next[j];           //如果失配,则不断把B向右移,直到成功匹配 
-	if(B[i]==B[j+1])  j++;                       //如果这一位是成功匹配了的,那j就移到下一位 
-	next[i]=j;                                   //此时i位置的next值就为j 
-}
-</code>
-# 复杂度分析
-在上文中已经提到KMP的时间复杂度为O（m+n），内层的while循环以及外层的for循环利用到了均摊思想，所以复杂度为O（m+n）</p>
+<p>那就可以用刚才的方法来求next数组</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                                             <span class="c1">//起初匹配了B的第0位 </span>
+<span class="n">next</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>                                       <span class="c1">//第1位的next值为0 </span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>                                <span class="c1">//枚举B的每一位 </span>
+<span class="p">{</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>  <span class="n">j</span><span class="o">=</span><span class="n">next</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>           <span class="c1">//如果失配,则不断把B向右移,直到成功匹配 </span>
+	<span class="k">if</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>  <span class="n">j</span><span class="o">++</span><span class="p">;</span>                       <span class="c1">//如果这一位是成功匹配了的,那j就移到下一位 </span>
+	<span class="n">next</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>                                   <span class="c1">//此时i位置的next值就为j </span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="复杂度分析">复杂度分析</h1>
+<p>在上文中已经提到KMP的时间复杂度为O（m+n），内层的while循环以及外层的for循环利用到了均摊思想，所以复杂度为O（m+n）</p>
 
-<h1 id="section">自己的笔记~~前面是抄的~~</h1>
+<h1 id="自己的笔记前面是抄的">自己的笔记<del>前面是抄的</del></h1>
 <p>指针i,j的含义是
 A[i-j+1…i]与B[1…j]完全相等。
 next数组表示匹配到B数组的第j个字母而第j+1个字母不能匹配了时候，新的j的最大值

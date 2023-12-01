@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="luoguP4147 玉蟾宫 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-#  题目背景
+题目背景
 有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -23,7 +23,7 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="luoguP4147 玉蟾宫 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-#  题目背景
+题目背景
 有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -194,102 +194,99 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>#  题目背景
-有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。</p>
+      <h1 id="题面">题面</h1>
+<h1 id="题目背景">题目背景</h1>
+<p>有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。</p>
 
-<h1 id="section-1">题目描述</h1>
+<h1 id="题目描述">题目描述</h1>
 <p>这片土地被分成N*M个格子，每个格子里写着’R’或者’F’，R代表这块土地被赐予了rainbow，F代表这块土地被赐予了freda。</p>
 
 <p>现在freda要在这里卖萌。。。它要找一块矩形土地，要求这片土地都标着’F’并且面积最大。</p>
 
 <p>但是rainbow和freda的OI水平都弱爆了，找不出这块土地，而蓝兔也想看freda卖萌（她显然是不会编程的……），所以它们决定，如果你找到的土地面积为S，它们每人给你S两银子。</p>
 
-<h1 id="section-2">输入输出格式</h1>
-<p>#  输入格式：
-第一行两个整数N,M，表示矩形土地有N行M列。</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式：</h1>
+<p>第一行两个整数N,M，表示矩形土地有N行M列。</p>
 
 <p>接下来N行，每行M个用空格隔开的字符’F’或’R’，描述了矩形土地。</p>
 
-<h1 id="section-3">输出格式：</h1>
+<h1 id="输出格式">输出格式：</h1>
 <p>输出一个整数，表示你能得到多少银子，即(3*最大’F’矩形土地面积)的值。</p>
 
-<h1 id="section-4">输入输出样例</h1>
-<p>#  输入样例# 1： 
-<code class="language-plaintext highlighter-rouge">
-5 6 
+<h1 id="输入输出样例">输入输出样例</h1>
+<h1 id="输入样例-1">输入样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 6 
 R F F F F F 
 F F F F F F 
 R R R F F F 
 F F F F F F 
 F F F F F F
-</code>
-输出样例# 1： 
-<code class="language-plaintext highlighter-rouge">
-45
-</code>
-# 解答
-lyd和shy真的秀啊，我为什么要在2月13号做这种题？情人节预热？FA♂Q！
+</code></pre></div></div>
+<p>输出样例# 1：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>45
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>lyd和shy真的秀啊，我为什么要在2月13号做这种题？情人节预热？FA♂Q！
 悬线法的题。所谓的悬线法就是针对这种题，我们用一根从上到下的线，从左到右扫描，这根线可长可短，每个点左右可以追溯到的最远的的方也可以计算到。然后就可以计算出面积了。预处理up,left,right数组表示(i，j)这个点左右上下的追溯点(up表示的是长度)，然后计算就行了。类似于dp。
-代码
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 19-2-13.
-//
-# include &lt;cstring&gt;
+代码</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-2-13.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstring&gt;
 # include &lt;cstdio&gt;
-int read(){
-    int x = 0,f = 1;
-    static char c = getchar();
-    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
-    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
-    return x*f;
-}
-const int MAXN = 1010;
-int up[MAXN][MAXN],left[MAXN][MAXN],right[MAXN][MAXN];
-char map[MAXN][MAXN];
-char s[5];
-inline int max(int a,int b){return a&gt;b?a:b;}
-inline int min(int a,int b){return a&lt;b?a:b;}
-int main(){
-    int n = read(),m = read();
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 1;j&lt;=m;j++){
-            scanf("%s",s);
-            map[i][j] = s[0];
-            up[i][j] = 1;right[i][j] = left[i][j] = j;
-        }
-    }
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 1;j&lt;=m;j++){
-            if(map[i][j] == 'F'&amp;&amp;map[i][j-1]=='F'){
-                left[i][j] = left[i][j-1];
-            }
-        }
-    }
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = m-1;j&gt;=1;j--){
-            if(map[i][j] == 'F'&amp;&amp;map[i][j+1]=='F'){
-                right[i][j] = right[i][j+1];
-            }
-        }
-    }
-    int ans = 0;
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 1;j&lt;=m;j++){
-            if(i&gt;1&amp;&amp;map[i][j]=='F'&amp;&amp;map[i-1][j]=='F'){
-                right[i][j] = min(right[i-1][j],right[i][j]);
-                left[i][j] = max(left[i-1][j],left[i][j]);
-                up[i][j] = up[i-1][j]+1;
-            }
-            ans = max(ans,up[i][j]*(right[i][j]-left[i][j]+1));
-        }
-    }
-    printf("%d",ans*3);
-    return 0;
-}
-</code>
-最后，吐槽一句洛谷的数据，水啊！我把<code class="language-plaintext highlighter-rouge">map[i][j+1]=='F'</code>打成了<code class="language-plaintext highlighter-rouge">map[i][j+1=='F']</code>居然TM过了4个点。</p>
+</span><span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">up</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">],</span><span class="n">left</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">],</span><span class="n">right</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">char</span> <span class="n">map</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">min</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>
+            <span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'F'</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">'F'</span><span class="p">){</span>
+                <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'F'</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">'F'</span><span class="p">){</span>
+                <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sc">'F'</span><span class="o">&amp;&amp;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="sc">'F'</span><span class="p">){</span>
+                <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+                <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+                <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">up</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="o">*</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>最后，吐槽一句洛谷的数据，水啊！我把<code class="language-plaintext highlighter-rouge">map[i][j+1]=='F'</code>打成了<code class="language-plaintext highlighter-rouge">map[i][j+1=='F']</code>居然TM过了4个点。</p>
 
     </div>
 

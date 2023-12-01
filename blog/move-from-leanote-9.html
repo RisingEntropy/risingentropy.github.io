@@ -14,8 +14,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="二分答案P1316温习 – Haoyu Deng's page">
-  <meta name="twitter:description" content="cpp
-# include &amp;lt;iostream&amp;gt;
+  <meta name="twitter:description" content="# include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 using namespace std;
 int A,B;
@@ -58,8 +57,7 @@ int main() {
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="二分答案P1316温习 – Haoyu Deng's page">
-  <meta property="og:description" content="cpp
-# include &amp;lt;iostream&amp;gt;
+  <meta property="og:description" content="# include &amp;lt;iostream&amp;gt;
 # include &amp;lt;algorithm&amp;gt;
 using namespace std;
 int A,B;
@@ -266,45 +264,44 @@ int main() {
   <article class="post">
 
     <div class="post__content">
-      <p><code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;algorithm&gt;
-using namespace std;
-int A,B;
-int caps[100000+1];
-bool judge(int dis){
-    int last = caps[1];
-    int now,cnt = 1;
-    for(int i = 2;i&lt;=A;i++){
-        if(caps[i]-last&gt;dis){
-            last = caps[i];
-            cnt++;
-        }
-        if(cnt&gt;B)true;//如果满足当前距离的点过多，说明距离过小，应增大，即区间应该更新到[mid,last]之间
-    }
-    return cnt&gt;=B;
-}
-int main() {
-    cin&gt;&gt;A&gt;&gt;B;
-    for(int i = 1;i&lt;=A;i++){
-        cin&gt;&gt;caps[i];
-    }
-    sort(caps+1,caps+A+1);
-    int l,r;
-    l = 0;
-    r = caps[A];
-    while(l&lt;r){
-        int mid = (l+r)/2;
-        if(judge(mid)==true){//说明距离过小，调整区间(mid,last]
-            l = mid+1;
-        }else{//区间合适或者过大，调整区间[0,mid]包含mid
-            r = mid;
-        }
-    }
-    cout&lt;&lt;l;//l即是找到的答案，因为二分答案就是搜索所有的可能情况，找到最符合的一个。骚！
-    return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">caps</span><span class="p">[</span><span class="mi">100000</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="nf">judge</span><span class="p">(</span><span class="kt">int</span> <span class="n">dis</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="n">caps</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">now</span><span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">A</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">caps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">last</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">){</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="n">caps</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">&gt;</span><span class="n">B</span><span class="p">)</span><span class="nb">true</span><span class="p">;</span><span class="c1">//如果满足当前距离的点过多，说明距离过小，应增大，即区间应该更新到[mid,last]之间</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">cnt</span><span class="o">&gt;=</span><span class="n">B</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">A</span><span class="o">&gt;&gt;</span><span class="n">B</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">A</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">caps</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">caps</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">caps</span><span class="o">+</span><span class="n">A</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">caps</span><span class="p">[</span><span class="n">A</span><span class="p">];</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">judge</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span><span class="o">==</span><span class="nb">true</span><span class="p">){</span><span class="c1">//说明距离过小，调整区间(mid,last]</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="c1">//区间合适或者过大，调整区间[0,mid]包含mid</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">l</span><span class="p">;</span><span class="c1">//l即是找到的答案，因为二分答案就是搜索所有的可能情况，找到最符合的一个。骚！</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

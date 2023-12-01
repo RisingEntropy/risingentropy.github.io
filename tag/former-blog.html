@@ -327,18 +327,20 @@
                 <p class="article__excerpt">
                   字符串
 
-  [x] 哈希*
-  [x] KMP
-  [x] trie
+  哈希*
+  KMP
+  trie
   [] AC自动机(写1道做过的题就好了：阿里的打字机+？？？)
 
 
 图论算法
 
-  [x] 强连通分量
-  [x] 点双联通 边双联通
-  [x] 欧拉回路
-...
+  强连通分量
+  点双联通 边双联通
+  欧拉回路
+  topo sort*
+  最短路
+    数...
                 </p>
           
                 <div class="article__meta">
@@ -482,8 +484,8 @@
           
                 <p class="article__excerpt">
                   HXY txdy
-# HXY AK IOI
-# HXY 高考750
+HXY AK IOI
+HXY 高考750
 
                 </p>
           
@@ -635,14 +637,15 @@
           
                 <p class="article__excerpt">
                   低级错误汇总
-# 考试死磕，崩心态
-# 考试死磕，崩心态
-# 考试死磕，崩心态
-- [] 考试死磕，崩心态(想到正解不一定赢，全部打满才是成功)
-- [] 某些小地方没开long long
-- [] 调试代码忘删除
-- [] 头文件
-...
+考试死磕，崩心态
+考试死磕，崩心态
+考试死磕，崩心态
+
+  [] 考试死磕，崩心态(想到正解不一定赢，全部打满才是成功)
+  [] 某些小地方没开long long
+  [] 调试代码忘删除
+  [] 头文件
+  [] ...
                 </p>
           
                 <div class="article__meta">
@@ -690,13 +693,17 @@
                   标号的表示较简单，比较熟悉，有空再来看看
 粗体表示重点复习
 *斜体表示有生之年系列
-# 字符串
-- [] 哈希*
-- [x] KMP
-- [] trie*
-- [] AC自动机(写1道做过的题就好了：阿里的打字机+？？？)
+字符串
 
-图论算法...
+  [] 哈希*
+  KMP
+  [] trie*
+  [] AC自动机(写1道做过的题就好了：阿里的打字机+？？？)
+
+
+图论算法
+
+  ...
                 </p>
           
                 <div class="article__meta">
@@ -742,12 +749,12 @@
           
                 <p class="article__excerpt">
                   
-  $O(nlog(n))$的做法真是清奇无比，~~目前已花8h+的时间。。。~~ 9h成功AC
+  $O(nlog(n))$的做法真是清奇无比，目前已花8h+的时间。。。 9h成功AC
 主要是写心得，所以放在归纳总结里
 
 
 题面
-风景迷人的小城 $Y$ 市，拥有 $n$  个美丽的景点。由于慕名而来的游客越来越多，$Y...
+风景迷人的小城 $Y$ 市，拥有 $n$  个美丽的景点。由于慕名而来的游客越来越多，$Y$ 市特...
                 </p>
           
                 <div class="article__meta">
@@ -795,12 +802,16 @@
                   标号的表示较简单，比较熟悉，有空再来看看
 粗体表示重点复习
 *斜体表示有生之年
-# 字符串
-- [x] 哈希*
-- [x] KMP
-- [x] trie*~~过水已水过~~
-- [x] 可持久化trie
-- [x] AC自动机(写1道...
+字符串
+
+  哈希*
+  KMP
+  trie*过水已水过
+  可持久化trie
+  AC自动机(写1道做过的题就好了：阿里的打字机+？？？)
+
+
+图论算...
                 </p>
           
                 <div class="article__meta">
@@ -946,8 +957,9 @@ $f(n) = \sum_{d|n}\mu(d)F(\lfloor\frac{n}{d}\rfloor)$
                 <p class="article__excerpt">
                   数学复习总结
 人生中最后一篇OI总结
-# 数论分块
-- [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=nk -\sum\lfloor\frac{k}{i}\rf...
+数论分块
+
+  [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rf...
                 </p>
           
                 <div class="article__meta">
@@ -993,10 +1005,11 @@ $f(n) = \sum_{d|n}\mu(d)F(\lfloor\frac{n}{d}\rfloor)$
           
                 <p class="article__excerpt">
                   网络瘤
-~~骗分用的~~
+骗分用的
 这可能是这辈子倒数第二次写OI复习总结了.
-# 网络流匹配二分图
-&gt;做法很简单，假设二分图是A和B集合是二分图的集合，那么就从源点S连一条边向A集合，容量为1，然后AB之间的连边容量也是1，然后B连向汇...
+网络流匹配二分图
+
+  做法很简单，假设二分图是A和B集合是二分图的集合，那么就从源点S连一条边向A集合，容量为1，然后AB之间的连边容量也是1，然后B连向汇点，跑最大流就...
                 </p>
           
                 <div class="article__meta">
@@ -1149,7 +1162,8 @@ $f(n) = \sum_{d|n}\mu(d)F(\lfloor\frac{n}{d}\rfloor)$
                 <p class="article__excerpt">
                   20191031总结
 其实今天本来想写点图论的，结果写成杂题练习了Orz。
-- [] woj1060 贪婪大陆 对于每一条线段，我们维护它的两个段点，就是+1与-1标记，然后树状2个数组直接统计答案就好了。套路：对于线段，我们可以把它...
+
+  [] woj1060 贪婪大陆 对于每一条线段，我们维护它的两个段点，就是+1与-1标记，然后树状2个数组直接统计答案就好了。套路：对于线段，我们可以把...
                 </p>
           
                 <div class="article__meta">
@@ -1196,8 +1210,9 @@ $f(n) = \sum_{d|n}\mu(d)F(\lfloor\frac{n}{d}\rfloor)$
                 <p class="article__excerpt">
                   总结
 今天进行了联赛DP真题专题训练，总结如下
-- [] 对于一类非常水的DP，如传球游戏 联合权值 摆花之类的水题，看清楚题面，注意细节就好了
-- [] 对于传纸条一类的题，虽然我觉得$O(n^4)$做法有点问题，但是也没有Hack...
+
+  [] 对于一类非常水的DP，如传球游戏 联合权值 摆花之类的水题，看清楚题面，注意细节就好了
+  [] 对于传纸条一类的题，虽然我觉得$O(n^4)$做法有点问题，但是也没有Hac...
                 </p>
           
                 <div class="article__meta">
@@ -1243,10 +1258,10 @@ $f(n) = \sum_{d|n}\mu(d)F(\lfloor\frac{n}{d}\rfloor)$
           
                 <p class="article__excerpt">
                   test20191024
-# T1spongebob
+T1spongebob
 送的，十多分钟就A了，节奏算是把握的还不错吧，给后面留足了时间。
-# T2
-算是一个对于我这种弱鸡来说比较有难度的题吧，对于每个修改，可以使用结论，也可以学习hxy神仙的分类讨论，...
+T2
+算是一个对于我这种弱鸡来说比较有难度的题吧，对于每个修改，可以使用结论，也可以学习hxy神仙的分类讨论，我分类讨...
                 </p>
           
                 <div class="article__meta">
@@ -1542,11 +1557,12 @@ wjs AK IOI&nbsp;
                 <p class="article__excerpt">
                   图论の汇总
 
-#  最短路
-- [] Floyd $O(n^3)$     用于处理任意两点间最短路
+最短路
+
+  [] Floyd $O(n^3)$     用于处理任意两点间最短路
 好题：奶牛接力 Floyd矩阵快速幂（什么JB玩意）
 也可以求传递闭包（可是我不会）
-- [] Dijkstra $O((n+m)l...
+  [] Dijkstra $O((n+m)log...
                 </p>
           
                 <div class="article__meta">
@@ -1594,7 +1610,7 @@ wjs AK IOI&nbsp;
                   偏序 分治
 要擅长发现题目中的偏序关系，然后使用cdq分治，关于cdq分治，其实就是一维一维的满足。
 一道非常好的题就是：删数字cdq优化dp方程的转移。
-# 总结
+总结
 多写几遍板子(最后一周肝模板)
 
                 </p>
@@ -1739,9 +1755,10 @@ wjs AK IOI&nbsp;
           
                 <p class="article__excerpt">
                   贪心复习
-# 题目
-- [] 引水入城 思维比较巧妙，通过记忆化搜索把问题转化为线段覆盖问题(最小先端覆盖就贪心地找l端点小于当前pos，右端点最长的地方的线段)
-- [] woj2380分配防晒霜 把奶牛按照最小限制从大到小排序，然...
+题目
+
+  [] 引水入城 思维比较巧妙，通过记忆化搜索把问题转化为线段覆盖问题(最小先端覆盖就贪心地找l端点小于当前pos，右端点最长的地方的线段)
+  [] woj2380分配防晒霜 把奶牛按照最小限制从大到小排序，然后...
                 </p>
           
                 <div class="article__meta">
@@ -1790,10 +1807,9 @@ wjs AK IOI&nbsp;
 某日，小 Q 得到了一种新的生成 01 串的代码
 
 给定一个整数 Z&lt; M，执行 n 次下列语句会得到一个 01 串
-
 z=[(a*z+c)/k]%m;
 if (z&lt; m/2) return 0;
-else retu...
+else retur...
                 </p>
           
                 <div class="article__meta">
@@ -1839,9 +1855,11 @@ else retu...
           
                 <p class="article__excerpt">
                   OI技巧总结及例题
-#  动态规划
-#  概率期望
-- [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解...
+动态规划
+概率期望
+
+  [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
+    ...
                 </p>
           
                 <div class="article__meta">
@@ -1890,12 +1908,11 @@ else retu...
 有一个 $n \times n$的网格，其中 $m$ 个格子上涂了色。每次随机选择一个格子（有可能是涂过色的格子）涂色，求让网格每一行每一列都至少有一个格子涂了色的操作次数期望。
 输入输出样例
 输入
-
 5 2
 2 3
 4 1
 
-...
+输...
                 </p>
           
                 <div class="article__meta">
@@ -1942,8 +1959,8 @@ else retu...
                 <p class="article__excerpt">
                   题面
 硬币购物一共有4种硬币。面值分别为c1,c2,c3,c4。某人去商店买东西，去了tot次。每次带di枚ci硬币，买si的价值的东西。请问每次有多少种付款方法。
-#  输入
-第一行 c1,c2,c3,c4,tot 下面tot行 d...
+输入
+第一行 c1,c2,c3,c4,tot 下面tot行 d1,d...
                 </p>
           
                 <div class="article__meta">
@@ -2083,12 +2100,12 @@ L的书籍被M偷了以后伤心欲绝，决定再购买一些回来，现在有
           
                 <p class="article__excerpt">
                   测试
-#  T1
+T1
 求由 1 到 n 一共 n 个数字组成的所有排列中，逆序对个数为 k 的有多少个
-# 解答
+解答
 动态规划：
 dp[i][j]表示长度为i，逆序对个数为j的方案数，那么有如下转移：
-$dp[i][j] = dp[i-1][...
+$dp[i][j] = dp[i-1][j]+\s...
                 </p>
           
                 <div class="article__meta">
@@ -2231,11 +2248,10 @@ Bessie从某个特殊的位置L (1 &lt;= L &lt;= 1,000,000)开始，可以沿着
                   T1
 神奇的幻方
 水题，模拟就行。但是初赛可能会考幻方补全程序.
-cpp
 # include &lt;iostream&gt;
 # include &lt;cstdio&gt;
 # include &lt;cstring&gt;
-us...
+using ...
                 </p>
           
                 <div class="article__meta">
@@ -2334,11 +2350,10 @@ us...
                   三分
 SCOI 传送带
 三分模板题
-cpp
 # include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
-# include &lt;cma...
+# include &lt;cmath&g...
                 </p>
           
                 <div class="article__meta">
@@ -2385,12 +2400,12 @@ cpp
                 <p class="article__excerpt">
                   NOIP2017
 评价:质量还不错的一年，难度适中，没有16年的毒瘤，也没有18年的日怪。
-#  T1
+T1
 题面
-#   解答
+解答
 神仙结论题，其实考试的时候打表也可以找出规律。注意开long long
 结论是$a\times b-a-b$
-...
+# inclu...
                 </p>
           
                 <div class="article__meta">
@@ -2436,14 +2451,13 @@ cpp
           
                 <p class="article__excerpt">
                   NOIP2018
-评价：这年的NOIP感觉质量很屑，完全是在乱搞，听说Day2T2是因为漏题的原因直接换成了清华校内集训的T1。~~分明就是我太菜了~~
-# T1
+评价：这年的NOIP感觉质量很屑，完全是在乱搞，听说Day2T2是因为漏题的原因直接换成了清华校内集训的T1。分明就是我太菜了
+T1
 题面
-#  解答
+解答
 水题，做个差分，把正的加起来就行了。
-cpp
 //
-...
+// Created by...
                 </p>
           
                 <div class="article__meta">
@@ -2538,9 +2552,9 @@ Pine 计划用 m 天到达 T 地。除第 m 天外，每一天晚上 Pine 都必
                 <p class="article__excerpt">
                   题面
 有n个球，编号1-n，现在知道一些重量关系，请你给每个球赋一个重量，使得所有的球的重量满足约束，任意两个球的重量不能相同，且重量也是1-n。
-#  输入
+输入
 第一行是2个整数N,M，表示一共N个球，M个约束
-接下来M行，每行2个整数...
+接下来M行，每行2个整数u，v...
                 </p>
           
                 <div class="article__meta">
@@ -2586,8 +2600,8 @@ Pine 计划用 m 天到达 T 地。除第 m 天外，每一天晚上 Pine 都必
           
                 <p class="article__excerpt">
                   FFT
-学习了FFT ~~法法塔~~ 感受到了人和人之间是有不少差距的Orz。
-首先要介绍一个单位根，说的玄妙，其实就把它看做一个角度好了，然后在坐标系里面以自己角的大小为步长，进行旋转，然后它会回到自己就完了。如果我口胡太严重了，就...
+学习了FFT 法法塔 感受到了人和人之间是有不少差距的Orz。
+首先要介绍一个单位根，说的玄妙，其实就把它看做一个角度好了，然后在坐标系里面以自己角的大小为步长，进行旋转，然后它会回到自己就完了。如果我口胡太严重了，就去看这篇...
                 </p>
           
                 <div class="article__meta">
@@ -2791,8 +2805,8 @@ F(w_n^k) = FL(w_{n/2}^k...
 
 
 只有老虎和鹿都死完的时候你才叫做生存，求你生存的概率
-# 解答
-其实有好几...
+解答
+其实有好几种做...
                 </p>
           
                 <div class="article__meta">
@@ -2839,9 +2853,9 @@ F(w_n^k) = FL(w_{n/2}^k...
                 <p class="article__excerpt">
                   题面
 因为懒得调格式问题，直接丢传送门吧。传送门
-# 解答
+解答
 一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
-我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s...
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j...
                 </p>
           
                 <div class="article__meta">
@@ -2887,13 +2901,15 @@ F(w_n^k) = FL(w_{n/2}^k...
           
                 <p class="article__excerpt">
                   想要变强就要付出努力
-# 暑假计划
-#  OI
- - [x] 8.25 斜率优化 概率DP
- - [x] 8.26 概率DP 
- - [] 8.27 数据结构
- - [] 8.28 数学数论(有空学习FFT)
- - [] 8.29 复...
+暑假计划
+OI
+
+  8.25 斜率优化 概率DP
+  8.26 概率DP
+  [] 8.27 数据结构
+  [] 8.28 数学数论(有空学习FFT)
+  [] 8.29 复习模板(支配树等重点复习)
+  []...
                 </p>
           
                 <div class="article__meta">
@@ -2939,9 +2955,9 @@ F(w_n^k) = FL(w_{n/2}^k...
           
                 <p class="article__excerpt">
                   试题地址：njfls的一套NOIP模拟
-# T1
+T1
 大水模拟题，但是要用到一下结论 $\sum\limits_{i=0}^{\infty}d^i = \frac{1}{1-d}(0&lt;d&lt;1)$
-说白了就是等比数列求和公式趋近...
+说白了就是等比数列求和公式趋近于正...
                 </p>
           
                 <div class="article__meta">
@@ -3034,8 +3050,8 @@ F(w_n^k) = FL(w_{n/2}^k...
           
                 <p class="article__excerpt">
                   中国剩余定理
-#  内容：
-设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_...
+内容：
+设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$...
                 </p>
           
                 <div class="article__meta">
@@ -3132,11 +3148,11 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
 给定一个 n×m 的网格，请计算三点都在格点上的三角形共有多少个。下图为 4×4 的网格上的一个三角形。
 
 注意：三角形的三点不能共线。
-#  输入
+输入
 输入一行，包含两个空格分隔的正整数 m 和 n
 
 输出
-输出一个正整数，为所求...
+输出一个正整数，为所求三角形...
                 </p>
           
                 <div class="article__meta">
@@ -3191,16 +3207,14 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
 输出答案 mod 9901。
 
 样例输入
-
 2 3
 
-#  样例输出
-
+样例输出
 15
 
 提示
 样例说明
-23=8，8的所有约数为 1,2,4,8，...
+23=8，8的所有约数为 1,2,4,8，1+2+4...
                 </p>
           
                 <div class="article__meta">
@@ -3248,7 +3262,8 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
                   题面
 有一个无限大的矩形，初始时你在左上角（即第一行第一列），每次你都可以选择一个右下方格子，并瞬移过去（如从下图中的红色格子能直接瞬移到蓝色格子），求到第n行第m列的格子有几种方案，答案对1000000007取模。 
 
-#  Inp...
+Input
+...
                 </p>
           
                 <div class="article__meta">
@@ -3343,9 +3358,9 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
           
                 <p class="article__excerpt">
                   两类斯特林数
-#  第一类斯特林数
+第一类斯特林数
 意义：$\begin{bmatrix}n\m\end{bmatrix}$表示$n$元素分成$m$个环的方案数
-$\begin{bmatrix}n\m \end{bmatrix} = \begin{b...
+$\begin{bmatrix}n\m \end{bmatrix} = \begin{bmat...
                 </p>
           
                 <div class="article__meta">
@@ -3581,12 +3596,13 @@ FJ的N(2 &lt;= N &lt;= 1,000,000)头奶牛选择了接力跑作为她们的日�
                 <p class="article__excerpt">
                   题面
 n个阴珠子n个阳珠子间隔串成一串项链，给出m组信息u,v表示u号阳珠子放在v号阴珠子旁边会褪色。求一种排列使得褪色阳珠子的个数最少。
-#  输入
+输入
 第一行两个数字n,m
 接下去m行每行两个数字u,v
-#  输出
+输出
 一个数字代表答案
-...
+样例输入
+3...
                 </p>
           
                 <div class="article__meta">
@@ -3775,10 +3791,10 @@ Sylvia 是一个热爱学习的女孩子。
                 <p class="article__excerpt">
                   题面
 输入n个矩形，求他们总共占地面积（也就是求一下面积的并）
-#  输入
+输入
 可能有多组数据，读到n=0为止(不超过500组)
 每组数据第一行一个数n，表示矩形个数(n&lt;=100)
-接下来n行每行4个实数x1,y1,x2,y1(0...
+接下来n行每行4个实数x1,y1,x2,y1(0 &l...
                 </p>
           
                 <div class="article__meta">
@@ -3823,12 +3839,11 @@ Sylvia 是一个热爱学习的女孩子。
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
-# defin...
+# define cl...
                 </p>
           
                 <div class="article__meta">
@@ -3875,10 +3890,10 @@ Sylvia 是一个热爱学习的女孩子。
                 <p class="article__excerpt">
                   题面
 构造一个长度为n的非负整数序列x，满足m个条件，第i个条件为x[li]|x[li+1]|…|x[ri]=pi。
-#  输入
+输入
 第一行两个整数n,m。接下来m行每行三个整数li,ri,pi。
-#  输出
-如果存在这样的序列x，第一行...
+输出
+如果存在这样的序列x，第一行输出Yes，...
                 </p>
           
                 <div class="article__meta">
@@ -3924,13 +3939,14 @@ Sylvia 是一个热爱学习的女孩子。
           
                 <p class="article__excerpt">
                   *:重点复习
-:水水就好了
-# 练习计划
-#  大纲
-- 7月份主要是复习知识点，提高熟练程度，并且适当复习之前学习的省选知识，学会使用省选知识骗分
-- 8月份做提高题，把简单的知识玩出新花样
-#  具体计划
-上午听课，按照日期规划把...
+**:水水就好了
+练习计划
+大纲
+
+  7月份主要是复习知识点，提高熟练程度，并且适当复习之前学习的省选知识，学会使用省选知识骗分
+  8月份做提高题，把简单的知识玩出新花样
+    具体计划
+    上午听课，按照日期...
                 </p>
           
                 <div class="article__meta">
@@ -3976,12 +3992,12 @@ Sylvia 是一个热爱学习的女孩子。
           
                 <p class="article__excerpt">
                   考试
-高一下最后一次课，考试爆了0，真心爆零。~~这锅该dev和捆绑测试背~~
-# T1
+高一下最后一次课，考试爆了0，真心爆零。这锅该dev和捆绑测试背
+T1
 woj4586 逻辑命题
 
 描述
-有N个命题，已有m个数学大师选择两个命题证明，他们都给出了证明结果。已知每个大师的判断至少一个是正确的。请你根...
+有N个命题，已有m个数学大师选择两个命题证明，他们都给出了证明结果。已知每个大师的判断至少一个是正确的。请你根据数学家们给...
                 </p>
           
                 <div class="article__meta">
@@ -4170,7 +4186,9 @@ liympanda, one of Ikki’s friend, likes playing games with Ikki. Today after mi
                 <p class="article__excerpt">
                   最小树形图
 粗暴地理解就是有向图上的最小生成树。
-&gt;最小树形图，就是给有向带权图中指定一个特殊的点root，求一棵以root为根的有向生成树T，并且T中所有边的总权值最小。–百毒百科
+
+  最小树形图，就是给有向带权图中指定一个特殊的点root，求一棵以root为根的有向生成树T，并且T中所有边的总权值最小。–百毒百科
+
 
 求取
 OI中主流的算法是朱-刘算法
@@ -4220,7 +4238,7 @@ OI中主流的算法是朱-刘算法
           
                 <p class="article__excerpt">
                   关于本分类的说明
-本分类主要放一些比较冷门的知识点，学学就好了。~~搞不好今年就成了NOIp必知必会~~
+本分类主要放一些比较冷门的知识点，学学就好了。搞不好今年就成了NOIp必知必会
 
                 </p>
           
@@ -4268,8 +4286,8 @@ OI中主流的算法是朱-刘算法
                 <p class="article__excerpt">
                   支配树
 在一个有向图中，有一个起点R，对于任意点W，对于R-&gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
-#  支配树的性质
-...
+支配树的性质
+1.支...
                 </p>
           
                 <div class="article__meta">
@@ -4316,11 +4334,11 @@ OI中主流的算法是朱-刘算法
                 <p class="article__excerpt">
                   fhq treap(神仙数据结构)
 前置知识：treap平衡树 BST
-# 开始
+开始
 首先说一下
 这个东西可以搞一切bst，treap，splay所能搞的东西
 这个东西的学名应该是叫做fhq treap，应该是treap的强化版。
-整个数...
+整个数据结...
                 </p>
           
                 <div class="article__meta">
@@ -4468,8 +4486,8 @@ OI中主流的算法是朱-刘算法
                 <p class="article__excerpt">
                   考试
 不干啦，爆零啦！
-# T1选数问题
-在麦克雷的面前有N 个数，以及一个 R∗C 的矩阵。现在他的任务是从N 个数中取出R∗C 个，并填入这个矩阵中。矩阵每一行的法值为本行最大值与最小值的差，而整个矩阵的法值为每一行的法值的最大值...
+T1选数问题
+在麦克雷的面前有N 个数，以及一个 R∗C 的矩阵。现在他的任务是从N 个数中取出R∗C 个，并填入这个矩阵中。矩阵每一行的法值为本行最大值与最小值的差，而整个矩阵的法值为每一行的法值的最大值。现...
                 </p>
           
                 <div class="article__meta">
@@ -4684,12 +4702,12 @@ n,m
           
                 <p class="article__excerpt">
                   传送门
-# 解答
+解答
 抄自：http://www.cnblogs.com/NLDQY/p/10147594.html
 李超线段树板子题。
 什么是李超线段树呢？
 李超线段树是用来解决二维直角坐标系上给定直线求最值的一类题目的线段树
-这一类题...
+这一类题目往...
                 </p>
           
                 <div class="article__meta">
@@ -5038,13 +5056,13 @@ S 城现有两座监狱，一共关押着N 名罪犯，编号分别为1~N。他�
                 <p class="article__excerpt">
                   点、边双联通分量
 小知识点，记一下
-# 点双联通分量
+点双联通分量
 性质
 
 
   任意两点间至少存在两条点不重复的路径等价于图中删去任意一个点都不会改变图的连通性，即BCC中无割点
   若BCC间有公共点，则公共点为原图的割点
-  无向连通图中割点...
+  无向连通图中割点一定...
                 </p>
           
                 <div class="article__meta">
@@ -5290,7 +5308,9 @@ SC 省 MY 市有着庞大的地下水管网络，嘟嘟是 MY 市的水管局长
 
 　　假如我是焦仲卿，我会娶刘兰芝。
 　　首先，从文中
-&gt;十三能织素，十四学裁衣，十五弹箜篌，十六诵诗书
+
+  十三能织素，十四学裁衣，十五弹箜篌，十六诵诗书
+
 
 可以看出，刘兰芝是一个多才多艺的，古代所谓的”贤妇”，不仅如此，文中还多次提到刘兰芝善于织素这件事情...
                 </p>
@@ -5452,12 +5472,11 @@ SC 省 MY 市有着庞大的地下水管网络，嘟嘟是 MY 市的水管局长
                   非旋treap
 fhq是天才！
 先放板子
-cpp
 # include &lt;iostream&gt;
 # include &lt;cstdlib&gt;
 using namespace std;
 struct node{
-    i...
+    int v...
                 </p>
           
                 <div class="article__meta">
@@ -5595,11 +5614,11 @@ struct node{
           
                 <p class="article__excerpt">
                   期望与概率
-#  一些概念
-#  基本事件ω(也称样本点)： 
+一些概念
+基本事件ω(也称样本点)：
 一次试验可能出现的每一个直接的结果。也就是随机试验不能够再分解的结果。如：
 E1有两个基本事件：E1 ={出现正面}， E2={出现反面}
-E2有六个基本事件： Ei =...
+E2有六个基本事件： Ei ={出现 i 点...
                 </p>
           
                 <div class="article__meta">
@@ -5647,10 +5666,9 @@ E2有六个基本事件： Ei =...
                   AI(Aritficial Intelligence I)
 可以从哲♂学层面揭示人类本质的AI
 实现代码：
-cpp
 # include &lt;iostream&gt;
 # include &lt;string&gt;
-using n...
+using names...
                 </p>
           
                 <div class="article__meta">
@@ -5746,9 +5764,9 @@ using n...
 已知 n 元线性一次方程组。
 其中： n &lt; = 50 ．系数是整数,绝对值&lt;=100 , bi(方程右边)的值都是正整数且&lt;300
 根据输入的数据，编程输出方程组的解的情况。
-#  输入
+输入
 n
-a11 a12 ...
+a11 a12 … a...
                 </p>
           
                 <div class="article__meta">
@@ -5897,8 +5915,8 @@ eg1:
           
                 <p class="article__excerpt">
                   题面
-#  描述
-国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在...
+描述
+国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在有一个...
                 </p>
           
                 <div class="article__meta">
@@ -5948,8 +5966,8 @@ eg1:
 • 换根
 • 修改点权
 • 查询子树最小值
-# 输入
-第一行两个整数 n, Q ,分别表示树的大小和操作数。接下来n行,每行两个整数f,v,第i+1行的两个数表示点i的父亲和点i...
+输入
+第一行两个整数 n, Q ,分别表示树的大小和操作数。接下来n行,每行两个整数f,v,第i+1行的两个数表示点i的父亲和点i的权...
                 </p>
           
                 <div class="article__meta">
@@ -6049,12 +6067,11 @@ eg1:
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;
 using namespace std;
-const int MA...
+const int MAXM =...
                 </p>
           
                 <div class="article__meta">
@@ -6109,11 +6126,11 @@ const int MA...
 对于每组数据输出一个答案，各占一行。
 
 样例输入
-
 1 9
 12 15
 
-#  样...
+样例输出
+...
                 </p>
           
                 <div class="article__meta">
@@ -6160,19 +6177,19 @@ const int MA...
                 <p class="article__excerpt">
                   题面
 给出两个数$a,b$，求出$[a,b]$中各位数字之和能整除原数的数的个数。
-# 输入格式：
+输入格式：
 一行，两个整数$a$和$b$
-# 输出格式：
+输出格式：
 一个整数，表示答案
-# 样例数据
-#  输入样例
-
+样例数据
+输入样例
 10 19
 
-#  输出样例
-
+输出样例
 3
-...
+
+解答
+众所周知，题目越短，...
                 </p>
           
                 <div class="article__meta">
@@ -6264,7 +6281,7 @@ const int MA...
           
                 <p class="article__excerpt">
                   树形DP
-#  树的特征
+树的特征
 
 
   有N个点，N-1条边的无向图，任意两顶点间可达
@@ -6275,7 +6292,7 @@ const int MA...
 
 树形DP
 
-  树可以描述比较复杂的关系，对...
+  树可以描述比较复杂的关系，对选手分...
                 </p>
           
                 <div class="article__meta">
@@ -6470,13 +6487,12 @@ eg1 :第k大的数woj 1903
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 # include &lt;cstdio&gt;
 using namespace std;
 const int MAXN = 100010;
 int a[MAXN];
-in...
+int ro...
                 </p>
           
                 <div class="article__meta">
@@ -6524,9 +6540,10 @@ in...
                   DFS序
 dfs序比较重要的性质：一棵子树的所有节点在dfs序里是连续一段，主要就是利用这个性质来解题。
 跑出dfs序，然后数据结构维护
-# 经典问题
-#  T1单点修改，子树查询
-对某个点X权值加上一个数W，查询某个子树X里所有点权...
+经典问题
+T1单点修改，子树查询
+对某个点X权值加上一个数W，查询某个子树X里所有点权值和
+解：...
                 </p>
           
                 <div class="article__meta">
@@ -6573,9 +6590,9 @@ dfs序比较重要的性质：一棵子树的所有节点在dfs序里是连续�
                 <p class="article__excerpt">
                   题面
 有一个N个点M条边的无向图，每次选择一个点，并删除该点及其相邻的边，如果变成了一棵树，这这个点就是我们需要的。请找出满足条件的可能的点。
-#  输入
+输入
 第一行2个正整数N,M，表示N个点M条边，保证N&gt;=2
-接下来M行，每行...
+接下来M行，每行2个整...
                 </p>
           
                 <div class="article__meta">
@@ -6621,14 +6638,12 @@ dfs序比较重要的性质：一棵子树的所有节点在dfs序里是连续�
           
                 <p class="article__excerpt">
                   Splay
-~~Splay可牛逼了，可以处理区间问题~~
+Splay可牛逼了，可以处理区间问题
 splay说白了就是转着玩。每个点轮流转到根节点
 文艺平衡树
-```cpp
-# include 
-# include 
-using namespace std;
-const i...
+# include &lt;iostream&gt;
+# include &lt;cstdio&gt;
+using nam...
                 </p>
           
                 <div class="article__meta">
@@ -6674,7 +6689,7 @@ const i...
           
                 <p class="article__excerpt">
                   题面
-有N头奶牛，每头那牛都有一个标号Pi，1 &lt;= Pi &lt;= M &lt;= N &lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为kk...
+有N头奶牛，每头那牛都有一个标号Pi，1 &lt;= Pi &lt;= M &lt;= N &lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为k*...
                 </p>
           
                 <div class="article__meta">
@@ -6960,11 +6975,10 @@ Codeforces 1114E Arithmetic Progression
                   T1：
 一句话题意：给你一个序列，判断他能否通过栈变得有序且从小到大。
 就是个判断出栈顺序是否合法。
-# 解答
+解答
 我太弱了，居然连判断出栈顺序是否合法都不会了。基础太差了，我太弱了。
 代码:
-cpp
-# include &lt;cstd...
+# include &lt;cstdio&gt;...
                 </p>
           
                 <div class="article__meta">
@@ -7056,12 +7070,12 @@ cpp
           
                 <p class="article__excerpt">
                   CF1114D
-# 题面
+题面
 Flood Fill
-# 一句话题意
+一句话题意
 给你一个序列，每次可以把连续的每个数组都相等的一部分变成任意数字，问多少次可以把这个序列变成数字完全相同的。
-# 解答
-我只会区间DP，不会那个神仙的回文$NlogN$做...
+解答
+我只会区间DP，不会那个神仙的回文$NlogN$做法。$dp[...
                 </p>
           
                 <div class="article__meta">
@@ -7107,11 +7121,11 @@ Flood Fill
           
                 <p class="article__excerpt">
                   题面
-#  题目背景
+题目背景
 有一天，小猫rainbow和freda来到了湘西张家界的天门山玉蟾宫，玉蟾宫宫主蓝兔盛情地款待了它们，并赐予它们一片土地。
 
 题目描述
-这片土地被分成N*M个格子，每个格子里写着’R’或者’F’，R代表这块土地被...
+这片土地被分成N*M个格子，每个格子里写着’R’或者’F’，R代表这块土地被赐予了...
                 </p>
           
                 <div class="article__meta">
@@ -7158,9 +7172,9 @@ Flood Fill
                 <p class="article__excerpt">
                   题面
 给你一个无向带权连通图，每条边是黑色或白色。让你求一棵最小权的恰好有need条白色边的生成树。题目保证有解。
-#  输入
+输入
 第一行V,E,need分别表示点数，边数和需要的白色边数。
-接下来E行,每行s,t,c,col表示这边的端...
+接下来E行,每行s,t,c,col表示这边的端点(点...
                 </p>
           
                 <div class="article__meta">
@@ -7207,8 +7221,8 @@ Flood Fill
                 <p class="article__excerpt">
                   题面
 墨墨突然对等式很感兴趣，他正在研究a1x1+a2y2+…+anxn=B存在非负整数解的条件，他要求你编写一个程序，给定N、{an}、以及B的取值范围，求出有多少B可以使等式存在非负整数解。
-#  输入
-输入的第一行包含3个正整数...
+输入
+输入的第一行包含3个正整数，分别...
                 </p>
           
                 <div class="article__meta">
@@ -7257,11 +7271,12 @@ Flood Fill
 传送门
 大意：
 把一个序列分成k份，使得每一份前m大的值的和最大。
-# 解答
+解答
 比赛时读错题了，以为是单调队列优化DP，唉，菜是原罪。贪心，把数组排个序取前m×k各数就行了
 至于划分方案，贪心，取够m个最大就不取了。
 代码：
-cp...
+//
+/...
                 </p>
           
                 <div class="article__meta">
@@ -7306,12 +7321,12 @@ cp...
                 </h2>
           
                 <p class="article__excerpt">
-                  毒~~瘤~~硫
-#  一·硫的物理性质及存在
+                  毒瘤硫
+一·硫的物理性质及存在
 
 
   硫在自然界广泛存在，游离态的硫存在于火山口附近的地壳的岩层中。化合态的硫存在形式非常多，硫化物、硫的氧化物、蛋白质中等等。
-  硫是一种黄色晶体，俗称硫磺，质脆，易研制成粉末，微溶...
+  硫是一种黄色晶体，俗称硫磺，质脆，易研制成粉末，微溶于酒精，易溶于...
                 </p>
           
                 <div class="article__meta">
@@ -7409,12 +7424,12 @@ C 国有 n 个大城市和 m 条道路，每条道路连接这 n 个城市中的
 
 
 
-# 解答
+解答
 瘤子题一道。我们考虑化简:
 \(\frac{1}{x}+\frac{1}{y}=\frac{1}{n!}\)
-~~显然~~$y$必须大于$n!$，不妨设\(y = n!+t\)
+显然$y$必须大于$n!$，不妨设\(y = n!+t\)
 那么
-\(\frac{1}{x}...
+\(\frac{1}{x}+\frac...
                 </p>
           
                 <div class="article__meta">
@@ -7462,8 +7477,8 @@ C 国有 n 个大城市和 m 条道路，每条道路连接这 n 个城市中的
                   柯西不等式
 $(a^2+b^2)(c^2+d^2)&gt;=(ac+bd)^2$
 反序和&lt;=乱序和&lt;=顺序和
-# 调和级数
-$\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
+调和级数
+$\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + r$...
                 </p>
           
                 <div class="article__meta">
@@ -7509,15 +7524,15 @@ $\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
           
                 <p class="article__excerpt">
                   复习
-~~数位dp~~
+数位dp
 ~~ 状态压缩 ~~
-~~二分图\二分图带权匹配~~
-~~网络流~~
-~~左偏树~~
-~~树链剖分~~
-~~主席树~~
-~~费用流~~
-# 自学
+二分图\二分图带权匹配
+网络流
+左偏树
+树链剖分
+主席树
+费用流
+自学
 四边形不等式优化
 倍增优化
 博弈论
@@ -7569,10 +7584,10 @@ $\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
                 <p class="article__excerpt">
                   物理
 平抛运动几个推论:夹角2倍
-#  数学
+数学
 三角函数及向量练习
 几个函数压轴题技巧，解不等式技巧
-#  化学
+化学
 铝离子与氢氧化钠溶液互滴，沉淀产生
 ccl4出去hcl
 
@@ -7674,12 +7689,12 @@ Q次询问K,V，询问到V距离&gt;=K的点有多少（不含V）
           
                 <p class="article__excerpt">
                   网络流
-#  概念
+概念
 若有向图G=(V,E)满足下列条件
 
 
   有且仅有一个顶点S，它的入度为零，即d-(S) ==0，这个顶点S便称为源点，或称为发点。
-  有且仅有一个顶点T，它的出度为零，即d+(T) = 0，这个顶点T便称为汇...
+  有且仅有一个顶点T，它的出度为零，即d+(T) = 0，这个顶点T便称为汇点，或...
                 </p>
           
                 <div class="article__meta">
@@ -7726,8 +7741,8 @@ Q次询问K,V，询问到V距离&gt;=K的点有多少（不含V）
                 <p class="article__excerpt">
                   题面
 小Q是一个非常聪明的孩子，除了国际象棋，他还很喜欢玩一个电脑益智游戏——矩阵游戏。矩阵游戏在一个N
-N黑白方阵进行（如同国际象棋一般，只是颜色是随意的）。每次可以对该矩阵进行两种操作：行交换操作：选择
-矩阵的任意两行，交换这两行...
+*N黑白方阵进行（如同国际象棋一般，只是颜色是随意的）。每次可以对该矩阵进行两种操作：行交换操作：选择
+矩阵的任意两行，交换这两...
                 </p>
           
                 <div class="article__meta">
@@ -7871,9 +7886,11 @@ woj1222
                   求法
 1.tarjan 的离线求法，用并查集维护。不多赘述
 2.欧拉序：
-&gt;树的欧拉序是对树进行DFS的一种序列。有两种形式：
+
+  树的欧拉序是对树进行DFS的一种序列。有两种形式：
 1、在每个结点进和出都加进序列。
 2、只要到达每一个结点就把他加进序列。
+
 
 eg：
 
@@ -8269,9 +8286,9 @@ FJ打算好好修一下农场中某条凹凸不平的土路。按奶牛们的要
           
                 <p class="article__excerpt">
                   题面
-# Description
+Description
 
-A histogram is a polygon composed of a sequence of rectangles aligned at a common base line. The re...
+A histogram is a polygon composed of a sequence of rectangles aligned at a common base line. The rect...
                 </p>
           
                 <div class="article__meta">
@@ -8317,10 +8334,10 @@ A histogram is a polygon composed of a sequence of rectangles aligned at a commo
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
+题目描述
 某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。
 
-从转播站到转播站以及从转播站到所有用户终端的...
+从转播站到转播站以及从转播站到所有用户终端的信号...
                 </p>
           
                 <div class="article__meta">
@@ -8414,8 +8431,8 @@ A histogram is a polygon composed of a sequence of rectangles aligned at a commo
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-回到家中的猫猫把三桶鱼全部转移到了她那长方形大池子中，然后开始思考：到底要以何种方法吃鱼呢（猫猫就是这么可爱，吃鱼也要想好吃法 ^_*）。她发现，把大池子视为01矩阵（0表示对应位置无鱼，1表示对应位置有鱼）有助于...
+题目描述
+回到家中的猫猫把三桶鱼全部转移到了她那长方形大池子中，然后开始思考：到底要以何种方法吃鱼呢（猫猫就是这么可爱，吃鱼也要想好吃法 ^_*）。她发现，把大池子视为01矩阵（0表示对应位置无鱼，1表示对应位置有鱼）有助于决定...
                 </p>
           
                 <div class="article__meta">
@@ -8461,12 +8478,12 @@ A histogram is a polygon composed of a sequence of rectangles aligned at a commo
           
                 <p class="article__excerpt">
                   题面
-# Description
+Description
 
 在一年前赢得了小镇的最佳草坪比赛后，FJ变得很懒，再也没有修剪过草坪。现在，
 新一轮的最佳草坪比赛又开始了，FJ希望能够再次夺冠。
 
-然而，FJ的草坪非常脏乱，因此，FJ只能够让他的奶牛来完成这项工...
+然而，FJ的草坪非常脏乱，因此，FJ只能够让他的奶牛来完成这项工作。...
                 </p>
           
                 <div class="article__meta">
@@ -8749,15 +8766,13 @@ Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One n
           
                 <p class="article__excerpt">
                   为了省事，我已不择手段
-```cpp
 //
 // Created by dhy on 18-12-2.
 //
-# include 
-# include 
+# include &lt;cstdlib&gt;
+# include &lt;cstdio&gt;
 int read(){
-    int x = 0,f = 1;
-    sta...
+    in...
                 </p>
           
                 <div class="article__meta">
@@ -8803,9 +8818,9 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-#  Description
+Description
 有一个树形的水系，由 N-1 条河道和 N 个交叉点组成。我们可以把交叉点看作树中的节点，编号为1~N，河道则
-看作树中的无向边。每条河道都有一个容量，连接 x 与 y 的河道的容量记为 c(x,y...
+看作树中的无向边。每条河道都有一个容量，连接 x 与 y 的河道的容量记为 c(x,y)。河...
                 </p>
           
                 <div class="article__meta">
@@ -8851,10 +8866,10 @@ int read(){
           
                 <p class="article__excerpt">
                   树形dp
-#  普通树形dp
+普通树形dp
 其实就是没有上司的舞会，比较简单
-#  背包类树形dp
-例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的...
+背包类树形dp
+例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正...
                 </p>
           
                 <div class="article__meta">
@@ -8902,11 +8917,12 @@ int read(){
                   关于看到这个东西的小伙伴，如果你没看懂的话，可以加鄙人QQ1724458359，我一定会尽我所能解答你的问题。今天上课我讲的可能语速快了一点，我的锅。
 
 打表
-# 前置技能
+前置技能
 1.前缀和
 2.估算复杂度
-# 前缀和
-我们先看一下一个问题...
+前缀和
+我们先看一下一个问题：
+给定...
                 </p>
           
                 <div class="article__meta">
@@ -8956,11 +8972,12 @@ int read(){
 洛谷P1463
 洛谷P2657
 洛谷P1865
-# 模拟退火
+模拟退火
 最优解问题？dp？搜索？NONO 模拟退火一遍过，顺便AC旅行商问题
 洛谷P1337
 洛谷P3959
-洛谷P2503...
+洛谷P2503
+A...
                 </p>
           
                 <div class="article__meta">
@@ -9106,8 +9123,8 @@ int read(){
 欧拉路径：图G中经过每一条边一次并且仅一次的路径叫做欧拉路径。
 欧拉图：存在欧拉回路的图叫欧拉图
 半欧拉图：存在欧拉路径但不存在欧拉回路的图叫半欧拉图。
-# 判断
-...
+判断
+定理...
                 </p>
           
                 <div class="article__meta">
@@ -9152,12 +9169,11 @@ int read(){
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;cstdio&gt;
+                  # include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstring&gt;
 # include &lt;ctime&gt;
-# include ...
+# include &lt;...
                 </p>
           
                 <div class="article__meta">
@@ -9250,11 +9266,12 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
+题目描述
 给定一个n个点m条边有向图，每个点有一个权值，求一条路径，使路径经过的点权值之和最大。你只需要求出这个权值和。
 允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。
-#  输入输出格式
-#  输入格式...
+输入输出格式
+输入格式：
+第一行，n,...
                 </p>
           
                 <div class="article__meta">
@@ -9300,7 +9317,7 @@ int read(){
           
                 <p class="article__excerpt">
                   Day-2
-今天比较颓废，上午在机房做热身赛，觉得自己好菜啊！尝试写个dp，我的dp从来就没怎么连过。水平也停留在某本白色的代码不等宽的书上。中午去华莱士买了一个2.99元的鸡排，好油腻啊，下次不吃了。~~可能是我太瘦了~~为什么你们...
+今天比较颓废，上午在机房做热身赛，觉得自己好菜啊！尝试写个dp，我的dp从来就没怎么连过。水平也停留在某本白色的代码不等宽的书上。中午去华莱士买了一个2.99元的鸡排，好油腻啊，下次不吃了。可能是我太瘦了为什么你们什么都会...
                 </p>
           
                 <div class="article__meta">
@@ -9346,13 +9363,13 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-#  题目描述
+题目描述
 有q次操作，每次操作是以下两种：
 1、 加入一个数到集合中
 2、 查询，查询当前数字与集合中的数字的最大异或值，最大and值，最大or值
-#  输入
+输入
 第一行1个正整数Q表示操作次数
-接下来Q行，每行2个数字，第一...
+接下来Q行，每行2个数字，第一个数字是操作...
                 </p>
           
                 <div class="article__meta">
@@ -9398,8 +9415,8 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-#  描述
-有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能...
+描述
+有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能满足条...
                 </p>
           
                 <div class="article__meta">
@@ -9445,8 +9462,8 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-# Problem Description
-有N个比赛队（1&lt;=N&lt;=500），编号依次为1，2，3，。。。。，N进行比赛，比赛结束后，裁判委员会要将所有参赛队伍从前往后依次排名，但现在裁判委员会不能直接获得每个队的...
+Problem Description
+有N个比赛队（1&lt;=N&lt;=500），编号依次为1，2，3，。。。。，N进行比赛，比赛结束后，裁判委员会要将所有参赛队伍从前往后依次排名，但现在裁判委员会不能直接获得每个队的比赛...
                 </p>
           
                 <div class="article__meta">
@@ -9492,8 +9509,8 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww...
+题目描述
+幼儿园里有N个小朋友，lxhgww老师现在想要给这些小朋友们分配糖果，要求每个小朋友都要分到糖果。但是小朋友们也有嫉妒心，总是会提出一些要求，比如小明不希望小红分到的糖果比他的多，于是在分配糖果的时候，lxhgww需要...
                 </p>
           
                 <div class="article__meta">
@@ -9539,8 +9556,8 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-小B有一个序列，包含N个1~K之间的整数。他一共有M个询问，每个询问给定一个区间[L..R]，求Sigma(c(i)^2)的值,其中i的值从1到K，其中c(i)表示数字i在[L..R]中的重复次数。小B请你帮助他回...
+题目描述
+小B有一个序列，包含N个1~K之间的整数。他一共有M个询问，每个询问给定一个区间[L..R]，求Sigma(c(i)^2)的值,其中i的值从1到K，其中c(i)表示数字i在[L..R]中的重复次数。小B请你帮助他回答询...
                 </p>
           
                 <div class="article__meta">
@@ -9587,8 +9604,8 @@ int read(){
                 <p class="article__excerpt">
                   发生了什么
 最近作者的QQ上发生了多起QQ账号被盗的悲惨事件，这些事件就像病毒传播一样，一传十，十传百。包括许多我十分尊敬的老师也中了招。真是十分悲惨！
-# 怎么回事
-其实是某些不法分子制作了一些小网站(具体套路下面解析)，盗取部分人...
+怎么回事
+其实是某些不法分子制作了一些小网站(具体套路下面解析)，盗取部分人的Q...
                 </p>
           
                 <div class="article__meta">
@@ -9634,8 +9651,8 @@ int read(){
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上...
+题目描述
+某大学有N个职员，编号为1~N。他们之间有从属关系，也就是说他们的关系就像一棵以校长为根的树，父结点就是子结点的直接上司。现在有个周年庆宴会，宴会每邀请来一个职员都会增加一定的快乐指数Ri，但是呢，如果某个职员的上司来...
                 </p>
           
                 <div class="article__meta">
@@ -9775,14 +9792,13 @@ int read(){
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-const int MAXN = 101;
+                  const int MAXN = 101;
 struct edge{
     int t,w,next;
 }edges[MAXN&lt;&lt;1];
 int head[MAXN];
 int top;
-void add(int...
+void add(int f,i...
                 </p>
           
                 <div class="article__meta">
@@ -9878,17 +9894,17 @@ void add(int...
                 <p class="article__excerpt">
                   题面
 给定一个m，和若干个l,r 若l或r 不属于[1,m]输出Crossing the line 否则，输出l到r之间有多少个质数
-# 样例
-#  样例输入：
-
+样例
+样例输入：
 2 5
 1 3
 2 6
 
-#  样例输出
-
+样例输出
 2
-Crossing th...
+Crossing the line
+
+解答...
                 </p>
           
                 <div class="article__meta">
@@ -9934,8 +9950,8 @@ Crossing th...
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-“RP餐厅”的员工素质就是不一般，在齐刷刷的算出同一个电话号码之后，就准备让HZH,TZY去送快餐了，他们将自己居住的城市画了一张地图，已知在他们的地图上，有N个地方，而且他们目前处在标注为“1”的小镇上，而送餐的...
+题目描述
+“RP餐厅”的员工素质就是不一般，在齐刷刷的算出同一个电话号码之后，就准备让HZH,TZY去送快餐了，他们将自己居住的城市画了一张地图，已知在他们的地图上，有N个地方，而且他们目前处在标注为“1”的小镇上，而送餐的地点...
                 </p>
           
                 <div class="article__meta">
@@ -10076,11 +10092,11 @@ Crossing th...
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
+题目描述
 windy定义了一种windy数。不含前导零且相邻两个数字之差至少为2的正整数被称为windy数。 windy想知道，在A和B之间，包括A和B，总共有多少个windy数？
-# 输入输出格式
-#  输入格式：
-包含两...
+输入输出格式
+输入格式：
+包含两个整数，A B...
                 </p>
           
                 <div class="article__meta">
@@ -10128,10 +10144,10 @@ windy定义了一种windy数。不含前导零且相邻两个数字之差至少�
                   题面
 题目背景
 此题约为NOIP提高组Day2T2难度。
-# 题目描述
+题目描述
 众所周知，模数的hash会产生冲突。例如，如果模的数p=7，那么4和11便冲突了。
 B君对hash冲突很感兴趣。他会给出一个正整数序列value[]。
-自然，B君...
+自然，B君会把...
                 </p>
           
                 <div class="article__meta">
@@ -10177,10 +10193,10 @@ B君对hash冲突很感兴趣。他会给出一个正整数序列value[]。
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
+题目描述
 有$n$个城市和$m$条单向道路，城市编号为$1$到$n$。每条道路连接两个不同的城市，且任意两条道路要么起点不同要么终点不同，因此$n$和$m$满足$m \le n(n-1)$
 
-给定两个城市a和b，可以给a到b...
+给定两个城市a和b，可以给a到b的所...
                 </p>
           
                 <div class="article__meta">
@@ -10274,8 +10290,8 @@ Stan and Ollie play the game of multiplication by multiplying an integer p by on
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-有两堆石子，数量任意，可以不同。游戏开始由两个人轮流取石子。游戏规定，每次有两种不同的取法，一是可以在任意的一堆中取走任意多的石子；二是可以在两堆中同时取走相同数量的石子。最后把石子全部取完者为胜者。现在给出初始的...
+题目描述
+有两堆石子，数量任意，可以不同。游戏开始由两个人轮流取石子。游戏规定，每次有两种不同的取法，一是可以在任意的一堆中取走任意多的石子；二是可以在两堆中同时取走相同数量的石子。最后把石子全部取完者为胜者。现在给出初始的两堆...
                 </p>
           
                 <div class="article__meta">
@@ -10370,8 +10386,9 @@ A和B一块报数，每人每次报最少1个，最多报4个，看谁先报到3
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-输入k及k个整数n1，n2，…，nk，表示有k堆火柴棒，第i堆火柴棒的根数为ni；接着便是你和计算机取火柴棒的对弈游戏。取的规则如下：每次可以从一堆中取走若干根火柴，也可以一堆全部取走，但不允许跨堆取，也不允许不取...
+题目描述
+输入k及k个整数n1，n2，…，nk，表示有k堆火柴棒，第i堆火柴棒的根数为ni；接着便是你和计算机取火柴棒的对弈游戏。取的规则如下：每次可以从一堆中取走若干根火柴，也可以一堆全部取走，但不允许跨堆取，也不允许不取。
+...
                 </p>
           
                 <div class="article__meta">
@@ -10511,9 +10528,10 @@ nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于1
                 <p class="article__excerpt">
                   1.公平组合游戏(ICG)
 定义：
-&gt;两名选手
+
+  两名选手
 两名选手轮流行动，每一次行动可以在有限合法操作集合中选择一个
-游戏的任何一种可能的局面(position)，合法操作集合只取决于这个局面本身，不取决于轮到哪名选手操作、以前的任何操...
+游戏的任何一种可能的局面(position)，合法操作集合只取决于这个局面本身，不取决于轮到哪名选手操作、以前的任何操作...
                 </p>
           
                 <div class="article__meta">
@@ -10607,8 +10625,8 @@ nim游戏的规则是这样的：地上有n堆石子（每堆石子数量小于1
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-AA国有n n座城市，编号从 $1$ 到 $n$，城市之间有 $m$条双向道路。每一条道路对车辆都有重量限制，简称限重。现在有 $q$ 辆货车在运输货物， 司机们想知道每辆车在不超过车辆限重的情况下，最多能运多重的...
+题目描述
+AA国有n n座城市，编号从 $1$ 到 $n$，城市之间有 $m$条双向道路。每一条道路对车辆都有重量限制，简称限重。现在有 $q$ 辆货车在运输货物， 司机们想知道每辆车在不超过车辆限重的情况下，最多能运多重的货物...
                 </p>
           
                 <div class="article__meta">
@@ -10653,13 +10671,15 @@ AA国有n n座城市，编号从 $1$ 到 $n$，城市之间有 $m$条双向道�
                 </h2>
           
                 <p class="article__excerpt">
-                  ~~复习差分约束~~
-# ~~拓扑排序~~
-# ~~树的重心、直径~~
-# ~~写一下模拟退火~~
-# ~~费马小定理，欧拉定理复习~~
-# ~~背一下数论阶的相关东西~~
-# ~~博弈论~~luogu P2197~~  ~~1290...
+                  复习差分约束
+拓扑排序
+树的重心、直径
+写一下模拟退火
+费马小定理，欧拉定理复习
+背一下数论阶的相关东西
+博弈论luogu P2197~~  1290           HDU3904
+写P2158 1967题解
+线段树复习 tri...
                 </p>
           
                 <div class="article__meta">
@@ -10705,9 +10725,9 @@ AA国有n n座城市，编号从 $1$ 到 $n$，城市之间有 $m$条双向道�
           
                 <p class="article__excerpt">
                   题面
-# 题目
+题目
 “Madoka,不要相信 QB！”伴随着 Homura 的失望地喊叫,Madoka 与 QB 签订了契约.
-这是 Modoka 的一个噩梦,也同时是上个轮回中所发生的事.为了使这一次 Madoka 不再与 QB签订契约...
+这是 Modoka 的一个噩梦,也同时是上个轮回中所发生的事.为了使这一次 Madoka 不再与 QB签订契约,H...
                 </p>
           
                 <div class="article__meta">
@@ -10851,11 +10871,12 @@ Bytie boy has to learn a fragment of a certain poem by heart. The poem, followin
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
+题目描述
 有三个好朋友喜欢在一起玩游戏,A君写下一个字符串S,B君将其复制一遍得到T,C君在T的任意位置(包括首尾)插入一个字符得到U.现在你得到了U,请你找出S.
-# 输入输出格式
-#  输入格式
-第一行一个数N,表示U的...
+输入输出格式
+输入格式
+第一行一个数N,表示U的长度.
+第二行...
                 </p>
           
                 <div class="article__meta">
@@ -10901,12 +10922,12 @@ Bytie boy has to learn a fragment of a certain poem by heart. The poem, followin
           
                 <p class="article__excerpt">
                   Think twice , code once!
-# 并查集初始化！
-# 多组数据把每一组读完，尤其是在读取的过程中就已经找到答案
-# 看清有向图还是无向图
-# 不要压行，这不是游戏
-# 不要把问题想简单了/复杂了导致结果不正确
-# ...
+并查集初始化！
+多组数据把每一组读完，尤其是在读取的过程中就已经找到答案
+看清有向图还是无向图
+不要压行，这不是游戏
+不要把问题想简单了/复杂了导致结果不正确
+方法不唯一，不要卡死在一...
                 </p>
           
                 <div class="article__meta">
@@ -11050,8 +11071,8 @@ Berland地区的腐败现象非常常见。
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-__stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个...
+题目描述
+__stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如果x[u] xor x[v]的结果在二进制表示下有奇数个1，那么在u和v之间连接一个Edge，现在__stdcall想让你求出一共有多少个Ed...
                 </p>
           
                 <div class="article__meta">
@@ -11146,8 +11167,8 @@ __stdcall给了你n个点，第i个点有权值x[i]，对于两个点u和v，如
                 <p class="article__excerpt">
                   圆排列
 从n个不同元素中不重复地取出m（1≤m≤n）个元素在一个圆周上，叫做这n个不同元素的圆排列。如果一个m-圆排列旋转可以得到另一个m-圆排列，则认为这两个圆排列相同。
-# 不相异元素排列
-如果在n个元素中，有m种不同的元素，每种...
+不相异元素排列
+如果在n个元素中，有m种不同的元素，每种元素...
                 </p>
           
                 <div class="article__meta">
@@ -11338,13 +11359,12 @@ b|a表示b整除a(a%b=0)
           
                 <p class="article__excerpt">
                   线性筛质数
-cpp
 int v[MAXN];//每个数的最小质因子
 int prime[MAXN];
 int cnt;
 void get_list(){
     for(int i=2;i&lt;=maxn;i++){
-       ...
+        if(...
                 </p>
           
                 <div class="article__meta">
@@ -11390,14 +11410,13 @@ void get_list(){
           
                 <p class="article__excerpt">
                   点:
-cpp
 //tarjan find cut point
 edge stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
 int dfn_cnt;
-int bcc_num[...
+int bcc_num[1000...
                 </p>
           
                 <div class="article__meta">
@@ -11443,14 +11462,13 @@ int bcc_num[...
           
                 <p class="article__excerpt">
                   tarjan 求割点
-```cpp
 //tarjan find cut point
 int stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
 int dfn_cnt;
-bo...
+bool iscu...
                 </p>
           
                 <div class="article__meta">
@@ -11495,13 +11513,12 @@ bo...
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 using namespace std;
 struct edge{int t,next;}edges[10000];
 int head[10000];
 int top;
-v...
+void ...
                 </p>
           
                 <div class="article__meta">
@@ -11547,8 +11564,8 @@ v...
           
                 <p class="article__excerpt">
                   题面
-# 题目描述
-每头奶牛都梦想成为牛棚里的明星。被所有奶牛喜欢的奶牛就是一头明星奶牛。所有奶牛都是自恋狂，每头奶牛总是喜欢自己的。奶牛之间的“喜欢”是可以传递的——如果A喜欢B，B喜欢C，那么A也喜欢C。牛栏里共有N 头奶牛，给定...
+题目描述
+每头奶牛都梦想成为牛棚里的明星。被所有奶牛喜欢的奶牛就是一头明星奶牛。所有奶牛都是自恋狂，每头奶牛总是喜欢自己的。奶牛之间的“喜欢”是可以传递的——如果A喜欢B，B喜欢C，那么A也喜欢C。牛栏里共有N 头奶牛，给定一些...
                 </p>
           
                 <div class="article__meta">
@@ -11595,8 +11612,9 @@ v...
                 <p class="article__excerpt">
                   一些概念(bing搜的)
 一、定义
-&gt;1.点连通度与边连通度:在一个无向连通图中，如果有个顶点集合V.副除顶点集合V以及与V中顶点相连(至少有一端在V中)的所有边后原图不连通，就称这个点集v为割点集合。
-2.一个图的点连通度:最...
+
+  1.点连通度与边连通度:在一个无向连通图中，如果有个顶点集合V.副除顶点集合V以及与V中顶点相连(至少有一端在V中)的所有边后原图不连通，就称这个点集v为割点集合。
+2.一个图的点连通度:最小...
                 </p>
           
                 <div class="article__meta">
@@ -11641,12 +11659,11 @@ v...
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 using namespace std;
 int st[10000];//可以用stl stack 代替 
 int t = 0;//可以用stl stack 代替 
-str...
+struct ...
                 </p>
           
                 <div class="article__meta">
@@ -11786,11 +11803,10 @@ str...
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include&lt;bits/stdc++.h&gt;     //万能头文件
+                  # include&lt;bits/stdc++.h&gt;     //万能头文件
 # define INF 0x3f3f3f3f
 using namespace std;        //养成好习惯
-typedef ve...
+typedef vector...
                 </p>
           
                 <div class="article__meta">
@@ -11836,14 +11852,12 @@ typedef ve...
           
                 <p class="article__excerpt">
                   dijkstra+heap优化板子luoguP2384
-```cpp
 //
 // Created by dhy on 18-9-15.
 //
-# include 
-# include 
-# include 
-using namespa...
+# include &lt;queue&gt;
+# include &lt;iostream&gt;
+# ...
                 </p>
           
                 <div class="article__meta">
@@ -11889,15 +11903,12 @@ using namespa...
           
                 <p class="article__excerpt">
                   Prime luoguP3366
-```cpp
 //
 // Created by dhy on 18-9-15.
 //
-# include 
-# include 
-using namespace std;
-struct edge{
- ...
+# include &lt;queue&gt;
+# include &lt;iostream&gt;
+using namespa...
                 </p>
           
                 <div class="article__meta">
@@ -11942,14 +11953,13 @@ struct edge{
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-//
+                  //
 // Created by dhy on 18-9-14.
 //
 # include &lt;iostream&gt;
 # include &lt;string&gt;
 # include &lt;queue&gt;
-u...
+using...
                 </p>
           
                 <div class="article__meta">
@@ -11995,14 +12005,15 @@ u...
           
                 <p class="article__excerpt">
                   NOIP好像不考，介于时间紧，学的比较匆忙，日后复习
-# 用途
+用途
 就是用于多模式串的匹配问题
-# 步骤
+步骤
 1.所有的模式串构建一棵trie树。
 2.对Trie上的所有节点构造前缀指针。
 3.利用前缀指针对主串进行匹配。
-# 算法流程
-树上...
+算法流程
+树上KMP，见板子
+
                 </p>
           
                 <div class="article__meta">
@@ -12047,13 +12058,12 @@ u...
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-const N = 50000;
+                  const N = 50000;
 const sigmaSize = 26;//字符集大小 
 int trie[N][sigmaSize];
 int total = 1;
 bool endOfWords[N];
-void in...
+void insert...
                 </p>
           
                 <div class="article__meta">
@@ -12099,13 +12109,12 @@ void in...
           
                 <p class="article__excerpt">
                   KMP板子
-cpp
 void next(){
     j=0;
     for (int i=2;i&lt;=lb;i++)
        {     
        while(j&amp;&amp;b[i]!=b[j+1])
-  ...
+      ...
                 </p>
           
                 <div class="article__meta">
@@ -12196,12 +12205,11 @@ void next(){
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 # include &lt;queue&gt;
 # include &lt;algorithm&gt;
 # include &lt;string&gt;
-using nam...
+using namespa...
                 </p>
           
                 <div class="article__meta">
@@ -12348,10 +12356,10 @@ X=a...
           
                 <p class="article__excerpt">
                   哈希表
-其实就是把很多数对一个大质数取模，然后把模数相等的放到一个链表里面，最后查询就行了。有点像~~非常像~~前向星存图
-# 构造
+其实就是把很多数对一个大质数取模，然后把模数相等的放到一个链表里面，最后查询就行了。有点像非常像前向星存图
+构造
 1.除余法
-选一个适当的数b，然后用其对b取模的数作为哈希值，即H(x) = x mod b,如果b...
+选一个适当的数b，然后用其对b取模的数作为哈希值，即H(x) = x mod b,如果b的约数越多，...
                 </p>
           
                 <div class="article__meta">
@@ -12398,10 +12406,10 @@ X=a...
                 <p class="article__excerpt">
                   哈希
 哈希的思想比较简单，其实就是把一个字符串看做一个高进制的数。
-# 滚动哈希
+滚动哈希
 子字符串匹配，复杂度O(n+m)。
-#  -流程
-我盟选取两个合适的互质的常数b和h(b&lt;h)，假设字符串为C=$C_1C_2C_3..C_n$那...
+-流程
+我盟选取两个合适的互质的常数b和h(b&lt;h)，假设字符串为C=$C_1C_2C_3..C_n$那么我们定义...
                 </p>
           
                 <div class="article__meta">
@@ -12447,11 +12455,10 @@ X=a...
           
                 <p class="article__excerpt">
                   其实很简单，就是两边一起搜。板子如下luogu UVA439
-cpp
 # include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 # include &lt;queue&gt;
-# i...
+# inclu...
                 </p>
           
                 <div class="article__meta">
@@ -12592,16 +12599,13 @@ cpp
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-//
+                  //
 // Created by dhy on 18-8-15.
 //
-# include 
-# include 
+# include &lt;iostream&gt;
+# include &lt;algorithm&gt;
 using namespace std;
-int n,m,p;
-struct SegmentNode{
-...
+int n...
                 </p>
           
                 <div class="article__meta">
@@ -12695,11 +12699,10 @@ struct SegmentNode{
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-void dfs(int u,int fa){
+                  void dfs(int u,int fa){
     dep[u] = dep[fa]+1;
     for(int i = 0;i&lt;=19;i++){
-        f[u][i+1]=f[f[u][i]][...
+        f[u][i+1]=f[f[u][i]][i];//处理...
                 </p>
           
                 <div class="article__meta">
@@ -12745,13 +12748,12 @@ void dfs(int u,int fa){
           
                 <p class="article__excerpt">
                   构造普通线段树
-cpp
 //用数组来做
 int mins[];
 void build(int k,int l,int r){//k代表编号
     if（l==r){
         nodes[k].val = a[l];
-    ...
+        ...
                 </p>
           
                 <div class="article__meta">
@@ -12796,13 +12798,12 @@ void build(int k,int l,int r){//k代表编号
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-int max = ....;
+                  int max = ....;
 int logN = 20;//自己改，值是log2 N
 int a[],F[max][logN],int log2[];
 cin&gt;&gt;a;
 log2[0] = -1;
-for(1.....
+for(1...N){...
                 </p>
           
                 <div class="article__meta">
@@ -12849,9 +12850,10 @@ for(1.....
                 <p class="article__excerpt">
                   一.作用
 求区间最大最小值
-# 二.算法流程
-&gt;1.预处理
-$ST算法本质是动态规划，我们用a[1…n]表示一组数，设F[i,j]表示从a[i]到a[i+$2^{j-1}$]这个范围的最大值，也就是以a[i]为起点的连续$2^j...
+二.算法流程
+
+  1.预处理
+$ST算法本质是动态规划，我们用a[1…n]表示一组数，设F[i,j]表示从a[i]到a[i+$2^{j-1}$]这个范围的最大值，也就是以a[i]为起点的连续$2^j$个数...
                 </p>
           
                 <div class="article__meta">
@@ -12896,11 +12898,11 @@ $ST算法本质是动态规划，我们用a[1…n]表示一组数，设F[i,j]表
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-    int dis[N];
+                      int dis[N];
     bool exist[2001];
     memset(exist,false, sizeof(exist));
-    memset(dis,0x7f, sizeof(dis)...
+    memset(dis,0x7f, sizeof(dis));
+    ...
                 </p>
           
                 <div class="article__meta">
@@ -12945,14 +12947,13 @@ $ST算法本质是动态规划，我们用a[1…n]表示一组数，设F[i,j]表
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-struct node{
+                  struct node{
     int son[27];
     int exist = false;
     bool visited = false;
 }nodes[900000];
 int top = 0;
-vo...
+void inse...
                 </p>
           
                 <div class="article__meta">
@@ -12999,10 +13000,11 @@ vo...
                 <p class="article__excerpt">
                   树上倍增
 见模板
-# 欧拉遍历序
+欧拉遍历序
 欧拉序是dfs序的一种，就是在dfs的时候的顺序，计算可以如下
-&gt;法1、在每个结点进和出都加进序列。 
-    »1、求某个点到根节点的额权值和。方法是：需要在进的点处做加法，出的点处做减法，查...
+
+  法1、在每个结点进和出都加进序列。 
+    »1、求某个点到根节点的额权值和。方法是：需要在进的点处做加法，出的点处做减法，查询某点...
                 </p>
           
                 <div class="article__meta">
@@ -13048,14 +13050,13 @@ vo...
           
                 <p class="article__excerpt">
                   一维：
-cpp
 c[];//
 int lowbit(int x){
     return x&amp;-x;//自证不难个屁
 }
 void add(int x,int value){
     while(x&lt;=n){
-    c...
+    c[x]+...
                 </p>
           
                 <div class="article__meta">
@@ -13102,10 +13103,10 @@ void add(int x,int value){
                 <p class="article__excerpt">
                   作用
 解决单点修改、区间询问（区间修改、单点询问，区间修改、区间询问）的问题
-# 复杂度
+复杂度
 $O(nlogn)$
-# 概念
-线段是是一颗二叉树，线段树上的每一个节点对应序列的一段区间，根节点对应的是[0,n-1]。若一个节点对应的是[l...
+概念
+线段是是一颗二叉树，线段树上的每一个节点对应序列的一段区间，根节点对应的是[0,n-1]。若一个节点对应的是[l,r]时...
                 </p>
           
                 <div class="article__meta">
@@ -13197,15 +13198,13 @@ $O(nlogn)$
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-//
+                  //
 // Created by dhy on 18-8-8.
 //
-# include 
-# include 
+# include &lt;iostream&gt;
+# include &lt;cstring&gt;
 using namespace std;
-const int OK = 1;
-const int REPE...
+const in...
                 </p>
           
                 <div class="article__meta">
@@ -13252,7 +13251,7 @@ const int REPE...
                 <p class="article__excerpt">
                   区间dp
 定义：从较小的区间向较大的区间转移，就是按照区间长度从小到大转移。
-#  环上dp
+环上dp
 在环上描述的问题，采用倍增成链。把一个环上的数据，放到两倍长的链上.（you know that）
 
                 </p>
@@ -13302,8 +13301,8 @@ const int REPE...
                   差分-&gt;前缀和的逆运算
 b[i]是a[i]-a[i-1].
 如果要对某一区间i-j进行加减操作，直接b[i]+x b[j+1]-x就行，在O(1)内完成操作，输出a数组时，a[i] = $\sum b[1…i]$
-# 分块
-把序...
+分块
+把序列分...
                 </p>
           
                 <div class="article__meta">
@@ -13348,14 +13347,12 @@ b[i]是a[i]-a[i-1].
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-//
+                  //
 // Created by dhy on 18-8-8.
 //
-# include 
+# include &lt;iostream&gt;
 using namespace std;
-int q[500000+1],c[5000000+1] = {0};
-int mai...
+int q[500000+1],c[5000000+1] = {0}...
                 </p>
           
                 <div class="article__meta">
@@ -13403,8 +13400,8 @@ int mai...
                   柯西不等式
 $(a^2+b^2)(c^2+d^2)&gt;=(ac+bd)^2$
 反序和&lt;=乱序和&lt;=顺序和
-# 调和级数
-$\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
+调和级数
+$\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + r$...
                 </p>
           
                 <div class="article__meta">
@@ -13551,8 +13548,8 @@ $\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
 1.设定起始点，放入A集合，将起始点连接的边放入可选的边的集合中去。
 2.循环n-1次，
     1.找出可选的边集合中另一个端点在b集合中且边权最小的一条，将它加入最小生成树
-# 堆优化O(n log m)
-把边...
+堆优化O(n log m)
+把边按边...
                 </p>
           
                 <div class="article__meta">
@@ -13597,16 +13594,13 @@ $\frac{1}{1}+\frac{1}{2}+…..+\frac{1}{n}==ln n + ...
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-//
+                  //
 // Created by dhy on 18-8-5.
 //
-# include 
-# include 
-# include 
-using namespace std;
-int map[200][200];
-in...
+# include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;algorithm&gt;
+u...
                 </p>
           
                 <div class="article__meta">
@@ -13653,12 +13647,13 @@ in...
                 <p class="article__excerpt">
                   剪枝
 避免访问那些已经不可能成功的后继状态
-# 最优性剪枝
+最优性剪枝
 若当前价值加估价已经大于目前最优解，则剪掉，估价越高效果越好
-# 引入随机
+引入随机
 解空间非常大的时候，可以引入随机来减少解空间
-# 预处理
-预处理一些数据，方便之后剪枝dfs与bf...
+预处理
+预处理一些数据，方便之后剪枝dfs与bfs结合
+折半...
                 </p>
           
                 <div class="article__meta">
@@ -13858,12 +13853,11 @@ set
 原理：
 质数的倍数一点不是质数
 代码：
-cpp
 int prime[10000001];
 bool judge[10000001];
 int tot = 0;
 void ph(int N){
-    memset(judge...
+    memset(judge,tru...
                 </p>
           
                 <div class="article__meta">
@@ -14001,9 +13995,9 @@ void ph(int N){
           
                 <p class="article__excerpt">
                   最小生成树(Minimum Spanning Tree MST)用于解决最小代价问题，例如用N-1条边链接N个城市，求最小”花费”
-#  定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
-# 1.Prim算法
-最小生成树...
+定理1:N个点用N-1条边连成一个连通块，形成的图形只可能是树
+1.Prim算法
+最小生成树其实就是连...
                 </p>
           
                 <div class="article__meta">
@@ -14048,13 +14042,12 @@ void ph(int N){
                 </h2>
           
                 <p class="article__excerpt">
-                  cpp
-# include &lt;iostream&gt;
+                  # include &lt;iostream&gt;
 # include &lt;algorithm&gt;
 using namespace std;
 int A,B;
 int caps[100000+1];
-bool jud...
+bool judge(i...
                 </p>
           
                 <div class="article__meta">
@@ -14100,8 +14093,8 @@ bool jud...
           
                 <p class="article__excerpt">
                   反复查找元素在哪个集合里面。解决数据量极大的问题
-# 定义
-并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集...
+定义
+并查集是一种用于分离集合操作的抽象数据类型。处理的是集合之间的关系，即动态的维护和处理集合之间复杂的关系。例如，当给出两个元素的无序对(a,b)时，需要快速合并a和b所在的集合。...
                 </p>
           
                 <div class="article__meta">
@@ -14148,10 +14141,9 @@ bool jud...
                 <p class="article__excerpt">
                   最小环问题说白了就是暴力Floyed算法————沃·兹基·硕德
 emm，上代码
-cpp
 for(int k = 1;k&lt;=n;k++)
     for(int i = 1;i&lt;=k-1;i++){
-        for(...
+        for(int ...
                 </p>
           
                 <div class="article__meta">
@@ -14196,15 +14188,12 @@ for(int k = 1;k&lt;=n;k++)
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-# include 
-# include 
-# include 
+                  # include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;queue&gt;
 using namespace std;
 struct edge{
-    int next,diss ,to;
-}Edges[500001];
-int ...
+    in...
                 </p>
           
                 <div class="article__meta">
@@ -14299,14 +14288,12 @@ int ...
                 </h2>
           
                 <p class="article__excerpt">
-                  ```cpp
-# include 
-# include 
+                  # include &lt;iostream&gt;
+# include &lt;cstring&gt;
 using namespace std;
 struct edge{
     int next,diss ,to;
-}Edges[500001];
-int head[10001]...
+}Edges[...
                 </p>
           
                 <div class="article__meta">
@@ -14352,9 +14339,9 @@ int head[10001]...
           
                 <p class="article__excerpt">
                   剪枝搜索
-# 折半搜索
+折半搜索
 从两头开始搜
-# 迭代加深
+迭代加深
 
                 </p>
           
@@ -14406,8 +14393,7 @@ O($n^3$)
 1.初始化，点U，V相连则dis[u][v] = w[u][v]
 若不相连则dis[u][v] = 0x7FFFFFF;
 2.
-cpp
-for(int k = 1;k&lt;=n;k++)//中专...
+for(int k = 1;k&lt;=n;k++)//中专点放第一...
                 </p>
           
                 <div class="article__meta">
@@ -14454,9 +14440,9 @@ for(int k = 1;k&lt;=n;k++)//中专...
                 <p class="article__excerpt">
                   定义
 点用边连接起来就是图，严格的讲，图是一种数据结构，定义为graph = (V,E),V是一个有限非空集合，代表定点，E是边的集合
-# 概念
+概念
 1节点的度：无向图中与节点相连接的边的数目，叫节点的度
-2节点的入度：在有向图中，以这个...
+2节点的入度：在有向图中，以这个节点...
                 </p>
           
                 <div class="article__meta">
@@ -14502,13 +14488,12 @@ for(int k = 1;k&lt;=n;k++)//中专...
           
                 <p class="article__excerpt">
                   设置小数精度
-cpp
 cout&lt;&lt;setiosflags(ios::fixed)&lt;&lt;setprecision(3)&lt;&lt;ans;
 
 
 1.优化流输出，使其与scanf/printf一样快
 
-  ios...
+  ios::sy...
                 </p>
           
                 <div class="article__meta">

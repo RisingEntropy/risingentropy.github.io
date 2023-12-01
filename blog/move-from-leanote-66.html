@@ -18,27 +18,25 @@
 对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
 如果某个正整数x满足：g(x)&amp;gt;g(i) 0&amp;lt;i&amp;lt;x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
 现在给定一个数N，你能求出不超过N的最大的反质数么？
-#  输入格式：
+输入格式：
 一个数N（1&amp;lt;=N&amp;lt;=2,000,000,000）。
-#  输出格式：
+输出格式：
 不超过N的最大的反质数。
-#  输入
-
+输入
 1000
 
-#  输出
-
+输出
 840
 
-# 解答
+解答
 其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
 \(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
-# 代码
+代码
 ```cpp
-# include 
-# include 
-# include 
+include 
+include 
+include 
 using namespace std;
 int primes[13]={0,2,3,5,7,11,13,17,19,23,29,31,37};//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了
 long long ans = 0;
@@ -55,8 +53,8 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 		ans = now;
 	}
 	for(int i = 1;i&amp;lt;=63;i++){
-		if(primes[prime_cnt]*now&amp;gt;n)break;//如果超了,舍弃不要
-		dfs(prime_cnt+1,now*=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
+		if(primes[prime_cnt]now&amp;gt;n)break;//如果超了,舍弃不要
+		dfs(prime_cnt+1,now=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
 	}
 
 }
@@ -69,27 +67,25 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
 如果某个正整数x满足：g(x)&amp;gt;g(i) 0&amp;lt;i&amp;lt;x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
 现在给定一个数N，你能求出不超过N的最大的反质数么？
-#  输入格式：
+输入格式：
 一个数N（1&amp;lt;=N&amp;lt;=2,000,000,000）。
-#  输出格式：
+输出格式：
 不超过N的最大的反质数。
-#  输入
-
+输入
 1000
 
-#  输出
-
+输出
 840
 
-# 解答
+解答
 其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
 \(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
-# 代码
+代码
 ```cpp
-# include 
-# include 
-# include 
+include 
+include 
+include 
 using namespace std;
 int primes[13]={0,2,3,5,7,11,13,17,19,23,29,31,37};//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了
 long long ans = 0;
@@ -106,8 +102,8 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 		ans = now;
 	}
 	for(int i = 1;i&amp;lt;=63;i++){
-		if(primes[prime_cnt]*now&amp;gt;n)break;//如果超了,舍弃不要
-		dfs(prime_cnt+1,now*=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
+		if(primes[prime_cnt]now&amp;gt;n)break;//如果超了,舍弃不要
+		dfs(prime_cnt+1,now=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
 	}
 
 }
@@ -280,60 +276,57 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>对于任何正整数x，其约数的个数记作g(x)。例如g(1)=1、g(6)=4。
 如果某个正整数x满足：g(x)&gt;g(i) 0<code class="language-plaintext highlighter-rouge">&lt;</code>i<code class="language-plaintext highlighter-rouge">&lt;</code>x，则称x为反质数。例如，整数1，2，4，6等都是反质数。
-现在给定一个数N，你能求出不超过N的最大的反质数么？
-#  输入格式：
-一个数N（1&lt;=N&lt;=2,000,000,000）。
-#  输出格式：
-不超过N的最大的反质数。
-#  输入
-<code class="language-plaintext highlighter-rouge">
-1000
-</code>
-#  输出
-<code class="language-plaintext highlighter-rouge">
-840
-</code>
-# 解答
-其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
+现在给定一个数N，你能求出不超过N的最大的反质数么？</p>
+<h1 id="输入格式">输入格式：</h1>
+<p>一个数N（1&lt;=N&lt;=2,000,000,000）。</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>不超过N的最大的反质数。</p>
+<h1 id="输入">输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1000
+</code></pre></div></div>
+<h1 id="输出">输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>840
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
-\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
-# 代码
-```cpp
-# include <iostream>
-# include <string>
-# include <cstring>
-using namespace std;
-int primes[13]={0,2,3,5,7,11,13,17,19,23,29,31,37};//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了
-long long ans = 0;
-long long n;
-int MAX = 0;
-void dfs(int prime_cnt,long long now,int nums){//暴搜
-	if(prime_cnt&gt;=12)return;//如果因数个数大于12,那么不可能了，剪掉
-	if(nums&gt;MAX){//找到了因数多的数
-		MAX = nums;
-		ans = now;
-	}
-	if(MAX==nums&amp;&amp;ans&gt;now){//如果当前数小于已找到的答案，且因数个数相同，那么我们取较小的那个，因为这样更可能获得更多的因数
-	//当初自己迷惑这里，其实是不必要的，因为在范围内，找到因数个数更多的数是，在上面就已经更新了，这里就不会更新了，否则，因数个数相同，取较小的值
-		ans = now;
-	}
-	for(int i = 1;i&lt;=63;i++){
-		if(primes[prime_cnt]*now&gt;n)break;//如果超了,舍弃不要
-		dfs(prime_cnt+1,now*=primes[prime_cnt],nums*(i+1));//根据一个数的因数个数公式
-	}</cstring></string></iostream></p>
+\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)</p>
+<h1 id="代码">代码</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;string&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">primes</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">37</span><span class="p">};</span><span class="c1">//一共就这么几个素数，在题干中的范围内，不可能再有其他质因数了</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">prime_cnt</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">nums</span><span class="p">){</span><span class="c1">//暴搜</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="c1">//如果因数个数大于12,那么不可能了，剪掉</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="o">&gt;</span><span class="n">MAX</span><span class="p">){</span><span class="c1">//找到了因数多的数</span>
+		<span class="n">MAX</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">MAX</span><span class="o">==</span><span class="n">nums</span><span class="o">&amp;&amp;</span><span class="n">ans</span><span class="o">&gt;</span><span class="n">now</span><span class="p">){</span><span class="c1">//如果当前数小于已找到的答案，且因数个数相同，那么我们取较小的那个，因为这样更可能获得更多的因数</span>
+	<span class="c1">//当初自己迷惑这里，其实是不必要的，因为在范围内，找到因数个数更多的数是，在上面就已经更新了，这里就不会更新了，否则，因数个数相同，取较小的值</span>
+		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">63</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">]</span><span class="o">*</span><span class="n">now</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//如果超了,舍弃不要</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="o">*=</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">],</span><span class="n">nums</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="c1">//根据一个数的因数个数公式</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span>
 
-<p>}</p>
-
-<p>int main(void){
-	ios::sync_with_stdio(false);
-	cin»n;
-	dfs(1,1,1);
-	cout«ans;
-}
-```</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

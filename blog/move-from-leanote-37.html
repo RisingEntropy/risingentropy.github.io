@@ -15,7 +15,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="线段树 – Haoyu Deng's page">
   <meta name="twitter:description" content="构造普通线段树
-cpp
 //用数组来做
 int mins[];
 void build(int k,int l,int r){//k代表编号
@@ -29,7 +28,7 @@ void build(int k,int l,int r){//k代表编号
     mins[k] =  min(mins[2*k].val,mins[2*k+1].val);//当前节点的值，根据实际情况改
 }
 
-# 区间查询
+区间查询
 ```cpp
 int query(int k,int l,int r,int x,int y){//l是标号,xy是询问区间，lr是当前区间
     if(x&amp;gt;r||y&amp;lt;l)return inf;//查询区间不在该节点的范围内
@@ -43,7 +42,6 @@ int query(int k,int l,int r,int x,int y){//l是标号,xy是询问区间，lr是�
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="线段树 – Haoyu Deng's page">
   <meta property="og:description" content="构造普通线段树
-cpp
 //用数组来做
 int mins[];
 void build(int k,int l,int r){//k代表编号
@@ -57,7 +55,7 @@ void build(int k,int l,int r){//k代表编号
     mins[k] =  min(mins[2*k].val,mins[2*k+1].val);//当前节点的值，根据实际情况改
 }
 
-# 区间查询
+区间查询
 ```cpp
 int query(int k,int l,int r,int x,int y){//l是标号,xy是询问区间，lr是当前区间
     if(x&amp;gt;r||y&amp;lt;l)return inf;//查询区间不在该节点的范围内
@@ -234,121 +232,115 @@ int query(int k,int l,int r,int x,int y){//l是标号,xy是询问区间，lr是�
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">构造普通线段树</h1>
-<p><code class="language-plaintext highlighter-rouge">cpp
-//用数组来做
-int mins[];
-void build(int k,int l,int r){//k代表编号
-    if（l==r){
-        nodes[k].val = a[l];
-        return;
-    }
-    int mid = (l+r)/2;
-    build(k*2,l,mid);
-    build(k*2+1,mid+1,r);
-    mins[k] =  min(mins[2*k].val,mins[2*k+1].val);//当前节点的值，根据实际情况改
-}
-</code>
-# 区间查询
-```cpp
-int query(int k,int l,int r,int x,int y){//l是标号,xy是询问区间，lr是当前区间
-    if(x&gt;r||y&lt;l)return inf;//查询区间不在该节点的范围内
-    if(x&lt;=l&amp;&amp;r&lt;=y)return//只有真包含才会执行 nodes[k].val;
-    int mind = (l+r)/2;
-    return min(query(k<em>2,l,mid,x,y),query(k</em>2+1,mid+1,r,x,y);
-}</p>
+      <h1 id="构造普通线段树">构造普通线段树</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//用数组来做</span>
+<span class="kt">int</span> <span class="n">mins</span><span class="p">[];</span>
+<span class="kt">void</span> <span class="nf">build</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span><span class="c1">//k代表编号</span>
+    <span class="k">if</span><span class="err">（</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>
+        <span class="n">nodes</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">];</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span>
+    <span class="n">build</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="n">mins</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span>  <span class="n">min</span><span class="p">(</span><span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">].</span><span class="n">val</span><span class="p">,</span><span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="p">);</span><span class="c1">//当前节点的值，根据实际情况改</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="区间查询">区间查询</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="c1">//l是标号,xy是询问区间，lr是当前区间</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">r</span><span class="o">||</span><span class="n">y</span><span class="o">&lt;</span><span class="n">l</span><span class="p">)</span><span class="k">return</span> <span class="n">inf</span><span class="p">;</span><span class="c1">//查询区间不在该节点的范围内</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">l</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span><span class="c1">//只有真包含才会执行 nodes[k].val;</span>
+    <span class="kt">int</span> <span class="n">mind</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">min</span><span class="p">(</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
 
-<p><code class="language-plaintext highlighter-rouge">
-# 单点修改
-</code>cpp
-void change(int k,int l,int r,int x,int v){
-    if(x&lt;l||x&gt;r)return ;//不在区间内，不管
-    if(l==r&amp;&amp;x==l){//不要忘了l==r
-        mi[k] = v;
-        return;
-    }
-    int mid = (l+r)/2;
-    change(k<em>2,l,mid,x,v);
-    change(k</em>2+1,mid+1,r,x,v);
-    mi[k] = min(mi[k<em>2],mi[k</em>2+1]);//回来的路上把值更新了
-}
-<code class="language-plaintext highlighter-rouge">
-# 区间修改，单点查询
-</code>cpp
-addsum[];
-int query(int k,int l,int r,int pos){
-    if(l==r)return addsum[k];
-    int mid = (l+r)»1;
-    if(pos&lt;=mid)return query(2<em>k,l,mid,pos)+addsum[k];
-    else return query(k</em>2+1,mid+1,r,pos)+addsum[k];
-}
-void modify(int k,int l,int r int x int y,int v){//区间[x,y]内所有数加上v
-        if(l&gt;y||r&lt;x)return;
-        if(l&gt;=x&amp;&amp;r&lt;=y){//完全包含
-            addsum[k]+=v;//标记上
-            return;
-        }
-        int mid = l+r»1;
-        modify(k<em>2,l,mid,x,y,v);
-        modify(k</em>2+1,mid+1,r,x,y,v);
-}
-<code class="language-plaintext highlighter-rouge">
-# 标记下传
-</code>cpp
-void Add(int k,int l,int r,intv){
-    add[k] +=v;
-    sum[k]+=(r-l+1)<em>v;
-    retrun;
-}
-void pushdown(int k,int l,int r,int mid){//标记下传
-    if(add[k]==0)return;//如果当前节点没有标记，就不管
-    Add(k</em>2,l,mid,add[k]);
-    Add(k<em>2+1,mid+1,r,add[k]);
-    add[k] = 0;//清空标记
-}
-void modify(int k,int l,int r,int x,int y,int v){
-    if(l&gt;=x&amp;&amp;r&lt;=y)return Add(k,l,r,v);//包含
-    int mid = l + r»1;
-    pushdown(k,l,r,mid);//每一个节点都向下穿标记
-    if(x&lt;=mid)modify(k</em>2,l,mid,x,y,v);
-    if(mid&lt;y)modify(k<em>2+1,mid+1,r,x,y,v);
-    sum[k] = sum[k</em>2]+sum[k<em>2+1];//下传后更新当前正确的sum值
-}
-int query(int k,int l,int r,int x,int y){//查询[l,r]的和
-    if(l&gt;=x&amp;&amp;r&lt;=y)return sum[k];
-    int mid = l+r»1;
-    int ans = 0;
-    pushdown(k,l,r,mid);
-    if(x&lt;=mid)res+=query(k</em>2,l,mid,x,y);
-    if(mid&lt;y)res+=query(k*2+1,mid+1,r,x,y);
-    return res;
-}</p>
+</code></pre></div></div>
+<h1 id="单点修改">单点修改</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">change</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">l</span><span class="o">||</span><span class="n">x</span><span class="o">&gt;</span><span class="n">r</span><span class="p">)</span><span class="k">return</span> <span class="p">;</span><span class="c1">//不在区间内，不管</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="o">==</span><span class="n">l</span><span class="p">){</span><span class="c1">//不要忘了l==r</span>
+        <span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">change</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">change</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">],</span><span class="n">mi</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span><span class="c1">//回来的路上把值更新了</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="区间修改单点查询">区间修改，单点查询</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addsum</span><span class="p">[];</span>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">)</span><span class="k">return</span> <span class="n">addsum</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">pos</span><span class="p">)</span><span class="o">+</span><span class="n">addsum</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="k">else</span> <span class="k">return</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pos</span><span class="p">)</span><span class="o">+</span><span class="n">addsum</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span> <span class="kt">int</span> <span class="n">x</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span><span class="c1">//区间[x,y]内所有数加上v</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;</span><span class="n">y</span><span class="o">||</span><span class="n">r</span><span class="o">&lt;</span><span class="n">x</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">){</span><span class="c1">//完全包含</span>
+            <span class="n">addsum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span><span class="c1">//标记上</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+        <span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="标记下传">标记下传</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="n">intv</span><span class="p">){</span>
+    <span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span><span class="n">v</span><span class="p">;</span>
+    <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+=</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">;</span>
+    <span class="n">retrun</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">mid</span><span class="p">){</span><span class="c1">//标记下传</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="c1">//如果当前节点没有标记，就不管</span>
+    <span class="n">Add</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+    <span class="n">Add</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+    <span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//清空标记</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">v</span><span class="p">);</span><span class="c1">//包含</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span><span class="c1">//每一个节点都向下穿标记</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mid</span><span class="o">&lt;</span><span class="n">y</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span><span class="c1">//下传后更新当前正确的sum值</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="c1">//查询[l,r]的和</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mid</span><span class="o">&lt;</span><span class="n">y</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p><code class="language-plaintext highlighter-rouge">
-# 标记永久化
-</code>cpp
-void modify(int k,int l,int r,int x,int y,int v){
-    if(l&gt;=x&amp;&amp;r&lt;=y){
-        add[k]+=v;
-        return ;
-    }
-    sum[k]+=(min(r,y)-max(l,x)+1)<em>v;//计算子节点对当前节点的影响
-    int mid = l+r»1;
-    if(x&lt;=mid)modify(k</em>2,l,mid,x,y,v);
-    if(mid&lt;y)midfy(k<em>2+1,mid+1,r,x,y,v);
-    sum[k]=sum[k</em>2]+sum[k*2+1]//千万不要忘了
-}</p>
+</code></pre></div></div>
+<h1 id="标记永久化">标记永久化</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">){</span>
+        <span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+=</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">;</span><span class="c1">//计算子节点对当前节点的影响</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">modify</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mid</span><span class="o">&lt;</span><span class="n">y</span><span class="p">)</span><span class="n">midfy</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="c1">//千万不要忘了</span>
+<span class="p">}</span>
 
-<p>int query(int k,int l,int r,int x,int y){
-    if(l&gt;=x&amp;&amp;r&lt;=y)return sum[k]+(r-l+1)<em>add[k];
-    int mid = l+r»1;
-    int res = (min(r,y)-max(l,x)+1)</em>add[k];
-    if(x&lt;=mid)res+=query(k<em>2,l,mid,x,y);
-    if(mid&lt;y)res+=query(k</em>2+1,mid+1,r,x,y);
-    return res;
-}
-```
-# 小优化</p>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">sum</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">add</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">mid</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mid</span><span class="o">&lt;</span><span class="n">y</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="小优化">小优化</h1>
 
 <ol>
   <li>a/2 -&gt;a»1</li>

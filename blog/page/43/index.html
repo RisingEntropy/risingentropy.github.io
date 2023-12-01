@@ -237,16 +237,13 @@
       </h2>
 
       <p class="c-blog-card__excerpt">
-        ```cpp
-//
+        //
 // Created by dhy on 18-8-15.
 //
-# include 
-# include 
+# include &lt;iostream&gt;
+# include &lt;algorithm&gt;
 using namespace std;
-int n,m,p;
-struct SegmentNode{
-...
+int n...
       </p>
 
       <div class="c-blog-card__meta">
@@ -340,11 +337,10 @@ struct SegmentNode{
       </h2>
 
       <p class="c-blog-card__excerpt">
-        ```cpp
-void dfs(int u,int fa){
+        void dfs(int u,int fa){
     dep[u] = dep[fa]+1;
     for(int i = 0;i&lt;=19;i++){
-        f[u][i+1]=f[f[u][i]][...
+        f[u][i+1]=f[f[u][i]][i];//处理...
       </p>
 
       <div class="c-blog-card__meta">
@@ -390,13 +386,12 @@ void dfs(int u,int fa){
 
       <p class="c-blog-card__excerpt">
         构造普通线段树
-cpp
 //用数组来做
 int mins[];
 void build(int k,int l,int r){//k代表编号
     if（l==r){
         nodes[k].val = a[l];
-    ...
+        ...
       </p>
 
       <div class="c-blog-card__meta">
@@ -441,13 +436,12 @@ void build(int k,int l,int r){//k代表编号
       </h2>
 
       <p class="c-blog-card__excerpt">
-        cpp
-int max = ....;
+        int max = ....;
 int logN = 20;//自己改，值是log2 N
 int a[],F[max][logN],int log2[];
 cin&gt;&gt;a;
 log2[0] = -1;
-for(1.....
+for(1...N){...
       </p>
 
       <div class="c-blog-card__meta">

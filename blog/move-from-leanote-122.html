@@ -190,14 +190,14 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 
 <p>A team of k (1 &lt;= K &lt;= 100) workers should paint a fence which contains N (1 &lt;= N &lt;= 16 000) planks numbered from 1 to N from left to right. Each worker i (1 &lt;= i &lt;= K) should sit in front of the plank Si and he may paint only a compact interval (this means that the planks from the interval should be consecutive). This interval should contain the Si plank. Also a worker should not paint more than Li planks and for each painted plank he should receive Pi $ (1 &lt;= Pi &lt;= 10 000). A plank should be painted by no more than one worker. All the numbers Si should be distinct.</p>
 
 <p>Being the team’s leader you want to determine for each worker the interval that he should paint, knowing that the total income should be maximal. The total income represents the sum of the workers personal income.</p>
 
-<p>Write a program that determines the total maximal income obtained by the K workers. 
-#  Input</p>
+<p>Write a program that determines the total maximal income obtained by the K workers.</p>
+<h1 id="input">Input</h1>
 
 <p>The input contains: 
 Input</p>
@@ -213,23 +213,21 @@ LK PK SK</p>
 <p>N -the number of the planks; K ? the number of the workers 
 Li -the maximal number of planks that can be painted by worker i 
 Pi -the sum received by worker i for a painted plank 
-Si -the plank in front of which sits the worker i 
-#  Output</p>
+Si -the plank in front of which sits the worker i</p>
+<h1 id="output">Output</h1>
 
-<p>The output contains a single integer, the total maximal income.
-#  Sample Input
-<code class="language-plaintext highlighter-rouge">
-8 4
+<p>The output contains a single integer, the total maximal income.</p>
+<h1 id="sample-input">Sample Input</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8 4
 3 2 2
 3 2 3
 3 3 5
 1 1 7 
-</code>
-#  Sample Output
-<code class="language-plaintext highlighter-rouge">
-17
-</code>
-#  Hint</p>
+</code></pre></div></div>
+<h1 id="sample-output">Sample Output</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>17
+</code></pre></div></div>
+<h1 id="hint">Hint</h1>
 
 <p>Explanation of the sample:</p>
 
@@ -242,7 +240,7 @@ Si -the plank in front of which sits the worker i
 <p>the worker 4 does not paint any plank 
 Source</p>
 
-<h1 id="section-1">解答</h1>
+<h1 id="解答">解答</h1>
 <p>首先设计状态，我们用$F[i,j]$表示前$i$个工人粉刷前j个木板的最大收益，那么如何转移呢？</p>
 
 <ol>
@@ -269,48 +267,47 @@ Source</p>
 </ol>
 
 <p>那么对于这道题，从内层循环开始时(j=Si)，建立一个空的单调队列，把$[max(S_i-L_i,0),S_i-1]$中的决策依次加入候选集合，对于每个$j=Si~N$,先在队头检查决策合法性，然后取队头为最优决策进行状态转移。每个决策入队出队依次，转移复杂度$O(1)$总体复杂度$O(MN)$
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 18-12-22.
-//
-# include &lt;cstring&gt;
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-22.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstring&gt;
 # include &lt;iostream&gt;
 # include &lt;deque&gt;
 # include &lt;algorithm&gt;
-using namespace std;
-struct worker{int si,li,pi;}workers[110];
-bool operator&lt;(const worker &amp;w1,const worker &amp;w2){return w1.si&lt;w2.si;}
-int F[110][16010];
-int cal(int i,int k){//前面提到过的小优化，方便计算
-    return F[i-1][k]-workers[i].pi*k;
-}
-int n,m;
-int main() {
-    cin&gt;&gt;n&gt;&gt;m;
-    for(int i = 1;i&lt;=m;i++)cin&gt;&gt;workers[i].li&gt;&gt;workers[i].pi&gt;&gt;workers[i].si;
-    sort(workers+1,workers+m+1);//按Si从大到小排序，这样就可以愉快地按线性dp的方式来啦
-    for(int i = 1;i&lt;=m;i++){
-        deque&lt;int&gt; q;//这里我采用双端队列，方便维护这个单调队列
-        for(int k = max(0,workers[i].si-workers[i].li);k &lt;= workers[i].si-1;k++){
-            //int k = max(0,workers[i].si-workers[i].li)是为了强制包含si，然后枚举从si
-之前的哪个木板开始刷(题目说了是连续的)
-            //k &lt;= workers[i].si-1是为了防止把si这一块刷2次
-            while(!q.empty()&amp;&amp;cal(i,q.back())&lt;=cal(i,k))q.pop_back();//排除队列里面根本不可能出现在决策的集合
-            q.push_back(k);//把当且决策加入集合
-        }
-        for(int j = 1;j&lt;=n;j++){//开始枚举每一块木板
-            F[i][j] = max(F[i-1][j],F[i][j-1]);//不粉刷时的转移
-            if(j&gt;=workers[i].si){//粉刷k+1~j块木板的转移
-                while(!q.empty()&amp;&amp;q.front()&lt;j-workers[i].li)q.pop_front();//排除不合法的决策
-                if(!q.empty())F[i][j] = max(F[i][j],cal(i,q.front())+workers[i].pi*j);//队列飞控时，取队头进行状态转移
-            }
-        }
-    }
-    cout&lt;&lt;F[m][n]&lt;&lt;endl;
-    return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">worker</span><span class="p">{</span><span class="kt">int</span> <span class="n">si</span><span class="p">,</span><span class="n">li</span><span class="p">,</span><span class="n">pi</span><span class="p">;}</span><span class="n">workers</span><span class="p">[</span><span class="mi">110</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">worker</span> <span class="o">&amp;</span><span class="n">w1</span><span class="p">,</span><span class="k">const</span> <span class="n">worker</span> <span class="o">&amp;</span><span class="n">w2</span><span class="p">){</span><span class="k">return</span> <span class="n">w1</span><span class="p">.</span><span class="n">si</span><span class="o">&lt;</span><span class="n">w2</span><span class="p">.</span><span class="n">si</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="mi">110</span><span class="p">][</span><span class="mi">16010</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="c1">//前面提到过的小优化，方便计算</span>
+    <span class="k">return</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">*</span><span class="n">k</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">workers</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">workers</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="c1">//按Si从大到小排序，这样就可以愉快地按线性dp的方式来啦</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span><span class="c1">//这里我采用双端队列，方便维护这个单调队列</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="p">);</span><span class="n">k</span> <span class="o">&lt;=</span> <span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+            <span class="c1">//int k = max(0,workers[i].si-workers[i].li)是为了强制包含si，然后枚举从si</span>
+<span class="err">之前的哪个木板开始刷</span><span class="p">(</span><span class="err">题目说了是连续的</span><span class="p">)</span>
+            <span class="c1">//k &lt;= workers[i].si-1是为了防止把si这一块刷2次</span>
+            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="c1">//排除队列里面根本不可能出现在决策的集合</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="c1">//把当且决策加入集合</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//开始枚举每一块木板</span>
+            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span><span class="c1">//不粉刷时的转移</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="p">){</span><span class="c1">//粉刷k+1~j块木板的转移</span>
+                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">&lt;</span><span class="n">j</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="c1">//排除不合法的决策</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">())</span><span class="o">+</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">*</span><span class="n">j</span><span class="p">);</span><span class="c1">//队列飞控时，取队头进行状态转移</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

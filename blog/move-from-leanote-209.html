@@ -16,15 +16,15 @@
   <meta name="twitter:title" content="【冷门知识点】支配树 – Haoyu Deng's page">
   <meta name="twitter:description" content="支配树
 在一个有向图中，有一个起点R，对于任意点W，对于R-&amp;gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
-#  支配树的性质
+支配树的性质
 1.支配树是以R为根的一棵树
 2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&amp;gt;i的必经点
 3.对于任意的i，它是子树中每个点的必经点
-#  求得
-#  半必经点
+求得
+半必经点
 在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&amp;gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
 通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。
-#  半必经点性质
+半必经点性质
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -32,15 +32,15 @@
   <meta property="og:title" content="【冷门知识点】支配树 – Haoyu Deng's page">
   <meta property="og:description" content="支配树
 在一个有向图中，有一个起点R，对于任意点W，对于R-&amp;gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
-#  支配树的性质
+支配树的性质
 1.支配树是以R为根的一棵树
 2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&amp;gt;i的必经点
 3.对于任意的i，它是子树中每个点的必经点
-#  求得
-#  半必经点
+求得
+半必经点
 在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&amp;gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
 通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。
-#  半必经点性质
+半必经点性质
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -210,17 +210,17 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">支配树</h1>
-<p>在一个有向图中，有一个起点R，对于任意点W，对于R-&gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树
-#  支配树的性质
-1.支配树是以R为根的一棵树
+      <h1 id="支配树">支配树</h1>
+<p>在一个有向图中，有一个起点R，对于任意点W，对于R-&gt;W的任意路径都经过点P，则称P为W的支配点。设idom[i]表示距离i最近的支配点。在原图基础上，idom[i]向i连边构成一颗新树，称为支配树</p>
+<h1 id="支配树的性质">支配树的性质</h1>
+<p>1.支配树是以R为根的一棵树
 2.对于任意点i，到根r路径上经过的点集{xi}是原图上r-&gt;i的必经点
-3.对于任意的i，它是子树中每个点的必经点
-#  求得
-#  半必经点
-在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
-通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。
-#  半必经点性质</p>
+3.对于任意的i，它是子树中每个点的必经点</p>
+<h1 id="求得">求得</h1>
+<h1 id="半必经点">半必经点</h1>
+<p>在dfs搜索树中，对于一个节点Y，存在某个点X能够通过一系列点pi（不包含X和Y）到达点Y且∀i dfn[i]&gt;dfn[Y]，我们就称X是Y的半必经点，记做semi[Y]=X
+通俗理解：semi[x]就是x在dfs树中所有祖先中z，能不经过 z​ 和 x​ 之间的树上的点而到达 x​ 的点中深度最小的。</p>
+<h1 id="半必经点性质">半必经点性质</h1>
 
 <ol>
   <li>semi[x]一定是x的祖先</li>
@@ -229,24 +229,24 @@
   <li>semi[x]深度不小于idom[x]，即idom[x]在semi[x]祖先链上</li>
 </ol>
 
-<p>~~证明的话，咕咕了~~
-#  半必经点的作用
-保留dfs树的树边，连接semi[i]-&gt;i构建新图。不改变原图支配关系，且构成一个dag图。
-#  计算
-对于点x，有边(y,x)
+<p><del>证明的话，咕咕了</del></p>
+<h1 id="半必经点的作用">半必经点的作用</h1>
+<p>保留dfs树的树边，连接semi[i]-&gt;i构建新图。不改变原图支配关系，且构成一个dag图。</p>
+<h1 id="计算">计算</h1>
+<p>对于点x，有边(y,x)
 • 若dfn[y]$&lt;$dfn[x](树边或前向边） 且dfn[y]$&lt;$dfn[semi[x]] ,semi[x]=y
 • 根据定义显然
 • 若dfn[y]&gt;dfn[x]（后向边或横叉边），找到y的一个祖先semi值最小
-的z且dfn[z]&gt;dfn[x]，用semi[z]更新semi[x]
-#  计算idom
-#  性质</p>
+的z且dfn[z]&gt;dfn[x]，用semi[z]更新semi[x]</p>
+<h1 id="计算idom">计算idom</h1>
+<h1 id="性质">性质</h1>
 
 <ol>
   <li>idom[x]的深度不大于semi[x]</li>
   <li>设点集P是semi[x]（不包含）到x路径上的点，t是P中semi最小的点(1、若semi[t]=semi[x],则idom[x]=semi[x]2、若semi[t]!=semi[x],则idom[x]=idom[t])</li>
 </ol>
 
-<h1 id="section-1">算法</h1>
+<h1 id="算法">算法</h1>
 
 <ol>
   <li>按dfs序搜索原图得到dfn，从dfn大到小考虑节点</li>
@@ -256,110 +256,110 @@
   <li>最后将semi[x]!=idom[x]的节点idom按dfn从小到大刷新一次</li>
 </ol>
 
-<h1 id="section-2">代码实现</h1>
+<h1 id="代码实现">代码实现</h1>
 <p>wdnmd 并查集打错了，跳了一晚上
-HDU4694
-```cpp
-//
-// Created by dhy on 19-6-7.
-//
-# include <iostream>
-# include <vector>
-# include <cstring>
-using namespace std;
-const int MAXN = 1e5+10;
-struct graph{
-    vector<int> G[MAXN];
-    void add(int f,int t){
-        G[f].push_back(t);
-    }
-    void clear(){
-        for(int i = 1;i&lt;MAXN;i++)G[i].clear();
-    }
-}G,rG,sG,tree;
-int dfn[MAXN],id[MAXN],fa[MAXN],semi[MAXN],idom[MAXN];
-int dfn_cnt;
-int belong[MAXN],val[MAXN];
-int n,m;
-int ans[MAXN];
-void reset(){
-    memset(ans,0, sizeof(ans));
-    memset(dfn,0, sizeof(dfn));
-    memset(fa,0, sizeof(fa));
-    memset(semi,0, sizeof(semi));
-    memset(idom,0, sizeof(idom));
-    memset(belong,0, sizeof(belong));
-    memset(val,0, sizeof(val));
-    memset(id,0, sizeof(id));
-    dfn_cnt = 0;
-    G.clear(),rG.clear(),sG.clear(),tree.clear();
-}</int></cstring></vector></iostream></p>
+HDU4694</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-6-7.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;vector&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">graph</span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">G</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+    <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">f</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">clear</span><span class="p">(){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="n">G</span><span class="p">,</span><span class="n">rG</span><span class="p">,</span><span class="n">sG</span><span class="p">,</span><span class="n">tree</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">id</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">semi</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">idom</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">belong</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">reset</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ans</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dfn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dfn</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">fa</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fa</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">semi</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">semi</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">idom</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">idom</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">belong</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">belong</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+    <span class="n">dfn_cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">G</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">rG</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">sG</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="n">tree</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
 
-<p>void getdfn(int x,int f){
-    dfn[x] = ++dfn_cnt;id[dfn_cnt] = x;
-    fa[x] = f;
-    for(int i = 0;i&lt;G.G[x].size();i++){
-        int t = G.G[x][i];
-        if(dfn[t])continue;
-        getdfn(t,x);
-    }
-}
-int find(int x){
-    if(belong[x]==x)return x;
-    int fx = find(belong[x]);
-    if(dfn[semi[val[belong[x]]]]&lt;dfn[semi[val[x]]])val[x] = val[belong[x]];//wdnmd就是这里
-    belong[x] =fx;return fx;
-}
-void tarjan(){
-    for(int j = dfn_cnt;j&gt;1;j–){
-        int x = id[j];
-        for(int i = 0;i&lt;rG.G[x].size();i++){//尝试更新semi
-            int t = rG.G[x][i];
-            if(!dfn[t])continue;
-            find(t);
-            if(dfn[semi[val[t]]]&lt;dfn[semi[x]])
-                semi[x] = semi[val[t]];
-        }
-        sG.add(semi[x],x);//建图
-        belong[x] = fa[x];
-        int now = fa[x];
-        for(int i = 0;i&lt;sG.G[now].size();i++){//图上使用更新fa[x]为semi的点，更新为新找到的那个点
-            int t = sG.G[now][i];
-            find(t);
-            if(semi[val[t]]==now)idom[t] = now;如果semi[x]=semit[t]，说明idom[x]=semi[x]
-            //此时semi=now
-            else idom[t] = val[t];否则就是idom[x]=idom[t]，实现的时候写成idom[t]=t，后面在处理
-        }
-    }
-    for(int i = 2;i&lt;=dfn_cnt;i++){
-        int t = id[i];
-        if(idom[t]!=semi[t])idom[t] = idom[idom[t]];//处理
-        tree.add(idom[t],t);
-    }
-}
-void getans(int x,int sum){
-    ans[x] = x+sum;
-    for(int i = 0;i&lt;tree.G[x].size();i++){
-        int t = tree.G[x][i];
-        getans(t,x+sum);
-    }
-}
-int main(){
-    while(scanf(“%d%d”,&amp;n,&amp;m)!=EOF){
-        reset();int f,t;
-        for(int i = 1;i&lt;=m;i++){
-            scanf(“%d%d”,&amp;f,&amp;t);
-            G.add(f,t);rG.add(t,f);
-        }
-        for(int i = 1;i&lt;=n;i++)belong[i] =semi[i] =val[i] = i;
-        getdfn(n,0);
-        tarjan();
-        getans(n,0);
-        for(int i = 1;i&lt;n;i++)printf(“%d “,ans[i]);
-        printf(“%d”,ans[n]);puts(“”);</p>
+<span class="kt">void</span> <span class="nf">getdfn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">f</span><span class="p">){</span>
+    <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span><span class="n">id</span><span class="p">[</span><span class="n">dfn_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">G</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">G</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+        <span class="n">getdfn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">x</span><span class="p">)</span><span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">fx</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]]]]</span><span class="o">&lt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]]])</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]];</span><span class="c1">//wdnmd就是这里</span>
+    <span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span><span class="n">fx</span><span class="p">;</span><span class="k">return</span> <span class="n">fx</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">dfn_cnt</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">rG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//尝试更新semi</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">rG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+            <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]]]</span><span class="o">&lt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]])</span>
+                <span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]];</span>
+        <span class="p">}</span>
+        <span class="n">sG</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">);</span><span class="c1">//建图</span>
+        <span class="n">belong</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">sG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">now</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="c1">//图上使用更新fa[x]为semi的点，更新为新找到的那个点</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">sG</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">now</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">semi</span><span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span><span class="o">==</span><span class="n">now</span><span class="p">)</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span><span class="err">如果</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">semit</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="err">，说明</span><span class="n">idom</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">semi</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="c1">//此时semi=now</span>
+            <span class="k">else</span> <span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="err">否则就是</span><span class="n">idom</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="err">，实现的时候写成</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">=</span><span class="n">t</span><span class="err">，后面在处理</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">dfn_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">semi</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">idom</span><span class="p">[</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">]];</span><span class="c1">//处理</span>
+        <span class="n">tree</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">idom</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">t</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">getans</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">sum</span><span class="p">){</span>
+    <span class="n">ans</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">sum</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">tree</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">getans</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">sum</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+        <span class="n">reset</span><span class="p">();</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="n">rG</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">belong</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">semi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">getdfn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">tarjan</span><span class="p">();</span>
+        <span class="n">getans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span><span class="n">puts</span><span class="p">(</span><span class="s">""</span><span class="p">);</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>}
-return 0; } ```
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 

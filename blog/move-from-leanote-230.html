@@ -192,62 +192,59 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>求 $A^B$ 的所有约数之和 mod 9901。</p>
 
-<h1 id="section-1">输入</h1>
+<h1 id="输入">输入</h1>
 <p>输入两个整数 A,B</p>
 
-<h1 id="section-2">输出</h1>
+<h1 id="输出">输出</h1>
 <p>输出答案 mod 9901。</p>
 
-<h1 id="section-3">样例输入</h1>
-<p><code class="language-plaintext highlighter-rouge">
-2 3
-</code>
-#  样例输出
-<code class="language-plaintext highlighter-rouge">
-15
-</code>
-提示
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 3
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>15
+</code></pre></div></div>
+<p>提示
 样例说明
 23=8，8的所有约数为 1,2,4,8，1+2+4+8=15,15 mod 9901=15，因此输出 15
 数据范围与提示
-对于全部数据，$0≤A,B≤5×10^7$
-# 解答
-唯一分解定理，把A分解为如下形式：\(\prod_j\sum\limits_{i = 0}^{ci} P_j^{i}\)
+对于全部数据，$0≤A,B≤5×10^7$</p>
+<h1 id="解答">解答</h1>
+<p>唯一分解定理，把A分解为如下形式：\(\prod_j\sum\limits_{i = 0}^{ci} P_j^{i}\)
 然后由于是$B$次方，所以每一个$c_i$都要扩大$B$倍，对于每一个$p_i$可以使用等比数列求和公式算出它的值为\(\frac{p_i^{n+1}-1}{1-p_i}\)对上面处理一个快速幂，对于下面处理了一个逆元。完事了。
-代码:
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+代码:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # define int long long
-using namespace std;
-const int mod = 9901;
-int fp(int b,int p){
-	int ans = 1;
-	while(p){
-		if(p&amp;1)ans = ans*b%mod;
-		b = b*b%mod;
-		p&gt;&gt;=1;
-	}
-	return ans;
-}
-signed main(){
-	int a,b;scanf("%d%d",&amp;a,&amp;b);
-	int ans = 1;
-	register int cnt = 0;
-	for(register int i = 2;i&lt;=a;i++){
-		cnt = 0;
-		while(a%i==0)cnt++,a/=i;
-		if(cnt)ans = (ans*(((fp(i,cnt*b+1)-1+mod)%mod)*fp(i-1,mod-2)%mod))%mod;
-		if(a==1)break;
-	}
-	printf("%d",ans);
-	return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">9901</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">fp</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">register</span> <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="k">register</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">a</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="o">%</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">cnt</span><span class="o">++</span><span class="p">,</span><span class="n">a</span><span class="o">/=</span><span class="n">i</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">*</span><span class="p">(((</span><span class="n">fp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">cnt</span><span class="o">*</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">)</span><span class="o">*</span><span class="n">fp</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

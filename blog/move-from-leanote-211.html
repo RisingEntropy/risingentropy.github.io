@@ -19,16 +19,15 @@
 攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
 当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
 现在，要你求消灭全机房要用掉代价最小多少。
-#  Input
+Input
 第一行一个数N，(N&amp;lt;=50),表示机房修建的堡垒数。
 接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0&amp;lt;Ai&amp;lt;=1000)。第二个数Bi(0&amp;lt;Bi&amp;lt;100)表示i号堡垒需要被攻打Bi次。
 接下来一个数k，表示总共有k组依赖关系。
 接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
 不需要攻打的城堡不允许攻打。
-#  Output
+Output
 一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。
-#  Sample Input
-
+Sample Input
 3 										
 10．00  1
 1.80  1 
@@ -38,11 +37,10 @@
 3  2  1.50
 
 Sample Output
-
 15.50
 
-# 解答
-最小树形图板题~~题目名称暴露了一切~~。出题人牛逼
+解答
+最小树形图板题题目名称暴露了一切。出题人牛逼
 建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下
 ```cpp
 //
@@ -58,16 +56,15 @@ Sample Output
 攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
 当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
 现在，要你求消灭全机房要用掉代价最小多少。
-#  Input
+Input
 第一行一个数N，(N&amp;lt;=50),表示机房修建的堡垒数。
 接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0&amp;lt;Ai&amp;lt;=1000)。第二个数Bi(0&amp;lt;Bi&amp;lt;100)表示i号堡垒需要被攻打Bi次。
 接下来一个数k，表示总共有k组依赖关系。
 接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
 不需要攻打的城堡不允许攻打。
-#  Output
+Output
 一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。
-#  Sample Input
-
+Sample Input
 3 										
 10．00  1
 1.80  1 
@@ -77,11 +74,10 @@ Sample Output
 3  2  1.50
 
 Sample Output
-
 15.50
 
-# 解答
-最小树形图板题~~题目名称暴露了一切~~。出题人牛逼
+解答
+最小树形图板题题目名称暴露了一切。出题人牛逼
 建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下
 ```cpp
 //
@@ -256,131 +252,128 @@ Sample Output
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>小C现在正要攻打科学馆腹地——计算机第三机房。而信息组的同学们已经建好了一座座堡垒，准备迎战。小C作为一种高度智慧的可怕生物，早已对同学们的信息了如指掌。
 攻打每一个人的堡垒需要一个代价，而且必须攻打若干次才能把镇守之人灭得灰飞烟灭。
 当小C在绞尽脑汁想攻打方案时，突然从XXX的堡垒中滚出来一个纸条：一个惊人的秘密被小C发现了：原来各个堡垒之间会相互提供援助，但是当一个堡垒被攻打时，他对所援助的堡垒的援助就会停止，因为他自己已经自身难保了。也就是说，小C只要攻打某个堡垒一次之后，某些堡垒就只需要花更小的代价攻击了。
-现在，要你求消灭全机房要用掉代价最小多少。
-#  Input
-第一行一个数N，(N<code class="language-plaintext highlighter-rouge">&lt;</code>=50),表示机房修建的堡垒数。
+现在，要你求消灭全机房要用掉代价最小多少。</p>
+<h1 id="input">Input</h1>
+<p>第一行一个数N，(N<code class="language-plaintext highlighter-rouge">&lt;</code>=50),表示机房修建的堡垒数。
 接下来N行，每行两个数，第一个实数Ai表示攻打i号堡垒需要的代价Ai(0<code class="language-plaintext highlighter-rouge">&lt;</code>Ai<code class="language-plaintext highlighter-rouge">&lt;=</code>1000)。第二个数Bi(0<code class="language-plaintext highlighter-rouge">&lt;</code>Bi<code class="language-plaintext highlighter-rouge">&lt;</code>100)表示i号堡垒需要被攻打Bi次。
 接下来一个数k，表示总共有k组依赖关系。
 接下来k行每行三个数x，y，z(x,y,为整数，z为实数)，表示攻打过一次x号堡垒之后，攻打y号堡垒就只要花z的代价，保证z比y原来的代价小。
-不需要攻打的城堡不允许攻打。
-#  Output
-一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。
-#  Sample Input
-<code class="language-plaintext highlighter-rouge">
-3 										
+不需要攻打的城堡不允许攻打。</p>
+<h1 id="output">Output</h1>
+<p>一行，一个实数表示消灭全机房要用的最小代价，保留两位小数。</p>
+<h1 id="sample-input">Sample Input</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 										
 10．00  1
 1.80  1 
 2.50	 2
 2
 1  3  2.00
 3  2  1.50
-</code>
-Sample Output
-<code class="language-plaintext highlighter-rouge">
-15.50
-</code>
-# 解答
-最小树形图板题~~题目名称暴露了一切~~。出题人牛逼
-建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下
-```cpp
-//
-// Created by dhy on 19-6-2.
-//</p>
+</code></pre></div></div>
+<p>Sample Output</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>15.50
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>最小树形图板题<del>题目名称暴露了一切</del>。出题人牛逼
+建立一个虚点，连向所有点，然后跑出每个点都打一次的最小代价。然后再来以每次都是最小代价的打法，对每个点再打$times[i]-1$次。代码如下</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-6-2.</span>
+<span class="c1">//</span>
 
-<h1 id="include-iostream">include <iostream></iostream></h1>
-<p># include <cstdio>
-# include <cstring>
-# include <iomanip>
-using namespace std;
-# define LL long long
-const int MAXN = 60;
-const int MAXM = 3000;
-struct edge{int f,t;double w;}edges[MAXM];
-int id[MAXN],vis[MAXN],fa[MAXN];double dis[MAXN];
-bool mark[MAXN];
-double cost[MAXN];
-int times[MAXN];
-int top;
-void add(int f,int t,double w){
-    edges[++top].f = f;
-    edges[top].t = t;
-    edges[top].w = w;
-}
-const double INF = 1e19;
-double zhuliu(int root,int n,int m){
-    double res = 0;
-    while(true) {
-        for(int i = 0;i&lt;=n;i++)mark[i] = false,dis[i] = INF;
-        for(int i = 1;i&lt;=m;i++){
-            int f = edges[i].f,t = edges[i].t;
-            if(f!=t&amp;&amp;edges[i].w&lt;dis[t]){
-                dis[t] = edges[i].w;
-                fa[t] = f;
-            }
-        }
-        for(int i = 0;i&lt;=n;i++){
-            if(dis[i]==INF&amp;&amp;i!=root)mark[i] = true;
-        }
-        int cnt = 0;
-        memset(vis,-1,sizeof(vis));
-        memset(id,-1, sizeof(id));
-        dis[root] = 0;
-        for(int i = 0;i&lt;=n;i++){
-            if(mark[i])continue;
-            int t = i;
-            res+=dis[t];
-            while(id[t]==-1&amp;&amp;t!=root&amp;&amp;vis[t]!=i){
-                vis[t] = i;
-                t = fa[t];//it will come back to itself
-            }
-            if(id[t]==-1&amp;&amp;t!=root){
-                for(int u = fa[t];u!=t;u = fa[u]){//mark the ring
-                    id[u] = cnt;
-                }
-                id[t] = cnt++;
-            }
-        }
-        if(cnt==0)return res;
-        for(int i = 0;i&lt;=n;i++)if(id[i]==-1)id[i]=++cnt;
-        for(int i = 1;i&lt;=m;i++){
-            int f = edges[i].f,t = edges[i].t;
-            edges[i].f = id[f];edges[i].t = id[t];
-            if(id[f]!=id[t])edges[i].w-=dis[t];
-        }
-        n = cnt;root = id[root];
-    }
-}
-int main(){
-    int n;cin&gt;&gt;n;
-    for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;cost[i]&gt;&gt;times[i];
-        if(times[i]!=0){
-            add(0,i,cost[i]);
-        }else{
-            mark[i] = true;
-        }
-    }
-    double res = 0;
-    int k;cin&gt;&gt;k;
-    int f,t;double w;
-    for(int i = 1;i&lt;=k;i++){
-        cin&gt;&gt;f&gt;&gt;t&gt;&gt;w;
-        if(t==0)continue;
-        if(mark[t]||mark[f])continue;
-        add(f,t,w);
-        cost[t] = min(cost[t],w);
-    }
-    for(int i = 1;i&lt;=n;i++)if(!mark[i])res+=(times[i]-1)*cost[i];
-    res += zhuliu(0,n,top);
-    cout.setf(ios::fixed);
-    cout&lt;&lt;setprecision(2)&lt;&lt;res;
-    return 0;
-}
-```</iomanip></cstring></cstdio></p>
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;cstdio&gt;
+# include &lt;cstring&gt;
+# include &lt;iomanip&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp"># define LL long long
+</span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">double</span> <span class="n">w</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">id</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">vis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="kt">double</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">mark</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">double</span> <span class="n">cost</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">times</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">double</span> <span class="n">w</span><span class="p">){</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="n">INF</span> <span class="o">=</span> <span class="mf">1e19</span><span class="p">;</span>
+<span class="kt">double</span> <span class="nf">zhuliu</span><span class="p">(</span><span class="kt">int</span> <span class="n">root</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">){</span>
+    <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">!=</span><span class="n">t</span><span class="o">&amp;&amp;</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+                <span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
+                <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">INF</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">!=</span><span class="n">root</span><span class="p">)</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
+        <span class="n">dis</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="n">res</span><span class="o">+=</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">t</span><span class="o">!=</span><span class="n">root</span><span class="o">&amp;&amp;</span><span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">i</span><span class="p">){</span>
+                <span class="n">vis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="c1">//it will come back to itself</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">t</span><span class="o">!=</span><span class="n">root</span><span class="p">){</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">t</span><span class="p">];</span><span class="n">u</span><span class="o">!=</span><span class="n">t</span><span class="p">;</span><span class="n">u</span> <span class="o">=</span> <span class="n">fa</span><span class="p">[</span><span class="n">u</span><span class="p">]){</span><span class="c1">//mark the ring</span>
+                    <span class="n">id</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="n">id</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=++</span><span class="n">cnt</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">f</span><span class="p">];</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">!=</span><span class="n">id</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="o">-=</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span><span class="n">root</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">root</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span><span class="kt">double</span> <span class="n">w</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">f</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">w</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">||</span><span class="n">mark</span><span class="p">[</span><span class="n">f</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+        <span class="n">cost</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">cost</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">w</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">res</span><span class="o">+=</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">res</span> <span class="o">+=</span> <span class="n">zhuliu</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">top</span><span class="p">);</span>
+    <span class="n">cout</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">ios</span><span class="o">::</span><span class="n">fixed</span><span class="p">);</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">res</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

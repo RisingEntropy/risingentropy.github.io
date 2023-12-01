@@ -15,14 +15,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="动态规划 – Haoyu Deng's page">
   <meta name="twitter:description" content="树形dp
-#  普通树形dp
+普通树形dp
 其实就是没有上司的舞会，比较简单
-#  背包类树形dp
+背包类树形dp
 例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
 \(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
 以下是实现的代码。
 ```cpp
-# include 
+include 
 using namespace std;
 const int MAXN = 310;
 const int MAXM = 310;
@@ -46,8 +46,8 @@ void dfs(int x){
     for(int i = head[x];i!=0; i = edges[i].next){
         int t = edges[i].t;
         dfs(t);
-        for(int j = m;j&amp;gt;=0;j--){//为了处理组内选取0个课程的情况
-            for(int k = j;k&amp;gt;=0;k--){
+        for(int j = m;j&amp;gt;=0;j–){//为了处理组内选取0个课程的情况
+            for(int k = j;k&amp;gt;=0;k–){
                 if(j-k&amp;gt;=0){
                     F[x][j] = max(F[x][j],F[x][j-k]+F[t][k]);
                 }
@@ -58,14 +58,14 @@ void dfs(int x){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="动态规划 – Haoyu Deng's page">
   <meta property="og:description" content="树形dp
-#  普通树形dp
+普通树形dp
 其实就是没有上司的舞会，比较简单
-#  背包类树形dp
+背包类树形dp
 例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
 \(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
 以下是实现的代码。
 ```cpp
-# include 
+include 
 using namespace std;
 const int MAXN = 310;
 const int MAXM = 310;
@@ -89,8 +89,8 @@ void dfs(int x){
     for(int i = head[x];i!=0; i = edges[i].next){
         int t = edges[i].t;
         dfs(t);
-        for(int j = m;j&amp;gt;=0;j--){//为了处理组内选取0个课程的情况
-            for(int k = j;k&amp;gt;=0;k--){
+        for(int j = m;j&amp;gt;=0;j–){//为了处理组内选取0个课程的情况
+            for(int k = j;k&amp;gt;=0;k–){
                 if(j-k&amp;gt;=0){
                     F[x][j] = max(F[x][j],F[x][j-k]+F[t][k]);
                 }
@@ -264,61 +264,72 @@ void dfs(int x){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="dp">树形dp</h1>
-<p>#  普通树形dp
-其实就是没有上司的舞会，比较简单
-#  背包类树形dp
-例如<a href="https://www.luogu.org/problemnew/show/P2014">选课</a>，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
+      <h1 id="树形dp">树形dp</h1>
+<h1 id="普通树形dp">普通树形dp</h1>
+<p>其实就是没有上司的舞会，比较简单</p>
+<h1 id="背包类树形dp">背包类树形dp</h1>
+<p>例如<a href="https://www.luogu.org/problemnew/show/P2014">选课</a>，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
 \(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
-以下是实现的代码。
-```cpp
-# include <iostream>
-using namespace std;
-const int MAXN = 310;
-const int MAXM = 310;
-int indegree[MAXN];
-struct edge{
-    int t,w,next;
-}edges[MAXN];
-int head[MAXN];
-int top;
-void add(int f,int t,int w) {
-    edges[++top].next = head[f];
-    edges[top].t = t;
-    edges[top].w = w;
- //   indegree[t]++;
-    head[f] = top;
-}
-int score[MAXN];
-int F[MAXN][MAXM];
-int n,m;
-void dfs(int x){
-    for(int i = head[x];i!=0; i = edges[i].next){
-        int t = edges[i].t;
-        dfs(t);
-        for(int j = m;j&gt;=0;j--){//为了处理组内选取0个课程的情况
-            for(int k = j;k&gt;=0;k--){
-                if(j-k&gt;=0){
-                    F[x][j] = max(F[x][j],F[x][j-k]+F[t][k]);
-                }
-            }</iostream></p>
+以下是实现的代码。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">310</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">310</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">indegree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+ <span class="c1">//   indegree[t]++;</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">score</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">--</span><span class="p">){</span><span class="c1">//为了处理组内选取0个课程的情况</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">--</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span>
+                    <span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">F</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">k</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    }
-}
-if(x!=0){
-    for(int i = m;i&gt;0;i--)F[x][i] = F[x][i-1]+score[x];
-} } int main(void){
-cin&gt;&gt;n&gt;&gt;m;
-int si,ki;
-for(int i = 1;i&lt;=n;i++){
-    cin&gt;&gt;si&gt;&gt;ki;
-    score[i] = ki;
-    add(si,i,ki);
-}
-dfs(0);
-cout&lt;&lt;F[0][m];
-return 0; } ``` # 状态压缩DP [eg:poj2411](http://poj.org/problem?id=2411) # 解答 其实是一道状压dp的裸题！ 我们以当前扩展到了第$i$行作为状态，然后用1表示`竖着的矩形的上面的一个`0表示其他情况 ![图片标题](https://cdn.risingentropy.top/images/posts/c139874ab6441051a006ca4.png) 那么怎么转移呢？ 设$F[i,j]$为第$i$行为$j$状态的时候的分割总数。j是用十进制记录的$M$位的二进制数。 第$i-1$行的形态$k$能够转移到$j$时，当且仅当：
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">score</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">si</span><span class="p">,</span><span class="n">ki</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">si</span><span class="o">&gt;&gt;</span><span class="n">ki</span><span class="p">;</span>
+        <span class="n">score</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ki</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">si</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">ki</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">m</span><span class="p">];</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
+<h1 id="状态压缩dp">状态压缩DP</h1>
+<p><a href="http://poj.org/problem?id=2411">eg:poj2411</a></p>
+<h1 id="解答">解答</h1>
+<p>其实是一道状压dp的裸题！
+我们以当前扩展到了第$i$行作为状态，然后用1表示<code class="language-plaintext highlighter-rouge">竖着的矩形的上面的一个</code>0表示其他情况
+<img src="https://cdn.risingentropy.top/images/posts/c139874ab6441051a006ca4.png" alt="图片标题" />
+那么怎么转移呢？
+设$F[i,j]$为第$i$行为$j$状态的时候的分割总数。j是用十进制记录的$M$位的二进制数。
+第$i-1$行的形态$k$能够转移到$j$时，当且仅当：</p>
 
 <ol>
   <li>$j$和$k$的<code class="language-plaintext highlighter-rouge">按位与</code>运算的结果为$0$。这保证了每个数字$1$的下方必须是$0$，代表补全竖着的$1\times 2$的长方形</li>
@@ -332,54 +343,53 @@ return 0; } ``` # 状态压缩DP [eg:poj2411](http://poj.org/problem?id=2411) # 
 目标：F[N,0]
 复杂度$O(2^M2^MN) = O(4^MN)$
 <strong>注意，打出来的数非常大，需要用long long</strong>
-code:
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;cstdio&gt;
+code:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;iostream&gt;
-using namespace std;
-int read(){
-    int x = 0,f = 1;
-    static char c = getchar();
-    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
-    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
-    return x*f;
-}
-int F[12][1&lt;&lt;11];
-bool canGo[1&lt;&lt;11];
-int main(){
-	int n,m;
-	while(cin&gt;&gt;n&gt;&gt;m&amp;&amp;n){
-		for(int i = 0;i&lt;1&lt;&lt;m;i++){
-			bool cnt = 0,has_odd = 0;
-			for(int j = 0;j&lt;m;j++){
-				if(i&gt;&gt;j&amp;1)has_odd|=cnt,cnt = 0;
-				else cnt^=1;
-			}
-			canGo[i] = has_odd|cnt?0:1;
-		}
-		F[0][0] = 1;
-		for(int i = 1;i&lt;=n;i++){
-			for(int j = 0;j&lt;1&lt;&lt;m;j++){//遍历每个状态
-				F[i][j] = 0;
-				for(int k = 0;k&lt;1&lt;&lt;m;k++){//便利可以转移的状态 
-					if((j&amp;k)==0&amp;&amp;canGo[j|k])F[i][j]+=F[i-1][k];
-				} 
-			}
-		}
-		cout&lt;&lt;F[n][0]&lt;&lt;endl;
-	}
-	return 0;
-}
-</code>
-# 倍增优化
-过两天学
-# 数据结构优化DP
-过两天学
-# 单调队列优化DP
-其实就是用一个单调队列存储可能的状态集合，这样遍历的时候就不需要遍历所有已知的状态了，因为有些状态是明显不可能成立的。适用于形如以下形式的dp\(F[x] = \underset{k\in [x-m,x-1]}{max/min}(F[k])+val[x]\)
-照例一道例题：<a href="http://poj.org/problem?id=1821">poj1821</a>
-# 解答
-首先设计状态，我们用$F[i,j]$表示前$i$个工人粉刷前j个木板的最大收益，那么如何转移呢？</p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="mi">12</span><span class="p">][</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">canGo</span><span class="p">[</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="o">&amp;&amp;</span><span class="n">n</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="kt">bool</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">has_odd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+				<span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="n">j</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">has_odd</span><span class="o">|=</span><span class="n">cnt</span><span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+				<span class="k">else</span> <span class="n">cnt</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">canGo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">has_odd</span><span class="o">|</span><span class="n">cnt</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//遍历每个状态</span>
+				<span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+				<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span><span class="c1">//便利可以转移的状态 </span>
+					<span class="k">if</span><span class="p">((</span><span class="n">j</span><span class="o">&amp;</span><span class="n">k</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">canGo</span><span class="p">[</span><span class="n">j</span><span class="o">|</span><span class="n">k</span><span class="p">])</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+				<span class="p">}</span> 
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="倍增优化">倍增优化</h1>
+<p>过两天学</p>
+<h1 id="数据结构优化dp">数据结构优化DP</h1>
+<p>过两天学</p>
+<h1 id="单调队列优化dp">单调队列优化DP</h1>
+<p>其实就是用一个单调队列存储可能的状态集合，这样遍历的时候就不需要遍历所有已知的状态了，因为有些状态是明显不可能成立的。适用于形如以下形式的dp\(F[x] = \underset{k\in [x-m,x-1]}{max/min}(F[k])+val[x]\)
+照例一道例题：<a href="http://poj.org/problem?id=1821">poj1821</a></p>
+<h1 id="解答-1">解答</h1>
+<p>首先设计状态，我们用$F[i,j]$表示前$i$个工人粉刷前j个木板的最大收益，那么如何转移呢？</p>
 
 <ol>
   <li>第$i$个工匠可以什么也不刷，此时$F[i][j]=F[i-1,j]$</li>
@@ -405,49 +415,48 @@ int main(){
 </ol>
 
 <p>那么对于这道题，从内层循环开始时(j=Si)，建立一个空的单调队列，把$[max(S_i-L_i,0),S_i-1]$中的决策依次加入候选集合，对于每个$j=Si~N$,先在队头检查决策合法性，然后取队头为最优决策进行状态转移。每个决策入队出队依次，转移复杂度$O(1)$总体复杂度$O(MN)$
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 18-12-22.
-//
-# include &lt;cstring&gt;
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-22.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;cstring&gt;
 # include &lt;iostream&gt;
 # include &lt;deque&gt;
 # include &lt;algorithm&gt;
-using namespace std;
-struct worker{int si,li,pi;}workers[110];
-bool operator&lt;(const worker &amp;w1,const worker &amp;w2){return w1.si&lt;w2.si;}
-int F[110][16010];
-int cal(int i,int k){//前面提到过的小优化，方便计算
-    return F[i-1][k]-workers[i].pi*k;
-}
-int n,m;
-int main() {
-    cin&gt;&gt;n&gt;&gt;m;
-    for(int i = 1;i&lt;=m;i++)cin&gt;&gt;workers[i].li&gt;&gt;workers[i].pi&gt;&gt;workers[i].si;
-    sort(workers+1,workers+m+1);//按Si从大到小排序，这样就可以愉快地按线性dp的方式来啦
-    for(int i = 1;i&lt;=m;i++){
-        deque&lt;int&gt; q;//这里我采用双端队列，方便维护这个单调队列
-        for(int k = max(0,workers[i].si-workers[i].li);k &lt;= workers[i].si-1;k++){
-            //int k = max(0,workers[i].si-workers[i].li)是为了强制包含si，然后枚举从si
-之前的哪个木板开始刷(题目说了是连续的)
-            //k &lt;= workers[i].si-1是为了防止把si这一块刷2次
-            while(!q.empty()&amp;&amp;cal(i,q.back())&lt;=cal(i,k))q.pop_back();//排除队列里面根本不可能出现在决策的集合
-            q.push_back(k);//把当且决策加入集合
-        }
-        for(int j = 1;j&lt;=n;j++){//开始枚举每一块木板
-            F[i][j] = max(F[i-1][j],F[i][j-1]);//不粉刷时的转移
-            if(j&gt;=workers[i].si){//粉刷k+1~j块木板的转移
-                while(!q.empty()&amp;&amp;q.front()&lt;j-workers[i].li)q.pop_front();//排除不合法的决策
-                if(!q.empty())F[i][j] = max(F[i][j],cal(i,q.front())+workers[i].pi*j);//队列飞控时，取队头进行状态转移
-            }
-        }
-    }
-    cout&lt;&lt;F[m][n]&lt;&lt;endl;
-    return 0;
-}
-</code>
-思考题:poj3017
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">worker</span><span class="p">{</span><span class="kt">int</span> <span class="n">si</span><span class="p">,</span><span class="n">li</span><span class="p">,</span><span class="n">pi</span><span class="p">;}</span><span class="n">workers</span><span class="p">[</span><span class="mi">110</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">worker</span> <span class="o">&amp;</span><span class="n">w1</span><span class="p">,</span><span class="k">const</span> <span class="n">worker</span> <span class="o">&amp;</span><span class="n">w2</span><span class="p">){</span><span class="k">return</span> <span class="n">w1</span><span class="p">.</span><span class="n">si</span><span class="o">&lt;</span><span class="n">w2</span><span class="p">.</span><span class="n">si</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="mi">110</span><span class="p">][</span><span class="mi">16010</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="c1">//前面提到过的小优化，方便计算</span>
+    <span class="k">return</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">*</span><span class="n">k</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">&gt;&gt;</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">workers</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">workers</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="c1">//按Si从大到小排序，这样就可以愉快地按线性dp的方式来啦</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span><span class="c1">//这里我采用双端队列，方便维护这个单调队列</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="p">);</span><span class="n">k</span> <span class="o">&lt;=</span> <span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+            <span class="c1">//int k = max(0,workers[i].si-workers[i].li)是为了强制包含si，然后枚举从si</span>
+<span class="err">之前的哪个木板开始刷</span><span class="p">(</span><span class="err">题目说了是连续的</span><span class="p">)</span>
+            <span class="c1">//k &lt;= workers[i].si-1是为了防止把si这一块刷2次</span>
+            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="c1">//排除队列里面根本不可能出现在决策的集合</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="c1">//把当且决策加入集合</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//开始枚举每一块木板</span>
+            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span><span class="c1">//不粉刷时的转移</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">si</span><span class="p">){</span><span class="c1">//粉刷k+1~j块木板的转移</span>
+                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">&lt;</span><span class="n">j</span><span class="o">-</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">li</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="c1">//排除不合法的决策</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">())</span><span class="o">+</span><span class="n">workers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pi</span><span class="o">*</span><span class="n">j</span><span class="p">);</span><span class="c1">//队列飞控时，取队头进行状态转移</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>思考题:poj3017
 寒假再来做吧
 单调队列优化的多重背包多重背包dp方程\(F[i] = max(F[i],F[i-k*v]+k*w)\)
 然后我们把i-k<em>v改写一下。把i看做是u+p</em>v的形式，其中u是状态i按照对vi的取模进行分类的。然后这样以后dp方程就转化为了\(F[u+p*vi] = \underset{p-Ci\leq k \leq p-1}{max} \{F[u+k*vi]+(p-k)*wi\}\)这样就可以把倒序循环j的过程改为对于每个余数$u\in [0,vi-1]$,倒序循环$p = \lfloor(M-u)/Vi~0$M是背包容量，对应状态就是$j = u+p<em>vi$.第i个物品只有Ci个，故能转移到j = u = p * vi的决策候选集合就是${u+k</em>Vi|p-Ci\leq k \leq p-1}$。然后与fence那道题一样，把外层循环i 和 u 看成定值，当内层循环变量p减小1时，决策k取值范围$[p-Ci,p-1]$的上下界统统缩小。状态转移方程等号右侧的式子依然分为两部分，仅包含变量p的p<em>wi和仅包含k的$F[u+k</em>vi]-k<em>wi$那么，我们只需要维护一个k单调递增，$F[u+k</em>vi]-k*wi$单调递减的队列。三个管理操作：</p>
@@ -458,62 +467,61 @@ int main() {
   <li>把新决策$k = p-Ci-1$插入队尾，入队前检查单调性，排除无用决策。</li>
 </ol>
 
-<p>整个算法复杂度$O(MN)$
-```cpp
-//
-// Created by dhy on 18-12-23.
-//</p>
+<p>整个算法复杂度$O(MN)$</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-23.</span>
+<span class="c1">//</span>
 
-<h1 id="include-cstring">include <cstring></cstring></h1>
-<p># include <cstdio>
-# include <deque>
-using namespace std;
-int read(){
-    int x = 0,f = 1;
-    static char c = getchar();
-    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
-    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
-    return x*f;
-}
-const int MAXN = 1e6;
-const int MAXM = 1e6;
-int F[MAXM];
-int V[MAXN];
-int C[MAXN];
-int W[MAXN];
-inline int cal(int i,int u,int k){return F[u+k*V[i]]-k*W[i];}
-int n,m;
-int main() {
-    n = read(),m = read();
-    memset(F,0xcf, sizeof(F));//-INF
-    F[0] = 0;
-    for(int i = 1;i&lt;=n;i++){
-        V[i] = read(),W[i] = read(),C[i] =read();
-        for(int u = 0;u&lt;V[i];u++){
-            deque<int> q;
-            int maxp = (m-u)/V[i];
-            for(int k = maxp-1;k&gt;=max(maxp-C[i],0);k--){//初始化状态这里，为什么是maxp-1我再去问问
-                while(!q.empty()&amp;&amp;cal(i,u,q.back())&lt;=cal(i,u,k))q.pop_back();
-                q.push_back(k);
-            }//倒叙循环每个状态
-            for(int p = maxp;p&gt;=0;p--){
-                while(!q.empty()&amp;&amp;q.front()&gt;p-1)q.pop_front();//删除违法状态
-                if(!q.empty())F[u+p*V[i]] = max(F[u+p*V[i]],cal(i,u,q.front())+p*W[i]);//计算新解
-                if(p-C[i]-1&gt;=0){//插入新决策，同时维护单调性
-                    while(!q.empty()&amp;&amp;cal(i,u,q.back())&lt;=cal(i,u,p-C[i]-1))q.pop_back();
-                    q.push_back(p - C[i] - 1);
-                }
-            }</int></deque></cstdio></p>
+<span class="cp"># include &lt;cstring&gt;
+# include &lt;cstdio&gt;
+# include &lt;deque&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">V</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">C</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">W</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">int</span> <span class="n">k</span><span class="p">){</span><span class="k">return</span> <span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="n">k</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">];}</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="mh">0xcf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">F</span><span class="p">));</span><span class="c1">//-INF</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">read</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">u</span><span class="o">&lt;</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">u</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">maxp</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">maxp</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">k</span><span class="o">&gt;=</span><span class="n">max</span><span class="p">(</span><span class="n">maxp</span><span class="o">-</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">0</span><span class="p">);</span><span class="n">k</span><span class="o">--</span><span class="p">){</span><span class="c1">//初始化状态这里，为什么是maxp-1我再去问问</span>
+                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">k</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+            <span class="p">}</span><span class="c1">//倒叙循环每个状态</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">maxp</span><span class="p">;</span><span class="n">p</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">p</span><span class="o">--</span><span class="p">){</span>
+                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">&gt;</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="c1">//删除违法状态</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="n">p</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="n">p</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">())</span><span class="o">+</span><span class="n">p</span><span class="o">*</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="c1">//计算新解</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span><span class="c1">//插入新决策，同时维护单调性</span>
+                    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">cal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="o">-</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+                    <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    }
-}
-int ans = 0;
-for(int i = 1;i&lt;=n;i++)ans = max(ans,F[i]);
-printf("%d ",ans);
-return 0; }
 </code></pre></div></div>
-
-<p>```</p>
 
     </div>
 

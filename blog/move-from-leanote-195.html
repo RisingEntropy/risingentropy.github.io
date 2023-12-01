@@ -16,7 +16,7 @@
   <meta name="twitter:title" content="点、边双联通分量 – Haoyu Deng's page">
   <meta name="twitter:description" content="点、边双联通分量
 小知识点，记一下
-# 点双联通分量
+点双联通分量
 性质
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -25,7 +25,7 @@
   <meta property="og:title" content="点、边双联通分量 – Haoyu Deng's page">
   <meta property="og:description" content="点、边双联通分量
 小知识点，记一下
-# 点双联通分量
+点双联通分量
 性质
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -196,10 +196,10 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">点、边双联通分量</h1>
-<p>小知识点，记一下
-# 点双联通分量
-性质</p>
+      <h1 id="点边双联通分量">点、边双联通分量</h1>
+<p>小知识点，记一下</p>
+<h1 id="点双联通分量">点双联通分量</h1>
+<p>性质</p>
 
 <ol>
   <li>任意两点间至少存在两条点不重复的路径等价于图中删去任意一个点都不会改变图的连通性，即BCC中无割点</li>
@@ -210,78 +210,77 @@
 <p>做法
  在Tarjan过程中维护一个栈，每次Tarjan到一个结点就将该结点入栈，回溯时若目标结点low值不小于当前结点dfn值就出栈直到目标结点（目标结点也出栈），将出栈结点和当前结点存入BCC</p>
 
-<p>代码：
-```cpp
-# include<cstdio>
-# include<cctype>
-# include<vector>
-using namespace std;
-struct edge
-{
-    int to,pre;
-}edges[1000001];
-int head[1000001],dfn[1000001],dfs_clock,tot;
-int num;//BCC数量 
-int stack[1000001],top;//栈 
-vector<int>bcc[1000001];
-int tarjan(int u,int fa)
-{
-    int lowu=dfn[u]=++dfs_clock;
-    for(int i=head[u];i;i=edges[i].pre)
-        if(!dfn[edges[i].to])
-        {
-            stack[++top]=edges[i].to;//搜索到的点入栈 
-            int lowv=tarjan(edges[i].to,u);
-            lowu=min(lowu,lowv);
-            if(lowv&gt;=dfn[u])//是割点或根 
-            {
-                num++;
-                while(stack[top]!=edges[i].to)//将点出栈直到目标点 
-                    bcc[num].push_back(stack[top--]);
-                bcc[num].push_back(stack[top--]);//目标点出栈 
-                bcc[num].push_back(u);//不要忘了将当前点存入bcc 
-            }
-        }
-        else if(edges[i].to!=fa)
-            lowu=min(lowu,dfn[edges[i].to]);
-    return lowu;
-}
-void add(int x,int y)//邻接表存边 
-{
-    edges[++tot].to=y;
-    edges[tot].pre=head[x];
-    head[x]=tot;
-}
-int main()
-{
-    int n,m;
-    scanf("%d%d",&amp;n,&amp;m);
-    for(int i=1;i&lt;=m;i++)
-    {
-        int x,y;
-        scanf("%d%d",&amp;x,&amp;y);
-        add(x,y),add(y,x);
-    }
-    for(int i=1;i&lt;=n;i++)//遍历n个点tarjan 
-        if(!dfn[i])
-        {
-            stack[top=1]=i;
-            tarjan(i,i);
-        }
-    for(int i=1;i&lt;=num;i++)
-    {
-        printf("BCC# %d: ",i);
-        for(int j=0;j&lt;bcc[i].size();j++)
-            printf("%d ",bcc[i][j]);
-        printf("\n");
-    }
-    return 0;
-}</int></vector></cctype></cstdio></p>
+<p>代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;cstdio&gt;
+# include&lt;cctype&gt;
+# include&lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">to</span><span class="p">,</span><span class="n">pre</span><span class="p">;</span>
+<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="mi">1000001</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="mi">1000001</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="mi">1000001</span><span class="p">],</span><span class="n">dfs_clock</span><span class="p">,</span><span class="n">tot</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">num</span><span class="p">;</span><span class="c1">//BCC数量 </span>
+<span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="mi">1000001</span><span class="p">],</span><span class="n">top</span><span class="p">;</span><span class="c1">//栈 </span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">bcc</span><span class="p">[</span><span class="mi">1000001</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">lowu</span><span class="o">=</span><span class="n">dfn</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=++</span><span class="n">dfs_clock</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">u</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pre</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">;</span><span class="c1">//搜索到的点入栈 </span>
+            <span class="kt">int</span> <span class="n">lowv</span><span class="o">=</span><span class="n">tarjan</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">,</span><span class="n">u</span><span class="p">);</span>
+            <span class="n">lowu</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">lowu</span><span class="p">,</span><span class="n">lowv</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">lowv</span><span class="o">&gt;=</span><span class="n">dfn</span><span class="p">[</span><span class="n">u</span><span class="p">])</span><span class="c1">//是割点或根 </span>
+            <span class="p">{</span>
+                <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">!=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">)</span><span class="c1">//将点出栈直到目标点 </span>
+                    <span class="n">bcc</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="o">--</span><span class="p">]);</span>
+                <span class="n">bcc</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="o">--</span><span class="p">]);</span><span class="c1">//目标点出栈 </span>
+                <span class="n">bcc</span><span class="p">[</span><span class="n">num</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">u</span><span class="p">);</span><span class="c1">//不要忘了将当前点存入bcc </span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="o">!=</span><span class="n">fa</span><span class="p">)</span>
+            <span class="n">lowu</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="n">lowu</span><span class="p">,</span><span class="n">dfn</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="n">lowu</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">)</span><span class="c1">//邻接表存边 </span>
+<span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">tot</span><span class="p">].</span><span class="n">to</span><span class="o">=</span><span class="n">y</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">tot</span><span class="p">].</span><span class="n">pre</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">tot</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">add</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="c1">//遍历n个点tarjan </span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="o">=</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+            <span class="n">tarjan</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">num</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"BCC# %d: "</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">bcc</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span><span class="n">bcc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>双连通分量
-```
-# 边双连通分量
-对于一个连通图，如果任意两点至少存在两条“边不重复”的路径，则说图是点双连通的，边双连通的极大子图称为边双连通分量。
+<span class="err">双连通分量</span>
+</code></pre></div></div>
+<h1 id="边双连通分量">边双连通分量</h1>
+<p>对于一个连通图，如果任意两点至少存在两条“边不重复”的路径，则说图是点双连通的，边双连通的极大子图称为边双连通分量。
 边双联通分量的计算方法比较简单
 首先，对于边双联通分量里的点我们是不用考虑的。
 因此我们先用tarjan把边双联通分量缩出来

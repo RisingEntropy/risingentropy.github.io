@@ -18,29 +18,29 @@
 //
 // Created by dhy on 18-8-15.
 //
-# include 
-# include 
+include 
+include 
 using namespace std;
 int n,m,p;
 struct SegmentNode{
     long long val,add,mul = 1;
-}segTree[100000*4+1];
-long long a[100000*4];
+}segTree[1000004+1];
+long long a[1000004];
 void buildTree(int k,int l,int r){
     if(l==r){
         segTree[k].val = a[l]%p;
         return;
     }
-    int mid = l+r&amp;gt;&amp;gt;1;
-    buildTree(k*2,l,mid);
-    buildTree(k*2+1,mid+1,r);
-    segTree[k].val = (segTree[k*2].val+segTree[k*2+1].val)%p;
+    int mid = l+r»1;
+    buildTree(k2,l,mid);
+    buildTree(k2+1,mid+1,r);
+    segTree[k].val = (segTree[k2].val+segTree[k2+1].val)%p;
 }
 void pushdown(int k,int l,int r){
-    //更新子节点的值，先称后加更方便，子节点的新值=子节点的值*父节点的乘法数+加法的套路
-    int mid = l+r&amp;gt;&amp;gt;1;
-    segTree[k*2].val = (segTree[k*2].val*segTree[k].mul+segTree[k].add*(mid-l+1))%p;
-    segTree[k*2+1].val = (segTree[k*2+1].val*segTree[k].mul+segTree[k].add*(r-mid))%p;
+    //更新子节点的值，先称后加更方便，子节点的新值=子节点的值父节点的乘法数+加法的套路
+    int mid = l+r»1;
+    segTree[k2].val = (segTree[k2].valsegTree[k].mul+segTree[k].add(mid-l+1))%p;
+    segTree[k2+1].val = (segTree[k2+1].valsegTree[k].mul+segTree[k].add*(r-mid))%p;
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -50,29 +50,29 @@ void pushdown(int k,int l,int r){
 //
 // Created by dhy on 18-8-15.
 //
-# include 
-# include 
+include 
+include 
 using namespace std;
 int n,m,p;
 struct SegmentNode{
     long long val,add,mul = 1;
-}segTree[100000*4+1];
-long long a[100000*4];
+}segTree[1000004+1];
+long long a[1000004];
 void buildTree(int k,int l,int r){
     if(l==r){
         segTree[k].val = a[l]%p;
         return;
     }
-    int mid = l+r&amp;gt;&amp;gt;1;
-    buildTree(k*2,l,mid);
-    buildTree(k*2+1,mid+1,r);
-    segTree[k].val = (segTree[k*2].val+segTree[k*2+1].val)%p;
+    int mid = l+r»1;
+    buildTree(k2,l,mid);
+    buildTree(k2+1,mid+1,r);
+    segTree[k].val = (segTree[k2].val+segTree[k2+1].val)%p;
 }
 void pushdown(int k,int l,int r){
-    //更新子节点的值，先称后加更方便，子节点的新值=子节点的值*父节点的乘法数+加法的套路
-    int mid = l+r&amp;gt;&amp;gt;1;
-    segTree[k*2].val = (segTree[k*2].val*segTree[k].mul+segTree[k].add*(mid-l+1))%p;
-    segTree[k*2+1].val = (segTree[k*2+1].val*segTree[k].mul+segTree[k].add*(r-mid))%p;
+    //更新子节点的值，先称后加更方便，子节点的新值=子节点的值父节点的乘法数+加法的套路
+    int mid = l+r»1;
+    segTree[k2].val = (segTree[k2].valsegTree[k].mul+segTree[k].add(mid-l+1))%p;
+    segTree[k2+1].val = (segTree[k2+1].valsegTree[k].mul+segTree[k].add*(r-mid))%p;
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -242,94 +242,102 @@ void pushdown(int k,int l,int r){
   <article class="post">
 
     <div class="post__content">
-      <p>```cpp
-//
-// Created by dhy on 18-8-15.
-//
-# include <iostream>
-# include <algorithm>
-using namespace std;
-int n,m,p;
-struct SegmentNode{
-    long long val,add,mul = 1;
-}segTree[100000*4+1];
-long long a[100000*4];
-void buildTree(int k,int l,int r){
-    if(l==r){
-        segTree[k].val = a[l]%p;
-        return;
-    }
-    int mid = l+r&gt;&gt;1;
-    buildTree(k*2,l,mid);
-    buildTree(k*2+1,mid+1,r);
-    segTree[k].val = (segTree[k*2].val+segTree[k*2+1].val)%p;
-}
-void pushdown(int k,int l,int r){
-    //更新子节点的值，先称后加更方便，子节点的新值=子节点的值*父节点的乘法数+加法的套路
-    int mid = l+r&gt;&gt;1;
-    segTree[k*2].val = (segTree[k*2].val*segTree[k].mul+segTree[k].add*(mid-l+1))%p;
-    segTree[k*2+1].val = (segTree[k*2+1].val*segTree[k].mul+segTree[k].add*(r-mid))%p;</algorithm></iostream></p>
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-8-15.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">p</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">SegmentNode</span><span class="p">{</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span><span class="p">,</span><span class="n">add</span><span class="p">,</span><span class="n">mul</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span><span class="n">segTree</span><span class="p">[</span><span class="mi">100000</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="mi">100000</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">buildTree</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">r</span><span class="p">){</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">buildTree</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">);</span>
+    <span class="n">buildTree</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">val</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">pushdown</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">){</span>
+    <span class="c1">//更新子节点的值，先称后加更方便，子节点的新值=子节点的值*父节点的乘法数+加法的套路</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">val</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="o">*</span><span class="p">(</span><span class="n">mid</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">mid</span><span class="p">))</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>segTree[k*2].mul = (segTree[k].mul*segTree[k*2].mul)%p;
-segTree[k*2+1].mul = (segTree[k].mul*segTree[k*2+1].mul)%p;
-segTree[k*2].add = (segTree[2*k].add*segTree[k].mul+segTree[k].add)%p;
-segTree[k*2+1].add = (segTree[2*k+1].add*segTree[k].mul+segTree[k].add)%p;
-segTree[k].add = 0;
-segTree[k].mul = 1; } long long query(int k,int l,int r,int x,int y){
-if(r&lt;x||l&gt;y)return 0;
-if(l&gt;=x&amp;&amp;r&lt;=y)return segTree[k].val;
-pushdown(k,l,r);
-long long ans = 0;
-int m = l+r&gt;&gt;1;
-ans += query(k*2,l,m,x,y);
-ans += query(k*2+1,m+1,r,x,y);
-return ans%p; } void modifyMul(int k,int l,int r,int x,int y,long long v){
-if(y&lt;l||x&gt;r)return;
-if(l&gt;=x&amp;&amp;r&lt;=y){
-    segTree[k].mul = (segTree[k].mul*v)%p;
-    segTree[k].add = (segTree[k].add*v)%p;
-    segTree[k].val = (segTree[k].val*v)%p;
-    return;
-}
-pushdown(k,l,r);
-int mid = l+r&gt;&gt;1;
-modifyMul(k*2,l,mid,x,y,v);
-modifyMul(k*2+1,mid+1,r,x,y,v);
-segTree[k].val = (segTree[k*2].val+segTree[k*2+1].val)%p; } void modifyAdd(int k,int l,int r,int x,int y,long long v){
-if(r&lt;x|l&gt;y)return;
-if(l&gt;=x&amp;&amp;r&lt;=y){
-    segTree[k].val = (segTree[k].val+(r-l+1)*v)%p;
-    segTree[k].add = (segTree[k].add+v)%p;
-    return;
-}
-int mid = l+r&gt;&gt;1;
-pushdown(k,l,r);
-modifyAdd(k*2,l,mid,x,y,v);
-modifyAdd(k*2+1,mid+1,r,x,y,v);
-segTree[k].val = (segTree[k*2].val+segTree[k*2+1].val)%p; } int main(void){
-ios::sync_with_stdio(false);
-cin&gt;&gt;n&gt;&gt;m&gt;&gt;p;
-for(int i = 1;i&lt;=n;i++){
-    cin&gt;&gt;a[i];
-}
-buildTree(1,1,n);
-int op,x,y,k;
-for(int i = 1;i&lt;=m;i++){
-    cin&gt;&gt;op&gt;&gt;x&gt;&gt;y;
-    switch(op){
-        case 2:
-            cin&gt;&gt;k;
-            modifyAdd(1,1,n,x,y,k);
-            break;
-        case 1:
-            cin&gt;&gt;k;
-            modifyMul(1,1,n,x,y,k);
-            break;
-        default:
-            cout&lt;&lt;query(1,1,n,x,y)&lt;&lt;endl;
-    }
-}
-return 0; } ```
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">mul</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">mul</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">mul</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">mul</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">add</span><span class="o">*</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">&lt;</span><span class="n">x</span><span class="o">||</span><span class="n">l</span><span class="o">&gt;</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">)</span><span class="k">return</span> <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span><span class="p">;</span>
+    <span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">ans</span> <span class="o">+=</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">ans</span> <span class="o">+=</span> <span class="n">query</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">modifyMul</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&lt;</span><span class="n">l</span><span class="o">||</span><span class="n">x</span><span class="o">&gt;</span><span class="n">r</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">){</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">mul</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">modifyMul</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">modifyMul</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">val</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">modifyAdd</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">v</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">&lt;</span><span class="n">x</span><span class="o">|</span><span class="n">l</span><span class="o">&gt;</span><span class="n">y</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&gt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">r</span><span class="o">&lt;=</span><span class="n">y</span><span class="p">){</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span><span class="o">+</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">add</span><span class="o">+</span><span class="n">v</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">pushdown</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+    <span class="n">modifyAdd</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">mid</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">modifyAdd</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">].</span><span class="n">val</span><span class="o">+</span><span class="n">segTree</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">val</span><span class="p">)</span><span class="o">%</span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="o">&gt;&gt;</span><span class="n">p</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">buildTree</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">op</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">op</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="p">;</span>
+        <span class="k">switch</span><span class="p">(</span><span class="n">op</span><span class="p">){</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+                <span class="n">modifyAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
+                <span class="n">modifyMul</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="nl">default:</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">query</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
     </div>

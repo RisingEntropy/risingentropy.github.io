@@ -15,14 +15,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="luogu P2943 [USACO09MAR]清理Cleaning Up – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-有N头奶牛，每头那牛都有一个标号Pi，1 &amp;lt;= Pi &amp;lt;= M &amp;lt;= N &amp;lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为kk。那总的不和谐度就是所有段的不和谐度的总和。
-#  输入
+有N头奶牛，每头那牛都有一个标号Pi，1 &amp;lt;= Pi &amp;lt;= M &amp;lt;= N &amp;lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为k*k。那总的不和谐度就是所有段的不和谐度的总和。
+输入
 第一行：两个整数N，M
 第2..N+1行：N个整数代表每个奶牛的编号
-#  输出
+输出
 一个整数，代表最小不和谐度
-#  样例输入
-
+样例输入
 13 4
 1
 2
@@ -38,20 +37,19 @@
 1
 4
 
-#  样例输出
-
+样例输出
 11
 
-#  标签
+标签
 usaco2009mar
-# 解答
+解答
 好难的一道dp啊！奇奇怪怪的做法
-# 低分做法
+低分做法
 $O(n^2)$的DP
-# 骗分做法
+骗分做法
 直接unique然后输出unique之后的长度
-# 满分做法
-我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设pos[j]的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
+满分做法
+我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n*1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设pos[j]的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
 那么，问题就转化为了怎么处理pos数组。我们维护一下几个信息：
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -59,14 +57,13 @@ $O(n^2)$的DP
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="luogu P2943 [USACO09MAR]清理Cleaning Up – Haoyu Deng's page">
   <meta property="og:description" content="题面
-有N头奶牛，每头那牛都有一个标号Pi，1 &amp;lt;= Pi &amp;lt;= M &amp;lt;= N &amp;lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为kk。那总的不和谐度就是所有段的不和谐度的总和。
-#  输入
+有N头奶牛，每头那牛都有一个标号Pi，1 &amp;lt;= Pi &amp;lt;= M &amp;lt;= N &amp;lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为k*k。那总的不和谐度就是所有段的不和谐度的总和。
+输入
 第一行：两个整数N，M
 第2..N+1行：N个整数代表每个奶牛的编号
-#  输出
+输出
 一个整数，代表最小不和谐度
-#  样例输入
-
+样例输入
 13 4
 1
 2
@@ -82,20 +79,19 @@ $O(n^2)$的DP
 1
 4
 
-#  样例输出
-
+样例输出
 11
 
-#  标签
+标签
 usaco2009mar
-# 解答
+解答
 好难的一道dp啊！奇奇怪怪的做法
-# 低分做法
+低分做法
 $O(n^2)$的DP
-# 骗分做法
+骗分做法
 直接unique然后输出unique之后的长度
-# 满分做法
-我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设pos[j]的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
+满分做法
+我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n*1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设pos[j]的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
 那么，问题就转化为了怎么处理pos数组。我们维护一下几个信息：
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -266,16 +262,15 @@ $O(n^2)$的DP
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>有N头奶牛，每头那牛都有一个标号Pi，1 &lt;= Pi &lt;= M &lt;= N &lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为k<em>k。那总的不和谐度就是所有段的不和谐度的总和。
-#  输入
-第一行：两个整数N，M
-第2..N+1行：N个整数代表每个奶牛的编号
-#  输出
-一个整数，代表最小不和谐度
-#  样例输入
-<code class="language-plaintext highlighter-rouge">
-13 4
+      <h1 id="题面">题面</h1>
+<p>有N头奶牛，每头那牛都有一个标号Pi，1 &lt;= Pi &lt;= M &lt;= N &lt;= 40000。现在Farmer John要把这些奶牛分成若干段，定义每段的不和谐度为：若这段里有k个不同的数，那不和谐度为k*k。那总的不和谐度就是所有段的不和谐度的总和。</p>
+<h1 id="输入">输入</h1>
+<p>第一行：两个整数N，M
+第2..N+1行：N个整数代表每个奶牛的编号</p>
+<h1 id="输出">输出</h1>
+<p>一个整数，代表最小不和谐度</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13 4
 1
 2
 1
@@ -289,21 +284,20 @@ $O(n^2)$的DP
 3
 1
 4
-</code>
-#  样例输出
-<code class="language-plaintext highlighter-rouge">
-11
-</code>
-#  标签
-usaco2009mar
-# 解答
-好难的一道dp啊！奇奇怪怪的做法
-# 低分做法
-$O(n^2)$的DP
-# 骗分做法
-直接unique然后输出unique之后的长度
-# 满分做法
-我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n</em>1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设<code class="language-plaintext highlighter-rouge">pos[j]</code>的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11
+</code></pre></div></div>
+<h1 id="标签">标签</h1>
+<p>usaco2009mar</p>
+<h1 id="解答">解答</h1>
+<p>好难的一道dp啊！奇奇怪怪的做法</p>
+<h1 id="低分做法">低分做法</h1>
+<p>$O(n^2)$的DP</p>
+<h1 id="骗分做法">骗分做法</h1>
+<p>直接unique然后输出unique之后的长度</p>
+<h1 id="满分做法">满分做法</h1>
+<p>我们考虑最坏情况：最坏情况就是每个点都单独算，那么最多也就是$n*1^2=n$次也就是说，答案最多不超过n次。那么可以知道，如果一个区间里面，出现的数的个数超过了$\sqrt n$次的话，这个区间就没意义了。假如我们知道从当前点为结尾的不同颜色出现为j次的区间的开始的地方，我们就可以方便的转移了。假设<code class="language-plaintext highlighter-rouge">pos[j]</code>的含义为以当前点为结尾，出现不同颜色为$j$种的区间的起始点，那么，转移方程就写成了\(dp[i] = min(dp[i],dp[pos[j]-1]+j*j)j\in [1,\sqrt n]\)
 那么，问题就转化为了怎么处理pos数组。我们维护一下几个信息：</p>
 
 <ul>
@@ -313,73 +307,70 @@ $O(n^2)$的DP
   <li>pos[i]表示以<strong>当前点作为结尾</strong>，出现<strong>不同数字的个数为$i$</strong>的区间<strong>最远</strong>的起点</li>
 </ul>
 
-<p>那么曾么维护呢？我们考虑<code class="language-plaintext highlighter-rouge">pre</code> <code class="language-plaintext highlighter-rouge">last</code> <code class="language-plaintext highlighter-rouge">nxt</code>互相维护：
-<code class="language-plaintext highlighter-rouge">cpp
-for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;a[i];
-        pre[i] = last[a[i]];//读入
-        nxt[last[a[i]]] = i;//当前颜色的点上一次出现的地方的后一次出现的地方为当前点
-        last[a[i]] = i;//a[i]种颜色最后一次出现为i
-        nxt[i] = n+1;//当前点如果后面在没出现过，那么就是n+1
-        dp[i] = INF;
-    }
-</code>
-然后维护<code class="language-plaintext highlighter-rouge">pos</code>的同时，转移状态
-<code class="language-plaintext highlighter-rouge">cpp
- for(int i = 1;i&lt;=n;i++)pos[i] = 1;//初始化为1，后面会调整。并且也为了方便第一次出现的点(pre 为0)的维护
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 1;j*j&lt;=n;j++){
-            if(pre[i]&lt;pos[j])cnt[j]++;//如果这个颜色的点的出现都在当前区间的前面了，说明当前区间需要多一种颜色了。
-            if(cnt[j]&gt;j){//如果当前区间的不同颜色的点都超过了j了，也就是说不满足pos[j]的含义了，需要修改
-                cnt[j]--;//颜色少一个
-                while(nxt[pos[j]]&lt;i)pos[j]++;//一直向后跳，知道调到一个位置，使得当前区间少一个颜色
-                pos[j]++;//当前pos[j]的位置是在当前区间出现过的某种颜色的最后一个点，还需要向后跳一个，把这个点跳过去
-            }
-            dp[i] = min(dp[i],dp[pos[j]-1]+j*j);//pos维护完了，就该转移了
-        }
-    }
-</code>
-我一开始有个疑问，就是<code class="language-plaintext highlighter-rouge">if(cnt[j]&gt;j)</code>的时候<code class="language-plaintext highlighter-rouge">cnt[j]--</code>会不会导致<code class="language-plaintext highlighter-rouge">cnt[j]--</code>以后，它的值任然大于<code class="language-plaintext highlighter-rouge">j</code>呢？其实不会，因为<code class="language-plaintext highlighter-rouge">cnt[j]</code>每增加一次的时候，就会判断一次，刚刚超过的时候就修改了，所以不会.~~说白了就是我太弱了~~
-AC代码如下：
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;cstdlib&gt;
+<p>那么曾么维护呢？我们考虑<code class="language-plaintext highlighter-rouge">pre</code> <code class="language-plaintext highlighter-rouge">last</code> <code class="language-plaintext highlighter-rouge">nxt</code>互相维护：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span><span class="c1">//读入</span>
+        <span class="n">nxt</span><span class="p">[</span><span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="c1">//当前颜色的点上一次出现的地方的后一次出现的地方为当前点</span>
+        <span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="c1">//a[i]种颜色最后一次出现为i</span>
+        <span class="n">nxt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="c1">//当前点如果后面在没出现过，那么就是n+1</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<p>然后维护<code class="language-plaintext highlighter-rouge">pos</code>的同时，转移状态</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">//初始化为1，后面会调整。并且也为了方便第一次出现的点(pre 为0)的维护</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">//如果这个颜色的点的出现都在当前区间的前面了，说明当前区间需要多一种颜色了。</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="n">j</span><span class="p">){</span><span class="c1">//如果当前区间的不同颜色的点都超过了j了，也就是说不满足pos[j]的含义了，需要修改</span>
+                <span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">--</span><span class="p">;</span><span class="c1">//颜色少一个</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">nxt</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">i</span><span class="p">)</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">//一直向后跳，知道调到一个位置，使得当前区间少一个颜色</span>
+                <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">//当前pos[j]的位置是在当前区间出现过的某种颜色的最后一个点，还需要向后跳一个，把这个点跳过去</span>
+            <span class="p">}</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="p">);</span><span class="c1">//pos维护完了，就该转移了</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<p>我一开始有个疑问，就是<code class="language-plaintext highlighter-rouge">if(cnt[j]&gt;j)</code>的时候<code class="language-plaintext highlighter-rouge">cnt[j]--</code>会不会导致<code class="language-plaintext highlighter-rouge">cnt[j]--</code>以后，它的值任然大于<code class="language-plaintext highlighter-rouge">j</code>呢？其实不会，因为<code class="language-plaintext highlighter-rouge">cnt[j]</code>每增加一次的时候，就会判断一次，刚刚超过的时候就修改了，所以不会.<del>说白了就是我太弱了</del>
+AC代码如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdlib&gt;
 # include &lt;iostream&gt;
 # include &lt;vector&gt;
 # include &lt;cmath&gt;
 # include &lt;string&gt;
 # include &lt;algorithm&gt;
 # include &lt;cstdio&gt;
-using namespace std;
-const int INF = 0x7f7f7f7f;
-const int MAXN = 40010;
-int a[MAXN],pre[MAXN],pos[MAXN],cnt[MAXN],last[MAXN],nxt[MAXN],dp[MAXN];
-int main(){
-    ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    int n,m;cin&gt;&gt;n&gt;&gt;m;
-    for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;a[i];
-        pre[i] = last[a[i]];
-        nxt[last[a[i]]] = i;
-        last[a[i]] = i;
-        nxt[i] = n+1;
-        dp[i] = INF;
-    }
-    for(int i = 1;i&lt;=n;i++)pos[i] = 1;
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 1;j*j&lt;=n;j++){
-            if(pre[i]&lt;pos[j])cnt[j]++;
-            if(cnt[j]&gt;j){
-                cnt[j]--;
-                while(nxt[pos[j]]&lt;i)pos[j]++;
-                pos[j]++;
-            }
-            dp[i] = min(dp[i],dp[pos[j]-1]+j*j);
-        }
-    }
-    cout&lt;&lt;dp[n];
-    return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x7f7f7f7f</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">40010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">pre</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">last</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">nxt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+        <span class="n">nxt</span><span class="p">[</span><span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">last</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">nxt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&gt;</span><span class="n">j</span><span class="p">){</span>
+                <span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+                <span class="k">while</span><span class="p">(</span><span class="n">nxt</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">&lt;</span><span class="n">i</span><span class="p">)</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">j</span><span class="o">*</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

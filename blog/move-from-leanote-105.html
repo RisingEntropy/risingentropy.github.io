@@ -15,26 +15,24 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="拓扑排序WOJ# 2576 小咸鱼，大梦想 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-#  描述
+描述
 有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能满足条件？
-#  输入
+输入
 一开始是一个数字T，表示数据组数 接下来T行，每行是一个数N ，表示咸鱼的数量 接下来一行有n个数，表示每个咸鱼的能力值
-#  输出
+输出
 对于每组数据，输出答案
-#  样例输入
-
+样例输入
 2
 3
 1 2 3
 4
 3 1 2 2
 
-#  样例输出 
-
+样例输出
 6
 6
 
-#  提示
+提示
 样例解释：
 第一个样例中第1个咸鱼送1份饭,第2个咸鱼送2份饭,第三个咸鱼送3份饭.
 第二个样例中第1个咸鱼送2份饭,第2个咸鱼送1份饭,第三个咸鱼送2份饭.最后一个咸鱼送一份饭,因为最后两个咸鱼的能力值不是严格大于.
@@ -42,45 +40,43 @@
 30 % 的数据保证T &amp;lt;= 10 , N &amp;lt;= 1000
 100 % 的数据保证T&amp;lt;=10 , N &amp;lt;= 100000
 100 % 的数据保证0 &amp;lt;= A[i] &amp;lt;= 10^9
-# 解答
+解答
 其实就是裸的拓扑排序，我们比较相邻的两个咸鱼，如果a[i]&amp;gt;a[i-1]那么从i-1连一条道i的边，如果a[i-1]&amp;gt;a[i]，那么连一条从i-1到i的边。
 注意，在一开始找入度为0的点的时候，要把所有入度为0的点都找完才行！！！。还要注意初始化f数组(f[i]表示i条咸鱼送多少饭，入度为0的咸鱼送1份饭)
 AC代码：
 ```cpp
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="拓扑排序WOJ# 2576 小咸鱼，大梦想 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-#  描述
+描述
 有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能满足条件？
-#  输入
+输入
 一开始是一个数字T，表示数据组数 接下来T行，每行是一个数N ，表示咸鱼的数量 接下来一行有n个数，表示每个咸鱼的能力值
-#  输出
+输出
 对于每组数据，输出答案
-#  样例输入
-
+样例输入
 2
 3
 1 2 3
 4
 3 1 2 2
 
-#  样例输出 
-
+样例输出
 6
 6
 
-#  提示
+提示
 样例解释：
 第一个样例中第1个咸鱼送1份饭,第2个咸鱼送2份饭,第三个咸鱼送3份饭.
 第二个样例中第1个咸鱼送2份饭,第2个咸鱼送1份饭,第三个咸鱼送2份饭.最后一个咸鱼送一份饭,因为最后两个咸鱼的能力值不是严格大于.
@@ -88,19 +84,19 @@ AC代码：
 30 % 的数据保证T &amp;lt;= 10 , N &amp;lt;= 1000
 100 % 的数据保证T&amp;lt;=10 , N &amp;lt;= 100000
 100 % 的数据保证0 &amp;lt;= A[i] &amp;lt;= 10^9
-# 解答
+解答
 其实就是裸的拓扑排序，我们比较相邻的两个咸鱼，如果a[i]&amp;gt;a[i-1]那么从i-1连一条道i的边，如果a[i-1]&amp;gt;a[i]，那么连一条从i-1到i的边。
 注意，在一开始找入度为0的点的时候，要把所有入度为0的点都找完才行！！！。还要注意初始化f数组(f[i]表示i条咸鱼送多少饭，入度为0的咸鱼送1份饭)
 AC代码：
 ```cpp
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
-# include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
+include 
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -270,110 +266,107 @@ AC代码：
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>#  描述
-有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能满足条件？
-#  输入
-一开始是一个数字T，表示数据组数 接下来T行，每行是一个数N ，表示咸鱼的数量 接下来一行有n个数，表示每个咸鱼的能力值
-#  输出
-对于每组数据，输出答案
-#  样例输入
-<code class="language-plaintext highlighter-rouge">
-2
+      <h1 id="题面">题面</h1>
+<h1 id="描述">描述</h1>
+<p>有N条咸鱼，每条咸鱼都有自己的能力值A[i]，现在你要给这些咸鱼送饭，当然咸鱼也有梦想，他们会暗中较劲，所以你给每个咸鱼送饭的时候要保证对于相邻的两条咸鱼，能力值大的咸鱼得到的饭要比咸鱼值少的多，请问最少送多少饭就能满足条件？</p>
+<h1 id="输入">输入</h1>
+<p>一开始是一个数字T，表示数据组数 接下来T行，每行是一个数N ，表示咸鱼的数量 接下来一行有n个数，表示每个咸鱼的能力值</p>
+<h1 id="输出">输出</h1>
+<p>对于每组数据，输出答案</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
 3
 1 2 3
 4
 3 1 2 2
-</code>
-#  样例输出 
-<code class="language-plaintext highlighter-rouge">
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
 6
-6
-</code>
-#  提示
-样例解释：
+</code></pre></div></div>
+<h1 id="提示">提示</h1>
+<p>样例解释：
 第一个样例中第1个咸鱼送1份饭,第2个咸鱼送2份饭,第三个咸鱼送3份饭.
 第二个样例中第1个咸鱼送2份饭,第2个咸鱼送1份饭,第三个咸鱼送2份饭.最后一个咸鱼送一份饭,因为最后两个咸鱼的能力值不是严格大于.
 数据范围：
 30 % 的数据保证T &lt;= 10 , N &lt;= 1000
 100 % 的数据保证T&lt;=10 , N &lt;= 100000
-100 % 的数据保证0 &lt;= A[i] &lt;= 10^9
-# 解答
-其实就是裸的拓扑排序，我们比较相邻的两个咸鱼，如果a[i]&gt;a[i-1]那么从i-1连一条道i的边，如果a[i-1]&gt;a[i]，那么连一条从i-1到i的边。
+100 % 的数据保证0 &lt;= A[i] &lt;= 10^9</p>
+<h1 id="解答">解答</h1>
+<p>其实就是裸的拓扑排序，我们比较相邻的两个咸鱼，如果a[i]&gt;a[i-1]那么从i-1连一条道i的边，如果a[i-1]&gt;a[i]，那么连一条从i-1到i的边。
 注意，在一开始找入度为0的点的时候，要把所有入度为0的点都找完才行！！！。还要注意初始化f数组(f[i]表示i条咸鱼送多少饭，入度为0的咸鱼送1份饭)
-AC代码：
-```cpp
-# include <cstdio>
-# include <cstring>
-# include <cmath>
-# include <algorithm>
-# include <set>
-# include <queue>
-# include <iostream>
-# include <stack></stack></iostream></queue></set></algorithm></cmath></cstring></cstdio></p>
+AC代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
+# include &lt;cstring&gt;
+# include &lt;cmath&gt;
+# include &lt;algorithm&gt;
+# include &lt;set&gt;
+# include &lt;queue&gt;
+# include &lt;iostream&gt;
+# include &lt;stack&gt;
+</span>
+<span class="cp"># pragma GCC optimize("Ofast")
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span> <span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">indegree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+    <span class="n">indegree</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">f</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 
-<h1 id="pragma-gcc-optimizeofast">pragma GCC optimize(“Ofast”)</h1>
-<p>using namespace std;
-const int MAXN = 100010;
-struct edge{ int t,w,next; }edges[MAXN];
-int head[MAXN];
-int top;
-int indegree[MAXN];
-void add(int f,int t,int w) {
-    edges[++top].next = head[f];
-    edges[top].t = t;
-    edges[top].w = w;
-    indegree[t]++;
-    head[f] = top;
-}
-int f[MAXN];
-int n;
-int a[MAXN];</p>
+<span class="kt">void</span> <span class="nf">topo</span><span class="p">(){</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">indegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-<p>void topo(){
-    queue<int> q;
-    for(int i = 1;i&lt;=n;i++){
-        if(indegree[i]==0){
-            q.push(i);
-            f[i] = 1;
-        }
-    }</int></p>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="n">indegree</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">indegree</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while(!q.empty()){
-    int top = q.front();
-    q.pop();
-    for(int i = head[top];i!=0;i = edges[i].next){
-        int t = edges[i].t;
-        indegree[t]--;
-        if(indegree[t]==0){
-            f[t] = max(f[t],f[top]+1);
-            q.push(t);
-        }
-    }
-} }
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">T</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">T</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">head</span><span class="p">));</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">topo</span><span class="p">();</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span><span class="o">+=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
-
-<p>int main(){
-    int T;
-    cin»T;
-    while(T–) {
-        memset(f,0, sizeof(f));
-        memset(head,0, sizeof(head));
-        top = 0;
-        cin » n;
-        for (int i = 1; i &lt;= n; i++)cin » a[i];
-        for(int i = 2;i&lt;=n;i++){
-            if(a[i]&gt;a[i-1])add(i-1,i,1);
-            if(a[i]&lt;a[i-1])add(i,i-1,i);
-        }
-        topo();
-        long long ans = 0;
-        for(int i = 1;i&lt;=n;i++)ans+=f[i];
-        cout«ans«endl;
-    }
-    return 0;
-}
-```</p>
 
     </div>
 

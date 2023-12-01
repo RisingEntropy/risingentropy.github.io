@@ -16,25 +16,22 @@
   <meta name="twitter:title" content="bzoj 2118 墨墨的等式(好题) – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 墨墨突然对等式很感兴趣，他正在研究a1x1+a2y2+…+anxn=B存在非负整数解的条件，他要求你编写一个程序，给定N、{an}、以及B的取值范围，求出有多少B可以使等式存在非负整数解。
-#  输入
+输入
 输入的第一行包含3个正整数，分别表示N、BMin、BMax分别表示数列的长度、B的下界、B的上界。输入的第二行包含N个整数，即数列{an}的值。
-#  输出
+输出
 输出一个整数，表示有多少b可以使等式存在非负整数解。
-#  样例
-#  样例输入
-
+样例
+样例输入
 2 5 10
 3 5
 
-#  样例输出
-
+样例输出
 5
 
-# 解答
+解答
 我死活都想不到这TM和最短路有关系。大概弱是原罪吧！
-# $15ptr$做法
+$15ptr$做法
 爆搜。剪剪枝，其实也没多大用
-cpp
 //
 // Created by dhy on 19-2-11.
 //
@@ -66,17 +63,17 @@ int main(){
     return 0;
 }
 
-# $100ptr$做法
-我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，~~我懒得去算了~~开大点，不要爆空间就行。
+$100ptr$做法
+我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，我懒得去算了开大点，不要爆空间就行。
 代码：
 ```cpp
 //
 // Created by dhy on 19-2-11.
 //
-# include 
-# include 
-# include 
-# include 
+include 
+include 
+include 
+include 
 using namespace std;
 int n;
 int num[14];
@@ -125,25 +122,22 @@ void spfa(){
   <meta property="og:title" content="bzoj 2118 墨墨的等式(好题) – Haoyu Deng's page">
   <meta property="og:description" content="题面
 墨墨突然对等式很感兴趣，他正在研究a1x1+a2y2+…+anxn=B存在非负整数解的条件，他要求你编写一个程序，给定N、{an}、以及B的取值范围，求出有多少B可以使等式存在非负整数解。
-#  输入
+输入
 输入的第一行包含3个正整数，分别表示N、BMin、BMax分别表示数列的长度、B的下界、B的上界。输入的第二行包含N个整数，即数列{an}的值。
-#  输出
+输出
 输出一个整数，表示有多少b可以使等式存在非负整数解。
-#  样例
-#  样例输入
-
+样例
+样例输入
 2 5 10
 3 5
 
-#  样例输出
-
+样例输出
 5
 
-# 解答
+解答
 我死活都想不到这TM和最短路有关系。大概弱是原罪吧！
-# $15ptr$做法
+$15ptr$做法
 爆搜。剪剪枝，其实也没多大用
-cpp
 //
 // Created by dhy on 19-2-11.
 //
@@ -175,17 +169,17 @@ int main(){
     return 0;
 }
 
-# $100ptr$做法
-我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，~~我懒得去算了~~开大点，不要爆空间就行。
+$100ptr$做法
+我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，我懒得去算了开大点，不要爆空间就行。
 代码：
 ```cpp
 //
 // Created by dhy on 19-2-11.
 //
-# include 
-# include 
-# include 
-# include 
+include 
+include 
+include 
+include 
 using namespace std;
 int n;
 int num[14];
@@ -396,138 +390,134 @@ void spfa(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>墨墨突然对等式很感兴趣，他正在研究a1x1+a2y2+…+anxn=B存在非负整数解的条件，他要求你编写一个程序，给定N、{an}、以及B的取值范围，求出有多少B可以使等式存在非负整数解。
-#  输入
-输入的第一行包含3个正整数，分别表示N、BMin、BMax分别表示数列的长度、B的下界、B的上界。输入的第二行包含N个整数，即数列{an}的值。
-#  输出
-输出一个整数，表示有多少b可以使等式存在非负整数解。
-#  样例
-#  样例输入
-<code class="language-plaintext highlighter-rouge">
-2 5 10
+      <h1 id="题面">题面</h1>
+<p>墨墨突然对等式很感兴趣，他正在研究a1x1+a2y2+…+anxn=B存在非负整数解的条件，他要求你编写一个程序，给定N、{an}、以及B的取值范围，求出有多少B可以使等式存在非负整数解。</p>
+<h1 id="输入">输入</h1>
+<p>输入的第一行包含3个正整数，分别表示N、BMin、BMax分别表示数列的长度、B的下界、B的上界。输入的第二行包含N个整数，即数列{an}的值。</p>
+<h1 id="输出">输出</h1>
+<p>输出一个整数，表示有多少b可以使等式存在非负整数解。</p>
+<h1 id="样例">样例</h1>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 5 10
 3 5
-</code>
-#  样例输出
-<code class="language-plaintext highlighter-rouge">
-5
-</code>
-# 解答
-我死活都想不到这TM和最短路有关系。大概弱是原罪吧！
-# $15ptr$做法
-爆搜。剪剪枝，其实也没多大用
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 19-2-11.
-//
-# include &lt;iostream&gt;
-using namespace std;
-int ans;
-int n;
-int num[14];
-int re_sum[14];
-void dfs(int pos,long long sum,long long maxx,long long minn){
-    if(pos&gt;n&amp;&amp;sum&lt;=maxx&amp;&amp;sum&gt;=minn){ans++;return; }
-    if(sum+re_sum[pos+1]&gt;=maxx){ans++; return;}
-    else if(pos&gt;n)return;
-    for(int i = 0;i*num[pos]+sum&lt;=maxx;i++){
-        dfs(pos+1,sum+i*num[pos],maxx,minn);
-    }
-}
-int main(){
-    int bmax,bmin;
-    cin&gt;&gt;n&gt;&gt;bmin&gt;&gt;bmax;
-    for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;num[i];
-    }
-    for(int i = n;i&gt;=1;i--){
-        re_sum[i] = num[i]+re_sum[i+1];
-    }
-    dfs(1,0,bmax,bmin);
-    cout&lt;&lt;ans;
-    return 0;
-}
-</code>
-# $100ptr$做法
-我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，<strong>只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数</strong>。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，~~我懒得去算了~~开大点，不要爆空间就行。
-代码：
-```cpp
-//
-// Created by dhy on 19-2-11.
-//
-# include <iostream>
-# include <queue>
-# include <algorithm>
-# include <cstring>
-using namespace std;
-int n;
-int num[14];
-const int MAXN = (int)5e5+10;
-bool viss[MAXN];
-long long dis[MAXN];
-struct edge{
-    long long t,w,next;
-}edges[MAXN*20];
-int head[MAXN];
-int topp;
-void add(int f,int t,int w) {
-    edges[++topp].next = head[f];
-    edges[topp].t = t;
-    edges[topp].w = w;
-    head[f] = topp;
-}
-void spfa(){
-    memset(dis,0x6f,sizeof(dis));
-    memset(viss,false,sizeof(viss));
-    queue<long long=""> q;
-    int s = 0;
-    viss[s] = true;
-    dis[s] = 0;
-    q.push(s);
-    while(!q.empty()){
-        long long top = q.front();
-        q.pop();
-        viss[top] = false;
-        for(long long i = head[top];i!=0;i = edges[i].next){
-            long long t = edges[i].t;
-            if(dis[t]&gt;dis[top]+edges[i].w){
-                dis[t] = dis[top]+edges[i].w;
-                if(!viss[t]){
-                    viss[t] = true;
-                    q.push(t);
-                }
-            }
-        }
-    }
-}</long></cstring></algorithm></queue></iostream></p>
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>我死活都想不到这TM和最短路有关系。大概弱是原罪吧！</p>
+<h1 id="15ptr做法">$15ptr$做法</h1>
+<p>爆搜。剪剪枝，其实也没多大用</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-2-11.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">num</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">re_sum</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">maxx</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">minn</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">n</span><span class="o">&amp;&amp;</span><span class="n">sum</span><span class="o">&lt;=</span><span class="n">maxx</span><span class="o">&amp;&amp;</span><span class="n">sum</span><span class="o">&gt;=</span><span class="n">minn</span><span class="p">){</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span><span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="o">+</span><span class="n">re_sum</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">maxx</span><span class="p">){</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span> <span class="k">return</span><span class="p">;}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">num</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">+</span><span class="n">sum</span><span class="o">&lt;=</span><span class="n">maxx</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">sum</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">num</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span><span class="n">maxx</span><span class="p">,</span><span class="n">minn</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">bmax</span><span class="p">,</span><span class="n">bmin</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">bmin</span><span class="o">&gt;&gt;</span><span class="n">bmax</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
+        <span class="n">re_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">re_sum</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">bmax</span><span class="p">,</span><span class="n">bmin</span><span class="p">);</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="100ptr做法">$100ptr$做法</h1>
+<p>我们考虑对最后可以凑出来的数进行分类。对这个数进行对$min(a_i)$取模，分成$0-min(a_i)-1$类，对于每一类考虑有哪些可以由这一类拓展过来。如$v$可以被凑出来那么$v+m$(m代指$min(a_i)$)也可以被凑出来。也就是说，<strong>只要我们找到一个最小的，在模m意义下等于p($p\in[1,m-1]$)的数，那么我们就可以算出所以在范围内的数</strong>。要找出最小的那个数，我们发现这就是最短路模型，由i向i+a[j]%m连边。最后遍历dis[1-m-1]统计一下答案就行。至于存边的数组的大小，玄学，<del>我懒得去算了</del>开大点，不要爆空间就行。
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 19-2-11.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
+# include &lt;queue&gt;
+# include &lt;algorithm&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">num</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">5e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">viss</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dis</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="mi">20</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">topp</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">topp</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">topp</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">topp</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">topp</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">spfa</span><span class="p">(){</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="mh">0x6f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">viss</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">viss</span><span class="p">));</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">viss</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">dis</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">top</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">viss</span><span class="p">[</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">top</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">){</span>
+                <span class="n">dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">+</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">viss</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+                    <span class="n">viss</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<p>int main(){
-    long long bmax,bmin;
-    cin»n»bmin»bmax;
-    for(int i = 1;i&lt;=n;i++)cin»num[i];
-    sort(num+1,num+1+n);
-    int mn = num[1];
-    for(int i = 0;i&lt;mn;i++){
-        for(int j = 2;j&lt;=n;j++){
-            add(i,(i+num[j])%mn,num[j]);
-        }
-    }
-    spfa();
-    long long ans = 0;
-    for(int i = 0;i&lt;mn;i++){
-        if(dis[i]&gt;bmax)continue;
-        if(dis[i]&gt;bmin){
-            ans+=(bmax-dis[i])/mn+1;
-        } else{
-            ans+=(bmax-dis[i])/mn+1;
-            ans-=(bmin-dis[i]+mn-1)/mn;
-        }
-    }
-    cout«ans;
-    return 0;
-}</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">bmax</span><span class="p">,</span><span class="n">bmin</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">bmin</span><span class="o">&gt;&gt;</span><span class="n">bmax</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="o">+</span><span class="n">n</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mn</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,(</span><span class="n">i</span><span class="o">+</span><span class="n">num</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">%</span><span class="n">mn</span><span class="p">,</span><span class="n">num</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">spfa</span><span class="p">();</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mn</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">bmax</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">bmin</span><span class="p">){</span>
+            <span class="n">ans</span><span class="o">+=</span><span class="p">(</span><span class="n">bmax</span><span class="o">-</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">mn</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+            <span class="n">ans</span><span class="o">+=</span><span class="p">(</span><span class="n">bmax</span><span class="o">-</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">mn</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">ans</span><span class="o">-=</span><span class="p">(</span><span class="n">bmin</span><span class="o">-</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">mn</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">mn</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>```</p>
+</code></pre></div></div>
 
     </div>
 

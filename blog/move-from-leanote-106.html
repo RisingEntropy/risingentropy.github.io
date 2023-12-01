@@ -15,70 +15,70 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="luoguP3387 【模板】缩点 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-# 题目描述
+题目描述
 给定一个n个点m条边有向图，每个点有一个权值，求一条路径，使路径经过的点权值之和最大。你只需要求出这个权值和。
 允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。
-#  输入输出格式
-#  输入格式：
+输入输出格式
+输入格式：
 第一行，n,m
 第二行，n个整数，依次代表点权
 第三至m+2行，每行两个整数u,v，表示u-&amp;gt;v有一条有向边
-#  输出格式：
+输出格式：
 共一行，最大的点权之和。
-#  输入输出样例
-#  输入样例# 1： 
-
+输入输出样例
+输入样例# 1：
 2 2
 1 1
 1 2
 2 1
 
-#  输出样例# 1： 
-
+输出样例# 1：
 2
 
 说明
 n&amp;lt;=10^4,m&amp;lt;=10^5,点权&amp;lt;=1000
 算法：Tarjan缩点+DAGdp
-# 解答
+解答
 其实是一道水题，不知道怎么刷到蓝题了，水的一批。
 首先看路径权值和最大？爆搜？当然不行啦(暴力：你看不起我？)那我们考虑换种方法，我们看到题中的一个点可以被计算多次，但权值只计算一次我们想一下，如果一个点的权值可以计算多次怎么办？当然是找环啦，这样就一直在环上绕圈圈，权值和直接$\infty$，那么，这就是我们的切入点！找环！因为找到一个环，然后再缩点，我们就可以忽略这个环上其他点对求解的干扰。缩点的同时，我们把被缩掉的点的权值加到缩了的点上。于是乎我们就找到了如下流程：
-&amp;gt;tarjan找环-&amp;gt;缩点-&amp;gt;dfs搜索(记忆化搜索)
+
+  tarjan找环-&amp;gt;缩点-&amp;gt;dfs搜索(记忆化搜索)
+
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="luoguP3387 【模板】缩点 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-# 题目描述
+题目描述
 给定一个n个点m条边有向图，每个点有一个权值，求一条路径，使路径经过的点权值之和最大。你只需要求出这个权值和。
 允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。
-#  输入输出格式
-#  输入格式：
+输入输出格式
+输入格式：
 第一行，n,m
 第二行，n个整数，依次代表点权
 第三至m+2行，每行两个整数u,v，表示u-&amp;gt;v有一条有向边
-#  输出格式：
+输出格式：
 共一行，最大的点权之和。
-#  输入输出样例
-#  输入样例# 1： 
-
+输入输出样例
+输入样例# 1：
 2 2
 1 1
 1 2
 2 1
 
-#  输出样例# 1： 
-
+输出样例# 1：
 2
 
 说明
 n&amp;lt;=10^4,m&amp;lt;=10^5,点权&amp;lt;=1000
 算法：Tarjan缩点+DAGdp
-# 解答
+解答
 其实是一道水题，不知道怎么刷到蓝题了，水的一批。
 首先看路径权值和最大？爆搜？当然不行啦(暴力：你看不起我？)那我们考虑换种方法，我们看到题中的一个点可以被计算多次，但权值只计算一次我们想一下，如果一个点的权值可以计算多次怎么办？当然是找环啦，这样就一直在环上绕圈圈，权值和直接$\infty$，那么，这就是我们的切入点！找环！因为找到一个环，然后再缩点，我们就可以忽略这个环上其他点对求解的干扰。缩点的同时，我们把被缩掉的点的权值加到缩了的点上。于是乎我们就找到了如下流程：
-&amp;gt;tarjan找环-&amp;gt;缩点-&amp;gt;dfs搜索(记忆化搜索)
+
+  tarjan找环-&amp;gt;缩点-&amp;gt;dfs搜索(记忆化搜索)
+
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -248,42 +248,41 @@ n&amp;lt;=10^4,m&amp;lt;=10^5,点权&amp;lt;=1000
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p># 题目描述
-给定一个n个点m条边有向图，每个点有一个权值，求一条路径，使路径经过的点权值之和最大。你只需要求出这个权值和。
-允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。
-#  输入输出格式
-#  输入格式：
-第一行，n,m
+      <h1 id="题面">题面</h1>
+<h1 id="题目描述">题目描述</h1>
+<p>给定一个n个点m条边有向图，每个点有一个权值，求一条路径，使路径经过的点权值之和最大。你只需要求出这个权值和。
+允许多次经过一条边或者一个点，但是，重复经过的点，权值只计算一次。</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式：</h1>
+<p>第一行，n,m
 第二行，n个整数，依次代表点权
-第三至m+2行，每行两个整数u,v，表示u-&gt;v有一条有向边
-#  输出格式：
-共一行，最大的点权之和。
-#  输入输出样例
-#  输入样例# 1： 
-<code class="language-plaintext highlighter-rouge">
-2 2
+第三至m+2行，每行两个整数u,v，表示u-&gt;v有一条有向边</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>共一行，最大的点权之和。</p>
+<h1 id="输入输出样例">输入输出样例</h1>
+<h1 id="输入样例-1">输入样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 2
 1 1
 1 2
 2 1
-</code>
-#  输出样例# 1： 
-<code class="language-plaintext highlighter-rouge">
-2
-</code>
-说明
+</code></pre></div></div>
+<h1 id="输出样例-1">输出样例# 1：</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+<p>说明
 n&lt;=10^4,m&lt;=10^5,点权&lt;=1000
-算法：Tarjan缩点+DAGdp
-# 解答
-其实是一道水题，不知道怎么刷到蓝题了，水的一批。
-首先看路径权值和最大？爆搜？当然不行啦(暴力：你看不起我？)那我们考虑换种方法，我们看到题中的<code class="language-plaintext highlighter-rouge">一个点可以被计算多次，但权值只计算一次</code>我们想一下，如果一个点的权值可以计算多次怎么办？当然是找环啦，这样就一直在环上绕圈圈，权值和直接$\infty$，那么，这就是我们的切入点！找环！因为找到一个环，然后再缩点，我们就可以忽略这个环上其他点对求解的干扰。缩点的同时，我们把被缩掉的点的权值加到缩了的点上。于是乎我们就找到了如下流程：
-&gt;tarjan找环-&gt;缩点-&gt;dfs搜索(记忆化搜索)</p>
+算法：Tarjan缩点+DAGdp</p>
+<h1 id="解答">解答</h1>
+<p>其实是一道水题，不知道怎么刷到蓝题了，水的一批。
+首先看路径权值和最大？爆搜？当然不行啦(暴力：你看不起我？)那我们考虑换种方法，我们看到题中的<code class="language-plaintext highlighter-rouge">一个点可以被计算多次，但权值只计算一次</code>我们想一下，如果一个点的权值可以计算多次怎么办？当然是找环啦，这样就一直在环上绕圈圈，权值和直接$\infty$，那么，这就是我们的切入点！找环！因为找到一个环，然后再缩点，我们就可以忽略这个环上其他点对求解的干扰。缩点的同时，我们把被缩掉的点的权值加到缩了的点上。于是乎我们就找到了如下流程：</p>
+<blockquote>
+  <p>tarjan找环-&gt;缩点-&gt;dfs搜索(记忆化搜索)</p>
+</blockquote>
 
 <p>注意，也是为了提醒我自己：
 tarjan求强联通分量还有一个数组记录一个点是否在栈里面，和tarjan找双连通分量与割点与桥不同
-AC代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include&lt;iostream&gt;
+AC代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;iostream&gt;
 # include&lt;cstdio&gt;
 # include &lt;cmath&gt;
 # include &lt;cstring&gt;
@@ -292,101 +291,101 @@ AC代码：
 # include &lt;algorithm&gt;
 # include &lt;fstream&gt;
 # include &lt;set&gt;
-using namespace std;
-const int MAXN = 101000;
-struct edge{int f,t,w,next;}edges[MAXN];
-int fe[MAXN],te[MAXN];
-int head[MAXN];
-int w[MAXN];
-int top;
-int n;
-int read(){
-    int x = 0,f = 1;
-    static char c = getchar();
-    while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
-    while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar();}
-    return x*f;
-}
-void add(int f,int t,int w) {
-    edges[++top].next = head[f];
-    edges[top].t = t;
-    edges[top].f = f;
-    edges[top].w = w;
-    head[f] = top;
-}
-stack&lt;int&gt; stk;
-int dfn_cnt;
-int dfn[MAXN],low[MAXN];
-int wei[MAXN];
-int color[MAXN];
-int col_cnt;
-bool instack[MAXN];
-int dp[MAXN];
-void tarjan(int x){
-    dfn[x] = low[x] = ++dfn_cnt;
-    stk.push(x);
-    instack[x] = true;
-    for(int i = head[x];i!=0; i =edges[i].next){
-        int t = edges[i].t;
-        if(!dfn[t]){
-            tarjan(t);
-            low[x] = min(low[x],low[t]);
-        }else if(instack[t]){
-            low[x] =  min(dfn[t],low[x]);
-        }
-    }
-    if(dfn[x]==low[x]){
-        color[x] = ++col_cnt;
-        wei[col_cnt]+=w[x];
-        while(stk.top()!=x){
-            wei[col_cnt] += w[stk.top()];
-            instack[stk.top()] =  false;
-            color[stk.top()] = col_cnt;
-            stk.pop();
-        }
-        instack[x] = false;
-        stk.pop();
-    }
-}
-void dfs(int x){
-    if(dp[x])return;
-    dp[x] = wei[x];
-    int maxsum = 0;
-    for(int i = head[x];i!=0;i = edges[i].next){
-        if(!dp[edges[i].t])dfs(edges[i].t);
-        maxsum=max(maxsum,dp[edges[i].t]);
-    }
-    dp[x]+=maxsum;
-}
-int main(void){
-    int m ;
-    n = read(),m = read();
-    for(int i = 1;i&lt;=n;i++)w[i] = read();
-    int f,t;
-    for(int i = 1;i&lt;=m;i++){
-        f = read(),t = read();
-        fe[i] = f,te[i] =t;
-        add(f,t,1);
-    }
-    for(int i = 1;i&lt;=n;i++)if(!dfn[i])tarjan(i);
-    memset(head,0, sizeof(head));
-    top = 0;
-    for(int i = 1;i&lt;=m;i++){
-        if(color[fe[i]]!=color[te[i]]){
-            add(color[fe[i]],color[te[i]],1);
-        }
-    }
-    int ans = 0;
-    for(int i = 1;i&lt;=col_cnt;i++){
-        if(!dp[i]){
-            dfs(i);
-            ans = max(ans,dp[i]);
-        }
-    }
-    printf("%d",ans);
-    return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">101000</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">next</span><span class="p">;}</span><span class="n">edges</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">fe</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">te</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">w</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span><span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">edges</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">;</span>
+    <span class="n">edges</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">wei</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">color</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">col_cnt</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">instack</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+    <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">instack</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+            <span class="n">tarjan</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">t</span><span class="p">]);</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">instack</span><span class="p">[</span><span class="n">t</span><span class="p">]){</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span>  <span class="n">min</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
+        <span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">col_cnt</span><span class="p">;</span>
+        <span class="n">wei</span><span class="p">[</span><span class="n">col_cnt</span><span class="p">]</span><span class="o">+=</span><span class="n">w</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
+            <span class="n">wei</span><span class="p">[</span><span class="n">col_cnt</span><span class="p">]</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()];</span>
+            <span class="n">instack</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()]</span> <span class="o">=</span>  <span class="nb">false</span><span class="p">;</span>
+            <span class="n">color</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()]</span> <span class="o">=</span> <span class="n">col_cnt</span><span class="p">;</span>
+            <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">instack</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="k">return</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">wei</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">maxsum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dp</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">])</span><span class="n">dfs</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">);</span>
+        <span class="n">maxsum</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">maxsum</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+=</span><span class="n">maxsum</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="p">;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">m</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">read</span><span class="p">(),</span><span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+        <span class="n">fe</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">,</span><span class="n">te</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">t</span><span class="p">;</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">tarjan</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">head</span><span class="p">));</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="n">fe</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">!=</span><span class="n">color</span><span class="p">[</span><span class="n">te</span><span class="p">[</span><span class="n">i</span><span class="p">]]){</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="n">fe</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span><span class="n">color</span><span class="p">[</span><span class="n">te</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">col_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

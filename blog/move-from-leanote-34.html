@@ -244,37 +244,36 @@ int search(string str){
   <article class="post">
 
     <div class="post__content">
-      <p>```cpp
-struct node{
-    int son[27];
-    int exist = false;
-    bool visited = false;
-}nodes[900000];
-int top = 0;
-void insert(string str){
-    int num,root = 1;
-    for(int i = 0;str[i];i++){
-        num = str[i] - ‘a’;
-        if(nodes[root].son[num]==0)//no son
-            nodes[root].son[num] = ++top;
-        root = nodes[root].son[num];
-    }
-    nodes[root].exist = true;
-}
-int search(string str){
-    int num = 0,root = 1;
-    for(int i = 0;str[i];i++){
-        num = str[i]-‘a’;
-        if(nodes[root].son[num]==0)return WRONG;
-        root = nodes[root].son[num];
-    }
-    if(!nodes[root].exist)return WRONG;
-    else if(nodes[root].visited)return REPEAT;
-    nodes[root].visited = true;
-    return OK;</p>
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="nc">node</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">son</span><span class="p">[</span><span class="mi">27</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">exist</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">visited</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span><span class="n">nodes</span><span class="p">[</span><span class="mi">900000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">num</span><span class="p">,</span><span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'a'</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="c1">//no son</span>
+            <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">top</span><span class="p">;</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">exist</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">search</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">root</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">WRONG</span><span class="p">;</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">exist</span><span class="p">)</span><span class="k">return</span> <span class="n">WRONG</span><span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">visited</span><span class="p">)</span><span class="k">return</span> <span class="n">REPEAT</span><span class="p">;</span>
+    <span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">].</span><span class="n">visited</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">OK</span><span class="p">;</span>
 
-<p>}
-```</p>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

@@ -16,26 +16,28 @@
   <meta name="twitter:title" content="数学复习总结 – Haoyu Deng's page">
   <meta name="twitter:description" content="数学复习总结
 人生中最后一篇OI总结
-# 数论分块
-- [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=nk -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
-# 欧拉函数
-计算公式：$\varphi(N) = N\prod_{p|N}(1-\frac{1}{p})$
+数论分块
+
+  [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
+    欧拉函数
+    计算公式：$\varphi(N) = N*\prod_{p|N}(1-\frac{1}{p})$
 线性筛计算代码：
-cpp
-void getprime(int n){
-	phi[1] = 1;
-	for(int i = 2;i&amp;lt;=n;i++){
-		if(!vis[i]){phi[i] = i-1;prime[++cnt] = i;}
-		for(int j = 1;j&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;=n;j++){
-			vis[i*prime[j]] = true;
-			if(i%prime[j]==0){
-				phi[i*prime[j]] = phi[i]*prime[j];
-				break;
-			}else
-				phi[i*prime[j]] = phi[i]*phi[prime[j]];
-		}
-	}
+    void getprime(int n){
+  phi[1] = 1;
+  for(int i = 2;i&amp;lt;=n;i++){
+      if(!vis[i]){phi[i] = i-1;prime[++cnt] = i;}
+      for(int j = 1;j&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;=n;j++){
+          vis[i*prime[j]] = true;
+          if(i%prime[j]==0){
+              phi[i*prime[j]] = phi[i]*prime[j];
+              break;
+          }else
+              phi[i*prime[j]] = phi[i]*phi[prime[j]];
+      }
+  }
 }
+    
+  
 
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -44,26 +46,28 @@ void getprime(int n){
   <meta property="og:title" content="数学复习总结 – Haoyu Deng's page">
   <meta property="og:description" content="数学复习总结
 人生中最后一篇OI总结
-# 数论分块
-- [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=nk -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
-# 欧拉函数
-计算公式：$\varphi(N) = N\prod_{p|N}(1-\frac{1}{p})$
+数论分块
+
+  [] 余数求和 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
+    欧拉函数
+    计算公式：$\varphi(N) = N*\prod_{p|N}(1-\frac{1}{p})$
 线性筛计算代码：
-cpp
-void getprime(int n){
-	phi[1] = 1;
-	for(int i = 2;i&amp;lt;=n;i++){
-		if(!vis[i]){phi[i] = i-1;prime[++cnt] = i;}
-		for(int j = 1;j&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;=n;j++){
-			vis[i*prime[j]] = true;
-			if(i%prime[j]==0){
-				phi[i*prime[j]] = phi[i]*prime[j];
-				break;
-			}else
-				phi[i*prime[j]] = phi[i]*phi[prime[j]];
-		}
-	}
+    void getprime(int n){
+  phi[1] = 1;
+  for(int i = 2;i&amp;lt;=n;i++){
+      if(!vis[i]){phi[i] = i-1;prime[++cnt] = i;}
+      for(int j = 1;j&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;=n;j++){
+          vis[i*prime[j]] = true;
+          if(i%prime[j]==0){
+              phi[i*prime[j]] = phi[i]*prime[j];
+              break;
+          }else
+              phi[i*prime[j]] = phi[i]*phi[prime[j]];
+      }
+  }
 }
+    
+  
 
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -234,29 +238,31 @@ void getprime(int n){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">数学复习总结</h1>
-<p>人生中最后一篇OI总结
-# 数论分块
-- [] <a href="http://192.168.110.251/problempage.php?problem_id=3138#">余数求和</a> 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n<em>k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
-# 欧拉函数
-计算公式：$\varphi(N) = N</em>\prod_{p|N}(1-\frac{1}{p})$
-线性筛计算代码：
-<code class="language-plaintext highlighter-rouge">cpp
-void getprime(int n){
-	phi[1] = 1;
-	for(int i = 2;i&lt;=n;i++){
-		if(!vis[i]){phi[i] = i-1;prime[++cnt] = i;}
-		for(int j = 1;j&lt;=cnt&amp;&amp;i*prime[j]&lt;=n;j++){
-			vis[i*prime[j]] = true;
-			if(i%prime[j]==0){
-				phi[i*prime[j]] = phi[i]*prime[j];
-				break;
-			}else
-				phi[i*prime[j]] = phi[i]*phi[prime[j]];
-		}
-	}
-}
-</code></p>
+      <h1 id="数学复习总结">数学复习总结</h1>
+<p>人生中最后一篇OI总结</p>
+<h1 id="数论分块">数论分块</h1>
+<ul>
+  <li>[] <a href="http://192.168.110.251/problempage.php?problem_id=3138#">余数求和</a> 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
+    <h1 id="欧拉函数">欧拉函数</h1>
+    <p>计算公式：$\varphi(N) = N*\prod_{p|N}(1-\frac{1}{p})$
+线性筛计算代码：</p>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">getprime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+  <span class="n">phi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">prime</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;}</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">cnt</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+          <span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+              <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="p">}</span><span class="k">else</span>
+              <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">phi</span><span class="p">[</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]];</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
     </div>
 

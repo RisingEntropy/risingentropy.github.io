@@ -14,8 +14,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trie 数组版 – Haoyu Deng's page">
-  <meta name="twitter:description" content="cpp
-const N = 50000;
+  <meta name="twitter:description" content="const N = 50000;
 const sigmaSize = 26;//字符集大小 
 int trie[N][sigmaSize];
 int total = 1;
@@ -50,8 +49,7 @@ bool search(char * str){
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="Trie 数组版 – Haoyu Deng's page">
-  <meta property="og:description" content="cpp
-const N = 50000;
+  <meta property="og:description" content="const N = 50000;
 const sigmaSize = 26;//字符集大小 
 int trie[N][sigmaSize];
 int total = 1;
@@ -250,37 +248,36 @@ bool search(char * str){
   <article class="post">
 
     <div class="post__content">
-      <p><code class="language-plaintext highlighter-rouge">cpp
-const N = 50000;
-const sigmaSize = 26;//字符集大小 
-int trie[N][sigmaSize];
-int total = 1;
-bool endOfWords[N];
-void insert(char * str){
-	int n = strlen(str);
-	int p = 1;
-	int ch ;
-	for(int i = 0;i&lt;n;i++){
-		ch = str[i]-'a';
-		if(trie[p][ch]==0){
-			trie[p][ch] = ++total;
-		}
-		p = trie[p][ch];
-	}
-	endOfWords[p] = true;
-}
-bool search(char * str){
-	int n = strlen(str);
-	int p = 1;
-	int ch = 0;
-	for(int i = 0;i&lt;n;i++){
-		ch = str[i]-'a';
-		if(trie[p][ch]==0)return false;
-		p = trie[p][ch];
-	}
-	return false;
-}
-</code></p>
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">50000</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">sigmaSize</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span><span class="c1">//字符集大小 </span>
+<span class="kt">int</span> <span class="n">trie</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">sigmaSize</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">endOfWords</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">str</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">ch</span> <span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">ch</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">ch</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+			<span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">ch</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">total</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">ch</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="n">endOfWords</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">search</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">str</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">ch</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">ch</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+		<span class="n">p</span> <span class="o">=</span> <span class="n">trie</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">ch</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

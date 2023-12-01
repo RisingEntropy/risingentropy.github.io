@@ -15,14 +15,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="bzoj 2442 Usaco2011 Open 修剪草坪 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-# Description
+Description
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="bzoj 2442 Usaco2011 Open 修剪草坪 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-# Description
+Description
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -192,8 +192,8 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p># Description</p>
+      <h1 id="题面">题面</h1>
+<h1 id="description">Description</h1>
 
 <p>在一年前赢得了小镇的最佳草坪比赛后，FJ变得很懒，再也没有修剪过草坪。现在，
 新一轮的最佳草坪比赛又开始了，FJ希望能够再次夺冠。</p>
@@ -222,94 +222,90 @@
 <ul>
   <li>第一行：一个值，表示FJ可以得到的最大的效率值。
 Sample Input
-<code class="language-plaintext highlighter-rouge">
-5 2
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 2
 1
 2
 3
 4
 5
-</code></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
-<p>输入解释：
-<code class="language-plaintext highlighter-rouge">
-FJ有5只奶牛，他们的效率为1，2，3，4，5。他们希望选取效率总和最大的奶牛，但是
+<p>输入解释：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FJ有5只奶牛，他们的效率为1，2，3，4，5。他们希望选取效率总和最大的奶牛，但是
 他不能选取超过2只连续的奶牛
-</code>
-Sample Output
-<code class="language-plaintext highlighter-rouge">
-12
-</code></p>
+</code></pre></div></div>
+<p>Sample Output</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12
+</code></pre></div></div>
 
 <p>FJ可以选择出了第三只以外的其他奶牛，总的效率为1+2+4+5=12。</p>
 
-<h1 id="section-1">解答</h1>
-<p>其实就是单调队列优化的dp。首先，我们先设计一个最朴素的方程，之后再来优化。不难~~难死我了~~ 设计出如下方程
+<h1 id="解答">解答</h1>
+<p>其实就是单调队列优化的dp。首先，我们先设计一个最朴素的方程，之后再来优化。不难<del>难死我了</del> 设计出如下方程
 \(F[i] = \underset{i-K \leq j\leq i}{max}(F[i],F[j-1]+sum[i]-sum[j])\)</p>
 
 <p><code class="language-plaintext highlighter-rouge">F[i]</code>的含义是前$i$头奶牛中，选一些奶牛获得的最大效率。然后因为一段连续的奶牛不能超过$K$，所以要枚举一下断点$j$，这个$j$号奶牛不选。于是乎就可以推出如下方程。我们发现i可以看做是常量，那么就可以使用单调队列优化，优化后的方程式如下
 \(F[i] = \underset{i-K \leq j\leq i}{max}(F[i],F[j-1]-sum[j])+sum[i]\)
-那么，我们就维护一个<strong>$j$单调递增，$F[j-1]-sum[j]$也单调递增的单调队列</strong>，为什么可以这样呢？因为我们发现对于$k_1$和$k_2$有$i-K\leq k_1&lt;k_2&lt;i$如果有$F[k_1-1]-sum[k_1]&lt;F[k_2]-sum[k_2]$那么，就意味着$k_2$永远不会成为最优解，也就是说$k_2$将永远不会成为决策的一部分，那么我们还考虑它干嘛？直接删掉不管了。这就是单调队列优化dp的精髓。通俗一点，就是如果k1比k2小，并且它代表的值还比k2小，也就是说它的生存能力小于k2，就可删掉。~~当一个选手比你小，还比你强，你就永远打不过他了~~
-然后看了题解开心的像个智商250的智障~~NOIP2018我250分~~一样的我开始写起了代码。
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 18-12-31.
-//
-# include &lt;iostream&gt;
+那么，我们就维护一个<strong>$j$单调递增，$F[j-1]-sum[j]$也单调递增的单调队列</strong>，为什么可以这样呢？因为我们发现对于$k_1$和$k_2$有$i-K\leq k_1&lt;k_2&lt;i$如果有$F[k_1-1]-sum[k_1]&lt;F[k_2]-sum[k_2]$那么，就意味着$k_2$永远不会成为最优解，也就是说$k_2$将永远不会成为决策的一部分，那么我们还考虑它干嘛？直接删掉不管了。这就是单调队列优化dp的精髓。通俗一点，就是如果k1比k2小，并且它代表的值还比k2小，也就是说它的生存能力小于k2，就可删掉。<del>当一个选手比你小，还比你强，你就永远打不过他了</del>
+然后看了题解开心的像个智商250的智障<del>NOIP2018我250分</del>一样的我开始写起了代码。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-31.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
 # include &lt;deque&gt;
-using namespace std;
-long long F[100010];
-long long s[100010];
-long long d[100010];
-int main(){
-    int N,K;
-    cin&gt;&gt;N&gt;&gt;K;
-    for(int i = 1;i&lt;=N;i++){cin&gt;&gt;s[i];s[i]+=s[i-1];}
-    deque&lt;int&gt; q;
-    for(int i = 1;i&lt;=N;i++){
-        d[i] = F[i-1]-s[i];
-        while(!q.empty()&amp;&amp;d[q.back()]&lt;=d[i])q.pop_back();
-        q.push_back(i);
-        while(!q.empty()&amp;&amp;q.front()&lt;i-K)q.pop_front();
-        F[i] = d[q.front()]+s[i];
-    }
-    cout&lt;&lt;F[N]+1;
-    return 0;
-}
-</code>
-然后挂了9个点，冥思苦想不得其因。然后看了题解，我也没搞懂l = 0 r = 1的含义。然后瞎向单调队里里面加了两个元素0和1，洛谷数据过了，但是bzoj数据却过不了。然后又一次陷入沉思，突然，我想起了四个字：<strong>初始状态</strong>。对呀！我的单调队列没有维护初始状态。对于$i&lt;k$我们直接$F[i] = sum[i]$，然后维护一下单调队列就完事了呀！于是乎花了5小时终于A了这道题。
-<code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 18-12-31.
-//
-# include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">F</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">s</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">K</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">N</span><span class="o">&gt;&gt;</span><span class="n">K</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];}</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">d</span><span class="p">[</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">()]</span><span class="o">&lt;=</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">&lt;</span><span class="n">i</span><span class="o">-</span><span class="n">K</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+        <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>然后挂了9个点，冥思苦想不得其因。然后看了题解，我也没搞懂l = 0 r = 1的含义。然后瞎向单调队里里面加了两个元素0和1，洛谷数据过了，但是bzoj数据却过不了。然后又一次陷入沉思，突然，我想起了四个字：<strong>初始状态</strong>。对呀！我的单调队列没有维护初始状态。对于$i&lt;k$我们直接$F[i] = sum[i]$，然后维护一下单调队列就完事了呀！于是乎花了5小时终于A了这道题。</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-12-31.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
 # include &lt;deque&gt;
-using namespace std;
-long long F[100010];
-long long s[100010];
-long long work(int j){return F[j-1]-s[j];}
-int main(){
-    long long N,K;
-    cin&gt;&gt;N&gt;&gt;K;
-    for(int i = 1;i&lt;=N;i++){cin&gt;&gt;s[i];s[i]+=s[i-1];}
-    deque&lt;int&gt; q;
-    for(int i = 1;i&lt;=K;i++){
-        F[i] = s[i];
-        while(!q.empty()&amp;&amp;work(q.back())&lt;=work(i))q.pop_back();
-        q.push_back(i);
-    }
-    for(int i = K+1;i&lt;=N;i++){
-        while(!q.empty()&amp;&amp;q.front()&lt;i-K)q.pop_front();
-        while(!q.empty()&amp;&amp;work(q.back())&lt;=work(i))q.pop_back();
-        q.push_back(i);
-        F[i] = work(q.front())+s[i];
-    }
-    cout&lt;&lt;F[N];
-    return 0;
-}
-</code>
-好了，到这里，我又积累了一点关于dp的坑了。~~元旦作业呀，做不完了~~
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">F</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">s</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">work</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">){</span><span class="k">return</span> <span class="n">F</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">];}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">N</span><span class="p">,</span><span class="n">K</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">N</span><span class="o">&gt;&gt;</span><span class="n">K</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];}</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">K</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">work</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">work</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">&lt;</span><span class="n">i</span><span class="o">-</span><span class="n">K</span><span class="p">)</span><span class="n">q</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">&amp;&amp;</span><span class="n">work</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="o">&lt;=</span><span class="n">work</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">work</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">())</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>好了，到这里，我又积累了一点关于dp的坑了。<del>元旦作业呀，做不完了</del>
 推销一下我的博客<a href="denghaoyu.leanote.com">dhy的博客</a></p>
 
     </div>

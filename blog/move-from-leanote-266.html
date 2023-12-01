@@ -16,28 +16,37 @@
   <meta name="twitter:title" content="hxy的图论总结 – Haoyu Deng's page">
   <meta name="twitter:description" content="图论の汇总
 
-#  最短路
-- [] Floyd $O(n^3)$     用于处理任意两点间最短路
+最短路
+
+  [] Floyd $O(n^3)$     用于处理任意两点间最短路
 好题：奶牛接力 Floyd矩阵快速幂（什么JB玩意）
 也可以求传递闭包（可是我不会）
-- [] Dijkstra $O((n+m)log(m))$
-- [] Bellman-Ford 不会啊
-- [] SPFA ···$O(不能过)$
-#  最短路拓展
-- [] 输出最短路路径（数）
-- [] k短路
-#  tarjan
-#  无向图
-- [] 割点（点双联通）
-- [] 割边（边双联通）
-#  有向图
-- [] 强连通分量
-#  拓扑排序
-- [] 好题：球的序列（【HNOI2015】菜肴制作）
-&amp;gt;注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+  [] Dijkstra $O((n+m)log(m))$
+  [] Bellman-Ford 不会啊
+  [] SPFA ···$O(不能过)$
+    最短路拓展
+  
+  [] 输出最短路路径（数）
+  [] k短路
+    tarjan
+    无向图
+  
+  [] 割点（点双联通）
+  [] 割边（边双联通）
+    有向图
+  
+  [] 强连通分量
+    拓扑排序
+  
+  [] 好题：球的序列（【HNOI2015】菜肴制作）
+    
+      注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
 但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现
-#  差分约束系统
- 重点在于找出尽可能多的限制，SPFA判负环。
+      差分约束系统
+      重点在于找出尽可能多的限制，SPFA判负环。
+    
+  
+
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
 
@@ -45,28 +54,37 @@
   <meta property="og:title" content="hxy的图论总结 – Haoyu Deng's page">
   <meta property="og:description" content="图论の汇总
 
-#  最短路
-- [] Floyd $O(n^3)$     用于处理任意两点间最短路
+最短路
+
+  [] Floyd $O(n^3)$     用于处理任意两点间最短路
 好题：奶牛接力 Floyd矩阵快速幂（什么JB玩意）
 也可以求传递闭包（可是我不会）
-- [] Dijkstra $O((n+m)log(m))$
-- [] Bellman-Ford 不会啊
-- [] SPFA ···$O(不能过)$
-#  最短路拓展
-- [] 输出最短路路径（数）
-- [] k短路
-#  tarjan
-#  无向图
-- [] 割点（点双联通）
-- [] 割边（边双联通）
-#  有向图
-- [] 强连通分量
-#  拓扑排序
-- [] 好题：球的序列（【HNOI2015】菜肴制作）
-&amp;gt;注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+  [] Dijkstra $O((n+m)log(m))$
+  [] Bellman-Ford 不会啊
+  [] SPFA ···$O(不能过)$
+    最短路拓展
+  
+  [] 输出最短路路径（数）
+  [] k短路
+    tarjan
+    无向图
+  
+  [] 割点（点双联通）
+  [] 割边（边双联通）
+    有向图
+  
+  [] 强连通分量
+    拓扑排序
+  
+  [] 好题：球的序列（【HNOI2015】菜肴制作）
+    
+      注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
 但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现
-#  差分约束系统
- 重点在于找出尽可能多的限制，SPFA判负环。
+      差分约束系统
+      重点在于找出尽可能多的限制，SPFA判负环。
+    
+  
+
 ">
   <meta property="og:image" content="/images/posts/OI.png">
 
@@ -236,49 +254,58 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">图论の汇总</h1>
+      <h1 id="图论の汇总">图论の汇总</h1>
 <hr />
-<p>#  最短路
-- [] Floyd $O(n^3)$     用于处理任意两点间最短路
-好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2379">奶牛接力</a> Floyd矩阵快速幂（什么JB玩意）
-也可以求传递闭包（可是我不会）
-- [] Dijkstra $O((n+m)log(m))$
-- [] Bellman-Ford 不会啊
-- [] SPFA ···$O(不能过)$
-#  最短路拓展
-- [] 输出最短路路径（数）
-- [] k短路
-#  tarjan
-#  无向图
-- [] 割点（点双联通）
-- [] 割边（边双联通）
-#  有向图
-- [] 强连通分量
-#  拓扑排序
-- [] 好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3969">球的序列（【HNOI2015】菜肴制作）</a>
-&gt;注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
-但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现
-#  差分约束系统
- 重点在于找出尽可能多的限制，SPFA判负环。</p>
-
+<h1 id="最短路">最短路</h1>
 <ul>
-  <li>
-    <p>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2239">奶牛的站位Layout</a>
-&gt; 比较板子题了
+  <li>[] Floyd $O(n^3)$     用于处理任意两点间最短路
+好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2379">奶牛接力</a> Floyd矩阵快速幂（什么JB玩意）
+也可以求传递闭包（可是我不会）</li>
+  <li>[] Dijkstra $O((n+m)log(m))$</li>
+  <li>[] Bellman-Ford 不会啊</li>
+  <li>[] SPFA ···$O(不能过)$
+    <h1 id="最短路拓展">最短路拓展</h1>
+  </li>
+  <li>[] 输出最短路路径（数）</li>
+  <li>[] k短路
+    <h1 id="tarjan">tarjan</h1>
+    <h1 id="无向图">无向图</h1>
+  </li>
+  <li>[] 割点（点双联通）</li>
+  <li>[] 割边（边双联通）
+    <h1 id="有向图">有向图</h1>
+  </li>
+  <li>[] 强连通分量
+    <h1 id="拓扑排序">拓扑排序</h1>
+  </li>
+  <li>[] 好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3969">球的序列（【HNOI2015】菜肴制作）</a>
+    <blockquote>
+      <p>注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
+但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现</p>
+      <h1 id="差分约束系统">差分约束系统</h1>
+      <p>重点在于找出尽可能多的限制，SPFA判负环。</p>
+    </blockquote>
+  </li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2239">奶牛的站位Layout</a>
+    <blockquote>
+      <p>比较板子题了
 朋友关系就是$dis[v]&lt;=dis[u]+w$
 敌对关系就是$dis[v]&gt;=dis[u]+w$,转化成$dis[u]&lt;=dis[v]-w$
 (差分约束只能处理&lt;=)
 编号小的靠前：$dis[i-1]&lt;=dis[i]$</p>
+    </blockquote>
   </li>
   <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3844">出纳员问题</a> 有点毒
-&gt;求解$sum[i]$：知道$i$时间段内所需人数总和，答案即为$sum[24]$
+    <blockquote>
+      <p>求解$sum[i]$：知道$i$时间段内所需人数总和，答案即为$sum[24]$
 但是在写限制的时候，0-7小时的情况很麻烦：$sum[24]-sum[i+16]$$+sum[i]&gt;=R[i]$出现了三个变量
-但我们求$sum[24]$，不妨二分它，然后判断是否合法即可
-#  二分图</li>
+但我们求$sum[24]$，不妨二分它，然后判断是否合法即可</p>
+      <h1 id="二分图">二分图</h1>
+    </blockquote>
+  </li>
   <li>[] km算法 复杂度$O(nm)$（雾）
 以后复习，先贴代码
-<code class="language-plaintext highlighter-rouge">
-int tot,vis[N],match[N];
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int tot,vis[N],match[N];
 bool find(int u){
   for(int i=first[u],v;i;i=e[i].nxt){
       v=e[i].v;if(vis[v]!=tot){
@@ -298,7 +325,8 @@ int km(){
   }
   return ret;
 }
-</code></li>
+</code></pre></div>    </div>
+  </li>
 </ul>
 
 <p>可以解决：</p>
@@ -318,8 +346,9 @@ int km(){
   <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
   <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2081">glod小行星群</a> 建边同上</li>
   <li>[] <a href="">POJ - 2446 Chessboard</a>
-#  生成树
-#  普通生成树</li>
+    <h1 id="生成树">生成树</h1>
+    <h1 id="普通生成树">普通生成树</h1>
+  </li>
   <li>[] prim：不会啊</li>
   <li>[] kruskal
 <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4323">mst</a>:生成树+树剖</li>
@@ -329,7 +358,7 @@ int km(){
   <p>相当于是每条非树边都对kruskal上与之所成环的边都有一个贡献，一条树边所受最小的贡献就是答案。把边权存在点上，树剖解决</p>
 </blockquote>
 
-<h1 id="section-1">高级东西</h1>
+<h1 id="高级东西">高级东西</h1>
 <ol>
   <li>[] 基环树：不会啊
 <a href=""></a></li>
@@ -372,10 +401,9 @@ int km(){
 所以直接在返祖边的$u,v$处打-1,和1的标记，dfs $O(n)$跑一边前缀和，然后$O(n+m)$直接枚举返祖边验证每个环是否合法（$sum\not=1$就不合法，直接跳出来，因此是$O(n)$的）</p>
 </blockquote>
 
-<h1 id="section-2">网络流</h1>
-<p>以防万一还是贴个板子吧
-<code class="language-plaintext highlighter-rouge">
-inline bool bfs(){
+<h1 id="网络流">网络流</h1>
+<p>以防万一还是贴个板子吧</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inline bool bfs(){
 	queue&lt;int&gt;q;q.push(S);
 	memset(dis,-1,sizeof(dis));dis[S]=0;
 	while(!q.empty()){
@@ -414,10 +442,12 @@ inline int dinic(){
 	}
 	return ret;
 }
-</code>
-- [] 最大流
+</code></pre></div></div>
+<ul>
+  <li>[] 最大流
 <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2766">危桥</a>
-好题一道、</p>
+好题一道、</li>
+</ul>
 
 <blockquote>
   <p>直接建图跑最大流会有个问题：a流向b或者b流向a，如图
@@ -441,16 +471,16 @@ inline int dinic(){
 
 <blockquote>
   <p>观察到对于一个实验$i$，要不得到$val_i-\sum_j^{j\in i}cost_j$的贡献，要不得到$0$的贡献
-所以~~根据题解~~可将题目转化成\(ans=sumval-\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)\)
+所以<del>根据题解</del>可将题目转化成\(ans=sumval-\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)\)
 其中$\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)$就是求个最小割
 方案输出只需要判断是否出现在增广路中（$dis\not=-1$）（待填坑）</p>
 </blockquote>
 
-<h1 id="sat">2-SAT</h1>
+<h1 id="2-sat">2-SAT</h1>
 
-<h1 id="section-3">分层图</h1>
+<h1 id="分层图">分层图</h1>
 
-<h1 id="section-4">杂（七杂八的知识都考了的）题</h1>
+<h1 id="杂七杂八的知识都考了的题">杂（七杂八的知识都考了的）题</h1>
 <p>这块实在是太杂了……</p>
 
 <ul>

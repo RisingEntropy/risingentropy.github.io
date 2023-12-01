@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>邪教喜欢在各种各样空间内跳。</p>
 
 <p>现在，邪教来到了一个二维平面。在这个平面内，如果邪教当前跳到了(x,y)，那么他下一步可以选择跳到以下4个点：(x-1,y), (x+1,y), (x,y-1), (x,y+1)。</p>
@@ -211,62 +211,59 @@
 
 <p>由于答案可能很大，只需要输出答案对10^9+7取模的结果。</p>
 
-<h1 id="section-1">输入</h1>
+<h1 id="输入">输入</h1>
 <p>读入两个整数N，M，表示邪教想到达的点。</p>
 
-<h1 id="section-2">输出</h1>
+<h1 id="输出">输出</h1>
 <p>输出仅一个整数，表示邪教需要花费的最小体力对10^9+7取模的结果。</p>
 
-<h1 id="section-3">样例输入</h1>
-<p><code class="language-plaintext highlighter-rouge">
-1 2
-</code>
-#  样例输出
-<code class="language-plaintext highlighter-rouge">
-6
-</code>
-提示
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+</code></pre></div></div>
+<p>提示
 【数据说明】
 对于10%的数据，满足N, M&lt;=20；
 对于30%的数据，满足N, M&lt;=100；
 对于60%的数据，满足min(N,M)&lt;=100；
-对于100%的数据，满足0&lt;=N, M&lt;=10^12，N*M&lt;=10^12。
-# 解答
-把整个表格顺时针旋转45度就会发现这是一个杨辉三角。于是乎我们不妨设$n&gt;m$，那么就有答案为：
+对于100%的数据，满足0&lt;=N, M&lt;=10^12，N*M&lt;=10^12。</p>
+<h1 id="解答">解答</h1>
+<p>把整个表格顺时针旋转45度就会发现这是一个杨辉三角。于是乎我们不妨设$n&gt;m$，那么就有答案为：
 \(N+\sum C_{N+i}^{i}\)
 有因为有如下推论
 \(\sum\limits_{i=0}^MC_{N+i}^{i} = C_{M+N+1}^{M}\)
 然后就可以直接计算了
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstdio&gt;
-using namespace std;
-const long long mod = (int)1e9+7;
-long long fp(long long b,long long p){
-	int ans = 1;
-	while(p){
-		if(p&amp;1)ans = ans*b%mod;
-		b = b*b%mod;
-		p&gt;&gt;=1;
-	}
-	return ans;
-}
-long long n,m;
-int main(){
-	scanf("%lld%lld",&amp;n,&amp;m);
-	if(n&lt;m)swap(n,m);
-	n%=mod;
-	long long ans = 1,ansb = 1;
-	for(long long i = 1;i&lt;=m;i++){
-		ans = ans * ((n+m+2-i+mod)%mod)%mod;
-		ansb = ansb*i%mod;
-	}
-	ans = ((ans*fp(ansb,mod-2)%mod+n)%mod+mod)%mod;
-	printf("%lld",ans);
-	return 0;
-} 
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">1e9</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">fp</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="n">m</span><span class="p">)</span><span class="n">swap</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
+	<span class="n">n</span><span class="o">%=</span><span class="n">mod</span><span class="p">;</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">ansb</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span> <span class="o">*</span> <span class="p">((</span><span class="n">n</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="mi">2</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">ansb</span> <span class="o">=</span> <span class="n">ansb</span><span class="o">*</span><span class="n">i</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">ans</span> <span class="o">=</span> <span class="p">((</span><span class="n">ans</span><span class="o">*</span><span class="n">fp</span><span class="p">(</span><span class="n">ansb</span><span class="p">,</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="o">+</span><span class="n">n</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="o">+</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%lld"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div></div>
 
     </div>
 

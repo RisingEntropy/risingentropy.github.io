@@ -15,8 +15,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="dijkstra算法解析洛谷P3371 – Haoyu Deng's page">
   <meta name="twitter:description" content="```cpp
-# include 
-# include 
+include 
+include 
 using namespace std;
 struct edge{
     int next,diss ,to;
@@ -32,10 +32,10 @@ void addEdge(int from,int to,int weight){
 int main() {
     int N,M,S;
     ios::sync_with_stdio(false);
-    cin&amp;gt;&amp;gt;N&amp;gt;&amp;gt;M&amp;gt;&amp;gt;S;
+    cin»N»M»S;
     for(int i = 1;i&amp;lt;=M;i++){
         int Fi,Gi,Wi;
-        cin&amp;gt;&amp;gt;Fi&amp;gt;&amp;gt;Gi&amp;gt;&amp;gt;Wi;
+        cin»Fi»Gi»Wi;
         addEdge(Fi,Gi,Wi);
     }//读入、建链表
     int dis[10001];
@@ -61,7 +61,7 @@ int main() {
         }
     }
     for(int i = 1;i&amp;lt;=N;i++){
-        cout&amp;lt;&amp;lt;dis[i]&amp;lt;&amp;lt;' ';
+        cout«dis[i]«’ ‘;
     }
     return 0;
 }
@@ -71,8 +71,8 @@ int main() {
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="dijkstra算法解析洛谷P3371 – Haoyu Deng's page">
   <meta property="og:description" content="```cpp
-# include 
-# include 
+include 
+include 
 using namespace std;
 struct edge{
     int next,diss ,to;
@@ -88,10 +88,10 @@ void addEdge(int from,int to,int weight){
 int main() {
     int N,M,S;
     ios::sync_with_stdio(false);
-    cin&amp;gt;&amp;gt;N&amp;gt;&amp;gt;M&amp;gt;&amp;gt;S;
+    cin»N»M»S;
     for(int i = 1;i&amp;lt;=M;i++){
         int Fi,Gi,Wi;
-        cin&amp;gt;&amp;gt;Fi&amp;gt;&amp;gt;Gi&amp;gt;&amp;gt;Wi;
+        cin»Fi»Gi»Wi;
         addEdge(Fi,Gi,Wi);
     }//读入、建链表
     int dis[10001];
@@ -117,7 +117,7 @@ int main() {
         }
     }
     for(int i = 1;i&amp;lt;=N;i++){
-        cout&amp;lt;&amp;lt;dis[i]&amp;lt;&amp;lt;' ';
+        cout«dis[i]«’ ‘;
     }
     return 0;
 }
@@ -290,59 +290,61 @@ int main() {
   <article class="post">
 
     <div class="post__content">
-      <p>```cpp
-# include <iostream>
-# include <cstring>
-using namespace std;
-struct edge{
-    int next,diss ,to;
-}Edges[500001];
-int head[10001];
-int edge_top = 0;//++edge_top
-void addEdge(int from,int to,int weight){
-  Edges[++edge_top].next = head[from];//head是保存上一个以该点为起点的节点
-  Edges[edge_top].to = to;
-  Edges[edge_top].diss = weight;
-  head[from] = edge_top;//把上一个节点的位置换成这一个节点，这样才可以方便的形成链表式的结构，即链式前向星
-}
-int main() {
-    int N,M,S;
-    ios::sync_with_stdio(false);
-    cin&gt;&gt;N&gt;&gt;M&gt;&gt;S;
-    for(int i = 1;i&lt;=M;i++){
-        int Fi,Gi,Wi;
-        cin&gt;&gt;Fi&gt;&gt;Gi&gt;&gt;Wi;
-        addEdge(Fi,Gi,Wi);
-    }//读入、建链表
-    int dis[10001];
-    for(int i = 1;i&lt;=N;i++)dis[i] = 2147483647;
-    bool visited[10005]{false};
-    dis[S] = 0;//初始化，标记
-    for(int i = 1;i&lt;=N;i++){
-        int minnl = 214748364;//不多说
-        int k = 0;
-        for(int j = 1;j&lt;=N;j++){
-            if(!visited[j]&amp;&amp;dis[j]&lt;minnl){
-                minnl = dis[j];
-                k = j;
-            }//寻找路径最短的点（一开始是自己，其他点全都没有遍历过）
-        }
-        if(k==0)break;
-        visited[k] = true;
-        for(int j = head[k];j;j = Edges[j].next){//dijkstra算法的核心
-            if(!visited[Edges[j].to]//下一个点没被访问
-               &amp;&amp;dis[Edges[j].to]&gt;Edges[j].diss+dis[k]){//并且到下一个点的距离小于连接这条边的距离+到当前点的距离
-                dis[Edges[j].to]=Edges[j].diss+dis[k];//update
-            }
-        }
-    }
-    for(int i = 1;i&lt;=N;i++){
-        cout&lt;&lt;dis[i]&lt;&lt;' ';
-    }
-    return 0;
-}</cstring></iostream></p>
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">next</span><span class="p">,</span><span class="n">diss</span> <span class="p">,</span><span class="n">to</span><span class="p">;</span>
+<span class="p">}</span><span class="n">Edges</span><span class="p">[</span><span class="mi">500001</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="mi">10001</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">edge_top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//++edge_top</span>
+<span class="kt">void</span> <span class="nf">addEdge</span><span class="p">(</span><span class="kt">int</span> <span class="n">from</span><span class="p">,</span><span class="kt">int</span> <span class="n">to</span><span class="p">,</span><span class="kt">int</span> <span class="n">weight</span><span class="p">){</span>
+  <span class="n">Edges</span><span class="p">[</span><span class="o">++</span><span class="n">edge_top</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">from</span><span class="p">];</span><span class="c1">//head是保存上一个以该点为起点的节点</span>
+  <span class="n">Edges</span><span class="p">[</span><span class="n">edge_top</span><span class="p">].</span><span class="n">to</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span>
+  <span class="n">Edges</span><span class="p">[</span><span class="n">edge_top</span><span class="p">].</span><span class="n">diss</span> <span class="o">=</span> <span class="n">weight</span><span class="p">;</span>
+  <span class="n">head</span><span class="p">[</span><span class="n">from</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_top</span><span class="p">;</span><span class="c1">//把上一个节点的位置换成这一个节点，这样才可以方便的形成链表式的结构，即链式前向星</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">N</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="n">S</span><span class="p">;</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">N</span><span class="o">&gt;&gt;</span><span class="n">M</span><span class="o">&gt;&gt;</span><span class="n">S</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">M</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">Fi</span><span class="p">,</span><span class="n">Gi</span><span class="p">,</span><span class="n">Wi</span><span class="p">;</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">Fi</span><span class="o">&gt;&gt;</span><span class="n">Gi</span><span class="o">&gt;&gt;</span><span class="n">Wi</span><span class="p">;</span>
+        <span class="n">addEdge</span><span class="p">(</span><span class="n">Fi</span><span class="p">,</span><span class="n">Gi</span><span class="p">,</span><span class="n">Wi</span><span class="p">);</span>
+    <span class="p">}</span><span class="c1">//读入、建链表</span>
+    <span class="kt">int</span> <span class="n">dis</span><span class="p">[</span><span class="mi">10001</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2147483647</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">visited</span><span class="p">[</span><span class="mi">10005</span><span class="p">]{</span><span class="nb">false</span><span class="p">};</span>
+    <span class="n">dis</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//初始化，标记</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">minnl</span> <span class="o">=</span> <span class="mi">214748364</span><span class="p">;</span><span class="c1">//不多说</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">dis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">minnl</span><span class="p">){</span>
+                <span class="n">minnl</span> <span class="o">=</span> <span class="n">dis</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span><span class="c1">//寻找路径最短的点（一开始是自己，其他点全都没有遍历过）</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="n">j</span><span class="p">;</span><span class="n">j</span> <span class="o">=</span> <span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">next</span><span class="p">){</span><span class="c1">//dijkstra算法的核心</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">to</span><span class="p">]</span><span class="c1">//下一个点没被访问</span>
+               <span class="o">&amp;&amp;</span><span class="n">dis</span><span class="p">[</span><span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">to</span><span class="p">]</span><span class="o">&gt;</span><span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">diss</span><span class="o">+</span><span class="n">dis</span><span class="p">[</span><span class="n">k</span><span class="p">]){</span><span class="c1">//并且到下一个点的距离小于连接这条边的距离+到当前点的距离</span>
+                <span class="n">dis</span><span class="p">[</span><span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">to</span><span class="p">]</span><span class="o">=</span><span class="n">Edges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">diss</span><span class="o">+</span><span class="n">dis</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="c1">//update</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>```</p>
+
+
+
+</code></pre></div></div>
 
     </div>
 

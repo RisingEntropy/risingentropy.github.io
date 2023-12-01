@@ -16,9 +16,9 @@
   <meta name="twitter:title" content="oi-HAOI2008硬币购物 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 硬币购物一共有4种硬币。面值分别为c1,c2,c3,c4。某人去商店买东西，去了tot次。每次带di枚ci硬币，买si的价值的东西。请问每次有多少种付款方法。
-#  输入
+输入
 第一行 c1,c2,c3,c4,tot 下面tot行 d1,d2,d3,d4,s
-#  输出
+输出
 每次的方法数
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -27,9 +27,9 @@
   <meta property="og:title" content="oi-HAOI2008硬币购物 – Haoyu Deng's page">
   <meta property="og:description" content="题面
 硬币购物一共有4种硬币。面值分别为c1,c2,c3,c4。某人去商店买东西，去了tot次。每次带di枚ci硬币，买si的价值的东西。请问每次有多少种付款方法。
-#  输入
+输入
 第一行 c1,c2,c3,c4,tot 下面tot行 d1,d2,d3,d4,s
-#  输出
+输出
 每次的方法数
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -200,77 +200,74 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>硬币购物一共有4种硬币。面值分别为c1,c2,c3,c4。某人去商店买东西，去了tot次。每次带di枚ci硬币，买si的价值的东西。请问每次有多少种付款方法。
-#  输入
-第一行 c1,c2,c3,c4,tot 下面tot行 d1,d2,d3,d4,s
-#  输出
-每次的方法数</p>
+      <h1 id="题面">题面</h1>
+<p>硬币购物一共有4种硬币。面值分别为c1,c2,c3,c4。某人去商店买东西，去了tot次。每次带di枚ci硬币，买si的价值的东西。请问每次有多少种付款方法。</p>
+<h1 id="输入">输入</h1>
+<p>第一行 c1,c2,c3,c4,tot 下面tot行 d1,d2,d3,d4,s</p>
+<h1 id="输出">输出</h1>
+<p>每次的方法数</p>
 
-<h1 id="section-1">样例输入</h1>
-<p><code class="language-plaintext highlighter-rouge">
-1 2 5 10 2
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2 5 10 2
 3 2 3 1 10
 1000 2 2 2 900
-</code>
-#  样例输出
-<code class="language-plaintext highlighter-rouge">
-4
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
 27
-</code>
-提示
+</code></pre></div></div>
+<p>提示
 di,s&lt;=100000
 tot&lt;=1000
 标签
-HAOI2008
-# 解答
-很好的一道容斥原理的题。首先要知道一个结论，就是这个限制非常难以处理，如果没有限制就好了，那么答案直接跑一个完全背包。$dp[j] += dp[j-v[i]]$转移就好了，但是现在有限制啊，那到底怎么处理呢？然后我在某大佬的博客上看到如下式子，非常生动形象：
+HAOI2008</p>
+<h1 id="解答">解答</h1>
+<p>很好的一道容斥原理的题。首先要知道一个结论，就是这个限制非常难以处理，如果没有限制就好了，那么答案直接跑一个完全背包。$dp[j] += dp[j-v[i]]$转移就好了，但是现在有限制啊，那到底怎么处理呢？然后我在某大佬的博客上看到如下式子，非常生动形象：
 \([2,+\infty)-(3,\infty)=[2,3]\)
 于是乎我们计算出没有限制的答案，再减去限制+1到没有限制的答案就可以了，但是怎么同时把4个全部考虑上去呢？当然是枚举每个集合，然后使用容斥原理就可以考虑4个东西对此的影响了。但是要注意一点，就是枚举子集的时候，如果是奇数就-1，否则+1，因为我们计算的是减掉的那一坨，而不是容斥原理公式中对答案正贡献的一坨。
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;
 # include &lt;cstdio&gt;
 # define int long long
-using namespace std;
-const int MAXN = (int)5e5+10;
-inline char nc(){
-	static char buf[100000],*p1 = buf,*p2 = buf;
-	return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++;
-}
-template&lt;typename T&gt;
-void read(T &amp;x){
-	x = 0;
-	char c = nc();
-	while(c&lt;'0'||c&gt;'9')c = nc();
-	while(c&gt;='0'&amp;&amp;c&lt;='9'){x = x*10+(c^48);c = nc();}
-}
-int c[5],d[5];
-long long dp[100010];
-signed main(){
-	# ifdef BEYONDSTARS
-		freopen("testdata.in","r",stdin);
-	# endif
-	read(c[1]);read(c[2]);read(c[3]);read(c[4]);
-	register int tot;read(tot);int s;
-	dp[0] = 1;
-	for(register int i = 1;i&lt;=4;i++)for(int j = c[i];j&lt;=100000;j++)dp[j]+=dp[j-c[i]];
-	while(tot--){
-		read(d[1]);read(d[2]);read(d[3]);read(d[4]);read(s);
-		long long res = 0;
-		for(int i =0;i&lt;=15;i++){
-			long long now = s,k = 1;
-			for(int j = 1;j&lt;=4;j++){
-				if(i&amp;(1&lt;&lt;j-1))k*=-1,now-=(d[j]+1)*c[j];
-			}
-			if(now&gt;=0)res+=k*dp[now];
-		}
-		printf("%lld\n",res);
-	}
-	return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">5e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="kr">inline</span> <span class="kt">char</span> <span class="nf">nc</span><span class="p">(){</span>
+	<span class="k">static</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="n">buf</span><span class="p">,</span><span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="n">buf</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">p2</span><span class="o">=</span><span class="p">(</span><span class="n">p1</span><span class="o">=</span><span class="n">buf</span><span class="p">)</span><span class="o">+</span><span class="n">fread</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="n">stdin</span><span class="p">),</span><span class="n">p1</span><span class="o">==</span><span class="n">p2</span><span class="p">)</span><span class="o">?</span><span class="n">EOF</span><span class="o">:*</span><span class="n">p1</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="kt">void</span> <span class="nf">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">)</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">c</span><span class="o">^</span><span class="mi">48</span><span class="p">);</span><span class="n">c</span> <span class="o">=</span> <span class="n">nc</span><span class="p">();}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="cp"># ifdef BEYONDSTARS
+</span>		<span class="n">freopen</span><span class="p">(</span><span class="s">"testdata.in"</span><span class="p">,</span><span class="s">"r"</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+	<span class="cp"># endif
+</span>	<span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+	<span class="k">register</span> <span class="kt">int</span> <span class="n">tot</span><span class="p">;</span><span class="n">read</span><span class="p">(</span><span class="n">tot</span><span class="p">);</span><span class="kt">int</span> <span class="n">s</span><span class="p">;</span>
+	<span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="k">register</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">4</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">100000</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">tot</span><span class="o">--</span><span class="p">){</span>
+		<span class="n">read</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span><span class="n">read</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+		<span class="kt">long</span> <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+			<span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span> <span class="o">=</span> <span class="n">s</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="mi">4</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+				<span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="n">k</span><span class="o">*=-</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="o">-=</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+			<span class="p">}</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">now</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="n">res</span><span class="o">+=</span><span class="n">k</span><span class="o">*</span><span class="n">dp</span><span class="p">[</span><span class="n">now</span><span class="p">];</span>
+		<span class="p">}</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">res</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

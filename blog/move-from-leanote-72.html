@@ -192,7 +192,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题目描述</h1>
+      <h1 id="题目描述">题目描述</h1>
 <p>有一个长度为 $n$ 的数列 $a_i$，要求你将这个数列重排成一个排列 $p_i$，使得对于任意的 $p_i(1 \le i &lt; n)$：</p>
 
 <ul>
@@ -202,7 +202,7 @@
 
 <p>保证答案存在。</p>
 
-<h1 id="section-1">输入输出格式</h1>
+<h1 id="输入输出格式">输入输出格式</h1>
 
 <p><strong>输入格式：</strong></p>
 
@@ -215,98 +215,96 @@
 
 <p>输出应包含 $n$ 个整数 $p_1, p_2, \dots, p_n$，表示你的答案。</p>
 
-<h1 id="section-2">说明</h1>
+<h1 id="说明">说明</h1>
 
-<p>在第一个样例中，一种可能的合法排列为 $[9,3,6,12,4,8]$。
-# 解答
-#  法1：乱搞
-就是取2个随机数，然后把这两个随机数所代表的的位置的数交换，每交换一次就判断一下是不是符合题意。这样可以过3个点。大概就是小于20左右的数据范围可以过吧。多了就过不了啦
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+<p>在第一个样例中，一种可能的合法排列为 $[9,3,6,12,4,8]$。</p>
+<h1 id="解答">解答</h1>
+<h1 id="法1乱搞">法1：乱搞</h1>
+<p>就是取2个随机数，然后把这两个随机数所代表的的位置的数交换，每交换一次就判断一下是不是符合题意。这样可以过3个点。大概就是小于20左右的数据范围可以过吧。多了就过不了啦
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;time.h&gt;
 # include &lt;stdlib.h&gt;
-using namespace std;
-int n;
-long long a[101];
-bool judge(){
-    for(int i = 1;i&lt;n;i++){
-        if(!(a[i]*2ll==a[i+1]||a[i+1]*3ll==a[i])){
-            return false;
-        }
-    }
-    return true;
-}
-void work(){
-    int x=0,y = 0;
-    srand((int)time(0));
-    while(!judge()){
-        x=0,y = 0;
-        while(x==y) {
-            while (x == 0||x==y)x = rand()%(n+1);
-            while (y == 0||x==y)y = rand()%(n+1);
-        }
-        swap(a[x],a[y]);   //as
-        x = y = 0;
-    }
-}
-int main(void){
-    ios::sync_with_stdio(false);
-    cin&gt;&gt;n;
-    for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;a[i];
-    }
-    work();
-    for(int i = 1;i&lt;=n;i++)cout&lt;&lt;a[i]&lt;&lt;' ';
-    return 0;
-}
-</code>
-#  法2：老实地搜索吧
-没有什么难度，复杂度也很低，直接搜就行
-```cpp
-# include <iostream>
-# include <time.h>
-# include <stdlib.h>
-using namespace std;
-int n;
-long long a[101];
-int used[101];
-long long ans[101];
-inline void print(){
-    for(int i = 1;i&lt;=n;i++)cout&lt;&lt;ans[i]&lt;&lt;' ';
-    exit(0);
-}
-void dfs(int pos){
-    if(pos&gt;n){
-        print();
-    }
-    for(int i = 1;i&lt;=n;i++){
-        if(!used[i]){
-            if(a[i]==ans[pos-1]*2||a[i]*3==ans[pos-1]){
-                used[i] = true;
-                ans[pos] = a[i];
-                dfs(pos+1);
-                used[i] = false;
-            }
-        }
-    }
-}</stdlib.h></time.h></iostream></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="mi">101</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="nf">judge</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">2ll</span><span class="o">==</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">||</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">3ll</span><span class="o">==</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])){</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">work</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">srand</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">judge</span><span class="p">()){</span>
+        <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="o">||</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span><span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="o">||</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span><span class="n">y</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">]);</span>   <span class="c1">//as</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">work</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h1 id="法2老实地搜索吧">法2：老实地搜索吧</h1>
+<p>没有什么难度，复杂度也很低，直接搜就行</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;time.h&gt;
+# include &lt;stdlib.h&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">[</span><span class="mi">101</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">used</span><span class="p">[</span><span class="mi">101</span><span class="p">];</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">[</span><span class="mi">101</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="sc">' '</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">n</span><span class="p">){</span>
+        <span class="n">print</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">ans</span><span class="p">[</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">||</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="o">==</span><span class="n">ans</span><span class="p">[</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">]){</span>
+                <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                <span class="n">ans</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">dfs</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<p>int main(void){
-    ios::sync_with_stdio(false);
-    cin»n;
-    for(int i = 1;i&lt;=n;i++){
-        cin»a[i];
-    }
-    for(int i = 1;i&lt;=n;i++){
-        ans[1] = a[i];
-        used[i] = true;
-        dfs(2);
-        used[i] = false;
-    }
-    return 0;
-}
-```</p>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">ans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+        <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

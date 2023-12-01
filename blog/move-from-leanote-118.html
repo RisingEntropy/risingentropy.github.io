@@ -192,7 +192,7 @@ Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One n
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways.</p>
 
 <p><img src="https://cdn.risingentropy.top/images/posts/c1393ceab6441051a006bbf.png" alt="图片标题" />
@@ -206,9 +206,8 @@ Expert as he was in this material, he saw at a glance that he’ll need a comput
 
 <p>For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times.
 <img src="https://cdn.risingentropy.top/images/posts/c1393ceab6441051a006bbf.png" alt="图片标题" />
-Sample Input
-<code class="language-plaintext highlighter-rouge">
-1 2
+Sample Input</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 2
 1 3
 1 4
 2 2
@@ -217,10 +216,9 @@ Sample Input
 2 11
 4 11
 0 0
-</code>
-Sample Output
-<code class="language-plaintext highlighter-rouge">
-1
+</code></pre></div></div>
+<p>Sample Output</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
 0
 1
 2
@@ -228,9 +226,9 @@ Sample Output
 5
 144
 51205
-</code>
-# 解答
-其实是一道状压dp的裸题！
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实是一道状压dp的裸题！
 我们以当前扩展到了第$i$行作为状态，然后用1表示<code class="language-plaintext highlighter-rouge">竖着的矩形的上面的一个</code>0表示其他情况
 <img src="https://cdn.risingentropy.top/images/posts/c1393ceab6441051a006bbf.png" alt="图片标题" />
 那么怎么转移呢？
@@ -248,44 +246,44 @@ Sample Output
 复杂度$O(2^M2^MN) = O(4^MN)$
 <strong>注意，打出来的数非常大，需要用long long</strong>
 code:
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;cstdio&gt;
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;iostream&gt;
-using namespace std;
-int read(){
-int x = 0,f = 1;
-static char c = getchar();
-while(c&lt;'0'||c&gt;'9'){ if(c=='-')f = -1;c = getchar(); }
-while(c&gt;='0'&amp;&amp;c&lt;='9'){ x = (x&lt;&lt;1)+(x&lt;&lt;3)+c-'0';c = getchar(); }
-return x*f;
-}
-int F[12][1&lt;&lt;11];
-bool canGo[1&lt;&lt;11];
-int main(){
-int n,m;
-while(cin&gt;&gt;n&gt;&gt;m&amp;&amp;n){
-    for(int i = 0;i&lt;1&lt;&lt;m;i++){
-        bool cnt = 0,has_odd = 0;
-        for(int j = 0;j&lt;m;j++){
-            if(i&gt;&gt;j&amp;1)has_odd|=cnt,cnt = 0;
-            else cnt^=1;
-        }
-        canGo[i] = has_odd|cnt?0:1;
-    }
-    F[0][0] = 1;
-    for(int i = 1;i&lt;=n;i++){
-        for(int j = 0;j&lt;1&lt;&lt;m;j++){//遍历每个状态
-            F[i][j] = 0;
-            for(int k = 0;k&lt;1&lt;&lt;m;k++){//便利可以转移的状态 
-                if((j&amp;k)==0&amp;&amp;canGo[j|k])F[i][j]+=F[i-1][k];
-            } 
-        }
-    }
-    cout&lt;&lt;F[n][0]&lt;&lt;endl;
-}
-return 0;
-}
-</code></li>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span> <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span> <span class="p">}</span>
+<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">F</span><span class="p">[</span><span class="mi">12</span><span class="p">][</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">canGo</span><span class="p">[</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="o">&amp;&amp;</span><span class="n">n</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">bool</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">has_odd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="n">j</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">has_odd</span><span class="o">|=</span><span class="n">cnt</span><span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">cnt</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">canGo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">has_odd</span><span class="o">|</span><span class="n">cnt</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span><span class="c1">//遍历每个状态</span>
+            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span><span class="c1">//便利可以转移的状态 </span>
+                <span class="k">if</span><span class="p">((</span><span class="n">j</span><span class="o">&amp;</span><span class="n">k</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">canGo</span><span class="p">[</span><span class="n">j</span><span class="o">|</span><span class="n">k</span><span class="p">])</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+            <span class="p">}</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">F</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
 </ol>
 
     </div>

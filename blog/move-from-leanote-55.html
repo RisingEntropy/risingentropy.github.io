@@ -14,8 +14,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SP2885 to reivew – Haoyu Deng's page">
-  <meta name="twitter:description" content="cpp
-# include&amp;lt;bits/stdc++.h&amp;gt;     //万能头文件
+  <meta name="twitter:description" content="# include&amp;lt;bits/stdc++.h&amp;gt;     //万能头文件
 # define INF 0x3f3f3f3f
 using namespace std;        //养成好习惯
 typedef vector&amp;lt;int&amp;gt; vec;
@@ -92,8 +91,7 @@ int main()
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="SP2885 to reivew – Haoyu Deng's page">
-  <meta property="og:description" content="cpp
-# include&amp;lt;bits/stdc++.h&amp;gt;     //万能头文件
+  <meta property="og:description" content="# include&amp;lt;bits/stdc++.h&amp;gt;     //万能头文件
 # define INF 0x3f3f3f3f
 using namespace std;        //养成好习惯
 typedef vector&amp;lt;int&amp;gt; vec;
@@ -334,79 +332,78 @@ int main()
   <article class="post">
 
     <div class="post__content">
-      <p><code class="language-plaintext highlighter-rouge">cpp
-# include&lt;bits/stdc++.h&gt;     //万能头文件
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;bits/stdc++.h&gt;     //万能头文件
 # define INF 0x3f3f3f3f
-using namespace std;        //养成好习惯
-typedef vector&lt;int&gt; vec;
-map &lt;string,vec&gt; f;
-vec e[100005];
-char word[1005];
-int n,Length[100005];
-double dis[100005];
-bool vis[100005];
-string pre[100005];
-bool dfs(int u,double k)
-{
-    vis[u] = true;
-    for(vector &lt;int&gt; ::iterator it = e[u].begin();it != e[u].end();it++)
-    {
-        int v = *it;
-        if(Length[v]*1.0 - k + dis[u] &gt; dis[v])
-        {
-            dis[v] = Length[v]*1.0 - k + dis[u];
-            if(vis[v] || dfs(v,k)) return true; 
-        }
-    }
-    vis[u] = false;
-    return false;
-}
-bool jud(double k)
-{
-    for(int i = 1;i &lt;= n;i++) dis[i] = 0;
-    memset(vis,0,sizeof(vis));
-    for(int i = 1;i &lt;= n;i++)
-     if(dfs(i,k)) return true;
-    return false;
-}
-int main()
-{
-    while(scanf("%d",&amp;n) &amp;&amp; n)   //while语句和输入
-    {
-        f.clear();
-        for(int i = 1;i &lt;= n;i++) e[i].clear();
-        for(int i = 1;i &lt;= n;i++)
-        {
-            scanf("%s",word);   //输入
-            Length[i] = strlen(word);
-            if(Length[i] &lt; 2) continue;
-            char Temp[3];
-            for(int j = 0;j &lt; 2;j++) Temp[j] = word[j];
-            Temp[2] = '\0';
-            pre[i] = Temp;
-            for(int j = 0;j &lt; 2;j++) Temp[j] = word[Length[i]-2+j];
-            Temp[2] = '\0';
-            string temp = Temp;
-            f[temp].push_back(i);
-        }
-        for(int i = 1;i &lt;= n;i++)    //for循环
-        {
-            if(Length[i] &lt; 2) continue;    //如果Length[i]小于2，则继续
-            if(f.count(pre[i]))
-             for(vector&lt;int&gt; :: iterator step = f[pre[i]].begin();step != f[pre[i]].end();step++) e[*step].push_back(i);
-        }
-        double s = 0,t = 1000;    //double定义s,t
-        while(t - s &gt; 0.0001)
-        {
-            double mid = (s+t)/2.0;
-            if(jud(mid)) s = mid;
-            else t = mid;
-        }
-        if(s &lt; 0.99999) printf("No solution.\n");   //输出
-        else printf("%.2lf\n",s);   //输出
-    }
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>        <span class="c1">//养成好习惯</span>
+<span class="k">typedef</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+<span class="n">map</span> <span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="n">vec</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">;</span>
+<span class="n">vec</span> <span class="n">e</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="kt">char</span> <span class="n">word</span><span class="p">[</span><span class="mi">1005</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">Length</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="kt">double</span> <span class="n">dis</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="n">string</span> <span class="n">pre</span><span class="p">[</span><span class="mi">100005</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">double</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">vector</span> <span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">::</span><span class="n">iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span><span class="n">it</span> <span class="o">!=</span> <span class="n">e</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">end</span><span class="p">();</span><span class="n">it</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">Length</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">*</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="n">dis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">dis</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">Length</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">*</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="n">dis</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">||</span> <span class="n">dfs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">k</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="nf">jud</span><span class="p">(</span><span class="kt">double</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+     <span class="k">if</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="p">)</span>   <span class="c1">//while语句和输入</span>
+    <span class="p">{</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">word</span><span class="p">);</span>   <span class="c1">//输入</span>
+            <span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+            <span class="kt">char</span> <span class="n">Temp</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">Temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="n">Temp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+            <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Temp</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">Temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">];</span>
+            <span class="n">Temp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+            <span class="n">string</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">Temp</span><span class="p">;</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">temp</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>    <span class="c1">//for循环</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>    <span class="c1">//如果Length[i]小于2，则继续</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+             <span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">::</span> <span class="n">iterator</span> <span class="n">step</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">begin</span><span class="p">();</span><span class="n">step</span> <span class="o">!=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">end</span><span class="p">();</span><span class="n">step</span><span class="o">++</span><span class="p">)</span> <span class="n">e</span><span class="p">[</span><span class="o">*</span><span class="n">step</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>    <span class="c1">//double定义s,t</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="mf">0.0001</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">double</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">jud</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span> <span class="n">s</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">t</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.99999</span><span class="p">)</span> <span class="n">printf</span><span class="p">(</span><span class="s">"No solution.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>   <span class="c1">//输出</span>
+        <span class="k">else</span> <span class="n">printf</span><span class="p">(</span><span class="s">"%.2lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>   <span class="c1">//输出</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

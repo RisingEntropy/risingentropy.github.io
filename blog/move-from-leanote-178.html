@@ -15,11 +15,11 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="woj1566 骑士 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-#  描述
+描述
 国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在有一个 n∗n的棋盘，有k个骑士需要被摆到棋盘上去。那么使所有骑士互不攻击的摆放方式一共有多少种呢？
-#  输入
+输入
 一行: 两个整数， n,k
-#  输出
+输出
 一行: 一个整数，为摆放的方式数
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -27,11 +27,11 @@
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="woj1566 骑士 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-#  描述
+描述
 国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在有一个 n∗n的棋盘，有k个骑士需要被摆到棋盘上去。那么使所有骑士互不攻击的摆放方式一共有多少种呢？
-#  输入
+输入
 一行: 两个整数， n,k
-#  输出
+输出
 一行: 一个整数，为摆放的方式数
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -202,104 +202,100 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>#  描述
-国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在有一个 n∗n的棋盘，有k个骑士需要被摆到棋盘上去。那么使所有骑士互不攻击的摆放方式一共有多少种呢？
-#  输入
-一行: 两个整数， n,k
-#  输出
-一行: 一个整数，为摆放的方式数</p>
+      <h1 id="题面">题面</h1>
+<h1 id="描述">描述</h1>
+<p>国际象棋中骑士的移动规则和中国象棋中的马是类似的，它先沿着一个方向移动两格，再沿着与刚才移动方向垂直的方向移动一格。路径上的棋子并不会影响骑士的移动，但是如果一个骑士走到了一个放有棋子的格子，它就会攻击那棋子。 现在有一个 n∗n的棋盘，有k个骑士需要被摆到棋盘上去。那么使所有骑士互不攻击的摆放方式一共有多少种呢？</p>
+<h1 id="输入">输入</h1>
+<p>一行: 两个整数， n,k</p>
+<h1 id="输出">输出</h1>
+<p>一行: 一个整数，为摆放的方式数</p>
 
-<h1 id="section-1">样例输入</h1>
-<p>```
-样例[1]</p>
+<h1 id="样例输入">样例输入</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>样例[1]
 
-<p>3 2</p>
+3 2
 
-<p>样例[2]</p>
+样例[2]
 
-<p>4 4
-````
-#  样例输出
-```
-样例[1]</p>
+4 4
+</code></pre></div></div>
+<h1 id="样例输出">样例输出</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>样例[1]
 
-<p>28</p>
+28
 
-<p>样例[2]</p>
+样例[2]
 
-<p>412
-<code class="language-plaintext highlighter-rouge">
-提示
+412
+</code></pre></div></div>
+<p>提示
 数据范围及提示 Data Size &amp; Hint
-$1≤n≤8,1≤k≤n^2$
-# 解答
-我们可以发现，最多的k不超过$\frac{n}{2}$个。然后画图分析
-![图片标题](https://cdn.risingentropy.top/images/posts/c959ec5ab64417c52000169.png)
+$1≤n≤8,1≤k≤n^2$</p>
+<h1 id="解答">解答</h1>
+<p>我们可以发现，最多的k不超过$\frac{n}{2}$个。然后画图分析
+<img src="https://cdn.risingentropy.top/images/posts/c959ec5ab64417c52000169.png" alt="图片标题" />
 图中黄色表示可以被攻击到的地方。我们发现每个状态会被上一行的状态影响，同时影响下一行的状态。我们用dp[i][j][k1][k2]表示i行，当前用了j个骑士，上一行的状态为k1，当前行的状态为k2的情况的方案数，然后通过枚举状态进行转移。复杂度$O(n\times m\times  2^{2n})$
 我们还可以小小地优化一下，预处理出合法的状态。L1[i][j]表示状态i和状态j挨着的时候是否合法，L2表示i和j隔一行的时候是否合法。
-写一个check函数:
-</code>cpp
-bool check(int x,int y,int d){
-	if((x&amp;(y«d))||(x&amp;(y»d)))return false;
-	return true;
-}
-<code class="language-plaintext highlighter-rouge">
-代码：
-</code>cpp
-# include <iostream>
-using namespace std;
-int dp[9][33][256][256];
-int w,h;
-bool L1[256][256];
-bool L2[256][256];
-inline int lowbit(int x){return x&amp;-x;}
-int n,k,states;
-int cnt[256];
-bool check(int x,int y,int d){
-	if((x&amp;(y&lt;&lt;d))||(x&amp;(y&gt;&gt;d)))return false;
-	return true;
-}
-int getBit(int x){
-	int ans = 0;
-	while(x)ans++,x-=lowbit(x);
-	return ans;
-}
-int main(void){
-	cin&gt;&gt;n&gt;&gt;k;states=1&lt;&lt;n;
-	for(int i = 0;i&lt;states;i++){
-		cnt[i] = getBit(i);
-		for(int j = 0;j&lt;states;j++){
-			L1[i][j] = L1[j][i] = check(i,j,2);//前一行的状态，因为左右各走2格，然后向上下走一格，所以偏移量是2 
-			L2[i][j] = L2[i][j] = check(i,j,1);//同理,上下走2格，向下走一格，偏移量为1 
-		}
-	}
-	dp[0][0][0][0] = 1;
-	for(int i = 0;i&lt;n;i++){
-		for(int j = 0;j&lt;=k;j++){
-			for(int k1 = 0;k1&lt;states;k1++){//上一行 
-				for(int k2 = 0;k2&lt;states;k2++){//当前行
-					if(dp[i][j][k1][k2]){//有值表示当前行和上一行合法
-						for(int nxt = 0;nxt&lt;states;nxt++){
-							if(L2[k1][nxt]&amp;&amp;L1[nxt][k2]&amp;&amp;j+cnt[nxt]&lt;=k){//当前行和下一行合法，上一行和当前行的下一行合法，并且骑士数量小于k个
-								dp[i+1][j+cnt[nxt]][k2][nxt]+=dp[i][j][k1][k2];
-							}
-						}
-					}
-				} 
-			}
-		}
-	}
-	long long ans = 0;
-	for(int i = 0;i&lt;states;i++){
-		for(int j = 0;j&lt;states;j++){
-			ans+=dp[n][k][i][j];
-		}
-	}
-	cout&lt;&lt;ans;
-	return 0;             	
-}
-```</iostream></p>
+写一个check函数:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="n">y</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="p">))</span><span class="o">||</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;&gt;</span><span class="n">d</span><span class="p">)))</span><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="mi">33</span><span class="p">][</span><span class="mi">256</span><span class="p">][</span><span class="mi">256</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">L1</span><span class="p">[</span><span class="mi">256</span><span class="p">][</span><span class="mi">256</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">L2</span><span class="p">[</span><span class="mi">256</span><span class="p">][</span><span class="mi">256</span><span class="p">];</span>
+<span class="kr">inline</span> <span class="kt">int</span> <span class="nf">lowbit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&amp;-</span><span class="n">x</span><span class="p">;}</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">states</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">d</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="n">y</span><span class="o">&lt;&lt;</span><span class="n">d</span><span class="p">))</span><span class="o">||</span><span class="p">(</span><span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;&gt;</span><span class="n">d</span><span class="p">)))</span><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">getBit</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="n">ans</span><span class="o">++</span><span class="p">,</span><span class="n">x</span><span class="o">-=</span><span class="n">lowbit</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span><span class="n">states</span><span class="o">=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">getBit</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">L1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">L1</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="c1">//前一行的状态，因为左右各走2格，然后向上下走一格，所以偏移量是2 </span>
+			<span class="n">L2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">L2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="c1">//同理,上下走2格，向下走一格，偏移量为1 </span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k1</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">k1</span><span class="o">++</span><span class="p">){</span><span class="c1">//上一行 </span>
+				<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">k2</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">k2</span><span class="o">++</span><span class="p">){</span><span class="c1">//当前行</span>
+					<span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k1</span><span class="p">][</span><span class="n">k2</span><span class="p">]){</span><span class="c1">//有值表示当前行和上一行合法</span>
+						<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">nxt</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">nxt</span><span class="o">++</span><span class="p">){</span>
+							<span class="k">if</span><span class="p">(</span><span class="n">L2</span><span class="p">[</span><span class="n">k1</span><span class="p">][</span><span class="n">nxt</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">L1</span><span class="p">[</span><span class="n">nxt</span><span class="p">][</span><span class="n">k2</span><span class="p">]</span><span class="o">&amp;&amp;</span><span class="n">j</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">){</span><span class="c1">//当前行和下一行合法，上一行和当前行的下一行合法，并且骑士数量小于k个</span>
+								<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="n">cnt</span><span class="p">[</span><span class="n">nxt</span><span class="p">]][</span><span class="n">k2</span><span class="p">][</span><span class="n">nxt</span><span class="p">]</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">k1</span><span class="p">][</span><span class="n">k2</span><span class="p">];</span>
+							<span class="p">}</span>
+						<span class="p">}</span>
+					<span class="p">}</span>
+				<span class="p">}</span> 
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">states</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+			<span class="n">ans</span><span class="o">+=</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>             	
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

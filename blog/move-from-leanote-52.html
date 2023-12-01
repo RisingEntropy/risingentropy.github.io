@@ -14,8 +14,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AC自动机板子洛谷P3808 – Haoyu Deng's page">
-  <meta name="twitter:description" content="cpp
-//
+  <meta name="twitter:description" content="//
 // Created by dhy on 18-9-14.
 //
 # include &amp;lt;iostream&amp;gt;
@@ -93,8 +92,7 @@ int main(void){
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="AC自动机板子洛谷P3808 – Haoyu Deng's page">
-  <meta property="og:description" content="cpp
-//
+  <meta property="og:description" content="//
 // Created by dhy on 18-9-14.
 //
 # include &amp;lt;iostream&amp;gt;
@@ -336,80 +334,79 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <p><code class="language-plaintext highlighter-rouge">cpp
-//
-// Created by dhy on 18-9-14.
-//
-# include &lt;iostream&gt;
+      <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//</span>
+<span class="c1">// Created by dhy on 18-9-14.</span>
+<span class="c1">//</span>
+<span class="cp"># include &lt;iostream&gt;
 # include &lt;string&gt;
 # include &lt;queue&gt;
-using namespace std;
-struct trie{
-    int fail;
-    int son[27];
-    int cnt;
-}ACtree[1000000];
-int top = 0;
-void build_tree(string str){
-    int n = str.size()-1;
-    int ch = 0;
-    for(int i = 0;i&lt;=n;i++){
-        if(ACtree[ch].son[str[i]-'a']==0){
-            ACtree[ch].son[str[i]-'a'] = ++top;
-        }
-        ch = ACtree[ch].son[str[i]-'a'];
-    }
-    ACtree[ch].cnt+=1;
-}
-void build_fail(){
-    queue&lt;int&gt; q;
-    for(int i = 0;i&lt;26;i++){
-        if(ACtree[0].son[i]!=0) {
-            ACtree[ACtree[0].son[i]].fail = 0;
-            q.push(ACtree[0].son[i]);
-        }
-    }
-    while(!q.empty()){
-        int u = q.front();
-        q.pop();
-        for(int i = 0;i&lt;26;i++){
-            if(ACtree[u].son[i]!=0){
-                ACtree[ACtree[u].son[i]].fail = ACtree[ACtree[u].fail].son[i];//
-                q.push(ACtree[u].son[i]);
-            }else{
-                ACtree[u].son[i] = ACtree[ACtree[u].fail].son[i];;
-            }
-        }
-    }
-}
-int query(string str){
-    int n = str.size()-1;
-    int ans = 0;
-    int ch = 0;
-    for(int i = 0;i&lt;=n;i++){
-        ch = ACtree[ch].son[str[i]-'a'];
-        for(int j = ch;ACtree[j].cnt!=-1;j = ACtree[j].fail){
-            ans+=ACtree[j].cnt;
-            ACtree[j].cnt = -1;
-        }
-    }
-    return ans;
-}
-int main(void){
-    ios::sync_with_stdio(false);
-    int n;
-    cin&gt;&gt;n;
-    string s;
-    for(int i = 1;i&lt;=n;i++){
-        cin&gt;&gt;s;
-        build_tree(s);
-    }
-    build_fail();
-    cin&gt;&gt;s;
-    cout&lt;&lt;query(s)&lt;&lt;endl;
-    return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">trie</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">fail</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">son</span><span class="p">[</span><span class="mi">27</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">1000000</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">build_tree</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+            <span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">top</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">cnt</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">build_fail</span><span class="p">(){</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">26</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ACtree</span><span class="p">[</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">fail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">26</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">ACtree</span><span class="p">[</span><span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">fail</span> <span class="o">=</span> <span class="n">ACtree</span><span class="p">[</span><span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">fail</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="c1">//</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ACtree</span><span class="p">[</span><span class="n">ACtree</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">fail</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">];;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'a'</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span><span class="n">ACtree</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">cnt</span><span class="o">!=-</span><span class="mi">1</span><span class="p">;</span><span class="n">j</span> <span class="o">=</span> <span class="n">ACtree</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">fail</span><span class="p">){</span>
+            <span class="n">ans</span><span class="o">+=</span><span class="n">ACtree</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="n">ACtree</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">cnt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">;</span>
+        <span class="n">build_tree</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">build_fail</span><span class="p">();</span>
+    <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">query</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

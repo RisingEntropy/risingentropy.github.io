@@ -15,40 +15,35 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="bzoj3620 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
-# 题目
+题目
 “Madoka,不要相信 QB！”伴随着 Homura 的失望地喊叫,Madoka 与 QB 签订了契约.
 这是 Modoka 的一个噩梦,也同时是上个轮回中所发生的事.为了使这一次 Madoka 不再与 QB签订契约,Homura 决定在刚到学校的第一天就解决 QB.然而,QB 也是有许多替身的(但在第八话中的剧情显示它也有可能是无限重生的),不过,意志坚定的 Homura 是不会放弃的——她决定
 消灭所有可能是 QB 的东西.现在，她已感受到附近的状态,并且把它转化为一个长度为 n 的字符串交给了学 OI 的你.
 现在你从她的话中知道 , 所有形似于 A+B+A 的字串都是 QB 或它的替身 , 且len(A)&amp;gt;=k,len(B)&amp;gt;=1 （位置不同其他性质相同的子串算不同子串,位置相同但拆分不同的子串算同一子串）,然后你必须尽快告诉 Homura 这个答案——QB 以及它的替身的数量.
-# 输入输出格式
-#  输入格式
+输入输出格式
+输入格式
 第一行一个字符串,第二行一个数 k
-#  输出格式
+输出格式
 仅一行一个数 ans,表示 QB 以及它的替身的数量
-#  样例
-#  样例输入1
-
+样例
+样例输入1
 aaaaa
 1
 
-#  样例输出1
-
+样例输出1
 6
 
-#  样例输入2
-
+样例输入2
 abcabcabc
 2
 
-#  样例输出2
-
+样例输出2
 8
 
-# 解答
+解答
 其实还是比较裸的kmp的题。主要是理解清楚kmp的fail的含义当前失配以后去哪里 通过这个含义，我们可以想到用它来解决A+B+A的问题。若对于后面的串A，我们发现其实对于A[1]要找到它在前面的A中的对应位置只需要求得fail[i]就行了
 对于当前的j来说，只要j!=pos(pos是枚举的开始位置)并且(j-pos+1)2&amp;gt;=i-pos+1,就是说明两个A串的长度加起来都大于等于(取等是因为len(B)&amp;gt;=1目前枚举到的pos-i串的长度了，肯定不可能构成一个A+B+A型的串，所以要把j向前调整，就是向前跳。最后判断一下如果(j-pos+1)2&amp;gt;=k,就说明这里找到匹配了，计数加一个。因为这道题说的是只要位置不同就行，即只要对于每一个pos，只要符合条件的j取到的时候，i与之前不同，就不同。所以这里直接ans++一下就行。快写有问题，输出是一样的，但是交上去却死活过不了
 以下是代码
-cpp
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;cstdlib&amp;gt;
 # include &amp;lt;time.h&amp;gt;
@@ -101,40 +96,35 @@ int main(void){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="bzoj3620 – Haoyu Deng's page">
   <meta property="og:description" content="题面
-# 题目
+题目
 “Madoka,不要相信 QB！”伴随着 Homura 的失望地喊叫,Madoka 与 QB 签订了契约.
 这是 Modoka 的一个噩梦,也同时是上个轮回中所发生的事.为了使这一次 Madoka 不再与 QB签订契约,Homura 决定在刚到学校的第一天就解决 QB.然而,QB 也是有许多替身的(但在第八话中的剧情显示它也有可能是无限重生的),不过,意志坚定的 Homura 是不会放弃的——她决定
 消灭所有可能是 QB 的东西.现在，她已感受到附近的状态,并且把它转化为一个长度为 n 的字符串交给了学 OI 的你.
 现在你从她的话中知道 , 所有形似于 A+B+A 的字串都是 QB 或它的替身 , 且len(A)&amp;gt;=k,len(B)&amp;gt;=1 （位置不同其他性质相同的子串算不同子串,位置相同但拆分不同的子串算同一子串）,然后你必须尽快告诉 Homura 这个答案——QB 以及它的替身的数量.
-# 输入输出格式
-#  输入格式
+输入输出格式
+输入格式
 第一行一个字符串,第二行一个数 k
-#  输出格式
+输出格式
 仅一行一个数 ans,表示 QB 以及它的替身的数量
-#  样例
-#  样例输入1
-
+样例
+样例输入1
 aaaaa
 1
 
-#  样例输出1
-
+样例输出1
 6
 
-#  样例输入2
-
+样例输入2
 abcabcabc
 2
 
-#  样例输出2
-
+样例输出2
 8
 
-# 解答
+解答
 其实还是比较裸的kmp的题。主要是理解清楚kmp的fail的含义当前失配以后去哪里 通过这个含义，我们可以想到用它来解决A+B+A的问题。若对于后面的串A，我们发现其实对于A[1]要找到它在前面的A中的对应位置只需要求得fail[i]就行了
 对于当前的j来说，只要j!=pos(pos是枚举的开始位置)并且(j-pos+1)2&amp;gt;=i-pos+1,就是说明两个A串的长度加起来都大于等于(取等是因为len(B)&amp;gt;=1目前枚举到的pos-i串的长度了，肯定不可能构成一个A+B+A型的串，所以要把j向前调整，就是向前跳。最后判断一下如果(j-pos+1)2&amp;gt;=k,就说明这里找到匹配了，计数加一个。因为这道题说的是只要位置不同就行，即只要对于每一个pos，只要符合条件的j取到的时候，i与之前不同，就不同。所以这里直接ans++一下就行。快写有问题，输出是一样的，但是交上去却死活过不了
 以下是代码
-cpp
 # include &amp;lt;cstdio&amp;gt;
 # include &amp;lt;cstdlib&amp;gt;
 # include &amp;lt;time.h&amp;gt;
@@ -350,87 +340,82 @@ int main(void){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p># 题目
-“Madoka,不要相信 QB！”伴随着 Homura 的失望地喊叫,Madoka 与 QB 签订了契约.
+      <h1 id="题面">题面</h1>
+<h1 id="题目">题目</h1>
+<p>“Madoka,不要相信 QB！”伴随着 Homura 的失望地喊叫,Madoka 与 QB 签订了契约.
 这是 Modoka 的一个噩梦,也同时是上个轮回中所发生的事.为了使这一次 Madoka 不再与 QB签订契约,Homura 决定在刚到学校的第一天就解决 QB.然而,QB 也是有许多替身的(但在第八话中的剧情显示它也有可能是无限重生的),不过,意志坚定的 Homura 是不会放弃的——她决定
 消灭所有可能是 QB 的东西.现在，她已感受到附近的状态,并且把它转化为一个长度为 n 的字符串交给了学 OI 的你.
-现在你从她的话中知道 , 所有形似于 A+B+A 的字串都是 QB 或它的替身 , 且len(A)&gt;=k,len(B)&gt;=1 （位置不同其他性质相同的子串算不同子串,位置相同但拆分不同的子串算同一子串）,然后你必须尽快告诉 Homura 这个答案——QB 以及它的替身的数量.
-# 输入输出格式
-#  输入格式
-第一行一个字符串,第二行一个数 k
-#  输出格式
-仅一行一个数 ans,表示 QB 以及它的替身的数量
-#  样例
-#  样例输入1
-<code class="language-plaintext highlighter-rouge">
-aaaaa
+现在你从她的话中知道 , 所有形似于 A+B+A 的字串都是 QB 或它的替身 , 且len(A)&gt;=k,len(B)&gt;=1 （位置不同其他性质相同的子串算不同子串,位置相同但拆分不同的子串算同一子串）,然后你必须尽快告诉 Homura 这个答案——QB 以及它的替身的数量.</p>
+<h1 id="输入输出格式">输入输出格式</h1>
+<h1 id="输入格式">输入格式</h1>
+<p>第一行一个字符串,第二行一个数 k</p>
+<h1 id="输出格式">输出格式</h1>
+<p>仅一行一个数 ans,表示 QB 以及它的替身的数量</p>
+<h1 id="样例">样例</h1>
+<h1 id="样例输入1">样例输入1</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aaaaa
 1
-</code>
-#  样例输出1
-<code class="language-plaintext highlighter-rouge">
-6
-</code>
-#  样例输入2
-<code class="language-plaintext highlighter-rouge">
-abcabcabc
+</code></pre></div></div>
+<h1 id="样例输出1">样例输出1</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6
+</code></pre></div></div>
+<h1 id="样例输入2">样例输入2</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abcabcabc
 2
-</code>
-#  样例输出2
-<code class="language-plaintext highlighter-rouge">
-8
-</code>
-# 解答
-其实还是比较裸的kmp的题。主要是理解清楚kmp的fail的含义<strong>当前失配以后去哪里</strong> 通过这个含义，我们可以想到用它来解决A+B+A的问题。若对于后面的串A，我们发现其实对于A[1]要找到它在前面的A中的对应位置只需要求得fail[i]就行了
+</code></pre></div></div>
+<h1 id="样例输出2">样例输出2</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>其实还是比较裸的kmp的题。主要是理解清楚kmp的fail的含义<strong>当前失配以后去哪里</strong> 通过这个含义，我们可以想到用它来解决A+B+A的问题。若对于后面的串A，我们发现其实对于A[1]要找到它在前面的A中的对应位置只需要求得fail[i]就行了
 对于当前的j来说，只要j!=pos(pos是枚举的开始位置)并且(j-pos+1)<em>2&gt;=i-pos+1,就是说明两个A串的长度加起来都大于等于(取等是因为len(B)&gt;=1目前枚举到的pos-i串的长度了，肯定不可能构成一个A+B+A型的串，所以要把j向前调整，就是向前跳。最后判断一下如果(j-pos+1)</em>2&gt;=k,就说明这里找到匹配了，计数加一个。因为这道题说的是只要位置不同就行，即只要对于每一个pos，只要符合条件的j取到的时候，i与之前不同，就不同。所以这里直接ans++一下就行。快写有问题，输出是一样的，但是交上去却死活过不了
-以下是代码
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;cstdio&gt;
+以下是代码</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;cstdlib&gt;
 # include &lt;time.h&gt;
 # include &lt;vector&gt;
 # include &lt;cstring&gt;
-using namespace std;
-int read(){
-	int x = 0,f = 1;
-	static char c = getchar();
-	while(c&lt;'0'||c&gt;'9'){if(c=='-') f = -1;c = getchar();}
-	while(c&gt;='0'&amp;&amp;c&lt;='9')x = x*10+c-'0',c = getchar();
-	return x*f;
-}
-const int MAXN = 15010;
-int nxt[MAXN];
-char str[MAXN];
-int n,k;
-int ans = 0;
-void kmp(int pos){
-	int j = 0;
-	nxt[pos] = pos-1;
-	for(int i = pos+1;i&lt;=n;i++){
-		j = nxt[i-1];
-		while(j!=pos-1&amp;&amp;str[i]!=str[j+1]) j = nxt[j];
-		if(str[i] == str[j+1])j++;
-		nxt[i] = j;
-	}
-	j = nxt[pos];
-	for(int i = pos+1;i&lt;=n;i++){
-		while(j!=pos-1&amp;&amp;str[i]!=str[j+1])j = nxt[j];
-		if(str[i]==str[j+1])j++;
-		while((j-pos+1)*2&gt;=(i-pos+1))
-			j = nxt[j];
-		if((j-pos+1)&gt;=k)
-			ans++;
-	}
-}
-int main(void){
-	scanf("%s",str+1);
-	k = read();
-	n = strlen(str+1);
-	for(int i = 1;i&lt;=n;i++)kmp(i);//枚举以i作为开头
-	printf("%d",ans);
-	return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">static</span> <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&lt;</span><span class="sc">'0'</span><span class="o">||</span><span class="n">c</span><span class="o">&gt;</span><span class="sc">'9'</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'-'</span><span class="p">)</span> <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();}</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">c</span><span class="o">&gt;=</span><span class="sc">'0'</span><span class="o">&amp;&amp;</span><span class="n">c</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">)</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">'0'</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">15010</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">nxt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">kmp</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">nxt</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">j</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">!=</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="n">j</span><span class="o">++</span><span class="p">;</span>
+		<span class="n">nxt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">j</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">[</span><span class="n">pos</span><span class="p">];</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">!=</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="n">j</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="n">j</span><span class="o">++</span><span class="p">;</span>
+		<span class="k">while</span><span class="p">((</span><span class="n">j</span><span class="o">-</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">&gt;=</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+			<span class="n">j</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">((</span><span class="n">j</span><span class="o">-</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span>
+			<span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">k</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">kmp</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="c1">//枚举以i作为开头</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

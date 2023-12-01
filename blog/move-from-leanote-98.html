@@ -202,7 +202,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">树的重心</h1>
+      <h1 id="树的重心">树的重心</h1>
 <blockquote>
   <p>树的重心也叫树的质心。找到一个点,其所有的子树中最大的子树节点数最少,那么这个点就是这棵树的重心,删去重心后，生成的多棵树尽可能平衡。 –百度
 求取：
@@ -210,148 +210,146 @@
 代码（抄的）:</p>
 </blockquote>
 
-<p>```cpp
-# include <iostream>
-# include <string.h>
-# include <stdio.h></stdio.h></string.h></iostream></p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;string.h&gt;
+# include &lt;stdio.h&gt;
+</span> 
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">20005</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">30</span><span class="p">;</span>
+ 
+<span class="kt">int</span> <span class="n">head</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">son</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">bool</span> <span class="n">vis</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">cnt</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span><span class="p">,</span><span class="n">size</span><span class="p">;</span>
+ 
+<span class="k">struct</span> <span class="nc">Edge</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">to</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+ 
+<span class="n">Edge</span> <span class="n">edge</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">];</span>
+ 
+<span class="kt">void</span> <span class="nf">Init</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">head</span><span class="p">));</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">edge</span><span class="p">[</span><span class="n">cnt</span><span class="p">].</span><span class="n">to</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">edge</span><span class="p">[</span><span class="n">cnt</span><span class="p">].</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+    <span class="n">head</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vis</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">son</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">cur</span><span class="p">];</span><span class="o">~</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">to</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+            <span class="n">son</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">+=</span> <span class="n">son</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">son</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">son</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="o">||</span> <span class="n">tmp</span> <span class="o">==</span> <span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span> <span class="o">&lt;</span> <span class="n">ans</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<p>using namespace std;
-const int N = 20005;
-const int INF = 1«30;</p>
+<span class="o">---------------------</span> 
+<span class="err">作者：</span><span class="n">acdreamers</span> 
+<span class="err">来源：</span><span class="n">CSDN</span> 
+<span class="err">原文：</span><span class="n">https</span><span class="o">:</span><span class="c1">//blog.csdn.net/acdreamers/article/details/16905653 </span>
+<span class="err">版权声明：本文为博主原创文章，转载请附上博文链接！</span>
+</code></pre></div></div>
 
-<p>int head[N];
-int son[N];
-bool vis[N];
-int cnt,n;
-int ans,size;</p>
-
-<p>struct Edge
-{
-    int to;
-    int next;
-};</p>
-
-<p>Edge edge[2*N];</p>
-
-<p>void Init()
-{
-    cnt = 0;
-    size = INF;
-    memset(vis,0,sizeof(vis));
-    memset(head,-1,sizeof(head));
-}</p>
-
-<p>void add(int u,int v)
-{
-    edge[cnt].to = v;
-    edge[cnt].next = head[u];
-    head[u] = cnt++;
-}</p>
-
-<p>void dfs(int cur)
-{
-    vis[cur] = 1;
-    son[cur] = 0;
-    int tmp = 0;
-    for(int i=head[cur];~i;i=edge[i].next)
-    {
-        int u = edge[i].to;
-        if(!vis[u])
-        {
-            dfs(u);
-            son[cur] += son[u] + 1;
-            tmp = max(tmp,son[u] + 1);
-        }
-    }
-    tmp = max(tmp,n-son[cur]-1);
-    if(tmp &lt; size || tmp == size &amp;&amp; cur &lt; ans)
-    {
-        ans = cur;
-        size = tmp;
-    }
-}</p>
-
-<hr />
-<p>作者：acdreamers 
-来源：CSDN 
-原文：https://blog.csdn.net/acdreamers/article/details/16905653 
-版权声明：本文为博主原创文章，转载请附上博文链接！
-```</p>
-
-<h1 id="section-1">树的最长路径</h1>
+<h1 id="树的最长路径">树的最长路径</h1>
 <p>从任意一个点出发，找到离这个点最远的点$p_1$然后从$p_1$出发，找到距$p_1$最远的点$p_2$，那么$p_1\ p_2$所构成的路径就是最短路径
-代码(懒得写，抄的):
-```cpp
-# include<queue>  
-# include<vector>  
-# include<cstdio>  
-# include<cstring> 
-# include<iostream>  
-# include<algorithm>   
-using namespace std;    
-struct Node  
-{  
-	int to,cap;  
-};  
-const int N=100010;
-vector<Node> v[N];  
-int vis[N],dis[N],ans;</Node></algorithm></iostream></cstring></cstdio></vector></queue></p>
+代码(懒得写，抄的):</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;queue&gt;  
+# include&lt;vector&gt;  
+# include&lt;cstdio&gt;  
+# include&lt;cstring&gt; 
+# include&lt;iostream&gt;  
+# include&lt;algorithm&gt;   
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>    
+<span class="k">struct</span> <span class="nc">Node</span>  
+<span class="p">{</span>  
+	<span class="kt">int</span> <span class="n">to</span><span class="p">,</span><span class="n">cap</span><span class="p">;</span>  
+<span class="p">};</span>  
+<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span><span class="o">=</span><span class="mi">100010</span><span class="p">;</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>  
+<span class="kt">int</span> <span class="n">vis</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">dis</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">ans</span><span class="p">;</span>  
+ 
+<span class="kt">int</span> <span class="nf">bfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>  
+<span class="p">{</span>  
+    <span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>  
+    <span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>  
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>  
+    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>  
+    <span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>  
+    <span class="kt">int</span> <span class="n">point</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>  
+    <span class="p">{</span>  
+        <span class="kt">int</span> <span class="n">f</span><span class="o">=</span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>  
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>  
+        <span class="k">if</span><span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">&gt;</span><span class="n">ans</span><span class="p">)</span>  
+        <span class="p">{</span>  
+            <span class="n">ans</span><span class="o">=</span><span class="n">dis</span><span class="p">[</span><span class="n">f</span><span class="p">];</span>  
+            <span class="n">point</span><span class="o">=</span><span class="n">f</span><span class="p">;</span>  
+        <span class="p">}</span>  
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">v</span><span class="p">[</span><span class="n">f</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>  
+        <span class="p">{</span>  
+            <span class="n">Node</span> <span class="n">temp</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>  
+            <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">temp</span><span class="p">.</span><span class="n">to</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>  
+            <span class="p">{</span>  
+                <span class="n">vis</span><span class="p">[</span><span class="n">temp</span><span class="p">.</span><span class="n">to</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>  
+                <span class="n">dis</span><span class="p">[</span><span class="n">temp</span><span class="p">.</span><span class="n">to</span><span class="p">]</span><span class="o">=</span><span class="n">dis</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">+</span><span class="n">temp</span><span class="p">.</span><span class="n">cap</span><span class="p">;</span>  
+                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="n">to</span><span class="p">);</span>  
+            <span class="p">}</span>  
+        <span class="p">}</span>  
+    <span class="p">}</span>  
+    <span class="k">return</span> <span class="n">point</span><span class="p">;</span>  
+<span class="p">}</span>  
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>  
+<span class="p">{</span>  
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">~</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">))</span>  
+    <span class="p">{</span>  
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>  
+        <span class="p">{</span>  
+            <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>    
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d %d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>  
+            <span class="n">v</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">push_back</span><span class="p">((</span><span class="n">Node</span><span class="p">){</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">});</span>  
+            <span class="n">v</span><span class="p">[</span><span class="n">y</span><span class="p">].</span><span class="n">push_back</span><span class="p">((</span><span class="n">Node</span><span class="p">){</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">});</span>  
+        <span class="p">}</span>  
+        <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  
+        <span class="kt">int</span> <span class="n">point</span><span class="o">=</span><span class="n">bfs</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>  
+        <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  
+        <span class="n">bfs</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>  
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>  
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>  
+    <span class="p">}</span>  
+<span class="p">}</span>  
 
-<p>int bfs(int x)<br />
-{<br />
-    memset(dis,0,sizeof(dis));<br />
-    memset(vis,0,sizeof(vis));<br />
-    queue<int> q;  
-    q.push(x);  
-    vis[x]=1;  
-    int point=0;  
-    while(!q.empty())  
-    {  
-        int f=q.front();  
-        q.pop();  
-        if(dis[f]&gt;ans)  
-        {  
-            ans=dis[f];  
-            point=f;  
-        }  
-        for(int i=0;i&lt;v[f].size();i++)  
-        {  
-            Node temp=v[f][i];  
-            if(vis[temp.to]==0)  
-            {  
-                vis[temp.to]=1;  
-                dis[temp.to]=dis[f]+temp.cap;  
-                q.push(temp.to);  
-            }  
-        }  
-    }  
-    return point;  
-}</int></p>
-
-<p>int main()<br />
-{<br />
-    int n;
-    while(~scanf(“%d”,&amp;n))<br />
-    {<br />
-        for(int i=1;i&lt;=n-1;i++)<br />
-        {<br />
-            int x,y;  <br />
-            scanf(“%d %d”,&amp;x,&amp;y);<br />
-            v[x].push_back((Node){y,1});<br />
-            v[y].push_back((Node){x,1});<br />
-        }<br />
-        ans=0;<br />
-        int point=bfs(1);<br />
-        ans=0;<br />
-        bfs(point);<br />
-        printf(“%d\n”,ans);<br />
-        for(int i=1;i&lt;=n;i++) v[i].clear();<br />
-    }<br />
-}</p>
-
-<p>```
-# 树的中心
-首先第一个dfs求出所有每个节点i在其子树中的正向最大距离和正向次大距离和d[i][0]和d[i][1]（如果i节点在子树中最大距离经过了2号儿子，那么次大距离就是不经过2号儿子的最大距离）。并且还要标记c[i]=j表示节点i在其子树中的最大距离经过了节点j（即j是i的一个儿子）。 
+</code></pre></div></div>
+<h1 id="树的中心">树的中心</h1>
+<p>首先第一个dfs求出所有每个节点i在其子树中的正向最大距离和正向次大距离和d[i][0]和d[i][1]（如果i节点在子树中最大距离经过了2号儿子，那么次大距离就是不经过2号儿子的最大距离）。并且还要标记c[i]=j表示节点i在其子树中的最大距离经过了节点j（即j是i的一个儿子）。 
 由上步我们获得了正向最大距离，正向次大距离和最大距离的儿子节点标记。画图可以知道我们建立的这棵树，i节点的最远距离只有两种选择：i节点所在子树的最大距离，或者i节点连接它的父节点所能到达的最大距离。（即前者往下走，后者先往上走之后很可能也往下走） 
 所以我们只要求出反向最大距离d[i][2]（即i节点往它的父节点走所能到达的最大距离）就可以知道i节点在整个树中能走的最大距离了。 
 d[i][2]求法：i节点往它的父节j点走，如果它的父节点的正向最大距离不经过i的话，那么d[i][2]要不就是它父节点的反向最大距离+W[i][j]要不就是它父节点的正向最大距离+ W[i][j]. 
@@ -375,74 +373,75 @@ u[i]表示除了以i为根的子树中的叶节点外，其他叶子结点到i�
 在n个节点里面找最大值
 t[i] = max{u[i],d1[i]}
 ans = min{t[i]}
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include&lt;bits/stdc++.h&gt;
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;bits/stdc++.h&gt;
 # define N 10005
-using namespace std;
-int tot,head[N],vet[N&lt;&lt;1],Next[N&lt;&lt;1],val[N&lt;&lt;1];
-void add(int x,int y ,int z){
-    tot++;
-    vet[tot]=y;
-    val[tot]=z;
-    Next[tot]=head[x]; 
-    head[x]=tot;
-}//边表
-int d[N][3];
-int c[N];
-int dfs1(int u,int fa){
-    if(d[u][0]&gt;=0)return d[u][0];
-    d[u][0]=d[u][1]=d[u][2]=c[u]=0; 
-    for(int i=head[u];i;i=Next[i]){
-        int v=vet[i];
-        if(v==fa)continue;
-        if(d[u][0]&lt;dfs1(v,u)+val[i]){
-            c[u]=v;
-            d[u][1]=max(d[u][1],d[u][0]);
-            d[u][0]=dfs1(v,u)+val[i];
-        }
-        else if(d[u][1]&lt;dfs1(v,u)+val[i]) 
-            d[u][1]=max(d[u][1],dfs1(v,u)+val[i]);
-    }
-    return d[u][0];
-}//计算正向最大和正向次大
-void dfs2(int u,int fa){
-    for(int i=head[u];i;i=Next[i]){
-        int v=vet[i];
-        if(v==fa)continue;
-        if(v==c[u])d[v][2]=max(d[u][2],d[u][1])+val[i];
-        else d[v][2]=max(d[u][2],d[u][0])+val[i];
-        dfs2(v,u);
-    }
-}//计算反向最大
-int main(){
-    int n;
-    while(~scanf("%d",&amp;n)){
-        tot=0;
-        memset(d,-1,sizeof(d));
-        memset(head,-1,sizeof(head));
-        memset(c,-1,sizeof(c));
-        for(int i=2;i&lt;=n;i++){
-            int v,w;
-            scanf("%d%d",&amp;v,&amp;w);
-            add(i,v,w);
-            add(v,i,w);
-        }//读入构图
-        dfs1(1,-1);
-        dfs2(1,-1);
-        for(int i=1;i&lt;=n;i++)
-            printf("%d\n",max(d[i][0],d[i][2]));
-    }
-    return 0;
-}
---------------------- 
-作者：罪_蒟蒻PDD 
-来源：CSDN 
-原文：https://blog.csdn.net/qq_36316033/article/details/81026602 
-版权声明：本文为博主原创文章，转载请附上博文链接！
-</code>
-一语道破：
-2.    树的中心</p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">tot</span><span class="p">,</span><span class="n">head</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">vet</span><span class="p">[</span><span class="n">N</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">],</span><span class="n">Next</span><span class="p">[</span><span class="n">N</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">N</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span> <span class="p">,</span><span class="kt">int</span> <span class="n">z</span><span class="p">){</span>
+    <span class="n">tot</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">vet</span><span class="p">[</span><span class="n">tot</span><span class="p">]</span><span class="o">=</span><span class="n">y</span><span class="p">;</span>
+    <span class="n">val</span><span class="p">[</span><span class="n">tot</span><span class="p">]</span><span class="o">=</span><span class="n">z</span><span class="p">;</span>
+    <span class="n">Next</span><span class="p">[</span><span class="n">tot</span><span class="p">]</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span> 
+    <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">tot</span><span class="p">;</span>
+<span class="p">}</span><span class="c1">//边表</span>
+<span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">c</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">dfs1</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> 
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">u</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="n">Next</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+        <span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="n">vet</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dfs1</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+            <span class="n">c</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">v</span><span class="p">;</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">dfs1</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="n">dfs1</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+            <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">dfs1</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">)</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span><span class="c1">//计算正向最大和正向次大</span>
+<span class="kt">void</span> <span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">u</span><span class="p">];</span><span class="n">i</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="n">Next</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+        <span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="n">vet</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">==</span><span class="n">fa</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="o">==</span><span class="n">c</span><span class="p">[</span><span class="n">u</span><span class="p">])</span><span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">else</span> <span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">dfs2</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="c1">//计算反向最大</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">~</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">)){</span>
+        <span class="n">tot</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">head</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">int</span> <span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">;</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span><span class="o">&amp;</span><span class="n">w</span><span class="p">);</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+        <span class="p">}</span><span class="c1">//读入构图</span>
+        <span class="n">dfs1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">dfs2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">---------------------</span> 
+<span class="err">作者：罪</span><span class="n">_</span><span class="err">蒟蒻</span><span class="n">PDD</span> 
+<span class="err">来源：</span><span class="n">CSDN</span> 
+<span class="err">原文：</span><span class="n">https</span><span class="o">:</span><span class="c1">//blog.csdn.net/qq_36316033/article/details/81026602 </span>
+<span class="err">版权声明：本文为博主原创文章，转载请附上博文链接！</span>
+</code></pre></div></div>
+<p>一语道破：</p>
+<ol>
+  <li>树的中心</li>
+</ol>
 
 <p>概念：树的直径的中点。</p>
 

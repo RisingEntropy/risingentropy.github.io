@@ -15,7 +15,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KMP真宗好看的板子 – Haoyu Deng's page">
   <meta name="twitter:description" content="KMP板子
-cpp
 void next(){
     j=0;
     for (int i=2;i&amp;lt;=lb;i++)
@@ -54,7 +53,6 @@ void kmp(){
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="KMP真宗好看的板子 – Haoyu Deng's page">
   <meta property="og:description" content="KMP板子
-cpp
 void next(){
     j=0;
     for (int i=2;i&amp;lt;=lb;i++)
@@ -256,40 +254,39 @@ void kmp(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="kmp">KMP板子</h1>
-<p><code class="language-plaintext highlighter-rouge">cpp
-void next(){
-    j=0;
-    for (int i=2;i&lt;=lb;i++)
-       {     
-       while(j&amp;&amp;b[i]!=b[j+1])
-       //此处判断j是否为0的原因在于，如果回跳到第一个字符就不 用再回跳了
-       j=kmp[j];    
-        //通过自己匹配自己来得出每一个点的kmp值 
-       if(b[j+1]==b[i])j++;    
-       kmp[i]=j;
-        //i+1失配后应该如何跳 
-       }
-}
-void kmp(){
-    int j;
-    j=0;//j可以看做表示当前已经匹配完的模式串的最后一位的位置 
-    //如果楼上看不懂，你也可以理解为j表示模式串匹配到第几位了 
-    for(int i=1;i&lt;=la;i++)
-       {
-          while(j&amp;&amp;b[j+1]!=a[i])j=kmp[j];
-          //如果失配 ，那么就不断向回跳，直到可以继续匹配 
-          if (b[j+1]==a[i]) j++;
-          //如果匹配成功，那么对应的模式串位置++ 
-          if (j==lb) 
-          {
-          cout&lt;&lt;i-lb+1&lt;&lt;endl;
-          j=kmp[j];
-          //继续匹配 
-          }
-       }
-}
-</code></p>
+      <h1 id="kmp板子">KMP板子</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">next</span><span class="p">(){</span>
+    <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">lb</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+       <span class="p">{</span>     
+       <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+       <span class="c1">//此处判断j是否为0的原因在于，如果回跳到第一个字符就不 用再回跳了</span>
+       <span class="n">j</span><span class="o">=</span><span class="n">kmp</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>    
+        <span class="c1">//通过自己匹配自己来得出每一个点的kmp值 </span>
+       <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">j</span><span class="o">++</span><span class="p">;</span>    
+       <span class="n">kmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="p">;</span>
+        <span class="c1">//i+1失配后应该如何跳 </span>
+       <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">kmp</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+    <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="c1">//j可以看做表示当前已经匹配完的模式串的最后一位的位置 </span>
+    <span class="c1">//如果楼上看不懂，你也可以理解为j表示模式串匹配到第几位了 </span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">la</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+       <span class="p">{</span>
+          <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&amp;&amp;</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">j</span><span class="o">=</span><span class="n">kmp</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+          <span class="c1">//如果失配 ，那么就不断向回跳，直到可以继续匹配 </span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+          <span class="c1">//如果匹配成功，那么对应的模式串位置++ </span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">lb</span><span class="p">)</span> 
+          <span class="p">{</span>
+          <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">-</span><span class="n">lb</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+          <span class="n">j</span><span class="o">=</span><span class="n">kmp</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+          <span class="c1">//继续匹配 </span>
+          <span class="p">}</span>
+       <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

@@ -15,45 +15,55 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="OI技巧总结及例题 – Haoyu Deng's page">
   <meta name="twitter:description" content="OI技巧总结及例题
-#  动态规划
-#  概率期望
-- [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
-#  斜率优化
-- [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
-其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
-#  计数类问题
-- [] 状态定义为还剩a,b,c,d…
-# 线段覆盖的妙用
-- [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
-# 倍增
-#  倍增优化
-- [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
-# 数学
-- [] nm的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
-- [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
-- [] 表示形如kkkkkk这种数：$k(10^{x+1}-1)/9$
-# 杂七杂八的技巧
-- [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
-- [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
-# 数据结构
-- [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
-- [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
-- [] 
-# 图论
-- [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题 
-- [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
-- [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
-- [] dijkstra的重载（&amp;gt;符号）
+动态规划
+概率期望
 
-struct node{
-	int u;
-	ll c,t;
-	const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
-		if(c==b.c)return t&amp;gt;b.t;
-		return c&amp;gt;b.c;
-	}
+  [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
+    斜率优化
+  
+  [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
+    计数类问题
+  
+  [] 状态定义为还剩a,b,c,d…
+    线段覆盖的妙用
+  
+  [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
+    倍增
+    倍增优化
+  
+  [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
+    数学
+  
+  [] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
+  [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
+  [] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    杂七杂八的技巧
+  
+  [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
+  [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    数据结构
+  
+  [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
+  [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
+  []
+    图论
+  
+  [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题
+  [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
+  [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
+  [] dijkstra的重载（&amp;gt;符号）
+    struct node{
+  int u;
+  ll c,t;
+  const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
+      if(c==b.c)return t&amp;gt;b.t;
+      return c&amp;gt;b.c;
+  }
 };
 priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt; &amp;gt;q;
+    
+  
 
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -61,45 +71,55 @@ priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="OI技巧总结及例题 – Haoyu Deng's page">
   <meta property="og:description" content="OI技巧总结及例题
-#  动态规划
-#  概率期望
-- [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
-#  斜率优化
-- [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
-其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
-#  计数类问题
-- [] 状态定义为还剩a,b,c,d…
-# 线段覆盖的妙用
-- [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
-# 倍增
-#  倍增优化
-- [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
-# 数学
-- [] nm的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
-- [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
-- [] 表示形如kkkkkk这种数：$k(10^{x+1}-1)/9$
-# 杂七杂八的技巧
-- [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
-- [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
-# 数据结构
-- [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
-- [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
-- [] 
-# 图论
-- [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题 
-- [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
-- [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
-- [] dijkstra的重载（&amp;gt;符号）
+动态规划
+概率期望
 
-struct node{
-	int u;
-	ll c,t;
-	const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
-		if(c==b.c)return t&amp;gt;b.t;
-		return c&amp;gt;b.c;
-	}
+  [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题CF398B Painting The Wall$\ \ \ \ \ \ \ $ 题解
+    斜率优化
+  
+  [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
+    计数类问题
+  
+  [] 状态定义为还剩a,b,c,d…
+    线段覆盖的妙用
+  
+  [] 有些题可以转化为线段覆盖的模型。例题引水入城 poj1328
+    倍增
+    倍增优化
+  
+  [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：01 串 题解
+    数学
+  
+  [] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
+  [] 递推逆元 inv[i] = (p-p/i)*inv[p%i]%p
+  [] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    杂七杂八的技巧
+  
+  [] 涉及到2个数组交换后相同的题，有可能是逆序对。例题
+  [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    数据结构
+  
+  [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。例题
+  [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
+  []
+    图论
+  
+  [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 例题
+  [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
+  [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
+  [] dijkstra的重载（&amp;gt;符号）
+    struct node{
+  int u;
+  ll c,t;
+  const bool operator &amp;gt;(const node &amp;amp;b)const{//像这样重载 
+      if(c==b.c)return t&amp;gt;b.t;
+      return c&amp;gt;b.c;
+  }
 };
 priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt; &amp;gt;q;
+    
+  
 
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -270,71 +290,84 @@ priority_queue&amp;lt;node,vector&amp;lt;node&amp;gt;,greater&amp;lt;node&amp;gt
   <article class="post">
 
     <div class="post__content">
-      <h1 id="oi">OI技巧总结及例题</h1>
-<p>#  动态规划
-#  概率期望
-- [] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题<a href="https://www.luogu.org/problem/CF398B">CF398B Painting The Wall</a>$\ \ \ \ \ \ \ $ <a href="http://blog.leanote.com/post/denghaoyu/8a76b7a5a11b">题解</a>
-#  斜率优化
-- [] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
+      <h1 id="oi技巧总结及例题">OI技巧总结及例题</h1>
+<h1 id="动态规划">动态规划</h1>
+<h1 id="概率期望">概率期望</h1>
+<ul>
+  <li>[] 许多概率期望都是倒着推，有一类概率期望的状态定义是还剩i个的期望步数 ，然后递推。例题<a href="https://www.luogu.org/problem/CF398B">CF398B Painting The Wall</a>$\ \ \ \ \ \ \ $ <a href="http://blog.leanote.com/post/denghaoyu/8a76b7a5a11b">题解</a>
+    <h1 id="斜率优化">斜率优化</h1>
+  </li>
+  <li>[] 一般（但不限于）能把转移方程抽象成这样的形式： \(dp[i]=min/max(a*dp[j]^b+k*W[i]*S[j]+c*K[j]^d+f*L[i]^g)\)
 其中$a,b,c,d,f,g,k\in R$ 且 $a,b,c,d,f,g,k\not=0$。
-#  计数类问题
-- [] 状态定义为还剩a,b,c,d…
-# 线段覆盖的妙用
-- [] 有些题可以转化为线段覆盖的模型。例题<a href="http://192.168.110.251/problempage.php?problem_id=1838">引水入城</a> <a href="">poj1328</a>
-# 倍增
-#  倍增优化
-- [] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：<a href="http://192.168.110.251/problempage.php?problem_id=4079">01 串</a> <a href="http://blog.leanote.com/post/denghaoyu/%E3%80%90%E5%80%8D%E5%A2%9E%E3%80%9101%E4%B8%B2">题解</a>
-# 数学
-- [] n<em>m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN
-- [] 递推逆元 <code class="language-plaintext highlighter-rouge">inv[i] = (p-p/i)*inv[p%i]%p</code>
-- [] 表示形如kkkkkk这种数：$k</em>(10^{x+1}-1)/9$
-# 杂七杂八的技巧
-- [] 涉及到2个数组交换后相同的题，有可能是逆序对。<a href="http://192.168.110.251/problempage.php?problem_id=1806">例题</a>
-- [] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
-# 数据结构
-- [] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。<a href="http://192.168.110.251/problempage.php?problem_id=4768">例题</a>
-- [] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。
-- [] 
-# 图论
-- [] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 <a href="http://192.168.110.251/problempage.php?problem_id=3841">例题</a> 
-- [] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑
-- [] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。
-- [] dijkstra的重载（&gt;符号）
-<code class="language-plaintext highlighter-rouge">
-struct node{
-	int u;
-	ll c,t;
-	const bool operator &gt;(const node &amp;b)const{//像这样重载 
-		if(c==b.c)return t&gt;b.t;
-		return c&gt;b.c;
-	}
+    <h1 id="计数类问题">计数类问题</h1>
+  </li>
+  <li>[] 状态定义为还剩a,b,c,d…
+    <h1 id="线段覆盖的妙用">线段覆盖的妙用</h1>
+  </li>
+  <li>[] 有些题可以转化为线段覆盖的模型。例题<a href="http://192.168.110.251/problempage.php?problem_id=1838">引水入城</a> <a href="">poj1328</a>
+    <h1 id="倍增">倍增</h1>
+    <h1 id="倍增优化">倍增优化</h1>
+  </li>
+  <li>[] 倍增不仅可以用来求LCA，还可以用来优化一些不方便维护的东西，比如在有些实在是不好用其他方法(比如数学方法)优化的题。例题：<a href="http://192.168.110.251/problempage.php?problem_id=4079">01 串</a> <a href="http://blog.leanote.com/post/denghaoyu/%E3%80%90%E5%80%8D%E5%A2%9E%E3%80%9101%E4%B8%B2">题解</a>
+    <h1 id="数学">数学</h1>
+  </li>
+  <li>[] n*m的方格从(1,1)走向(n,m)，只能走右或者下的方案数为$C_{n+m-2}^{n-1}$注意MAXN的范围就是m+n而不是MAXN</li>
+  <li>[] 递推逆元 <code class="language-plaintext highlighter-rouge">inv[i] = (p-p/i)*inv[p%i]%p</code></li>
+  <li>[] 表示形如kkkkkk这种数：$k*(10^{x+1}-1)/9$
+    <h1 id="杂七杂八的技巧">杂七杂八的技巧</h1>
+  </li>
+  <li>[] 涉及到2个数组交换后相同的题，有可能是逆序对。<a href="http://192.168.110.251/problempage.php?problem_id=1806">例题</a></li>
+  <li>[] 有些不好处理的线段问题，或许可以拆成2个点来处理，不好处理的矩形问题，或许可以拆成线段再拆成点处理。
+    <h1 id="数据结构">数据结构</h1>
+  </li>
+  <li>[] 有一类题，就是想个稍微高级点的做法，然后就上数据结构优化，说白了就是数据结构优化暴力乱搞。<a href="http://192.168.110.251/problempage.php?problem_id=4768">例题</a></li>
+  <li>[] 对于区间某个数出现次数的问题，可以离线，单独对每一个数进行处理，把这个数的影响全部计算出来。</li>
+  <li>[]
+    <h1 id="图论">图论</h1>
+  </li>
+  <li>[] 对于某些有多个状态的题，可以考虑spfa的时候加一维状态 <a href="http://192.168.110.251/problempage.php?problem_id=3841">例题</a></li>
+  <li>[] 有些最小生成树相关的题，是以kruskal的过程变化来做的，不妨从kruskal的过程方面来考虑</li>
+  <li>[] 如果树上两条链相交，那么一条链一定过另一条链的的最浅的点。</li>
+  <li>[] dijkstra的重载（&gt;符号）
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct node{
+  int u;
+  ll c,t;
+  const bool operator &gt;(const node &amp;b)const{//像这样重载 
+      if(c==b.c)return t&gt;b.t;
+      return c&gt;b.c;
+  }
 };
 priority_queue&lt;node,vector&lt;node&gt;,greater&lt;node&gt; &gt;q;
-</code></p>
+</code></pre></div>    </div>
+  </li>
+</ul>
 
-<h1 id="section">枚举子集</h1>
-<p><code class="language-plaintext highlighter-rouge">cpp
-for(int y = S;y;y = (y-1)&amp;S)
-</code>
-# 应试&amp;答题技巧
-#  检查时应记住的一些事项
-- [] 一些非MAXN、MAXM数组的空间
-- [] 相似的变量名
-- [] long long的一系列操作
-- [] 数组千万清零，尤其是用第0个元素记录长度的，一定清零
-#  关于重构代码
-- [] 在自己思维混乱，在原来代码上修改数次后
-- [] 修改算法或完全推翻算法时应将相关部分重构
-#  考试注意事项
-- [] 不要用size做变量名
-- [] 头文件,比如<code class="language-plaintext highlighter-rouge">cstdio</code>
-- [] 老版本编译器在结构体内定义比较大小运算符重载记得后面加<code class="language-plaintext highlighter-rouge">const</code> 在结构体外定义cmp函数时也要写成<code class="language-plaintext highlighter-rouge">const [name] &amp;[varname]</code>的形式
-- [] m和n变量名不要反
-- [] 保证暴力不要挂
-- [] 卡常暴力超级读优不要写挂
-- [] 循环变量ij不要打反
-- [] 注意模数是多少，不要多打个0，也不要少打个0eg:$10^8+7$
-- [] 对于一类在环上DP的问题，下一个坐标通过取模处理的时候千万要注意是<img src="https://cdn.risingentropy.top/images/posts/db243bdab64417d4300004c.png" alt="title" /></p>
+<h1 id="枚举子集">枚举子集</h1>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">S</span><span class="p">;</span><span class="n">y</span><span class="p">;</span><span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="n">S</span><span class="p">)</span>
+</code></pre></div></div>
+<h1 id="应试答题技巧">应试&amp;答题技巧</h1>
+<h1 id="检查时应记住的一些事项">检查时应记住的一些事项</h1>
+<ul>
+  <li>[] 一些非MAXN、MAXM数组的空间</li>
+  <li>[] 相似的变量名</li>
+  <li>[] long long的一系列操作</li>
+  <li>[] 数组千万清零，尤其是用第0个元素记录长度的，一定清零
+    <h1 id="关于重构代码">关于重构代码</h1>
+  </li>
+  <li>[] 在自己思维混乱，在原来代码上修改数次后</li>
+  <li>[] 修改算法或完全推翻算法时应将相关部分重构
+    <h1 id="考试注意事项">考试注意事项</h1>
+  </li>
+  <li>[] 不要用size做变量名</li>
+  <li>[] 头文件,比如<code class="language-plaintext highlighter-rouge">cstdio</code></li>
+  <li>[] 老版本编译器在结构体内定义比较大小运算符重载记得后面加<code class="language-plaintext highlighter-rouge">const</code> 在结构体外定义cmp函数时也要写成<code class="language-plaintext highlighter-rouge">const [name] &amp;[varname]</code>的形式</li>
+  <li>[] m和n变量名不要反</li>
+  <li>[] 保证暴力不要挂</li>
+  <li>[] 卡常暴力超级读优不要写挂</li>
+  <li>[] 循环变量ij不要打反</li>
+  <li>[] 注意模数是多少，不要多打个0，也不要少打个0eg:$10^8+7$</li>
+  <li>[] 对于一类在环上DP的问题，下一个坐标通过取模处理的时候千万要注意是<img src="https://cdn.risingentropy.top/images/posts/db243bdab64417d4300004c.png" alt="title" /></li>
+</ul>
 
     </div>
 

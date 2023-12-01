@@ -16,26 +16,23 @@
   <meta name="twitter:title" content="AHOI2009同类分布 – Haoyu Deng's page">
   <meta name="twitter:description" content="题面
 给出两个数$a,b$，求出$[a,b]$中各位数字之和能整除原数的数的个数。
-# 输入格式：
+输入格式：
 一行，两个整数$a$和$b$
-# 输出格式：
+输出格式：
 一个整数，表示答案
-# 样例数据
-#  输入样例
-
+样例数据
+输入样例
 10 19
 
-#  输出样例
-
+输出样例
 3
 
-# 解答
+解答
 众所周知，题目越短，题越恶心。
 这题不好想啊，但是题的名称给了提示，就是数学上的剩余系分类。我们枚举最后的数的和，这样我们就可方便转移了。
 定义dp[pos][sum][mod]的含义为第pos位，前面所有数的和为sum，当前的剩余系位mod的方案数，转移嘛，就是dp[pos][sum][mod]-&amp;gt;dp[pos-1][sum+i][(mod*10+1)%MOD]其中MOD是枚举的最后的数字的和。
-关键问题是：我太菜了，想不到枚举MOD这种做法啊？~~实在不行打个表？~~
+关键问题是：我太菜了，想不到枚举MOD这种做法啊？实在不行打个表？
 代码：
-cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 using namespace std;
@@ -80,26 +77,23 @@ int main(){
   <meta property="og:title" content="AHOI2009同类分布 – Haoyu Deng's page">
   <meta property="og:description" content="题面
 给出两个数$a,b$，求出$[a,b]$中各位数字之和能整除原数的数的个数。
-# 输入格式：
+输入格式：
 一行，两个整数$a$和$b$
-# 输出格式：
+输出格式：
 一个整数，表示答案
-# 样例数据
-#  输入样例
-
+样例数据
+输入样例
 10 19
 
-#  输出样例
-
+输出样例
 3
 
-# 解答
+解答
 众所周知，题目越短，题越恶心。
 这题不好想啊，但是题的名称给了提示，就是数学上的剩余系分类。我们枚举最后的数的和，这样我们就可方便转移了。
 定义dp[pos][sum][mod]的含义为第pos位，前面所有数的和为sum，当前的剩余系位mod的方案数，转移嘛，就是dp[pos][sum][mod]-&amp;gt;dp[pos-1][sum+i][(mod*10+1)%MOD]其中MOD是枚举的最后的数字的和。
-关键问题是：我太菜了，想不到枚举MOD这种做法啊？~~实在不行打个表？~~
+关键问题是：我太菜了，想不到枚举MOD这种做法啊？实在不行打个表？
 代码：
-cpp
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
 using namespace std;
@@ -306,65 +300,62 @@ int main(){
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
-<p>给出两个数$a,b$，求出$[a,b]$中各位数字之和能整除原数的数的个数。
-# 输入格式：
-一行，两个整数$a$和$b$
-# 输出格式：
-一个整数，表示答案
-# 样例数据
-#  输入样例
-<code class="language-plaintext highlighter-rouge">
-10 19
-</code>
-#  输出样例
-<code class="language-plaintext highlighter-rouge">
-3
-</code>
-# 解答
-众所周知，题目越短，题越恶心。
+      <h1 id="题面">题面</h1>
+<p>给出两个数$a,b$，求出$[a,b]$中各位数字之和能整除原数的数的个数。</p>
+<h1 id="输入格式">输入格式：</h1>
+<p>一行，两个整数$a$和$b$</p>
+<h1 id="输出格式">输出格式：</h1>
+<p>一个整数，表示答案</p>
+<h1 id="样例数据">样例数据</h1>
+<h1 id="输入样例">输入样例</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 19
+</code></pre></div></div>
+<h1 id="输出样例">输出样例</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>众所周知，题目越短，题越恶心。
 这题不好想啊，但是题的名称给了提示，就是数学上的剩余系分类。我们枚举最后的数的和，这样我们就可方便转移了。
 定义dp[pos][sum][mod]的含义为第pos位，前面所有数的和为sum，当前的剩余系位mod的方案数，转移嘛，就是dp[pos][sum][mod]-&gt;dp[pos-1][sum+i][(mod*10+1)%MOD]其中MOD是枚举的最后的数字的和。
-关键问题是：我太菜了，想不到枚举MOD这种做法啊？~~实在不行打个表？~~
-代码：
-<code class="language-plaintext highlighter-rouge">cpp
-# include &lt;iostream&gt;
+关键问题是：我太菜了，想不到枚举MOD这种做法啊？<del>实在不行打个表？</del>
+代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;
-using namespace std;
-long long dp[20][200][200];
-int num[20],cnt;
-int MOD;
-long long dfs(int pos,int sum,int mod,bool limit){
-	if(pos==0)return mod==0&amp;&amp;sum==MOD;
-	if(!limit&amp;&amp;dp[pos][sum][mod]!=-1)return dp[pos][sum][mod];
-	int mx = limit?num[pos]:9;
-	long long ans = 0;
-	for(int i = 0;i&lt;=mx;i++){
-		ans+=dfs(pos-1,sum+i,(mod*10+i)%MOD,(i==mx)&amp;&amp;limit);
-	}
-	if(!limit)dp[pos][sum][mod] = ans;
-	return ans;
-}
-long long work(long long x){
-	cnt = 0;
-	while(x){
-		num[++cnt] = x%10;x/=10;
-	}
-	long long ans = 0;
-	for(int i = 1;i&lt;=9*cnt;i++){
-		memset(dp,-1,sizeof(dp));
-		MOD = i;
-		ans += dfs(cnt,0,0,true);
-	}
-	return ans;
-}
-int main(){
-	memset(dp,-1,sizeof(dp));
-	long long x,y;cin&gt;&gt;x&gt;&gt;y;
-	cout&lt;&lt;work(y)-work(x-1);
-	return 0;
-}
-</code></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="n">dp</span><span class="p">[</span><span class="mi">20</span><span class="p">][</span><span class="mi">200</span><span class="p">][</span><span class="mi">200</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">num</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span><span class="n">cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">MOD</span><span class="p">;</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">sum</span><span class="p">,</span><span class="kt">int</span> <span class="n">mod</span><span class="p">,</span><span class="kt">bool</span> <span class="n">limit</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span> <span class="n">mod</span><span class="o">==</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">sum</span><span class="o">==</span><span class="n">MOD</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">limit</span><span class="o">&amp;&amp;</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">sum</span><span class="p">][</span><span class="n">mod</span><span class="p">]</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">sum</span><span class="p">][</span><span class="n">mod</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">limit</span><span class="o">?</span><span class="n">num</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">:</span><span class="mi">9</span><span class="p">;</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">mx</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">ans</span><span class="o">+=</span><span class="n">dfs</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">sum</span><span class="o">+</span><span class="n">i</span><span class="p">,(</span><span class="n">mod</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="n">MOD</span><span class="p">,(</span><span class="n">i</span><span class="o">==</span><span class="n">mx</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="n">limit</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">limit</span><span class="p">)</span><span class="n">dp</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="n">sum</span><span class="p">][</span><span class="n">mod</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">long</span> <span class="kt">long</span> <span class="nf">work</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">){</span>
+	<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+		<span class="n">num</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span><span class="n">x</span><span class="o">/=</span><span class="mi">10</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">9</span><span class="o">*</span><span class="n">cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+		<span class="n">MOD</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+		<span class="n">ans</span> <span class="o">+=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">memset</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dp</span><span class="p">));</span>
+	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="p">;</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">work</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">work</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

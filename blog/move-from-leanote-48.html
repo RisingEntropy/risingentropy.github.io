@@ -192,10 +192,10 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">简述</h1>
+      <h1 id="简述">简述</h1>
 <p>康托展开是一个全排列到一个自然数的双射，常用于构建hash表时的空间压缩。设有n个数（1，2，3，4,…,n），可以有组成不同(n!种)的排列组合，康托展开表示的就是是当前排列组合在n个不同元素的全排列中的名次。</p>
 
-<h1 id="section-1">原理</h1>
+<h1 id="原理">原理</h1>
 <p>X=a[n]<em>(n-1)!+a[n-1]</em>(n-2)!+…+a[i]<em>(i-1)!+…+a[1]</em>0! 
 其中, a[i]为整数，并且0 &lt;= a[i] &lt;= i, 0 &lt;= i &lt; n, 表示当前未出现的的元素中排第几个，这就是康托展开。
 例如有3个数（1，2，3），则其排列组合及其相应的康托展开值如下：
@@ -209,9 +209,9 @@
 比如其中的 231：</p>
 
 <p>想要计算排在它前面的排列组合数目（123，132，213），则可以转化为计算算比首位小及小于2的所有排列「1 * 2！」，首位相等及为2第二位小于3的所有排列「1<em>1！」，前两位相等及为23第三位小于1的所有排列（0</em>0！）的和即可，康托展开为：1<em>2！+1</em>1+0*0=3。
-所以小于231的组合有3个，所以231的名次是4。
-# 康托展开
-再举个例子说明。 
+所以小于231的组合有3个，所以231的名次是4。</p>
+<h1 id="康托展开">康托展开</h1>
+<p>再举个例子说明。 
 在（1，2，3，4，5）5个数的排列组合中，计算 34152的康托展开值。</p>
 
 <p>首位是3，则小于3的数有两个，为1和2，a[5]=2，则首位小于3的所有排列组合为 a[0]*(5-1)!
@@ -225,54 +225,54 @@ X = 2 * 4! + 2 * 3! + 0 * 2! + 1 * 1! + 0 * 0!
 = 61 
 仔细来说，在它后面比他小的数的个数乘以它所在位置的阶乘。
 所以比 34152 小的组合有61个，即34152是排第62。
-代码实现
-<code class="language-plaintext highlighter-rouge">cpp
-static const int FAC[] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};   // 阶乘
-int cantor(int *a, int n)
-{
-    int x = 0;
-    for (int i = 0; i &lt; n; ++i) {
-        int smaller = 0;  // 在当前位之后小于其的个数
-        for (int j = i + 1; j &lt; n; ++j) {
-            if (a[j] &lt; a[i])
-                smaller++;
-        }
-        x += FAC[n - i - 1] * smaller; // 康托展开累加
-    }
-    return x;  // 康托展开值
-}
-</code>
-&gt;tips: 这里主要为了讲解康托展开的思路，实现的算法复杂度为O(n^2)，实际当n很大时，内层循环计算在当前位之后小于当前位的个数可以用 线段树来处理计算，而不用每次都遍历，这样复杂度可以降为O(nlogn)。
-# 逆康托展开
-一开始已经提过了，康托展开是一个全排列到一个自然数的双射，因此是可逆的。即对于上述例子，在（1，2，3，4，5）给出61可以算出起排列组合为 34152。由上述的计算过程可以容易的逆推回来，具体过程如下：</p>
+代码实现</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">FAC</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">720</span><span class="p">,</span> <span class="mi">5040</span><span class="p">,</span> <span class="mi">40320</span><span class="p">,</span> <span class="mi">362880</span><span class="p">};</span>   <span class="c1">// 阶乘</span>
+<span class="kt">int</span> <span class="nf">cantor</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">smaller</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 在当前位之后小于其的个数</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">smaller</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">FAC</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">smaller</span><span class="p">;</span> <span class="c1">// 康托展开累加</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>  <span class="c1">// 康托展开值</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>tips: 这里主要为了讲解康托展开的思路，实现的算法复杂度为O(n^2)，实际当n很大时，内层循环计算在当前位之后小于当前位的个数可以用 线段树来处理计算，而不用每次都遍历，这样复杂度可以降为O(nlogn)。</p>
+  <h1 id="逆康托展开">逆康托展开</h1>
+  <p>一开始已经提过了，康托展开是一个全排列到一个自然数的双射，因此是可逆的。即对于上述例子，在（1，2，3，4，5）给出61可以算出起排列组合为 34152。由上述的计算过程可以容易的逆推回来，具体过程如下：</p>
+</blockquote>
 
 <p>用 61 / 4! = 2余13，说明a[5]=2,说明比首位小的数有2个，所以首位为3。
 用 13 / 3! = 2余1，说明a[4]=2，说明在第二位之后小于第二位的数有2个，所以第二位为4。
 用 1 / 2! = 0余1，说明a[3]=0，说明在第三位之后没有小于第三位的数，所以第三位为1。
 用 1 / 1! = 1余0，说明a[2]=1，说明在第二位之后小于第四位的数有1个，所以第四位为5。
 最后一位自然就是剩下的数2啦。
-通过以上分析，所求排列组合为 34152。代码实现：
-```cpp
-static const int FAC[] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};   // 阶乘</p>
+通过以上分析，所求排列组合为 34152。代码实现：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">FAC</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">720</span><span class="p">,</span> <span class="mi">5040</span><span class="p">,</span> <span class="mi">40320</span><span class="p">,</span> <span class="mi">362880</span><span class="p">};</span>   <span class="c1">// 阶乘</span>
 
-<p>//康托展开逆运算
-void decantor(int x, int n)
-{
-    vector<int> v;  // 存放当前可选数
-    vector<int> a;  // 所求排列组合
-    for(int i=1;i&lt;=n;i++)
-        v.push_back(i);
-    for(int i=m;i&gt;=1;i--)
-    {
-        int r = x % FAC[i-1];
-        int t = x / FAC[i-1];
-        x = r;
-        sort(v.begin(),v.end());// 从小到大排序 
-        a.push_back(v[t]);      // 剩余数里第t+1个数为当前位
-        v.erase(v.begin()+t);   // 移除选做当前位的数
-    }
-}
-```</int></int></p>
+<span class="c1">//康托展开逆运算</span>
+<span class="kt">void</span> <span class="nf">decantor</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>  <span class="c1">// 存放当前可选数</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">;</span>  <span class="c1">// 所求排列组合</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">FAC</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">FAC</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="c1">// 从小到大排序 </span>
+        <span class="n">a</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">]);</span>      <span class="c1">// 剩余数里第t+1个数为当前位</span>
+        <span class="n">v</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="o">+</span><span class="n">t</span><span class="p">);</span>   <span class="c1">// 移除选做当前位的数</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
     </div>
 

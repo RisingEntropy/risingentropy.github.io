@@ -17,7 +17,7 @@
   <meta name="twitter:description" content="题面
 有一个无限大的矩形，初始时你在左上角（即第一行第一列），每次你都可以选择一个右下方格子，并瞬移过去（如从下图中的红色格子能直接瞬移到蓝色格子），求到第n行第m列的格子有几种方案，答案对1000000007取模。 
 
-#  Input
+Input
 多组测试数据。
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -27,7 +27,7 @@
   <meta property="og:description" content="题面
 有一个无限大的矩形，初始时你在左上角（即第一行第一列），每次你都可以选择一个右下方格子，并瞬移过去（如从下图中的红色格子能直接瞬移到蓝色格子），求到第n行第m列的格子有几种方案，答案对1000000007取模。 
 
-#  Input
+Input
 多组测试数据。
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -198,69 +198,66 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="section">题面</h1>
+      <h1 id="题面">题面</h1>
 <p>有一个无限大的矩形，初始时你在左上角（即第一行第一列），每次你都可以选择一个右下方格子，并瞬移过去（如从下图中的红色格子能直接瞬移到蓝色格子），求到第n行第m列的格子有几种方案，答案对1000000007取模。 
-<img src="https://cdn.risingentropy.top/images/posts/d5e8cd2ab644143fe007312.png" alt="图片标题" />
-#  Input
-多组测试数据。</p>
+<img src="https://cdn.risingentropy.top/images/posts/d5e8cd2ab644143fe007312.png" alt="图片标题" /></p>
+<h1 id="input">Input</h1>
+<p>多组测试数据。</p>
 
-<p>两个整数n,m(2≤n,m≤100000) 
-#  Output
-一个整数表示答案
-#  Sample Input
-<code class="language-plaintext highlighter-rouge">
-4 5
-</code>
-#  Sample Output
-<code class="language-plaintext highlighter-rouge">
-10
-</code>
-# 解答
-一道组合数学的题，考虑枚举步数，然后计算。考虑竖着，一共有n行，需要花n-1步，然后在每一步之间插个板，一共可以插入n-2个板子，所以答案就是\(n-2 \choose i-1\)
+<p>两个整数n,m(2≤n,m≤100000)</p>
+<h1 id="output">Output</h1>
+<p>一个整数表示答案</p>
+<h1 id="sample-input">Sample Input</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 5
+</code></pre></div></div>
+<h1 id="sample-output">Sample Output</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
+</code></pre></div></div>
+<h1 id="解答">解答</h1>
+<p>一道组合数学的题，考虑枚举步数，然后计算。考虑竖着，一共有n行，需要花n-1步，然后在每一步之间插个板，一共可以插入n-2个板子，所以答案就是\(n-2 \choose i-1\)
 同样的对于m列也可以这么考虑，那么答案就是\(m-2\choose i-1\)
 所以统计总的答案就是\(\sum\limits_{i=1}^{n-1}{n-2\choose i-1}\times {m-2\choose i-1}\)
-当然也可以化简为~~我不知道这么化出来的~~
+当然也可以化简为<del>我不知道这么化出来的</del>
 \(m+n-4\choose n-2\)
-现行处理阶乘和阶乘逆元。$O(1)$计算组合数就好了。代码：
-```cpp
-# include <iostream>
-# include <cstring>
-# include <cstdio>
+现行处理阶乘和阶乘逆元。$O(1)$计算组合数就好了。代码：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
+# include &lt;cstring&gt;
+# include &lt;cstdio&gt;
 # define int long long
-using namespace std;
-const int MAXN = (int)2e5+10;
-const int mod = 1000000007;
-int fac[MAXN],rev[MAXN];
-int n,m;
-int fp(int b,int p){
-	int ans = 1;
-	while(p){
-		if(p&amp;1)ans = ans*b%mod;
-		b = b*b%mod;
-		p&gt;&gt;=1;
-	}
-	return ans;
-}
-void init(){
-	fac[0] = 1;
-	for(int i = 1;i&lt;MAXN;i++)fac[i] = fac[i-1]*i%mod;
-	rev[MAXN-1] = fp(fac[MAXN-1],mod-2);
-	for(int i = MAXN-2;i&gt;=0;i--)rev[i] = (rev[i+1]*(i+1))%mod;
-}
-int C(int n,int m){return (fac[m]*rev[n]%mod)*rev[m-n]%mod;}
-signed main(){
-	init();
-	int n,m;
-	while(scanf("%lld%lld",&amp;n,&amp;m)!=EOF){
-		long long ans = 0;
-		if(n&gt;m)swap(n,m);
-		for(int i = 1;i&lt;=n-1;i++)ans = (ans+C(i-1,n-2)*C(i-1,m-2))%mod;
-		printf("%lld\n",ans);
-	}
-	return 0;
-}</cstdio></cstring></iostream></p>
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="mf">2e5</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">fac</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">rev</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">fp</span><span class="p">(</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="n">p</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">p</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
+	<span class="n">fac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">fac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fac</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+	<span class="n">rev</span><span class="p">[</span><span class="n">MAXN</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">MAXN</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">mod</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">MAXN</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rev</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">C</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">m</span><span class="p">){</span><span class="k">return</span> <span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">*</span><span class="n">rev</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">)</span><span class="o">*</span><span class="n">rev</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="n">n</span><span class="p">]</span><span class="o">%</span><span class="n">mod</span><span class="p">;}</span>
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">(){</span>
+	<span class="n">init</span><span class="p">();</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">scanf</span><span class="p">(</span><span class="s">"%lld%lld"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span><span class="o">!=</span><span class="n">EOF</span><span class="p">){</span>
+		<span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="n">m</span><span class="p">)</span><span class="n">swap</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span><span class="o">+</span><span class="n">C</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span><span class="o">%</span><span class="n">mod</span><span class="p">;</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-<p>```</p>
+</code></pre></div></div>
 
     </div>
 
