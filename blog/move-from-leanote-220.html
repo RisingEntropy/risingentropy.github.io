@@ -413,19 +413,19 @@ signed main(){
 <h1 id="解答">解答</h1>
 <p>神仙状态。
 画画图可以发现有如下两种可能：
-<img src="/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 (此时5是根)
-<img src="/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 (此时1是根)
 然后就是推到状态<del>看题解</del>
 我们用$f[i][j]$表示在$i$的子树中距离$i$的长度为$j$的点有多少个，那么显然，$f[i][j] = \sum f[t][j-1]$。
 另$g[i][j]$为在以$i$为根的子树中，$x$,$y$ 到其$LCA(x,y)$的距离为$d$，$i$到$LCA(x,y)$的距离为$d-i$的这样的点对$(x,y)$有多少对。那么<del>显然</del>$g[i][j] = \sum g[t][j+1]$关于为什么$g$是这样转移，我们可以用下图解释
-<img src="/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 图中，g[2][0] 表示的点有2个，那么￥g[2][0] = 2￥，那么因为$2-&gt;1=1$，所以$1$号点的状态就是$g[1][d-(j-1)]=g[1][d-j+1]$(向上挪了一步，所以距离要减1）。
 所以他是这么转移的。
 好，现在我们考虑如何统计答案。
 对于一个点$i$显然。$g[i][0]$就是答案的一部分，因为此时$i$已经是LCA了。然后我们新加入一个子节点是，对答案的贡献通过乘法原理可以计算的到是$g[i][j]*f[t][j-1]$至于为什么，可以看一下下面这个图
-<img src="/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/d38067bab64414b8a006248.png" alt="图片标题" />
 一下子就明白了，6 2 3 构成3个符合条件的的hotel。，我们发现如果可以从子树中把f和j继承过来就好了，然后跑一波长链剖分。(如果不会可以看这篇<a href="https://www.cnblogs.com/cjyyb/p/9479258.html">博客</a>，如果不会指针，可以看zxyoi神仙的<a href="https://blog.csdn.net/zxyoi_dreamer/article/details/84828291">博客</a>)
 注意一下代码细节</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;

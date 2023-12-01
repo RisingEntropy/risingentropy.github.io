@@ -204,7 +204,7 @@
 </ol>
 
 <p>则称之为网络流图，记为G = (V, E, C)
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 <h1 id="可行流">可行流</h1>
 <p>其实就是每一条弧上面的流量$F_{i,j}$都小于这条路的容量。性质如下</p>
 
@@ -247,7 +247,7 @@
 <h1 id="建立后向弧">建立后向弧</h1>
 <p>后向弧为算法纠正自己所犯的错误提供了可能性，它允许算法取消先前的错误的行为。
 图示
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 
 <p>图二中，有些方向相反的边就是后向弧</p>
 
@@ -257,15 +257,15 @@
   <h1 id="割">割</h1>
   <p>G = (V, E, C)是已知的网络流图，设U是V的一个子集，W =V\U，满足S ∈ U，T∈W。即U、W把V分成两个不相交的集合，且源点和汇点分属不同的集合(其实就是把一个网络流图分成2部分，源点和汇点分别属于不同集合就完了)对于弧尾在U，弧头在W的弧所构成的集合称之为割切，用（U，W）表示。把割切（U，W）中所有弧的容量之和叫做此割切的容量，记为C（U，W），即：
 \(C(U,V) = \sum_{i\in U\ \ j\in V}C_{i,j}\)
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 </blockquote>
 
 <p>图中令$U = {S, V1}$，则$W = {V2, V3, V4, T}$，那么，$C(U, W) = &lt;S, V2&gt; + &lt;V1, V2&gt; + &lt;V1, V3&gt;+&lt;V1, V4&gt;=8+4+4+1=17$</p>
 
 <p>要理解割，网上找的图<a href="https://blog.csdn.net/a519781181/article/details/51908303">装逼之二 最小割与最大流（mincut &amp; maxflow）</a>
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
 <h1 id="增广路算法求最大流">增广路算法求最大流</h1>
 <h1 id="几个定理">几个定理</h1>
 
@@ -297,9 +297,9 @@
   <p>就是指不考虑反向弧时的极大流。对应到程序就是从起点开始在层次图上DFS，每找到一条就增广。</p>
 </blockquote>
 
-<p><img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
+<p><img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 
-<p><img src="/images/posts/c4aae12ab644108f0000711.png" alt="title" />
+<p><img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" />
 eg板子题：<a href="https://www.luogu.org/problemnew/show/P3376">水谷3376</a></p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;algorithm&gt;
@@ -392,7 +392,7 @@ eg板子题：<a href="https://www.luogu.org/problemnew/show/P3376">水谷3376</
 <h1 id="二分图的网络流模型建模">二分图的网络流模型建模</h1>
 <p>eg<a href="http://192.168.110.251/problempage.php?problem_id=2303">「网络流 24 题」搭配飞行员</a>
 把所有正飞行员全部连接到0号点上，容量为1，副飞行员连到n+1号点上，容量为1，求个最大流就行了。
-<img src="/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;cstring&gt;
 # include &lt;queue&gt;

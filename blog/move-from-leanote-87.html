@@ -264,12 +264,12 @@
 </blockquote>
 
 <p>A*：
-<img src="/images/posts/bd997dfab64411f74005998.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/bd997dfab64411f74005998.png" alt="图片标题" />
 BFS:
-<img src="/images/posts/bd997dfab64411f74005998.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/bd997dfab64411f74005998.png" alt="图片标题" />
 用$h(x)$表示走到当前点的权值和。$g(x)$表示估价函数。关于$h(x)$的计算很简单，就是一路走，一路加就行。但是$g(x)$怎么计算呢？建立反图后，我们可以事先跑一趟<del>spfa它已经死了</del>  <del>dijkstra它太慢了</del> 你喜欢的最短路径算法，计算出点$i$到点$b$的最短距离$dis[i]$，作为估价函数。然后把每个点放进<strong>小根堆</strong>里面，就是用堆代替BFS里面的队列，然后每次取出权值最小的点来跑，每次跑到点B以后就记录一下。如果到达k次，说明已经是第k短路了，那么直接输出。<del>下图是感性理解</del></p>
 
-<p><img src="/images/posts/bd997dfab64411f74005998.png" alt="图片标题" /></p>
+<p><img src="https://cdn.risingentropy.top/images/posts/bd997dfab64411f74005998.png" alt="图片标题" /></p>
 
 <p><del>忽略灵魂画手</del></p>
 

@@ -335,11 +335,11 @@ int main(){
 <p>eg1 :第k大的数woj 1903
 题意：n个数，m次查询，查询任意区间第k大。
 首先我们发现这个题满足区间减法。如果[1,l-1]中有k个比x小的数，[1,r]中有k2个比x小的数，那么[l,r]中一共有k2-k个数比x小。基本思想就是我们做n个权值线段树，然后树相减。什么情况下可以相减呢？他们必须是同构的(就是长得一样).抄几张图
-<img src="/images/posts/c764f92ab644159370026c7.png" alt="title" />
-<img src="/images/posts/c764f92ab644159370026c7.png" alt="title" />
-<img src="/images/posts/c764f92ab644159370026c7.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="title" />
 但是直接建立n颗树的话会炸空间，于是乎只好利用历史信息来做了。如下图
-<img src="/images/posts/c764f92ab644159370026c7.png" alt="1" />
+<img src="https://cdn.risingentropy.top/images/posts/c764f92ab644159370026c7.png" alt="1" />
 以下是抄的代码(回去有空写自己的代码)</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;algorithm&gt;

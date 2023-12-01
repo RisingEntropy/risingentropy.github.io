@@ -217,7 +217,7 @@
 （3）100%的数据2&lt;=a,b&lt;=1000,n&lt;=a,n&lt;=b,n&lt;=100</p>
 <h1 id="解答">解答</h1>
 <p>先用单调队列处理每一行，用$X[i][j]$表示第$i$行，以$j$列开始，长度为$n$的$1\times n$的矩形的最大值。用$x[i][j]$表示第$i$行，以$j$列开始，长度为$n$的$1\times n$的矩形的最小值这样每一行都处理一下。这样以后，再竖着来对$X$和$x$做，就可以做出每一个方块的最大最小值，然后暴力枚举，好了。解释如下图
-<img src="/images/posts/c46b112ab6441132c001d18.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/c46b112ab6441132c001d18.png" alt="图片标题" />
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;iostream&gt;

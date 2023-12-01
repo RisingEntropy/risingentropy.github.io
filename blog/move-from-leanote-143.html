@@ -318,7 +318,7 @@
 N&lt;=100000</p>
 <h1 id="解答-1">解答</h1>
 <p>其实考试的时候算是想到半个正解了的吧。求出根节点到每个节点的深度dep[x],再求出叶节点到每个节点的深度dep2<a href="有分叉的节点，就取各子节点的最小值">x</a>，因为要拦截，所以对于每个点必须要$dep2[x]&gt;dep[x]$。你可看下图，去了最小之后，就相当于把一些分枝砍掉了。然后对于一个节点要防到，所以在假设对方不存在的情况下，必须保卫者先走到才行。所以从上到下搜对于dep2[x]&lt;=dep[x]的点，需要一个保卫，就ans++就行了
-<img src="/images/posts/c4c05a6ab644106f50012fb.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/c4c05a6ab644106f50012fb.png" alt="title" /></p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;cstring&gt;
 </span><span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>

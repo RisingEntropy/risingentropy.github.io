@@ -211,24 +211,24 @@
   </li>
 </ol>
 
-<p><img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<p><img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="矩阵变换">矩阵变换</h1>
 <h1 id="平移变换">平移变换</h1>
 <p>平移变换就是变换前后像素的水平及垂直坐标发生了变化。以矩阵的形式表示平移前后的像素关系是为：
 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}1\ \ 0 \ \ \ \Delta x \0\ \ \  1\ \  \Delta y\0\ \ \ \  0\ \ \   1\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}=\begin{bmatrix}x+\Delta x\y+\Delta y\1\end{bmatrix}$</p>
 
 <p>效果如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="镜像变换">镜像变换</h1>
 <p>镜像变换分为水平镜像和垂直镜像。水平镜像是以$y$轴为对称轴；垂直镜像是以$x$轴为对称轴。
 水平镜像变换公式如下：
 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}-1\ \ 0 \ \ \ \omega \0\ \ \  1\ \  0\0\ \ \ \  0\ \ \   1\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}=\begin{bmatrix}-x+\omega\y\1\end{bmatrix}$其中$\omega$的意义是图像对称过后其进行平移一段距离，防止其坐标超出显示区域。
 效果如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
 垂直镜像变换公式:
 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}1\ \ 0 \ \ \ 0\0\ \  -1\ \  h\0\ \ \ \  0\ \ \   1\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}=\begin{bmatrix}x\-y+h\1\end{bmatrix}$其中$h$的意义是图像对称过后其进行平移一段距离，防止其坐标超出显示区域。
 效果如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="旋转变换">旋转变换</h1>
 <p>旋转变换是指图像绕某一点以逆时针或者顺时针旋转一定的角度，长按逆时针方向旋转。为了得到旋转后的新坐标，要经过三个步骤：</p>
 <blockquote>
@@ -244,15 +244,15 @@ $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}cos\theta\ \ -sin\thet
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat_moudle</span> <span class="o">=</span> <span class="n">mat_translate</span><span class="o">*</span><span class="n">mat_rotate</span><span class="p">;</span>
 </code></pre></div></div>
 <p>效果如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="缩放变换">缩放变换</h1>
 <p>图像的缩放指的是通过删掉或者增加像素来改变图像的尺寸。当图像缩小时，图像会变得更清晰；当图像放大时，图像质量会有所下降，因此需要插值。插值算法不在本文讨论范围内，故本文不对变换过后的图像做插值处理。
 缩放变换矩阵为：
 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}\alpha\ \ 0 \ \ \ 0\0\ \   \beta\ \ \ 0\0\ \ \    0\ \   1\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}=\begin{bmatrix}\alpha x\\beta y\1\end{bmatrix}$
 当$\alpha=\beta$时，表示等比缩放，$\alpha，\beta&gt;1$时表示放大，反之表示缩小。需要特别注意的是，放大会产生空白像素，若不做插值处理，图像质量会受到极大影响。
 效果如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="使用矩阵的意义与优势">使用矩阵的意义与优势</h1>
 <p>在做此次研讨以前，我一直有个疑惑：为什么非要用矩阵，上述变换得到的坐标矩阵我不需要矩阵运算也能得到，也可以得到相同的效果。但是不妨思考一个问题：对一张图像先平移，后旋转，再放大，最后镜像对称处理，我们需要做多少次运算？如果不使用矩阵，仅仅平凡处理，上一次变换的结果作为下一次变换的输入，4次变换需要对这个图像的每个像素做4次计算，即$4<em>width</em>height$次运算(即k次变换的时间复杂度为$\Theta(k<em>m</em>n)$)，且过程极其容易出错，代码冗繁。若使用矩阵，我们可以把变换过程和结果分离。先对变换过程处理，处理完了最后体现到变换结果上去，实现极为简单，只需要矩阵乘法即可。如上述4次变换，4次矩阵相乘计算次数为$4<em>3</em>3<em>3=108$,则总计算次数为$108+width</em>height$(即k次变换的时间复杂度为$\Theta(k+m*n)$)，计算次数大大减少，且变换过程越复杂，计算次数减少越明显。如示例程序中的左右镜像放大，左右镜像平移和平移放大操作，其代码实现仅仅是几个矩阵相乘即可完成，极其简单且灵活。</p>
 
@@ -268,11 +268,11 @@ x’=ax+by+c\y’=cx+dy+e
 <h1 id="补充矩阵的控制点变换">补充：矩阵的控制点变换</h1>
 <p>图像的控制点变换是指根据输入和输出的图像的控制点的位置信息，将图像进行变换。利用控制点变换可以进行图像的变形处理，以达到某种特殊效果。通俗地讲，就是根据变换前后3个对应的点的坐标关系，解出整个变换矩阵。（如下是克拉默法则解法）
 以三角形区域变换为例：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
 坐标变换矩阵如下：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" />
 求解参数：
-<img src="/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>
 <h1 id="参考资料">参考资料</h1>
 
 <p>数字图像处理原理与实现方法(全红艳 曹桂涛) 机械工业出版社 2014年1月第1版第1次印刷</p>

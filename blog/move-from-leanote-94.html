@@ -197,7 +197,7 @@
 <p>如图：有n个重物，每个重物系在一条足够长的绳子上。每条绳子自上而下穿过桌面上的洞，然后系在一起。图中X处就是公共的绳结。假设绳子是完全弹性的（不会造成能量损失），桌子足够高（因而重物不会垂到地上），且忽略所有的摩擦。
 问绳结X最终平衡于何处。</p>
 
-<p><img src="/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
+<p><img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
 <p>注意：桌面上的洞都比绳结X小得多，所以即使某个重物特别重，绳结X也不可能穿过桌面上的洞掉下来，最多是卡在某个洞口处。</p>
 <h1 id="输入输出格式">输入输出格式</h1>
@@ -241,15 +241,15 @@ AC算法传说中的模拟退火算法！
 <h1 id="为什么sa可能计算出最优解">为什么SA可能计算出最优解</h1>
 <p>以下仅为个人理解
 我们把求解的过程比作在函数上找极点，如图
-<img src="/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
 <p>如果我们当前在一个解，然后我们通过随机数，获得一个变化幅度，获得一个新解，如果这个解更优，那当然是选择它呀！但是如果这个解不是更优呢？对于贪心算法，那就是选择放弃它。但是从图中可以看出，当前局部最优解可能不是全局最优解，为了找到全局最优解，我们还是得以一定概率接受它。但是如果它就是全局最优解呢？岂不是就走出去了吗？别担心！我们还会走回来的，并且随着温度的降低，接受一个更劣解的概率会越来越小！</p>
 
 <p>借用<a href="https://m-sea.blog.luogu.org/qian-tan-SA">洛谷日报</a>的几张图方便理解：
-<img src="/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
 <p>但是也有它不适应的情况：解的变化随着解空间变大得太厉害了：
-<img src="/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
+<img src="https://cdn.risingentropy.top/images/posts/bdc025eab64410e42003829.png" alt="图片标题" /></p>
 
 <p>所以模拟退火仅限于函数峰不是特别多的情况<del>(单调函数和单峰函数用二分三分啊，为什么要用SA?)</del>
 对于函数峰特别多的情况，分块跑SA再合并</p>

@@ -233,7 +233,7 @@
 <p>说明
 样例解释
 【样例解释】
-<img src="/images/posts/c39fe3bab64416ed80019e1.png" alt="enter image description here" />
+<img src="https://cdn.risingentropy.top/images/posts/c39fe3bab64416ed80019e1.png" alt="enter image description here" />
 如图所示，共有五个结点。结点①为根结点，即现场直播站，②为一个中转站，③④⑤为用户端，共M个，编号从N-M+1到N，他们为观看比 赛分别准备的钱数为3、4、2，从结点①可以传送信号到结点②，费用为2，也可以传送信号到结点⑤，费用为3（第二行数据所示），从结点②可以传输信号到结点③，费用为2。也可传输信号到结点④，费用为3（第三行数据所示），如果要让所有用户（③④⑤）都能看上比赛，则信号传输的总费用为： 2+3+2+3=10，大于用户愿意支付的总费用3+4+2=9，有线电视网就亏本了，而只让③④两个用户看比赛就不亏本了。</p>
 <h1 id="解答">解答</h1>
 <p>骚题一道。我们从答案可行性角度来想。我们用<code class="language-plaintext highlighter-rouge">dp[i][j]</code>表示从<code class="language-plaintext highlighter-rouge">i</code>个节点开始，选择<code class="language-plaintext highlighter-rouge">j</code>个节点获得的最大利润。这个利润是什么意思呢？就是总价值减去成本。那么状态转移方程式就是\(dp[i][j] = max(dp[i][j],dp[i][j-k]+dp[t][k]-w[edge])\)

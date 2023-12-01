@@ -242,7 +242,7 @@ Yes
 <p>对于100%的数据，N ≤ 200</p>
 <h1 id="解答">解答</h1>
 <p>对于这种题，套路！横纵坐标连边。然后我们发现，如果一种情况能够移动过去，当且仅当任意一行和一列中1的个数为1.如下图所示
-<img src="/images/posts/5c4aa9a7ab644106f500063c.png" alt="title" />
+<img src="https://cdn.risingentropy.top/images/posts/5c4aa9a7ab644106f500063c.png" alt="title" />
 那么x和y连边了以后，做匹配。匹配出n组，则有解。为什么呢？因为对于一个$y$它只能与一个$x$连接。如果某个$y$与多个$x$连接了以后，必定有个$x$找不到$y$<del>女朋友</del>，所以匹配数一定为$n$
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;

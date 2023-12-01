@@ -211,7 +211,7 @@ B	 	 	a	b	a	b
 
 <p>我们定义next[i]表示除去第i个字符，在从第1个字符到第（i-1）个字符组成的字符串中最长的相同前缀和后缀的长度。（比如说一个字符串abcab，那它最长的相同前缀和后缀的长度就为2，即为ab）
 那么每当失配的时候，我们就把B的这一位移到这一位的next指向的那个位置，如下图：
-<img src="/images/posts/bda8e11ab644129e20019dc.png" alt="图片标题" />
+<img src="https://cdn.risingentropy.top/images/posts/bda8e11ab644129e20019dc.png" alt="图片标题" />
 这样的话，很多操作都被省去了，时间复杂度就会大大地得到优化</p>
 
 <p>代码如下：</p>
