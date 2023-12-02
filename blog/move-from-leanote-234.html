@@ -236,7 +236,7 @@ Windy 在有向图中迷路了。 该有向图有 N 个节点，Windy 从节点 
 <h1 id="解答">解答</h1>
 <p>其实很简单的一道题，只需要你做过<a href="https://www.luogu.org/problem/P2886">牛继电器</a>，发现边权不大，拆点就好了额。
 解答一下下为什么可以用矩阵快速幂来代替floyd计算经过k条边的最短路？
-首先假设我们有两个矩阵$A$和$B$分别表示经过$x$和$y$条边的最短路的长度。那么要得到经过$x+y$条边的最短路，显然是：$min\{A[i][k]+B[k][j]\}$，然后最开始我们可以轻易计算出经过1条边的最短路，那么是不是计算k次就可得到答案了呢？于是乎矩阵快速幂一下就好了。Orz
+首先假设我们有两个矩阵$A$和$B$分别表示经过$x$和$y$条边的最短路的长度。那么要得到经过$x+y$条边的最短路，显然是：$min{A[i][k]+B[k][j]}$，然后最开始我们可以轻易计算出经过1条边的最短路，那么是不是计算k次就可得到答案了呢？于是乎矩阵快速幂一下就好了。Orz
 代码:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;

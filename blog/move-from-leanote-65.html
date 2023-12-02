@@ -463,7 +463,7 @@ y=y1-a</em>t;
 <h1 id="线性同余方程">线性同余方程</h1>
 <p>定义1:给定整数a,b,m，求一个整数x满足$a\times b \equiv b(mod\ m)$，因为未知数的次数为1，所以我们称之为一次同余方程，也称线性同余方程。</p>
 
-<p>$a*x\equiv b(mod\ m)$ 等价于a<em>x-b是m的倍数，不妨设为-y倍。于是乎方程就可以被改写成a</em>x+m<em>y = b。然后只需要接不定方程a</em>x+m*y = b。</p>
+<p>$a<em>x\equiv b(mod\ m)$ 等价于a</em>x-b是m的倍数，不妨设为-y倍。于是乎方程就可以被改写成a<em>x+m</em>y = b。然后只需要接不定方程a<em>x+m</em>y = b。</p>
 <h1 id="一个定理">一个定理</h1>
 <p>a,b,m是整数，且m&gt;0 ,gcd(a,m) = d，如果d|b,则方程恰好有d个模m不同余的姐，否则，方程无解。
 方程的解：
@@ -508,9 +508,9 @@ y=y1-a</em>t;
 <h1 id="费马小定理">费马小定理</h1>
 <p>$若p为素数，a为正整数，且a、p互质。 则有a^{p-1} \equiv 1 (\bmod {p})$
 那么
-$a*x\equiv 1 (mod\ p)$
+$a<em>x\equiv 1 (mod\ p)$
 则
-$a*x\equiv a^{p-1}(mod\ p)$
+$a</em>x\equiv a^{p-1}(mod\ p)$
 那么
 $x\equiv a^{p-2}(mod\ p)$
 然后只需要求出$a^{p-2}\ mod\  p$的值就行了,求逆元其实就是pow(x,mod-2)注意此时mod必须为质数

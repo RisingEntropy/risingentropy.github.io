@@ -21,13 +21,13 @@
 $\omega_n^k = (\omega_n^1)^k$
 $\omega_{2n}^{2k} = \omega_n^k$
 $\omega_n^0 = 1$
-$\omega_n^k*\omega_n^j = \omega_n^{j+k}$
-然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)*g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
+$\omega_n^k\omega_n^j = \omega_n^{j+k}$
+然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
 $F(x) = a_0+a_0x^1+…+a_nx^n$
 然后按照奇偶项拆开
-$F(x) = (a_0+a_2x^2…)+x*(a_1x^1+…)$
+$F(x) = (a_0+a_2x^2…)+x(a_1x^1+…)$
 化为,然后发现这玩意可以分治
-$F(x) = FL(x^2)+x*FR(x^2)$
+$F(x) = FL(x^2)+xFR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
 F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
@@ -95,13 +95,13 @@ void DFT(complex *f,int op){
 $\omega_n^k = (\omega_n^1)^k$
 $\omega_{2n}^{2k} = \omega_n^k$
 $\omega_n^0 = 1$
-$\omega_n^k*\omega_n^j = \omega_n^{j+k}$
-然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)*g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
+$\omega_n^k\omega_n^j = \omega_n^{j+k}$
+然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
 $F(x) = a_0+a_0x^1+…+a_nx^n$
 然后按照奇偶项拆开
-$F(x) = (a_0+a_2x^2…)+x*(a_1x^1+…)$
+$F(x) = (a_0+a_2x^2…)+x(a_1x^1+…)$
 化为,然后发现这玩意可以分治
-$F(x) = FL(x^2)+x*FR(x^2)$
+$F(x) = FL(x^2)+xFR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
 F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
@@ -334,13 +334,13 @@ void DFT(complex *f,int op){
 $\omega_n^k = (\omega_n^1)^k$
 $\omega_{2n}^{2k} = \omega_n^k$
 $\omega_n^0 = 1$
-$\omega_n^k*\omega_n^j = \omega_n^{j+k}$
-然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)*g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
+$\omega_n^k<em>\omega_n^j = \omega_n^{j+k}$
+然后就差不多使用如下性质。然后再说FFT。FFT是用来求卷积的，所谓的卷积就是由两个函数生成第三个函数的运算。即$h(x) = \int\limits_{-\infty}^{\infty}f(i)</em>g(x-i)$，然后这玩意和傅里叶变化有很大关系，可以简化计算。注意由于计算机只能处理非连续的数据，所以需要把上面的积分符号换成$\sum$。FFT的过程如下
 $F(x) = a_0+a_0x^1+…+a_nx^n$
 然后按照奇偶项拆开
-$F(x) = (a_0+a_2x^2…)+x*(a_1x^1+…)$
+$F(x) = (a_0+a_2x^2…)+x<em>(a_1x^1+…)$
 化为,然后发现这玩意可以分治
-$F(x) = FL(x^2)+x*FR(x^2)$
+$F(x) = FL(x^2)+x</em>FR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
 F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\

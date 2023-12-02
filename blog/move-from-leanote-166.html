@@ -480,7 +480,7 @@ T2树上路径修改，单点查询
 </code></pre></div></div>
 <h1 id="t3树上路径修改子树查询2231">T3树上路径修改，子树查询2231</h1>
 <p>从X到Y的点加上或者减去一个W，求某个点子树内的所有点的权值和.
-解答：我们考虑对于每个修改的影响，如果x是y的子树，那么对y这棵树的影响是$w(x)*(dep[x]-dep[y]+1)$，那么我们把它拆开$w(x)*(dep[x]+1]-dep[y]*w(x))$，然后考虑T2的差分的做法，那么我们直接维护到根，然后减去(lca到根+lca的父节点到根)就行了(参见T2的理解或者做一下T4)。两个树状数组维护$w(x)$和$w(x)*(dep[x]-1)$就行了。代码如下：</p>
+解答：我们考虑对于每个修改的影响，如果x是y的子树，那么对y这棵树的影响是$w(x)<em>(dep[x]-dep[y]+1)$，那么我们把它拆开$w(x)</em>(dep[x]+1]-dep[y]<em>w(x))$，然后考虑T2的差分的做法，那么我们直接维护到根，然后减去(lca到根+lca的父节点到根)就行了(参见T2的理解或者做一下T4)。两个树状数组维护$w(x)$和$w(x)</em>(dep[x]-1)$就行了。代码如下：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;bits/stdc++.h&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">struct</span> <span class="nc">IO</span>
