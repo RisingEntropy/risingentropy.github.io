@@ -198,7 +198,7 @@
 <h3 id="11x1卷积等价于张量与和参数在通道维度进行张量简并">1、1x1卷积等价于张量与和参数在通道维度进行张量简并</h3>
 
 <p>tensor contraction: 张量缩并/张量缩约，即让张量降两阶。
-张量n模积定义为$\mathcal{P}=\tau\times_{n}M=\mathcal{P}_{i_0,\cdots,i_N}=\sum\limits_{k=0}^{I_n}\tau_{i_0,\cdots,i_{n-1},k,i_{n+1},\cdots,i_N}M_{i_n,k}$，其中$\tau\in\mathcal{R}^{I_0\times I_1\times \cdots\times I_N},M\in R^{J\times I_n}$，两个张量进行简并说白了就是在某一维度上的纤维（fiber）都乘以矩阵M，$v\in R^{1,i_n},M\in R^{i_n,k},vM\in R^{1,k}$。</p>
+张量n模积定义为$\mathcal{P}=\tau\times_{n}M=\mathcal{P}<em>{i_0,\cdots,i_N}=\sum\limits</em>{k=0}^{I_n}\tau_{i_0,\cdots,i_{n-1},k,i_{n+1},\cdots,i_N}M_{i_n,k}$，其中$\tau\in\mathcal{R}^{I_0\times I_1\times \cdots\times I_N},M\in R^{J\times I_n}$，两个张量进行简并说白了就是在某一维度上的纤维（fiber）都乘以矩阵M，$v\in R^{1,i_n},M\in R^{i_n,k},vM\in R^{1,k}$。</p>
 
 <p>然后就能发现，1x1卷积就是一种张量n模积，有如下形式
 <img src="https://cdn.risingentropy.top/images/posts/20231202002438.png" alt="20231202002438" /></p>
@@ -206,9 +206,9 @@
 <h3 id="2深度可分离卷积是对普通卷积的cp分解">2、深度可分离卷积是对普通卷积的CP分解</h3>
 
 <p>对于卷积$\mathcal{F}=\mathcal{X}*\mathcal{W}$，有
-\(\mathcal{F}\_{t,y,x}=\sum\limits\_{k=1}^{C}\sum\limits\_{j=1}^{H}\sum\limits\_{i=1}^{W}\mathcal{W}(t,k,j,i)\mathcal{X}(k,j+y,i+x)\)
+\(\mathcal{F}_{t,y,x}=\sum\limits_{k=1}^{C}\sum\limits_{j=1}^{H}\sum\limits_{i=1}^{W}\mathcal{W}(t,k,j,i)\mathcal{X}(k,j+y,i+x)\)
 对$\mathcal{W}(t,k,j,i)$进行CP分解，得到kruskal形式：
-\(\mathcal{W}(t,k,j,i)=\sum\limits\_{r=0}^{R-1}U^{(T)}\_{t,r}U^{(C)}\_{s,r}U^{(H)}\_{j,r}U^{(W)}\_{i,r}\)
+\(\mathcal{W}(t,k,j,i)=\sum\limits_{r=0}^{R-1}U^{(T)}_{t,r}U^{(C)}_{s,r}U^{(H)}_{j,r}U^{(W)}_{i,r}\)
 然后带回去，得到：
 <img src="https://cdn.risingentropy.top/images/posts/20231202150419.png" alt="20231202150419" /></p>
 <h3 id="3基于tucker分解的卷积">3、基于Tucker分解的卷积</h3>
@@ -219,17 +219,17 @@
 <h3 id="factorized-higher-order-convolutions">Factorized higher-order convolutions</h3>
 <p>对于高维张量，用Kruskal形式来表述参数，表述为$\mathcal{W}=[\lambda;U^{(T)};U^{(C)};U^{(K_0)}\cdots ;U^{(K_{N-1})}]$
 然后卷积可以写为:
-\(\Phi(\mathcal{X})\_{t,i\_0,i\_1,\cdots,i\_n}=\sum\limits\_{r=0}^{R}\sum\limits\_{s=0}^{C}\sum\limits\_{i\_0=0}^{K\_0}\cdots\sum\limits\_{i\_{N-1}=0}^{K\_{N-1}}\lambda\_r[U^{(T)}\_{t,r}U^{(C)}\_{s,r}U^{(K\_0)}\_{i\_0,r}\cdots U\_{i\_{N-1}}^{K\_{N-1}}\mathcal{X}\_{s,\cdots,i\_{N-1}}]\)</p>
+\(\Phi(\mathcal{X})_{t,i_0,i_1,\cdots,i_n}=\sum\limits_{r=0}^{R}\sum\limits_{s=0}^{C}\sum\limits_{i_0=0}^{K_0}\cdots\sum\limits_{i_{N-1}=0}^{K_{N-1}}\lambda_r[U^{(T)}_{t,r}U^{(C)}_{s,r}U^{(K_0)}_{i_0,r}\cdots U_{i_{N-1}}^{K_{N-1}}\mathcal{X}_{s,\cdots,i_{N-1}}]\)</p>
 
 <p>调整一下乘积的顺序（前面的一堆$\sum$我就略过了），可以写成：
-\(\sum\cdots\sum\lambda\_r[U^{(T)}\mathcal{X}\_sU^{(C)}U^{(K\_0)}\cdots U^{(k\_{N-1})}]\)
+\(\sum\cdots\sum\lambda_r[U^{(T)}\mathcal{X}_sU^{(C)}U^{(K_0)}\cdots U^{(k_{N-1})}]\)
 然后定义一个$\rho(\mathcal{X})$操作为：
-\(\rho(\mathcal{X})=(\mathcal{X}\star\_1U^{(K\_0)}\cdots \star\_{N+1}U^{(K\_{N-1})})\)
+\(\rho(\mathcal{X})=(\mathcal{X}\star_1U^{(K_0)}\cdots \star_{N+1}U^{(K_{N-1})})\)
 说白了这个$\rho(\mathcal{X})$就是做超空间上的卷积。然后上面的那一坨可以写成：
-\(\mathcal{F}=\rho(\Phi(\mathcal{X}\times\_0U^{(T)}))\times\_0(diag(\lambda)U^{(C)})\)
+\(\mathcal{F}=\rho(\Phi(\mathcal{X}\times_0U^{(T)}))\times_0(diag(\lambda)U^{(C)})\)
 这样优化的意义就在于把$N$维卷积参数量从$T\times C\times K_0\times K_1\cdots\times K_{N-1}$降低到了$T+C+\sum\limits_{i=0}^{N-1}I_k$
 要想将训练好的参数拓展一维，只需要把$\rho$换成$\hat{\rho}$就行，$\hat{\rho}$被定义为：
-\(\hat{\rho}(\mathcal{X})=\rho(\mathcal{X})\star\_{N+1}U^{K\_{N+1}}\)
+\(\hat{\rho}(\mathcal{X})=\rho(\mathcal{X})\star_{N+1}U^{K_{N+1}}\)
 确实说白了就是他这个形式方便拓展维度，要拓展就多塞一项就行。</p>
 <h2 id="困惑">困惑</h2>
 
