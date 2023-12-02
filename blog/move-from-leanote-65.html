@@ -77,14 +77,14 @@ lcm求法
 OI中的结论，只需要关注其正确性，不需要关注证明.—–沃兹基硕德
 作用：求不定方程详见证明。其实就是归纳法的思想。一本通P396
 代码实现
-void ex_gcd(int a,int b,int &amp;amp;mod,int &amp;amp;x,int &amp;amp;y){
+void ex\_gcd(int a,int b,int &amp;amp;mod,int &amp;amp;x,int &amp;amp;y){
     int t;
     if(b==0){
         mod = a;
         x = 1;
         y = 0
     }else{
-        ex_gcd(b,a%b,mod,x,y);
+        ex\_gcd(b,a%b,mod,x,y);
         t = x;
         x = y;
         y = t-(a/b)*y;//这里很重要
@@ -173,14 +173,14 @@ lcm求法
 OI中的结论，只需要关注其正确性，不需要关注证明.—–沃兹基硕德
 作用：求不定方程详见证明。其实就是归纳法的思想。一本通P396
 代码实现
-void ex_gcd(int a,int b,int &amp;amp;mod,int &amp;amp;x,int &amp;amp;y){
+void ex\_gcd(int a,int b,int &amp;amp;mod,int &amp;amp;x,int &amp;amp;y){
     int t;
     if(b==0){
         mod = a;
         x = 1;
         y = 0
     }else{
-        ex_gcd(b,a%b,mod,x,y);
+        ex\_gcd(b,a%b,mod,x,y);
         t = x;
         x = y;
         y = t-(a/b)*y;//这里很重要
@@ -433,14 +433,14 @@ lcm(m,n)最小公倍数</p>
 <del>OI中的结论，只需要关注其正确性，不需要关注证明.—–沃兹基硕德</del>
 作用：求不定方程详见证明。其实就是归纳法的思想。一本通P396
 代码实现</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">ex_gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">mod</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">ex</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">mod</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">t</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
         <span class="n">mod</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-        <span class="n">ex_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span><span class="n">mod</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+        <span class="n">ex</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">,</span><span class="n">mod</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">;</span><span class="c1">//这里很重要</span>
@@ -484,12 +484,12 @@ y=y1-a</em>t;
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">ex_gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+<span class="kt">void</span> <span class="n">ex</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
 		<span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
 		<span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">ex_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
+		<span class="n">ex</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
 		<span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
 		<span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
 		<span class="n">y</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
@@ -498,7 +498,7 @@ y=y1-a</em>t;
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
 	<span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="o">&gt;&gt;</span><span class="n">b</span><span class="p">;</span>
-	<span class="n">ex_gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+	<span class="n">ex</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
 	<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="n">b</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="n">b</span><span class="p">;</span>
 	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">x</span><span class="p">;</span>
 <span class="p">}</span>
@@ -548,7 +548,7 @@ code:</p>
 <strong>其实$C_{i,j}$就等于A的i行的元素与B的第j列的元素的乘积的和</strong>
 用公式描述就是
 设Ａ是n</em>m的矩阵，Ｂ是m<em>p的矩阵，那么C=A</em>B就是n*p的矩阵
-\(C_{i,j}=\sum_{k=1}^m\ A_{i,j}*B_{j,k}\)</p>
+\(C\_{i,j}=\sum\_{k=1}^m\ A\_{i,j}*B\_{j,k}\)</p>
 <h1 id="方阵乘幂">方阵乘幂</h1>
 <p>求方阵A的n次方，$A^n$</p>
 <h1 id="矩阵乘法应用">矩阵乘法应用</h1>
@@ -558,7 +558,7 @@ code:</p>
 <h1 id="欧拉函数">欧拉函数</h1>
 <p>1~N中与N互质的数的个数被称为欧拉函数，记为$\varphi(N)$。
 又因为算数基本定理，所以:
-\(\varphi(N)=N*\frac{p_1-1}{p_1}*\frac{p_2-1}{p_2}*\frac{p_3-1}{p_3}...*\frac{p_m-1}{p_m}=N*\prod_{质数p|N}(1-\frac{1}{p})\)
+\(\varphi(N)=N*\frac{p\_1-1}{p\_1}*\frac{p\_2-1}{p\_2}*\frac{p\_3-1}{p\_3}...*\frac{p\_m-1}{p\_m}=N*\prod\_{质数p|N}(1-\frac{1}{p})\)
 其实就是在分解质因数的时候就可以计算了
 板子：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">phi</span><span class="p">(</span><span class="kt">int</span> <span class="n">N</span><span class="p">){</span>

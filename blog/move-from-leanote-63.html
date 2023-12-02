@@ -20,14 +20,14 @@ edge stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
-int bcc_num[1000];//哪个点属于哪个双连通分量 
-int bcc_cnt;//有多少个双连通分量
+int dfn\_cnt;
+int bcc\_num[1000];//哪个点属于哪个双连通分量 
+int bcc\_cnt;//有多少个双连通分量
 vector&amp;lt;int&amp;gt; bcc[10000];//每个双连通分量有哪些点 
 bool iscut[1000];
 int root;
 void tarjan(int x,int fa){
-    low[x] = dfn[x] = ++dfn_cnt;
+    low[x] = dfn[x] = ++dfn\_cnt;
     int child = 0;
     for(int i = head[x];i!=0;i = edges[i].next){
         int v = edges[i].t;
@@ -38,17 +38,17 @@ void tarjan(int x,int fa){
             low[x] = min(low[x],low[edges[i].t]);
             if(low[v]&amp;gt;dfn[x]){
                 iscut[x] = true;
-                ++bcc_cnt;
-                bcc[bcc_cnt].clear();
+                ++bcc\_cnt;
+                bcc[bcc\_cnt].clear();
                 while(true){
                     edge e = stack[stop--];
-                    if(bcc_num[e.f]!=bcc_cnt){
-                        bcc[bcc_cnt].push_back(e.f);
-                        bcc_no[e.f] = bcc_cnt;
+                    if(bcc\_num[e.f]!=bcc\_cnt){
+                        bcc[bcc\_cnt].push\_back(e.f);
+                        bcc\_no[e.f] = bcc\_cnt;
                     }
-                    if(bcc_num[e.t]!=bcc_cnt){//取出这些边与其相邻的点，组成一个双连通分量 
-                        bcc[bcc_cnt].push_back(e.t);
-                        bcc_no[e.t] = bcc_cnt;
+                    if(bcc\_num[e.t]!=bcc\_cnt){//取出这些边与其相邻的点，组成一个双连通分量 
+                        bcc[bcc\_cnt].push\_back(e.t);
+                        bcc\_no[e.t] = bcc\_cnt;
                     }
                     if(e.f == x&amp;amp;&amp;amp;e.t = v){
                         break;//直到取出边(u,v) 
@@ -81,14 +81,14 @@ edge stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
-int bcc_num[1000];//哪个点属于哪个双连通分量 
-int bcc_cnt;//有多少个双连通分量
+int dfn\_cnt;
+int bcc\_num[1000];//哪个点属于哪个双连通分量 
+int bcc\_cnt;//有多少个双连通分量
 vector&amp;lt;int&amp;gt; bcc[10000];//每个双连通分量有哪些点 
 bool isbridge[1000];
 int root;
 void tarjan(int x,int fa){
-    low[x] = dfn[x] = ++dfn_cnt;
+    low[x] = dfn[x] = ++dfn\_cnt;
     for(int i = head[x];i!=0;i = edges[i].next){
         int v = edges[i].t;
         if(!dfn[i]){//下一个点没有被访问过; 
@@ -107,7 +107,7 @@ void tarjan(int x,int fa){
 }
 void dfs(int index){
     dfn[index] = true;
-    bcc_num[index] = bcc_cnt;
+    bcc\_num[index] = bcc\_cnt;
     for(int i = head[index];i!=0;i = edges[i].next){
         int v = edges[i].t;
         if(isbridge[i])continue;
@@ -116,7 +116,7 @@ void dfs(int index){
         }
     }
 }
-void find_ebcc(int n){
+void find\_ebcc(int n){
     //做一些初始化，把数组初始化了 
     for(int i = 1;i&amp;lt;=n;i++){
         if(!dfn[n]){
@@ -126,7 +126,7 @@ void find_ebcc(int n){
     memset(dfn,0,sizeof(dfn));
     for(int i = 1;i&amp;lt;=n;i++){
         if(!dfn[i]){
-            bcc_cnt++;
+            bcc\_cnt++;
             dfs(i);
         }
     } 
@@ -143,14 +143,14 @@ edge stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
-int bcc_num[1000];//哪个点属于哪个双连通分量 
-int bcc_cnt;//有多少个双连通分量
+int dfn\_cnt;
+int bcc\_num[1000];//哪个点属于哪个双连通分量 
+int bcc\_cnt;//有多少个双连通分量
 vector&amp;lt;int&amp;gt; bcc[10000];//每个双连通分量有哪些点 
 bool iscut[1000];
 int root;
 void tarjan(int x,int fa){
-    low[x] = dfn[x] = ++dfn_cnt;
+    low[x] = dfn[x] = ++dfn\_cnt;
     int child = 0;
     for(int i = head[x];i!=0;i = edges[i].next){
         int v = edges[i].t;
@@ -161,17 +161,17 @@ void tarjan(int x,int fa){
             low[x] = min(low[x],low[edges[i].t]);
             if(low[v]&amp;gt;dfn[x]){
                 iscut[x] = true;
-                ++bcc_cnt;
-                bcc[bcc_cnt].clear();
+                ++bcc\_cnt;
+                bcc[bcc\_cnt].clear();
                 while(true){
                     edge e = stack[stop--];
-                    if(bcc_num[e.f]!=bcc_cnt){
-                        bcc[bcc_cnt].push_back(e.f);
-                        bcc_no[e.f] = bcc_cnt;
+                    if(bcc\_num[e.f]!=bcc\_cnt){
+                        bcc[bcc\_cnt].push\_back(e.f);
+                        bcc\_no[e.f] = bcc\_cnt;
                     }
-                    if(bcc_num[e.t]!=bcc_cnt){//取出这些边与其相邻的点，组成一个双连通分量 
-                        bcc[bcc_cnt].push_back(e.t);
-                        bcc_no[e.t] = bcc_cnt;
+                    if(bcc\_num[e.t]!=bcc\_cnt){//取出这些边与其相邻的点，组成一个双连通分量 
+                        bcc[bcc\_cnt].push\_back(e.t);
+                        bcc\_no[e.t] = bcc\_cnt;
                     }
                     if(e.f == x&amp;amp;&amp;amp;e.t = v){
                         break;//直到取出边(u,v) 
@@ -204,14 +204,14 @@ edge stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
-int bcc_num[1000];//哪个点属于哪个双连通分量 
-int bcc_cnt;//有多少个双连通分量
+int dfn\_cnt;
+int bcc\_num[1000];//哪个点属于哪个双连通分量 
+int bcc\_cnt;//有多少个双连通分量
 vector&amp;lt;int&amp;gt; bcc[10000];//每个双连通分量有哪些点 
 bool isbridge[1000];
 int root;
 void tarjan(int x,int fa){
-    low[x] = dfn[x] = ++dfn_cnt;
+    low[x] = dfn[x] = ++dfn\_cnt;
     for(int i = head[x];i!=0;i = edges[i].next){
         int v = edges[i].t;
         if(!dfn[i]){//下一个点没有被访问过; 
@@ -230,7 +230,7 @@ void tarjan(int x,int fa){
 }
 void dfs(int index){
     dfn[index] = true;
-    bcc_num[index] = bcc_cnt;
+    bcc\_num[index] = bcc\_cnt;
     for(int i = head[index];i!=0;i = edges[i].next){
         int v = edges[i].t;
         if(isbridge[i])continue;
@@ -239,7 +239,7 @@ void dfs(int index){
         }
     }
 }
-void find_ebcc(int n){
+void find\_ebcc(int n){
     //做一些初始化，把数组初始化了 
     for(int i = 1;i&amp;lt;=n;i++){
         if(!dfn[n]){
@@ -249,7 +249,7 @@ void find_ebcc(int n){
     memset(dfn,0,sizeof(dfn));
     for(int i = 1;i&amp;lt;=n;i++){
         if(!dfn[i]){
-            bcc_cnt++;
+            bcc\_cnt++;
             dfs(i);
         }
     } 
@@ -430,14 +430,14 @@ void find_ebcc(int n){
 <span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">bcc_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
-<span class="kt">int</span> <span class="n">bcc_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
+<span class="kt">int</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bcc</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//每个双连通分量有哪些点 </span>
 <span class="kt">bool</span> <span class="n">iscut</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">child</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
         <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
@@ -448,17 +448,17 @@ void find_ebcc(int n){
             <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">low</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">]);</span>
             <span class="k">if</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&gt;</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
                 <span class="n">iscut</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                <span class="o">++</span><span class="n">bcc_cnt</span><span class="p">;</span>
-                <span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
+                <span class="o">++</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
+                <span class="n">bcc</span><span class="p">[</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
                 <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
                     <span class="n">edge</span> <span class="n">e</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="o">--</span><span class="p">];</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">bcc_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc_cnt</span><span class="p">){</span>
-                        <span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">);</span>
-                        <span class="n">bcc_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">bcc</span><span class="err">\</span><span class="n">_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">){</span>
+                        <span class="n">bcc</span><span class="p">[</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">);</span>
+                        <span class="n">bcc</span><span class="err">\</span><span class="n">_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
                     <span class="p">}</span>
-                    <span class="k">if</span><span class="p">(</span><span class="n">bcc_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc_cnt</span><span class="p">){</span><span class="c1">//取出这些边与其相邻的点，组成一个双连通分量 </span>
-                        <span class="n">bcc</span><span class="p">[</span><span class="n">bcc_cnt</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">);</span>
-                        <span class="n">bcc_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">bcc</span><span class="err">\</span><span class="n">_num</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span><span class="o">!=</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">){</span><span class="c1">//取出这些边与其相邻的点，组成一个双连通分量 </span>
+                        <span class="n">bcc</span><span class="p">[</span><span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">);</span>
+                        <span class="n">bcc</span><span class="err">\</span><span class="n">_no</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
                     <span class="p">}</span>
                     <span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">f</span> <span class="o">==</span> <span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">e</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">v</span><span class="p">){</span>
                         <span class="k">break</span><span class="p">;</span><span class="c1">//直到取出边(u,v) </span>
@@ -491,14 +491,14 @@ void find_ebcc(int n){
 <span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">bcc_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
-<span class="kt">int</span> <span class="n">bcc_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_num</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//哪个点属于哪个双连通分量 </span>
+<span class="kt">int</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span><span class="c1">//有多少个双连通分量</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bcc</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//每个双连通分量有哪些点 </span>
 <span class="kt">bool</span> <span class="n">isbridge</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
         <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span><span class="c1">//下一个点没有被访问过; </span>
@@ -517,7 +517,7 @@ void find_ebcc(int n){
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">){</span>
     <span class="n">dfn</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="n">bcc_num</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc_cnt</span><span class="p">;</span>
+    <span class="n">bcc</span><span class="err">\</span><span class="n">_num</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
         <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
         <span class="k">if</span><span class="p">(</span><span class="n">isbridge</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
@@ -526,7 +526,7 @@ void find_ebcc(int n){
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="kt">void</span> <span class="nf">find_ebcc</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+<span class="kt">void</span> <span class="n">find</span><span class="err">\</span><span class="n">_ebcc</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
     <span class="c1">//做一些初始化，把数组初始化了 </span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">n</span><span class="p">]){</span>
@@ -536,7 +536,7 @@ void find_ebcc(int n){
     <span class="n">memset</span><span class="p">(</span><span class="n">dfn</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dfn</span><span class="p">));</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
-            <span class="n">bcc_cnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">bcc</span><span class="err">\</span><span class="n">_cnt</span><span class="o">++</span><span class="p">;</span>
             <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span> 

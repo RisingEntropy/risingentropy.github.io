@@ -27,15 +27,15 @@ void add(int f,int t){
 bool visited[1000];//某个节点是否在栈中
 int dfn[1000];
 int low[1000];
-int dfn_sum;
+int dfn\_sum;
 int stack[10000];
 int stop;
 int color[10000];//哪个点染什么色，颜色一样的点属于同一个强连通分量 
-int color_val = 0;
+int color\_val = 0;
 inline int minn(int x,int y){return x&amp;gt;y?y:x;}
 void tarjan(int x){
-    dfn[x] = ++dfn_sum;
-    low[x] = dfn_sum;
+    dfn[x] = ++dfn\_sum;
+    low[x] = dfn\_sum;
     visited[x] = true;
     stack[++stop] = x;
     for(int i = head[x];i!=0;i = edges[i].next){
@@ -49,9 +49,9 @@ void tarjan(int x){
     }
     if(dfn[x]==low[x]){
         visited[x] = false;
-        color[x] = ++color_val;
+        color[x] = ++color\_val;
         while(stack[stop]!=x){
-            color[stack[stop]] = color_val;
+            color[stack[stop]] = color\_val;
             visited[stack[stop--]] = false;
         }
         stop--;//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 
@@ -76,15 +76,15 @@ void add(int f,int t){
 bool visited[1000];//某个节点是否在栈中
 int dfn[1000];
 int low[1000];
-int dfn_sum;
+int dfn\_sum;
 int stack[10000];
 int stop;
 int color[10000];//哪个点染什么色，颜色一样的点属于同一个强连通分量 
-int color_val = 0;
+int color\_val = 0;
 inline int minn(int x,int y){return x&amp;gt;y?y:x;}
 void tarjan(int x){
-    dfn[x] = ++dfn_sum;
-    low[x] = dfn_sum;
+    dfn[x] = ++dfn\_sum;
+    low[x] = dfn\_sum;
     visited[x] = true;
     stack[++stop] = x;
     for(int i = head[x];i!=0;i = edges[i].next){
@@ -98,9 +98,9 @@ void tarjan(int x){
     }
     if(dfn[x]==low[x]){
         visited[x] = false;
-        color[x] = ++color_val;
+        color[x] = ++color\_val;
         while(stack[stop]!=x){
-            color[stack[stop]] = color_val;
+            color[stack[stop]] = color\_val;
             visited[stack[stop--]] = false;
         }
         stop--;//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 
@@ -289,15 +289,15 @@ void tarjan(int x){
 <span class="kt">bool</span> <span class="n">visited</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span><span class="c1">//某个节点是否在栈中</span>
 <span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dfn_sum</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_sum</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">color</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span><span class="c1">//哪个点染什么色，颜色一样的点属于同一个强连通分量 </span>
-<span class="kt">int</span> <span class="n">color_val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">color</span><span class="err">\</span><span class="n">_val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="kr">inline</span> <span class="kt">int</span> <span class="nf">minn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">){</span><span class="k">return</span> <span class="n">x</span><span class="o">&gt;</span><span class="n">y</span><span class="o">?</span><span class="n">y</span><span class="o">:</span><span class="n">x</span><span class="p">;}</span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_sum</span><span class="p">;</span>
-    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn_sum</span><span class="p">;</span>
+    <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_sum</span><span class="p">;</span>
+    <span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_sum</span><span class="p">;</span>
     <span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
@@ -311,9 +311,9 @@ void tarjan(int x){
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
         <span class="n">visited</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">color_val</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span>
         <span class="k">while</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
-            <span class="n">color</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span> <span class="o">=</span> <span class="n">color_val</span><span class="p">;</span>
+            <span class="n">color</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span> <span class="o">=</span> <span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span>
             <span class="n">visited</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="o">--</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">stop</span><span class="o">--</span><span class="p">;</span><span class="c1">//点x已经在栈中，并且已经找到了一个强连通分量，上一个在栈中的点x出栈 </span>

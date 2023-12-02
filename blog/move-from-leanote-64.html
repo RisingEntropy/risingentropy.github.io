@@ -18,13 +18,13 @@
 int v[MAXN];//每个数的最小质因子
 int prime[MAXN];
 int cnt;
-void get_list(){
+void get\_list(){
     for(int i=2;i&amp;lt;=maxn;i++){
-        if(!not_prime[i]){
+        if(!not\_prime[i]){
             primes[++cnt] = i;
         }
         for(int j = 1;i&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;MAX;j++){
-            not_prime[i*prime[j]] = true;
+            not\_prime[i*prime[j]] = true;
             if(i%primes[j]==0){//即比一个合数大的质数和该合数的乘积可用一个更大的合数和比其小的质数相乘得到
                 break;
             }
@@ -61,7 +61,7 @@ void divide(int x){
 vector&amp;lt;int&amp;gt; factor[N];
 for(int i = 1;i&amp;lt;=n;i++)
     for(int j = 1;j&amp;lt;=n/i;j++)
-        facotr[i*j].push_back(i);
+        facotr[i*j].push\_back(i);
 
 求GCD
 int gcd(int a,int b){
@@ -77,13 +77,13 @@ int gcd(int a,int b){
 拓展欧几里得算法(很重要)
 long long x0,y0;
 long long d;
-void extend_gcd(long long a,long long b){
+void extend\_gcd(long long a,long long b){
 	if(b==0){
 		x0 = 1;
 		y0 = 0;
 		d = a;
 	}else{
-		extend_gcd(b,a%b);
+		extend\_gcd(b,a%b);
 		long long t = x0;
 		x0 = y0;
 		y0 = t-(a/b)*y0;
@@ -114,7 +114,7 @@ void mul(long long a[105][105],long long b[105][105]){
 			a[i][j] = temp[i][j];
 }
 int main(void){
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	long long k;
 	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
 	for(int i = 1;i&amp;lt;=n;i++)
@@ -144,14 +144,14 @@ void pre()
     fac[0] = 1;  
     for(int i = 1; i &amp;lt;= MAX; i++)  
         fac[i] = (fac[i - 1] * i) % MOD; //处理f[n]的逆元 
-    inv_fac[MAX] = qpow(fac[MAX], MOD - 2);  
+    inv\_fac[MAX] = qpow(fac[MAX], MOD - 2);  
     for(int i = MAX - 1; i &amp;gt;= 0; i--)  
-        inv_fac[i] = (inv_fac[i + 1] * (i + 1)) % MOD;   
+        inv\_fac[i] = (inv\_fac[i + 1] * (i + 1)) % MOD;   
 } 
 --------------------- 
 作者：超超越 
 来源：CSDN 
-原文：https://blog.csdn.net/kiwi_berrys/article/details/54834977 
+原文：https://blog.csdn.net/kiwi\_berrys/article/details/54834977 
 版权声明：本文为博主原创文章，转载请附上博文链接！
 
 ">
@@ -163,13 +163,13 @@ void pre()
 int v[MAXN];//每个数的最小质因子
 int prime[MAXN];
 int cnt;
-void get_list(){
+void get\_list(){
     for(int i=2;i&amp;lt;=maxn;i++){
-        if(!not_prime[i]){
+        if(!not\_prime[i]){
             primes[++cnt] = i;
         }
         for(int j = 1;i&amp;lt;=cnt&amp;amp;&amp;amp;i*prime[j]&amp;lt;MAX;j++){
-            not_prime[i*prime[j]] = true;
+            not\_prime[i*prime[j]] = true;
             if(i%primes[j]==0){//即比一个合数大的质数和该合数的乘积可用一个更大的合数和比其小的质数相乘得到
                 break;
             }
@@ -206,7 +206,7 @@ void divide(int x){
 vector&amp;lt;int&amp;gt; factor[N];
 for(int i = 1;i&amp;lt;=n;i++)
     for(int j = 1;j&amp;lt;=n/i;j++)
-        facotr[i*j].push_back(i);
+        facotr[i*j].push\_back(i);
 
 求GCD
 int gcd(int a,int b){
@@ -222,13 +222,13 @@ int gcd(int a,int b){
 拓展欧几里得算法(很重要)
 long long x0,y0;
 long long d;
-void extend_gcd(long long a,long long b){
+void extend\_gcd(long long a,long long b){
 	if(b==0){
 		x0 = 1;
 		y0 = 0;
 		d = a;
 	}else{
-		extend_gcd(b,a%b);
+		extend\_gcd(b,a%b);
 		long long t = x0;
 		x0 = y0;
 		y0 = t-(a/b)*y0;
@@ -259,7 +259,7 @@ void mul(long long a[105][105],long long b[105][105]){
 			a[i][j] = temp[i][j];
 }
 int main(void){
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	long long k;
 	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;k;
 	for(int i = 1;i&amp;lt;=n;i++)
@@ -289,14 +289,14 @@ void pre()
     fac[0] = 1;  
     for(int i = 1; i &amp;lt;= MAX; i++)  
         fac[i] = (fac[i - 1] * i) % MOD; //处理f[n]的逆元 
-    inv_fac[MAX] = qpow(fac[MAX], MOD - 2);  
+    inv\_fac[MAX] = qpow(fac[MAX], MOD - 2);  
     for(int i = MAX - 1; i &amp;gt;= 0; i--)  
-        inv_fac[i] = (inv_fac[i + 1] * (i + 1)) % MOD;   
+        inv\_fac[i] = (inv\_fac[i + 1] * (i + 1)) % MOD;   
 } 
 --------------------- 
 作者：超超越 
 来源：CSDN 
-原文：https://blog.csdn.net/kiwi_berrys/article/details/54834977 
+原文：https://blog.csdn.net/kiwi\_berrys/article/details/54834977 
 版权声明：本文为博主原创文章，转载请附上博文链接！
 
 ">
@@ -472,13 +472,13 @@ void pre()
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">v</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//每个数的最小质因子</span>
 <span class="kt">int</span> <span class="n">prime</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">get_list</span><span class="p">(){</span>
+<span class="kt">void</span> <span class="n">get</span><span class="err">\</span><span class="n">_list</span><span class="p">(){</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">maxn</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">not</span><span class="err">\</span><span class="n">_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]){</span>
             <span class="n">primes</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">cnt</span><span class="o">&amp;&amp;</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;</span><span class="n">MAX</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">not_prime</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">not</span><span class="err">\</span><span class="n">_prime</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">prime</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
             <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span><span class="c1">//即比一个合数大的质数和该合数的乘积可用一个更大的合数和比其小的质数相乘得到</span>
                 <span class="k">break</span><span class="p">;</span>
             <span class="p">}</span>
@@ -515,7 +515,7 @@ void pre()
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">factor</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">/</span><span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-        <span class="n">facotr</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">facotr</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 </code></pre></div></div>
 <h1 id="求gcd">求GCD</h1>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">gcd</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
@@ -531,13 +531,13 @@ void pre()
 <h1 id="拓展欧几里得算法很重要">拓展欧几里得算法(很重要)</h1>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="kt">long</span> <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">;</span>
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">extend_gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+<span class="kt">void</span> <span class="n">extend</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
 		<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 		<span class="n">y0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 		<span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
 	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">extend_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
+		<span class="n">extend</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
 		<span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x0</span><span class="p">;</span>
 		<span class="n">x0</span> <span class="o">=</span> <span class="n">y0</span><span class="p">;</span>
 		<span class="n">y0</span> <span class="o">=</span> <span class="n">t</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y0</span><span class="p">;</span>
@@ -568,7 +568,7 @@ void pre()
 			<span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="kt">long</span> <span class="kt">long</span> <span class="n">k</span><span class="p">;</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">k</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -598,14 +598,14 @@ void pre()
     <span class="n">fac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">MAX</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>  
         <span class="n">fac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">;</span> <span class="c1">//处理f[n]的逆元 </span>
-    <span class="n">inv_fac</span><span class="p">[</span><span class="n">MAX</span><span class="p">]</span> <span class="o">=</span> <span class="n">qpow</span><span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">MAX</span><span class="p">],</span> <span class="n">MOD</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>  
+    <span class="n">inv</span><span class="err">\</span><span class="n">_fac</span><span class="p">[</span><span class="n">MAX</span><span class="p">]</span> <span class="o">=</span> <span class="n">qpow</span><span class="p">(</span><span class="n">fac</span><span class="p">[</span><span class="n">MAX</span><span class="p">],</span> <span class="n">MOD</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>  
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">MAX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>  
-        <span class="n">inv_fac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv_fac</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">;</span>   
+        <span class="n">inv</span><span class="err">\</span><span class="n">_fac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">inv</span><span class="err">\</span><span class="n">_fac</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">;</span>   
 <span class="p">}</span> 
 <span class="o">---------------------</span> 
 <span class="err">作者：超超越</span> 
 <span class="err">来源：</span><span class="n">CSDN</span> 
-<span class="err">原文：</span><span class="n">https</span><span class="o">:</span><span class="c1">//blog.csdn.net/kiwi_berrys/article/details/54834977 </span>
+<span class="err">原文：</span><span class="n">https</span><span class="o">:</span><span class="c1">//blog.csdn.net/kiwi\_berrys/article/details/54834977 </span>
 <span class="err">版权声明：本文为博主原创文章，转载请附上博文链接！</span>
 </code></pre></div></div>
 

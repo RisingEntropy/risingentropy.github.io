@@ -257,8 +257,8 @@ AC算法传说中的模拟退火算法！
 <h1 id="一些小技巧">一些小技巧</h1>
 <p>尽量多跑SA，但是又不能超时，那我就卡着时间来：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="n">clock</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span><span class="c1">//注意这里不用太贪心，把时间卡太死了，不然一下就是全部TLE。。。</span>
-    <span class="n">simulate_annealing</span><span class="p">();</span>
+<span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS</span><span class="err">\</span><span class="n">_PER</span><span class="err">\</span><span class="n">_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span><span class="c1">//注意这里不用太贪心，把时间卡太死了，不然一下就是全部TLE。。。</span>
+    <span class="n">simulate</span><span class="err">\</span><span class="n">_annealing</span><span class="p">();</span>
 </code></pre></div></div>
 <p>调参方法：
 调小降温系数，调大初始温度，调大初始解。但是修改会导致运行时间变长。最好还是卡时间！
@@ -294,31 +294,31 @@ AC算法传说中的模拟退火算法！
 <span class="p">}</span>
 <span class="kt">double</span> <span class="n">T</span> <span class="p">;</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.99789999</span><span class="p">;</span>
-<span class="kt">double</span> <span class="n">ans_x</span><span class="p">,</span><span class="n">ans_y</span><span class="p">,</span><span class="n">ans</span> <span class="o">=</span> <span class="mf">1e15</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">ans</span><span class="err">\</span><span class="n">_x</span><span class="p">,</span><span class="n">ans</span><span class="err">\</span><span class="n">_y</span><span class="p">,</span><span class="n">ans</span> <span class="o">=</span> <span class="mf">1e15</span><span class="o">+</span><span class="mi">7</span><span class="p">;</span>
 <span class="kt">double</span> <span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">ep</span> <span class="o">=</span> <span class="mf">1e-14</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">simulated_annealing</span><span class="p">(){</span>
+<span class="kt">void</span> <span class="n">simulated</span><span class="err">\</span><span class="n">_annealing</span><span class="p">(){</span>
     <span class="n">T</span> <span class="o">=</span> <span class="mi">1926</span><span class="p">;</span>
     <span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">&gt;</span><span class="n">ep</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">nx</span> <span class="o">=</span> <span class="n">ans_x</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">RAND_MAX</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">;</span>
-        <span class="n">ny</span> <span class="o">=</span> <span class="n">ans_y</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">;</span>
-        <span class="kt">double</span> <span class="n">new_ans</span> <span class="o">=</span> <span class="n">cal</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">);</span>
-        <span class="kt">double</span> <span class="n">DE</span> <span class="o">=</span> <span class="n">new_ans</span><span class="o">-</span><span class="n">ans</span><span class="p">;</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="n">ans</span><span class="err">\</span><span class="n">_x</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">;</span>
+        <span class="n">ny</span> <span class="o">=</span> <span class="n">ans</span><span class="err">\</span><span class="n">_y</span><span class="o">+</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="n">cal</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">);</span>
+        <span class="kt">double</span> <span class="n">DE</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="o">-</span><span class="n">ans</span><span class="p">;</span>
         <span class="k">if</span><span class="p">(</span><span class="n">DE</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-            <span class="n">ans_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
-            <span class="n">ans_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
-        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">DE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
-            <span class="n">ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-            <span class="n">ans_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
-            <span class="n">ans_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
+            <span class="n">ans</span><span class="err">\</span><span class="n">_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
+            <span class="n">ans</span><span class="err">\</span><span class="n">_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">DE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
+            <span class="n">ans</span><span class="err">\</span><span class="n">_x</span> <span class="o">=</span> <span class="n">nx</span><span class="p">;</span>
+            <span class="n">ans</span><span class="err">\</span><span class="n">_y</span> <span class="o">=</span> <span class="n">ny</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">SA</span><span class="p">(){</span>
-    <span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span>
-    <span class="n">simulated_annealing</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">clock</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">CLOCKS</span><span class="err">\</span><span class="n">_PER</span><span class="err">\</span><span class="n">_SEC</span><span class="o">&lt;=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">simulated</span><span class="err">\</span><span class="n">_annealing</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
@@ -329,7 +329,7 @@ AC算法传说中的模拟退火算法！
         <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wei</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="n">SA</span><span class="p">();</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"%.3lf %.3lf"</span><span class="p">,</span><span class="n">ans_x</span><span class="p">,</span><span class="n">ans_y</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%.3lf %.3lf"</span><span class="p">,</span><span class="n">ans</span><span class="err">\</span><span class="n">_x</span><span class="p">,</span><span class="n">ans</span><span class="err">\</span><span class="n">_y</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>

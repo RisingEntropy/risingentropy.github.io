@@ -30,25 +30,25 @@ $F(x) = (a_0+a_2x^2…)+x(a_1x^1+…)$
 $F(x) = FL(x^2)+xFR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
-F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
-solve:w_n^0...w_n^{n/2-1}\\
-to: w_n^{n/2-1}...w_n^{n-1}\\\)
+F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
+F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
+solve:w\_n^0...w\_n^{n/2-1}\\
+to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
 假设$k&amp;lt;n/2$,由于：
-\(w_n^k = w_n^{k\%n}\)
+\(w\_n^k = w\_n^{k\%n}\)
 所以可以做如下转化
-\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
+\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
 bacause\\
-(w_n^k)^j = w_n^{kj}\\
+(w\_n^k)^j = w\_n^{kj}\\
 therefore\\
-=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
-w_n^k = w_n^{k\%n}\\
-= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
-w_{2n}^{2k} = w_n^k\\
-= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
-w_n^{k+n/2} = -w_n^{k}\\
+=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
+w\_n^k = w\_n^{k\%n}\\
+= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
+w\_{2n}^{2k} = w\_n^k\\
+= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
+w\_n^{k+n/2} = -w\_n^{k}\\
 therefore \\
-FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
+FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
 板子代码：
 ```cpp
@@ -104,25 +104,25 @@ $F(x) = (a_0+a_2x^2…)+x(a_1x^1+…)$
 $F(x) = FL(x^2)+xFR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
-F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
-solve:w_n^0...w_n^{n/2-1}\\
-to: w_n^{n/2-1}...w_n^{n-1}\\\)
+F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
+F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
+solve:w\_n^0...w\_n^{n/2-1}\\
+to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
 假设$k&amp;lt;n/2$,由于：
-\(w_n^k = w_n^{k\%n}\)
+\(w\_n^k = w\_n^{k\%n}\)
 所以可以做如下转化
-\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
+\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
 bacause\\
-(w_n^k)^j = w_n^{kj}\\
+(w\_n^k)^j = w\_n^{kj}\\
 therefore\\
-=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
-w_n^k = w_n^{k\%n}\\
-= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
-w_{2n}^{2k} = w_n^k\\
-= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
-w_n^{k+n/2} = -w_n^{k}\\
+=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
+w\_n^k = w\_n^{k\%n}\\
+= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
+w\_{2n}^{2k} = w\_n^k\\
+= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
+w\_n^{k+n/2} = -w\_n^{k}\\
 therefore \\
-FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
+FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
 板子代码：
 ```cpp
@@ -342,25 +342,25 @@ $F(x) = (a_0+a_2x^2…)+x<em>(a_1x^1+…)$
 $F(x) = FL(x^2)+x</em>FR(x^2)$
 把x代为单位根：
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
-F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
-solve:w_n^0...w_n^{n/2-1}\\
-to: w_n^{n/2-1}...w_n^{n-1}\\\)
+F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
+F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
+solve:w\_n^0...w\_n^{n/2-1}\\
+to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
 假设$k&lt;n/2$,由于：
-\(w_n^k = w_n^{k\%n}\)
+\(w\_n^k = w\_n^{k\%n}\)
 所以可以做如下转化
-\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
+\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
 bacause\\
-(w_n^k)^j = w_n^{kj}\\
+(w\_n^k)^j = w\_n^{kj}\\
 therefore\\
-=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
-w_n^k = w_n^{k\%n}\\
-= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
-w_{2n}^{2k} = w_n^k\\
-= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
-w_n^{k+n/2} = -w_n^{k}\\
+=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
+w\_n^k = w\_n^{k\%n}\\
+= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
+w\_{2n}^{2k} = w\_n^k\\
+= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
+w\_n^{k+n/2} = -w\_n^{k}\\
 therefore \\
-FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
+FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
 然后计算就行了。最后有一个玄学蝴蝶优化，大概就是不写递归的感觉，因为分治就像一个线段树，于是我把每个区间单独取出来处理一下，就免了递归，方便卡常
 板子代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;

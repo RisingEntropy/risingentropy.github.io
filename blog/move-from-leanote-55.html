@@ -66,13 +66,13 @@ int main()
             for(int j = 0;j &amp;lt; 2;j++) Temp[j] = word[Length[i]-2+j];
             Temp[2] = '\0';
             string temp = Temp;
-            f[temp].push_back(i);
+            f[temp].push\_back(i);
         }
         for(int i = 1;i &amp;lt;= n;i++)    //for循环
         {
             if(Length[i] &amp;lt; 2) continue;    //如果Length[i]小于2，则继续
             if(f.count(pre[i]))
-             for(vector&amp;lt;int&amp;gt; :: iterator step = f[pre[i]].begin();step != f[pre[i]].end();step++) e[*step].push_back(i);
+             for(vector&amp;lt;int&amp;gt; :: iterator step = f[pre[i]].begin();step != f[pre[i]].end();step++) e[*step].push\_back(i);
         }
         double s = 0,t = 1000;    //double定义s,t
         while(t - s &amp;gt; 0.0001)
@@ -143,13 +143,13 @@ int main()
             for(int j = 0;j &amp;lt; 2;j++) Temp[j] = word[Length[i]-2+j];
             Temp[2] = '\0';
             string temp = Temp;
-            f[temp].push_back(i);
+            f[temp].push\_back(i);
         }
         for(int i = 1;i &amp;lt;= n;i++)    //for循环
         {
             if(Length[i] &amp;lt; 2) continue;    //如果Length[i]小于2，则继续
             if(f.count(pre[i]))
-             for(vector&amp;lt;int&amp;gt; :: iterator step = f[pre[i]].begin();step != f[pre[i]].end();step++) e[*step].push_back(i);
+             for(vector&amp;lt;int&amp;gt; :: iterator step = f[pre[i]].begin();step != f[pre[i]].end();step++) e[*step].push\_back(i);
         }
         double s = 0,t = 1000;    //double定义s,t
         while(t - s &amp;gt; 0.0001)
@@ -384,13 +384,13 @@ int main()
             <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">Temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">];</span>
             <span class="n">Temp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
             <span class="n">string</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">Temp</span><span class="p">;</span>
-            <span class="n">f</span><span class="p">[</span><span class="n">temp</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">temp</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>    <span class="c1">//for循环</span>
         <span class="p">{</span>
             <span class="k">if</span><span class="p">(</span><span class="n">Length</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>    <span class="c1">//如果Length[i]小于2，则继续</span>
             <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-             <span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">::</span> <span class="n">iterator</span> <span class="n">step</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">begin</span><span class="p">();</span><span class="n">step</span> <span class="o">!=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">end</span><span class="p">();</span><span class="n">step</span><span class="o">++</span><span class="p">)</span> <span class="n">e</span><span class="p">[</span><span class="o">*</span><span class="n">step</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+             <span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">::</span> <span class="n">iterator</span> <span class="n">step</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">begin</span><span class="p">();</span><span class="n">step</span> <span class="o">!=</span> <span class="n">f</span><span class="p">[</span><span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">end</span><span class="p">();</span><span class="n">step</span><span class="o">++</span><span class="p">)</span> <span class="n">e</span><span class="p">[</span><span class="o">*</span><span class="n">step</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="p">}</span>
         <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>    <span class="c1">//double定义s,t</span>
         <span class="k">while</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="mf">0.0001</span><span class="p">)</span>

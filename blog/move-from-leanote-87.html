@@ -362,7 +362,7 @@ BFS:
 <span class="kt">bool</span> <span class="n">found</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">Astar</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">priority</span><span class="err">\</span><span class="n">_queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
     <span class="n">node</span> <span class="n">no</span><span class="p">;</span><span class="n">no</span><span class="p">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span><span class="n">no</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="n">no</span><span class="p">.</span><span class="n">a</span><span class="p">[</span><span class="o">++</span><span class="n">no</span><span class="p">.</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
     <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">no</span><span class="p">);</span>

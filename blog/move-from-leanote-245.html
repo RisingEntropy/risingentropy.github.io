@@ -235,13 +235,13 @@ $S^2 = \frac{\sum(x-{ x’})^2}{m}$
 但是由于题面求得是$S^2m^2$所以题面可以化为:$S^2m^2 = m*\sum(x-x’)^2$
 化简得
 \(\begin{aligned}
-v &amp;= \frac{\sum_{i=1}^{m}(\overline r - r_i)^2}{m}\\
-  &amp;= \frac{\sum_{i=1}^{m}r_i^2 + m * (\overline r)^2 - 2 * (\overline r) * \sum_{i=1}^{m}r_i}{m}\\
-  &amp;= \frac{\sum_{i=1}^{m}r_i^2 + m * (\frac{\sum_{i=1}^{m}r_i}{m})^2 - 2 * \frac{(\sum_{i=1}^{m}r_i)^2}{m}}{m}\\
-  &amp;=- \frac{(\sum_{i=1}^{m}r_i)^2}{m ^ 2} + \frac{\sum_{i=1}^{m}r_i^2}{m}
+v &amp;= \frac{\sum\_{i=1}^{m}(\overline r - r\_i)^2}{m}\\
+  &amp;= \frac{\sum\_{i=1}^{m}r\_i^2 + m * (\overline r)^2 - 2 * (\overline r) * \sum\_{i=1}^{m}r\_i}{m}\\
+  &amp;= \frac{\sum\_{i=1}^{m}r\_i^2 + m * (\frac{\sum\_{i=1}^{m}r\_i}{m})^2 - 2 * \frac{(\sum\_{i=1}^{m}r\_i)^2}{m}}{m}\\
+  &amp;=- \frac{(\sum\_{i=1}^{m}r\_i)^2}{m ^ 2} + \frac{\sum\_{i=1}^{m}r\_i^2}{m}
 \end{aligned}
 \begin{aligned}
-v * m ^ 2 &amp;= m * \sum_{i=1}^{m}r_i^2 - (\sum_{i=1}^{m}r_i) ^ 2\\
+v * m ^ 2 &amp;= m * \sum\_{i=1}^{m}r\_i^2 - (\sum\_{i=1}^{m}r\_i) ^ 2\\
 \end{aligned}\)
 后面是一个定值，所以只要求前面最大就好了。
 老套路dp

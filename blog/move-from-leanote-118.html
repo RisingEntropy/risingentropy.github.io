@@ -240,7 +240,7 @@ Sample Input</p>
   <li>$j$和$k$执行按位或运算的结果的二进制表示中，每一段连续的$0$都必须有偶数个
 这些0代表若干个横着的$1\times 2$长方形，奇数个$0$无法分割成这种形态
 我们需要预处理出$[0,2^M-1]$内所有满足“每一段连续的$0$都必须有偶数个”的整数，记录在集合S中
-方程：\(F[i,j] = \sum_{j\&amp;k=0并且j|k\in S}F[i-1,k]\)
+方程：\(F[i,j] = \sum\_{j\&amp;k=0并且j|k\in S}F[i-1,k]\)
 然后dp的初始值：F[0,0] = 1,其余为0
 目标：F[N,0]
 复杂度$O(2^M2^MN) = O(4^MN)$
@@ -262,12 +262,12 @@ code:
 <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="o">&amp;&amp;</span><span class="n">n</span><span class="p">){</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">bool</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">has_odd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">bool</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">has</span><span class="err">\</span><span class="n">_odd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="n">j</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">has_odd</span><span class="o">|=</span><span class="n">cnt</span><span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;&gt;</span><span class="n">j</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span><span class="n">has</span><span class="err">\</span><span class="n">_odd</span><span class="o">|=</span><span class="n">cnt</span><span class="p">,</span><span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
             <span class="k">else</span> <span class="n">cnt</span><span class="o">^=</span><span class="mi">1</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="n">canGo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">has_odd</span><span class="o">|</span><span class="n">cnt</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">canGo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">has</span><span class="err">\</span><span class="n">_odd</span><span class="o">|</span><span class="n">cnt</span><span class="o">?</span><span class="mi">0</span><span class="o">:</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>

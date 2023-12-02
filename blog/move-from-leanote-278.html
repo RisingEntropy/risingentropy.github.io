@@ -242,7 +242,7 @@
 <p>人生中最后一篇OI总结</p>
 <h1 id="数论分块">数论分块</h1>
 <ul>
-  <li>[] <a href="http://192.168.110.251/problempage.php?problem_id=3138#">余数求和</a> 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
+  <li>[] <a href="http://192.168.110.251/problempage.php?problem\_id=3138#">余数求和</a> 数论分块的板子，拆式子：$ans=\sum k-\lfloor \frac{k}{i}\rfloor\=n*k -\sum\lfloor\frac{k}{i}\rfloor$然后我们发现$\lfloor \frac{k}{i}\rfloor$这个东西很多都是一样的，也就是说如果一个点l是一样的，那么最后一个一样的就是$\lfloor\frac{k}{l}\rfloor$，于是直接从1开始枚举每个l，计算区间的值,计算方法如下:当前块的 $t \times$ 当前块元素个数 $\times$ 当前块 $i$ 的平均值 = $t \times (r-l+1) \times (l+r) \div 2$
     <h1 id="欧拉函数">欧拉函数</h1>
     <p>计算公式：$\varphi(N) = N*\prod_{p|N}(1-\frac{1}{p})$
 线性筛计算代码：</p>
