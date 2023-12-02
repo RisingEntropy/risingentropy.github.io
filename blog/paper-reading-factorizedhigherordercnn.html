@@ -198,7 +198,7 @@
 <h3 id="11x1卷积等价于张量与和参数在通道维度进行张量简并">1、1x1卷积等价于张量与和参数在通道维度进行张量简并</h3>
 
 <p>tensor contraction: 张量缩并/张量缩约，即让张量降两阶。
-张量n模积定义为$\mathcal{P}=\tau\times_{n}M=\mathcal{P}<em>{i_0,\cdots,i_N}=\sum\limits</em>{k=0}^{I_n}\tau_{i_0,\cdots,i_{n-1},k,i_{n+1},\cdots,i_N}M_{i_n,k}$，其中$\tau\in\mathcal{R}^{I_0\times I_1\times \cdots\times I_N},M\in R^{J\times I_n}$，两个张量进行简并说白了就是在某一维度上的纤维（fiber）都乘以矩阵M，$v\in R^{1,i_n},M\in R^{i_n,k},vM\in R^{1,k}$。</p>
+张量n模积定义为$\mathcal{P}=\tau\times_{n}M=\mathcal{P}_{i_0,\cdots,i_N}=\sum\limits_{k=0}^{I_n}\tau_{i_0,\cdots,i_{n-1},k,i_{n+1},\cdots,i_N}M_{i_n,k}$，其中$\tau\in\mathcal{R}^{I_0\times I_1\times \cdots\times I_N},M\in R^{J\times I_n}$，两个张量进行简并说白了就是在某一维度上的纤维（fiber）都乘以矩阵M，$v\in R^{1,i_n},M\in R^{i_n,k},vM\in R^{1,k}$。</p>
 
 <p>然后就能发现，1x1卷积就是一种张量n模积，有如下形式
 <img src="https://cdn.risingentropy.top/images/posts/20231202002438.png" alt="20231202002438" /></p>
