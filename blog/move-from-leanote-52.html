@@ -27,7 +27,7 @@ struct trie{
     int cnt;
 }ACtree[1000000];
 int top = 0;
-void build\_tree(string str){
+void build_tree(string str){
     int n = str.size()-1;
     int ch = 0;
     for(int i = 0;i&amp;lt;=n;i++){
@@ -38,7 +38,7 @@ void build\_tree(string str){
     }
     ACtree[ch].cnt+=1;
 }
-void build\_fail(){
+void build_fail(){
     queue&amp;lt;int&amp;gt; q;
     for(int i = 0;i&amp;lt;26;i++){
         if(ACtree[0].son[i]!=0) {
@@ -73,15 +73,15 @@ int query(string str){
     return ans;
 }
 int main(void){
-    ios::sync\_with\_stdio(false);
+    ios::sync_with_stdio(false);
     int n;
     cin&amp;gt;&amp;gt;n;
     string s;
     for(int i = 1;i&amp;lt;=n;i++){
         cin&amp;gt;&amp;gt;s;
-        build\_tree(s);
+        build_tree(s);
     }
-    build\_fail();
+    build_fail();
     cin&amp;gt;&amp;gt;s;
     cout&amp;lt;&amp;lt;query(s)&amp;lt;&amp;lt;endl;
     return 0;
@@ -105,7 +105,7 @@ struct trie{
     int cnt;
 }ACtree[1000000];
 int top = 0;
-void build\_tree(string str){
+void build_tree(string str){
     int n = str.size()-1;
     int ch = 0;
     for(int i = 0;i&amp;lt;=n;i++){
@@ -116,7 +116,7 @@ void build\_tree(string str){
     }
     ACtree[ch].cnt+=1;
 }
-void build\_fail(){
+void build_fail(){
     queue&amp;lt;int&amp;gt; q;
     for(int i = 0;i&amp;lt;26;i++){
         if(ACtree[0].son[i]!=0) {
@@ -151,15 +151,15 @@ int query(string str){
     return ans;
 }
 int main(void){
-    ios::sync\_with\_stdio(false);
+    ios::sync_with_stdio(false);
     int n;
     cin&amp;gt;&amp;gt;n;
     string s;
     for(int i = 1;i&amp;lt;=n;i++){
         cin&amp;gt;&amp;gt;s;
-        build\_tree(s);
+        build_tree(s);
     }
-    build\_fail();
+    build_fail();
     cin&amp;gt;&amp;gt;s;
     cout&amp;lt;&amp;lt;query(s)&amp;lt;&amp;lt;endl;
     return 0;
@@ -347,7 +347,7 @@ int main(void){
     <span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
 <span class="p">}</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">1000000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span> <span class="n">build</span><span class="err">\</span><span class="n">_tree</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
+<span class="kt">void</span> <span class="nf">build_tree</span><span class="p">(</span><span class="n">string</span> <span class="n">str</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -358,7 +358,7 @@ int main(void){
     <span class="p">}</span>
     <span class="n">ACtree</span><span class="p">[</span><span class="n">ch</span><span class="p">].</span><span class="n">cnt</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kt">void</span> <span class="n">build</span><span class="err">\</span><span class="n">_fail</span><span class="p">(){</span>
+<span class="kt">void</span> <span class="nf">build_fail</span><span class="p">(){</span>
     <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">26</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="n">ACtree</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">son</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -393,15 +393,15 @@ int main(void){
     <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
     <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
     <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">;</span>
-        <span class="n">build</span><span class="err">\</span><span class="n">_tree</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">build_tree</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="n">build</span><span class="err">\</span><span class="n">_fail</span><span class="p">();</span>
+    <span class="n">build_fail</span><span class="p">();</span>
     <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">s</span><span class="p">;</span>
     <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">query</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>

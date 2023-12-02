@@ -293,7 +293,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 
     <div class="post__content">
       <h1 id="三分">三分</h1>
-<p><a href="http://192.168.110.251/problempage.php?contest\_id=1130&amp;prob=2">SCOI 传送带</a>
+<p><a href="http://192.168.110.251/problempage.php?contest_id=1130&amp;prob=2">SCOI 传送带</a>
 三分模板题</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;
@@ -566,7 +566,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 <span class="p">}</span>
 </code></pre></div></div>
 <h1 id="区间dp">区间DP</h1>
-<p><a href="http://192.168.110.251/problempage.php?problem\_id=2082">glod在奔跑中吃草</a>
+<p><a href="http://192.168.110.251/problempage.php?problem_id=2082">glod在奔跑中吃草</a>
 区间DP+记忆化搜索，dp[l][r][0/1]表示已经吃完区间$[l,r]$之后，当前在左边/右边，给全局造成的变质期的和最小。
 那么显然有如下转移方程式：
 \(dp[l][r][0] = min(dp[l-1][r][0]+dis[l,l-1]*(n-(r-l+1)),dp[l][r+1][0]+dis[r,r+1]*(n-(r-l+1)))\)
@@ -607,7 +607,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 <span class="p">}</span>
 </code></pre></div></div>
 <h1 id="trie">trie</h1>
-<p><a href="http://192.168.110.251/problempage.php?problem\_id=1459">SCOI背单词</a>
+<p><a href="http://192.168.110.251/problempage.php?problem_id=1459">SCOI背单词</a>
 还是不错的一道题，就是题面太垃圾了，根本不可读。
 对于如下三种操作：</p>
 
@@ -632,7 +632,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 <span class="kr">inline</span> <span class="kt">int</span> <span class="nf">id</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">){</span><span class="k">return</span> <span class="n">c</span><span class="o">-</span><span class="sc">'a'</span><span class="p">;}</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">G</span><span class="p">[</span><span class="mi">510010</span><span class="p">];</span>
 <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span>
-	<span class="n">G</span><span class="p">[</span><span class="n">f</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+	<span class="n">G</span><span class="p">[</span><span class="n">f</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">){</span>
 	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
@@ -650,7 +650,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 		<span class="k">if</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="n">dfs</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">?</span><span class="n">x</span><span class="o">:</span><span class="n">fa</span><span class="p">);</span>
 	<span class="p">}</span>
 <span class="p">}</span>
-<span class="kt">int</span> <span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">sze</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dfn</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">dfn_cnt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
 	<span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -664,7 +664,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 	<span class="k">return</span> <span class="n">sze</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&lt;</span><span class="n">sze</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">dfs3</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">faId</span><span class="p">){</span>
-	<span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
+	<span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
 	<span class="n">ans</span><span class="o">+=</span><span class="mi">1ll</span><span class="o">*</span><span class="p">(</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">-</span><span class="n">faId</span><span class="p">);</span>
 	<span class="n">sort</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="n">cmp</span><span class="p">);</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -685,7 +685,7 @@ XXX发现他生活的村有很多值钱的石头。XXX 所在的村有 N 堆石�
 <span class="p">}</span>
 </code></pre></div></div>
 <h1 id="曼哈顿距离-分治">曼哈顿距离 分治</h1>
-<p><a href="http://192.168.110.251/problempage.php?problem\_id=3618#">bomb</a>
+<p><a href="http://192.168.110.251/problempage.php?problem_id=3618#">bomb</a>
 对于最大值，我们发现所谓的马哈顿距离的最大，就是一个最大的可以框住三个点的矩形，它可以如下方式产生：
  1.一个点确定了一个xy，另外两个点确定了x和y
  2.一个点确定了一个xy，另外一个点也确定了一个xy，第三个点没什么卵用，但是必须存在。

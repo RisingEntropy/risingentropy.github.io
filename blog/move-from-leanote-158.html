@@ -241,7 +241,7 @@ cin:</p>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 	<span class="p">}</span>
@@ -254,7 +254,7 @@ cin:</p>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">MAXN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 		<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
@@ -300,10 +300,10 @@ cin:</p>
 	<span class="cm">/*******cin close sync*******/</span>
 	<span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 	<span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"Start new test"</span><span class="p">);</span>
-	<span class="n">out</span><span class="o">&lt;&lt;</span><span class="s">"|cin\_close\_sync|"</span><span class="p">;</span>
+	<span class="n">out</span><span class="o">&lt;&lt;</span><span class="s">"|cin_close_sync|"</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">T</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 		<span class="n">start</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
-		<span class="n">system</span><span class="p">(</span><span class="s">"./cin\_close&lt;in"</span><span class="p">);</span>
+		<span class="n">system</span><span class="p">(</span><span class="s">"./cin_close&lt;in"</span><span class="p">);</span>
 		<span class="n">end</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
 		<span class="n">out</span><span class="o">&lt;&lt;</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">&lt;&lt;</span><span class="s">" ms|"</span><span class="p">;</span>
 		<span class="n">tot</span><span class="o">+=</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">;</span>
@@ -311,13 +311,13 @@ cin:</p>
 	<span class="p">}</span>
 	<span class="n">out</span><span class="o">&lt;&lt;</span><span class="kt">double</span><span class="p">(</span><span class="n">tot</span><span class="p">)</span><span class="o">/</span><span class="kt">double</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 
-	<span class="cm">/*******cin\_tie0*******/</span>
+	<span class="cm">/*******cin_tie0*******/</span>
 		<span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="s">"Start new test"</span><span class="p">);</span>
 	<span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="n">out</span><span class="o">&lt;&lt;</span><span class="s">"|cin\_close\_sync\_tie0|"</span><span class="p">;</span>
+	<span class="n">out</span><span class="o">&lt;&lt;</span><span class="s">"|cin_close_sync_tie0|"</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">T</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 		<span class="n">start</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
-		<span class="n">system</span><span class="p">(</span><span class="s">"./cin\_close\_sync\_tie0&lt;in"</span><span class="p">);</span>
+		<span class="n">system</span><span class="p">(</span><span class="s">"./cin_close_sync_tie0&lt;in"</span><span class="p">);</span>
 		<span class="n">end</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
 		<span class="n">out</span><span class="o">&lt;&lt;</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">&lt;&lt;</span><span class="s">" ms|"</span><span class="p">;</span>
 		<span class="n">tot</span><span class="o">+=</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">;</span>

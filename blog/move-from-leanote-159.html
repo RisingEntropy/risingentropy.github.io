@@ -50,8 +50,8 @@ m行，回答答案
 using namespace std;
 const int MAXM = 100010;
 const int MAXN = 100010;
-int block\_len;
-struct Q{int l,r,id;bool operator&amp;lt;(const Q&amp;amp;q1){int x = (l-1)/block\_len+1;int y = (q1.l-1)/block\_len+1;return x==y?r&amp;lt;q1.r:x&amp;lt;y;}}querys[MAXM];
+int block_len;
+struct Q{int l,r,id;bool operator&amp;lt;(const Q&amp;amp;q1){int x = (l-1)/block_len+1;int y = (q1.l-1)/block_len+1;return x==y?r&amp;lt;q1.r:x&amp;lt;y;}}querys[MAXM];
 int top;
 int a[MAXN],cnt[MAXN],ans;
 int anss[MAXM];
@@ -66,13 +66,13 @@ void del(int pos){
     else if(cnt[a[pos]]%2==1)ans--;
 }
 int main(){
-    ios::sync\_with\_stdio(false);cin.tie(0);
+    ios::sync_with_stdio(false);cin.tie(0);
     int n,c,m;cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;c&amp;gt;&amp;gt;m;
     int l = 0,r = 0;
     for(int i = 1;i&amp;lt;=n;i++){
         cin&amp;gt;&amp;gt;c;a[i] = c;
     }
-    block\_len = sqrt(n);
+    block_len = sqrt(n);
     for(int i = 1;i&amp;lt;=m;i++){
         cin&amp;gt;&amp;gt;l&amp;gt;&amp;gt;r;
         querys[++top].l = l,querys[top].r = r,querys[top].id = i;
@@ -131,8 +131,8 @@ m行，回答答案
 using namespace std;
 const int MAXM = 100010;
 const int MAXN = 100010;
-int block\_len;
-struct Q{int l,r,id;bool operator&amp;lt;(const Q&amp;amp;q1){int x = (l-1)/block\_len+1;int y = (q1.l-1)/block\_len+1;return x==y?r&amp;lt;q1.r:x&amp;lt;y;}}querys[MAXM];
+int block_len;
+struct Q{int l,r,id;bool operator&amp;lt;(const Q&amp;amp;q1){int x = (l-1)/block_len+1;int y = (q1.l-1)/block_len+1;return x==y?r&amp;lt;q1.r:x&amp;lt;y;}}querys[MAXM];
 int top;
 int a[MAXN],cnt[MAXN],ans;
 int anss[MAXM];
@@ -147,13 +147,13 @@ void del(int pos){
     else if(cnt[a[pos]]%2==1)ans--;
 }
 int main(){
-    ios::sync\_with\_stdio(false);cin.tie(0);
+    ios::sync_with_stdio(false);cin.tie(0);
     int n,c,m;cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;c&amp;gt;&amp;gt;m;
     int l = 0,r = 0;
     for(int i = 1;i&amp;lt;=n;i++){
         cin&amp;gt;&amp;gt;c;a[i] = c;
     }
-    block\_len = sqrt(n);
+    block_len = sqrt(n);
     for(int i = 1;i&amp;lt;=m;i++){
         cin&amp;gt;&amp;gt;l&amp;gt;&amp;gt;r;
         querys[++top].l = l,querys[top].r = r,querys[top].id = i;
@@ -376,8 +376,8 @@ int main(){
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">Q</span><span class="p">{</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Q</span><span class="o">&amp;</span><span class="n">q1</span><span class="p">){</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="p">.</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="o">?</span><span class="n">r</span><span class="o">&lt;</span><span class="n">q1</span><span class="p">.</span><span class="n">r</span><span class="o">:</span><span class="n">x</span><span class="o">&lt;</span><span class="n">y</span><span class="p">;}}</span><span class="n">querys</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">block_len</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">Q</span><span class="p">{</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Q</span><span class="o">&amp;</span><span class="n">q1</span><span class="p">){</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="p">.</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="o">?</span><span class="n">r</span><span class="o">&lt;</span><span class="n">q1</span><span class="p">.</span><span class="n">r</span><span class="o">:</span><span class="n">x</span><span class="o">&lt;</span><span class="n">y</span><span class="p">;}}</span><span class="n">querys</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">ans</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">anss</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
@@ -392,13 +392,13 @@ int main(){
     <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">pos</span><span class="p">]]</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span><span class="o">--</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">l</span><span class="o">&gt;&gt;</span><span class="n">r</span><span class="p">;</span>
         <span class="n">querys</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span><span class="n">querys</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span><span class="n">querys</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>

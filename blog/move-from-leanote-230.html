@@ -213,8 +213,8 @@
 数据范围与提示
 对于全部数据，$0≤A,B≤5×10^7$</p>
 <h1 id="解答">解答</h1>
-<p>唯一分解定理，把A分解为如下形式：\(\prod\_j\sum\limits\_{i = 0}^{ci} P\_j^{i}\)
-然后由于是$B$次方，所以每一个$c_i$都要扩大$B$倍，对于每一个$p_i$可以使用等比数列求和公式算出它的值为\(\frac{p\_i^{n+1}-1}{1-p\_i}\)对上面处理一个快速幂，对于下面处理了一个逆元。完事了。
+<p>唯一分解定理，把A分解为如下形式：\(\prod_j\sum\limits_{i = 0}^{ci} P_j^{i}\)
+然后由于是$B$次方，所以每一个$c_i$都要扩大$B$倍，对于每一个$p_i$可以使用等比数列求和公式算出它的值为\(\frac{p_i^{n+1}-1}{1-p_i}\)对上面处理一个快速幂，对于下面处理了一个逆元。完事了。
 代码:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;

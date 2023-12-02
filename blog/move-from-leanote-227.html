@@ -231,9 +231,9 @@
 对于100%的数据，满足0&lt;=N, M&lt;=10^12，N*M&lt;=10^12。</p>
 <h1 id="解答">解答</h1>
 <p>把整个表格顺时针旋转45度就会发现这是一个杨辉三角。于是乎我们不妨设$n&gt;m$，那么就有答案为：
-\(N+\sum C\_{N+i}^{i}\)
+\(N+\sum C_{N+i}^{i}\)
 有因为有如下推论
-\(\sum\limits\_{i=0}^MC\_{N+i}^{i} = C\_{M+N+1}^{M}\)
+\(\sum\limits_{i=0}^MC_{N+i}^{i} = C_{M+N+1}^{M}\)
 然后就可以直接计算了
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;

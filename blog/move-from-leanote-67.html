@@ -226,35 +226,35 @@ $X-Y+a(m-n)=kL$
 提个负号出来
 \(a(n-m)+kL = X-Y\)
 于是乎成了不定方程，那么只需要求解一个特解，然后找最小解就行
-又因 为\(X\_k = X\_{min}+\frac{L}{gcd(n-m,L)}\)
-那么\(k\_{mid} = X\_k mod \frac{L}{gcd(n-m,L)}---(1)\)
+又因 为\(X_k = X_{min}+\frac{L}{gcd(n-m,L)}\)
+那么\(k_{mid} = X_k mod \frac{L}{gcd(n-m,L)}---(1)\)
 然后又因为我们的方程是建立在(gcd(n-m,L))上的，而不是建立在n-m上的，所以需要乘一个$\frac{n-m}{gcd(n-m,L)}$//注意，这一步是建立在(1)之上的，所以要先乘再模;
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include&lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">;</span>
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">d</span><span class="p">;</span>
-<span class="kt">void</span> <span class="n">extend</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
+<span class="kt">void</span> <span class="nf">extend_gcd</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">a</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">b</span><span class="p">){</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
 		<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 		<span class="n">y0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 		<span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
 	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
-		<span class="n">extend</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
+		<span class="n">extend_gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
 		<span class="kt">long</span> <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x0</span><span class="p">;</span>
 		<span class="n">x0</span> <span class="o">=</span> <span class="n">y0</span><span class="p">;</span>
 		<span class="n">y0</span> <span class="o">=</span> <span class="n">t</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">y0</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="kt">long</span> <span class="kt">long</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">L</span><span class="p">;</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">L</span><span class="p">;</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="n">m</span><span class="p">){</span>
 		<span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
 		<span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
 	<span class="p">}</span>
-	<span class="n">extend</span><span class="err">\</span><span class="n">_gcd</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+	<span class="n">extend_gcd</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">m</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
 	<span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="n">d</span><span class="p">;</span>
 	<span class="k">if</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">%</span><span class="n">d</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span><span class="c1">//注意提到的一个定理ax+by=c 当且仅当gcd(a,b)|c时，有整数解</span>
 		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Impossible"</span><span class="p">;</span>

@@ -259,7 +259,7 @@
 <h1 id="最短路">最短路</h1>
 <ul>
   <li>[] Floyd $O(n^3)$     用于处理任意两点间最短路
-好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2379">奶牛接力</a> Floyd矩阵快速幂（什么JB玩意）
+好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2379">奶牛接力</a> Floyd矩阵快速幂（什么JB玩意）
 也可以求传递闭包（可是我不会）</li>
   <li>[] Dijkstra $O((n+m)log(m))$</li>
   <li>[] Bellman-Ford 不会啊</li>
@@ -278,7 +278,7 @@
   <li>[] 强连通分量
     <h1 id="拓扑排序">拓扑排序</h1>
   </li>
-  <li>[] 好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3969">球的序列（【HNOI2015】菜肴制作）</a>
+  <li>[] 好题：<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3969">球的序列（【HNOI2015】菜肴制作）</a>
     <blockquote>
       <p>注意此题是让编号小的球拓扑序尽量靠前（轻），不是让靠前的球编号尽量小……
 但是可以把问题转化成让靠后的球编号尽量大（这个确实很玄）那么就建一个反图，大根堆实现</p>
@@ -286,7 +286,7 @@
       <p>重点在于找出尽可能多的限制，SPFA判负环。</p>
     </blockquote>
   </li>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2239">奶牛的站位Layout</a>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2239">奶牛的站位Layout</a>
     <blockquote>
       <p>比较板子题了
 朋友关系就是$dis[v]&lt;=dis[u]+w$
@@ -295,7 +295,7 @@
 编号小的靠前：$dis[i-1]&lt;=dis[i]$</p>
     </blockquote>
   </li>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3844">出纳员问题</a> 有点毒
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3844">出纳员问题</a> 有点毒
     <blockquote>
       <p>求解$sum[i]$：知道$i$时间段内所需人数总和，答案即为$sum[24]$
 但是在写限制的时候，0-7小时的情况很麻烦：$sum[24]-sum[i+16]$$+sum[i]&gt;=R[i]$出现了三个变量
@@ -343,15 +343,15 @@ int km(){
 <p>例题也甩这了</p>
 
 <ol>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2081">glod小行星群</a> 建边同上</li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2081">glod小行星群</a> 建边同上</li>
   <li>[] <a href="">POJ - 2446 Chessboard</a>
     <h1 id="生成树">生成树</h1>
     <h1 id="普通生成树">普通生成树</h1>
   </li>
   <li>[] prim：不会啊</li>
   <li>[] kruskal
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4323">mst</a>:生成树+树剖</li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4323">mst</a>:生成树+树剖</li>
 </ol>
 
 <blockquote>
@@ -364,7 +364,7 @@ int km(){
 <a href=""></a></li>
   <li>[] kruskal重构树
 这玩意的两点间lca就是两点间最小瓶颈路（or最大路，取决于sort）但重点不在于这个，而在于它的一些奇妙性质。
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3673">[NOI2018]归程（return）</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3673">[NOI2018]归程（return）</a></li>
 </ol>
 
 <blockquote>
@@ -376,14 +376,14 @@ int km(){
 
 <ul>
   <li>[] 最短路树
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2423">安全出行Safe Travel</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2423">安全出行Safe Travel</a>
 毒瘤题</li>
 </ul>
 
 <blockquote>
   <p>跑出最短路生成树，对于每条非树边，会对$u$到$lca_{u,v}$，$v$到$lca_{u,v}$造成贡献（不包括$lca$）
 继续分析：对于任意一个节点$x$，它的$ans$等于
-\(min(dep\_{lca}+w\_i+dep\_u+dep\_v-2*dep\_{lca}-(dep\_x-dep\_{lca}))\)
+\(min(dep_{lca}+w_i+dep_u+dep_v-2*dep_{lca}-(dep_x-dep_{lca}))\)
 也就是说$ans_x=min(dep_u+dep_v+w_i)-dep_x$
 其中$i$满足$x \not=lca_{u,v}$且$x\in lca_{u,v}$的子树
 此时直接上树剖是$O(mlog^2(n))$的，也就是$O($卡常$)$,所以我们用到了<strong>贪心</strong>
@@ -392,7 +392,7 @@ int km(){
 
 <ul>
   <li>[] dfs生成树
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4749">【2019CSP-S测试1012】困难的图</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4749">【2019CSP-S测试1012】困难的图</a></li>
 </ul>
 
 <blockquote>
@@ -445,7 +445,7 @@ inline int dinic(){
 </code></pre></div></div>
 <ul>
   <li>[] 最大流
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2766">危桥</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2766">危桥</a>
 好题一道、</li>
 </ul>
 
@@ -458,7 +458,7 @@ inline int dinic(){
 
 <ul>
   <li>[] 最小割
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=1759">zjoi2009狼与羊的故事</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1759">zjoi2009狼与羊的故事</a></li>
 </ul>
 
 <blockquote>
@@ -466,12 +466,12 @@ inline int dinic(){
 分开两个方格的代价为1，于是羊-&gt;狼连、羊-&gt;空地、空地-&gt;空地、空地-&gt;狼连边权为1的边。注意边不要连重了</p>
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2309">「网络流 24 题」太空飞行计划SPJ</a>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2309">「网络流 24 题」太空飞行计划SPJ</a>
 真正的好题</p>
 
 <blockquote>
   <p>观察到对于一个实验$i$，要不得到$val_i-\sum_j^{j\in i}cost_j$的贡献，要不得到$0$的贡献
-所以<del>根据题解</del>可将题目转化成\(ans=sumval-\sum\_{i=1}^n min(\sum\_j^{j\in i}cost\_j,val\_i)\)
+所以<del>根据题解</del>可将题目转化成\(ans=sumval-\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)\)
 其中$\sum_{i=1}^n min(\sum_j^{j\in i}cost_j,val_i)$就是求个最小割
 方案输出只需要判断是否出现在增广路中（$dis\not=-1$）（待填坑）</p>
 </blockquote>
@@ -484,24 +484,24 @@ inline int dinic(){
 <p>这块实在是太杂了……</p>
 
 <ul>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3668">连通代价</a></li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3668">连通代价</a></li>
 </ul>
 
 <blockquote>
   <p>直接暴力建边是$O(n^2)$的，但是有用的边只会在$x,y,z$的一维中连续的$a_i,a_{i+1}$相连，所以对三维排序后连续的点之间连边，复杂度$O(3nlog(n)+3n+kruskal)$</p>
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3841">双调路径</a></p>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3841">双调路径</a></p>
 
 <blockquote>
 
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4260">【ARC084D】Small Multiple</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3993">墨墨的等式</a>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4260">【ARC084D】Small Multiple</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3993">墨墨的等式</a>
 <a href="https://vjudge.net/problem/HDU-4370">HDU - 4370 0 or 1</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4194">【ARC61E】Snuke’s Subway Trip</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3742">黑白图</a></p>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4194">【ARC61E】Snuke’s Subway Trip</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3742">黑白图</a></p>
 
     </div>
 
@@ -552,7 +552,7 @@ inline int dinic(){
     </div>
     <div class="prev__box">
       <span class="post__nav post__nav__prev">Prev post</span>
-      <h2 class="post__nav__title">20191017\_blog</h2>
+      <h2 class="post__nav__title">20191017_blog</h2>
     </div>
   </a>
   

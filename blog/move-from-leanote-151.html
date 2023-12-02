@@ -40,10 +40,10 @@ using namespace std;
 int ans;
 int n;
 int num[14];
-int re\_sum[14];
+int re_sum[14];
 void dfs(int pos,long long sum,long long maxx,long long minn){
     if(pos&amp;gt;n&amp;amp;&amp;amp;sum&amp;lt;=maxx&amp;amp;&amp;amp;sum&amp;gt;=minn){ans++;return; }
-    if(sum+re\_sum[pos+1]&amp;gt;=maxx){ans++; return;}
+    if(sum+re_sum[pos+1]&amp;gt;=maxx){ans++; return;}
     else if(pos&amp;gt;n)return;
     for(int i = 0;i*num[pos]+sum&amp;lt;=maxx;i++){
         dfs(pos+1,sum+i*num[pos],maxx,minn);
@@ -56,7 +56,7 @@ int main(){
         cin&amp;gt;&amp;gt;num[i];
     }
     for(int i = n;i&amp;gt;=1;i--){
-        re\_sum[i] = num[i]+re\_sum[i+1];
+        re_sum[i] = num[i]+re_sum[i+1];
     }
     dfs(1,0,bmax,bmin);
     cout&amp;lt;&amp;lt;ans;
@@ -146,10 +146,10 @@ using namespace std;
 int ans;
 int n;
 int num[14];
-int re\_sum[14];
+int re_sum[14];
 void dfs(int pos,long long sum,long long maxx,long long minn){
     if(pos&amp;gt;n&amp;amp;&amp;amp;sum&amp;lt;=maxx&amp;amp;&amp;amp;sum&amp;gt;=minn){ans++;return; }
-    if(sum+re\_sum[pos+1]&amp;gt;=maxx){ans++; return;}
+    if(sum+re_sum[pos+1]&amp;gt;=maxx){ans++; return;}
     else if(pos&amp;gt;n)return;
     for(int i = 0;i*num[pos]+sum&amp;lt;=maxx;i++){
         dfs(pos+1,sum+i*num[pos],maxx,minn);
@@ -162,7 +162,7 @@ int main(){
         cin&amp;gt;&amp;gt;num[i];
     }
     for(int i = n;i&amp;gt;=1;i--){
-        re\_sum[i] = num[i]+re\_sum[i+1];
+        re_sum[i] = num[i]+re_sum[i+1];
     }
     dfs(1,0,bmax,bmin);
     cout&amp;lt;&amp;lt;ans;
@@ -416,10 +416,10 @@ void spfa(){
 <span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">num</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">re</span><span class="err">\</span><span class="n">_sum</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">re_sum</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
 <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">maxx</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">minn</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">n</span><span class="o">&amp;&amp;</span><span class="n">sum</span><span class="o">&lt;=</span><span class="n">maxx</span><span class="o">&amp;&amp;</span><span class="n">sum</span><span class="o">&gt;=</span><span class="n">minn</span><span class="p">){</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span><span class="k">return</span><span class="p">;</span> <span class="p">}</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="o">+</span><span class="n">re</span><span class="err">\</span><span class="n">_sum</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">maxx</span><span class="p">){</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span> <span class="k">return</span><span class="p">;}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="o">+</span><span class="n">re_sum</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">maxx</span><span class="p">){</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span> <span class="k">return</span><span class="p">;}</span>
     <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">*</span><span class="n">num</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span><span class="o">+</span><span class="n">sum</span><span class="o">&lt;=</span><span class="n">maxx</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">dfs</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">sum</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">num</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span><span class="n">maxx</span><span class="p">,</span><span class="n">minn</span><span class="p">);</span>
@@ -432,7 +432,7 @@ void spfa(){
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
     <span class="p">}</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">--</span><span class="p">){</span>
-        <span class="n">re</span><span class="err">\</span><span class="n">_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">re</span><span class="err">\</span><span class="n">_sum</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="n">re_sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">re_sum</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
     <span class="p">}</span>
     <span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">bmax</span><span class="p">,</span><span class="n">bmin</span><span class="p">);</span>
     <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>

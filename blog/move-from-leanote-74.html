@@ -60,7 +60,7 @@ int n;
 const int base = 37;//基数
 char str[MAXN];
 unsigned long long pow[MAXN];//基数的n次方mod mod的值
-void work\_pow(){
+void work_pow(){
     pow[0] = 1;
     for(int i = 1;i&amp;lt;=n;i++){
         pow[i] = pow[i-1]*base;
@@ -73,10 +73,10 @@ void calHash(){
     }
 }
 int main() {
-    ios::sync\_with\_stdio(false);
+    ios::sync_with_stdio(false);
     cin&amp;gt;&amp;gt;n;
     cin&amp;gt;&amp;gt;str+1;
-    work\_pow();
+    work_pow();
     calHash();
     if(!n&amp;amp;1){
         cout&amp;lt;&amp;lt;&quot;NOT POSSIBLE&quot;;
@@ -171,7 +171,7 @@ int n;
 const int base = 37;//基数
 char str[MAXN];
 unsigned long long pow[MAXN];//基数的n次方mod mod的值
-void work\_pow(){
+void work_pow(){
     pow[0] = 1;
     for(int i = 1;i&amp;lt;=n;i++){
         pow[i] = pow[i-1]*base;
@@ -184,10 +184,10 @@ void calHash(){
     }
 }
 int main() {
-    ios::sync\_with\_stdio(false);
+    ios::sync_with_stdio(false);
     cin&amp;gt;&amp;gt;n;
     cin&amp;gt;&amp;gt;str+1;
-    work\_pow();
+    work_pow();
     calHash();
     if(!n&amp;amp;1){
         cout&amp;lt;&amp;lt;&quot;NOT POSSIBLE&quot;;
@@ -446,7 +446,7 @@ ABABABABA
 <span class="k">const</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span><span class="c1">//基数</span>
 <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">pow</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span><span class="c1">//基数的n次方mod mod的值</span>
-<span class="kt">void</span> <span class="n">work</span><span class="err">\</span><span class="n">_pow</span><span class="p">(){</span>
+<span class="kt">void</span> <span class="nf">work_pow</span><span class="p">(){</span>
     <span class="n">pow</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">pow</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pow</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">base</span><span class="p">;</span>
@@ -459,10 +459,10 @@ ABABABABA
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
     <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
     <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">str</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">work</span><span class="err">\</span><span class="n">_pow</span><span class="p">();</span>
+    <span class="n">work_pow</span><span class="p">();</span>
     <span class="n">calHash</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
         <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"NOT POSSIBLE"</span><span class="p">;</span>
