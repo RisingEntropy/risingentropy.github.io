@@ -6,21 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Projects</title>
-  <meta name='description' content='Haoyu Deng's personal page'>
+  <title>2023_nuedc</title>
+  <meta name='description' content='2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分'>
 
-  <link rel="canonical" href="/projects/">
+  <link rel="canonical" href="/project/2023-nuedc">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Projects – Haoyu Deng's page">
-  <meta name="twitter:description" content="">
-  <meta name="twitter:image:src" content="">
+  <meta name="twitter:title" content="2023_nuedc – Haoyu Deng's page">
+  <meta name="twitter:description" content="2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分">
+  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20231203002127.png">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Projects – Haoyu Deng's page">
-  <meta property="og:description" content="">
-  <meta property="og:image" content="">
+  <meta property="og:title" content="2023_nuedc – Haoyu Deng's page">
+  <meta property="og:description" content="2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分">
+  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20231203002127.png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -86,7 +86,7 @@
               
                 
                 <li class="nav__item">
-                  <a href="/projects/" class="nav__link active-link">Projects</a>
+                  <a href="/projects/" class="nav__link">Projects</a>
                 </li>
                 
               
@@ -137,7 +137,37 @@
 </header>
 <!-- end header -->
 
+    <div class="container">
+
+  <!--bookshop-live name(page-heading/page-heading.jekyll.html) params(title=page.title description=page.subtitle) context() -->
+          
+<div class="container">
+  <div class="c-page-heading">
+    <h1 class="c-page-heading__title">2023_nuedc</h1>
     
+  </div>
+</div>
+          <!--bookshop-live end-->
+
+  <div class="page animate">
+    <p><a href="https://github.com/RisingEntropy/2023EEDesignContest">Code</a></p>
+
+<p><img src="https://cdn.risingentropy.top/images/posts/20231203002321.png" alt="20231203002321" />
+这是2023年全国大学生电子设计竞赛H题《信号分离装置》我们的方案。该仓库为FPGA部分电路设计代码。我们的方案分为三个部分，模拟电路部分，MCU部分，FPGA部分。<a href="https://github.com/Duanyll/h743_2023h">MCU部分代码</a></p>
+
+<p>FPGA选用XilinxXC7K70TFBG484-2芯片，高速ADC选用AD9269，DAC选用AD9744芯片。FPGA电路主要分成三个部分，ADC输入部分、寄存器组和输出部分。ADC 的采样率被设置为40.960. Msps，这样的数据速率超过了stm32单片机SPI总线的速度，故设计了一个缓冲区来缓存数据并发送给stm32单片机以供其分析计算。同时ADC部分还会维护一个触发计时，当计时结束时，会在下一个ADC的过零点产生一个触发信号来复位DDS的相位，以减少频率误差的积累。</p>
+
+<p>在寄存器组中，一共存在13个寄存器，地址从0x00到0x0D，其功能被列在表1中。通过
+SPI 读写寄存器组的方式，STM32单片机可以灵活地配置FPGA电路的输入输出和表现。寄存
+器主要负责配置DDS重置周期、两个通道的输出波形、频率及其初始相位。
+寄存器表格如下：
+<img src="https://cdn.risingentropy.top/images/posts/20231203002642.png" alt="20231203002642" /></p>
+
+  </div>
+
+  
+
+</div>
 
     <!-- 
         Bookshop components are accessed using the bookshop tag, 
@@ -145,76 +175,6 @@
     -->
     <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
           
-<div class="c-page">
-
-
-    <!--bookshop-live name(page-heading/page-heading.jekyll.html) params(bind=block) context(block=content_blocks[0]) -->
-          
-<div class="container">
-  <div class="c-page-heading">
-    <h1 class="c-page-heading__title">My projects</h1>
-    
-      <p class="c-page-heading__description">Here is all my projects, including developing ones.</p>
-    
-  </div>
-</div>
-          <!--bookshop-live end-->
-
-    <!--bookshop-live name(projects-list/projects-list.jekyll.html) params(bind=block) context(block=content_blocks[1]) -->
-          <div class="project-list container animate">
-  <div class="section__head">
-    <h2 class="section__title">My projects</h2>
-  </div>
-  <div class="section__description"></div>
-  <div class="row">
-    
-      <div class="col col-6 col-d-6 col-t-12">
-        <!--bookshop-live name(project-card/project-card.jekyll.html) params(project=project) context(project=site.projects[0]) -->
-          
-<div class="c-project-card">
-  <div class="c-project-card__content">
-    <div class="c-project-card__client-meta">
-      
-        <div class="c-project-card__image-container">
-          <img class="c-project-card__client-avatar" src="https://cdn.risingentropy.top/images/posts/20231203002127.png" alt="2023年全国大学生电子设计竞赛H题FPGA部分">
-        </div>
-      
-      <div class="c-project-card__client-info">
-        
-          <h3 class="c-project-card__client-name">
-            <a href="/project/2023-nuedc">2023年全国大学生电子设计竞赛H题FPGA部分</a>
-          </h3>
-        
-        
-          <p class="c-project-card__client-position">国一作品</p>
-        
-      </div>
-      
-      <div class="c-project-card__tags-box">
-        
-        <div class="c-project-card__tag">verilog</div>
-        
-        <div class="c-project-card__tag">Vivado</div>
-        
-      </div>
-      
-    </div>
-    
-      <p class="c-project-card__client-text">2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分</p>
-    
-  </div>
-</div>
-          <!--bookshop-live end-->
-      </div>
-    
-  </div>
-</div>
-
-          <!--bookshop-live end-->
-
-
-</div>
-
           <!--bookshop-live end-->
 
     <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
