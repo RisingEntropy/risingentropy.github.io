@@ -519,7 +519,7 @@ int main(){
 <h1 id="解答">解答</h1>
 <p>动态规划：
 dp[i][j]表示长度为i，逆序对个数为j的方案数，那么有如下转移：
-$dp[i][j] = dp[i-1][j]+\sum dp[i-1]<a href="1\le k&lt;i">k</a>$
+$dp[i][j] = dp[i-1][j]+\sum dp[i-1]<a href="1\\le k&lt;i">k</a>$
 然后对于后面那一坨，做一个前缀和优化。但是要注意一点，就是j的范围，因为我们在枚举的时候，逆序对的上界是一个$min(\frac{i*(i-1)}{2},k)$，但是当逆序对的上界较小的时候，在维护逆序对的时候更新不到后面去，导致后面转移的时候前缀和为0，所以干脆上界就直接设为k好了。
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
