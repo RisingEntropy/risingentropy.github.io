@@ -288,7 +288,7 @@
 
 <p>这样做固然可以，但是会T掉很多点，为什么呢？因为虽然用了启发式搜索，还是拓展了一些不可能在最短路上的点，所以我们需要另一利器：剪枝！没错，在bfs上剪枝！那么剪枝条件呢？我们只需要考虑可行性剪枝即可，因为最短路上起点到任意一点的距离加上这个点到终点的距离一点等于最短路权值和(废话)！如果堆顶的点的可能权值(这里的权值其实是确定的，因为我们的估计函数是精确的)都已经大于了最短路了，堆里面的其他元素都不可能在最短路上了那么我们直接返回就行了。关于A* 可以看看我的另一篇题解：<a href="http://denghaoyu.leanote.com/post/luoguP4467-%5BSCOI2007%5Dk%E7%9F%AD%E8%B7%AF">P4467 [SCOI2007]k短路</a> 推荐做一下<a href="https://www.luogu.org/problemnew/show/P1608">P4467</a>.原谅我的博客里借鉴了P4467一位大佬写的题解里面的图</p>
 
-<p>注意A*算法对内存要求比较大，出题人也会卡A* （不然谁去写正解啊）所以在写A*时我推荐使用<code class="language-plaintext highlighter-rouge">algorithm</code> 库里面的<code class="language-plaintext highlighter-rouge">push\_heap</code>和<code class="language-plaintext highlighter-rouge">pop\_heap</code> 函数或者手打堆，而不要使用<code class="language-plaintext highlighter-rouge">priority\_queue</code> 因为<code class="language-plaintext highlighter-rouge">priority\_queue</code>内存用的多，不吸氧会T掉，吸氧会MLE。</p>
+<p>注意A*算法对内存要求比较大，出题人也会卡A* （不然谁去写正解啊）所以在写A*时我推荐使用<code class="language-plaintext highlighter-rouge">algorithm</code> 库里面的<code class="language-plaintext highlighter-rouge">push_heap</code>和<code class="language-plaintext highlighter-rouge">pop_heap</code> 函数或者手打堆，而不要使用<code class="language-plaintext highlighter-rouge">priority_queue</code> 因为<code class="language-plaintext highlighter-rouge">priority_queue</code>内存用的多，不吸氧会T掉，吸氧会MLE。</p>
 
 <p>最后由于A* 不是正解，所以不可避免被卡掉几个点，所以我用了<del>面向数据编程</del>把这道题A了。不然也有80分</p>
 
@@ -355,14 +355,14 @@
 <span class="n">node</span> <span class="n">nodes</span><span class="p">[</span><span class="n">MAXN</span><span class="o">*</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">cnt</span><span class="p">;</span>
 <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
-    <span class="n">make</span><span class="err">\</span><span class="n">_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">MAXN</span><span class="p">);</span>
+    <span class="n">make_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">MAXN</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="k">const</span> <span class="n">node</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">){</span>
     <span class="n">nodes</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
-    <span class="n">push</span><span class="err">\</span><span class="n">_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">push_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kr">inline</span> <span class="n">node</span> <span class="nf">pop</span><span class="p">(){</span>
-    <span class="n">pop</span><span class="err">\</span><span class="n">_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">pop_heap</span><span class="p">(</span><span class="n">nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nodes</span><span class="o">+</span><span class="n">cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="n">cnt</span><span class="o">--</span><span class="p">];</span>
 <span class="p">}</span>
 <span class="kr">inline</span> <span class="n">node</span> <span class="nf">qtop</span><span class="p">(){</span>

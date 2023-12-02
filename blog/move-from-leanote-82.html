@@ -221,7 +221,7 @@
 </code></pre></div></div>
 <h1 id="解答">解答</h1>
 <p>分析一下这道题，我们发现当点$(x,y)$中，gcd(x,y)=1的时候，这个点才可以被看见(原因的话，从斜率的角度来看)。那么对于每一个y，我们只需要求出$\varphi(y)$就可以了。那么答案就是：
-\(3+2\times \sum\_{i=2}^{N}\varphi(i)\)
+\(3+2\times \sum_{i=2}^{N}\varphi(i)\)
 这里面的3是左下角那三个点可以被看见，特判一下。乘以2是因为这个图形有对称性。</p>
 
 <p>那么利用Eratosthenes筛法(就是最<del>脑残</del>简单的素数筛法)，直接在$O(N\ logN)$的复杂度内求出2~N中的每个数的欧拉函数。(其实这样做的道理就是当a<code class="language-plaintext highlighter-rouge">&lt;</code>b且a、b互质的时候，a与b的倍数也互质，再结合欧拉函数的求法可以直接这样求出很多数的欧拉函数)代码如下</p>

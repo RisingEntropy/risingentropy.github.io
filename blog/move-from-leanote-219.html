@@ -62,8 +62,8 @@ int main(){
 		clear(col),clear(sum);
 		double ans = 0;
 		for(int i = 1;i&amp;lt;=2*n;i++){
-			int l = lower\_bound(HASH+1,HASH+2*n+1,lines[i].x1)-HASH;
-			int r = lower\_bound(HASH+1,HASH+2*n+1,lines[i].x2)-HASH-1;
+			int l = lower_bound(HASH+1,HASH+2*n+1,lines[i].x1)-HASH;
+			int r = lower_bound(HASH+1,HASH+2*n+1,lines[i].x2)-HASH-1;
 			if(l&amp;lt;=r)update(l,r,lines[i].flag,1,2*n,1);
 			ans+=sum[1]*(lines[i+1].y-lines[i].y);
 		}
@@ -124,8 +124,8 @@ int main(){
 		clear(col),clear(sum);
 		double ans = 0;
 		for(int i = 1;i&amp;lt;=2*n;i++){
-			int l = lower\_bound(HASH+1,HASH+2*n+1,lines[i].x1)-HASH;
-			int r = lower\_bound(HASH+1,HASH+2*n+1,lines[i].x2)-HASH-1;
+			int l = lower_bound(HASH+1,HASH+2*n+1,lines[i].x1)-HASH;
+			int r = lower_bound(HASH+1,HASH+2*n+1,lines[i].x2)-HASH-1;
 			if(l&amp;lt;=r)update(l,r,lines[i].flag,1,2*n,1);
 			ans+=sum[1]*(lines[i+1].y-lines[i].y);
 		}
@@ -350,8 +350,8 @@ int main(){
 		<span class="n">clear</span><span class="p">(</span><span class="n">col</span><span class="p">),</span><span class="n">clear</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
 		<span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-			<span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">lower</span><span class="err">\</span><span class="n">_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="p">;</span>
-			<span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">lower</span><span class="err">\</span><span class="n">_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x2</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+			<span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="p">;</span>
+			<span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">HASH</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">HASH</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x2</span><span class="p">)</span><span class="o">-</span><span class="n">HASH</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 			<span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">)</span><span class="n">update</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">flag</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 			<span class="n">ans</span><span class="o">+=</span><span class="n">sum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">y</span><span class="o">-</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">);</span>
 		<span class="p">}</span>

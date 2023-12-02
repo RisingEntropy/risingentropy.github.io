@@ -215,7 +215,7 @@
 <h1 id="解答">解答</h1>
 <p>第一次自己把数学题的式子推出来Orz。
 题目要求求：$\sum \limits_{i=1}^{n}\sum\limits_{j=1}^{m}[gcd(i,j)=k]$
-\(\sum\limits\_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits\_{j=1}^{\lfloor\frac{m}{k}\rfloor}[gcd(i,j)=1]\\\sum\limits\_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits\_{j=1}^{\lfloor\frac{m}{k}\rfloor}\sum\_{d|gcd(i,j)}\mu(d)\\\sum\limits\_{d=1}^{min(n,m)}\mu(d)\sum\limits\_{i=1}^{\lfloor\frac{n}{kd}\rfloor}\sum\limits\_{j=1}^{\lfloor\frac{m}{kd}\rfloor}1\\\sum\limits\_{d=1}^{min(n,m)}\mu(d)\lfloor\frac{n}{kd}\rfloor\lfloor\frac{m}{kd}\rfloor\)
+\(\sum\limits_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{k}\rfloor}[gcd(i,j)=1]\\\sum\limits_{i=1}^{\lfloor\frac{n}{k}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{k}\rfloor}\sum_{d|gcd(i,j)}\mu(d)\\\sum\limits_{d=1}^{min(n,m)}\mu(d)\sum\limits_{i=1}^{\lfloor\frac{n}{kd}\rfloor}\sum\limits_{j=1}^{\lfloor\frac{m}{kd}\rfloor}1\\\sum\limits_{d=1}^{min(n,m)}\mu(d)\lfloor\frac{n}{kd}\rfloor\lfloor\frac{m}{kd}\rfloor\)
 对于后面下取整的式子可以整除分块，然后前面那一坨$\mu$可以做一个前缀和，在整除分块的时候同时计算了。
 然后进行容斥，$ans(b,d)-ans(a,c-1)-ans(b-1,d)+ans(b-1,c-1)$
 代码：</p>

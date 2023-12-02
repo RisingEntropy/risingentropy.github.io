@@ -16,25 +16,25 @@
   <meta name="twitter:title" content="FFT – Haoyu Deng's page">
   <meta name="twitter:description" content="FFT过程（n items）
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
-F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
-solve:w\_n^0...w\_n^{n/2-1}\\
-to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
+F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
+F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
+solve:w_n^0...w_n^{n/2-1}\\
+to: w_n^{n/2-1}...w_n^{n-1}\\\)
 假设$k&amp;lt;n/2$,由于：
-\(w\_n^k = w\_n^{k\%n}\)
+\(w_n^k = w_n^{k\%n}\)
 所以可以做如下转化
-\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
+\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
 bacause\\
-(w\_n^k)^j = w\_n^{kj}\\
+(w_n^k)^j = w_n^{kj}\\
 therefore\\
-=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
-w\_n^k = w\_n^{k\%n}\\
-= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
-w\_{2n}^{2k} = w\_n^k\\
-= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
-w\_n^{k+n/2} = -w\_n^{k}\\
+=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
+w_n^k = w_n^{k\%n}\\
+= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
+w_{2n}^{2k} = w_n^k\\
+= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
+w_n^{k+n/2} = -w_n^{k}\\
 therefore \\
-FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
+FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 DFT OK!
 ">
   <meta name="twitter:image:src" content="/images/posts/OI.png">
@@ -43,25 +43,25 @@ DFT OK!
   <meta property="og:title" content="FFT – Haoyu Deng's page">
   <meta property="og:description" content="FFT过程（n items）
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
-F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
-solve:w\_n^0...w\_n^{n/2-1}\\
-to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
+F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
+F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
+solve:w_n^0...w_n^{n/2-1}\\
+to: w_n^{n/2-1}...w_n^{n-1}\\\)
 假设$k&amp;lt;n/2$,由于：
-\(w\_n^k = w\_n^{k\%n}\)
+\(w_n^k = w_n^{k\%n}\)
 所以可以做如下转化
-\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
+\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
 bacause\\
-(w\_n^k)^j = w\_n^{kj}\\
+(w_n^k)^j = w_n^{kj}\\
 therefore\\
-=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
-w\_n^k = w\_n^{k\%n}\\
-= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
-w\_{2n}^{2k} = w\_n^k\\
-= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
-w\_n^{k+n/2} = -w\_n^{k}\\
+=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
+w_n^k = w_n^{k\%n}\\
+= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
+w_{2n}^{2k} = w_n^k\\
+= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
+w_n^{k+n/2} = -w_n^{k}\\
 therefore \\
-FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
+FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 DFT OK!
 ">
   <meta property="og:image" content="/images/posts/OI.png">
@@ -234,29 +234,29 @@ DFT OK!
     <div class="post__content">
       <p>FFT过程（n items）
 \(F(x) = FL(x^2)+x*FR(x^2)\\
-F(w\_n^k) = FL((w\_{n}^k)^2)+w\_n^kFR((w\_{n}^k)^2)\\
-F(w\_n^k) = FL(w\_{n/2}^k)+w\_n^kFR(w\_{n/2}^k)\\
-solve:w\_n^0...w\_n^{n/2-1}\\
-to: w\_n^{n/2-1}...w\_n^{n-1}\\\)
+F(w_n^k) = FL((w_{n}^k)^2)+w_n^kFR((w_{n}^k)^2)\\
+F(w_n^k) = FL(w_{n/2}^k)+w_n^kFR(w_{n/2}^k)\\
+solve:w_n^0...w_n^{n/2-1}\\
+to: w_n^{n/2-1}...w_n^{n-1}\\\)
 假设$k&lt;n/2$,由于：
-\(w\_n^k = w\_n^{k\%n}\)
+\(w_n^k = w_n^{k\%n}\)
 所以可以做如下转化
-\(F(w\_n^{k+n/2}) = FL((w\_n^{k+n/2})^2)+w\_n^{k+n/2}FR((w\_n^{k+n/2})^2)\\
+\(F(w_n^{k+n/2}) = FL((w_n^{k+n/2})^2)+w_n^{k+n/2}FR((w_n^{k+n/2})^2)\\
 bacause\\
-(w\_n^k)^j = w\_n^{kj}\\
+(w_n^k)^j = w_n^{kj}\\
 therefore\\
-=FL(w\_n^{2k+n})+w\_n^{k+n/2}FR(w\_n^{2k+n})\\
-w\_n^k = w\_n^{k\%n}\\
-= FL(w\_n^{2k})+w\_n^{k+n/2}FR(w\_n^{2k})\\
-w\_{2n}^{2k} = w\_n^k\\
-= FL(w\_{n/2}^k)+w\_n^{k+n/2}FR(w\_{n/2}^k)\\
-w\_n^{k+n/2} = -w\_n^{k}\\
+=FL(w_n^{2k+n})+w_n^{k+n/2}FR(w_n^{2k+n})\\
+w_n^k = w_n^{k\%n}\\
+= FL(w_n^{2k})+w_n^{k+n/2}FR(w_n^{2k})\\
+w_{2n}^{2k} = w_n^k\\
+= FL(w_{n/2}^k)+w_n^{k+n/2}FR(w_{n/2}^k)\\
+w_n^{k+n/2} = -w_n^{k}\\
 therefore \\
-FL(w\_{n/2}^k)-w\_n^{k}FR(w\_{n/2}^k)\)
+FL(w_{n/2}^k)-w_n^{k}FR(w_{n/2}^k)\)
 DFT OK!</p>
 
 <p>IDFT
-\(nF[k] = \sum\limits\_{i = 0}^{n-1}(\omega\_n^{-k})^iY[i]\)</p>
+\(nF[k] = \sum\limits_{i = 0}^{n-1}(\omega_n^{-k})^iY[i]\)</p>
 
     </div>
 

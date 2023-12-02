@@ -257,7 +257,7 @@
   <p>我们为所有边设置反向边(容量为0)，并将其流量与正向边同步。为了保持T-&gt;S边流量为0，每当由于增广操作，T-&gt;S边流量上升，其反向边也同步上涨，而显然在残量网络中反向边是沿S-&gt;T方向的，这就又出现了一条增广路，计算机对此无法容忍，下调它的流量，我们的T-&gt;S边流量也随之回到了0，达到了目的</p>
   <h1 id="割">割</h1>
   <p>G = (V, E, C)是已知的网络流图，设U是V的一个子集，W =V\U，满足S ∈ U，T∈W。即U、W把V分成两个不相交的集合，且源点和汇点分属不同的集合(其实就是把一个网络流图分成2部分，源点和汇点分别属于不同集合就完了)对于弧尾在U，弧头在W的弧所构成的集合称之为割切，用（U，W）表示。把割切（U，W）中所有弧的容量之和叫做此割切的容量，记为C（U，W），即：
-\(C(U,V) = \sum\_{i\in U\ \ j\in V}C\_{i,j}\)
+\(C(U,V) = \sum_{i\in U\ \ j\in V}C_{i,j}\)
 <img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 </blockquote>
 
@@ -391,7 +391,7 @@ eg板子题：<a href="https://www.luogu.org/problemnew/show/P3376">水谷3376</
 </ul>
 
 <h1 id="二分图的网络流模型建模">二分图的网络流模型建模</h1>
-<p>eg<a href="http://192.168.110.251/problempage.php?problem\_id=2303">「网络流 24 题」搭配飞行员</a>
+<p>eg<a href="http://192.168.110.251/problempage.php?problem_id=2303">「网络流 24 题」搭配飞行员</a>
 把所有正飞行员全部连接到0号点上，容量为1，副飞行员连到n+1号点上，容量为1，求个最大流就行了。
 <img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="图片标题" /></p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
@@ -472,7 +472,7 @@ eg板子题：<a href="https://www.luogu.org/problemnew/show/P3376">水谷3376</
  <span class="p">}</span>
 </code></pre></div></div>
 <h1 id="三分匹配等等">三分匹配等等</h1>
-<p>如<a href="http://192.168.110.251/problempage.php?problem\_id=2351"> [USACO07OPEN]吃饭Dining</a>其实就是把奶牛，食物，水连在源点S，奶牛拆成2个点，中间用容量为1的边连接起来，再连接饮料，然后连接汇点T。跑最大流</p>
+<p>如<a href="http://192.168.110.251/problempage.php?problem_id=2351"> [USACO07OPEN]吃饭Dining</a>其实就是把奶牛，食物，水连在源点S，奶牛拆成2个点，中间用容量为1的边连接起来，再连接饮料，然后连接汇点T。跑最大流</p>
 <h1 id="最大流量最小费用">最大流量最小费用</h1>
 <p>其实就是把bfs改成spfa或者dijkstra，因为这样走的就是费用最小的一条路，然后跑dinic；
 luogu3381</p>
@@ -548,7 +548,7 @@ luogu3381</p>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 	<span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">;</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="kt">long</span> <span class="kt">long</span> <span class="n">ci</span><span class="p">,</span><span class="n">wi</span><span class="p">;</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">S</span><span class="o">&gt;&gt;</span><span class="n">T</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
