@@ -43,7 +43,7 @@
       MathJax.Hub.Config({
           tex2jax: {
               skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
-              displayMath: [['$$','$$'], ['\[','\]']],
+              displayMath: [['$$','$$'], ['\[','\]'], ['\(', '\)']],
               inlineMath: [['$','$']],
           },
           TeX: {equationNumbers: {autoNumber: "AMS"}},
@@ -214,7 +214,7 @@
 
 <p>那么ZZ该如何安排使用加速器，才能使所有乘客的旅行时间总和最小？</p>
 
-<font color="red">对于 $100\%$ 的数据，$n，m\le 10^5，k\le5\times10^6，D_i\le1000。$ </font>
+<font color="red">对于 $100\%$ 的数据，$n，m\le 10^5，k\le5\times10^6，D\_i\le1000。$ </font>
 
 <hr />
 <h1 id="开题">开题</h1>
@@ -229,35 +229,35 @@
 
 <p>分析后可得</p>
 
-\[ans=\sum_{i=2}^nTim_i*cnt_i-\sum T_i\]
+\[ans=\sum\_{i=2}^nTim\_i*cnt\_i-\sum T\_i\]
 
 <p>这个式子很重要也很有用！
 其中$Tim_i$表示公交车到达第$i$号景点的时间，$cnt_i$表示在$i$景点下车的人数</p>
 
 <p>显然的，如果我们设$Begin_i$为从$i$号景点发车的时间，那么有</p>
 
-\[Tim_i=Begin_{i-1}+D_{i-1}\]
+\[Tim\_i=Begin\_{i-1}+D\_{i-1}\]
 
 <p>所以分析一波$Begin$的式子
 首先我们设$i$号景点最晚到的旅客的时间为$Maxn_i$
-\(Begin_i=max\left(Maxn_i,Begin_{i-1}+D_{i-1} \right)\)
+\(Begin\_i=max\left(Maxn\_i,Begin\_{i-1}+D\_{i-1} \right)\)
 发现这是一个递推式，尝试把它拆开</p>
 
-\[Begin_i=max\left(Maxn_i,max(Maxn_{i-1}+D_{i-1},Begin_{i-2}+D_{i-2}+D_{i-1})\right)\]
+\[Begin\_i=max\left(Maxn\_i,max(Maxn\_{i-1}+D\_{i-1},Begin\_{i-2}+D\_{i-2}+D\_{i-1})\right)\]
 
 <p>像这样一直拆下去，就得到了这样一个奇妙的式子
-\(Begin_i=max\left(Maxn_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j+D_{j\to i}\end{Bmatrix}\right)\)
+\(Begin\_i=max\left(Maxn\_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn\_j+D\_{j\to i}\end{Bmatrix}\right)\)
 把$D_{j\to i}$拆成前缀和形式$pre_i-pre_j$,再稍稍变一下形，就有：</p>
 
-\[Begin_i=max\left(Maxn_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_i\right)\\
-=max\left(Maxn_i-pre_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}\right)+pre_i\]
+\[Begin\_i=max\left(Maxn\_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}+pre\_i\right)\\
+=max\left(Maxn\_i-pre\_i,\underset{1\le j&lt;i}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}\right)+pre\_i\]
 
 <p>合并后完成变形：
-\(Begin_i=\underset{1\le j\le i}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_i\)
+\(Begin\_i=\underset{1\le j\le i}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}+pre\_i\)
 这时再回过头来看答案，可以推一波
-\(\sum_{i=2}^nTim_i*cnt_i-\sum T_i\\
-=\sum_{i=2}^n(Begin_{i-1}+D_{i-1})*cnt_i-\sum T_i\\
-=\sum_{i=2}^n\left(\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_{i-1}+D_{i-1}\right)*cnt_i-\sum T_i\)
+\(\sum\_{i=2}^nTim\_i*cnt\_i-\sum T\_i\\
+=\sum\_{i=2}^n(Begin\_{i-1}+D\_{i-1})*cnt\_i-\sum T\_i\\
+=\sum\_{i=2}^n\left(\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}+pre\_{i-1}+D\_{i-1}\right)*cnt\_i-\sum T\_i\)
 $pre_{i-1}+D_{i-1}$就是$pre_i$，那么我们就维护一下${max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}$就好了，线段树解决</p>
 
 <p>至此脑子烧糊，想不出怎么贪心了
@@ -266,10 +266,10 @@ $pre_{i-1}+D_{i-1}$就是$pre_i$，那么我们就维护一下${max}\begin{Bmatr
 <p>设$S_i$表示景点$i$公交到达时间和游客最晚时间之差，显然如果$S_i&gt;0$就有提速的余地
 于是推一波这个东西</p>
 
-\[S_i=Tim_i-Maxn_i\\
-=Begin_{i-1}+D_{i-1}-Maxn_i\\
-=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}+pre_{i-1}+D_{i-1}-Maxn_i\\
-=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn_j-pre_j\end{Bmatrix}-(Maxn_i-pre_i)\]
+\[S\_i=Tim\_i-Maxn\_i\\
+=Begin\_{i-1}+D\_{i-1}-Maxn\_i\\
+=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}+pre\_{i-1}+D\_{i-1}-Maxn\_i\\
+=\underset{1\le j\le i-1}{max}\begin{Bmatrix}Maxn\_j-pre\_j\end{Bmatrix}-(Maxn\_i-pre\_i)\]
 
 <p>通俗点讲，如果$i$号点前面有比它小的点，那么那个点可以对$i$号点产生影响
 那么现在就很清楚了：一个点能影响后面连续一段比它小的点，一个点是否优秀取决于它区间内除它以外的点的$cnt$总和（因为减小$1$的权值就减小了$\sum\limits_{i=l+1}^rcnt_i$的答案）

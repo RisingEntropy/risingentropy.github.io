@@ -101,7 +101,7 @@
       MathJax.Hub.Config({
           tex2jax: {
               skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
-              displayMath: [['$$','$$'], ['\[','\]']],
+              displayMath: [['$$','$$'], ['\[','\]'], ['\(', '\)']],
               inlineMath: [['$','$']],
           },
           TeX: {equationNumbers: {autoNumber: "AMS"}},
@@ -345,15 +345,15 @@ int km(){
 <p>例题也甩这了</p>
 
 <ol>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2081">glod小行星群</a> 建边同上</li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=1744">矩阵游戏</a>：行列间建边，要求匹配数为n</li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2081">glod小行星群</a> 建边同上</li>
   <li>[] <a href="">POJ - 2446 Chessboard</a>
     <h1 id="生成树">生成树</h1>
     <h1 id="普通生成树">普通生成树</h1>
   </li>
   <li>[] prim：不会啊</li>
   <li>[] kruskal
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4323">mst</a>:生成树+树剖</li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4323">mst</a>:生成树+树剖</li>
 </ol>
 
 <blockquote>
@@ -366,7 +366,7 @@ int km(){
 <a href=""></a></li>
   <li>[] kruskal重构树
 这玩意的两点间lca就是两点间最小瓶颈路（or最大路，取决于sort）但重点不在于这个，而在于它的一些奇妙性质。
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3673">[NOI2018]归程（return）</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3673">[NOI2018]归程（return）</a></li>
 </ol>
 
 <blockquote>
@@ -378,7 +378,7 @@ int km(){
 
 <ul>
   <li>[] 最短路树
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2423">安全出行Safe Travel</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2423">安全出行Safe Travel</a>
 毒瘤题</li>
 </ul>
 
@@ -394,7 +394,7 @@ int km(){
 
 <ul>
   <li>[] dfs生成树
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4749">【2019CSP-S测试1012】困难的图</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4749">【2019CSP-S测试1012】困难的图</a></li>
 </ul>
 
 <blockquote>
@@ -447,7 +447,7 @@ inline int dinic(){
 </code></pre></div></div>
 <ul>
   <li>[] 最大流
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2766">危桥</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2766">危桥</a>
 好题一道、</li>
 </ul>
 
@@ -460,7 +460,7 @@ inline int dinic(){
 
 <ul>
   <li>[] 最小割
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=1759">zjoi2009狼与羊的故事</a></li>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=1759">zjoi2009狼与羊的故事</a></li>
 </ul>
 
 <blockquote>
@@ -468,7 +468,7 @@ inline int dinic(){
 分开两个方格的代价为1，于是羊-&gt;狼连、羊-&gt;空地、空地-&gt;空地、空地-&gt;狼连边权为1的边。注意边不要连重了</p>
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=2309">「网络流 24 题」太空飞行计划SPJ</a>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=2309">「网络流 24 题」太空飞行计划SPJ</a>
 真正的好题</p>
 
 <blockquote>
@@ -486,24 +486,24 @@ inline int dinic(){
 <p>这块实在是太杂了……</p>
 
 <ul>
-  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3668">连通代价</a></li>
+  <li>[] <a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3668">连通代价</a></li>
 </ul>
 
 <blockquote>
   <p>直接暴力建边是$O(n^2)$的，但是有用的边只会在$x,y,z$的一维中连续的$a_i,a_{i+1}$相连，所以对三维排序后连续的点之间连边，复杂度$O(3nlog(n)+3n+kruskal)$</p>
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3841">双调路径</a></p>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3841">双调路径</a></p>
 
 <blockquote>
 
 </blockquote>
 
-<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4260">【ARC084D】Small Multiple</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3993">墨墨的等式</a>
+<p><a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4260">【ARC084D】Small Multiple</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3993">墨墨的等式</a>
 <a href="https://vjudge.net/problem/HDU-4370">HDU - 4370 0 or 1</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=4194">【ARC61E】Snuke’s Subway Trip</a>
-<a href="http://oi.cdshishi.net:8000/problempage.php?problem_id=3742">黑白图</a></p>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=4194">【ARC61E】Snuke’s Subway Trip</a>
+<a href="http://oi.cdshishi.net:8000/problempage.php?problem\_id=3742">黑白图</a></p>
 
     </div>
 
