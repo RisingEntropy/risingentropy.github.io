@@ -44,35 +44,35 @@ double cal(double x,double y,double z){
 }
 const double T = 1926;
 const double delta = 0.998;
-double best_x,best_y,best_z,best_ans;
-void simulate_annealing(){
-	double curr_T = T;
-	while(curr_T&amp;gt;0.001){
-		double curr_x = best_x + (rand()*2-RAND_MAX)*curr_T;
-		double curr_y = best_y + (rand()*2-RAND_MAX)*curr_T;
-		double curr_z = best_z + (rand()*2-RAND_MAX)*curr_T;
-		double curr_ans = cal(curr_x,curr_y,curr_z);
-		double DE = curr_ans - best_ans;
+double best\_x,best\_y,best\_z,best\_ans;
+void simulate\_annealing(){
+	double curr\_T = T;
+	while(curr\_T&amp;gt;0.001){
+		double curr\_x = best\_x + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_y = best\_y + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_z = best\_z + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_ans = cal(curr\_x,curr\_y,curr\_z);
+		double DE = curr\_ans - best\_ans;
 		if(DE&amp;lt;0){
-			best_x = curr_x;
-			best_y = curr_y;
-			best_z = curr_z;
-			best_ans = curr_ans;
-		}else if(exp(-DE/curr_T)*RAND_MAX&amp;gt;rand()){
-			best_x = curr_x;
-			best_y = curr_y;
-			best_z = curr_z;
-			best_ans = curr_ans;
+			best\_x = curr\_x;
+			best\_y = curr\_y;
+			best\_z = curr\_z;
+			best\_ans = curr\_ans;
+		}else if(exp(-DE/curr\_T)*RAND\_MAX&amp;gt;rand()){
+			best\_x = curr\_x;
+			best\_y = curr\_y;
+			best\_z = curr\_z;
+			best\_ans = curr\_ans;
 		}
-		curr_T*=delta;
+		curr\_T*=delta;
 	}
 }
 void SA(){
 	long long s = clock();
-//	while(double(clock()-s)/(double)CLOCKS_PER_SEC&amp;lt;0.8){
-		simulate_annealing();
-		simulate_annealing();
-		simulate_annealing();
+//	while(double(clock()-s)/(double)CLOCKS\_PER\_SEC&amp;lt;0.8){
+		simulate\_annealing();
+		simulate\_annealing();
+		simulate\_annealing();
 //	}
 }
 int main(){
@@ -84,7 +84,7 @@ int main(){
 		read(enemies[i].w);
 	}
 	SA();
-	printf(&quot;%.2lf\n%.2lf\n%.2lf\n%.2lf\n&quot;,best_x,best_y,best_z,best_ans);	
+	printf(&quot;%.2lf\n%.2lf\n%.2lf\n%.2lf\n&quot;,best\_x,best\_y,best\_z,best\_ans);	
 	return 0;
 }
 
@@ -123,35 +123,35 @@ double cal(double x,double y,double z){
 }
 const double T = 1926;
 const double delta = 0.998;
-double best_x,best_y,best_z,best_ans;
-void simulate_annealing(){
-	double curr_T = T;
-	while(curr_T&amp;gt;0.001){
-		double curr_x = best_x + (rand()*2-RAND_MAX)*curr_T;
-		double curr_y = best_y + (rand()*2-RAND_MAX)*curr_T;
-		double curr_z = best_z + (rand()*2-RAND_MAX)*curr_T;
-		double curr_ans = cal(curr_x,curr_y,curr_z);
-		double DE = curr_ans - best_ans;
+double best\_x,best\_y,best\_z,best\_ans;
+void simulate\_annealing(){
+	double curr\_T = T;
+	while(curr\_T&amp;gt;0.001){
+		double curr\_x = best\_x + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_y = best\_y + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_z = best\_z + (rand()*2-RAND\_MAX)*curr\_T;
+		double curr\_ans = cal(curr\_x,curr\_y,curr\_z);
+		double DE = curr\_ans - best\_ans;
 		if(DE&amp;lt;0){
-			best_x = curr_x;
-			best_y = curr_y;
-			best_z = curr_z;
-			best_ans = curr_ans;
-		}else if(exp(-DE/curr_T)*RAND_MAX&amp;gt;rand()){
-			best_x = curr_x;
-			best_y = curr_y;
-			best_z = curr_z;
-			best_ans = curr_ans;
+			best\_x = curr\_x;
+			best\_y = curr\_y;
+			best\_z = curr\_z;
+			best\_ans = curr\_ans;
+		}else if(exp(-DE/curr\_T)*RAND\_MAX&amp;gt;rand()){
+			best\_x = curr\_x;
+			best\_y = curr\_y;
+			best\_z = curr\_z;
+			best\_ans = curr\_ans;
 		}
-		curr_T*=delta;
+		curr\_T*=delta;
 	}
 }
 void SA(){
 	long long s = clock();
-//	while(double(clock()-s)/(double)CLOCKS_PER_SEC&amp;lt;0.8){
-		simulate_annealing();
-		simulate_annealing();
-		simulate_annealing();
+//	while(double(clock()-s)/(double)CLOCKS\_PER\_SEC&amp;lt;0.8){
+		simulate\_annealing();
+		simulate\_annealing();
+		simulate\_annealing();
 //	}
 }
 int main(){
@@ -163,7 +163,7 @@ int main(){
 		read(enemies[i].w);
 	}
 	SA();
-	printf(&quot;%.2lf\n%.2lf\n%.2lf\n%.2lf\n&quot;,best_x,best_y,best_z,best_ans);	
+	printf(&quot;%.2lf\n%.2lf\n%.2lf\n%.2lf\n&quot;,best\_x,best\_y,best\_z,best\_ans);	
 	return 0;
 }
 
@@ -366,35 +366,35 @@ int main(){
 <span class="p">}</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">1926</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.998</span><span class="p">;</span>
-<span class="kt">double</span> <span class="n">best_x</span><span class="p">,</span><span class="n">best_y</span><span class="p">,</span><span class="n">best_z</span><span class="p">,</span><span class="n">best_ans</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">simulate_annealing</span><span class="p">(){</span>
-	<span class="kt">double</span> <span class="n">curr_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">(</span><span class="n">curr_T</span><span class="o">&gt;</span><span class="mf">0.001</span><span class="p">){</span>
-		<span class="kt">double</span> <span class="n">curr_x</span> <span class="o">=</span> <span class="n">best_x</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr_T</span><span class="p">;</span>
-		<span class="kt">double</span> <span class="n">curr_y</span> <span class="o">=</span> <span class="n">best_y</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr_T</span><span class="p">;</span>
-		<span class="kt">double</span> <span class="n">curr_z</span> <span class="o">=</span> <span class="n">best_z</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr_T</span><span class="p">;</span>
-		<span class="kt">double</span> <span class="n">curr_ans</span> <span class="o">=</span> <span class="n">cal</span><span class="p">(</span><span class="n">curr_x</span><span class="p">,</span><span class="n">curr_y</span><span class="p">,</span><span class="n">curr_z</span><span class="p">);</span>
-		<span class="kt">double</span> <span class="n">DE</span> <span class="o">=</span> <span class="n">curr_ans</span> <span class="o">-</span> <span class="n">best_ans</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">best</span><span class="err">\</span><span class="n">_x</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_y</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_z</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
+<span class="kt">void</span> <span class="n">simulate</span><span class="err">\</span><span class="n">_annealing</span><span class="p">(){</span>
+	<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="o">&gt;</span><span class="mf">0.001</span><span class="p">){</span>
+		<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_x</span> <span class="o">=</span> <span class="n">best</span><span class="err">\</span><span class="n">_x</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="p">;</span>
+		<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_y</span> <span class="o">=</span> <span class="n">best</span><span class="err">\</span><span class="n">_y</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="p">;</span>
+		<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_z</span> <span class="o">=</span> <span class="n">best</span><span class="err">\</span><span class="n">_z</span> <span class="o">+</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="p">)</span><span class="o">*</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="p">;</span>
+		<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="n">cal</span><span class="p">(</span><span class="n">curr</span><span class="err">\</span><span class="n">_x</span><span class="p">,</span><span class="n">curr</span><span class="err">\</span><span class="n">_y</span><span class="p">,</span><span class="n">curr</span><span class="err">\</span><span class="n">_z</span><span class="p">);</span>
+		<span class="kt">double</span> <span class="n">DE</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_ans</span> <span class="o">-</span> <span class="n">best</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">DE</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-			<span class="n">best_x</span> <span class="o">=</span> <span class="n">curr_x</span><span class="p">;</span>
-			<span class="n">best_y</span> <span class="o">=</span> <span class="n">curr_y</span><span class="p">;</span>
-			<span class="n">best_z</span> <span class="o">=</span> <span class="n">curr_z</span><span class="p">;</span>
-			<span class="n">best_ans</span> <span class="o">=</span> <span class="n">curr_ans</span><span class="p">;</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">DE</span><span class="o">/</span><span class="n">curr_T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
-			<span class="n">best_x</span> <span class="o">=</span> <span class="n">curr_x</span><span class="p">;</span>
-			<span class="n">best_y</span> <span class="o">=</span> <span class="n">curr_y</span><span class="p">;</span>
-			<span class="n">best_z</span> <span class="o">=</span> <span class="n">curr_z</span><span class="p">;</span>
-			<span class="n">best_ans</span> <span class="o">=</span> <span class="n">curr_ans</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_x</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_x</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_y</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_y</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_z</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_z</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
+		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">DE</span><span class="o">/</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_x</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_x</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_y</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_y</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_z</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_z</span><span class="p">;</span>
+			<span class="n">best</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="n">curr</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
 		<span class="p">}</span>
-		<span class="n">curr_T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
+		<span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">SA</span><span class="p">(){</span>
 	<span class="kt">long</span> <span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
-<span class="c1">//	while(double(clock()-s)/(double)CLOCKS_PER_SEC&lt;0.8){</span>
-		<span class="n">simulate_annealing</span><span class="p">();</span>
-		<span class="n">simulate_annealing</span><span class="p">();</span>
-		<span class="n">simulate_annealing</span><span class="p">();</span>
+<span class="c1">//	while(double(clock()-s)/(double)CLOCKS\_PER\_SEC&lt;0.8){</span>
+		<span class="n">simulate</span><span class="err">\</span><span class="n">_annealing</span><span class="p">();</span>
+		<span class="n">simulate</span><span class="err">\</span><span class="n">_annealing</span><span class="p">();</span>
+		<span class="n">simulate</span><span class="err">\</span><span class="n">_annealing</span><span class="p">();</span>
 <span class="c1">//	}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
@@ -406,7 +406,7 @@ int main(){
 		<span class="n">read</span><span class="p">(</span><span class="n">enemies</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">w</span><span class="p">);</span>
 	<span class="p">}</span>
 	<span class="n">SA</span><span class="p">();</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">"%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">best_x</span><span class="p">,</span><span class="n">best_y</span><span class="p">,</span><span class="n">best_z</span><span class="p">,</span><span class="n">best_ans</span><span class="p">);</span>	
+	<span class="n">printf</span><span class="p">(</span><span class="s">"%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">%.2lf</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_x</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_y</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_z</span><span class="p">,</span><span class="n">best</span><span class="err">\</span><span class="n">_ans</span><span class="p">);</span>	
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>

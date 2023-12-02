@@ -31,7 +31,7 @@
 解答
 其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
-\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
+\(\prod\_{i=1}^{m}(c\_i+1)(m为质因数个数)\)
 代码
 ```cpp
 include 
@@ -80,7 +80,7 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 解答
 其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
-\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)
+\(\prod\_{i=1}^{m}(c\_i+1)(m为质因数个数)\)
 代码
 ```cpp
 include 
@@ -293,7 +293,7 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 <h1 id="解答">解答</h1>
 <p>其实这是一个数学题。设答案为m,且$m=p_1^{c_1}\times p_2^{c_2}\times p_3^{c_3}…\times p_n^{c_n}$那么要使m的因数最大，那么必有$c_1\geq c_2\geq c_3…$原因是因为因数个数相同时，较小的质因数个数越多，那么对于这个数的值的贡献越小，这个数在范围内就越有可能大。证明的话，可以将ci从大到小排列$c_1\leq c_2 \leq..c_n$然后发现新的数的约数个数与m相等，那么，m’小于m，所以不成立。
 因数个数公式：
-\(\prod_{i=1}^{m}(c_i+1)(m为质因数个数)\)</p>
+\(\prod\_{i=1}^{m}(c\_i+1)(m为质因数个数)\)</p>
 <h1 id="代码">代码</h1>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;string&gt;
@@ -303,8 +303,8 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">MAX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">prime_cnt</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">nums</span><span class="p">){</span><span class="c1">//暴搜</span>
-	<span class="k">if</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="c1">//如果因数个数大于12,那么不可能了，剪掉</span>
+<span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">prime</span><span class="err">\</span><span class="n">_cnt</span><span class="p">,</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">now</span><span class="p">,</span><span class="kt">int</span> <span class="n">nums</span><span class="p">){</span><span class="c1">//暴搜</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">prime</span><span class="err">\</span><span class="n">_cnt</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="c1">//如果因数个数大于12,那么不可能了，剪掉</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="o">&gt;</span><span class="n">MAX</span><span class="p">){</span><span class="c1">//找到了因数多的数</span>
 		<span class="n">MAX</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
 		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
@@ -314,14 +314,14 @@ void dfs(int prime_cnt,long long now,int nums){//暴搜
 		<span class="n">ans</span> <span class="o">=</span> <span class="n">now</span><span class="p">;</span>
 	<span class="p">}</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="mi">63</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-		<span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">]</span><span class="o">*</span><span class="n">now</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//如果超了,舍弃不要</span>
-		<span class="n">dfs</span><span class="p">(</span><span class="n">prime_cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="o">*=</span><span class="n">primes</span><span class="p">[</span><span class="n">prime_cnt</span><span class="p">],</span><span class="n">nums</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="c1">//根据一个数的因数个数公式</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">prime</span><span class="err">\</span><span class="n">_cnt</span><span class="p">]</span><span class="o">*</span><span class="n">now</span><span class="o">&gt;</span><span class="n">n</span><span class="p">)</span><span class="k">break</span><span class="p">;</span><span class="c1">//如果超了,舍弃不要</span>
+		<span class="n">dfs</span><span class="p">(</span><span class="n">prime</span><span class="err">\</span><span class="n">_cnt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="o">*=</span><span class="n">primes</span><span class="p">[</span><span class="n">prime</span><span class="err">\</span><span class="n">_cnt</span><span class="p">],</span><span class="n">nums</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="c1">//根据一个数的因数个数公式</span>
 	<span class="p">}</span>
 	
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="p">;</span>
 	<span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">ans</span><span class="p">;</span>

@@ -20,7 +20,7 @@ int stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
+int dfn\_cnt;
 bool iscut[1000];
 int root;
 /*
@@ -31,7 +31,7 @@ int root;
 【割点】 
 */
 void tarjan(int x){
-	low[x] = dfn[x] = ++dfn_cnt;
+	low[x] = dfn[x] = ++dfn\_cnt;
 	stack[++top] = x;
 	int child = 0;
 	for(int i = head[x];i!=0;i = edges[i].next){
@@ -71,7 +71,7 @@ int stack[10000];
 int dfn[10000];
 int low[10000];
 int stop;
-int dfn_cnt;
+int dfn\_cnt;
 bool iscut[1000];
 int root;
 /*
@@ -82,7 +82,7 @@ int root;
 【割点】 
 */
 void tarjan(int x){
-	low[x] = dfn[x] = ++dfn_cnt;
+	low[x] = dfn[x] = ++dfn\_cnt;
 	stack[++top] = x;
 	int child = 0;
 	for(int i = head[x];i!=0;i = edges[i].next){
@@ -286,7 +286,7 @@ void tarjan(int x){
 <span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">dfn_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">iscut</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">root</span><span class="p">;</span>
 <span class="cm">/*
@@ -297,7 +297,7 @@ void tarjan(int x){
 【割点】 
 */</span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-	<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+	<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 	<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
 	<span class="kt">int</span> <span class="n">child</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
@@ -333,7 +333,7 @@ void tarjan(int x){
 */</span>
 <span class="c1">//这个板子可能暂时有问题</span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">fa</span><span class="p">){</span>
-	<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn_cnt</span><span class="p">;</span>
+	<span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
 	    <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">t</span><span class="p">;</span>
 	    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dfn</span><span class="p">[</span><span class="n">v</span><span class="p">]){</span>

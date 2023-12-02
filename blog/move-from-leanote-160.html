@@ -35,7 +35,7 @@ const int MAXN = 100010;
 int tag[MAXN];
 vector&amp;lt;int&amp;gt; blocks[500];
 int idx[MAXN];
-int block_len,block_cnt;
+int block\_len,block\_cnt;
 int a[MAXN];
 int n;
 int read(){
@@ -46,51 +46,51 @@ int read(){
     return x*f;
 }
 void init(){
-    block_len = sqrt(n);
-    block_cnt = (n-1)/block_len+1;
+    block\_len = sqrt(n);
+    block\_cnt = (n-1)/block\_len+1;
     for(int i = 1;i&amp;lt;=n;i++){
-        int id = (i-1)/block_len+1;
+        int id = (i-1)/block\_len+1;
         idx[i] = id;
-        blocks[id].push_back(a[i]);
+        blocks[id].push\_back(a[i]);
     }
-    for(int i = 1;i&amp;lt;=block_cnt;i++){
+    for(int i = 1;i&amp;lt;=block\_cnt;i++){
         sort(blocks[i].begin(),blocks[i].end());
     }
 }
 void modify(int l,int r,int v){
-    for(int i = l;i&amp;lt;=min(r,block_len*idx[l]);i++){
+    for(int i = l;i&amp;lt;=min(r,block\_len*idx[l]);i++){
         a[i]+=v;
     }
     blocks[idx[l]].clear();
-    for(int i = block_len*(idx[l]-1)+1;i&amp;lt;=min(block_len*idx[l],n);i++){
-        blocks[idx[l]].push_back(a[i]);
+    for(int i = block\_len*(idx[l]-1)+1;i&amp;lt;=min(block\_len*idx[l],n);i++){
+        blocks[idx[l]].push\_back(a[i]);
     }
     sort(blocks[idx[l]].begin(),blocks[idx[l]].end());
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
             tag[i]+=v;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             a[i]+=v;
         }
         blocks[idx[r]].clear();
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=min(block_len*idx[r],n);i++){
-            blocks[idx[r]].push_back(a[i]);
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=min(block\_len*idx[r],n);i++){
+            blocks[idx[r]].push\_back(a[i]);
         }
         sort(blocks[idx[r]].begin(),blocks[idx[r]].end());
     }
 }
 int query(int l,int r,int x){
     int ans = 0;
-    for(int i = l;i&amp;lt;=min(idx[l]*block_len,r);i++){
+    for(int i = l;i&amp;lt;=min(idx[l]*block\_len,r);i++){
         if(a[i]&amp;lt;x-tag[idx[l]])ans++;
     }
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
-            int temp = lower_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin();
+            int temp = lower\_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin();
             ans+=temp;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             if(a[i]&amp;lt;x-tag[idx[i]])ans++;
         }
     }
@@ -130,7 +130,7 @@ const int MAXN = 100010;
 int tag[MAXN];
 vector&amp;lt;int&amp;gt; blocks[500];
 int idx[MAXN];
-int block_len,block_cnt;
+int block\_len,block\_cnt;
 int a[MAXN];
 int n;
 int read(){
@@ -141,48 +141,48 @@ int read(){
     return x*f;
 }
 void init(){
-    block_len = sqrt(n);
-    block_cnt = (n-1)/block_len+1;
+    block\_len = sqrt(n);
+    block\_cnt = (n-1)/block\_len+1;
     for(int i = 1;i&amp;lt;=n;i++){
-        int id = (i-1)/block_len+1;
+        int id = (i-1)/block\_len+1;
         idx[i] = id;
-        blocks[id].push_back(a[i]);
+        blocks[id].push\_back(a[i]);
     }
-    for(int i = 1;i&amp;lt;=block_cnt;i++){
+    for(int i = 1;i&amp;lt;=block\_cnt;i++){
         sort(blocks[i].begin(),blocks[i].end());
     }
 }
 void modify(int l,int r,int v){
-    for(int i = l;i&amp;lt;=min(r,block_len*idx[l]);i++){
+    for(int i = l;i&amp;lt;=min(r,block\_len*idx[l]);i++){
         a[i]+=v;
     }
     blocks[idx[l]].clear();
-    for(int i = block_len*(idx[l]-1)+1;i&amp;lt;=min(block_len*idx[l],n);i++){
-        blocks[idx[l]].push_back(a[i]);
+    for(int i = block\_len*(idx[l]-1)+1;i&amp;lt;=min(block\_len*idx[l],n);i++){
+        blocks[idx[l]].push\_back(a[i]);
     }
     sort(blocks[idx[l]].begin(),blocks[idx[l]].end());
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
             tag[i]+=v;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             a[i]+=v;
         }
         blocks[idx[r]].clear();
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=min(block_len*idx[r],n);i++){
-            blocks[idx[r]].push_back(a[i]);
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=min(block\_len*idx[r],n);i++){
+            blocks[idx[r]].push\_back(a[i]);
         }
         sort(blocks[idx[r]].begin(),blocks[idx[r]].end());
     }
 }
 int query(int l,int r,int x){
     int ans = -INF;
-    for(int i = l;i&amp;lt;=min(idx[l]*block_len,r);i++){
+    for(int i = l;i&amp;lt;=min(idx[l]*block\_len,r);i++){
         if(a[i]&amp;lt;x-tag[idx[l]]&amp;amp;&amp;amp;a[i]+tag[idx[l]]&amp;gt;ans)ans = a[i]+tag[idx[l]];
     }
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
-            int temp = lower_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin()-1;
+            int temp = lower\_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin()-1;
             int val;
             if(temp==-1)continue;
             else val = blocks[i][temp]+tag[i];
@@ -190,7 +190,7 @@ int query(int l,int r,int x){
                 ans = val;
             }
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             if(a[i]&amp;lt;x-tag[idx[i]]&amp;amp;&amp;amp;a[i]+tag[idx[i]]&amp;gt;ans)ans = a[i]+tag[idx[i]];
         }
     }
@@ -249,7 +249,7 @@ const int MAXN = 100010;
 int tag[MAXN];
 vector&amp;lt;int&amp;gt; blocks[500];
 int idx[MAXN];
-int block_len,block_cnt;
+int block\_len,block\_cnt;
 int a[MAXN];
 int n;
 int read(){
@@ -260,51 +260,51 @@ int read(){
     return x*f;
 }
 void init(){
-    block_len = sqrt(n);
-    block_cnt = (n-1)/block_len+1;
+    block\_len = sqrt(n);
+    block\_cnt = (n-1)/block\_len+1;
     for(int i = 1;i&amp;lt;=n;i++){
-        int id = (i-1)/block_len+1;
+        int id = (i-1)/block\_len+1;
         idx[i] = id;
-        blocks[id].push_back(a[i]);
+        blocks[id].push\_back(a[i]);
     }
-    for(int i = 1;i&amp;lt;=block_cnt;i++){
+    for(int i = 1;i&amp;lt;=block\_cnt;i++){
         sort(blocks[i].begin(),blocks[i].end());
     }
 }
 void modify(int l,int r,int v){
-    for(int i = l;i&amp;lt;=min(r,block_len*idx[l]);i++){
+    for(int i = l;i&amp;lt;=min(r,block\_len*idx[l]);i++){
         a[i]+=v;
     }
     blocks[idx[l]].clear();
-    for(int i = block_len*(idx[l]-1)+1;i&amp;lt;=min(block_len*idx[l],n);i++){
-        blocks[idx[l]].push_back(a[i]);
+    for(int i = block\_len*(idx[l]-1)+1;i&amp;lt;=min(block\_len*idx[l],n);i++){
+        blocks[idx[l]].push\_back(a[i]);
     }
     sort(blocks[idx[l]].begin(),blocks[idx[l]].end());
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
             tag[i]+=v;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             a[i]+=v;
         }
         blocks[idx[r]].clear();
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=min(block_len*idx[r],n);i++){
-            blocks[idx[r]].push_back(a[i]);
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=min(block\_len*idx[r],n);i++){
+            blocks[idx[r]].push\_back(a[i]);
         }
         sort(blocks[idx[r]].begin(),blocks[idx[r]].end());
     }
 }
 int query(int l,int r,int x){
     int ans = 0;
-    for(int i = l;i&amp;lt;=min(idx[l]*block_len,r);i++){
+    for(int i = l;i&amp;lt;=min(idx[l]*block\_len,r);i++){
         if(a[i]&amp;lt;x-tag[idx[l]])ans++;
     }
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
-            int temp = lower_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin();
+            int temp = lower\_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin();
             ans+=temp;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             if(a[i]&amp;lt;x-tag[idx[i]])ans++;
         }
     }
@@ -344,7 +344,7 @@ const int MAXN = 100010;
 int tag[MAXN];
 vector&amp;lt;int&amp;gt; blocks[500];
 int idx[MAXN];
-int block_len,block_cnt;
+int block\_len,block\_cnt;
 int a[MAXN];
 int n;
 int read(){
@@ -355,48 +355,48 @@ int read(){
     return x*f;
 }
 void init(){
-    block_len = sqrt(n);
-    block_cnt = (n-1)/block_len+1;
+    block\_len = sqrt(n);
+    block\_cnt = (n-1)/block\_len+1;
     for(int i = 1;i&amp;lt;=n;i++){
-        int id = (i-1)/block_len+1;
+        int id = (i-1)/block\_len+1;
         idx[i] = id;
-        blocks[id].push_back(a[i]);
+        blocks[id].push\_back(a[i]);
     }
-    for(int i = 1;i&amp;lt;=block_cnt;i++){
+    for(int i = 1;i&amp;lt;=block\_cnt;i++){
         sort(blocks[i].begin(),blocks[i].end());
     }
 }
 void modify(int l,int r,int v){
-    for(int i = l;i&amp;lt;=min(r,block_len*idx[l]);i++){
+    for(int i = l;i&amp;lt;=min(r,block\_len*idx[l]);i++){
         a[i]+=v;
     }
     blocks[idx[l]].clear();
-    for(int i = block_len*(idx[l]-1)+1;i&amp;lt;=min(block_len*idx[l],n);i++){
-        blocks[idx[l]].push_back(a[i]);
+    for(int i = block\_len*(idx[l]-1)+1;i&amp;lt;=min(block\_len*idx[l],n);i++){
+        blocks[idx[l]].push\_back(a[i]);
     }
     sort(blocks[idx[l]].begin(),blocks[idx[l]].end());
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
             tag[i]+=v;
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             a[i]+=v;
         }
         blocks[idx[r]].clear();
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=min(block_len*idx[r],n);i++){
-            blocks[idx[r]].push_back(a[i]);
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=min(block\_len*idx[r],n);i++){
+            blocks[idx[r]].push\_back(a[i]);
         }
         sort(blocks[idx[r]].begin(),blocks[idx[r]].end());
     }
 }
 int query(int l,int r,int x){
     int ans = -INF;
-    for(int i = l;i&amp;lt;=min(idx[l]*block_len,r);i++){
+    for(int i = l;i&amp;lt;=min(idx[l]*block\_len,r);i++){
         if(a[i]&amp;lt;x-tag[idx[l]]&amp;amp;&amp;amp;a[i]+tag[idx[l]]&amp;gt;ans)ans = a[i]+tag[idx[l]];
     }
     if(idx[l]!=idx[r]){
         for(int i = idx[l]+1;i&amp;lt;idx[r];i++){
-            int temp = lower_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin()-1;
+            int temp = lower\_bound(blocks[i].begin(),blocks[i].end(),x-tag[i])-blocks[i].begin()-1;
             int val;
             if(temp==-1)continue;
             else val = blocks[i][temp]+tag[i];
@@ -404,7 +404,7 @@ int query(int l,int r,int x){
                 ans = val;
             }
         }
-        for(int i = block_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
+        for(int i = block\_len*(idx[r]-1)+1;i&amp;lt;=r;i++){
             if(a[i]&amp;lt;x-tag[idx[i]]&amp;amp;&amp;amp;a[i]+tag[idx[i]]&amp;gt;ans)ans = a[i]+tag[idx[i]];
         }
     }
@@ -611,7 +611,7 @@ LL n,m,k;
 设每一块大小为$k$,那么一共分为$\frac{N}{k}$块。那么假设一共查询$M$次，每一次最坏情况大约是$k+\frac{N}{k}$则总复杂度为$M(k+\frac{N}{k})$又因为$M$是定值，所以只需要$k+\frac{N}{k}$最小即可，由均值不等式：$a\times b\ge 2\sqrt{ab}$(当且仅当$a=b$时取等)可知，当$k=\frac{N}{k}$时，复杂度最优，那么此时，$k$等于$\sqrt{N}$总复杂度：$M(2\sqrt N)=Θ(M\sqrt N)$</p>
 <h1 id="例题">例题</h1>
 <p>至于没什么好讲的，就上例题。
-T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
+T1<a href="oi.cdshishi.net:8000/problempage.php?problem\_id=2440#">2440</a>
 给出一个长为n的数列，以及n个操作，操作涉及区间加法，询问区间内小于某个值x的元素个数。
 解答：就是分块，然后每一块排个序，维护一个<code class="language-plaintext highlighter-rouge">lazy tag</code>，块间查找的时候就是lower_bound查找出来就行了。然后两边跑暴力。注意有些时候<code class="language-plaintext highlighter-rouge">lazy tag</code>不要忘了。
 代码：</p>
@@ -627,7 +627,7 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
 <span class="kt">int</span> <span class="n">tag</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">500</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">idx</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">block_len</span><span class="p">,</span><span class="n">block_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">,</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
 <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
@@ -638,51 +638,51 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
-    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">block_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
         <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
-        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">clear</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
     <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">end</span><span class="p">());</span>
     <span class="k">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">!=</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]){</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">clear</span><span class="p">();</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
         <span class="p">}</span>
         <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">end</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">block_len</span><span class="p">,</span><span class="n">r</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">,</span><span class="n">r</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]])</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">!=</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]){</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">lower</span><span class="err">\</span><span class="n">_bound</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span>
             <span class="n">ans</span><span class="o">+=</span><span class="n">temp</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -704,7 +704,7 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>T2<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2441">2441</a>
+<p>T2<a href="oi.cdshishi.net:8000/problempage.php?problem\_id=2441">2441</a>
 给出一个长为n的数列
 接下来有m次操作，操作有2种
 1 x y z 表示修改区间[x,y]增加数z
@@ -722,7 +722,7 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
 <span class="kt">int</span> <span class="n">tag</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">500</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">idx</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">block_len</span><span class="p">,</span><span class="n">block_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">,</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
 <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
@@ -733,48 +733,48 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
-    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">block_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
         <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
-        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">modify</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">v</span><span class="p">){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">clear</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
     <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]].</span><span class="n">end</span><span class="p">());</span>
     <span class="k">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">!=</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]){</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="n">v</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">clear</span><span class="p">();</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">n</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
         <span class="p">}</span>
         <span class="n">sort</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]].</span><span class="n">end</span><span class="p">());</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">query</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="n">INF</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">block_len</span><span class="p">,</span><span class="n">r</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">min</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">,</span><span class="n">r</span><span class="p">);</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span><span class="o">&amp;&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]]</span><span class="o">&gt;</span><span class="n">ans</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]];</span>
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">!=</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]){</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">lower</span><span class="err">\</span><span class="n">_bound</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">(),</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
             <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
             <span class="k">if</span><span class="p">(</span><span class="n">temp</span><span class="o">==-</span><span class="mi">1</span><span class="p">)</span><span class="k">continue</span><span class="p">;</span>
             <span class="k">else</span> <span class="n">val</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">temp</span><span class="p">]</span><span class="o">+</span><span class="n">tag</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
@@ -782,7 +782,7 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
                 <span class="n">ans</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">*</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">r</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
             <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">x</span><span class="o">-</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">&amp;&amp;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">&gt;</span><span class="n">ans</span><span class="p">)</span><span class="n">ans</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">tag</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -882,7 +882,7 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">1000010</span><span class="p">;</span>
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">10100</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">block_len</span><span class="p">,</span><span class="n">block_cnt</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">,</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">temp</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">top</span><span class="p">;</span>
 <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
     <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -900,31 +900,31 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">rebuild</span><span class="p">(){</span>
     <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">block</span><span class="err">\</span><span class="n">_cnt</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="n">temp</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">]</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
         <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span>
     <span class="p">}</span>
-    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
-    <span class="n">block_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">top</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">top</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">top</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">blocks</span><span class="p">[</span><span class="n">id</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span><span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(;</span><span class="n">pos</span><span class="o">&gt;</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="n">pos</span><span class="o">-=</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
     <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span><span class="o">+</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">20</span><span class="o">*</span><span class="n">block_len</span><span class="p">)</span><span class="n">rebuild</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">20</span><span class="o">*</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">)</span><span class="n">rebuild</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">block_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">t</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">read</span><span class="p">();</span>
-        <span class="n">blocks</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+        <span class="n">blocks</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">push</span><span class="err">\</span><span class="n">_back</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="kt">int</span> <span class="n">opt</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -946,8 +946,8 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXM</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">int</span> <span class="n">MAXN</span> <span class="o">=</span> <span class="mi">100010</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">block_len</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">Q</span><span class="p">{</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Q</span><span class="o">&amp;</span><span class="n">q1</span><span class="p">){</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="p">.</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="o">?</span><span class="n">r</span><span class="o">&lt;</span><span class="n">q1</span><span class="p">.</span><span class="n">r</span><span class="o">:</span><span class="n">x</span><span class="o">&lt;</span><span class="n">y</span><span class="p">;}}</span><span class="n">querys</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">Q</span><span class="p">{</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">id</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Q</span><span class="o">&amp;</span><span class="n">q1</span><span class="p">){</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="p">.</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">block</span><span class="err">\</span><span class="n">_len</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="o">?</span><span class="n">r</span><span class="o">&lt;</span><span class="n">q1</span><span class="p">.</span><span class="n">r</span><span class="o">:</span><span class="n">x</span><span class="o">&lt;</span><span class="n">y</span><span class="p">;}}</span><span class="n">querys</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">cnt</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">ans</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">anss</span><span class="p">[</span><span class="n">MAXM</span><span class="p">];</span>
@@ -962,13 +962,13 @@ T1<a href="oi.cdshishi.net:8000/problempage.php?problem_id=2440#">2440</a>
     <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">pos</span><span class="p">]]</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="n">ans</span><span class="o">--</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">m</span><span class="p">;</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">c</span><span class="p">;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">block_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">block</span><span class="err">\</span><span class="n">_len</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
         <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">l</span><span class="o">&gt;&gt;</span><span class="n">r</span><span class="p">;</span>
         <span class="n">querys</span><span class="p">[</span><span class="o">++</span><span class="n">top</span><span class="p">].</span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span><span class="n">querys</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span><span class="n">querys</span><span class="p">[</span><span class="n">top</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>

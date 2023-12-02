@@ -18,11 +18,11 @@
 因为懒得调格式问题，直接丢传送门吧。传送门
 解答
 一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
-我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
-然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s\_i-s\_j)^2+b(s\_i-s\_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s\_i^2-2as\_is\_j+as\_j^2+bs\_i-bs\_j+c\)
 若决策$j$优于$k$，那么用j-k可以的到以下式子:
-\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&amp;gt;0\)
-进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&amp;gt;2as_i\)
+\(dp[j]-dp[k]-2a\_is\_is\_j+2as\_is\_k+as\_j^2-as\_k^2-bs\_j+bs\_k&amp;gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as\_j^2-bs\_j-dp[k]-as\_k^2+bs\_k}{s\_j-s\_k}&amp;gt;2as\_i\)
 然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&amp;lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt; 
@@ -69,11 +69,11 @@ int main(){
 因为懒得调格式问题，直接丢传送门吧。传送门
 解答
 一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
-我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
-然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s\_i-s\_j)^2+b(s\_i-s\_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s\_i^2-2as\_is\_j+as\_j^2+bs\_i-bs\_j+c\)
 若决策$j$优于$k$，那么用j-k可以的到以下式子:
-\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&amp;gt;0\)
-进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&amp;gt;2as_i\)
+\(dp[j]-dp[k]-2a\_is\_is\_j+2as\_is\_k+as\_j^2-as\_k^2-bs\_j+bs\_k&amp;gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as\_j^2-bs\_j-dp[k]-as\_k^2+bs\_k}{s\_j-s\_k}&amp;gt;2as\_i\)
 然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&amp;lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt; 
@@ -284,11 +284,11 @@ int main(){
 <p>因为懒得调格式问题，直接丢传送门吧。<a href="https://www.luogu.org/problem/P3628">传送门</a></p>
 <h1 id="解答">解答</h1>
 <p>一道斜率优化的题，话说斜率优化里面的平方都是来恶心人的额。
-我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s_i-s_j)^2+b(s_i-s_j)+c\}\)
-然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s_i^2-2as_is_j+as_j^2+bs_i-bs_j+c\)
+我们考虑写出一个朴素的dp式子:\(dp[i] = max\{dp[j]+a(s\_i-s\_j)^2+b(s\_i-s\_j)+c\}\)
+然后丢掉max符号，拆开括号得到\(dp[i] = dp[j]+a\times s\_i^2-2as\_is\_j+as\_j^2+bs\_i-bs\_j+c\)
 若决策$j$优于$k$，那么用j-k可以的到以下式子:
-\(dp[j]-dp[k]-2a_is_is_j+2as_is_k+as_j^2-as_k^2-bs_j+bs_k&gt;0\)
-进一步化简，移项得到\(\frac{dp[j]+as_j^2-bs_j-dp[k]-as_k^2+bs_k}{s_j-s_k}&gt;2as_i\)
+\(dp[j]-dp[k]-2a\_is\_is\_j+2as\_is\_k+as\_j^2-as\_k^2-bs\_j+bs\_k&gt;0\)
+进一步化简，移项得到\(\frac{dp[j]+as\_j^2-bs\_j-dp[k]-as\_k^2+bs\_k}{s\_j-s\_k}&gt;2as\_i\)
 然后使用单调队列$O(1)$的维护以下就好了。特别注意一点，由于$a&lt;0$所以我们维护的是一个上凸壳。所以要在取出队首的时候斜率的大小比较需要相反。代码如下：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt; 

@@ -36,7 +36,7 @@ bool expand(int k){
 		ty = y+dy[i];
 		if(tx&amp;gt;0&amp;amp;&amp;amp;tx&amp;lt;=9&amp;amp;&amp;amp;ty&amp;gt;0&amp;amp;&amp;amp;ty&amp;lt;=9&amp;amp;&amp;amp;!ma[k][tx][ty]){
 			ma[k][tx][ty] = true;
-			qs[k].push(make_pair(tx,ty));
+			qs[k].push(make\_pair(tx,ty));
 			dis[k][tx][ty] = d+1;
 			if(ma[1-k][tx][ty]){
 				ans = distance[k][tx][ty]+distance[1-k][tx][ty];
@@ -48,10 +48,10 @@ bool expand(int k){
 }
 int main(void){
 	int x,gx,gy,y;
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	cin&amp;gt;&amp;gt;x&amp;gt;&amp;gt;y&amp;gt;&amp;gt;gx&amp;gt;&amp;gt;gy;
-	qs[0].push(make_pair(x,y));
-	qs[1].push(make_pair(gx,gy));
+	qs[0].push(make\_pair(x,y));
+	qs[1].push(make\_pair(gx,gy));
 	while(qs[0].size()&amp;gt;0||qs[1].size&amp;gt;0){
 	    pair&amp;lt;int,int&amp;gt; p;
 	    if(qs[0].size()&amp;gt;qs[1].size()){
@@ -90,7 +90,7 @@ bool expand(int k){
 		ty = y+dy[i];
 		if(tx&amp;gt;0&amp;amp;&amp;amp;tx&amp;lt;=9&amp;amp;&amp;amp;ty&amp;gt;0&amp;amp;&amp;amp;ty&amp;lt;=9&amp;amp;&amp;amp;!ma[k][tx][ty]){
 			ma[k][tx][ty] = true;
-			qs[k].push(make_pair(tx,ty));
+			qs[k].push(make\_pair(tx,ty));
 			dis[k][tx][ty] = d+1;
 			if(ma[1-k][tx][ty]){
 				ans = distance[k][tx][ty]+distance[1-k][tx][ty];
@@ -102,10 +102,10 @@ bool expand(int k){
 }
 int main(void){
 	int x,gx,gy,y;
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	cin&amp;gt;&amp;gt;x&amp;gt;&amp;gt;y&amp;gt;&amp;gt;gx&amp;gt;&amp;gt;gy;
-	qs[0].push(make_pair(x,y));
-	qs[1].push(make_pair(gx,gy));
+	qs[0].push(make\_pair(x,y));
+	qs[1].push(make\_pair(gx,gy));
 	while(qs[0].size()&amp;gt;0||qs[1].size&amp;gt;0){
 	    pair&amp;lt;int,int&amp;gt; p;
 	    if(qs[0].size()&amp;gt;qs[1].size()){
@@ -308,7 +308,7 @@ int main(void){
 		<span class="n">ty</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">tx</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">tx</span><span class="o">&lt;=</span><span class="mi">9</span><span class="o">&amp;&amp;</span><span class="n">ty</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">ty</span><span class="o">&lt;=</span><span class="mi">9</span><span class="o">&amp;&amp;!</span><span class="n">ma</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]){</span>
 			<span class="n">ma</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-			<span class="n">qs</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">));</span>
+			<span class="n">qs</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make</span><span class="err">\</span><span class="n">_pair</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">));</span>
 			<span class="n">dis</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 			<span class="k">if</span><span class="p">(</span><span class="n">ma</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]){</span>
 				<span class="n">ans</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">]</span><span class="o">+</span><span class="n">distance</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">k</span><span class="p">][</span><span class="n">tx</span><span class="p">][</span><span class="n">ty</span><span class="p">];</span>
@@ -320,10 +320,10 @@ int main(void){
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
 	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">gx</span><span class="p">,</span><span class="n">gy</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="o">&gt;&gt;</span><span class="n">gx</span><span class="o">&gt;&gt;</span><span class="n">gy</span><span class="p">;</span>
-	<span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
-	<span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span><span class="n">gy</span><span class="p">));</span>
+	<span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make</span><span class="err">\</span><span class="n">_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">));</span>
+	<span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">push</span><span class="p">(</span><span class="n">make</span><span class="err">\</span><span class="n">_pair</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span><span class="n">gy</span><span class="p">));</span>
 	<span class="k">while</span><span class="p">(</span><span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">||</span><span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
 	    <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">;</span>
 	    <span class="k">if</span><span class="p">(</span><span class="n">qs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="n">qs</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">size</span><span class="p">()){</span>

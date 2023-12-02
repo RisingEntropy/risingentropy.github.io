@@ -17,7 +17,7 @@
   <meta name="twitter:description" content="中国剩余定理
 内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
+\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
 证明
@@ -27,7 +27,7 @@
 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
 # include &amp;lt;iostream&amp;gt;
@@ -66,18 +66,18 @@ int main(){
 poj3900 拓展欧几里得解同余方程组
 由于这道题不保证互质，所以CRT就不能用了。需要使用拓展欧几里得算法。拓展欧几里得定理的主要思想就是合并方程组。
 拓展欧几里得算法的原理如下：
-要合并\(x\equiv r_1(mod\ a_1)\\x\equiv r_2(mod\ a_2)\)
+要合并\(x\equiv r\_1(mod\ a\_1)\\x\equiv r\_2(mod\ a\_2)\)
 可以化为如下形式：
-\(x=k_1a_1+r_1 \\ x=k_2a_2+r_2\)
+\(x=k\_1a\_1+r\_1 \\ x=k\_2a\_2+r\_2\)
 由于求得的$x$是同一个值，所以可以有
-\(k_1a_1+r_1=k_2a_2+r_2\)
-\(-&amp;gt; k_1a_1-k_2a_2=r_2-r_1\)
+\(k\_1a\_1+r\_1=k\_2a\_2+r\_2\)
+\(-&amp;gt; k\_1a\_1-k\_2a\_2=r\_2-r\_1\)
 于是通过拓展欧几里得算法解出$k_1$可以得到如下柿子
-\(x_1=k_1a_1+r_1\\ x_2 = k_2a_2+r_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x_1\equiv x (mod\ lcm(a1,a2))\)
+\(x\_1=k\_1a\_1+r\_1\\ x\_2 = k\_2a\_2+r\_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x\_1\equiv x (mod\ lcm(a1,a2))\)
 证明可以看这个wcr神仙的博客数学杂记
 进一步化简
-\(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
-然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
+\(x\equiv x\_1(mod\ a\_1a\_2/gcd(a\_1,a\_2))\)
+然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a\_1,a\_2,a\_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
 代码：
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
@@ -181,7 +181,7 @@ int main(){
   <meta property="og:description" content="中国剩余定理
 内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
+\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
 证明
@@ -191,7 +191,7 @@ int main(){
 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
 # include &amp;lt;iostream&amp;gt;
@@ -230,18 +230,18 @@ int main(){
 poj3900 拓展欧几里得解同余方程组
 由于这道题不保证互质，所以CRT就不能用了。需要使用拓展欧几里得算法。拓展欧几里得定理的主要思想就是合并方程组。
 拓展欧几里得算法的原理如下：
-要合并\(x\equiv r_1(mod\ a_1)\\x\equiv r_2(mod\ a_2)\)
+要合并\(x\equiv r\_1(mod\ a\_1)\\x\equiv r\_2(mod\ a\_2)\)
 可以化为如下形式：
-\(x=k_1a_1+r_1 \\ x=k_2a_2+r_2\)
+\(x=k\_1a\_1+r\_1 \\ x=k\_2a\_2+r\_2\)
 由于求得的$x$是同一个值，所以可以有
-\(k_1a_1+r_1=k_2a_2+r_2\)
-\(-&amp;gt; k_1a_1-k_2a_2=r_2-r_1\)
+\(k\_1a\_1+r\_1=k\_2a\_2+r\_2\)
+\(-&amp;gt; k\_1a\_1-k\_2a\_2=r\_2-r\_1\)
 于是通过拓展欧几里得算法解出$k_1$可以得到如下柿子
-\(x_1=k_1a_1+r_1\\ x_2 = k_2a_2+r_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x_1\equiv x (mod\ lcm(a1,a2))\)
+\(x\_1=k\_1a\_1+r\_1\\ x\_2 = k\_2a\_2+r\_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x\_1\equiv x (mod\ lcm(a1,a2))\)
 证明可以看这个wcr神仙的博客数学杂记
 进一步化简
-\(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
-然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
+\(x\equiv x\_1(mod\ a\_1a\_2/gcd(a\_1,a\_2))\)
+然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a\_1,a\_2,a\_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
 代码：
 # include &amp;lt;iostream&amp;gt;
 # include &amp;lt;cstring&amp;gt;
@@ -509,7 +509,7 @@ int main(){
       <h1 id="中国剩余定理">中国剩余定理</h1>
 <h1 id="内容">内容：</h1>
 <p>设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
+\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$</p>
 <h1 id="证明">证明</h1>
@@ -519,7 +519,7 @@ int main(){
 <h1 id="应用">应用</h1>
 <p><a href="https://www.luogu.org/problem/P1495">P1495 曹冲养猪</a>
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用<code class="language-plaintext highlighter-rouge">long long</code>
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
@@ -558,18 +558,18 @@ int main(){
 <p>poj3900 拓展欧几里得解同余方程组
 由于这道题不保证互质，所以CRT就不能用了。需要使用拓展欧几里得算法。拓展欧几里得定理的主要思想就是合并方程组。
 拓展欧几里得算法的原理如下：
-要合并\(x\equiv r_1(mod\ a_1)\\x\equiv r_2(mod\ a_2)\)
+要合并\(x\equiv r\_1(mod\ a\_1)\\x\equiv r\_2(mod\ a\_2)\)
 可以化为如下形式：
-\(x=k_1a_1+r_1 \\ x=k_2a_2+r_2\)
+\(x=k\_1a\_1+r\_1 \\ x=k\_2a\_2+r\_2\)
 由于求得的$x$是同一个值，所以可以有
-\(k_1a_1+r_1=k_2a_2+r_2\)
-\(-&gt; k_1a_1-k_2a_2=r_2-r_1\)
+\(k\_1a\_1+r\_1=k\_2a\_2+r\_2\)
+\(-&gt; k\_1a\_1-k\_2a\_2=r\_2-r\_1\)
 于是通过拓展欧几里得算法解出$k_1$可以得到如下柿子
-\(x_1=k_1a_1+r_1\\ x_2 = k_2a_2+r_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x_1\equiv x (mod\ lcm(a1,a2))\)
+\(x\_1=k\_1a\_1+r\_1\\ x\_2 = k\_2a\_2+r\_2\)此时求出来的$x$是两个方程的共同的解。那么显然有结论\(x\_1\equiv x (mod\ lcm(a1,a2))\)
 证明可以看这个wcr神仙的博客<a href="https://blog.csdn.net/g21wcr/article/details/102467429">数学杂记</a>
 进一步化简
-\(x\equiv x_1(mod\ a_1a_2/gcd(a_1,a_2))\)
-然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a_1,a_2,a_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
+\(x\equiv x\_1(mod\ a\_1a\_2/gcd(a\_1,a\_2))\)
+然后合并完成以后，其实最后的方程的形式就是\(x\equiv x'(mod\ gcd(a\_1,a\_2,a\_3.....)\)，由于后面是gcd，所以就不用解方程了，$x’$就是答案。
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;

@@ -53,14 +53,14 @@ int inline minn(int x,int y){return x&amp;gt;y?y:x;}
 int stack[maxn];//tarjan需要的一个栈 
 int dfn[maxn];
 int low[maxn];
-int dfn_sum;
+int dfn\_sum;
 int color[maxn];
-int color_val;
+int color\_val;
 int stop;
-int col_cnt[maxn];//计算每个缩点后的点原来有几个点 
+int col\_cnt[maxn];//计算每个缩点后的点原来有几个点 
 bool instack[maxn];//标记是否在栈中，方便找low 
 void tarjan(int x){//求强连通分量 
-	dfn[x]=low[x]=++dfn_sum;
+	dfn[x]=low[x]=++dfn\_sum;
 	instack[x] = true;
 	stack[++stop] = x;
 	for(int i = head[x];i!=0;i = edges[i].next){
@@ -74,19 +74,19 @@ void tarjan(int x){//求强连通分量
 	}
 	if(low[x]==dfn[x]){
 		instack[x] = false;
-		color[x] = ++color_val;
-		col_cnt[color_val]++;//点x算一个点，所以要在这里给它加上去 
+		color[x] = ++color\_val;
+		col\_cnt[color\_val]++;//点x算一个点，所以要在这里给它加上去 
 		while(stack[stop]!=x){
-			color[stack[stop]]=color_val;//其实就是染色的思想缩点 
+			color[stack[stop]]=color\_val;//其实就是染色的思想缩点 
 			instack[stack[stop--]] = false;
-			col_cnt[color_val]++;
+			col\_cnt[color\_val]++;
 		}
 		stop--;//在栈里又找到了x，要把它给删掉 
 	}
 }
 int outdegree[maxn];//每个顶点(把同一个强连通分量里面的点缩点缩成一个点) 的出度 
 int main(void){
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	int n,m;
 	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
 	int tx,ty;
@@ -108,7 +108,7 @@ int main(void){
 		}	
 	}
 	int zero = 0;
-	for(int i = 1;i&amp;lt;=color_val;i++){
+	for(int i = 1;i&amp;lt;=color\_val;i++){
 		if(outdegree[i]==0){//出度为0则符合题意 
 			if(zero!=0){//若有2个出度为0的点，则说明不存在最受欢迎的奶牛 
 				cout&amp;lt;&amp;lt;0;
@@ -117,7 +117,7 @@ int main(void){
 			zero = i;
 		}
 	}
-	cout&amp;lt;&amp;lt;col_cnt[zero];
+	cout&amp;lt;&amp;lt;col\_cnt[zero];
 	return 0;
 }
 
@@ -165,14 +165,14 @@ int inline minn(int x,int y){return x&amp;gt;y?y:x;}
 int stack[maxn];//tarjan需要的一个栈 
 int dfn[maxn];
 int low[maxn];
-int dfn_sum;
+int dfn\_sum;
 int color[maxn];
-int color_val;
+int color\_val;
 int stop;
-int col_cnt[maxn];//计算每个缩点后的点原来有几个点 
+int col\_cnt[maxn];//计算每个缩点后的点原来有几个点 
 bool instack[maxn];//标记是否在栈中，方便找low 
 void tarjan(int x){//求强连通分量 
-	dfn[x]=low[x]=++dfn_sum;
+	dfn[x]=low[x]=++dfn\_sum;
 	instack[x] = true;
 	stack[++stop] = x;
 	for(int i = head[x];i!=0;i = edges[i].next){
@@ -186,19 +186,19 @@ void tarjan(int x){//求强连通分量
 	}
 	if(low[x]==dfn[x]){
 		instack[x] = false;
-		color[x] = ++color_val;
-		col_cnt[color_val]++;//点x算一个点，所以要在这里给它加上去 
+		color[x] = ++color\_val;
+		col\_cnt[color\_val]++;//点x算一个点，所以要在这里给它加上去 
 		while(stack[stop]!=x){
-			color[stack[stop]]=color_val;//其实就是染色的思想缩点 
+			color[stack[stop]]=color\_val;//其实就是染色的思想缩点 
 			instack[stack[stop--]] = false;
-			col_cnt[color_val]++;
+			col\_cnt[color\_val]++;
 		}
 		stop--;//在栈里又找到了x，要把它给删掉 
 	}
 }
 int outdegree[maxn];//每个顶点(把同一个强连通分量里面的点缩点缩成一个点) 的出度 
 int main(void){
-	ios::sync_with_stdio(false);
+	ios::sync\_with\_stdio(false);
 	int n,m;
 	cin&amp;gt;&amp;gt;n&amp;gt;&amp;gt;m;
 	int tx,ty;
@@ -220,7 +220,7 @@ int main(void){
 		}	
 	}
 	int zero = 0;
-	for(int i = 1;i&amp;lt;=color_val;i++){
+	for(int i = 1;i&amp;lt;=color\_val;i++){
 		if(outdegree[i]==0){//出度为0则符合题意 
 			if(zero!=0){//若有2个出度为0的点，则说明不存在最受欢迎的奶牛 
 				cout&amp;lt;&amp;lt;0;
@@ -229,7 +229,7 @@ int main(void){
 			zero = i;
 		}
 	}
-	cout&amp;lt;&amp;lt;col_cnt[zero];
+	cout&amp;lt;&amp;lt;col\_cnt[zero];
 	return 0;
 }
 
@@ -441,14 +441,14 @@ int main(void){
 <span class="kt">int</span> <span class="n">stack</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span><span class="c1">//tarjan需要的一个栈 </span>
 <span class="kt">int</span> <span class="n">dfn</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">low</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">dfn_sum</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dfn</span><span class="err">\</span><span class="n">_sum</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">color</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span>
-<span class="kt">int</span> <span class="n">color_val</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">stop</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">col_cnt</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span><span class="c1">//计算每个缩点后的点原来有几个点 </span>
+<span class="kt">int</span> <span class="n">col</span><span class="err">\</span><span class="n">_cnt</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span><span class="c1">//计算每个缩点后的点原来有几个点 </span>
 <span class="kt">bool</span> <span class="n">instack</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span><span class="c1">//标记是否在栈中，方便找low </span>
 <span class="kt">void</span> <span class="nf">tarjan</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span><span class="c1">//求强连通分量 </span>
-	<span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=++</span><span class="n">dfn_sum</span><span class="p">;</span>
+	<span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=++</span><span class="n">dfn</span><span class="err">\</span><span class="n">_sum</span><span class="p">;</span>
 	<span class="n">instack</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 	<span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">stop</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
 	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">];</span><span class="n">i</span><span class="o">!=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">next</span><span class="p">){</span>
@@ -462,19 +462,19 @@ int main(void){
 	<span class="p">}</span>
 	<span class="k">if</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">==</span><span class="n">dfn</span><span class="p">[</span><span class="n">x</span><span class="p">]){</span>
 		<span class="n">instack</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-		<span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">color_val</span><span class="p">;</span>
-		<span class="n">col_cnt</span><span class="p">[</span><span class="n">color_val</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">//点x算一个点，所以要在这里给它加上去 </span>
+		<span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span>
+		<span class="n">col</span><span class="err">\</span><span class="n">_cnt</span><span class="p">[</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="c1">//点x算一个点，所以要在这里给它加上去 </span>
 		<span class="k">while</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]</span><span class="o">!=</span><span class="n">x</span><span class="p">){</span>
-			<span class="n">color</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span><span class="o">=</span><span class="n">color_val</span><span class="p">;</span><span class="c1">//其实就是染色的思想缩点 </span>
+			<span class="n">color</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="p">]]</span><span class="o">=</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span><span class="c1">//其实就是染色的思想缩点 </span>
 			<span class="n">instack</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="n">stop</span><span class="o">--</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-			<span class="n">col_cnt</span><span class="p">[</span><span class="n">color_val</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+			<span class="n">col</span><span class="err">\</span><span class="n">_cnt</span><span class="p">[</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
 		<span class="p">}</span>
 		<span class="n">stop</span><span class="o">--</span><span class="p">;</span><span class="c1">//在栈里又找到了x，要把它给删掉 </span>
 	<span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="n">outdegree</span><span class="p">[</span><span class="n">maxn</span><span class="p">];</span><span class="c1">//每个顶点(把同一个强连通分量里面的点缩点缩成一个点) 的出度 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-	<span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">ios</span><span class="o">::</span><span class="n">sync</span><span class="err">\</span><span class="n">_with</span><span class="err">\</span><span class="n">_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">;</span>
 	<span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">n</span><span class="o">&gt;&gt;</span><span class="n">m</span><span class="p">;</span>
 	<span class="kt">int</span> <span class="n">tx</span><span class="p">,</span><span class="n">ty</span><span class="p">;</span>
@@ -496,7 +496,7 @@ int main(void){
 		<span class="p">}</span>	
 	<span class="p">}</span>
 	<span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">color_val</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">color</span><span class="err">\</span><span class="n">_val</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">outdegree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span><span class="c1">//出度为0则符合题意 </span>
 			<span class="k">if</span><span class="p">(</span><span class="n">zero</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span><span class="c1">//若有2个出度为0的点，则说明不存在最受欢迎的奶牛 </span>
 				<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">;</span>
@@ -505,7 +505,7 @@ int main(void){
 			<span class="n">zero</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
 		<span class="p">}</span>
 	<span class="p">}</span>
-	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">col_cnt</span><span class="p">[</span><span class="n">zero</span><span class="p">];</span>
+	<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">col</span><span class="err">\</span><span class="n">_cnt</span><span class="p">[</span><span class="n">zero</span><span class="p">];</span>
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>

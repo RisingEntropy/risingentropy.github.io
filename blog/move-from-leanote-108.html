@@ -254,7 +254,7 @@ L代表这条道路的长度，K代表从赞助商帮你打通的宝藏屋到这
 <p>状压dp！？不会呀,我太弱了，dp基本就不会！怎么办啊，我要骗分啊！<del>不骗分，怎么拿省一？？？</del> 此时，一种<del>邪恶</del>灵活的思想涌上心头——————模拟退火！万岁！那么模拟退火有两个问题需要考虑：
 1.板子
 2.计算新解
-1板子的话，十分简单(见我另一篇题解)。如何计算新解是关键，也是对思维要求较高的<del>退火算法思维要求已经够低了</del>，对于这道题，我们考虑如何变化解。我们可以把这些点构造成一个序列，在序列中的位置就是它们依次被加入到结果中顺序。我们一开始把每个点的编号设为他在序列中的位置。那么我们有两种方式可以解决。1是使用<code class="language-plaintext highlighter-rouge">STL</code>中的<code class="language-plaintext highlighter-rouge">random_shuffle(Iterator begin,Iterator end)</code>函数来获得一个随机序列(因为这个数据范围只有<code class="language-plaintext highlighter-rouge">12</code>个点<code class="language-plaintext highlighter-rouge">12!</code>也q恰恰好可以卡过去，只是时间卡的有点死)。2是使用rand()随机交换两个位置的数，然后我们就可以$O(n^2)$的计算解(因为这个数据范围非常小，可以直接这样搞)，然后就是退火的老套路咯。其实不降温也可以。。。。
+1板子的话，十分简单(见我另一篇题解)。如何计算新解是关键，也是对思维要求较高的<del>退火算法思维要求已经够低了</del>，对于这道题，我们考虑如何变化解。我们可以把这些点构造成一个序列，在序列中的位置就是它们依次被加入到结果中顺序。我们一开始把每个点的编号设为他在序列中的位置。那么我们有两种方式可以解决。1是使用<code class="language-plaintext highlighter-rouge">STL</code>中的<code class="language-plaintext highlighter-rouge">random\_shuffle(Iterator begin,Iterator end)</code>函数来获得一个随机序列(因为这个数据范围只有<code class="language-plaintext highlighter-rouge">12</code>个点<code class="language-plaintext highlighter-rouge">12!</code>也q恰恰好可以卡过去，只是时间卡的有点死)。2是使用rand()随机交换两个位置的数，然后我们就可以$O(n^2)$的计算解(因为这个数据范围非常小，可以直接这样搞)，然后就是退火的老套路咯。其实不降温也可以。。。。
 这里解释一下node里面的dis函数的计算原理，就是随机获得一个序列以后，把这个序列看做每个点加到结果里面的顺序，然后找一个点，使当前计算的点连接到那个点产生的价格最小。<strong>别忘了把dep更新！！！</strong></p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;cstdio&gt;
 # include &lt;cstring&gt;
@@ -301,18 +301,18 @@ L代表这条道路的长度，K代表从赞助商帮你打通的宝藏屋到这
 <span class="p">};</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">19260817</span><span class="p">;</span>
 <span class="k">const</span> <span class="kt">double</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.997</span><span class="p">;</span>
-<span class="n">node</span> <span class="n">current_ans</span><span class="p">;</span>
+<span class="n">node</span> <span class="n">current</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
 <span class="kt">int</span> <span class="nf">SA</span><span class="p">(){</span>
-	<span class="kt">double</span> <span class="n">curr_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
+	<span class="kt">double</span> <span class="n">curr</span><span class="err">\</span><span class="n">_T</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
 	<span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">){</span>
-		<span class="n">node</span> <span class="n">new_ans</span><span class="p">(</span><span class="n">current_ans</span><span class="p">);</span>
-		<span class="kt">int</span> <span class="n">del</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">()</span><span class="o">-</span><span class="n">current_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">();</span>
+		<span class="n">node</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">(</span><span class="n">current</span><span class="err">\</span><span class="n">_ans</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">del</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">()</span><span class="o">-</span><span class="n">current</span><span class="err">\</span><span class="n">_ans</span><span class="p">.</span><span class="n">dis</span><span class="p">();</span>
 		<span class="k">if</span><span class="p">(</span><span class="n">del</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-			<span class="n">current_ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
-		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">del</span><span class="o">/</span><span class="n">curr_T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
-			<span class="n">current_ans</span> <span class="o">=</span> <span class="n">new_ans</span><span class="p">;</span>
+			<span class="n">current</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
+		<span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">del</span><span class="o">/</span><span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="p">)</span><span class="o">*</span><span class="n">RAND</span><span class="err">\</span><span class="n">_MAX</span><span class="o">&gt;</span><span class="n">rand</span><span class="p">()){</span>
+			<span class="n">current</span><span class="err">\</span><span class="n">_ans</span> <span class="o">=</span> <span class="k">new</span><span class="err">\</span><span class="n">_ans</span><span class="p">;</span>
 		<span class="p">}</span>
-		<span class="n">curr_T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
+		<span class="n">curr</span><span class="err">\</span><span class="n">_T</span><span class="o">*=</span><span class="n">delta</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
@@ -324,7 +324,7 @@ L代表这条道路的长度，K代表从赞助商帮你打通的宝藏屋到这
 		<span class="n">map</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
 	<span class="p">}</span>
 	<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">999999999</span><span class="p">;</span>
-	<span class="k">while</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">clock</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">CLOCKS_PER_SEC</span><span class="o">&lt;</span><span class="mf">0.9</span><span class="p">){</span>
+	<span class="k">while</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">clock</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">CLOCKS</span><span class="err">\</span><span class="n">_PER</span><span class="err">\</span><span class="n">_SEC</span><span class="o">&lt;</span><span class="mf">0.9</span><span class="p">){</span>
 		<span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">SA</span><span class="p">());</span>
 	<span class="p">}</span>
 	<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>

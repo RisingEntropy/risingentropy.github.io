@@ -197,7 +197,7 @@
     <p>图像的基本几何变换：在本文中指“平移变换”，“旋转变换”，“缩放变换”，“镜像变换”。图像的几何变换可以改变图像的空间位置关系，但是不改变图像的色彩特征。</p>
   </li>
   <li>
-    <p>模型矩阵：对于一个矩阵乘法表示的变换 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}a_{1,1},a_{1,2},a_{1,3}\a_{2,1},a_{2,2},a_{2,3}\a_{3,1},a_{3,2},a_{3,3}\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}$本报告中将$\begin{bmatrix}a_{1,1},a_{1,2},a_{1,3}\a_{2,1},a_{2,2},a_{2,3}\a_{3,1},a_{3,2},a_{3,3}\end{bmatrix}$称为模型矩阵,在代码中用<code class="language-plaintext highlighter-rouge">mat_moudle</code> 表示</p>
+    <p>模型矩阵：对于一个矩阵乘法表示的变换 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}a_{1,1},a_{1,2},a_{1,3}\a_{2,1},a_{2,2},a_{2,3}\a_{3,1},a_{3,2},a_{3,3}\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}$本报告中将$\begin{bmatrix}a_{1,1},a_{1,2},a_{1,3}\a_{2,1},a_{2,2},a_{2,3}\a_{3,1},a_{3,2},a_{3,3}\end{bmatrix}$称为模型矩阵,在代码中用<code class="language-plaintext highlighter-rouge">mat\_moudle</code> 表示</p>
   </li>
   <li>坐标矩阵： 上述概念中$\begin{bmatrix}x\y\1\end{bmatrix}$被称为坐标矩阵</li>
   <li>代码中涉及的图像表示方法：图像由一个个像素构成，每个像素的颜色由RGBA四个参数描述，分别表示 红 绿 蓝3元色的分量及$\alpha$通道(表示透明度)</li>
@@ -242,7 +242,7 @@ $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}1\ \ 0 \ \ \ 0\0\ \  -
 $\begin{bmatrix}x’\y’\1\end{bmatrix} = \begin{bmatrix}cos\theta\ \ -sin\theta \ \ \ 0\sin\theta\ \ \ \ \  cos\theta\ \ \ 0\0\ \ \ \  \ \ \ \  0\ \ \ \ \ \  \   1\end{bmatrix}\begin{bmatrix}x\y\1\end{bmatrix}=\begin{bmatrix}xcos\theta-ysin\theta\xsin\theta+ycos\theta\1\end{bmatrix}$</p>
 
 <p>为了简单起见，在事件过程中，我并没有按照3个步骤，而是现将图像平移一段距离，保证旋转过后任然在显示区域内，然后再进行旋转。具体方式是：用一个平移矩阵左乘旋转矩阵作为模型矩阵，然后再进行变换。即：</p>
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat_moudle</span> <span class="o">=</span> <span class="n">mat_translate</span><span class="o">*</span><span class="n">mat_rotate</span><span class="p">;</span>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat</span><span class="err">\</span><span class="n">_moudle</span> <span class="o">=</span> <span class="n">mat</span><span class="err">\</span><span class="n">_translate</span><span class="o">*</span><span class="n">mat</span><span class="err">\</span><span class="n">_rotate</span><span class="p">;</span>
 </code></pre></div></div>
 <p>效果如下：
 <img src="https://cdn.risingentropy.top/images/posts/15a6ca5ab644142b41cb4b4.png" alt="title" /></p>

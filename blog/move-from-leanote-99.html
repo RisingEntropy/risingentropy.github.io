@@ -61,7 +61,7 @@ struct node{
 	}
 };
 void dijkstra(){
-	priority_queue&amp;lt;node&amp;gt; q;
+	priority\_queue&amp;lt;node&amp;gt; q;
 	memset(dis,-0x3f,sizeof(dis));
 	memset(vis,false,sizeof(vis));
 	node temp;
@@ -160,7 +160,7 @@ struct node{
 	}
 };
 void dijkstra(){
-	priority_queue&amp;lt;node&amp;gt; q;
+	priority\_queue&amp;lt;node&amp;gt; q;
 	memset(dis,-0x3f,sizeof(dis));
 	memset(vis,false,sizeof(vis));
 	node temp;
@@ -423,7 +423,7 @@ inline int rd() {
 	<span class="p">}</span>
 <span class="p">};</span>
 <span class="kt">void</span> <span class="nf">dijkstra</span><span class="p">(){</span>
-	<span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+	<span class="n">priority</span><span class="err">\</span><span class="n">_queue</span><span class="o">&lt;</span><span class="n">node</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
 	<span class="n">memset</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="o">-</span><span class="mh">0x3f</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">dis</span><span class="p">));</span>
 	<span class="n">memset</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">vis</span><span class="p">));</span>
 	<span class="n">node</span> <span class="n">temp</span><span class="p">;</span>
@@ -476,7 +476,7 @@ struct IO
     int buf[50];
     inline void init()
     {
-        ios::sync_with_stdio(false);
+        ios::sync\_with\_stdio(false);
         cin.tie(NULL);cout.tie(NULL);
         ib=cin.rdbuf();ob=cout.rdbuf();
     }
