@@ -19,7 +19,7 @@
 其实就是没有上司的舞会，比较简单
 背包类树形dp
 例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
-\(F[x][t] = max\_{\sum^p\_{i=1}c\_i=t-1}\{\sum^p\_{i=1}F[y\_i,c\_i]+score[x]\}\)
+\(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
 以下是实现的代码。
 ```cpp
 include 
@@ -62,7 +62,7 @@ void dfs(int x){
 其实就是没有上司的舞会，比较简单
 背包类树形dp
 例如选课，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
-\(F[x][t] = max\_{\sum^p\_{i=1}c\_i=t-1}\{\sum^p\_{i=1}F[y\_i,c\_i]+score[x]\}\)
+\(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
 以下是实现的代码。
 ```cpp
 include 
@@ -106,16 +106,17 @@ void dfs(int x){
 
   <link rel="stylesheet" href="/assets/main.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script> 
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-        processEscapes: true
-      }
-    };
-    </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              inlineMath: [['$','$']],
+          },
+          TeX: {equationNumbers: {autoNumber: "AMS"}},
+      });
+  </script>
 </head>
 
 <body>
@@ -270,7 +271,7 @@ void dfs(int x){
 <p>其实就是没有上司的舞会，比较简单</p>
 <h1 id="背包类树形dp">背包类树形dp</h1>
 <p>例如<a href="https://www.luogu.org/problemnew/show/P2014">选课</a>，其实就是一个分组背包问题和树形dp结合起来。$F[x][t]$表示以$x$为根的子树中选$t$门课能够获取的最高学分。下面是一个非常搞扯的表达式，反正自己意会就行
-\(F[x][t] = max\_{\sum^p\_{i=1}c\_i=t-1}\{\sum^p\_{i=1}F[y\_i,c\_i]+score[x]\}\)
+\(F[x][t] = max_{\sum^p_{i=1}c_i=t-1}\{\sum^p_{i=1}F[y_i,c_i]+score[x]\}\)
 以下是实现的代码。</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 </span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>

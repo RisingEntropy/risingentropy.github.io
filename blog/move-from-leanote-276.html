@@ -40,16 +40,17 @@
 
   <link rel="stylesheet" href="/assets/main.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script> 
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-        processEscapes: true
-      }
-    };
-    </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              inlineMath: [['$','$']],
+          },
+          TeX: {equationNumbers: {autoNumber: "AMS"}},
+      });
+  </script>
 </head>
 
 <body>
@@ -207,7 +208,7 @@
 
 <p>首先有个思路：决策和数与数之间$0$的个数有关系，可关系是什么呢？
 会发现对于这样的一个序列：
-\(a\_1~~0~~...~~0~~a\_2~~0~~...~~a\_3\)
+\(a_1~~0~~...~~0~~a_2~~0~~...~~a_3\)
 选择$a_2$后是否选择$a_1$与$a_1,a_2$的差值以及$a_1,a_2$间$0$的个数有关，选择$a_3$后是否选择$a_2$与$a_1-a_2,a_1-a_3$间$0$的个数又有关系……
 <del>看了题解后</del>发现问题可以这么转化：每一个数减去它前面出现的$0$的数量，答案即为$maxlen+cnt_0$
 <strong>以上sao操作的实质是</strong>：</p>

@@ -36,16 +36,17 @@
 
   <link rel="stylesheet" href="/assets/main.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script> 
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-        processEscapes: true
-      }
-    };
-    </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              inlineMath: [['$','$']],
+          },
+          TeX: {equationNumbers: {autoNumber: "AMS"}},
+      });
+  </script>
 </head>
 
 <body>
@@ -258,7 +259,7 @@
   <p>我们为所有边设置反向边(容量为0)，并将其流量与正向边同步。为了保持T-&gt;S边流量为0，每当由于增广操作，T-&gt;S边流量上升，其反向边也同步上涨，而显然在残量网络中反向边是沿S-&gt;T方向的，这就又出现了一条增广路，计算机对此无法容忍，下调它的流量，我们的T-&gt;S边流量也随之回到了0，达到了目的</p>
   <h1 id="割">割</h1>
   <p>G = (V, E, C)是已知的网络流图，设U是V的一个子集，W =V\U，满足S ∈ U，T∈W。即U、W把V分成两个不相交的集合，且源点和汇点分属不同的集合(其实就是把一个网络流图分成2部分，源点和汇点分别属于不同集合就完了)对于弧尾在U，弧头在W的弧所构成的集合称之为割切，用（U，W）表示。把割切（U，W）中所有弧的容量之和叫做此割切的容量，记为C（U，W），即：
-\(C(U,V) = \sum\_{i\in U\ \ j\in V}C\_{i,j}\)
+\(C(U,V) = \sum_{i\in U\ \ j\in V}C_{i,j}\)
 <img src="https://cdn.risingentropy.top/images/posts/c4aae12ab644108f0000711.png" alt="title" /></p>
 </blockquote>
 

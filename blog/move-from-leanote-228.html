@@ -46,16 +46,17 @@
 
   <link rel="stylesheet" href="/assets/main.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script> 
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-        processEscapes: true
-      }
-    };
-    </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              inlineMath: [['$','$']],
+          },
+          TeX: {equationNumbers: {autoNumber: "AMS"}},
+      });
+  </script>
 </head>
 
 <body>
@@ -243,7 +244,7 @@
 <p>意义：$\begin{bmatrix}n\m\end{bmatrix}$表示$n$元素分成$m$个环的方案数
 $\begin{bmatrix}n\m \end{bmatrix} = \begin{bmatrix}n-1\m-1\end{bmatrix}+(n-1) * \begin{bmatrix} n-1\m \end{bmatrix}$
 理解：考虑从$n−1$个元素推过来，如果两个空环肯定是不符合的空一个环则单独成环，如果$n−1$的时候就没有空环就任意放在一个元素前
-性质\(n! = \sum\limits\_{i = 0}^{n}\begin{bmatrix}n\\i\end{bmatrix}\)</p>
+性质\(n! = \sum\limits_{i = 0}^{n}\begin{bmatrix}n\\i\end{bmatrix}\)</p>
 <h1 id="第二类斯特林数">第二类斯特林数</h1>
 <p>$\begin{Bmatrix} n\m\end{Bmatrix}$表示$n$个有区别的小球丢进$m$个无区别的盒子的方案数。
 计算：

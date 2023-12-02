@@ -17,7 +17,7 @@
   <meta name="twitter:description" content="中国剩余定理
 内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
+\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
 证明
@@ -27,7 +27,7 @@
 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
 # include &amp;lt;iostream&amp;gt;
@@ -181,7 +181,7 @@ int main(){
   <meta property="og:description" content="中国剩余定理
 内容：
 设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
+\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$
 证明
@@ -191,7 +191,7 @@ int main(){
 应用
 P1495 曹冲养猪
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用long long
 代码：
 # include &amp;lt;iostream&amp;gt;
@@ -348,16 +348,17 @@ int main(){
 
   <link rel="stylesheet" href="/assets/main.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script> 
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-        processEscapes: true
-      }
-    };
-    </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', '\''],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              inlineMath: [['$','$']],
+          },
+          TeX: {equationNumbers: {autoNumber: "AMS"}},
+      });
+  </script>
 </head>
 
 <body>
@@ -510,7 +511,7 @@ int main(){
       <h1 id="中国剩余定理">中国剩余定理</h1>
 <h1 id="内容">内容：</h1>
 <p>设$m_1,m_2.m_3,m4$是一组两两互质的数，设$m = \prod\limits_{i=1}^nm_i,M_i = m/m_i,t_i$是线性同余方程$M_it_i\equiv1(mod\  m_i)$的一个解，那么对于任意的$n$个整数$a_i,a_2…a_n$，方程组
-\(\begin{Bmatrix}x\equiv a\_i(mod\ m\_i)\\x\equiv a\_2(mod\  m\_2)\\.\\.\\x\equiv a\_n(mod\ m\_n)
+\(\begin{Bmatrix}x\equiv a_i(mod\ m_i)\\x\equiv a_2(mod\  m_2)\\.\\.\\x\equiv a_n(mod\ m_n)
 \end{Bmatrix}\)
 有整数解：为$x=\sum\limits_{i=1}^{n}a_iM_it_i$</p>
 <h1 id="证明">证明</h1>
@@ -520,7 +521,7 @@ int main(){
 <h1 id="应用">应用</h1>
 <p><a href="https://www.luogu.org/problem/P1495">P1495 曹冲养猪</a>
 观察题目不难列出如下柿子:
-\(\begin{Bmatrix}x\equiv b\_1(mod\ a\_1)\\x\equiv b\_2(mod\ a\_2)\\...\\x\equiv b\_n(mod\ a\_n)\end{Bmatrix}\)
+\(\begin{Bmatrix}x\equiv b_1(mod\ a_1)\\x\equiv b_2(mod\ a_2)\\...\\x\equiv b_n(mod\ a_n)\end{Bmatrix}\)
 然后根据中国剩余定理，处理处$M_i$和$t_i$，由于要最小，我们直接对$M$进行取模就好了。注意一点的是$M$的值可能很大，有题目可得为$1000^{10}$所以需要使用<code class="language-plaintext highlighter-rouge">long long</code>
 代码：</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
