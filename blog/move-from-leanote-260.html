@@ -230,10 +230,10 @@
 <p>一类非常经典的概率DP问题，由于许多概率dp是倒着推得，所以我们用dp[i][j]表示还剩i行j列的的期望步数，那么显然有$dp[0][0] = 0.0$，然后考虑转移，有如下四类转移</p>
 
 <ol>
-  <li>从dp[i-1][j-1]转移，那么<del>显然</del>有：$dp[i][j]+=dp[i-1][j-1]<em>\frac{i</em>j}{n*n}$</li>
-  <li>从dp[i-1][j]转移，那么有：$dp[i][j]+=dp[i-1][j]<em>\frac{i</em>(n-j)}{n*n}$</li>
-  <li>从dp[i][j-1]转移，那么有：$dp[i][j]+=dp[i][j-1]<em>\frac{(n-i)</em>j}{n*n}$</li>
-  <li>从dp[i-1][j-1]转移，那么有：$dp[i][j]+=dp[i][j]<em>\frac{(n-i)</em>(n-j)}{n*n}$</li>
+  <li>从dp[i-1][j-1]转移，那么<del>显然</del>有：$dp[i][j]+=dp[i-1][j-1]*\frac{i*j}{n*n}$</li>
+  <li>从dp[i-1][j]转移，那么有：$dp[i][j]+=dp[i-1][j]*\frac{i*(n-j)}{n*n}$</li>
+  <li>从dp[i][j-1]转移，那么有：$dp[i][j]+=dp[i][j-1]*\frac{(n-i)*j}{n*n}$</li>
+  <li>从dp[i-1][j-1]转移，那么有：$dp[i][j]+=dp[i][j]*\frac{(n-i)*(n-j)}{n*n}$</li>
   <li>加起来，化简得:\(dp[i][j] = \frac{(n*n +dp[i-1][j-1]*i*j+dp[i][j-1]*j*(n-i)+dp[i-1][j]*i*(n-j))}{(n*n-(n-i)*(n-j))}\)
 代码：
     <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;algorithm&gt;

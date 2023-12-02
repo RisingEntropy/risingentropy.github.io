@@ -249,8 +249,8 @@ v * m ^ 2 &amp;= m * \sum_{i=1}^{m}r_i^2 - (\sum_{i=1}^{m}r_i) ^ 2\\
 $f[i][k] = min(f[i][k], f[j][k - 1] + (sum[j] - sum[i])^2)$
 然后画柿子
 $\begin{aligned}
-f[t][k - 1] + (sum[t] - sum[i])^2 &amp;&lt; f[j][k - 1] + (sum[j] - sum[i]) ^ 2<br />
-(f[t][k - 1] + sum[t] ^ 2) - (f[j][k - 1] + sum[j] ^ 2) &amp;&lt; 2 * sum[i] * (sum[t] - sum[j])<br />
+f[t][k - 1] + (sum[t] - sum[i])^2 &amp;&lt; f[j][k - 1] + (sum[j] - sum[i]) ^ 2\<br />
+(f[t][k - 1] + sum[t] ^ 2) - (f[j][k - 1] + sum[j] ^ 2) &amp;&lt; 2 * sum[i] * (sum[t] - sum[j])\<br />
 \frac{(f[t][k - 1] + sum[t] ^ 2) - (f[j][k - 1] + sum[j] ^ 2)}{2 * (sum[t] - sum[j])} &amp;&lt; sum[i]
 \end{aligned}$
 斜率优化就好了
