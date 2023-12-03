@@ -257,7 +257,21 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 <h3 id="adversarial-loss">Adversarial Loss</h3>
 <p>对抗Loss被定义为：
 \(\begin{array}{l}{ {\mathcal{L}_{adv_{g\}\}(I_{SR};D)=-logD(I_{SR}),\}\}\\ \{\{\mathcal{L}_{adv_{d\}\}(I_{SR},\hat{I}_{HR};D)=-logD(\hat{I}_{HR})-log(1-D(I_{SR})),\}\}\end{array}\)
-其中$\mathcal{D}$表示鉴别器生成的二值类别。</p>
+其中$\mathcal{D}$表示鉴别器生成的二值类别。部分工作指出log换成平方项可以增加稳定性和提升效果。即：
+\(\begin{array}{l}{
+\mathcal{L}_{adv_{g_{-}Ise\}\}(I_{SR};D)=(D(I_{SR})-1)^{2},}\\
+{\mathcal{L}_{adv_{d\_lse\}\}
+(I_{SR},\hat{I}_{HR};D)=(D(\hat{I}_{HR}))^{2}-(D(I_{SR})-1)^{2}.}
+\end{array}\)</p>
+<h3 id="multi-scale-loss">Multi-scale Loss</h3>
+<p>考虑多个尺度，获得$I_{SR}^{(s)}=Bicubic_{\downarrow}(I_{SR},s)$。多尺度Loss被定义为
+\(\mathcal{L}_{ms}(I_{SR}^{(s)},I_{HR})=\left\|I_{SR}^{(s)}-\text{Bicubic}_{\downarrow}(I_{HR},s)\right\|_1.\)
+多尺度Loss能提供额外的监督，能提升网络的跨尺度泛化能力。有个疑惑是：这个Loss应该是多个$s$值的情况下获得的Loss的叠加，为什么这里没有求和。</p>
+
+<h3 id="other-losses">Other losses</h3>
+<p>任意尺度超分Loss很多，有基于difussion模型的loss，negative loglikelihood loss，flow model joint loss等。</p>
+
+<h2 id="基于尺度分类的超分">基于尺度分类的超分</h2>
 
     </div>
 
