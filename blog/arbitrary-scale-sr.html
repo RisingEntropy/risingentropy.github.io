@@ -273,6 +273,54 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 
 <h2 id="基于尺度分类的超分">基于尺度分类的超分</h2>
 
+<h3 id="固定整数尺度超分">固定整数尺度超分</h3>
+<p>固定整数尺度超分把不同尺度的超分任务看做不同的任务分开来看。他们通过亚像素卷积（卷积+Pixel Shuffle）或者反卷积来实现。典型网络有ESPCN, RED-Net, EDSR, DBPN, RDN, RCAN, and SwinIR。</p>
+
+<p>Multi-Scale Super-Resolution network (MDSR)一次性可以超分三个尺度。在网络的开始用$5\times 5$的卷积来获得一个大的感受野。</p>
+
+<p>有许多工作做了X8，X16，X32倍等的大尺度超分。但是这些方法都只能处理一个尺度。</p>
+
+<p>LIIF 将神经网络隐式表示引入了超分，其建立了一个坐标到RGB的映射，实现任意尺度的超分。</p>
+
+<p>UltraSR在LIIF的基础上增加了位置编码以增强高频材质的超分。</p>
+
+<p>LTE增加了对自然图像的频域估计器，使其能够捕获高频信息。</p>
+
+<p>IPF为接近模糊边缘的像素分配偏移量，使其更接近真实的锐利边缘</p>
+
+<p>CiSR-GAN 使用对抗loss来提升感受指标</p>
+
+<h3 id="非整数尺度超分">非整数尺度超分</h3>
+<p>2016年提出的very deep convolutional network (VDSR)可以实现如1.5倍这样的非整数倍超分。作者直接在卷积层前面加了插值再过神经网络来达到目的。</p>
+
+<p>Multiplescaling-based SR (MSSR)根据指定的尺度选择一个最优的整数尺度因子，然后最后使用插值将图像缩放到目标尺寸。</p>
+
+<p>Super-resolution with overscaling network （OverNet）生成了过尺度feature然后通过插值实现任意尺度超分。</p>
+
+<p>ASDN采用了拉普拉斯金字塔方法，在该方法中，图像是由预先计算的拉普拉斯金字塔层次的稀疏集合插值构造的</p>
+
+<p>Arbitrary Scale SR (ASSR) 用亚像素卷积和Bicubic插值实现卫星图像视频超分</p>
+
+<p>Meta-SR 收到元学习的启发，提出了magnificationarbitrary Network (called Meta-SR)。首次实现了单模型任意尺度超分。在此之上，Meta-SAN把Meta-SR里面地特征提取部分换成了二阶注意力网络。Meta-SRGAN实现用任意尺度超分方法做MRI图像超分。Medical image arbitrary scale super-resolution（MIASSR）在Meta-SRGAN基础上提高了保真度。</p>
+
+<h3 id="非对称尺度超分">非对称尺度超分</h3>
+<p>非对称尺度超分就是指长宽超分比例不一样。Scale-arbitrary super-resolution (ArbSR)提出了一种plug and play的模块实现任意尺度超分。ArbSR使用了动态卷积。其参数由长宽上的超分因子参与生成。ArbSR还使用了scale-aware的上采样模块。下图为ArbSR的核心部分。
+<img src="https://cdn.risingentropy.top/images/posts/20231203234620.png" alt="20231203234620" /></p>
+
+<p>Bidirectional Arbitrary Image Rescaling Network (BAIRNet)能够实现任意尺度上采样和下采样。在上采样时有较好表现。下采样时能保持图片的感受质量。</p>
+
+<h3 id="任意尺度变换超分">任意尺度变换超分</h3>
+<p>就是超分出来的图片不一定是方的，可以由一定的形变。</p>
+
+<p>《SRWarp: Generalized image super-resolution under arbitrary transformation》的作者将该任务解释为空间变化的超分任务然后提出了SRWrap方法。SRWrap并不是基于规则的矩形网格的，而是基于不规则网格采样的，所以能实现不规则变换。（个人觉得说白了就是获得不规则输入图像的仿射变换已知，然后作为信息去学）
+<img src="https://cdn.risingentropy.top/images/posts/20231204000329.png" alt="20231204000329" /></p>
+
+<p>为了解决隐式神经表示在恢复高频信息方面的局限性，提出了一种用于图像变形的局部隐式傅里叶表示和局部纹理估计器（LTEW）。</p>
+
+<p>上述两种方法都能用一个网络实现不同尺度的超分而不用插值。</p>
+
+<h2 id="基于上采样方法的分类">基于上采样方法的分类</h2>
+
     </div>
 
     <div class="post__share">
