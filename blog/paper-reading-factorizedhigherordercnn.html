@@ -219,7 +219,7 @@
 <h3 id="factorized-higher-order-convolutions">Factorized higher-order convolutions</h3>
 <p>对于高维张量，用Kruskal形式来表述参数，表述为$\mathcal{W}=[\lambda;U^{(T)};U^{(C)};U^{(K_0)}\cdots ;U^{(K_{N-1})}]$
 然后卷积可以写为:
-\(\Phi(\mathcal{X})_{t,i_0,i_1,\cdots,i_n}=\sum\limits_{r=0}^{R}\sum\limits_{s=0}^{C}\sum\limits_{i_0=0}^{K_0}\cdots\sum\limits_{i_{N-1}=0}^{K_{N-1}}\lambda_r[U^{(T)}_{t,r}U^{(C)}_{s,r}U^{(K_0)}_{i_0,r}\cdots U_{i_{N-1}}^{K_{N-1}}\mathcal{X}_{s,\cdots,i_{N-1}}]\)</p>
+\(\Phi(\mathcal{X})_{t,i_0,i_1,\cdots,i_n}=\sum\limits_{r=0}^{R}\sum\limits_{s=0}^{C}\sum\limits_{i_0=0}^{K_0}\cdots\sum\limits_{i_{N-1}=0}^{K_{N-1\}\}\lambda_r[U^{(T)}_{t,r}U^{(C)}_{s,r}U^{(K_0)}_{i_0,r}\cdots U_{i_{N-1\}\}^{K_{N-1\}\}\mathcal{X}_{s,\cdots,i_{N-1\}\}]\)</p>
 
 <p>调整一下乘积的顺序（前面的一堆$\sum$我就略过了），可以写成：
 \(\sum\cdots\sum\lambda_r[U^{(T)}\mathcal{X}_sU^{(C)}U^{(K_0)}\cdots U^{(k_{N-1})}]\)
@@ -229,7 +229,7 @@
 \(\mathcal{F}=\rho(\Phi(\mathcal{X}\times_0U^{(T)}))\times_0(diag(\lambda)U^{(C)})\)
 这样优化的意义就在于把$N$维卷积参数量从$T\times C\times K_0\times K_1\cdots\times K_{N-1}$降低到了$T+C+\sum\limits_{i=0}^{N-1}I_k$
 要想将训练好的参数拓展一维，只需要把$\rho$换成$\hat{\rho}$就行，$\hat{\rho}$被定义为：
-\(\hat{\rho}(\mathcal{X})=\rho(\mathcal{X})\star_{N+1}U^{K_{N+1}}\)
+\(\hat{\rho}(\mathcal{X})=\rho(\mathcal{X})\star_{N+1}U^{K_{N+1\}\}\)
 确实说白了就是他这个形式方便拓展维度，要拓展就多塞一项就行。</p>
 <h2 id="困惑">困惑</h2>
 
