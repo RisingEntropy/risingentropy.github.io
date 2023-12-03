@@ -326,7 +326,7 @@ T2
 <p>最难的一道题。首先我们可以考虑可以把成倍数关系的数放到一条链上面如下图所示</p>
 
 <p><img src="https://cdn.risingentropy.top/images/posts/d612d08ab64417884006e1c.png" alt="图片标题" />
-然后我们发现对于一条长度不为1的链，其实就是个类似于二分图的东西，于是乎它的贡献就是2，对于所有长度不为1的链的总贡献就是$2^c$现在考虑单独的点，既可以在A也可以在B，我们不妨记所有长度不为1的链的点的个数为$sum$，那么我们的答案就是\(s^c\times {sum-n \choose m-\frac{c}{2\}\}\).难点就在于如何计算长度不为1的链的条数，有一种做法是$O(n)$的枚举，但是显然过不了所有的点的，所以我们考虑log级别的算法，我们发现链长都是$2^k$的长度的，可以考虑枚举这个$k$,然后计算这个长度内所有的点数就好了,计算的时候注意代码细节。然后由于数量很大，所以需要使用<code class="language-plaintext highlighter-rouge">lucas</code>定理进行计算组合数。
+然后我们发现对于一条长度不为1的链，其实就是个类似于二分图的东西，于是乎它的贡献就是2，对于所有长度不为1的链的总贡献就是$2^c$现在考虑单独的点，既可以在A也可以在B，我们不妨记所有长度不为1的链的点的个数为$sum$，那么我们的答案就是\(s^c\times {sum-n \choose m-\frac{c}{2 }}\).难点就在于如何计算长度不为1的链的条数，有一种做法是$O(n)$的枚举，但是显然过不了所有的点的，所以我们考虑log级别的算法，我们发现链长都是$2^k$的长度的，可以考虑枚举这个$k$,然后计算这个长度内所有的点数就好了,计算的时候注意代码细节。然后由于数量很大，所以需要使用<code class="language-plaintext highlighter-rouge">lucas</code>定理进行计算组合数。
 代码：(有大量代码细节！！！)</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># include &lt;iostream&gt;
 # include &lt;cstring&gt;

@@ -378,10 +378,10 @@ $x_1-x_2\le |x_1-x_2|\ge x_2-x_1$
 移项
 \(a(p_i-p_{i-1})=c(p_{i+1}-p_{i})\)
 所以
-\(\frac{p_{i+1}-p_{i\}\}{p_{i}-p_{i-1\}\}=\frac{a}{c}\)
+\(\frac{p_{i+1}-p_{i }} {p_{i}-p_{i-1 }} =\frac{a}{c}\)
 设$b_i=p_{i+1}-p_i$
 那么
-\(\frac{b_i}{b_{i-1\}\}=\frac{a}{c}\)
+\(\frac{b_i}{b_{i-1 }} =\frac{a}{c}\)
 所以
 \(b_n = (\frac{a}{c})^{n}b_0\)
 \(b_0 = p_1-p_0\)
@@ -393,23 +393,23 @@ $x_1-x_2\le |x_1-x_2|\ge x_2-x_1$
 <p>所以
 \(p_n = \sum_{i=1}^{n-1}(\frac{a}{c})^{i}p_1+p_1\)
 由等比数列求和公式
-\(p_n=p_1\times \frac{\frac{a}{c}(1-(\frac{a}{c})^{n-1})}{1-\frac{a}{c\}\}+p_1\)
+\(p_n=p_1\times \frac{\frac{a}{c}(1-(\frac{a}{c})^{n-1})}{1-\frac{a}{c }} +p_1\)
 令$n=2n$</p>
 
 <p>然后有
-\(p_n=p_1\times \frac{\frac{a}{c}-(\frac{a}{c})^n+1-\frac{a}{c\}\}{1-\frac{a}{c\}\}\)
+\(p_n=p_1\times \frac{\frac{a}{c}-(\frac{a}{c})^n+1-\frac{a}{c }} {1-\frac{a}{c }}\)
 因为$p_n=1$</p>
 
 <p>所以有
-\(p_1=\frac{1-\frac{a}{c\}\}{1-(\frac{a}{c})^n}\)
+\(p_1=\frac{1-\frac{a}{c }} {1-(\frac{a}{c})^n}\)
 然后现在要求$p_k$</p>
 
 <p>所以
 \(p_k = \sum_{i=1}^{k-1}(\frac{a}{c})^{i}p_1+p_1\)
 这也是一个等比数列求和
-\(\therefore p_k = \frac{\frac{a}{c}(1-(\frac{a}{c})^{k-1})}{1-\frac{a}{c\}\}\times p_1+p_1\)</p>
+\(\therefore p_k = \frac{\frac{a}{c}(1-(\frac{a}{c})^{k-1})}{1-\frac{a}{c }} \times p_1+p_1\)</p>
 
-<p>\(p_k=p_1\times \frac{1-\frac{a}{c\}\}{1-(\frac{a}{c})^k}\)
+<p>\(p_k=p_1\times \frac{1-\frac{a}{c }} {1-(\frac{a}{c})^k}\)
 终于推出严格的数学证明了，中途合并消去的时候消漏了一个$p_1$，把我整惨了呜呜呜~~~</p>
 <h1 id="t2-9">T2</h1>
 <p>模拟题，多用STL。没想到我的40复杂度错误做法居然A了ORz</p>

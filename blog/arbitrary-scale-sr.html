@@ -224,7 +224,7 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 <h3 id="psnr-peak-signal-to-noise-ratio">PSNR: Peak signal-to-noise ratio</h3>
 <p>老熟人：
 \(\mathrm{MSE}=\frac{1}{HW}\sum_{i=1}^{H}\sum_{j=1}^{W}\left(I_{HR}(i,j)-I_{SR}(i,j)\right)^{2},\\
-\mathbf{PSNR}=10\log_{10}\left(\frac{L^{2\}\}{\mathbf{MSE\}\}\right).\)</p>
+\mathbf{PSNR}=10\log_{10}\left(\frac{L^{2 }} {\mathbf{MSE }} \right).\)</p>
 
 <p>$L$是指数据范围，对于8bit图像而言就是255。对于PSNR我有个疑惑：假设源图像是$I_{HR}$，量化过后是$\hat{I}_{HR}$。量化的过程相当于是加上一个均匀分布的噪声$\textbf{u}$，即$\hat{I}_{HR}=I_{HR}+\textbf{u}$。而对于超分图像$I_{SR}$，可以看做是$I$进行一个低通滤波，即$I_{SR}=I*LPF$，PSNR的MSE项严格来说应该写作
 \(\mathrm{MSE}=\frac{1}{HW}\sum_{i=1}^{H}\sum_{j=1}^{W}\left(I_{HR}(i,j)-I_{SR}(i,j)\right)^{2}，\)
@@ -233,9 +233,9 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 <h3 id="ssim-structural-similarity">SSIM: Structural similarity</h3>
 <p>$\sigma_{hr},\sigma_{sr}$分别是他们的标准差，$\sigma_{hrsr}$是协方差。
 \(\begin{aligned}
-&amp;l\left(I_{SR},I_{HR}\right)=\frac{2\mu_{sr}\mu_{hr}+C_{1\}\}{\mu_{sr}^{2}+\mu_{hr}^{2}+C_{1\}\}, \\
-&amp;c\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{sr}\sigma_{hr}+C_{2\}\}{\sigma_{sr}^{2}+\sigma_{hr}^{2}+C_{2\}\}, \\
-&amp;s\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{hrsr}+C_{3\}\}{\sigma_{sr}\sigma_{hr}+C_{3\}\}, \\
+&amp;l\left(I_{SR},I_{HR}\right)=\frac{2\mu_{sr}\mu_{hr}+C_{1 }} {\mu_{sr}^{2}+\mu_{hr}^{2}+C_{1 }} , \\
+&amp;c\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{sr}\sigma_{hr}+C_{2 }} {\sigma_{sr}^{2}+\sigma_{hr}^{2}+C_{2 }} , \\
+&amp;s\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{hrsr}+C_{3 }} {\sigma_{sr}\sigma_{hr}+C_{3 }} , \\
 &amp;\mathrm{SSIM}=\left[l\left(I_{SR},I_{HR}\right)\right]^{\alpha}\left[c\left(I_{SR},I_{HR}\right)\right]^{\beta}\left[s\left(I_{SR},I_{HR}\right)\right]^{\gamma},
 \end{aligned}\)
 其中$l(I_{SR},I_{HR}),c(I_{SR},I_{HR}),s(I_{SR},I_{HR})$分别表示亮度，对比度，结构。常见参数设置为$\alpha=\beta=\gamma=1$ and $C_{3}=C_{2}/2.$</p>
@@ -247,20 +247,20 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 
 <h3 id="pixel-loss">Pixel Loss</h3>
 <p>Pixel Loss 包括L1、L2和Charbonnier Loss.Charbonnier 是一种关于平均绝对误差的改进。
-\(\mathcal{L}_{L1}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR\}\}\left\|I_{SR}^{(s)}-I_{HR}\right\|_{1},\)</p>
+\(\mathcal{L}_{L1}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR }} \left\|I_{SR}^{(s)}-I_{HR}\right\|_{1},\)</p>
 
-<p>\(\begin{aligned}&amp;\mathcal{L}_{L2}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR\}\}(I_{SR}^{(s)}-I_{HR})^{2},\\\\&amp;\mathcal{L}_{cha}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR\}\}\sqrt{(I_{SR}^{(s)}-I_{HR})^{2}+\varepsilon^{2\}\},\end{aligned}\)</p>
+<p>\(\begin{aligned}&amp;\mathcal{L}_{L2}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR }} (I_{SR}^{(s)}-I_{HR})^{2},\\\\&amp;\mathcal{L}_{cha}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR }} \sqrt{(I_{SR}^{(s)}-I_{HR})^{2}+\varepsilon^{2 }} ,\end{aligned}\)</p>
 <h3 id="perceptual-loss">Perceptual Loss</h3>
 <p>感知损失也称为内容损失(Content Loss)，通过使用训练好的分类网络来评估图像之间的语义差异，如VGG和ResNet。与像素损失相比，感知损失追求的是高层次感知质量的一致性，而不是像素级别的一致性。因此，一些任意尺度的超分辨率模型使用感知损失来避免产生过度平滑的结果。
-\(\mathcal{L}_{perc}(I_{SR},I_{HR};\Gamma,l)=\mathbf{E}_{s\sim U(a,b).I_{HR\}\}\sqrt{(\Gamma^{(l)}(I_{SR}^{(s)})-\Gamma^{(l)}(I_{HR}))^{2\}\},\)
+\(\mathcal{L}_{perc}(I_{SR},I_{HR};\Gamma,l)=\mathbf{E}_{s\sim U(a,b).I_{HR }} \sqrt{(\Gamma^{(l)}(I_{SR}^{(s)})-\Gamma^{(l)}(I_{HR}))^{2 }} ,\)
 其中$\Gamma$是一个分类器网络，$\Gamma^{(l)}$是网络$l$层feature。</p>
 <h3 id="adversarial-loss">Adversarial Loss</h3>
 <p>对抗Loss被定义为：
-\(\begin{array}{l}{ {\mathcal{L}_{adv_{g\}\}(I_{SR};D)=-logD(I_{SR}),\}\}\\ \{\{\mathcal{L}_{adv_{d\}\}(I_{SR},\hat{I}_{HR};D)=-logD(\hat{I}_{HR})-log(1-D(I_{SR})),\}\}\end{array}\)
+\(\begin{array}{l}{ {\mathcal{L}_{adv_{g }} (I_{SR};D)=-logD(I_{SR}), }} \\  {{ \mathcal{L}_{adv_{d }} (I_{SR},\hat{I}_{HR};D)=-logD(\hat{I}_{HR})-log(1-D(I_{SR})), }} \end{array}\)
 其中$\mathcal{D}$表示鉴别器生成的二值类别。部分工作指出log换成平方项可以增加稳定性和提升效果。即：
 \(\begin{array}{l}{
-\mathcal{L}_{adv_{g_{-}Ise\}\}(I_{SR};D)=(D(I_{SR})-1)^{2},}\\
-{\mathcal{L}_{adv_{d\_lse\}\}
+\mathcal{L}_{adv_{g_{-}Ise }} (I_{SR};D)=(D(I_{SR})-1)^{2},}\\
+{\mathcal{L}_{adv_{d\_lse }} 
 (I_{SR},\hat{I}_{HR};D)=(D(\hat{I}_{HR}))^{2}-(D(I_{SR})-1)^{2}.}
 \end{array}\)</p>
 <h3 id="multi-scale-loss">Multi-scale Loss</h3>

@@ -60,7 +60,7 @@ int n,m;
 int tree[MAXN][2],mx[MAXN],fa[MAXN],tag[MAXN],sum[MAXN],val[MAXN];
 int top,stk[MAXN];
 typedef pair&amp;lt;int, int&amp;gt; pii;
-struct edge{int f,t,w;bool vis;bool operator&amp;lt;(const edge&amp;amp;e2)const{return w&amp;lt;e2.w;}}edges[1000010];
+struct edge{int f,t,w;bool vis;bool operator&amp;lt;(const edge&amp;amp;e2)const{return w&amp;lt;e2.w; }} edges[1000010];
 struct query{int op,x,y,id,ans;}querys[100010];
 int read(){
     int x = 0,f = 1;
@@ -120,7 +120,7 @@ int n,m;
 int tree[MAXN][2],mx[MAXN],fa[MAXN],tag[MAXN],sum[MAXN],val[MAXN];
 int top,stk[MAXN];
 typedef pair&amp;lt;int, int&amp;gt; pii;
-struct edge{int f,t,w;bool vis;bool operator&amp;lt;(const edge&amp;amp;e2)const{return w&amp;lt;e2.w;}}edges[1000010];
+struct edge{int f,t,w;bool vis;bool operator&amp;lt;(const edge&amp;amp;e2)const{return w&amp;lt;e2.w; }} edges[1000010];
 struct query{int op,x,y,id,ans;}querys[100010];
 int read(){
     int x = 0,f = 1;
@@ -344,7 +344,7 @@ Q≤100000
 <span class="kt">int</span> <span class="n">tree</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">mx</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">fa</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">tag</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">sum</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="n">val</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="kt">int</span> <span class="n">top</span><span class="p">,</span><span class="n">stk</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="k">typedef</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">pii</span><span class="p">;</span>
-<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span><span class="kt">bool</span> <span class="n">vis</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">edge</span><span class="o">&amp;</span><span class="n">e2</span><span class="p">)</span><span class="k">const</span><span class="p">{</span><span class="k">return</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">e2</span><span class="p">.</span><span class="n">w</span><span class="p">;</span><span class="err">\</span><span class="p">}</span><span class="err">\</span><span class="p">}</span><span class="n">edges</span><span class="p">[</span><span class="mi">1000010</span><span class="p">];</span>
+<span class="k">struct</span> <span class="nc">edge</span><span class="p">{</span><span class="kt">int</span> <span class="n">f</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">w</span><span class="p">;</span><span class="kt">bool</span> <span class="n">vis</span><span class="p">;</span><span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">edge</span><span class="o">&amp;</span><span class="n">e2</span><span class="p">)</span><span class="k">const</span><span class="p">{</span><span class="k">return</span> <span class="n">w</span><span class="o">&lt;</span><span class="n">e2</span><span class="p">.</span><span class="n">w</span><span class="p">;</span> <span class="p">}}</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1000010</span><span class="p">];</span>
 <span class="k">struct</span> <span class="nc">query</span><span class="p">{</span><span class="kt">int</span> <span class="n">op</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">id</span><span class="p">,</span><span class="n">ans</span><span class="p">;}</span><span class="n">querys</span><span class="p">[</span><span class="mi">100010</span><span class="p">];</span>
 <span class="kt">int</span> <span class="nf">read</span><span class="p">(){</span>
     <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
