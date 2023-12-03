@@ -1,0 +1,16 @@
+[
+{% for post in site.posts%}
+{% raw %} { {% endraw %}
+    "date": "{{ post.date }}",
+    "title": "{{ post.title }}",
+    "description": "{{ post.description }}",
+    "tags": "{{ post.tags }}",
+    "image": "{{ post.image }}",
+    "usemath": "{{ post.usemath }}"
+{% if forloop.index < site.posts.size%}
+    {% raw %} }, {% endraw %}
+{% else %}
+{% raw %} } {% endraw %}
+{% endif %}
+{% endfor %}
+]
