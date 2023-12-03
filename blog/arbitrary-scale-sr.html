@@ -199,13 +199,13 @@
   <article class="post">
 
     <div class="post__content">
-      <h2 id="introduction">Introduction</h2>
+      <h1 id="introduction">Introduction</h1>
 <p>过去的固定尺度超分存在许多缺点，如多尺度需要多个权重，对存储和计算又较高要求。任意尺度超分可以解决这些问题。本文立足任意尺度超分，提出了一种分类方法。首先按照超分尺度分，可以分成对称尺度（长宽一致）、非对称（长宽不一致）尺度超分和任意形状超分。对称尺度又可以分为整数尺寸和非整数尺寸。按照插值方法来分，又可以分为：插值超分和可学习自适应超分。
 <img src="https://cdn.risingentropy.top/images/posts/20231203165857.png" alt="20231203165857" />
 <img src="https://cdn.risingentropy.top/images/posts/20231203165911.png" alt="20231203165911" /></p>
 
-<h2 id="preliminaries">Preliminaries</h2>
-<h3 id="definition">Definition</h3>
+<h1 id="preliminaries">Preliminaries</h1>
+<h2 id="definition">Definition</h2>
 <p>HR图到LR图的退化过程被定义为：
 \(I_{LR} = \mathcal{D}(I_{HR};\delta)\)
 其中$\mathcal{D}$是一个以$\delta$为参数的退化模型。超分任务是通过恢复$I_{LR}$来逼近原始的$I_{HR}$。这个恢复过程可以被概括为：
@@ -217,11 +217,11 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 \(I_{LR}=D(I_{HR};\delta)=(I_{HR}\otimes k_g)\downarrow_s^{bic}+n,\)
 基于上述定义，我们可以将超分描述为：
 \(\hat{\theta}=\arg\min\mathcal{L}(I_{SR},I_{HR}),\)</p>
-<h3 id="datasets">Datasets</h3>
+<h2 id="datasets">Datasets</h2>
 <p>基于Bicubic 下采样的数据集被记作<strong>BI</strong>，基于高斯核的被记作<strong>BD</strong>。
 <img src="https://cdn.risingentropy.top/images/posts/20231203172932.png" alt="20231203172932" /></p>
-<h3 id="metrics">Metrics</h3>
-<h4 id="psnr-peak-signal-to-noise-ratio">PSNR: Peak signal-to-noise ratio</h4>
+<h2 id="metrics">Metrics</h2>
+<h3 id="psnr-peak-signal-to-noise-ratio">PSNR: Peak signal-to-noise ratio</h3>
 <p>老熟人：
 \(\mathrm{MSE}=\frac{1}{HW}\sum_{i=1}^{H}\sum_{j=1}^{W}\left(I_{HR}(i,j)-I_{SR}(i,j)\right)^{2},\\
 \mathbf{PSNR}=10\log_{10}\left(\frac{L^{2}}{\mathbf{MSE}}\right).\)</p>
@@ -230,14 +230,31 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 \(\mathrm{MSE}=\frac{1}{HW}\sum_{i=1}^{H}\sum_{j=1}^{W}\left(I_{HR}(i,j)-I_{SR}(i,j)\right)^{2}，\)
 然而现在的PNSR的MSE项实际上是
 \(\mathrm{MSE}=\frac{1}{HW}\sum_{i=1}^{H}\sum_{j=1}^{W}\left(\hat{I}_{HR}(i,j)-I_{SR}(i,j)\right)^{2}\)</p>
-<h4 id="ssim-structural-similarity">SSIM: Structural similarity</h4>
+<h3 id="ssim-structural-similarity">SSIM: Structural similarity</h3>
 <p>$\sigma_{hr},\sigma_{sr}$分别是他们的标准差，$\sigma_{hrsr}$是协方差。
 \(\begin{aligned}
 &amp;l\left(I_{SR},I_{HR}\right)=\frac{2\mu_{sr}\mu_{hr}+C_{1}}{\mu_{sr}^{2}+\mu_{hr}^{2}+C_{1}}, \\
 &amp;c\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{sr}\sigma_{hr}+C_{2}}{\sigma_{sr}^{2}+\sigma_{hr}^{2}+C_{2}}, \\
 &amp;s\left(I_{SR},I_{HR}\right)=\frac{2\sigma_{hrsr}+C_{3}}{\sigma_{sr}\sigma_{hr}+C_{3}}, \\
 &amp;\mathrm{SSIM}=\left[l\left(I_{SR},I_{HR}\right)\right]^{\alpha}\left[c\left(I_{SR},I_{HR}\right)\right]^{\beta}\left[s\left(I_{SR},I_{HR}\right)\right]^{\gamma},
-\end{aligned}\)</p>
+\end{aligned}\)
+其中$l(I_{SR},I_{HR}),c(I_{SR},I_{HR}),s(I_{SR},I_{HR})$分别表示亮度，对比度，结构。常见参数设置为$\alpha=\beta=\gamma=1$ and $C_{3}=C_{2}/2.$</p>
+<h3 id="lpips-learned-perceptual-image-patch-similarity">LPIPS: Learned perceptual image patch similarity</h3>
+<p>LPIPS 根据原始HR图像和SR图像之间的感知相似性来衡量它们之间的差异。LPIPS 使用深度神经网络从图像块中提取特征，然后计算这些特征之间的距离，以测量两幅图像之间的感知相似度。 一般来说，LPIPS比PSNR和SSIM更符合人类对图像质量的感知，LPIPS得分较低意味着两幅图像更相似。</p>
+
+<h2 id="loss-function">Loss function</h2>
+<p>一般来说，任意尺度的超分辨率模型都是使用多尺度数据对进行训练的，例如从均匀分布$U(a,b)$中采样的尺度$s$，其中$a$和$b$分别是训练尺度的上界和下界。</p>
+
+<h3 id="pixel-loss">Pixel Loss</h3>
+<p>Pixel Loss 包括L1、L2和Charbonnier Loss.Charbonnier 是一种关于平均绝对误差的改进。
+\(\mathcal{L}_{L1}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR}}\left\|I_{SR}^{(s)}-I_{HR}\right\|_{1},\)</p>
+
+<p>\(\begin{aligned}&amp;\mathcal{L}_{L2}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR}}(I_{SR}^{(s)}-I_{HR})^{2},\\\\&amp;\mathcal{L}_{cha}(I_{SR},I_{HR})=\mathbf{E}_{s\sim U(a,b),I_{HR}}\sqrt{(I_{SR}^{(s)}-I_{HR})^{2}+\varepsilon^{2}},\end{aligned}\)</p>
+<h3 id="perceptual-loss">Perceptual Loss</h3>
+<p>感知损失也称为内容损失(Content Loss)，通过使用训练好的分类网络来评估图像之间的语义差异，如VGG和ResNet。与像素损失相比，感知损失追求的是高层次感知质量的一致性，而不是像素级别的一致性。因此，一些任意尺度的超分辨率模型使用感知损失来避免产生过度平滑的结果。
+\(\mathcal{L}_{perc}(I_{SR},I_{HR};\Gamma,l)=\mathbf{E}_{s\sim U(a,b).I_{HR}}\sqrt{(\Gamma^{(l)}(I_{SR}^{(s)})-\Gamma^{(l)}(I_{HR}))^{2}},\)
+其中$\Gamma$是一个分类器网络，$\Gamma^{(l)}$是网络$l$层feature。</p>
+<h3 id="adversarial-loss">Adversarial Loss</h3>
 
     </div>
 
