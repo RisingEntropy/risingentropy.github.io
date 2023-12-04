@@ -365,6 +365,51 @@ Bilateral Upsampling Network (BiSR)：结合位置和内容信息，引入图像
 
 <p>FaceFormer：blind face restoration。包含facial feature upsampling（FFUP）和facial feature embedding（FFE）。FFUP实现上采样，FFE用生成模型（如GAN）生成脸部细节。</p>
 
+<p>在任意尺度的图像超分辨率任务中，尺度等变性处理块的能力起着至关重要的作用，即根据输入尺度的变化自适应地处理feature。Scale-equivalent super-resolution network (EQSR) 在Transformer式框架下提出了两个尺度等变模块：Adaptive Feature Extractor (AFE)和learnable Neural Kriging upsampling operator。AFE在频率扩展编码中注入显式的尺度信息。上采样模块算子编码距离和feature相似性。（没看懂这段在说啥）</p>
+
+<h3 id="implicit-neural-representation-based-arbitrary-scale-upsampling">Implicit neural representation based arbitrary-scale upsampling</h3>
+<p>老熟人，用编码器把图片编码，然后用全连接实现坐标到RGB像素的映射。
+<img src="https://cdn.risingentropy.top/images/posts/20231204173503.png" alt="20231204173503" /></p>
+
+<h4 id="从频域角度来看待">从频域角度来看待</h4>
+<p>《On the spectral bias of neural networks》指出全连接层倾向学习低频信息，不能很好地拟合高频细节。基于这个问题，有如下改进：</p>
+
+<p>UltraSR：基于LIIF设计了空间编码方式，把2D空间输入拓展到48D编码。</p>
+
+<p>Integrated positional encoding-LIIF (IPE-LIIF)：把传统位置编码拓展到二维</p>
+
+<p>CrossSR：提出Cross Transformer增强跨尺度特性，用动态位置编码进一步提升表现</p>
+
+<p>LTE：一种自然的图像主频估计器，它建立在隐函数在利用图像主频时优先学习图像纹理的假设之上。</p>
+
+<p>Adaptive LIIF（ALIIF）：LIIF所有像素都共用同样的MLP参数，ALIIF设计了一个拓展网络，把这个MLP参数设计成自适应地。</p>
+
+<p>DIINN：设计了一个dual interactive 网络来实现内容和位置（调制分支、合成分支）的解耦（不知道解耦这里作何解释）。</p>
+
+<p>Implicit pixel flow (IPF)：模拟INR模糊分布分布于锐利的真实分布之间的依赖关系。<strong>作者指出：模糊的边界可以简单的通过把周围像素squeeze得更紧就可以变得锐利。</strong>IPF旨在通过在最近邻位置用一个更合适的值替换每个像素的原始RGB值来恢复锐利的边缘。
+<img src="https://cdn.risingentropy.top/images/posts/20231204185423.png" alt="20231204185423" /></p>
+
+<p>continuous ISR method with implicit neural networks and generative adversarial networks (CiSR-GAN): 用生成模型实现photo-realistic，以解决LIIF模糊的问题。</p>
+
+<p>Scale-aware dynamic network (SADN)：相比于LIIF仅用一个latent space的做法，SADN用了多个尺度的latent space来预测像素。用了不同尺度因子动态生成卷积核。</p>
+
+<p>The local implicit normalizing flow (LINF)：为了解决INR忽略了超分是一个不适定问题，提出了local implicit normalizing flow.它对不同缩放因子下的纹理细节分布进行建模，以生成具有丰富纹理细节的逼真 SR 图像。</p>
+
+<p>IDM: 集成了隐式神经表示和去噪扩散模型。</p>
+
+<p>SRNO：将LR - HR图像对视为用不同网格尺寸近似的连续函数，并学习相应函数空间之间的映射。提升效果，降低运行时间</p>
+
+<h3 id="反转一致性">反转一致性</h3>
+<p>基于隐式表示的超分方法对encoder生成的latent code依赖很严重，因为MLP和encoder是一起训练的。如果将encoder生成的latent code flip一下，就会出现模糊。这种现象被称作反转一致性退化（decline of flipping consistency）。
+<img src="https://cdn.risingentropy.top/images/posts/20231204191522.png" alt="20231204191522" /></p>
+
+<p>为了解决这个问题，OPESR提出了正交位置编码。它提出的OPE-Upscale可以用于替代INR中的上采样模块，并且不需要训练参数。他可以直接以线性组合的方式进行，以连续的方式重建图像。</p>
+
+<h3 id="解决local-ensemble问题">解决local ensemble问题</h3>
+<p>基于隐式神经表示的上采样需要集成LR特征域中的局部特征来预测SR图像中任意查询坐标下的新像素。他的局部集成没有可学习的参数，忽略了视觉特征的相似性。而且，它的感受野有限，无法集成图像的全局信息。通常，局部集成基于坐标线性地计算特征，这与真实的图像分布不同。</p>
+
+<p>为了解决这个问题，continuous implicit attention-in-attention network (called CiaoSR)提出了一种隐式注意力网络来学习这个local ensemble编码。CiaoSR在隐式注意力中引入scale-aware, non-local信息来获得更大感受野。</p>
+
     </div>
 
     <div class="post__share">
