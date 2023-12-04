@@ -408,7 +408,67 @@ Bilateral Upsampling Network (BiSR)：结合位置和内容信息，引入图像
 <h3 id="解决local-ensemble问题">解决local ensemble问题</h3>
 <p>基于隐式神经表示的上采样需要集成LR特征域中的局部特征来预测SR图像中任意查询坐标下的新像素。他的局部集成没有可学习的参数，忽略了视觉特征的相似性。而且，它的感受野有限，无法集成图像的全局信息。通常，局部集成基于坐标线性地计算特征，这与真实的图像分布不同。</p>
 
-<p>为了解决这个问题，continuous implicit attention-in-attention network (called CiaoSR)提出了一种隐式注意力网络来学习这个local ensemble编码。CiaoSR在隐式注意力中引入scale-aware, non-local信息来获得更大感受野。</p>
+<p>为了解决这个问题，continuous implicit attention-in-attention network (called CiaoSR)提出了一种隐式注意力网络来学习这个local ensemble编码。其他方法都直接借鉴LIIF的使用MLP进行坐标到RGB的映射，忽略了feature similarity。CiaoSR同时从前面学习soft weight、visual feature 和坐标。CiaoSR是一种plug and play的方法，可以灵活插入其他网络。</p>
+
+<p>CLIT把注意力和频率编码集成到一个local implicit image function，并且采用了跨尺度局部注意力来聚合局部feature。同时它采用了multi-scale feature cascades来增强表现力。训练过程中，CLIT采用了逐步增加上采样倍数的方法。</p>
+
+<h3 id="其他任务超分">其他任务超分</h3>
+<p>Implicit Transformer Super-Resolution Network (ITSRN)是一个用于屏幕内容（Screen Content Image）超分的网络。采用坐标与像素一一对应的模式，即transformer的q，k都是坐标。这样的方法更适合屏幕内容这样有薄而尖锐的边缘的图像。</p>
+
+<p>ITSRN++：采用了modulation-base transformer。所谓的modulation transformer，就是平台transformer的softmax换成sin
+<img src="https://cdn.risingentropy.top/images/posts/20231204225602.png" alt="20231204225602" /></p>
+
+<p>BTC是使用B-splines的inr模型。BTC提取B样条的缩放、平移和平滑参数，然后MLP利用估计的B样条恢复SR图像。</p>
+
+<p>LTEW：用于处理image wrapping任务的网络。LTEW利用了坐标变换的雅克比矩阵和从输入图像中估计的傅里叶特征。</p>
+
+<p>VideoINR：不太了解，很多词不清楚含义，略过</p>
+
+<p>BAIRNet： 将任意尺度超分引入image rescaling任务（同时包括图像放大和缩小）。BAIRNet将降尺度和升尺度建模为等价的亚像素差分分裂和合并过程，并采用循环学习策略。BAIRNet引入亚像素权重函数和亚像素权重进行亚像素分割(升尺度)和合并( Downscale )，与LIIF中类似。
+<img src="https://cdn.risingentropy.top/images/posts/20231204235544.png" alt="20231204235544" /></p>
+
+<p>ArSSR将INR引入MRI图像超分。LISTA将连续表示引入声音超分，这使得低分辨率音频信号中缺失的高分辨率成分的预测成为可能（感觉声音超分就是一个完全无意义的任务，因为经典方法已经理论上完美了）</p>
+
+<h3 id="总结">总结</h3>
+<p>INR在训练尺度外的超分效果好，近年来是一个研究热点，近年来的一些方法也解决了LIIF的一些问题，如频谱角度看待，翻转一致性，local ensemble。<strong>然而，大多数基于LIIF的方法使用现有的骨架进行特征提取，而尺度信息只用于上采样而不在特征提取中使用。因此，针对不同规模的SR任务提取相似的特征。这可能会阻碍性能的进一步提升。总之，LIIF在二维离散信号和连续表示之间架起了一座桥梁。值得进一步研究。</strong></p>
+
+<h2 id="其他任意尺度超分方法">其他任意尺度超分方法</h2>
+<p>上述的超分网络存在不可忽略的问题，例如整数尺度上超分比不过固定尺度超分网络。没有使用插值或者任意尺度上采样的方法在这个部分中介绍。</p>
+
+<p>A high-frequency attention network ($𝐻^2𝐴^2-SR$)：不修改现有整数倍数超分网络结构，但是在离散余弦变换空间下去实现插值以达到目标尺度。同时，为了解决DCT频谱扩展导致的高频信息缺失问题，H2A2-SR引入了高频注意力网络进行尺度的任意提升来恢复高频信息。</p>
+
+<p>Neural ordinary differential equation (NODE-SR): 文章提出了一种Neural ordinary differential equation, 利用ODE进行超分。给定LR图像作为初始条件，能够使用传统restoration网络和ODE solver来求解提出的ODE以实现超分。这个方法只需要在测试室改变初始条件，天然就能进行超分。</p>
+
+<p>ASDN：基于拉普拉斯金字塔。它这说明不同尺度下的图像块具有相似性，图像的边缘具有可伸缩的趋势，使得不同尺度下的图像具有相似的边缘信息，主要表现为高频信息。它在一组稀疏的训练尺度之间进行插值，以实现尺度任意的ISR，而一个大的上采样尺度因子可以表示为小范围尺度因子的整数次幂，从而可以递归地实现尺度任意的上采样。</p>
+
+<p>SRWarp：第一个实现任意形状变换的网络，作者称其为非平面超分。</p>
+
+<h1 id="实验结果">实验结果</h1>
+<p>太长了，可以参考论文。这里只放部分DIV2K数据集的结果
+Symmetric integer scale：
+<img src="https://cdn.risingentropy.top/images/posts/20231205001216.png" alt="20231205001216" /></p>
+
+<p>Symmetric non-integer scale：
+<img src="https://cdn.risingentropy.top/images/posts/20231205001314.png" alt="20231205001314" /></p>
+
+<h1 id="限制和未来发展">限制和未来发展</h1>
+<h2 id="限制">限制</h2>
+<h3 id="退化模式单一">退化模式单一</h3>
+<p>几乎都是局限于用bicubic插值下采样得到的LR图超分HR图。</p>
+<h3 id="整数尺度表现不好">整数尺度表现不好</h3>
+<p>整数尺度上，任意尺度超分效果比不过固定尺度超分网络</p>
+<h3 id="慢">慢</h3>
+<p>又慢又大，没什么好说的，推理能吃满我3090，半天不出一张图。</p>
+
+<h2 id="未来方向">未来方向</h2>
+<h3 id="数据">数据</h3>
+<p>拓展数据类型，不要局限于人工下采样的数据</p>
+
+<h3 id="模型">模型</h3>
+<p>设计高效且泛化好的模型</p>
+
+<h3 id="应用">应用</h3>
+<p>拓展到视频，MRI之类的应用</p>
 
     </div>
 
