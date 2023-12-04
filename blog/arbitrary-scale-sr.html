@@ -320,6 +320,50 @@ $I_{SR}=\mathcal{S}(I_{LR};\theta)$
 <p>上述两种方法都能用一个网络实现不同尺度的超分而不用插值。</p>
 
 <h2 id="基于上采样方法的分类">基于上采样方法的分类</h2>
+<p>超分可以分成两个步骤：feature extraction 和 image recovery。Feature extraction 的关键在于提取高频细节信息。按照 image recovery 的方式来分，可以分为四类：interpolation arbitrary-scale upsampling (IASU);implicit neural representation based arbitrary-scale upsampling (INRASU);learnable adaptive arbitrary-scale upsampling (LAASU);other arbitrary-scale upsampling (OASU)
+<img src="https://cdn.risingentropy.top/images/posts/20231204143014.png" alt="20231204143014" />
+代表方法有：
+IASU：VSDR、MetaSR
+INRASU：LIIF
+LAASU： ArbSR</p>
+
+<h3 id="interpolation-arbitrary-scale-upsampling-iasu">Interpolation Arbitrary-Scale Upsampling (IASU)</h3>
+<p><img src="https://cdn.risingentropy.top/images/posts/20231204145101.png" alt="20231204145101" />
+这类网络大致可以分为Pre-interpolation和Post-interpolation。古早的任意尺度超分多采取Pre-interpolation结构。好出是降低学习难度，坏处是在大尺度图上卷积计算开销大。后来Multi-Scale Super-Resolution method (MSSR) 使用了Post-interpolation方法。对于非整数超分，MSSR计算出最优的超分比例，然后选择对应的模型，最后将超分结果用Bicubic下采样到目标尺寸。</p>
+
+<p>Arbitrary video satellite images(ASSR)使用feature extraction模块提取特征，然后上采样模块用亚像素卷积到目标尺寸，最后Bicubic插值到目标尺寸。</p>
+
+<p>super-resolution network with overscaling network (OverNet) 轻量级网络提出多尺度loss来实现跨尺度泛化。</p>
+
+<p>IASU是最简单的任意尺度超分方法，但是有很明显的缺点：会引入噪声和模糊，尺寸较大时推理时间变长。</p>
+
+<h3 id="learnable-adaptive-arbitrary-scale-upsamplinglaasu">Learnable adaptive arbitrary-scale upsampling(LAASU)</h3>
+<p>自适应任意尺度上采样的核心就是从训练集中学到上采样核参数。目前主流的思想有两种：基于元学习和基于动态卷积。</p>
+
+<h4 id="元学习">元学习</h4>
+<p>Meta-SR首次利用了元学习来动态预测不同尺度的核权重。Meta-SR包含了Feature Extraction Module(FEM)和meta-upscale模块。meta-upscale模块可以用来替代亚像素卷积。动态生成$HW$套卷积核，每套卷积核只负责生成SR图的一个像素。
+<img src="https://cdn.risingentropy.top/images/posts/20231204154153.png" alt="20231204154153" /></p>
+
+<p>Meta-SR有很多后续工作：
+Meta-SRGAN：融合SARGAN，用于超分MRI图像。
+MIASSR：用EDSR作为backbone和adversarial loss来提升保真度，用于MRI和CT超分。
+Meta-SAN：引入二阶注意力，在natural image上表现良好。
+Meta-USR：联合模型，综合考虑模糊、噪声和超分三个任务。</p>
+
+<p>缺陷：在未训练的尺度上超分效果不好</p>
+
+<h4 id="自适应上采样">自适应上采样</h4>
+<p>核心方法是动态卷积。Scale-arbitrary super-resolution (ArbSR)首次提出了一种叫做SAFAB的plug-in的模块来实现任意尺度超分。作者借鉴了动态卷积（conditional convolution）的想法，并且拓展了pixel shuffle层来实现任意尺度超分。对于HR空间中的$(x,y)$坐标，计算LR空间中的对应坐标$(L(x),L(y))$和相对距离$(R(x),R(y))$。然后尺度因子$r_h,r_v$和相对位置送进MLP层来生成偏移$(\delta_x,\delta_y)$以及$k\times k$的卷积核。最后LR空间中以$(L(x)+\delta_x,L(y)+\delta_y)$为中心的的$k\tiems k$的领域被送进卷积核来生成HR空间中$(x,y)$的像素。
+<img src="https://cdn.risingentropy.top/images/posts/20231204163113.png" alt="20231204163113" /></p>
+
+<p>SAFAB受到了不同尺度超分网络的启发：网络中不同区域对尺度的变化敏感程度是不一样的。所以文章还提出来scale-aware convolution。它根据不同超分尺度来动态生成卷积核。对于不同的尺度，特征图的区域既有相似之处，也有不同之处。 SAFAB 旨在适应这种变化。 它使用 SAConv 使输入特征适应相应的 SR 尺度。同时，它利用卷积来学习一个mask，并使用该mask来执行适应特征与原始输入特征的混合。 上述特征修改模块和尺度感知上采样模块都可以通过简单的变换轻松地将任何主流ISR网络转变为任意尺度的SR网络。</p>
+
+<p>改进方法有如下这些：
+Bilateral Upsampling Network (BiSR)：结合位置和内容信息，引入图像内容信息来自适应学习双边上采样滤波器的权重。双边上采样滤波器是空间上采样滤波器和范围上采样滤波器的组合，可以针对不同的尺度因子和不同的像素值自适应地学习不同的滤波器权重。提出了通道维度特征的上采样，降低了生成双向上采样核的生成计算复杂度的同时保留结构信息。</p>
+
+<p>Scale-arbitrary reversible image transformation framework (AIDN)：一种用于图像压缩的网络，采用encoder-decoder结构，将图像压缩到指定大小，然后能任意尺度超分。该方法核心是ArbSR提出的动态卷积，根据缩放因子和图像内容缺点核和采样位置。</p>
+
+<p>FaceFormer：blind face restoration。包含facial feature upsampling（FFUP）和facial feature embedding（FFE）。FFUP实现上采样，FFE用生成模型（如GAN）生成脸部细节。</p>
 
     </div>
 
