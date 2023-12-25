@@ -6,21 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>2023_nuedc</title>
-  <meta name='description' content='2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分'>
+  <title>2024_charactersarelikefaces</title>
+  <meta name='description' content='Code for ICLR 2023 tiny paper Characters Are Like Faces, including the website source code by spring boot'>
 
-  <link rel="canonical" href="/project/2023-nuedc">
+  <link rel="canonical" href="/project/2024-charactersarelikefaces">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="2023_nuedc – Haoyu Deng's page">
-  <meta name="twitter:description" content="2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分">
-  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20231203004200.png">
+  <meta name="twitter:title" content="2024_charactersarelikefaces – Haoyu Deng's page">
+  <meta name="twitter:description" content="Code for ICLR 2023 tiny paper Characters Are Like Faces, including the website source code by spring boot">
+  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20231225172419.png">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="2023_nuedc – Haoyu Deng's page">
-  <meta property="og:description" content="2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分">
-  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20231203004200.png">
+  <meta property="og:title" content="2024_charactersarelikefaces – Haoyu Deng's page">
+  <meta property="og:description" content="Code for ICLR 2023 tiny paper Characters Are Like Faces, including the website source code by spring boot">
+  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20231225172419.png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -143,36 +143,67 @@
           
 <div class="container">
   <div class="c-page-heading">
-    <h1 class="c-page-heading__title">2023年全国大学生电子设计竞赛H题FPGA部分</h1>
+    <h1 class="c-page-heading__title">Characters Are Like Faces Source Repository</h1>
     
-      <p class="c-page-heading__description">2023年全国大学生电子设计竞赛H题FPGA部分，包含ADC、DAC、SPI、寄存器组，DDS部分</p>
+      <p class="c-page-heading__description">Code for ICLR 2023 tiny paper Characters Are Like Faces, including the website source code by spring boot</p>
     
   </div>
 </div>
           <!--bookshop-live end-->
 
   <div class="page animate">
-    <p><a href="https://github.com/RisingEntropy/2023EEDesignContest">Code</a></p>
+    <p><a href="https://github.com/RisingEntropy/Characters-Are-Like-Faces">Code Repository</a></p>
+<h1 id="characters-are-like-faces">Characters Are Like Faces</h1>
+<p>This is the source code for ICLR 2023 TinyPaper <em>Characters Are Like Faces</em></p>
+<h2 id="file-explanation">File explanation</h2>
+<p><strong>character_argumentation.py</strong>: part of argumentation approach mentioned in the paper</p>
 
-<p><img src="https://cdn.risingentropy.top/images/posts/20231203002321.png" alt="20231203002321" />
-这是2023年全国大学生电子设计竞赛H题《信号分离装置》我们的方案。该仓库为FPGA部分电路设计代码。我们的方案分为三个部分，模拟电路部分，MCU部分，FPGA部分。<a href="https://github.com/Duanyll/h743_2023h">MCU部分代码</a></p>
+<p><strong>dataset.p</strong>y: the dataset class used to load training data</p>
 
-<p>FPGA选用XilinxXC7K70TFBG484-2芯片，高速ADC选用AD9269，DAC选用AD9744芯片。FPGA电路主要分成三个部分，ADC输入部分、寄存器组和输出部分。ADC 的采样率被设置为40.960. Msps，这样的数据速率超过了stm32单片机SPI总线的速度，故设计了一个缓冲区来缓存数据并发送给stm32单片机以供其分析计算。同时ADC部分还会维护一个触发计时，当计时结束时，会在下一个ADC的过零点产生一个触发信号来复位DDS的相位，以减少频率误差的积累。</p>
+<p><strong>evaluate.py</strong>: evaluation through our website(we didn’t utilize python with pytorch to evaluate simply because it’s too slow. We established a local http server to do this, code can be found in the web directory)</p>
 
-<p>在寄存器组中，一共存在13个寄存器，地址从0x00到0x0D，其功能被列在表1中。通过
-SPI 读写寄存器组的方式，STM32单片机可以灵活地配置FPGA电路的输入输出和表现。寄存
-器主要负责配置DDS重置周期、两个通道的输出波形、频率及其初始相位。
-寄存器表格如下：
-<img src="https://cdn.risingentropy.top/images/posts/20231203002642.png" alt="20231203002642" /></p>
+<p><strong>export_model.py</strong>: to export our trained model to onnx format, making it convenience to deploy on our web server</p>
+
+<p><strong>generate_database.py</strong>: generate the final database using font files in <code class="language-plaintext highlighter-rouge">eval_fonts</code> directory with trained model.</p>
+
+<p><strong>modules.py</strong>: the definition of our network, including MobileFaceNetV3 and Arcface Loss</p>
+
+<p><strong>test_database.py</strong>: reconginze the <code class="language-plaintext highlighter-rouge">test.png</code> file and give out the possible result using python with pytorch, it’s super slow!</p>
+
+<p><strong>train.py</strong>: training script</p>
+
+<p><strong>training_data_generation.py</strong>: generate our training data using font files in the fonts directory</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>To train your own network, you might first run <code class="language-plaintext highlighter-rouge">traning_data_generation.py</code> to generate the training data</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python traning_data_generation.py
+</code></pre></div></div>
+
+<p>Then, run train.py to train the network</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python train.py
+</code></pre></div></div>
+
+<p>After training, run <code class="language-plaintext highlighter-rouge">generate_data_base.py</code> to generate the database for query</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python generate_database.py
+</code></pre></div></div>
+
+<p>At last, run <code class="language-plaintext highlighter-rouge">test_database.py</code> to scognize the file <code class="language-plaintext highlighter-rouge">test.png</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python test_database.py
+</code></pre></div></div>
+
+<p>note that if you want to evalueate the accuracy on a certain font, you may modify <code class="language-plaintext highlighter-rouge">evaluate.py</code>. This file recognize a character via a web API (we establish it on a local server). The code for the server is in <code class="language-plaintext highlighter-rouge">web</code> directory. You should first put the database into the resource directory since it’s a little big that we did not upload to the repository.</p>
 
   </div>
 
   
   <div class="project__navigation animate">
-    <a class="project__prev" href="/project/2024-charactersarelikefaces">
+    <a class="project__prev" href="/project/2023-smartpower">
       <div class="project__box">
         <span class="project__nav__info">Next Project</span>
-        <h2 class="project__nav__title">2024_charactersarelikefaces<i class="ion ion-md-arrow-round-forward arrow-right"></i></h2>
+        <h2 class="project__nav__title">2023_smartpower<i class="ion ion-md-arrow-round-forward arrow-right"></i></h2>
       </div>
     </a>
   </div>
