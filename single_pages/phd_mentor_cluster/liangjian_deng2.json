@@ -1,0 +1,5354 @@
+{
+    "Liang-Jian Deng (邓良剑)": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Teng-Yu Ji",
+                "id": "dOk0-R4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Weihong Guo",
+                "id": "-U6QcqMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Si Wang",
+                "id": "L4UeNvMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yan-Fei Jing 荆燕飞",
+                "id": "Nl_bOBkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Liang-Jian Deng (邓良剑)",
+        "research_interest": [
+            "Machine Learning",
+            "Variational Image Processing",
+            "Image Fusion"
+        ],
+        "citation": "2633"
+    },
+    "Xi-Le Zhao": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Teng-Yu Ji",
+                "id": "dOk0-R4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yao Wang",
+                "id": "_aLM_uYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Si Wang",
+                "id": "L4UeNvMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Deyu Meng",
+                "id": "an6w-64AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Wang",
+                "id": "7ORCwFMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Robert Plemmons",
+                "id": "iI0SF3kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Xi-Le Zhao",
+        "research_interest": [
+            "sparse and low-rank modeling for high-dimensional data analysis"
+        ],
+        "citation": "5187"
+    },
+    "Gemine Vivone": {
+        "affiliation": "National Research Council",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rocco RESTAINO",
+                "id": "-6x3U7IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Addesso",
+                "id": "zRdV6BIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Garzelli",
+                "id": "C61jjN4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Braca",
+                "id": "uNSiHcAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenzhi Liao",
+                "id": "a9O1t1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi WEI",
+                "id": "FNKlnBcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wald Lucien",
+                "id": "hRxJ0zAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Yves Tourneret",
+                "id": "vHgDZDMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Karl Granström",
+                "id": "EbiJyCIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Peter Willett",
+                "id": "S-WTRMMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonino Maltese",
+                "id": "vlhjIy4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jochen Horstmann",
+                "id": "ma4iKroAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Borja Errasti-Alcala",
+                "id": "gpXNfL4AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Gemine Vivone",
+        "research_interest": [
+            "Image Fusion",
+            "Deep Learning",
+            "Classification",
+            "Tracking",
+            "Remote Sensing"
+        ],
+        "citation": "4961"
+    },
+    "Tai-Xiang Jiang (蒋太翔)": {
+        "affiliation": "Southwestern University of Finance and Economics",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Teng-Yu Ji",
+                "id": "dOk0-R4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yao Wang",
+                "id": "_aLM_uYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yisi Luo",
+                "id": "GFxpG1QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yi Chang（昌毅）",
+                "id": "I1nZ67YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jian-Li Wang (Jianli Wang)",
+                "id": "6QVFljgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinfan Hu",
+                "id": "hT-EiJEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jie Lin",
+                "id": "sPcpHncAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lina Zhuang (庄丽娜）",
+                "id": "wWuSEvcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qibin Zhao",
+                "id": "cSQGe3YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Junhao Zhuang",
+                "id": "J3olRccAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "JunJun Pan",
+                "id": "MSxiFd4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaotong Li",
+                "id": "cpCE_T4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Tai-Xiang Jiang (蒋太翔)",
+        "research_interest": [
+            "Multi-dimenssional image processing",
+            "Tensor completion"
+        ],
+        "citation": "1861"
+    },
+    "Teng-Yu Ji": {
+        "affiliation": "Northwestern Polytechnical University",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiao Xiang Zhu",
+                "id": "CNakdIgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Dong-Lin Sun",
+                "id": "u5OhIQkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Teng-Yu Ji",
+        "research_interest": [
+            "Image processing",
+            "Remote sensing",
+            "Low-rank tensor"
+        ],
+        "citation": "919"
+    },
+    "Yong Chen": {
+        "affiliation": "Jiangxi Normal University",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei He",
+                "id": "5qWEM-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinshan Zeng",
+                "id": "au5gb2EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jie Lin",
+                "id": "sPcpHncAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jian-Li Wang (Jianli Wang)",
+                "id": "6QVFljgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "CHAO LI",
+                "id": "i4JrumAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qibin Zhao",
+                "id": "cSQGe3YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hongyan Zhang",
+                "id": "fq7Uqx0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shanshan Xu",
+                "id": "Dqc8c3wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Meng Ding",
+                "id": "BqNY1mUAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yong Chen",
+        "research_interest": [
+            "Remote Sensing Image Processing",
+            "Optimization"
+        ],
+        "citation": "982"
+    },
+    "Xue-Cheng Tai": {
+        "affiliation": "Norwegian Research Center (NORCE)",
+        "coauthors": [
+            {
+                "name": "T F Chan",
+                "id": "UO7McmEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Egil Bae",
+                "id": "4gZun2oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jing Yuan",
+                "id": "eMPV_ZkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pekka Neittaanmäki",
+                "id": "BShrE6oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Arvid Lundervold, BSc, MD, PhD",
+                "id": "HqmyBUUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jooyoung Hahn",
+                "id": "4w2vNhcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Roland Glowinski",
+                "id": "C6E528wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ron Kimmel",
+                "id": "yV7LaW8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jun Liu",
+                "id": "Ofzm8awAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuri Boykov",
+                "id": "h6_PdYsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "S osher",
+                "id": "d3UtiX8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Zhu",
+                "id": "RAKBqb0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenbing Tao",
+                "id": "jRDPE2AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinchao Xu",
+                "id": "pBHiYxcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Li-Lian Wang",
+                "id": "19-d58sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Huibin Chang",
+                "id": "5OHdMtMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guy Rosman",
+                "id": "aQeTAr4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Talal Rahman",
+                "id": "hXE1zsUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Erlend Hodneland",
+                "id": "msU3g9EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Juyong Zhang",
+                "id": "_D9aUrgAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Xue-Cheng Tai",
+        "research_interest": [
+            "numerical and computational mathematics",
+            "computational imaging",
+            "image processing",
+            "data analysis"
+        ],
+        "citation": "3421"
+    },
+    "Weihong Guo": {
+        "affiliation": "Case Western Reserve University",
+        "coauthors": [
+            {
+                "name": "Jing Qin",
+                "id": "ERCT4PkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wotao Yin",
+                "id": "kpQGGFUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sibel Tari",
+                "id": "H8hwB58AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fei Hu",
+                "id": "lts9UIkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Weihong Guo",
+        "research_interest": [
+            "Image processing",
+            "Image reconstruction",
+            "Optimization"
+        ],
+        "citation": "181"
+    },
+    "Mauro Dalla Mura": {
+        "affiliation": "Grenoble-INP",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rocco RESTAINO",
+                "id": "-6x3U7IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guillaume TOCHON",
+                "id": "CQ50qT0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Prashanth Reddy Marpu",
+                "id": "vGF-RT8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniele Picone",
+                "id": "Hg5fPvsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Garzelli",
+                "id": "C61jjN4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jerome MARS",
+                "id": "QAg1PuUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marielle Malfante",
+                "id": "hNT-eiAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Magnus Ulfarsson",
+                "id": "2wAHVnsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lucas Drumetz",
+                "id": "abRvIGAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriele Cavallaro",
+                "id": "5Vm3vPkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mohamad Jouni",
+                "id": "JLNrpPcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Björn Waske",
+                "id": "dWjh5LEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Philippe Metaxian",
+                "id": "27Mv-7MAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Mauro Dalla Mura",
+        "research_interest": [
+            "remote sensing",
+            "computational imaging",
+            "image and signal processing"
+        ],
+        "citation": "5644"
+    },
+    "Si Wang": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jun Liu",
+                "id": "hIOsBLkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yougan CHENG",
+                "id": "SUU8RxIAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Si Wang",
+        "research_interest": [
+            "image processing",
+            "high-dimensional data modeling"
+        ],
+        "citation": "351"
+    },
+    "Yan-Fei Jing 荆燕飞": {
+        "affiliation": "University of Electronic Science and Technology",
+        "coauthors": [],
+        "name": "Yan-Fei Jing 荆燕飞",
+        "research_interest": [
+            "Numerical Linear Algebra and Scientific Computing"
+        ],
+        "citation": "226"
+    },
+    "Michael Kwok-Po Ng": {
+        "affiliation": "HKBU",
+        "coauthors": [
+            {
+                "name": "Wai-Ki CHING",
+                "id": "JGTX5i4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liping Jing",
+                "id": "zStEDu4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Raymond H. Chan",
+                "id": "ICiiEOAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qingyao Wu",
+                "id": "n6e_2IgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yunming Ye",
+                "id": "n30nnskAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "You-Wei Wen  文有为",
+                "id": "iSKj_oMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tieyong Zeng",
+                "id": "2yyTgRwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mila Nikolova",
+                "id": "DPG_Dv4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xutao Li",
+                "id": "hPm6fo8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Wang",
+                "id": "7ORCwFMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiongjun Zhang",
+                "id": "9IQ2e6QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andy M Yip",
+                "id": "2vaXBtEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tatsuya Akutsu",
+                "id": "IwippccAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "David W. Cheung",
+                "id": "wwb5LGsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Robert Plemmons",
+                "id": "iI0SF3kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Haiwei Sun",
+                "id": "4AeWA-wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hanrui Wu",
+                "id": "r4A7bX4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fang Li",
+                "id": "2_8WX68AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Michael Kwok-Po Ng",
+        "research_interest": [
+            "applied and computational mathematics",
+            "artificial intelligence",
+            "machine learning",
+            "data science"
+        ],
+        "citation": "13360"
+    },
+    "Yao Wang": {
+        "affiliation": "Xi&#39;an Jiaotong University",
+        "coauthors": [],
+        "name": "Yao Wang",
+        "research_interest": [],
+        "citation": "2297"
+    },
+    "Deyu Meng": {
+        "affiliation": "Xi&#39;an Jiaotong University",
+        "coauthors": [
+            {
+                "name": "Qian Zhao",
+                "id": "vM6yGTEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wangmeng Zuo",
+                "id": "rUOpCEYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi Xie",
+                "id": "2ZqIzTMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lei Zhang",
+                "id": "tAK5l1IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alex Hauptmann",
+                "id": "Py54GcEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiangyong Cao (曹相湧)",
+                "id": "IePM9RsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chenqiang Gao (高陈强)",
+                "id": "YiVDoL0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lu Jiang",
+                "id": "jIKjjSYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jun Shu (束俊)",
+                "id": "qnDOEV4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jiangjun Peng (彭江军)",
+                "id": "3crYjMoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shuhang Gu",
+                "id": "-kSTt40AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hongwei Yong",
+                "id": "Xii74qQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jianhua Ma",
+                "id": "dG5Ix6EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hong Wang (王红)",
+                "id": "I5RH0CwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fan Ma",
+                "id": "FyglsaAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Wei",
+                "id": "BlApk24AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xuanyi Dong",
+                "id": "7zp9arUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ji Zhao",
+                "id": "5zrgQAkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fernando De la Torre",
+                "id": "YB8_6gkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Deyu Meng",
+        "research_interest": [
+            "Machine Learning",
+            "Computer Vision",
+            "Artificial Intelligence"
+        ],
+        "citation": "22747"
+    },
+    "Wei Wang": {
+        "affiliation": "Tongji University",
+        "coauthors": [
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tieyong Zeng",
+                "id": "2yyTgRwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhigang Jia",
+                "id": "rfNxSIUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Huibin Chang",
+                "id": "5OHdMtMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fang Li",
+                "id": "2_8WX68AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "ling pi",
+                "id": "qtnzcSMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chuan CHEN",
+                "id": "s_zdg_IAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wei Wang",
+        "research_interest": [
+            "Image processing"
+        ],
+        "citation": "516"
+    },
+    "Robert Plemmons": {
+        "affiliation": "Wake Forest University",
+        "coauthors": [],
+        "name": "Robert Plemmons",
+        "research_interest": [
+            "Numerical linear algebra",
+            "optimization",
+            "remote sensing"
+        ],
+        "citation": "4823"
+    },
+    "Ting-Zhu Huang": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [],
+        "name": "Ting-Zhu Huang",
+        "research_interest": [
+            "Numerical Linear Algebra"
+        ],
+        "citation": "7809"
+    },
+    "Jocelyn Chanussot": {
+        "affiliation": "Grenoble Institute of Technology",
+        "coauthors": [
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mathieu Fauvel",
+                "id": "rzznG2UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Jutten",
+                "id": "iO3qCToAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuliya Tarabalka",
+                "id": "N5raVlIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qian (Jenny) Du",
+                "id": "0OdKQoQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Johannes R.  Sveinsson",
+                "id": "53ZjxhwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alberto Villa",
+                "id": "SXIrw58AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lucas Drumetz",
+                "id": "abRvIGAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Junshi Xia",
+                "id": "n1aKdTkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gustau Camps-Valls",
+                "id": "6mgnauMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenzhi Liao",
+                "id": "a9O1t1cAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jocelyn Chanussot",
+        "research_interest": [
+            "image processing",
+            "signal processing",
+            "remote sensing",
+            "hyperspectral"
+        ],
+        "citation": "28161"
+    },
+    "Rocco RESTAINO": {
+        "affiliation": "University of Salerno",
+        "coauthors": [
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Addesso",
+                "id": "zRdV6BIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Garzelli",
+                "id": "C61jjN4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wald Lucien",
+                "id": "hRxJ0zAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniele Picone",
+                "id": "Hg5fPvsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "stefano marano",
+                "id": "Q0wKJigAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Luigi Bruno",
+                "id": "my5E_nwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonino Maltese",
+                "id": "vlhjIy4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fulvio Capodici",
+                "id": "F_sDeAQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guido D&#39;Urso",
+                "id": "q6GpoQ0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fabio Postiglione",
+                "id": "9TNFbxcAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Rocco RESTAINO",
+        "research_interest": [
+            "Statistical Signal Processing",
+            "Remote Sensing",
+            "Localization"
+        ],
+        "citation": "2337"
+    },
+    "Paolo Addesso": {
+        "affiliation": "University of Salerno",
+        "coauthors": [],
+        "name": "Paolo Addesso",
+        "research_interest": [
+            "Signal Processing",
+            "Data Analysis",
+            "Statistics"
+        ],
+        "citation": "47796"
+    },
+    "Andrea Garzelli": {
+        "affiliation": "University of Siena",
+        "coauthors": [
+            {
+                "name": "Stefano Baronti",
+                "id": "377IQlAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bruno Aiazzi",
+                "id": "_6dj0iEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Massimo Selva",
+                "id": "w1pPKi4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Barni",
+                "id": "ntRScY8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Simone Lolli",
+                "id": "eWzc3lgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rocco RESTAINO",
+                "id": "-6x3U7IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alberto Arienzo",
+                "id": "g3mIBO0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Leonardo SANTURRI",
+                "id": "XBx7BK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wald Lucien",
+                "id": "hRxJ0zAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Francesca Bovolo",
+                "id": "40YiUvoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fabio Dell&#39;Acqua",
+                "id": "0rtidbgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Luca Facheris",
+                "id": "RnD1YAQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fabrizio Argenti",
+                "id": "oA_qPb4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gustau Camps-Valls",
+                "id": "6mgnauMAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Andrea Garzelli",
+        "research_interest": [
+            "Data fusion",
+            "image processing",
+            "remote sensing"
+        ],
+        "citation": "5311"
+    },
+    "giorgio licciardi": {
+        "affiliation": "Agenzia Spaziale Italiaana",
+        "coauthors": [],
+        "name": "giorgio licciardi",
+        "research_interest": [],
+        "citation": "2736"
+    },
+    "Paolo Braca": {
+        "affiliation": "Centre for Maritime Research and Experimentation",
+        "coauthors": [
+            {
+                "name": "Peter Willett",
+                "id": "S-WTRMMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Leonardo M. Millefiori",
+                "id": "0yLJ6mwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "stefano marano",
+                "id": "Q0wKJigAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Vincenzo MATTA",
+                "id": "O8jIseQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicola Forti",
+                "id": "-pJ1PkIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Florian Meyer",
+                "id": "XnMK9VcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Domenico Gaglione",
+                "id": "WJZBloAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Giovanni Soldi",
+                "id": "p4VYTQMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Franz Hlawatsch",
+                "id": "KRfilp8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Kevin D. LePage",
+                "id": "cBw7u30AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Raffaele Grasso",
+                "id": "E9zQME4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jochen Horstmann",
+                "id": "ma4iKroAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Salvatore Maresca",
+                "id": "eCzwSQ0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Moe Z. Win",
+                "id": "qRd8Hh4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sandro CARNIEL",
+                "id": "CA1q2iwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Karl Granström",
+                "id": "EbiJyCIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alessio Di Simone",
+                "id": "XseLx8wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriele Ferri",
+                "id": "mOwknhcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Krishna Pattipati",
+                "id": "7fOj6sAAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Paolo Braca",
+        "research_interest": [
+            "Statistical Signal Processing",
+            "Data Science",
+            "Detection",
+            "Sensor Network",
+            "Target Tracking"
+        ],
+        "citation": "3396"
+    },
+    "Wenzhi Liao": {
+        "affiliation": "Gent University",
+        "coauthors": [
+            {
+                "name": "Aleksandra Pizurica",
+                "id": "zNrrsUcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sidharta Gautama",
+                "id": "WsYguA8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi WEI",
+                "id": "FNKlnBcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wenzhi Liao",
+        "research_interest": [
+            "Image processing",
+            "pattern recognition",
+            "remote sensing"
+        ],
+        "citation": "4223"
+    },
+    "Nicolas Dobigeon": {
+        "affiliation": "ENSEEIHT",
+        "coauthors": [
+            {
+                "name": "Jean-Yves Tourneret",
+                "id": "vHgDZDMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi WEI",
+                "id": "FNKlnBcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alfred Hero",
+                "id": "DSiNzkIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yoann Altmann",
+                "id": "hytsEdwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Saïd Moussaoui",
+                "id": "Vkr8yxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Abderrahim Halimi",
+                "id": "y5FihW8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Thomas Oberlin",
+                "id": "iqotTk4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Stephen McLaughlin",
+                "id": "z9wnHv8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chainais Pierre",
+                "id": "DVdbdP4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mathieu Fauvel",
+                "id": "rzznG2UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marie Chabert",
+                "id": "s14hxkEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hadj Batatia",
+                "id": "rsGFcxwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pierre-Antoine Thouvenin",
+                "id": "f0cMhSMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marcelo Pereyra",
+                "id": "ep85sxQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paul Gader",
+                "id": "GD3jwG8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mario Parente",
+                "id": "noKsBaoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qian (Jenny) Du",
+                "id": "0OdKQoQAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Nicolas Dobigeon",
+        "research_interest": [
+            "signal processing",
+            "image processing",
+            "machine learning",
+            "computational imaging",
+            "hyperspectral imaging"
+        ],
+        "citation": "5711"
+    },
+    "Miguel Angel Veganzones": {
+        "affiliation": "VP of Data in Lookiero",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Manuel graña",
+                "id": "lM0Hb4wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guillaume TOCHON",
+                "id": "CQ50qT0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lucas Drumetz",
+                "id": "abRvIGAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenzhi Liao",
+                "id": "a9O1t1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi WEI",
+                "id": "FNKlnBcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Yves Tourneret",
+                "id": "vHgDZDMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Jutten",
+                "id": "iO3qCToAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pierre Comon",
+                "id": "jd8r71gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jérémy E.Cohen",
+                "id": "MlBzHfcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Philippe Ovarlez",
+                "id": "GtAsQlQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Joana Frontera-Pons",
+                "id": "fILyeswAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Miguel Angel Veganzones",
+        "research_interest": [
+            "Data Science",
+            "Machine Learning",
+            "Signal Processing",
+            "Big Data Analysis",
+            "Earth Observation"
+        ],
+        "citation": "1296"
+    },
+    "Naoto Yokoya": {
+        "affiliation": "University of Tokyo",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Danfeng Hong (洪丹枫)",
+                "id": "n7gL0_IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Junshi Xia",
+                "id": "n1aKdTkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiao Xiang Zhu",
+                "id": "CNakdIgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei He",
+                "id": "5qWEM-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ronny Hänsch",
+                "id": "mUlpUlUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bruno Adriano",
+                "id": "Ye7b8X8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenzhi Liao",
+                "id": "a9O1t1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bertrand Le Saux",
+                "id": "SiGd2-YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gerald Baier",
+                "id": "v-TKAicAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jing Yao",
+                "id": "1SHd5ygAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lianru Gao",
+                "id": "La-8gLMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shunichi Koshimura",
+                "id": "DqBV_fsAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Naoto Yokoya",
+        "research_interest": [
+            "Remote Sensing",
+            "Computer Vision",
+            "Machine Learning",
+            "Data Fusion"
+        ],
+        "citation": "9960"
+    },
+    "José M. Bioucas Dias": {
+        "affiliation": "Instituto de Telecomunicações",
+        "coauthors": [
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mario A. T. Figueiredo",
+                "id": "S-pd0NwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "jun li",
+                "id": "teMj0zMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marian-Daniel Iordache",
+                "id": "QQJEU0AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Manya Afonso",
+                "id": "1QHSlSEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Yves Tourneret",
+                "id": "vHgDZDMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qi WEI",
+                "id": "FNKlnBcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gonçalo Valadão",
+                "id": "8adqWJ0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paul Gader",
+                "id": "GD3jwG8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "João Oliveira",
+                "id": "YhWhbWYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriel Martin Hernandez",
+                "id": "BlOiITwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mario Parente",
+                "id": "noKsBaoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wing-Kin Ma",
+                "id": "zSjjF_UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Afonso Teodoro",
+                "id": "TV9RYGAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "V.Katkovnik",
+                "id": "t0BqIcUAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "José M. Bioucas Dias",
+        "research_interest": [
+            "Signal and image processing",
+            "inverse problems",
+            "optimization",
+            "remote sensing"
+        ],
+        "citation": "16930"
+    },
+    "Qi WEI": {
+        "affiliation": "Uber",
+        "coauthors": [
+            {
+                "name": "Nicolas Dobigeon",
+                "id": "YPQFwDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Yves Tourneret",
+                "id": "vHgDZDMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Simon Godsill",
+                "id": "vmcOEc0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenzhi Liao",
+                "id": "a9O1t1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Simões",
+                "id": "hjMg7-IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Adrian Basarab",
+                "id": "I2CCHb0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marie Chabert",
+                "id": "s14hxkEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Vinicius Ferraris",
+                "id": "1yGpUPUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ningning Zhao",
+                "id": "0TfWB8IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marcus Chen",
+                "id": "d4SfyOoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Joseph Y. Lo",
+                "id": "rKoMBUYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bibo Shi",
+                "id": "O6fQGfAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Katherine Heller",
+                "id": "WOAlvmoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Peter M Atkinson",
+                "id": "SK8kZ9cAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Qi WEI",
+        "research_interest": [
+            "Recommendation",
+            "Machine Learning",
+            "Optimization",
+            "Computer Vision"
+        ],
+        "citation": "2036"
+    },
+    "Wald Lucien": {
+        "affiliation": "MINES ParisTech",
+        "coauthors": [
+            {
+                "name": "Thierry Ranchin",
+                "id": "OZKUsYgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Prof. Philippe BLANC",
+                "id": "l0tNZQcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mireille LEFEVRE",
+                "id": "uz3sI2sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Benoit Gschwind",
+                "id": "ozrUw2EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lionel Menard",
+                "id": "E07LA54AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Marie Monget",
+                "id": "b6E08gQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Armel Oumbe",
+                "id": "qTjynNkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Espinar Bella",
+                "id": "Kyc8l60AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Carsten Hoyer-Klick",
+                "id": "PI4z77kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hans Georg Beyer",
+                "id": "AnnCcmcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marcel Suri",
+                "id": "T8D7EJ8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pierre Ineichen",
+                "id": "ImNFEUoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hosni Ghedira",
+                "id": "bdv8dsIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alberto Troccoli",
+                "id": "u3OUu3oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lori Bruce",
+                "id": "jL95X6IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yehia Eissa",
+                "id": "qJnHNisAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christiane Weber",
+                "id": "d7eGnUsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "S.R. Dorling",
+                "id": "ILxJTGQAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wald Lucien",
+        "research_interest": [
+            "Earth observation",
+            "remote sensing",
+            "solar radiation",
+            "meteorology",
+            "image processing"
+        ],
+        "citation": "6907"
+    },
+    "Jean-Yves Tourneret": {
+        "affiliation": "ENSEEIHT",
+        "coauthors": [],
+        "name": "Jean-Yves Tourneret",
+        "research_interest": [
+            "signal processing",
+            "image processing"
+        ],
+        "citation": "6265"
+    },
+    "Karl Granström": {
+        "affiliation": "Chalmers University of Technology",
+        "coauthors": [
+            {
+                "name": "Lennart Svensson",
+                "id": "AMM9vE4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Umut Orguner",
+                "id": "I-TcR6kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Lundquist",
+                "id": "j6G9RtYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuxuan Xia",
+                "id": "ONkHTSwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ángel F. García-Fernández",
+                "id": "Fd8DG_AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jason L. Williams",
+                "id": "psiQDeAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Stephan Reuter",
+                "id": "i0ILhNUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Peter Willett",
+                "id": "S-WTRMMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Maryam Fatemi",
+                "id": "GpcBXmoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "y. bar-shalom",
+                "id": "aW9GaKYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Henk Wymeersch",
+                "id": "a7mYN_EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Braca",
+                "id": "uNSiHcAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marcus Baum",
+                "id": "5SVQD3oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Natale",
+                "id": "N4IiipcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sunwoo Kim",
+                "id": "SSAeSUsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hyowon Kim",
+                "id": "ZHtyqOoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fabio Ramos",
+                "id": "T_mJiHoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Juan Nieto",
+                "id": "g7yXnrAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ba-Ngu Vo",
+                "id": "V03zTGIAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Karl Granström",
+        "research_interest": [
+            "Sensor Fusion",
+            "Robotics",
+            "Target Tracking"
+        ],
+        "citation": "3562"
+    },
+    "Peter Willett": {
+        "affiliation": "University of Connecticut",
+        "coauthors": [],
+        "name": "Peter Willett",
+        "research_interest": [
+            "Detection",
+            "Tracking",
+            "Signal Processing",
+            "Communications"
+        ],
+        "citation": "6867"
+    },
+    "Antonino Maltese": {
+        "affiliation": "University of Palermo",
+        "coauthors": [
+            {
+                "name": "Giuseppe Ciraolo",
+                "id": "6dCIeSIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fulvio Capodici",
+                "id": "F_sDeAQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Carmelo Cammalleri",
+                "id": "Bw3OFtkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gino Dardanelli, BSc (Civ. Eng.) Ph",
+                "id": "gvXdFd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guido D&#39;Urso",
+                "id": "q6GpoQ0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "mario minacapilli",
+                "id": "IitCd7AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Brigitta Szabó (Brigitta Tóth)",
+                "id": "vRfhoCwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Flavia Tauro",
+                "id": "khEOBCkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lyndon Estes",
+                "id": "JGlJj7sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Simone Cosoli",
+                "id": "wbaZORQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Giuseppe Provenzano",
+                "id": "8v6sPOIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chiara Corbari",
+                "id": "e7GbbvwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Giovanni Rallo, PhD",
+                "id": "XDw4yqQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Addesso",
+                "id": "zRdV6BIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rocco RESTAINO",
+                "id": "-6x3U7IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christopher M U Neale",
+                "id": "VIctbi4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paul Bates",
+                "id": "RO4T7pcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Massimo Iovino",
+                "id": "ahUvSEcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tim Malthus",
+                "id": "AR9tnTsAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Antonino Maltese",
+        "research_interest": [
+            "remote sensing",
+            "gis",
+            "geomatics"
+        ],
+        "citation": "1519"
+    },
+    "Jochen Horstmann": {
+        "affiliation": "Helmholtz-Zentrum Hereon",
+        "coauthors": [
+            {
+                "name": "Johannes Schulz-Stellenfleth",
+                "id": "eEt-T1UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ruben Carrasco",
+                "id": "j740YDUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Björn Lund",
+                "id": "n41W56gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Salvatore Maresca",
+                "id": "eCzwSQ0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Paolo Braca",
+                "id": "uNSiHcAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Streßer",
+                "id": "wqjqM3MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José Carlos Nieto Borge",
+                "id": "fymzZ54AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jochen Horstmann",
+        "research_interest": [
+            "oceanography",
+            "remote sensing",
+            "radar"
+        ],
+        "citation": "1783"
+    },
+    "Borja Errasti-Alcala": {
+        "affiliation": "Tecnalia Research and Innovation",
+        "coauthors": [],
+        "name": "Borja Errasti-Alcala",
+        "research_interest": [
+            "Algorithms",
+            "Data Science",
+            "Applied Statistics",
+            "Optimization",
+            "Computational Intelligence"
+        ],
+        "citation": "73"
+    },
+    "Yu-Bang Zheng (Yubang Zheng)": {
+        "affiliation": "Southwest Jiaotong University",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Teng-Yu Ji",
+                "id": "dOk0-R4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qibin Zhao",
+                "id": "cSQGe3YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jian-Li Wang (Jianli Wang)",
+                "id": "6QVFljgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei He",
+                "id": "5qWEM-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hongyan Zhang",
+                "id": "fq7Uqx0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jie Lin",
+                "id": "sPcpHncAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yi Chang（昌毅）",
+                "id": "I1nZ67YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yisi Luo",
+                "id": "GFxpG1QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiao Fu",
+                "id": "pDnpH1MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuchun Miao",
+                "id": "-ec3mwUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaotong Li",
+                "id": "cpCE_T4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong-Liang Zhao",
+                "id": "x3E2s2oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xian-Ming Gu",
+                "id": "xlDJMvEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Meng Ding",
+                "id": "BqNY1mUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhi-Feng Pang",
+                "id": "80IwIBsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lu-Bin CUI",
+                "id": "tmFiy6kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lina Zhuang (庄丽娜）",
+                "id": "wWuSEvcAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yu-Bang Zheng (Yubang Zheng)",
+        "research_interest": [
+            "tensor decomposition",
+            "tensor networks",
+            "machine learning‬",
+            "image processing"
+        ],
+        "citation": "694"
+    },
+    "Yisi Luo": {
+        "affiliation": "University Of Electronic Science And Technology Of China",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yi Chang（昌毅）",
+                "id": "I1nZ67YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Deyu Meng",
+                "id": "an6w-64AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "CHAO LI",
+                "id": "i4JrumAAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yisi Luo",
+        "research_interest": [
+            "computer vision"
+        ],
+        "citation": "77"
+    },
+    "Yi Chang（昌毅）": {
+        "affiliation": "Huazhong University of Science and Technology",
+        "coauthors": [
+            {
+                "name": "Houzhang Fang",
+                "id": "C7CWyGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hai Liu (刘海)",
+                "id": "Tjw7zHEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "ChangFeng Yu",
+                "id": "TfNnqwgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuntong Ye",
+                "id": "BqsrOoQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yi Li",
+                "id": "W0oMWBkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yonghong Tian, Professor, IEEE Fell",
+                "id": "fn6hJx0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Meiya Chen",
+                "id": "DznPdWEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lin Zhu",
+                "id": "32d6xfEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hanyu Zhou",
+                "id": "bRXguCgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Luxin Yan",
+                "id": "5CS6T8AAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yi Chang（昌毅）",
+        "research_interest": [
+            "computer vision",
+            "image processing"
+        ],
+        "citation": "1977"
+    },
+    "Jian-Li Wang (Jianli Wang)": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [],
+        "name": "Jian-Li Wang (Jianli Wang)",
+        "research_interest": [
+            "tensor decomposition",
+            "tensor networks",
+            "deep learning",
+            "‬image processing"
+        ],
+        "citation": "147"
+    },
+    "Jinfan Hu": {
+        "affiliation": "Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences",
+        "coauthors": [
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gemine Vivone",
+                "id": "sjb_uAMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhong-Cheng Wu",
+                "id": "8bOvaUcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Danfeng Hong (洪丹枫)",
+                "id": "n7gL0_IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Wei Zhuo",
+                "id": "5k7OYLsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting Xu",
+                "id": "NMwLfkYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chao Dong",
+                "id": "OSDCB0UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiangyu Chen",
+                "id": "_gkTxJUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jinfan Hu",
+        "research_interest": [
+            "deep learning",
+            "low-level vision"
+        ],
+        "citation": "340"
+    },
+    "Jie Lin": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lina Zhuang (庄丽娜）",
+                "id": "wWuSEvcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Meng Ding",
+                "id": "BqNY1mUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shanshan Xu",
+                "id": "Dqc8c3wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jie Lin",
+        "research_interest": [
+            "Low-rank modeling",
+            "Tensor decomposition",
+            "Image processing"
+        ],
+        "citation": "83"
+    },
+    "Lina Zhuang (庄丽娜）": {
+        "affiliation": "Aerospace Information Research Institute, Chinese Academy of Sciences",
+        "coauthors": [
+            {
+                "name": "Lianru Gao",
+                "id": "La-8gLMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mario A. T. Figueiredo",
+                "id": "S-pd0NwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "jun li",
+                "id": "teMj0zMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chia-Hsiang Lin (林家祥)",
+                "id": "VhP-kcwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marina Ljubenovic",
+                "id": "PQMuSLsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Dan Yao (姚丹)",
+                "id": "n_1krvUAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Lina Zhuang (庄丽娜）",
+        "research_interest": [
+            "Statistical Signal/Image  Processing"
+        ],
+        "citation": "1296"
+    },
+    "Qibin Zhao": {
+        "affiliation": "RIKEN AIP",
+        "coauthors": [
+            {
+                "name": "Andrzej Cichocki",
+                "id": "wpZDx1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guoxu Zhou",
+                "id": "BIUkSFEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liqing Zhang （张丽清）",
+                "id": "1smFmxAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Danilo Mandic",
+                "id": "hcxWZkcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jianting Cao",
+                "id": "KwTDHzQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "CHAO LI",
+                "id": "i4JrumAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu Zhang",
+                "id": "oDrTEi0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Cesar F. Caiafa",
+                "id": "yAUJHFYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Toshihisa Tanaka",
+                "id": "pBXvYnwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "wanzeng kong",
+                "id": "xvh66U8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ivan Oseledets",
+                "id": "5kMqBQEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fengyu Cong",
+                "id": "Jd0dQA8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qiang Wu",
+                "id": "EmSQyasAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei He",
+                "id": "5qWEM-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuning Qiu",
+                "id": "zGb0k1MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tomasz M. Rutkowski",
+                "id": "EO21dVcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tatsuya Yokota",
+                "id": "ULYa42YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andong WANG",
+                "id": "vuPyxGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Masashi Sugiyama",
+                "id": "GkYIrlIAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Qibin Zhao",
+        "research_interest": [
+            "Machine Learning",
+            "Tensor Decomposition",
+            "Tensor Networks"
+        ],
+        "citation": "6518"
+    },
+    "Junhao Zhuang": {
+        "affiliation": "Tsinghua University",
+        "coauthors": [],
+        "name": "Junhao Zhuang",
+        "research_interest": [
+            "image representation",
+            "learning (artificial intelligence)",
+            "neural network",
+            "video signal processing"
+        ],
+        "citation": "10"
+    },
+    "JunJun Pan": {
+        "affiliation": "Hong Kong Baptist University",
+        "coauthors": [
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiongjun Zhang",
+                "id": "9IQ2e6QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Gillis",
+                "id": "pVIJV7wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hong Yan",
+                "id": "oKwuCfAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chenyang Shen",
+                "id": "imt-1SsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "yinggang Nan",
+                "id": "Mkgi10EAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "JunJun Pan",
+        "research_interest": [
+            "numerical linear algebra",
+            "tensor decompositions",
+            "data science"
+        ],
+        "citation": "126"
+    },
+    "Xiaotong Li": {
+        "affiliation": "Peking University",
+        "coauthors": [
+            {
+                "name": "Lingyu Duan  段凌宇",
+                "id": "hsXZOgIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yixiao Ge (葛艺潇)",
+                "id": "TtU74NAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yongxing Dai 戴永兴",
+                "id": "j8slWLIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jun Liu",
+                "id": "Q5Ild8UAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Xiaotong Li",
+        "research_interest": [
+            "Transfer Learning",
+            "Self-supervised Learning",
+            "Foundation Model"
+        ],
+        "citation": "289"
+    },
+    "Xiao Xiang Zhu": {
+        "affiliation": "Technical University of Munich",
+        "coauthors": [
+            {
+                "name": "Lichao Mou",
+                "id": "7k8GAaEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Richard Bamler",
+                "id": "NBd-i7YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Schmitt",
+                "id": "CVnD4h4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuanyuan Wang",
+                "id": "h5NDQRkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yilei Shi",
+                "id": "4ykAWEcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Muhammad Shahzad",
+                "id": "XKmKkY8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hannes Taubenböck",
+                "id": "6jmRN58AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Devis Tuia",
+                "id": "p3iJiLIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sudipan Saha",
+                "id": "C1_Ukv4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sina Montazeri",
+                "id": "oEhF4KEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anna Kruspe",
+                "id": "3hmvu5MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qingyu Li",
+                "id": "4smM4bAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lloyd Hughes",
+                "id": "U0iNUnAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Patrick Ebel",
+                "id": "vOSVVdkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Friedrich Fraundorfer",
+                "id": "M0boL5kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jakob Gawlikowski",
+                "id": "JSDN9rsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Eineder",
+                "id": "OqopO7kAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Xiao Xiang Zhu",
+        "research_interest": [
+            "Earth Observation",
+            "AI4EO",
+            "Signal Processing",
+            "Data Science",
+            "Synthetic Aperture Radar"
+        ],
+        "citation": "20730"
+    },
+    "Dong-Lin Sun": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [],
+        "name": "Dong-Lin Sun",
+        "research_interest": [
+            "Numerical Analysis",
+            "Mathematical Modelling",
+            "Mathematical Analysis"
+        ],
+        "citation": "82"
+    },
+    "Wei He": {
+        "affiliation": "Wuhan University",
+        "coauthors": [
+            {
+                "name": "Hongyan Zhang",
+                "id": "fq7Uqx0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Huanfeng Shen",
+                "id": "ore_9NIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qibin Zhao",
+                "id": "cSQGe3YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "CHAO LI",
+                "id": "i4JrumAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Quanming Yao",
+                "id": "6PEbAiYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Danfeng Hong (洪丹枫)",
+                "id": "n7gL0_IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tatsumi Uezato",
+                "id": "fW9by3sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qiangqiang Yuan",
+                "id": "aItnA-sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "zhang liangpei",
+                "id": "vzj2hcYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinshan Zeng",
+                "id": "au5gb2EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gerald Baier",
+                "id": "v-TKAicAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Huilin Xu",
+                "id": "NXonBYEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiao Xiang Zhu",
+                "id": "CNakdIgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lianru Gao",
+                "id": "La-8gLMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xianwei Zheng",
+                "id": "5MiXMXoAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wei He",
+        "research_interest": [
+            "remote sensing",
+            "computer vision"
+        ],
+        "citation": "3408"
+    },
+    "Jinshan Zeng": {
+        "affiliation": "School of Computer and Information Engineering, Jiangxi Normal University",
+        "coauthors": [
+            {
+                "name": "Shao-Bo Lin",
+                "id": "dGt4l6QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wotao Yin",
+                "id": "kpQGGFUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jian Fang",
+                "id": "Mw2i7JAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiangyu Chang",
+                "id": "IWIQ64YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhimin Peng",
+                "id": "vRvQj2IAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jinshan Zeng",
+        "research_interest": [
+            "Machine Learning",
+            "Sparse Optimization",
+            "Distributed Optimization"
+        ],
+        "citation": "1845"
+    },
+    "CHAO LI": {
+        "affiliation": "RIKEN",
+        "coauthors": [
+            {
+                "name": "Qibin Zhao",
+                "id": "cSQGe3YAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhun Sun",
+                "id": "Y-3iZ9EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei He",
+                "id": "5qWEM-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Longhao Yuan",
+                "id": "h25R01wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Naoto Yokoya",
+                "id": "DJ2KOn8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jianting Cao",
+                "id": "KwTDHzQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrzej Cichocki",
+                "id": "wpZDx1cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Quanming Yao",
+                "id": "6PEbAiYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qingsong Feng",
+                "id": "woZcexIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Danilo Mandic",
+                "id": "hcxWZkcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guoxu Zhou",
+                "id": "BIUkSFEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andong WANG",
+                "id": "vuPyxGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ying Weng",
+                "id": "GmG5E4UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qiang Wu",
+                "id": "EmSQyasAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zerui Tao",
+                "id": "vcEOMXkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ning Zheng",
+                "id": "7Yed-TMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mohammad Emtiyaz Khan",
+                "id": "Yv6wq2kAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "CHAO LI",
+        "research_interest": [
+            "Tensor Networks",
+            "Machine Learning"
+        ],
+        "citation": "912"
+    },
+    "Hongyan Zhang": {
+        "affiliation": "China University of Geosciences (Wuhan)",
+        "coauthors": [],
+        "name": "Hongyan Zhang",
+        "research_interest": [
+            "High-Dimensional Data Processing",
+            "Remote Sensing",
+            "Agricultural Monitoring",
+            "Artificial Intelligence"
+        ],
+        "citation": "6137"
+    },
+    "Shanshan Xu": {
+        "affiliation": "University of Electronic Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Bing Tan",
+                "id": "EjcxbF4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Li Songxiao",
+                "id": "E_c3E4AAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Shanshan Xu",
+        "research_interest": [
+            "Image Processing"
+        ],
+        "citation": "63"
+    },
+    "Meng Ding": {
+        "affiliation": "Southwest Jiaotong University",
+        "coauthors": [
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiao Fu",
+                "id": "pDnpH1MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yong Chen",
+                "id": "lds7VxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Teng-Yu Ji",
+                "id": "dOk0-R4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Si Wang",
+                "id": "L4UeNvMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yu-Bang Zheng (Yubang Zheng)",
+                "id": "3KH22NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hong-Ning Dai",
+                "id": "20aqGSoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zibin Zheng",
+                "id": "zWnsNrkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jie Lin",
+                "id": "sPcpHncAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinghua Yang",
+                "id": "LarvIwUAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Meng Ding",
+        "research_interest": [
+            "Image processing",
+            "tensor analysis",
+            "deep learning"
+        ],
+        "citation": "324"
+    },
+    "T F Chan": {
+        "affiliation": "King Abdullah University of Science &amp; Technology",
+        "coauthors": [],
+        "name": "T F Chan",
+        "research_interest": [
+            "mathematics",
+            "computer science",
+            "image processing"
+        ],
+        "citation": "19657"
+    },
+    "Egil Bae": {
+        "affiliation": "Norwegian Defence Research Establishment",
+        "coauthors": [],
+        "name": "Egil Bae",
+        "research_interest": [
+            "Applied Mathematics",
+            "Computer Vision",
+            "Machine Learning",
+            "Image Processing"
+        ],
+        "citation": "406"
+    },
+    "Jing Yuan": {
+        "affiliation": "Professor of Computer Science and Med. AI, College of Math. Med., Zhejiang Normal Univ.",
+        "coauthors": [
+            {
+                "name": "Martin Rajchl",
+                "id": "FDEbajYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wu Qiu",
+                "id": "tXd5xSEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Eranga Ukwatta",
+                "id": "d4Q3lWcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ismail Ben Ayed",
+                "id": "29vyUccAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Terry M  Peters",
+                "id": "d2ayhAoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Egil Bae",
+                "id": "4gZun2oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christoph Schnörr",
+                "id": "C-5j7CQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jose Dolz",
+                "id": "yHQIFFMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Desrosiers",
+                "id": "XJ0jF3gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuri Boykov",
+                "id": "h6_PdYsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "John SH Baxter",
+                "id": "zB8zUmYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jessica Kishimoto",
+                "id": "kX7cVeUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sandrine de Ribaupierre",
+                "id": "yXssN6MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Florian Becker",
+                "id": "iMk4VbMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bernard Chiu",
+                "id": "J4aqOWUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yimin Chen",
+                "id": "_qaSfHAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "James A White",
+                "id": "4IjoBA8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Steidl, Gabriele",
+                "id": "mwpdGkQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jonathan McLeod",
+                "id": "X9HbgzYAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jing Yuan",
+        "research_interest": [
+            "Convex Optimization",
+            "Medical Image Analysis",
+            "Computer Vision",
+            "Machine Learning"
+        ],
+        "citation": "2575"
+    },
+    "Pekka Neittaanmäki": {
+        "affiliation": "University of Jyväskylä",
+        "coauthors": [
+            {
+                "name": "Olivier Pironneau",
+                "id": "oKA2uLgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Amir Averbuch",
+                "id": "W5hdNOgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nikolay V. Kuznetsov",
+                "id": "EjseyeQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gennady A. Leonov",
+                "id": "_zv2pFwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Seledzhi SM",
+                "id": "JuJi72EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Raino Mäkinen",
+                "id": "9VKiQx4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rolf Stenberg",
+                "id": "C3aWEwMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jari Toivanen",
+                "id": "LC1_w24AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Maria Dementieva",
+                "id": "awaRKf8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Irena Lasiecka, Fellow of AMS, SIAM",
+                "id": "vVXOLGIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Viorel Barbu",
+                "id": "tNnchD8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Roderick Melnik",
+                "id": "NII0bbkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Istvan Farago",
+                "id": "TwUQzlcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Päivi Häkkinen",
+                "id": "KuQVwQsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jan Valdman",
+                "id": "s_CRlpEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ferrante Neri",
+                "id": "h0JDq7sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Thomas Seidman",
+                "id": "oBfQYMQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gil Shabat",
+                "id": "d2sbErcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sanna Mönkölä",
+                "id": "7XEMMlUAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Pekka Neittaanmäki",
+        "research_interest": [
+            "Simulation",
+            "Optimization",
+            "Numerical Analysis",
+            "Optimal Control",
+            "Signal Analysis"
+        ],
+        "citation": "3107"
+    },
+    "Arvid Lundervold, BSc, MD, PhD": {
+        "affiliation": "University of Bergen",
+        "coauthors": [
+            {
+                "name": "Erlend Hodneland",
+                "id": "msU3g9EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Astri Lundervold",
+                "id": "GkBDaaIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Kenneth Hugdahl",
+                "id": "mo38n1UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alexander Lundervold",
+                "id": "3mfrDLYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anders Fjell",
+                "id": "yiSLTAcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Prof. Dr. Frank G. Zöllner",
+                "id": "m19sA2sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Kristine Beate Walhovd",
+                "id": "_PBy2G4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tormod Thomsen",
+                "id": "3NHhCH0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lars Tjelta Westlye",
+                "id": "zm7OAxsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonella Zanna Munthe-Kaas",
+                "id": "HmZIFSUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anders M. Dale",
+                "id": "F4URLXYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bruce Fischl or B Fischl",
+                "id": "t7mytXkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Erik A. Hanson",
+                "id": "PkrPRQ8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nikos Makris",
+                "id": "gGTas20AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marek Kocinski",
+                "id": "DPMBHOkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Helwig Hauser",
+                "id": "x4jXO7AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrzej Materka",
+                "id": "q_vABdUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Martha Chekenya",
+                "id": "3flwxywAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Artur Klepaczko",
+                "id": "aufHDdkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Arvid Lundervold, BSc, MD, PhD",
+        "research_interest": [
+            "Neuroinformatics",
+            "Machine learning",
+            "Neuroimaging",
+            "Computational medicine"
+        ],
+        "citation": "5127"
+    },
+    "Jooyoung Hahn": {
+        "affiliation": "Slovak University of Technology in Bratislava",
+        "coauthors": [
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jin Keun Seo",
+                "id": "t1p7qPcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alfred Bruckstein",
+                "id": "P1OaUP8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Hintermüller",
+                "id": "MmPNPtsAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jooyoung Hahn",
+        "research_interest": [
+            "Finite Volume Methods",
+            "Numerical algorithms",
+            "image processing",
+            "and computer vision"
+        ],
+        "citation": "194"
+    },
+    "Roland Glowinski": {
+        "affiliation": "University of Houston",
+        "coauthors": [],
+        "name": "Roland Glowinski",
+        "research_interest": [
+            "Computational Mathematics"
+        ],
+        "citation": "7742"
+    },
+    "Ron Kimmel": {
+        "affiliation": "Technion",
+        "coauthors": [
+            {
+                "name": "Alex Bronstein",
+                "id": "lafKN0sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Bronstein",
+                "id": "UU3N6-UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alfred Bruckstein",
+                "id": "P1OaUP8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guillermo Sapiro",
+                "id": "ISRNX3gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nir Sochen",
+                "id": "5ADhH10AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guy Rosman",
+                "id": "aQeTAr4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Dan Raviv",
+                "id": "a93gZekAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yonathan Aflalo",
+                "id": "Qh0sej0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anastasia Dubrovina",
+                "id": "QEfp1UwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Aaron Wetzler",
+                "id": "oSGdRWoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Elad",
+                "id": "UpZbV44AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Matan Sela",
+                "id": "LAawSpwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Doron Shaked",
+                "id": "1W-vJP4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Roman Goldenberg",
+                "id": "yggUoWYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ron Slossberg",
+                "id": "kPkhMYMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Laurent D. Cohen",
+                "id": "lphQnvMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "oshri halimi",
+                "id": "otORCAkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Elad Richardson",
+                "id": "9npMV2kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Irad Yavneh",
+                "id": "cTSS00EAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Ron Kimmel",
+        "research_interest": [
+            "Image processing",
+            "computer vision",
+            "shape analysis",
+            "medical imaging",
+            "metric geometry"
+        ],
+        "citation": "7671"
+    },
+    "Jun Liu": {
+        "affiliation": "Northeast Normal University",
+        "coauthors": [
+            {
+                "name": "Tieyong Zeng",
+                "id": "2yyTgRwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Si Wang",
+                "id": "L4UeNvMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xi-Le Zhao",
+                "id": "88Zs8pAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Po-Yu Chen (Paul)",
+                "id": "0OtIVF4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ivan Selesnick",
+                "id": "zU21I8MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ming Yan (严明)",
+                "id": "IR1mvb0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Faming Fang",
+                "id": "TSkJe-4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tai-Xiang Jiang (蒋太翔)",
+                "id": "nn6Ze0MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang Chen",
+                "id": "ZRd8xLIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liang-Jian Deng (邓良剑)",
+                "id": "TZs9NxkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinshan Zeng",
+                "id": "au5gb2EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ting-Zhu Huang",
+                "id": "H7El-ZkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jun Liu",
+        "research_interest": [
+            "Image processing",
+            "Numerical Algorithms"
+        ],
+        "citation": "572"
+    },
+    "Yuri Boykov": {
+        "affiliation": "University of Waterloo",
+        "coauthors": [
+            {
+                "name": "Olga Veksler",
+                "id": "r5QkMysAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Vladimir Kolmogorov",
+                "id": "BBGlIGQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ismail Ben Ayed",
+                "id": "29vyUccAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marie-Pierre Jolly (Dubuisson)",
+                "id": "qwY2ftYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrew Delong",
+                "id": "-FEYIEMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lena Gorelick",
+                "id": "LDur_VYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Meng Tang",
+                "id": "6DmW9v0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hossam Isack",
+                "id": "GNd6TgYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jing Yuan",
+                "id": "eMPV_ZkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Dmitrii Marin",
+                "id": "rPbo3nQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gareth Funka-Lea",
+                "id": "_IckFbIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Egil Bae",
+                "id": "4gZun2oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Frank R. Schmidt",
+                "id": "q47NFDsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Victor Lempitsky",
+                "id": "gYYVokYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniel Cremers",
+                "id": "cXQciMEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Demetri Terzopoulos",
+                "id": "pKuBFaQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shervin Minaee",
+                "id": "x0TMrMIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Carl Olsson",
+                "id": "d1TaXx4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anton Osokin",
+                "id": "R9MXY8wAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yuri Boykov",
+        "research_interest": [
+            "computer vision",
+            "biomedical image analysis"
+        ],
+        "citation": "9582"
+    },
+    "S osher": {
+        "affiliation": "Unknown affiliation",
+        "coauthors": [],
+        "name": "S osher",
+        "research_interest": [],
+        "citation": "37914"
+    },
+    "Wei Zhu": {
+        "affiliation": "University of Alabama",
+        "coauthors": [
+            {
+                "name": "T F Chan",
+                "id": "UO7McmEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Shelley",
+                "id": "Sa2AIxQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sung Ha Kang",
+                "id": "h6eAkFwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhongyi Huang",
+                "id": "4cUP2_kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Robert M Shapley",
+                "id": "hTqKvtoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Egil Bae",
+                "id": "4gZun2oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Peter Palffy-Muhoray",
+                "id": "C0aPt5MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Dajun Xing",
+                "id": "wETlqVYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jackie (Jianhong) Shen",
+                "id": "J1oKZscAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "George Biros",
+                "id": "O4_jWCsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Maryam Yashtini",
+                "id": "jWBkI8IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andy M Yip",
+                "id": "2vaXBtEAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wei Zhu",
+        "research_interest": [
+            "Applied Math",
+            "Image Processing",
+            "Data sciences"
+        ],
+        "citation": "502"
+    },
+    "Wenbing Tao": {
+        "affiliation": "Huazhong University of Science and Technology",
+        "coauthors": [
+            {
+                "name": "Hai Jin",
+                "id": "o02W0aEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jinwen Tian (田金文)",
+                "id": "kdAw20QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yimin D. Zhang",
+                "id": "6cGw2lYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Desheng Wang",
+                "id": "CIvWDEgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Moeness G. Amin",
+                "id": "qRvmRH8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yicong Zhou",
+                "id": "Fe5Ru58AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaobai Liu",
+                "id": "ffKMTFUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shuicheng Yan, Fellow of AAAI, ACM,",
+                "id": "DNuiPHwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Professor Junbin Gao",
+                "id": "3-KJN8IAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wenbing Tao",
+        "research_interest": [
+            "image processing",
+            "computer vision",
+            "pattern recognition"
+        ],
+        "citation": "3393"
+    },
+    "Jinchao Xu": {
+        "affiliation": "Penn State University",
+        "coauthors": [
+            {
+                "name": "Long Chen",
+                "id": "LhKNyYAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pengtao Sun",
+                "id": "zJvmZKwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaozhe Hu",
+                "id": "TaSKf_QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chen-Song Zhang",
+                "id": "0CmdeK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Young-Ju Lee",
+                "id": "gR0Y8KcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guangri Xue",
+                "id": "Gu7p3z4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ralf Hiptmair",
+                "id": "uJ03qIAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yunrong Zhu",
+                "id": "dAtrxjQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Holst",
+                "id": "_nB45VAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Constantin Bacuta",
+                "id": "ZXovmhIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Liuqiang Zhong",
+                "id": "9ESSZxUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriel Wittum",
+                "id": "GYubNyUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mingchao Cai",
+                "id": "PjOi73wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "T F Chan",
+                "id": "UO7McmEAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jinchao Xu",
+        "research_interest": [
+            "Numerical analysis",
+            "multigrid",
+            "domain decomposition",
+            "finite element method",
+            "numerical methods for partial differential equation"
+        ],
+        "citation": "6163"
+    },
+    "Li-Lian Wang": {
+        "affiliation": "Nanyang Technological University, Singapore",
+        "coauthors": [
+            {
+                "name": "Jie Shen",
+                "id": "6Rl6La8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tao Tang",
+                "id": "RM6TOsUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bo Wang",
+                "id": "dhkgIfcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Changtao Sheng",
+                "id": "8XGHKMkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gu Ying",
+                "id": "-Qf9ETsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wenjie Liu",
+                "id": "KdL_elMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhimin Zhang",
+                "id": "kwy7ROYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhiguo Yang",
+                "id": "BUqH1vAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhongqing Wang",
+                "id": "srN6cxsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sheng Chen",
+                "id": "26VtCiYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Huifang Yuan",
+                "id": "jQdLJxIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuying Shi",
+                "id": "D5ZT53cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Xiong",
+                "id": "AhITXNUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jierong Cheng",
+                "id": "59dIblkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Aihua Wood",
+                "id": "-vESiZoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tao Zhou",
+                "id": "3VMHxLoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shuhuang Xiang",
+                "id": "n11dErwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lina Ma",
+                "id": "-zcR0WsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhang Chao",
+                "id": "qhvgG_cAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Li-Lian Wang",
+        "research_interest": [
+            "Spectral and High-Order Methods",
+            "Computational Acoustic and Electromagnetic Wave Scattering"
+        ],
+        "citation": "2929"
+    },
+    "Huibin Chang": {
+        "affiliation": "School of Mathematical Sciences, Tianjin Normal University",
+        "coauthors": [
+            {
+                "name": "Stefano Marchesini",
+                "id": "hqe8wusAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tieyong Zeng",
+                "id": "2yyTgRwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jiayin Zhou",
+                "id": "MreWeX0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pablo Enfedaque",
+                "id": "sJl_DxMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Kwok-Po Ng",
+                "id": "BBpjLiIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhifang Liu",
+                "id": "ZwvON5oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jie Zhang",
+                "id": "IJse9ggAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "David A Shapiro",
+                "id": "AwI2BOsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Wang",
+                "id": "7ORCwFMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Li-Lian Wang",
+                "id": "19-d58sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaoqun Zhang",
+                "id": "mzsf_aUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Young-Sang Yu",
+                "id": "zTedPdwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian G. Schroer",
+                "id": "MyvZrCIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Juliane Reinhardt",
+                "id": "63JNWE0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jing Qin",
+                "id": "ERCT4PkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhi-Feng Pang",
+                "id": "80IwIBsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yifei Lou",
+                "id": "iCiUflEAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Huibin Chang",
+        "research_interest": [
+            "Domain Decomposition Method",
+            "Image Processing",
+            "Diffraction Imaging"
+        ],
+        "citation": "731"
+    },
+    "Guy Rosman": {
+        "affiliation": "Toyota Research Institute; Massachusetts General Hospital",
+        "coauthors": [
+            {
+                "name": "Daniela Rus",
+                "id": "910z20QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ozanan R. Meireles",
+                "id": "5pk-P1MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ron Kimmel",
+                "id": "yV7LaW8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniel A. Hashimoto, MD MS",
+                "id": "zXESohsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Luke Fletcher",
+                "id": "YGxUJXkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "John Leonard",
+                "id": "WPe7vWwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sertac Karaman",
+                "id": "Vu-Zb7EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xin Huang",
+                "id": "tHYy9bkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "John W. Fisher III",
+                "id": "izZZAegAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Igor Gilitschenski",
+                "id": "Nuw1Y4oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michael Bronstein",
+                "id": "UU3N6-UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alex Bronstein",
+                "id": "lafKN0sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Brian Williams",
+                "id": "OlzpVykAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alexander Amini",
+                "id": "EWB-8-oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alfred Bruckstein",
+                "id": "P1OaUP8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Anastasia Dubrovina",
+                "id": "QEfp1UwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorina Dascal",
+                "id": "2iTFe9kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Oren Freifeld",
+                "id": "fxzlm6IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Aaron Wetzler",
+                "id": "oSGdRWoAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Guy Rosman",
+        "research_interest": [
+            "Computer vision and robotic perception",
+            "Bayesian inference",
+            "trajectory prediction"
+        ],
+        "citation": "3134"
+    },
+    "Talal Rahman": {
+        "affiliation": "Professor of (Computational) Mathematics, Western Norway University of Applied Sciences",
+        "coauthors": [
+            {
+                "name": "dr hab. Leszek Marcinkowski",
+                "id": "ibGJGkoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Petter Bjorstad",
+                "id": "y5aoMlYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jan Valdman",
+                "id": "s_CRlpEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Martin Gander",
+                "id": "qVR7zB0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "S osher",
+                "id": "d3UtiX8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sergey Repin",
+                "id": "tDf1mjIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jan Martin Nordbotten",
+                "id": "F_lzCfMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ajit Patel",
+                "id": "YtUkgSQAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Talal Rahman",
+        "research_interest": [
+            "Scientific Computing",
+            "Numerical Methods for PDE",
+            "Domain Decomposition Method",
+            "Variational Image Processing"
+        ],
+        "citation": "210"
+    },
+    "Erlend Hodneland": {
+        "affiliation": "Haukeland University Hospital",
+        "coauthors": [],
+        "name": "Erlend Hodneland",
+        "research_interest": [
+            "Image processing",
+            "machine learning",
+            "flow simulations"
+        ],
+        "citation": "934"
+    },
+    "Juyong Zhang": {
+        "affiliation": "University of Science and Technology of China",
+        "coauthors": [
+            {
+                "name": "Jianfei Cai",
+                "id": "N6czCoUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bailin Deng",
+                "id": "zNXnH-UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jianmin Zheng",
+                "id": "sGCf2k0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ligang Liu",
+                "id": "1U9U_cYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yudong Guo",
+                "id": "cxF_-i4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "boyi jiang",
+                "id": "lTlZV8wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuxin Yao",
+                "id": "Ez-5iFEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Haofei Xu",
+                "id": "NhUwq_8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yue Peng",
+                "id": "kFUKMRkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hongrui Cai",
+                "id": "fqoe18wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Keyu Chen",
+                "id": "pTu2NakAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xue-Cheng Tai",
+                "id": "09Jag9sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sofien Bouaziz",
+                "id": "-iHeDkoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tat-Jen Cham",
+                "id": "Lx3X7W0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jiansong Deng",
+                "id": "rRFF-fcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guoxian Song",
+                "id": "EMyFIYgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qianyi Wu",
+                "id": "XI0RtesAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yijiang Huang",
+                "id": "6W-0MUUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lu FANG",
+                "id": "C1YeBLMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qiang Zou",
+                "id": "9FwFNqAAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Juyong Zhang",
+        "research_interest": [
+            "Computer Graphics",
+            "Computer Vision",
+            "Geometry Processing"
+        ],
+        "citation": "3808"
+    },
+    "Jing Qin": {
+        "affiliation": "University of Kentucky",
+        "coauthors": [
+            {
+                "name": "Deanna Needell",
+                "id": "SFGUFjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rachel Grotheer",
+                "id": "K-xBlOMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Weihong Guo",
+                "id": "-U6QcqMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "S osher",
+                "id": "d3UtiX8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wotao Yin",
+                "id": "kpQGGFUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chenxi Huang",
+                "id": "Mno6nMQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "WENTAI LIU",
+                "id": "F0zohzAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jay Rosenberger",
+                "id": "ZgqIhscAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shouyi Wang",
+                "id": "K9TqeAIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mujibur Rahman Chowdhury",
+                "id": "VzGo1r4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Feng Liu",
+                "id": "HVZdbX0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Bertozzi",
+                "id": "VJPRn1oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ying Li",
+                "id": "1UU0ytMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Igor Yanovsky",
+                "id": "V5TbEEcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ming Yan (严明)",
+                "id": "IR1mvb0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Fang Li",
+                "id": "2_8WX68AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "SHIMON               WEISS",
+                "id": "O6WepQgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn T. Chi",
+                "id": "SN33pRMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Harlin Lee",
+                "id": "AJhx0YgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jing Qin",
+        "research_interest": [
+            "Applied Mathematics",
+            "Image Processing",
+            "Optimization"
+        ],
+        "citation": "449"
+    },
+    "Wotao Yin": {
+        "affiliation": "DAMO Academy, Alibaba Group US",
+        "coauthors": [
+            {
+                "name": "S osher",
+                "id": "d3UtiX8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Donald Goldfarb",
+                "id": "EoqHOMsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yangyang Xu",
+                "id": "n9M17p8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Kun Yuan",
+                "id": "aMnHLz4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zaiwen Wen",
+                "id": "QfxrxDoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qing Ling",
+                "id": "u70vRDYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Junfeng Yang",
+                "id": "KNaIT2kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jialin Liu",
+                "id": "QS6Lj5sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ernest K. Ryu",
+                "id": "CNOqUZoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Tianyi Chen",
+                "id": "kFwvv38AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuejiao Sun",
+                "id": "TyCNTlkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jérôme Darbon",
+                "id": "QWnWvWEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhimin Peng",
+                "id": "vRvQj2IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei (Wilbur) Shi",
+                "id": "WTNbuSMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yilun Wang",
+                "id": "5PdrbfgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhu Han",
+                "id": "ty7wIXoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xiaohan  Chen",
+                "id": "fEehMTwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Elaine Hale",
+                "id": "xKXhe6EAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zhangyang (Atlas) Wang",
+                "id": "pxFyKAIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yanli Liu",
+                "id": "YzXIxCwAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Wotao Yin",
+        "research_interest": [
+            "optimization",
+            "parallel and distributed computation",
+            "inverse problems"
+        ],
+        "citation": "18732"
+    },
+    "Sibel Tari": {
+        "affiliation": "Middle East Technical University",
+        "coauthors": [
+            {
+                "name": "Carlotta Domeniconi",
+                "id": "aKkIMogAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Sibel Tari",
+        "research_interest": [
+            "Computer Vision",
+            "Image Processing",
+            "Shape Analysis",
+            "Variational Methods"
+        ],
+        "citation": "151"
+    },
+    "Fei Hu": {
+        "affiliation": "University of Alabama",
+        "coauthors": [],
+        "name": "Fei Hu",
+        "research_interest": [
+            "Wireless Networks",
+            "Machine Learning",
+            "Cyber Security"
+        ],
+        "citation": "7365"
+    },
+    "Jón Atli Benediktsson": {
+        "affiliation": "University of Iceland",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Johannes R.  Sveinsson",
+                "id": "53ZjxhwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mathieu Fauvel",
+                "id": "rzznG2UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Shutao Li (李树涛)",
+                "id": "PlBq8n8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Xudong Kang (康旭东)",
+                "id": "5XOeLZYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yuliya Tarabalka",
+                "id": "N5raVlIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Björn Waske",
+                "id": "dWjh5LEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "ZHIYONG  LV",
+                "id": "BijFK8cAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Leyuan Fang",
+                "id": "Gfa4nasAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicola Falco",
+                "id": "LoxBiDoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Prashanth Reddy Marpu",
+                "id": "vGF-RT8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Magnus Ulfarsson",
+                "id": "2wAHVnsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "jun li",
+                "id": "teMj0zMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Alberto Villa",
+                "id": "SXIrw58AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriele Cavallaro",
+                "id": "5Vm3vPkAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jón Atli Benediktsson",
+        "research_interest": [
+            "Remote Sensing",
+            "Image Analysis",
+            "Pattern Recognition",
+            "Signal Processing"
+        ],
+        "citation": "22521"
+    },
+    "Lorenzo Bruzzone": {
+        "affiliation": "University of Trento",
+        "coauthors": [
+            {
+                "name": "Francesca Bovolo",
+                "id": "40YiUvoAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Lorenzo Bruzzone",
+        "research_interest": [
+            "Remote Sensing",
+            "Synthetic Aperture Radar",
+            "Radar",
+            "Image Processing",
+            "Pattern Recognition"
+        ],
+        "citation": "23532"
+    },
+    "Guillaume TOCHON": {
+        "affiliation": "Associate Professor, EPITA (LRE)",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lucas Drumetz",
+                "id": "abRvIGAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Baptiste Féret",
+                "id": "LVmWs2Ay7ukC&amp;hl=en"
+            },
+            {
+                "name": "Gregory P. Asner",
+                "id": "sPyLa9oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Philippe Salembier",
+                "id": "TUPVuG0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Jutten",
+                "id": "iO3qCToAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Bertozzi",
+                "id": "VJPRn1oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jérôme Gilles",
+                "id": "m3vHJnAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jen-Mei Chang",
+                "id": "t4E9ft4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "giorgio licciardi",
+                "id": "2jaqWowAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Guillaume TOCHON",
+        "research_interest": [
+            "Image processing",
+            "mathematical morphology",
+            "machine/deep learning",
+            "space imagery",
+            "remote sensing"
+        ],
+        "citation": "2022"
+    },
+    "Antonio Plaza": {
+        "affiliation": "University of Extremadura",
+        "coauthors": [
+            {
+                "name": "jun li",
+                "id": "teMj0zMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Javier Plaza Miguel",
+                "id": "oydoIyYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Juan. M. Haut",
+                "id": "zLffeY8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gabriel Martin Hernandez",
+                "id": "BlOiITwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rubén Fernández Beltrán",
+                "id": "pdzJmcQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marian-Daniel Iordache",
+                "id": "QQJEU0AAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sergio Bernabe Garcia",
+                "id": "m8XgDM0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Qian (Jenny) Du",
+                "id": "0OdKQoQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "bing zhang",
+                "id": "nHup8tQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Chein-I Chang",
+                "id": "03Bww5gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lianru Gao",
+                "id": "La-8gLMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Abel Paz-Gallardo",
+                "id": "PEiry5wAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sergio Sanchez Martinez",
+                "id": "SBQoyjQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zebin Wu",
+                "id": "y_FtCsYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Inmaculada Garcia Fernandez",
+                "id": "a2hO6NYAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Antonio Plaza",
+        "research_interest": [
+            "Hyperspectral",
+            "parallel computing",
+            "remote sensing",
+            "geoscience",
+            "GPU"
+        ],
+        "citation": "27967"
+    },
+    "Prashanth Reddy Marpu": {
+        "affiliation": "Bayanat AI",
+        "coauthors": [
+            {
+                "name": "Taha BMJ Ouarda",
+                "id": "UJujT6gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hosni Ghedira",
+                "id": "bdv8dsIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Irmgard Niemeyer",
+                "id": "JHzY_vwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Prajowal Manandhar",
+                "id": "s6khtMcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Annalisa  Molini",
+                "id": "7mDIqosAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Richard Gloaguen",
+                "id": "e1QDLQUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Michele Lazzarini",
+                "id": "4yqjNPAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Peter Armstrong, PE/PhD/FASHRAE",
+                "id": "3KHTJ2UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rasha Alshehhi",
+                "id": "bm-v7NkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Yehia Eissa",
+                "id": "qJnHNisAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lindita Bande",
+                "id": "Q-v0C70AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "José M. Bioucas Dias",
+                "id": "nhSyPjEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "jun li",
+                "id": "teMj0zMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gamba Paolo",
+                "id": "9fiHXGwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Wei Lee Woon",
+                "id": "cmHsRGoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Afshin Afshari",
+                "id": "5QVZin4AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Prashanth Reddy Marpu",
+        "research_interest": [
+            "Remote Sensing",
+            "Image Processing",
+            "Machine Learning",
+            "Small Satellites"
+        ],
+        "citation": "2930"
+    },
+    "Daniele Picone": {
+        "affiliation": "Post Doctorant Fellow, GIPSA-Lab",
+        "coauthors": [],
+        "name": "Daniele Picone",
+        "research_interest": [
+            "Image Processing",
+            "Remote sensing",
+            "Hyperspectral data"
+        ],
+        "citation": "94"
+    },
+    "Jerome MARS": {
+        "affiliation": "Grenoble INP",
+        "coauthors": [
+            {
+                "name": "Barbara Nicolas",
+                "id": "nUcwZvsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "cedric gervaise",
+                "id": "cw5PY8sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas LE BIHAN",
+                "id": "gUYd8KYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Valeriu Vrabie",
+                "id": "cqUAzgQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Cornel Ioana",
+                "id": "H5INUPMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Julien Bonnel",
+                "id": "X-0wcSMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sebastian Miron",
+                "id": "fyAwACwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Philippe Metaxian",
+                "id": "27Mv-7MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Marielle Malfante",
+                "id": "hNT-eiAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Herve Lionel",
+                "id": "P3UfyJoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Amir A. Khan",
+                "id": "RXB1kRkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Helle Pedersen",
+                "id": "HQIxmGoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Adolfo Inza",
+                "id": "f45uDe8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Quentin Barthélemy",
+                "id": "97OQs9IAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "G. Bazile KINDA",
+                "id": "totIYVYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gareth Shane O&#39;Brien",
+                "id": "xhaqPNIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nadège Thirion-Moreau",
+                "id": "jRrFAcMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Valentin BARON",
+                "id": "Q37_HMsAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jerome MARS",
+        "research_interest": [
+            "Signal processing",
+            "Source separation",
+            "under water acoustic",
+            "array processing"
+        ],
+        "citation": "1588"
+    },
+    "Marielle Malfante": {
+        "affiliation": "Chercheur en intelligence artificielle, CEA Grenoble",
+        "coauthors": [
+            {
+                "name": "Jerome MARS",
+                "id": "QAg1PuUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean-Philippe Metaxian",
+                "id": "27Mv-7MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "cedric gervaise",
+                "id": "cw5PY8sAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Estelle Delouche",
+                "id": "Hj-xb20AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Marielle Malfante",
+        "research_interest": [
+            "Machine Learning",
+            "Signals representation",
+            "application to acoustics",
+            "application to sismology",
+            "application to volcanology"
+        ],
+        "citation": "295"
+    },
+    "Magnus Ulfarsson": {
+        "affiliation": "University of Iceland",
+        "coauthors": [
+            {
+                "name": "Johannes R.  Sveinsson",
+                "id": "53ZjxhwAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jakob Sigurdsson",
+                "id": "rOQCHdAAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Frosti Palsson",
+                "id": "o1DHDKMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Behnood Rasti",
+                "id": "hA_Xi6MAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Burkni Palsson",
+                "id": "aY_HWREAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Hreinn Stefansson",
+                "id": "BsBsqS0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniel Gudbjartsson",
+                "id": "NzLGjWoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "G. Bragi Walters",
+                "id": "oev-ZqEAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Benedikt Atli Jonsson",
+                "id": "WQjfrV4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Bin Zhao (赵斌)",
+                "id": "uLnQEEUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Gyda Bjornsdottir",
+                "id": "2mKbABYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Thorgeir Thorgeirsson",
+                "id": "xpNtpxcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lotta M. Ellingsen",
+                "id": "Px_2K0gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Muhammad Aufaristama",
+                "id": "DZ1Rlb0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Thor Thordarson",
+                "id": "LNYTIhkAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Luis Hernandez-Garcia, Luis Hernand",
+                "id": "K30BViwAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Magnus Ulfarsson",
+        "research_interest": [
+            "signal/image processing",
+            "machine learning",
+            "artificial intelligence",
+            "remote sensing",
+            "genomics"
+        ],
+        "citation": "3644"
+    },
+    "Lucas Drumetz": {
+        "affiliation": "IMT Atlantique, Lab-STICC, Brest, France",
+        "coauthors": [
+            {
+                "name": "Jocelyn Chanussot",
+                "id": "6owK2OQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "fablet ronan",
+                "id": "0donG7gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Christian Jutten",
+                "id": "iO3qCToAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Said Ouala",
+                "id": "uAiTuK0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Miguel Angel Veganzones",
+                "id": "8o-d6B4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Guillaume TOCHON",
+                "id": "CQ50qT0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "François Rousseau",
+                "id": "St-2ZOIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Duong Nguyen",
+                "id": "jLtTFrIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Vincent Gripon",
+                "id": "n3IKEqgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ananda Pascual",
+                "id": "JSX_hG8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicolas Courty",
+                "id": "ibEREjcAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Clément Bonet",
+                "id": "wjCPk5kAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Simon Henrot",
+                "id": "OuE26nQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andrea Bertozzi",
+                "id": "VJPRn1oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Raphael Baena",
+                "id": "8MU98WQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Francois Septier",
+                "id": "zGqIh9UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Ronald Phlypo",
+                "id": "hZIeqGMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "olivier pannekoucke",
+                "id": "qBmkuHEAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Lucas Drumetz",
+        "research_interest": [
+            "remote sensing",
+            "image and signal processing",
+            "machine learning",
+            "convex optimization",
+            "dynamical systems"
+        ],
+        "citation": "1075"
+    },
+    "Gabriele Cavallaro": {
+        "affiliation": "Forschungszentrum Jülich",
+        "coauthors": [
+            {
+                "name": "Prof. Dr.-Ing. Morris Riedel",
+                "id": "iXu1OP8AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jón Atli Benediktsson",
+                "id": "C6d7qe0AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Rocco Sedona",
+                "id": "nuFMOpYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Antonio Plaza",
+                "id": "F1UAj8oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Markus Götz",
+                "id": "eD2svJQAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Nicola Falco",
+                "id": "LoxBiDoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Helmut Neukirchen",
+                "id": "vnb7ijMAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lorenzo Bruzzone",
+                "id": "ff9-TK4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Matthias Book",
+                "id": "pLtarDIAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pedram Ghamisi",
+                "id": "Gr9afd0AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Gabriele Cavallaro",
+        "research_interest": [
+            "Remote Sensing",
+            "Machine Learning",
+            "High Performance Computing",
+            "Quantum Computing"
+        ],
+        "citation": "527"
+    },
+    "Mohamad Jouni": {
+        "affiliation": "Research Engineer, Université Grenoble Alpes",
+        "coauthors": [
+            {
+                "name": "Mauro Dalla Mura",
+                "id": "qbdbtn4AAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Pierre Comon",
+                "id": "jd8r71gAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Zebin Wu",
+                "id": "y_FtCsYAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniele Picone",
+                "id": "Hg5fPvsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Lucas Drumetz",
+                "id": "abRvIGAAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Mohamad Jouni",
+        "research_interest": [
+            "Computational Imaging",
+            "Tensor Algebra",
+            "Hybrid AI",
+            "Remote Sensing",
+            "Technology Transfer"
+        ],
+        "citation": "83"
+    },
+    "Björn Waske": {
+        "affiliation": "University Osnabrück",
+        "coauthors": [],
+        "name": "Björn Waske",
+        "research_interest": [],
+        "citation": "3162"
+    },
+    "Jean-Philippe Metaxian": {
+        "affiliation": "Institut de Physique du Globe de Paris",
+        "coauthors": [
+            {
+                "name": "Jerome MARS",
+                "id": "QAg1PuUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sri Widiyantoro",
+                "id": "7tELn5QAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Louis De Barros",
+                "id": "mZPEEwsAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Andri Dian Nugraha",
+                "id": "vK3hXcoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jean Battaglia",
+                "id": "l6-0EusAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "David Marsan",
+                "id": "3gE-k7oAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Sebastián Araujo",
+                "id": "OdSz6HgAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Philippe Jousset",
+                "id": "se_yD4UAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Jérôme Weiss",
+                "id": "hTzIIDgAAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Jean-Philippe Metaxian",
+        "research_interest": [
+            "volcano seismology",
+            "seismology"
+        ],
+        "citation": "924"
+    },
+    "Yougan CHENG": {
+        "affiliation": "Director, Quantitative Systems Pharmacology, Daiichi Sankyo, Inc.",
+        "coauthors": [
+            {
+                "name": "Erkki Somersalo",
+                "id": "IrKBbAoAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "Daniela Calvetti",
+                "id": "7buwpZUAAAAJ&amp;hl=en"
+            },
+            {
+                "name": "HG Othmer",
+                "id": "aP-71f4AAAAJ&amp;hl=en"
+            }
+        ],
+        "name": "Yougan CHENG",
+        "research_interest": [
+            "Mathematical Modeling of Complex Systems",
+            "Mathematical Biology",
+            "Quantitative Systems Pharmacology",
+            "Oncology",
+            "Image Processing"
+        ],
+        "citation": "171"
+    }
+}
