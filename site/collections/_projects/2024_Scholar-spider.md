@@ -26,5 +26,9 @@ Directly paste the google scholar homepage link or cnki homepage link into the t
 
 A successful demo is:
 ![20240204221953](https://cdn.risingentropy.top/images/posts/20240204221953.png)
+
+图中，圆圈的颜色表示学校，大小表示影响因子（知网是下载量）。
+
+In the figure, color of the circle is affiliation while the size is citation.
 ## Demo
 <iframe src="https://risingentropy.top/single_pages/demo/scholar_spider.html" width="800" height = "850" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe>
