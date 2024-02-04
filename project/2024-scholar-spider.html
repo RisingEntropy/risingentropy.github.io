@@ -15,12 +15,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="2024_scholar Spider – Haoyu Deng's page">
   <meta name="twitter:description" content="This spider claw data from google scholar or cnki and draw a relation graph among scholars">
-  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20240204214135.png">
+  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20240204221521.png">
 
   <!-- Facebook OpenGraph -->
   <meta property="og:title" content="2024_scholar Spider – Haoyu Deng's page">
   <meta property="og:description" content="This spider claw data from google scholar or cnki and draw a relation graph among scholars">
-  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20240204214135.png">
+  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20240204221521.png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -156,12 +156,23 @@
   <div class="page animate">
     <p><img src="https://cdn.risingentropy.top/images/posts/20240204214358.png" alt="20240204214358" /></p>
 
-<p>代码：<a href="https://github.com/RisingEntropy/scholar-spider">code</a>
-一年一度的套磁季快到了，准备开始海投简历找老师了。写了个爬虫，爬取google scholar 和cnki 上面的老师的合作关系，绘制关系图。代码包括python和js，实际demo在本页展示</p>
+<p>代码：<a href="https://github.com/RisingEntropy/scholar-spider">Github</a></p>
 
-<h2 id="使用方法">使用方法</h2>
-<p>直接粘贴谷歌学术连接或者cnki学者主页就行。深度不建议设置超过2，超过2会非常卡且半天爬不完。</p>
+<p>Code: <a href="https://github.com/RisingEntropy/scholar-spider">Github</a></p>
 
+<p>一年一度的套磁季快到了，准备开始海投简历找老师了。为了更好地海投，于是我写了个爬虫，爬取google scholar 和cnki 上面的老师的合作关系，绘制关系图。代码包括python和js，demo在本页下方。</p>
+
+<p>Time for applying for 2025 fall Ph.D is soon. To facilitate getting in contact, I write this network spider to draw the relation among mentors. The code includes python and javascript. A demon can be seen at the bottom this page.</p>
+
+<h2 id="使用方法-usage">使用方法 Usage</h2>
+<p>直接粘贴谷歌学术连接或者cnki学者主页就行。深度不建议设置超过2，超过2会变卡。由于谷歌学术不支持CORS，所以我用了cloudflare worker进行代理转发。</p>
+
+<p>Directly paste the google scholar homepage link or cnki homepage link into the text box. The suggested depth is no deeper than 2, otherwise it will get super slow. Google scholar doesn’t support CORS, so I use the cloudflare worker as an agent to forward the request.</p>
+
+<p>例如，我爬电子科技大学邓良剑老师的主页：</p>
+
+<p>A successful demo is:
+<img src="https://cdn.risingentropy.top/images/posts/20240204221953.png" alt="20240204221953" /></p>
 <h2 id="demo">Demo</h2>
 <iframe src="https://risingentropy.top/single_pages/demo/scholar_spider.html" width="800" height="850" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen=""> </iframe>
 
