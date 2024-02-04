@@ -2,9 +2,9 @@
 date: 2024-2-4 20:24:56 +0800
 name: Scholar Homepage Spider
 intro: A spder that claw and draw relation among scholars
-image: https://cdn.risingentropy.top/images/posts/20240204221521.png
+image: https://cdn.risingentropy.top/images/posts/20240204232209.png
 description: This spider claw data from google scholar or cnki and draw a relation graph among scholars
-tags: [NCNN, YOLO, Deployment]
+tags: [Network Spider, Python, JavaScript]
 ---
 
 ![20240204214358](https://cdn.risingentropy.top/images/posts/20240204214358.png)
