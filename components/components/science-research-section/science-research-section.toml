@@ -1,0 +1,11 @@
+[component]
+structures = [ "content_blocks" ]
+label = "Science Research"
+description = "Science Research Section with heading, a description and a link"
+icon = "wysiwyg"
+tags = ["Content"]
+
+[props]
+title = "Top papers"
+description_html= ""
+show_testimonials = true

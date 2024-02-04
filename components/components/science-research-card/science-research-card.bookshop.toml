@@ -1,0 +1,11 @@
+[component]
+structures = [ "content_blocks" ]
+label = "science-research-card"
+description = "science-research-card"
+icon = "wysiwyg"
+tags = ["Content"]
+
+[props]
+title = "Happy Clients"
+description_html= ""
+show_testimonials = true

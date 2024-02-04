@@ -1,0 +1,20 @@
+logo_text: 'Haoyu Deng' # You can add own logo. For example '/images/logo.png'.
+
+menu__settings:
+  menu__items:
+    - title: 'Home'
+      url: '/'
+    - title: 'Publications'
+      url: '/publications/'
+    - title: 'Projects'
+      url: '/projects/'
+    - title: 'Blog'
+      url: '/blog/'
+    - title: 'Pages'
+      submenu:
+      - url: '/about/'
+        title: 'About'
+      - url: '/single_pages/'
+        title: 'Single Page Resource'
+      # - url: '/elements/'
+      #   title: 'Elements'

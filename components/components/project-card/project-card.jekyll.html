@@ -1,0 +1,32 @@
+{% assign c = "c-project-card" %}
+<div class="{{c}}">
+  <div class="{{c}}__content">
+    <div class="{{c}}__client-meta">
+      {% if include.project.image %}
+        <div class="{{c}}__image-container">
+          <img class="{{c}}__client-avatar" src="{{ include.project.image }}" alt="{{ include.project.name }}">
+        </div>
+      {% endif %}
+      <div class="{{c}}__client-info">
+        {% if include.project.name %}
+          <h3 class="{{c}}__client-name">
+            <a href="{{ include.project.url }}">{{ include.project.name }}</a>
+          </h3>
+        {% endif %}
+        {% if include.project.intro %}
+          <p class="{{c}}__client-position">{{ include.project.intro }}</p>
+        {% endif %}
+      </div>
+      {% if include.project.tags.size >= 1 %}
+      <div class="{{c}}__tags-box">
+        {% for tag in include.project.tags %}
+        <div class="{{c}}__tag">{{ tag }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% if include.project.description %}
+      <p class="{{c}}__client-text">{{ include.project.description }}</p>
+    {% endif %}
+  </div>
+</div>

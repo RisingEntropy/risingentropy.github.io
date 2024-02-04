@@ -1,0 +1,399 @@
+---
+title: 二分图
+date: 2019-01-24 16:37:36 +0800
+image: '/images/posts/OI.png'
+tags: [OI, former blog]
+---
+挂了，去看源码
+<!-- # 二分图
+#  概念
+二分图是这样的一个图，它的顶点可以分为两个集合X和Y。所有的边关联的两个顶点中，恰好一个属于集合X，一个属于集合Y。
+#  二分图匹配
+给定一个二分图G，M为G边集的一个子集，如果M满足当中的任意两条边都不依附于同一个顶点，则称M是一个匹配。
+#  最大匹配
+图中包含边数最多的匹配称为图的最大匹配。
+#  完美匹配
+完美匹配： 如果所有点都在匹配边上，称这个最大匹配是完美匹配。
+#  二分图判定
+染色法，对一个节点染色，对其相邻不同节点染不同颜色。如果发现某个节点染色后，与其相邻节点染上了同一个颜色，则此图不是二分图
+#  二分图最大匹配
+
+ - 匈牙利算法$O(mn)$
+ - 转化为单位容量简单网络的最大流问题
+
+最大流不会，不管，讲匈牙利算法。其思想是用宽度优先搜索来找增广路径
+#  增广路(也称增广轨或交错路)
+若P是图G中一条连通两个未匹配顶点的路径，并且属M的边和不属M的边（即匹配边和非匹配边）在P上交替出现，则称P为相对于M的一条增广路径。(通俗地讲，就是匹配边，非匹配边ji)
+性质：
+
+ 1. 长度是奇数
+ 2. 第1,3,5...条边是非匹配边，第2,4,6...条边是匹配边。即匹配边永远比非匹配边多1条
+
+正是因为有了如上性质，我们把路径上的所有状态取反，那么得到的新的边集合是$S'$任然是一组匹配，并且匹配数增加了1。进一步可以推出以下结论：
+
+ - 二分图的一组匹配S是最大匹配，当且仅当图中不存在S的增广路。
+
+ 
+#  交替路
+![title](/images/posts/c499d9bab64415185001a5f.png)
+如图，路径x4→y3→x2→y1→x1→y2是一条交替路。
+
+#  匈牙利算法
+步骤
+
+ 1. 设$S = \emptyset$，即所有的边均为非匹配边
+ 2. 寻找增广路$path$，把路径上的所有边的匹配状态取反，得到一个更大的集合$S'$.
+ 3. 重复2，直到不存在增广路
+
+
+该算法关键是如何找到增广路。匈牙利算法依次尝试给每一个左边节点$x$寻一个匹配的右边节点$y$。右边节点y能与左边匹配，需要满足以下两个条件之一：
+
+ 1. y本身就是非匹配点。此时(x,y)本身就是非匹配边，自己构成长度为1的增广路
+ 2. y已经与左部x'匹配，但从x'出发能找到另一个右部点y'与之匹配
+ 
+此时，x~y~x'~y'为一条增广路。如图：
+![title](/images/posts/c499d9bab64415185001a5f.png)
+匹配过程
+>假如我们用xM数组表示左边节点对其右边节点的匹
+配,
+yM表示右边节点对其左边节点的匹配,初始化为-1;现在重点看节点3,当寻找下一条边时,如图中的蓝边,我们发现节点6的yM[6]=2;已经匹配了.此时我们就转到节点6的匹配点2上去,发现节点2的另一条边2->5中节点5也已经匹配了,yM[5]=1;继续转到节点1,发现节点1的边1->4中节点4还没匹配.于是我们找到了一个增广路径
+
+
+所以总的流程可以如下：
+
+ 1. 对于一个未匹配的节点u,寻找它的每条边,如果它的边上的另一个节点v还没匹配则表明找到了一个匹配,直接转步骤4;
+ 2. 假如节点u它边上的另一个节点v已经匹配,那么就转向跟v匹配的节点,假设是w,然后再对w重复1,2的步骤,即寻找增广路
+ 3. 假如我们在1,2步过程中找到一条增广路,那么修改各自对应的匹配点,转4,若无增广路, 则退出.
+ 4. 匹配数+1
+ 
+```cpp
+int find(int x){
+	for(int i = head[x];i;i = edges[i].next){
+		int t = edges[i].t;
+		if(!vis[t]){
+			vis[t] = true;
+			if(match[t]==0||find(match[t]){//找到就匹配，没找到就看一下上面的节点能不能找到
+				match[t] = x;return true;
+			}
+		}
+	}
+	return false;
+}
+for(int i = 1;i<=n;i++){
+	memset(vis,0,sizeof(vis));
+	if(find(i))ans++;
+}
+```
+eg:woj1669(注意dfs里面写的是dfs(match[t])而不是dfs(t))
+```cpp
+# include <iostream>
+# include <cstring>
+using namespace std;
+const int MAXN = 410;
+const int MAXM = MAXN*MAXN;
+struct edge{int next,t,w;}edges[MAXM<<1];
+int head[MAXN],top;
+void add(int f,int t,int w){
+	edges[++top].next = head[f];
+	edges[top].t =t ;
+	edges[top].w = w;
+	head[f] = top;
+}
+bool vis[MAXN];
+int match[MAXN];
+bool dfs(int x){
+	for(int i=head[x];i;i=edges[i].next){
+		int t=edges[i].t;
+		if(!vis[t]){
+			vis[t]=true;
+			if(match[t]==0||dfs(match[t])){
+				match[t]=x;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+int main(){
+	int n,m;
+	cin>>n>>m;
+	for(int i = 1;i<=n;i++){
+		int si;cin>>si;
+		for(int j = 1;j<=si;j++){
+			int t;cin>>t;
+			add(i,t,1);
+		}
+	}
+	int ans = 0;
+	for(int i = 1;i<=n;i++){
+		memset(vis,false,sizeof(vis));
+		if(dfs(i))ans++;
+	}
+	cout<<ans;
+	return 0;
+}
+```
+# 二分图的应用
+1.棋盘类二分图匹配。[poj2446](http://poj.org/problem?id=2446)
+其实就是一个点向右和向下连边，如果没有洞洞，就直接练上去就行。然后跑匹配，如果匹配数乘以2等于面积减去洞洞的数量，那么就可以。代码：(poj卡了，不知道对不对)
+```cpp
+# include <cstdio>
+# include <algorithm>
+using namespace std;
+const int MAXN = 100010;
+const int INF = 0x3f3f3f3f;
+struct edge{int t,f,w,next;bool operator<(const edge &e2)const {return w>e2.w;}}edges[MAXN<<2];
+int head[MAXN],top;
+int map[35][35];
+int n ,m,q;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c<'0'||c>'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c>='0'&&c<='9'){ x = (x<<1)+(x<<3)+c-'0';c = getchar(); }
+    return x*f;
+}
+void add(int f,int t,int w){
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int vis[1000];
+int match[1000];
+int dfn;
+int getId(int x,int y){return x*m+y;}
+bool dfs(int x){
+    for(int i = head[x];i;i = edges[i].next){
+        int t  = edges[i].t;
+        if(vis[t]==dfn)continue;
+        vis[t] = dfn;
+        if(match[t]==0||dfs(match[t])){
+            match[t] = x;
+            return true;
+        }
+    }
+    return false;
+}
+int main(){
+    n = read(),m = read(),q = read();
+    for(int i = 1;i<=q;i++){
+        int x = read(),y = read();
+        map[x][y] = 1;
+    }
+    for(int i = 1;i<n;i++){
+        for(int j = 1;j<m;j++){
+            if(map[i][j]==1)continue;
+            int p1 = getId(i,j),p2 = getId(i,j+1);
+            if(map[i][j+1]!=1)add(p1,p2,1);
+            p2 = getId(i+1,j);
+            if(map[i+1][j]!=1)add(p1,p2,1);
+        }
+    }
+    int ans = 0;
+    for(int i = 1;i<=n;i++){
+        for(int j = 1;j<=m;j++){
+            ++dfn;
+            if(dfs(getId(i,j)))ans++;
+        }
+    }
+    printf("%s\n",(ans*2==n*m-q)?"YES":"NO");
+    return 0;
+}
+```
+# 最小点覆盖
+最小覆盖： 最小覆盖要求用最少的点（X集合或Y集合的都行）让每条边都至少和其中一个点关联。可以证明：最少的点（即覆盖数）＝最大匹配数 M
+证明：
+>（1）M个是足够的。只需要让它们覆盖最大匹配的M条边，则其它边一定被覆盖（如果有边e不被覆盖，把e加入后得到一个更大的匹配）。
+（2）M个是必需的，仅考虑形成最大匹配的这M条边，由于它们两两之间没有公共点，因此至少需要M个点才可以把它们覆盖。
+
+eg [woj 2081](http://192.168.110.251/problempage.php?problem_id=2081# )
+其实我们发现对于一个在$(x,y)$的~~智力~~障碍,要消除它，就是$x$或者$y$上来一下就行了。也就是说$x$和$y$存在某种二选一的关系，我们可以考虑$x->y$连边，然后求最小点覆盖(因为使用最少的导弹)就行了，因为最小点覆盖等于最大匹配数，所以求一个最大匹配数就好了
+```cpp
+# include <cstdio>
+# include <algorithm>
+using namespace std;
+const int MAXN = 100010;
+const int INF = 0x3f3f3f3f;
+struct edge{int t,f,w,next;bool operator<(const edge &e2)const {return w>e2.w;}}edges[MAXN<<2];
+int head[MAXN],top;
+int map[35][35];
+int n ,k;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c<'0'||c>'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c>='0'&&c<='9'){ x = (x<<1)+(x<<3)+c-'0';c = getchar(); }
+    return x*f;
+}
+void add(int f,int t,int w){
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int vis[1000];
+int match[1000];
+int dfn;
+bool dfs(int x){
+    for(int i = head[x];i;i = edges[i].next){
+        int t  = edges[i].t;
+        if(vis[t]==dfn)continue;
+        vis[t] = dfn;
+        if(match[t]==0||dfs(match[t])){
+            match[t] = x;
+            return true;
+        }
+    }
+    return false;
+}
+int main(){
+    n = read(),k = read();
+    for(int i = 1;i<=k;i++){
+        int x = read(),y = read();
+        add(x,y,1);
+    }
+    int ans = 0;
+    for(int i = 1;i<=n;i++){
+        ++dfn;
+        if(dfs(i))ans++;
+    }
+    printf("%d",ans);
+    return 0;
+}
+```
+#  最大独立集
+最大独立集问题： 在Ｎ个点的图G中选出m个点，使这m个点两两之间没有边．求m最大值
+记住一个重要的结论：
+>二分图的最大独立集数=节点数(n)-最大匹配数
+
+其实证明很简单，最大匹配数等于最小点覆盖，又因为最小点覆盖集合$S$可以保证每一条边都连接这个$S$中的一个点，所以把这几个点扣去，那么剩下的就不能连接了
+eg[SHOI2002舞会](http://192.168.110.251/problempage.php?problem_id=1470# )
+
+#  最小边覆盖
+>边覆盖集：通俗地讲，所谓边覆盖集，就是G中所有的顶点都是E*中某条边的邻接顶点（边覆盖顶点），一条边只能覆盖2个顶点。
+• 注意：在无向图中存在用尽量少的边去“覆盖”住所有的顶点，所以边覆盖集有极小与最小的区别
+
+----------
+
+
+>极小边覆盖：若边覆盖E*中的任何真子集都不是边覆盖集，则称E*是极小边覆盖集。
+
+----------
+
+
+> 最小边覆盖：边数最小的边覆盖称为最小边覆盖，通俗地讲，就是极小边覆盖中的最小的一个集合
+
+> 最小边覆盖 = 最大独立集 = n - 最大匹配
+
+对于无向图和二分图最小边覆盖问题
+>二分图最小边覆盖 = 两边顶点数 - 最大匹配数
+无向图的最小边覆盖 = (二分图两边顶点数 - 二分图的最大匹配数)/2
+eg[poj3020](http://poj.org/problem?id=3020)
+```cpp
+# include <cstdio>
+# include <algorithm>
+# include <iostream>
+# include <cstring>
+using namespace std;
+const int MAXN = 100010;
+const int INF = 0x3f3f3f3f;
+struct edge{int t,f,w,next;bool operator<(const edge &e2)const {return w>e2.w;}}edges[MAXN<<2];
+int head[MAXN],top;
+int map[43][43];
+int n ,m;
+int read(){
+    int x = 0,f = 1;
+    static char c = getchar();
+    while(c<'0'||c>'9'){ if(c=='-')f = -1;c = getchar(); }
+    while(c>='0'&&c<='9'){ x = (x<<1)+(x<<3)+c-'0';c = getchar(); }
+    return x*f;
+}
+void add(int f,int t,int w){
+    edges[++top].next = head[f];
+    edges[top].t = t;
+    edges[top].w = w;
+    head[f] = top;
+}
+int vis[1000];
+int match[1000];
+int dfn;
+bool dfs(int x){
+    for(int i = head[x];i;i = edges[i].next){
+        int t  = edges[i].t;
+        if(vis[t]==dfn)continue;
+        vis[t] = dfn;
+        if(match[t]==0||dfs(match[t])){
+            match[t] = x;
+            return true;
+        }
+    }
+    return false;
+}
+int ID = 0;
+char c;
+int mov[4][2] = {{1,0},{0,1},{-1,0},{0,-1}};
+int main(){
+    int Q = read();
+    while(Q--){
+        memset(head,0, sizeof(head));
+        top = 0;
+        memset(match,0, sizeof(match));
+        memset(vis,0, sizeof(vis));
+        dfn = 0;
+        ID = 0;
+        n = read(),m = read();
+        for(int i = 1;i<=n;i++){
+            for(int j = 1;j<=m;j++){
+                cin>>c;
+                if(c=='*')map[i][j] = ++ID;
+            }
+        }
+        for(int i = 1;i<=n;i++){
+            for(int j = 1;j<=m;j++){
+                if(map[i][j]!=0){
+                    for(int k = 0;k<4;k++){
+                        int x = i+mov[k][1],y = j+mov[k][0];
+                        if(map[x][y]!=0){
+                            add(map[i][j],map[x][y],1);
+                        }
+                    }
+                }
+            }
+        }
+        int M = 0;
+        for(int i = 1;i<=ID;i++){
+            dfn++;
+            if(dfs(i)){
+                M++;
+            }
+        }
+        cout<<ID-M/2<<endl;
+    }
+    return 0;
+}
+
+```
+#  DAG图的最小路径覆盖
+**用尽量少的不相交简单路径覆盖有向无环(DAG)G的所有顶点，这就是DAG图的最小路径覆盖问题。**
+解决此类问题可以建立一个二分图模型。把所有顶点$i$拆成两个：$X$结点集中的i和$Y$结点集中的$i'$,如果有边$i->j$，则在二分图中引入边$i->j'$，设二分图最大匹配为m,则结果就是$n-m$
+>DAC图的最小路径覆盖数=节点数(n)-最大匹配数
+
+
+简要证明
+>简要证明：因为开始每个点为独立一条路径，共n条。每次在二分图加一条边相当于把两条路径合并成一条路径，因为路径不相交，所以加的边之间不能有公共点（就是匹配的含义）。所以有上述结论
+# DAG图的最小路径覆盖2
+**用尽量少的可相交简单路径覆盖有向无环(DAG)G的所有顶点，这就是DAG图的最小路径覆盖问题。**
+
+>先用floyd求出原图的传递闭包，即如果a到b有路径，那么就加边a->b。然后就转化成了最小不相交路径覆盖问题
+# 总结
+
+ 1. 最小点覆盖=最大匹配
+ 2. 二分图的最大独立集数=节点数(n)-最大匹配数
+ 3. 最大独立集=最小边覆盖 =顶点数 - 最大匹配
+ 4. DAG最小路径覆盖分为不相交路径、可相交路径
+ 
+>不相交：把原图的每个点V拆成 Vx和 Vy两个点，如果有一条有向边A->B，那么就加
+边Ax−>By。这样就得到了一个二分图。那么最小路径覆盖=原图的结点数-新图的最
+大匹配数。
+可相交：先用floyd求出原图的传递闭包。然后就转化成了最小不相交路径覆盖问题。 -->
