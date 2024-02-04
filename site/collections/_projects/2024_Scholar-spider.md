@@ -16,4 +16,4 @@ tags: [NCNN, YOLO, Deployment]
 直接粘贴谷歌学术连接或者cnki学者主页就行。深度不建议设置超过2，超过2会非常卡且半天爬不完。
 
 ## Demo
-<iframe src="https://risingentropy.top/single_pages/demo/scholar_spider.html" width="780px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe>
+<iframe src="https://risingentropy.top/single_pages/demo/scholar_spider.html" width="780px" height = "500" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen> </iframe>

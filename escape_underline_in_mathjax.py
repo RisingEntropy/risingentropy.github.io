@@ -10,12 +10,12 @@ def create_index(current_dir, father_dir=""):
     <body>
     """
     if father_dir != "":
-        html_code += f"<a href=\"../index.html\">Father Directory</a><br>"
+        html_code += f"<a href=\"../>Father Directory</a><br>"
     file_lists = []
     for file in os.listdir(current_dir):
         if os.path.isdir(os.path.join(current_dir, file)):
             create_index(os.path.join(current_dir, file), current_dir)
-            file_lists.append(f"<a href=\"./{file}/index.html\">{file}</a>")
+            file_lists.append(f"<a href=\"./{file}/>{file}</a>")
         else:
             file_lists.append(f"<a href=\"./{file}\">{file}</a><br>")
     html_code+="\n".join(file_lists)
