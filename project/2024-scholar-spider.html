@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>2024_scholar Spider</title>
+  <meta name='description' content='This spider claw data from google scholar or cnki and draw a relation graph among scholars'>
+
+  <link rel="canonical" href="/project/2024-scholar-spider">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2024_scholar Spider – Haoyu Deng's page">
+  <meta name="twitter:description" content="This spider claw data from google scholar or cnki and draw a relation graph among scholars">
+  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20240204214135.png">
+
+  <!-- Facebook OpenGraph -->
+  <meta property="og:title" content="2024_scholar Spider – Haoyu Deng's page">
+  <meta property="og:description" content="This spider claw data from google scholar or cnki and draw a relation graph among scholars">
+  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20240204214135.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Ionicons -->
+  <link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script> 
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$','$$'], ['\\(','\\)'], ['\\[','\\]']],
+        processEscapes: true
+      }
+    };
+    </script>
+</head>
+
+<body>
+
+    
+
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="/">
+          
+            Haoyu Deng
+          
+          </a>
+        </div>
+
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+              <ul class="nav__list list-reset">
+
+              
+                
+                <li class="nav__item">
+                  <a href="/" class="nav__link">Home</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/publications/" class="nav__link">Publications</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/projects/" class="nav__link">Projects</a>
+                </li>
+                
+              
+                
+                <li class="nav__item">
+                  <a href="/blog/" class="nav__link">Blog</a>
+                </li>
+                
+              
+                
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">Pages <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    
+                      <a href="/about/" class="nav__link">About</a>
+                    
+                      <a href="/single_pages/" class="nav__link">Single Page Resource</a>
+                    
+                  </div>
+                </li>
+
+                
+              
+
+            </ul>
+          </div>
+
+          <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    <div class="container">
+
+  <!--bookshop-live name(page-heading/page-heading.jekyll.html) params(title=page.name description=page.description) context() -->
+          
+<div class="container">
+  <div class="c-page-heading">
+    <h1 class="c-page-heading__title">Scholar Homepage Spider</h1>
+    
+      <p class="c-page-heading__description">This spider claw data from google scholar or cnki and draw a relation graph among scholars</p>
+    
+  </div>
+</div>
+          <!--bookshop-live end-->
+
+  <div class="page animate">
+    <p><img src="https://cdn.risingentropy.top/images/posts/20240204214358.png" alt="20240204214358" /></p>
+
+<p>代码：<a href="https://github.com/RisingEntropy/scholar-spider">code</a>
+一年一度的套磁季快到了，准备开始海投简历找老师了。写了个爬虫，爬取google scholar 和cnki 上面的老师的合作关系，绘制关系图。代码包括python和js，实际demo在本页展示</p>
+
+<h2 id="使用方法">使用方法</h2>
+<p>直接粘贴谷歌学术连接或者cnki学者主页就行。深度不建议设置超过2，超过2会非常卡且半天爬不完。</p>
+
+<h2 id="demo">Demo</h2>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script defer src="https://cdn.risingentropy.top/scholar_spider.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://cdn.risingentropy.top/scholar_spider.css"&gt;
+&lt;div id="google_spider_area" class="spider_area"&gt;
+    &lt;div class="input_area"&gt;
+        &lt;div class="inputbox"&gt;
+            &lt;input type="text" required="required" id="home_page_url"&gt;
+            &lt;span&gt;Homepage URL&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="inputbox"&gt;
+            &lt;input type="number" required="required" id="depth" step="1" min="0"&gt;
+            &lt;span&gt;Depth&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="button-wrapper"&gt;
+        &lt;p class="submit" &gt;Submit&lt;/p&gt;
+        &lt;div class="loader-wrapper"&gt;
+            &lt;span class="loader yellow"&gt;&lt;/span&gt;
+            &lt;span class="loader pink"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;span class="loader orange"&gt;&lt;/span&gt;
+        &lt;div class="check-wrapper"&gt;
+            &lt;svg width="65px" height="38px" viewBox="0 0 64.5 37.4"&gt;
+                &lt;polyline class="check" points="5,13 21.8,32.4 59.5,5 "/&gt;
+            &lt;/svg&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;svg xmlns="http://www.w3.org/2000/svg"&gt;  &lt;defs&gt;    &lt;filter id="goo"&gt;      &lt;feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" /&gt;      &lt;feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" /&gt;      &lt;feBlend in="SourceGraphic" in2="goo" /&gt;    &lt;/filter&gt;  &lt;/defs&gt;&lt;/svg&gt;
+    &lt;div class="gradient-border" id="box"&gt;
+        &lt;div id="graph"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+
+  </div>
+
+  
+  <div class="project__navigation animate">
+    <a class="project__prev" href="/project/2024-fps-ai-helper">
+      <div class="project__box">
+        <span class="project__nav__info">Next Project</span>
+        <h2 class="project__nav__title">2024_fps Ai Helper<i class="ion ion-md-arrow-round-forward arrow-right"></i></h2>
+      </div>
+    </a>
+  </div>
+  
+
+</div>
+
+    <!-- 
+        Bookshop components are accessed using the bookshop tag, 
+        using the same syntax as the standard Jekyll include tag.
+    -->
+    <!--bookshop-live name(page.jekyll.html) params(content_blocks=page.content_blocks page_theme=page.page_theme) context() -->
+          
+          <!--bookshop-live end-->
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <!--bookshop-live name(social-link.jekyll.html) params() context() -->
+          
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https://github.com/RisingEntropy" target="_blank" rel="noopener" aria-label="github icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+  </ul>
+</div>
+
+          <!--bookshop-live end-->
+
+        <ul class="footer_nav list-reset">
+          
+          <li class="footer_nav__item">
+            <a href="/" class="footer_nav__link">Home</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/papers/" class="footer_nav__link">Publications</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/projects/" class="footer_nav__link">Projects</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/blog/" class="footer_nav__link">Blog</a>
+          </li>
+          
+          <li class="footer_nav__item">
+            <a href="/about/" class="footer_nav__link">About</a>
+          </li>
+          
+        </ul>
+
+        <div class="copyright"><p> 2023 &copy; <a href="/">Haoyu Deng</a>. Template by <a href="https://cloudcannon.com/">CloudCannon</a>.</p></div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    <!--
+        load the live component for CloudCannon live previews.
+    -->
+    <script>
+(function(){
+  const bookshopLiveSetup = (CloudCannon) => {
+    CloudCannon.enableEvents();
+
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.src = `/_cloudcannon/bookshop-live.js`;
+    script.onload = function() {
+      window.bookshopLive = new window.BookshopLive({
+        remoteGlobals: ['/_cloudcannon/bookshop-site-data.json']
+      });
+      const updateBookshopLive = async () => {
+        const frontMatter = await CloudCannon.value();
+        const options = window.bookshopLiveOptions || {};
+        await window.bookshopLive.update({page: frontMatter}, options);
+        CloudCannon?.refreshInterface?.();
+      }
+      document.addEventListener('cloudcannon:update', updateBookshopLive);
+      updateBookshopLive();
+    }
+    head.appendChild(script);
+  }
+
+  document.addEventListener('cloudcannon:load', function (e) {
+    bookshopLiveSetup(e.detail.CloudCannon);
+  });
+})();
+</script>
+
+    <script src="/js/scripts.js"></script>
+    <script src="/js/common.js"></script>
+</body>
+</html>
