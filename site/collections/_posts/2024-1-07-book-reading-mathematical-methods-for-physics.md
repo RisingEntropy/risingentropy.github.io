@@ -113,3 +113,73 @@ x=\frac{k_2}{\nu}+E_1\sin\left(\sqrt{k_1k_2}t+\delta_1\right)\\
 \\
 y=\frac{k_{1}}{\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2}}t+\delta_{2}\right)
 $$
+
+## 1.2 矢量微分算子和拉普拉斯算子
+### 1.2.1矢量微分算子
+老熟人：
+$$
+\nabla=\frac{\partial}{\partial x}\boldsymbol{i}+\frac{\partial}{\partial y}\boldsymbol{j}+\frac{\partial}{\partial z}\boldsymbol{k}
+$$
+
+标量函数$u$的梯度:
+$$
+\nabla u=\frac{\partial u}{\partial x}i+\frac{\partial u}{\partial y}j+\frac{\partial u}{\partial z}k
+$$
+
+矢量函数${E}$的散度：
+$$
+\nabla\cdot\boldsymbol{E}=\left(\frac{\partial}{\partial x}\boldsymbol{i}+\frac{\partial}{\partial y}\boldsymbol{j}+\frac{\partial}{\partial z}\boldsymbol{k}\right)\cdot(E_x\boldsymbol{i}+E_y\boldsymbol{j}+E_z\boldsymbol{k})=\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}
+$$
+
+矢量函数$E$的旋度：
+$$
+\left.\nabla\times E=\left|\begin{array}{ccc}i&j&k\\\frac{\partial}{\partial x}&\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\E_x&E_y&E_z\end{array}\right.\right|=\left|\begin{array}{cc}\frac{\partial}{\partial y}&\frac{\partial}{\partial z}\\E_y&E_z\end{array}\right|i-\left|\begin{array}{ccc}\frac{\partial}{\partial x}&\frac{\partial}{\partial z}\\E_x&E_z\end{array}\right|j+\left|\begin{array}{ccc}\frac{\partial}{\partial x}&\frac{\partial}{\partial y}\\E_x&E_y\end{array}\right|k\\
+=\left(\frac{\partial E_x}{\partial y}-\frac{\partial E_y}{\partial z}\right)\boldsymbol{i}+\left(\frac{\partial E_x}{\partial z}-\frac{\partial E_x}{\partial x}\right)\boldsymbol{j}+\left(\frac{\partial E_y}{\partial x}-\frac{\partial E_x}{\partial y}\right)\boldsymbol{k}
+$$
+
+拉普拉斯算子：
+$$
+\nabla^{2}=\frac{\partial^{2}}{\partial x^{2}}+\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}}
+$$
+拉普拉斯算子作用于标量函数$u$得到：
+$$
+\nabla^{2}u\equiv\nabla\cdot(\nabla u)=\frac{\partial^{2}u}{\partial x^{2}}+\frac{\partial^{2}u}{\partial y^{2}}+\frac{\partial^{2}u}{\partial z^{2}}
+$$
+作用于矢量函数$E$得到：
+$$
+\nabla^{2}\boldsymbol{E}=(\nabla^{2}E_{x})\boldsymbol{i}+(\nabla^{2}E_{y})\boldsymbol{j}+(\nabla^{2}E_{z})\boldsymbol{k}
+$$
+然后就是一堆等式，注意，这些等式要求$u$和$E$有二阶连续偏导数：
+$$
+\begin{aligned}
+&(1)\nabla(u+v)=\nabla u+\nabla v;  \\
+&(2)\nabla\cdot(\boldsymbol{E}+\boldsymbol{F})=\nabla\cdot\boldsymbol{E}+\nabla\cdot\boldsymbol{F};  \\
+&(3)\nabla\times(\boldsymbol{E}+\boldsymbol{F})=\nabla\times\boldsymbol{E}+\nabla\times\boldsymbol{F};  \\
+&(4) \nabla\cdot(u\boldsymbol{E})=(\nabla u)\cdot\boldsymbol{E}+u(\nabla\cdot\boldsymbol{E});  \\
+&(5)\nabla\times(u\boldsymbol{E})=(\nabla u)\times\boldsymbol{E}+u(\nabla\times\boldsymbol{E}); \\
+&(6)\nabla\cdot(\boldsymbol{E}\times\boldsymbol{F})=\boldsymbol{F}\cdot(\nabla\times\boldsymbol{E})-\boldsymbol{E}\cdot(\nabla\times\boldsymbol{F});\\&(7)\nabla\times(\boldsymbol{E}\times\boldsymbol{F})=(\boldsymbol{F}\cdot\nabla)\boldsymbol{E}-\boldsymbol{F}(\nabla\cdot\boldsymbol{E})-(\boldsymbol{E}\cdot\nabla)\boldsymbol{F}+\boldsymbol{E}(\nabla\cdot\boldsymbol{F});\\&(8)\nabla(\boldsymbol{E}\cdot\boldsymbol{F})=(\boldsymbol{F}\cdot\nabla)\boldsymbol{E}+(\boldsymbol{E}\cdot\nabla)\boldsymbol{F}+\boldsymbol{F}\times(\nabla\times\boldsymbol{E})+\boldsymbol{E}\times(\nabla\times\boldsymbol{F});\\
+&(9)\nabla \times(\nabla u)=0\\
+&(10)\nabla \cdot(\nabla \times E) = 0\\
+&(11)\nabla \times(\nabla \times E) = \nabla (\nabla \cdot E)-\nabla ^2E
+\end{aligned}
+$$
+### 1.2.2 拉普拉斯算子
+有若干相关的方程：
+
+拉普拉斯方程：$\nabla^2u=0$
+
+亥姆霍兹方程：$\nabla^2u+k^2u=0$
+
+波动方程：$\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u$
+
+热传导方程：$\frac{\partial u}{\partial t}=a^2\nabla^2u$
+
+薛定谔方程：$\mathrm{i}\hbar\frac{\partial\psi}{\partial t}=-\frac{\hbar^2}{2m}\nabla^2\psi+V(r)\psi$
+#### 极坐标系中的拉普拉斯算子
+$$
+\nabla^2u=\frac{\partial^2u}{\partial r^2}+\frac1r\frac{\partial u}{\partial r}+\frac1{r^2}\frac{\partial^2u}{\partial\theta^2}
+$$
+#### 球坐标拉普拉斯算子
+$$
+\nabla^2u=\frac1{r^2}\frac\partial{\partial r}\left(r^2\frac{\partial u}{\partial r}\right)+\frac1{r^2\sin\theta}\frac\partial{\partial\theta}\left(\sin\theta\frac{\partial u}{\partial\theta}\right)+\frac1{r^2\sin^2\theta}\frac{\partial^2u}{\partial\phi^2}
+$$
