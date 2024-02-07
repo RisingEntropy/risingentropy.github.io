@@ -101,7 +101,7 @@ $$
 \sum_{n=1}^{\infty}\cdots\Delta\omega\xrightarrow{L\to\infty}\int_{0}^{\infty}\cdots d\omega 
 $$
 
-把傅里叶级数改写成积分形式：
+把傅里叶级数改写成积分形式，需要注意的是，这里的改写需要满足绝对可积条件：
 
 $$
 \begin{aligned}
@@ -122,3 +122,5 @@ $$
 $$
 \begin{aligned}A(\omega)&=\frac{1}{\pi}\int_{-\infty}^\infty f(t)\cos\omega t\mathrm{d}t\\B(\omega)&=\frac{1}{\pi}\int_{-\infty}^\infty f(t)\sin\omega t\mathrm{d}t\end{aligned}
 $$
+
+至此，傅里叶积分结束，基本上后面傅里叶变换的形式也就都出来了，下一步主要看它怎么从实数形式改写成复数形式的，在学校的课程中，这一部分基本都一笔带过。
