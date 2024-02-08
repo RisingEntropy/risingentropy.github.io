@@ -12,11 +12,13 @@ description: Chapter 2
 首先，我们需要知道$sin$和$cos$的正交性，即：
 
 $$
-\int_0^{2\pi}1\cdot\cos nx\mathrm{d}x=0,\quad\int_0^{2\pi}1\cdot\sin nx\mathrm{d}x=0\\
+\begin{aligned}
+&\int_0^{2\pi}1\cdot\cos nx\mathrm{d}x=0,\quad\int_0^{2\pi}1\cdot\sin nx\mathrm{d}x=0\\
 
-\int_0^{2\pi}\cos mx\cdot\cos nx\mathrm{d}x=0,\quad\int_0^{2\pi}\sin mx\cdot\sin nx\mathrm{d}x=0\\
+&\int_0^{2\pi}\cos mx\cdot\cos nx\mathrm{d}x=0,\quad\int_0^{2\pi}\sin mx\cdot\sin nx\mathrm{d}x=0\\
 
-\int_0^{2\pi}\cos mx\cdot\sin nx\mathrm{d}x=0
+&\int_0^{2\pi}\cos mx\cdot\sin nx\mathrm{d}x=0
+\end{aligned}
 $$
 
 这个正交性在后面非常重要。
@@ -64,15 +66,18 @@ $$
 就是说一个定义域为$(0,L)$的函数，也可以进行傅里叶展开，有两种形式：余弦形式和正弦形式。说白了就是把函数看成偶函数/奇函数，然后进行傅里叶展开。公式如下：
 
 $$
-\phi(x)=\sum_{n=1}^{\infty}C_{n}\sin\frac{n\pi x}{L}\\
+\begin{aligned}
+&\phi(x)=\sum_{n=1}^{\infty}C_{n}\sin\frac{n\pi x}{L}\\
 
-C_{n}=\frac{2}{L}\int_{0}^{L}\phi(x)\sin\frac{n\pi x}{L}\mathrm{d}x\quad(n=1,2,3,\cdots)\\
+&C_{n}=\frac{2}{L}\int_{0}^{L}\phi(x)\sin\frac{n\pi x}{L}\mathrm{d}x\quad(n=1,2,3,\cdots)\\
 
 
-\phi(x)=D_{0}+\sum_{n=1}^{\infty}D_{n}\cos\frac{n\pi x}{L}\\
+&\phi(x)=D_{0}+\sum_{n=1}^{\infty}D_{n}\cos\frac{n\pi x}{L}\\
 
-D_{0}=\frac{1}{L}\int_{0}^{L}\phi(x)\mathrm{d}x\\
-D_{n}=\frac{2}{L}\int_{0}^{L}\phi(x)\cos\frac{n\pi x}{L}\mathrm{d}x\quad(n=1,2,3,\cdots)
+&D_{0}=\frac{1}{L}\int_{0}^{L}\phi(x)\mathrm{d}x\\
+
+&D_{n}=\frac{2}{L}\int_{0}^{L}\phi(x)\cos\frac{n\pi x}{L}\mathrm{d}x\quad(n=1,2,3,\cdots)
+\end{aligned}
 $$
 
 ## 傅里叶积分
@@ -80,7 +85,7 @@ $$
 对于非周期信号也可以进行傅里叶展开。首先，它需要满足绝对可积条件，即：
 
 $$
-\int_{-\infty}^{\infty}|f(x)|\mathrm{d}x<\infty 
+\int_{-\infty}^{\infty}|f(x)|\mathrm{d}x<\infty
 $$
 
 有了绝对可积条件后，傅里叶级数里面$a_0$项就可以写为：
@@ -98,7 +103,7 @@ $$
 然后就可以把求和写成积分：
 
 $$
-\sum_{n=1}^{\infty}\cdots\Delta\omega\xrightarrow{L\to\infty}\int_{0}^{\infty}\cdots d\omega 
+\sum_{n=1}^{\infty}\cdots\Delta\omega\xrightarrow{L\to\infty}\int_{0}^{\infty}\cdots d\omega
 $$
 
 把傅里叶级数改写成积分形式，需要注意的是，这里的改写需要满足绝对可积条件：
@@ -114,7 +119,7 @@ $$
 总之，非周期函数的傅里叶积分可以写成如下形式：
 
 $$
-f(x)=\int_{0}^{\infty}[A(\omega)\cos\omega x+B(\omega)\sin\omega x]\mathrm{d}\omega 
+f(x)=\int_{0}^{\infty}[A(\omega)\cos\omega x+B(\omega)\sin\omega x]\mathrm{d}\omega
 $$
 
 其中：
