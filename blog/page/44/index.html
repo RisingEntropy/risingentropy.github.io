@@ -169,6 +169,55 @@
 
     
     <div class="c-blog-card__image-wrap">
+      <a class="c-blog-card__image" href="/blog/move-from-leanote-38">
+        <img alt="倍增求LCA" loading="lazy" src="/images/posts/OI.png">
+      </a>
+    </div>
+    
+
+    <div class="c-blog-card__content">
+
+      
+      <div class="c-blog-card__tags-box">
+        
+        <a class="c-blog-card__tag" href="/tag/oi">OI</a>
+        
+        <a class="c-blog-card__tag" href="/tag/former blog">former blog</a>
+        
+      </div>
+      
+
+      <h2 class="c-blog-card__title">
+        <a href="/blog/move-from-leanote-38">倍增求LCA</a>
+      </h2>
+
+      <p class="c-blog-card__excerpt">
+        倍增法求LCA
+
+
+  先用dfs求出每个点的深度(这个你应该会吧？)
+  设F[x][i]表示x的$2^i$的辈祖先，即x向根节点走$2^i$步到达的节点，若该点不存在，则令f[x][i] = 0,那么F[x][0]就是x的父节点。...
+      </p>
+
+      <div class="c-blog-card__meta">
+        <div class="c-blog-card__author-image">
+          <img alt="Haoyu Deng" loading="lazy" src="/images/avatar.jpg">
+        </div>
+        <div class="c-blog-card__info">
+          <div class="c-blog-card__author-name">Haoyu Deng</div>
+          <span class="c-blog-card__date"><time datetime="2018-08-13T08:32:19+00:00">13 Aug 2018</time></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+    
+      <div class="c-blog-card col col-4 col-d-6 col-t-12">
+  <div class="c-blog-card__inner">
+
+    
+    <div class="c-blog-card__image-wrap">
       <a class="c-blog-card__image" href="/blog/move-from-leanote-35">
         <img alt="LCA" loading="lazy" src="/images/posts/OI.png">
       </a>
@@ -405,57 +454,6 @@ $ST算法本质是动态规划，我们用a[1…n]表示一组数，设F[i,j]表
         <div class="c-blog-card__info">
           <div class="c-blog-card__author-name">Haoyu Deng</div>
           <span class="c-blog-card__date"><time datetime="2018-08-11T05:10:51+00:00">11 Aug 2018</time></span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-    
-      <div class="c-blog-card col col-4 col-d-6 col-t-12">
-  <div class="c-blog-card__inner">
-
-    
-    <div class="c-blog-card__image-wrap">
-      <a class="c-blog-card__image" href="/blog/move-from-leanote-34">
-        <img alt="Trie Tree" loading="lazy" src="/images/posts/OI.png">
-      </a>
-    </div>
-    
-
-    <div class="c-blog-card__content">
-
-      
-      <div class="c-blog-card__tags-box">
-        
-        <a class="c-blog-card__tag" href="/tag/oi">OI</a>
-        
-        <a class="c-blog-card__tag" href="/tag/former blog">former blog</a>
-        
-      </div>
-      
-
-      <h2 class="c-blog-card__title">
-        <a href="/blog/move-from-leanote-34">Trie Tree</a>
-      </h2>
-
-      <p class="c-blog-card__excerpt">
-        struct node{
-    int son[27];
-    int exist = false;
-    bool visited = false;
-}nodes[900000];
-int top = 0;
-void inse...
-      </p>
-
-      <div class="c-blog-card__meta">
-        <div class="c-blog-card__author-image">
-          <img alt="Haoyu Deng" loading="lazy" src="/images/avatar.jpg">
-        </div>
-        <div class="c-blog-card__info">
-          <div class="c-blog-card__author-name">Haoyu Deng</div>
-          <span class="c-blog-card__date"><time datetime="2018-08-11T01:37:07+00:00">11 Aug 2018</time></span>
         </div>
       </div>
 
