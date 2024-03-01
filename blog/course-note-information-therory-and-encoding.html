@@ -157,9 +157,9 @@
           
           <div class="post-tags">
             
-              <a href="/tag/course note" class="post-tags__tag">course note</a>
+              <a href="/tag/course-note" class="post-tags__tag">course-note</a>
             
-              <a href="/tag/information theory" class="post-tags__tag">information theory</a>
+              <a href="/tag/information-theory" class="post-tags__tag">information-theory</a>
             
           </div>
           
@@ -191,7 +191,45 @@
   <article class="post">
 
     <div class="post__content">
-      
+      <h1 id="textbook-elements-of-information">Textbook: Elements of Information</h1>
+
+<h2 id="chapter-2">Chapter 2</h2>
+
+<h3 id="熵">熵</h3>
+
+<p>离散随机变量$X$的熵被定义为：</p>
+
+\[H(X)=-\sum p(x)\log p(x)\]
+
+<p>同时，他也是随机变量$\frac{1}{p(X)}$的期望值，即：$H(X)=E\log \frac{1}{p(X)}$。熵满足如下性质：</p>
+
+\[1. H(X)\geq 0\\
+2. H_b(X)=(\log_ba)H_a(X)\]
+
+<p>熵有许多意义，其中一种意义是：描述一个随机信号的最短序列的期望长度。</p>
+
+<h3 id="联合熵">联合熵</h3>
+
+<p>一对离散随机变量$(X,Y)$的联合熵$H(X,Y)$被定义为：</p>
+
+\[H(X,Y)=-\sum\limits_{x\in \mathcal{X }} \sum\limits_{y\in\mathcal{Y }} p(x,y)\log p(x,y),\]
+
+<p>他也可以被写为$p(X,Y)$的期望。</p>
+
+<h3 id="条件熵">条件熵</h3>
+
+<p>条件熵被定义为：</p>
+
+\[\begin{aligned}
+H(Y|X)&amp;=\sum\limits_{x\in\mathcal{X }} p(x)H(Y|X=x)\\
+&amp;=-\sum\limits_{x\in\mathcal{X }} p(x)\sum\limits_{y\in\mathcal{Y }} p(y|x)\log p(y|x)\\
+&amp;=-\sum\limits_{x\in\mathcal{X }} \sum\limits_{y\in\mathcal{Y }} p(x,y)\log p(y|x)\\
+&amp;=-E\log p(Y|X)
+\end{aligned}\]
+
+<p>其实也是条件概率的对数的期望</p>
+
+<h3 id="链式法则">链式法则</h3>
 
     </div>
 
@@ -272,7 +310,7 @@
                 
                 
                   
-                    <a href="/tags/course note" class="section__link related-tag">See all<span> course note</span> <i class="ion ion-md-arrow-forward"></i></a>
+                    <a href="/tags/course-note" class="section__link related-tag">See all<span> course-note</span> <i class="ion ion-md-arrow-forward"></i></a>
                   
                 
                   
