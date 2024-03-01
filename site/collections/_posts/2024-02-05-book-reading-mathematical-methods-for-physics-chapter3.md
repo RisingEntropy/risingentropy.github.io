@@ -1,5 +1,5 @@
 ---
-title: "Book Reading: Mathematics Methods for Physics, Chapter II"
+title: "Book Reading: Mathematics Methods for Physics, Chapter III"
 
 date: 2024-02-08 15:28:35 +0800
 
