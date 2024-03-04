@@ -98,3 +98,5 @@ I\left(X;Y\right) =\sum_{x\in{\mathcal X}}\sum_{y\in{\mathcal Y}}p(x,y)\log{\fra
 =E_{p(x,y)}\log\frac{p(X,Y)}{p(X)p(Y)}. 
 \end{gathered}
 $$
+### 熵、互信息之间的关系
+![20240304190846](https://cdn.risingentropy.top/images/posts/20240304190846.png)
