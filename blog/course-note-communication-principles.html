@@ -6,21 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Book Reading: Mathematics Methods for Physics, Chapter I</title>
-  <meta name='description' content='Chapter 1'>
+  <title>Course Note: Communication Principles</title>
+  <meta name='description' content='Course note for information theory'>
 
-  <link rel="canonical" href="/blog/book-reading-mathematical-methods-for-physics">
+  <link rel="canonical" href="/blog/course-note-communication-principles">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Book Reading: Mathematics Methods for Physics, Chapter I – Haoyu Deng's page">
-  <meta name="twitter:description" content="Chapter 1">
-  <meta name="twitter:image:src" content="https://cdn.risingentropy.top/images/posts/20240107172456.png">
+  <meta name="twitter:title" content="Course Note: Communication Principles – Haoyu Deng's page">
+  <meta name="twitter:description" content="Course note for information theory">
+  <meta name="twitter:image:src" content="">
 
   <!-- Facebook OpenGraph -->
-  <meta property="og:title" content="Book Reading: Mathematics Methods for Physics, Chapter I – Haoyu Deng's page">
-  <meta property="og:description" content="Chapter 1">
-  <meta property="og:image" content="https://cdn.risingentropy.top/images/posts/20240107172456.png">
+  <meta property="og:title" content="Course Note: Communication Principles – Haoyu Deng's page">
+  <meta property="og:description" content="Course note for information theory">
+  <meta property="og:image" content="">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -144,12 +144,6 @@
     <div class="row">
 
       
-      <div class="col col-6 col-d-12">
-        <div class="post-image">
-          <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240107172456.png" alt="Book Reading: Mathematics Methods for Physics, Chapter I">
-        </div>
-      </div>
-      
 
       <div class="col col-6 col-d-12">
         <div class="post__info">
@@ -157,15 +151,15 @@
           
           <div class="post-tags">
             
-              <a href="/tag/book-reading" class="post-tags__tag">book-reading</a>
+              <a href="/tag/course-note" class="post-tags__tag">course-note</a>
             
-              <a href="/tag/math" class="post-tags__tag">math</a>
+              <a href="/tag/communication-principles" class="post-tags__tag">communication-principles</a>
             
           </div>
           
 
           <h1 class="post__title">
-            Book Reading: Mathematics Methods for Physics, Chapter I
+            Course Note: Communication Principles
           </h1>
 
           <div class="post__meta">
@@ -175,7 +169,7 @@
 
             <div class="post__meta-bottom">
               <div class="post__author">Haoyu Deng</div>
-              <time class="post__date" datetime="2024-01-05T07:28:35+00:00">05 Jan 2024</time>
+              <time class="post__date" datetime="2024-03-01T07:28:35+00:00">01 Mar 2024</time>
             </div>
           </div>
 
@@ -191,126 +185,7 @@
   <article class="post">
 
     <div class="post__content">
-      <h1 id="读前感">读前感</h1>
-<p>电子科大信通学院的数学相关课程属实垃圾，一坨答辩。几把电工数学四节课讲完复变？你要不要看看你在讲什么？系统建模与仿真？光给我讲状态矩阵怎么算，又不讲怎么用，怎么算网上一堆我要你教？信通早晚要完蛋，傻逼学院。自学罢！先读顾樵老师的数学物理方法。</p>
-
-<h1 id="第一章-基础知识">第一章 基础知识</h1>
-
-<h2 id="11-常微分方程模型与求解">1.1 常微分方程模型与求解</h2>
-<p>这个部分讲了几个例题，程度由浅入深。</p>
-
-<h3 id="例一">例一</h3>
-<p>这是一个马尔萨斯人口模型，简单的线性微分方程求解。方程如下：
-\(\frac{du}{dt}=\alpha u\)
-简单，没啥好说的。</p>
-
-<h3 id="例二">例二</h3>
-<p>例一的进阶，将线性的的方程改成了非线性。看点是套公式。方程如下：
-\(\frac{du}{dt}=\alpha u - \beta u^2\)
-把方程改写，$du$和$dt$分开到等号两边，得到
-\(\frac{M\mathrm{d}u}{u(u-M)}=-\alpha \mathrm{d}t\)
-然后两边积分，注意两边积分式子的含义要相同，得到：
-\(M\int_{N}^{u(\boldsymbol{t})}\frac{\mathrm{d}u}{u(u-M)}=-\alpha\int_{0}^{t}\mathrm{d}t\)
-考虑积分表里面的公式：
-\(\int\frac{\mathrm{d}u}{(u+a)(u+b)}=\frac1{b-a}\ln\frac{a+u}{b+u}\quad(a\neq b)\)
-就可以得到结果了。</p>
-
-<font color="Red">在求解的时候需要注意一下，用积分表的式子会出现这样的结果$ln \\frac{N}{-M+N}$，这样$ln$里面就有负数了，我们不用管他，直接把两个$ln$相减的式子画成除号，分子分母的负数就都没了。</font>
-
-<h3 id="例三">例三</h3>
-
-<p>一个LC振荡电路的例子。看点是初始条件的设置。得到简单的微分方程：
-\(\frac{\mathrm{d}^2Q}{\mathrm{d}t^2}+\frac{Q}{LC}=0\)
-这样的形式的方程通解是：
-\(Q(t)=A\cos\frac{t}{\sqrt{L\overline{C }} }+B\sin\frac{t}{\sqrt{L\overline{C }} }\)
-设置边界条件$Q(0)=C,Q’(0)=0$，直接解出$A,B$就行。</p>
-
-<h3 id="例四">例四</h3>
-<p>是一个单摆问题，看点是线性化，以及解的形式。小球重力，切向分量受力为$F=mgsin\theta$。切向速度为$v=l\frac{\mathrm{d}\theta}{\mathrm{d}t}$,然后各种简单的联立，得到该问题的微分方程：
-\(\frac{\mathrm{d}^2\theta}{\mathrm{d}^2t}+\frac{g}{l}\sin\theta=0\)
-这个是非线性的，如果摆动角度小，则有$\theta\approx sin\theta$，换成线性的，发现和前面的问题有类似的形式$\frac{\mathrm{d}^{2}y}{\mathrm{d}^{2}x}+k^{2}y=0$。然后解就行了。</p>
-
-<p>这种方程的通解是： $y(x)=A\cos kx+B\sin kx$。可以写成<font color="Red">驻波形式：</font>$y(x)=E\sin{(kx+\delta)}\text{或}y(x)=E\cos{(kx+\delta)}$，以及<font color="Red">行波形式：</font>$y(x)=C\exp(\mathrm{i}kx)+D\exp{(-\mathrm{i}kx)}$</p>
-
-<p>选取哪种形式就看哪个形式的系数0更多。</p>
-<h3 id="例五">例五</h3>
-<p>R-G传输线，看点是方程的形式。写出这样的简单震动的方程：
-\(\frac{\mathrm{d}^{2}y}{\mathrm{d}^{2}x}-k^{2}y=0\)
-利用：
-\(\cosh x=\frac{\mathrm{e}^{x}+\mathrm{e}^{-x }} {2},\quad\sinh x=\frac{\mathrm{e}^{x}-\mathrm{e}^{-x }} {2}\)
-把解写成这样的形式：
-\(y(x)=A\cosh kx+B\sinh kx\)
-选取原则也是尽量让系数尽可能多的为0</p>
-
-<h3 id="例六">例六</h3>
-<p>非常有意思的一个例子，看点：选取方程稳态解、代换解耦。这里我不太能明白为什么能代换，对于一些微元的代换我是非常害怕的，不知道什么时候就出问题了。好像微积分课也没细讲。本题的方程：
-\(\begin{aligned}\frac{\mathrm{d}x}{\mathrm{d}t}&amp;=k_1x-\mu xy\\\frac{\mathrm{d}y}{\mathrm{d}t}&amp;=\nu xy-k_2y\end{aligned}\)
-找稳态点，满足：
-\(\left.\frac{\mathrm{d}x}{\mathrm{d}t}\right|_{x=x_0,y=y_0}=0,\quad\left.\frac{\mathrm{d}y}{\mathrm{d}t}\right|_{x=x_0,y=y_0}=0\)
-在这一点满足：
-\(\begin{aligned}x_\mathrm{o}&amp;=\frac{k_2}\nu\\y_\mathrm{o}&amp;=\frac{k_1}\mu\end{aligned}\)
-于是乎解的形状就变成了：
-\(\begin{array}{c}x=x_\mathrm{o}+\xi\\y=y_\mathrm{o}+\eta\end{array}\)
-带入本题方程：
-\(\begin{aligned}\frac{\mathrm{d}\xi}{\mathrm{d}t}&amp;=k_1\xi-\mu x_0\eta-\mu y_0\xi-\mu\xi\eta\\\frac{\mathrm{d}\eta}{\mathrm{d}t}&amp;=\nu x_0\eta+\nu y_0\xi-k_2\eta+\nu\xi\eta\end{aligned}\)
-忽略掉$\xi\eta$这种二阶无穷小，然后带入$x_0,y_0$，得到：
-\(\begin{aligned}\frac{\mathrm{d}\xi}{\mathrm{d}t}&amp;=-k_2\frac{\mu}{\nu}\eta\\\frac{\mathrm{d}\eta}{\mathrm{d}t}&amp;=k_1\frac{\nu}{\mu}\xi\end{aligned}\)
-两边求下导，带一下，得到解耦式子：
-\(\begin{aligned}&amp;\frac{\mathrm{d}^2\xi}{\mathrm{d}t^2}+k_1k_2\xi=0\\&amp;\frac{\mathrm{d}^2\eta}{\mathrm{d}t^2}+k_1k_2\eta=0\end{aligned}\)
-熟悉的感觉，直接开始解，解得：
-\(x=\frac{k_2}{\nu}+E_1\sin\left(\sqrt{k_1k_2}t+\delta_1\right)\\
-\\
-y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p>
-
-<h2 id="12-矢量微分算子和拉普拉斯算子">1.2 矢量微分算子和拉普拉斯算子</h2>
-<h3 id="121矢量微分算子">1.2.1矢量微分算子</h3>
-<p>老熟人：
-\(\nabla=\frac{\partial}{\partial x}\boldsymbol{i}+\frac{\partial}{\partial y}\boldsymbol{j}+\frac{\partial}{\partial z}\boldsymbol{k}\)</p>
-
-<p>标量函数$u$的梯度:
-\(\nabla u=\frac{\partial u}{\partial x}i+\frac{\partial u}{\partial y}j+\frac{\partial u}{\partial z}k\)</p>
-
-<p>矢量函数${E}$的散度：
-\(\nabla\cdot\boldsymbol{E}=\left(\frac{\partial}{\partial x}\boldsymbol{i}+\frac{\partial}{\partial y}\boldsymbol{j}+\frac{\partial}{\partial z}\boldsymbol{k}\right)\cdot(E_x\boldsymbol{i}+E_y\boldsymbol{j}+E_z\boldsymbol{k})=\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}\)</p>
-
-<p>矢量函数$E$的旋度：
-\(\left.\nabla\times E=\left|\begin{array}{ccc}i&amp;j&amp;k\\\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\E_x&amp;E_y&amp;E_z\end{array}\right.\right|=\left|\begin{array}{cc}\frac{\partial}{\partial y}&amp;\frac{\partial}{\partial z}\\E_y&amp;E_z\end{array}\right|i-\left|\begin{array}{ccc}\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial z}\\E_x&amp;E_z\end{array}\right|j+\left|\begin{array}{ccc}\frac{\partial}{\partial x}&amp;\frac{\partial}{\partial y}\\E_x&amp;E_y\end{array}\right|k\\
-=\left(\frac{\partial E_x}{\partial y}-\frac{\partial E_y}{\partial z}\right)\boldsymbol{i}+\left(\frac{\partial E_x}{\partial z}-\frac{\partial E_x}{\partial x}\right)\boldsymbol{j}+\left(\frac{\partial E_y}{\partial x}-\frac{\partial E_x}{\partial y}\right)\boldsymbol{k}\)</p>
-
-<p>拉普拉斯算子：
-\(\nabla^{2}=\frac{\partial^{2 }} {\partial x^{2 }} +\frac{\partial^{2 }} {\partial y^{2 }} +\frac{\partial^{2 }} {\partial z^{2 }}\)
-拉普拉斯算子作用于标量函数$u$得到：
-\(\nabla^{2}u\equiv\nabla\cdot(\nabla u)=\frac{\partial^{2}u}{\partial x^{2 }} +\frac{\partial^{2}u}{\partial y^{2 }} +\frac{\partial^{2}u}{\partial z^{2 }}\)
-作用于矢量函数$E$得到：
-\(\nabla^{2}\boldsymbol{E}=(\nabla^{2}E_{x})\boldsymbol{i}+(\nabla^{2}E_{y})\boldsymbol{j}+(\nabla^{2}E_{z})\boldsymbol{k}\)
-然后就是一堆等式，注意，这些等式要求$u$和$E$有二阶连续偏导数：
-\(\begin{aligned}
-&amp;(1)\nabla(u+v)=\nabla u+\nabla v;  \\
-&amp;(2)\nabla\cdot(\boldsymbol{E}+\boldsymbol{F})=\nabla\cdot\boldsymbol{E}+\nabla\cdot\boldsymbol{F};  \\
-&amp;(3)\nabla\times(\boldsymbol{E}+\boldsymbol{F})=\nabla\times\boldsymbol{E}+\nabla\times\boldsymbol{F};  \\
-&amp;(4) \nabla\cdot(u\boldsymbol{E})=(\nabla u)\cdot\boldsymbol{E}+u(\nabla\cdot\boldsymbol{E});  \\
-&amp;(5)\nabla\times(u\boldsymbol{E})=(\nabla u)\times\boldsymbol{E}+u(\nabla\times\boldsymbol{E}); \\
-&amp;(6)\nabla\cdot(\boldsymbol{E}\times\boldsymbol{F})=\boldsymbol{F}\cdot(\nabla\times\boldsymbol{E})-\boldsymbol{E}\cdot(\nabla\times\boldsymbol{F});\\&amp;(7)\nabla\times(\boldsymbol{E}\times\boldsymbol{F})=(\boldsymbol{F}\cdot\nabla)\boldsymbol{E}-\boldsymbol{F}(\nabla\cdot\boldsymbol{E})-(\boldsymbol{E}\cdot\nabla)\boldsymbol{F}+\boldsymbol{E}(\nabla\cdot\boldsymbol{F});\\&amp;(8)\nabla(\boldsymbol{E}\cdot\boldsymbol{F})=(\boldsymbol{F}\cdot\nabla)\boldsymbol{E}+(\boldsymbol{E}\cdot\nabla)\boldsymbol{F}+\boldsymbol{F}\times(\nabla\times\boldsymbol{E})+\boldsymbol{E}\times(\nabla\times\boldsymbol{F});\\
-&amp;(9)\nabla \times(\nabla u)=0\\
-&amp;(10)\nabla \cdot(\nabla \times E) = 0\\
-&amp;(11)\nabla \times(\nabla \times E) = \nabla (\nabla \cdot E)-\nabla ^2E
-\end{aligned}\)</p>
-<h3 id="122-拉普拉斯算子">1.2.2 拉普拉斯算子</h3>
-<p>有若干相关的方程：</p>
-
-<p>拉普拉斯方程：$\nabla^2u=0$</p>
-
-<p>亥姆霍兹方程：$\nabla^2u+k^2u=0$</p>
-
-<p>波动方程：$\frac{\partial^2u}{\partial t^2}=a^2\nabla^2u$</p>
-
-<p>热传导方程：$\frac{\partial u}{\partial t}=a^2\nabla^2u$</p>
-
-<p>薛定谔方程：$\mathrm{i}\hbar\frac{\partial\psi}{\partial t}=-\frac{\hbar^2}{2m}\nabla^2\psi+V(r)\psi$</p>
-<h4 id="极坐标系中的拉普拉斯算子">极坐标系中的拉普拉斯算子</h4>
-<p>\(\nabla^2u=\frac{\partial^2u}{\partial r^2}+\frac1r\frac{\partial u}{\partial r}+\frac1{r^2}\frac{\partial^2u}{\partial\theta^2}\)</p>
-<h4 id="球坐标拉普拉斯算子">球坐标拉普拉斯算子</h4>
-<p>\(\nabla^2u=\frac1{r^2}\frac\partial{\partial r}\left(r^2\frac{\partial u}{\partial r}\right)+\frac1{r^2\sin\theta}\frac\partial{\partial\theta}\left(\sin\theta\frac{\partial u}{\partial\theta}\right)+\frac1{r^2\sin^2\theta}\frac{\partial^2u}{\partial\phi^2}\)</p>
+      
 
     </div>
 
@@ -321,25 +196,25 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
   <ul class="share__list list-reset">
     <li class="share__item">
       <a class="share__link share__twitter"
-        href="https://twitter.com/intent/tweet?text=Book%20Reading:%20Mathematics%20Methods%20for%20Physics,%20Chapter%20I&url=/blog/book-reading-mathematical-methods-for-physics"
+        href="https://twitter.com/intent/tweet?text=Course%20Note:%20Communication%20Principles&url=/blog/course-note-communication-principles"
         onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
         title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
     </li>
     <li class="share__item">
       <a class="share__link share__facebook"
-        href="https://www.facebook.com/sharer/sharer.php?u=/blog/book-reading-mathematical-methods-for-physics"
+        href="https://www.facebook.com/sharer/sharer.php?u=/blog/course-note-communication-principles"
         onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
         title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
     </li>
     <li class="share__item">
       <a class="share__link share__pinterest"
-        href="http://pinterest.com/pin/create/button/?url=/blog/book-reading-mathematical-methods-for-physics&amp;media=https://cdn.risingentropy.top/images/posts/20240107172456.png&amp;description=Book%20Reading:%20Mathematics%20Methods%20for%20Physics,%20Chapter%20I"
+        href="http://pinterest.com/pin/create/button/?url=/blog/course-note-communication-principles&amp;media=&amp;description=Course%20Note:%20Communication%20Principles"
         onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
         title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
     </li>
     <li class="share__item">
       <a class="share__link share__linkedin"
-        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/book-reading-mathematical-methods-for-physics&title=Book%20Reading:%20Mathematics%20Methods%20for%20Physics,%20Chapter%20I&summary=Chapter%201&source=Haoyu%20Deng's%20page"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/blog/course-note-communication-principles&title=Course%20Note:%20Communication%20Principles&summary=Course%20note%20for%20information%20theory&source=Haoyu%20Deng's%20page"
         onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
         title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
     </li>
@@ -355,25 +230,25 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
     <div class="col col-10 col-d-12 push-d-0 push-1">
       <div class="post__navigation animate">
   
-  <a class="post__prev" href="/blog/integrate-gradient">
+  <a class="post__prev" href="/blog/book-reading-mathematical-methods-for-physics-chapter3">
     <div class="prev__image">
-      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240105172553.png" alt="Book Reading: Mathematics Methods for Physics, Chapter I">
+      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240107172456.png" alt="Course Note: Communication Principles">
     </div>
     <div class="prev__box">
       <span class="post__nav post__nav__prev">Prev post</span>
-      <h2 class="post__nav__title">Papaer Reading: Axiomatic Attribution for Deep Networks</h2>
+      <h2 class="post__nav__title">Book Reading: Mathematics Methods for Physics, Chapter III</h2>
     </div>
   </a>
   
 
   
-  <a class="post__next" href="/blog/book-reading-mathematical-methods-for-physics-chapter2">
+  <a class="post__next" href="/blog/course-note-information-therory-and-encoding">
     <div class="next__box">
       <span class="post__nav post__nav__next">Next post</span>
-      <h2 class="post__nav__title">Book Reading: Mathematics Methods for Physics, Chapter II</h2>
+      <h2 class="post__nav__title">Course Note: Information Theory</h2>
     </div>
     <div class="next__image">
-      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240107172456.png" alt="Book Reading: Mathematics Methods for Physics, Chapter I">
+      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240301174111.png" alt="Course Note: Communication Principles">
     </div>
   </a>
   
@@ -401,7 +276,7 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
                 
                 
                   
-                    <a href="/tags/book-reading" class="section__link related-tag">See all<span> book-reading</span> <i class="ion ion-md-arrow-forward"></i></a>
+                    <a href="/tags/course-note" class="section__link related-tag">See all<span> course-note</span> <i class="ion ion-md-arrow-forward"></i></a>
                   
                 
                   
@@ -419,28 +294,14 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
             
       
             
-            
-            
-            
-      
-            
-      
-            
-            
-            
-            
-      
-            
-      
-            
 
               <div class="article col col-4 col-d-6 col-t-12">
                 <div class="article__inner">
               
                   
                   <div class="image-wrap">
-                    <a class="article__image" href="/blog/book-reading-mathematical-methods-for-physics-chapter3">
-                      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240107172456.png" alt="Book Reading: Mathematics Methods for Physics, Chapter III">
+                    <a class="article__image" href="/blog/course-note-information-therory-and-encoding">
+                      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240301174111.png" alt="Course Note: Information Theory">
                     </a>
                   </div>
                   
@@ -450,19 +311,19 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
                     
                     <div class="article-tags__box">
                       
-                      <a href="/tag/book-reading" class="article__tag">book-reading</a>
+                      <a href="/tag/course-note" class="article__tag">course-note</a>
                       
-                      <a href="/tag/math" class="article__tag">math</a>
+                      <a href="/tag/information-theory" class="article__tag">information-theory</a>
                       
                     </div>
                     
               
                     <h2 class="article__title">
-                      <a href="/blog/book-reading-mathematical-methods-for-physics-chapter3">Book Reading: Mathematics Methods for Physics, Chapter III</a>
+                      <a href="/blog/course-note-information-therory-and-encoding">Course Note: Information Theory</a>
                     </h2>
               
                     <p class="article__excerpt">
-                      Chapter 3
+                      Course note for information theory
                     </p>
               
                     <div class="article__meta">
@@ -471,7 +332,7 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
                       </div>
                       <div class="article-info">
                         <div class="article__author-name">Haoyu Deng</div>
-                        <span class="article__date"><time datetime="2024-02-08T07:28:35+00:00">08 Feb 2024</time></span>
+                        <span class="article__date"><time datetime="2024-03-01T07:28:35+00:00">01 Mar 2024</time></span>
                       </div>
                     </div>
               
@@ -489,55 +350,20 @@ y=\frac{k_{1 }} {\mu}+E_{2}\sin\left(\sqrt{k_{1}k_{2 }} t+\delta_{2}\right)\)</p
             
       
             
-
-              <div class="article col col-4 col-d-6 col-t-12">
-                <div class="article__inner">
-              
-                  
-                  <div class="image-wrap">
-                    <a class="article__image" href="/blog/book-reading-mathematical-methods-for-physics-chapter2">
-                      <img loading="lazy" src="https://cdn.risingentropy.top/images/posts/20240107172456.png" alt="Book Reading: Mathematics Methods for Physics, Chapter II">
-                    </a>
-                  </div>
-                  
-              
-                  <div class="article__content">
-              
-                    
-                    <div class="article-tags__box">
-                      
-                      <a href="/tag/book-reading" class="article__tag">book-reading</a>
-                      
-                      <a href="/tag/math" class="article__tag">math</a>
-                      
-                    </div>
-                    
-              
-                    <h2 class="article__title">
-                      <a href="/blog/book-reading-mathematical-methods-for-physics-chapter2">Book Reading: Mathematics Methods for Physics, Chapter II</a>
-                    </h2>
-              
-                    <p class="article__excerpt">
-                      Chapter 2
-                    </p>
-              
-                    <div class="article__meta">
-                      <div class="article__author-image">
-                        <img loading="lazy" src="/images/avatar.jpg" alt="Haoyu Deng">
-                      </div>
-                      <div class="article-info">
-                        <div class="article__author-name">Haoyu Deng</div>
-                        <span class="article__date"><time datetime="2024-02-05T07:28:35+00:00">05 Feb 2024</time></span>
-                      </div>
-                    </div>
-              
-                  </div>
-                </div>
-              </div>
-
             
-                
-              
+            
+            
+      
+            
+      
+            
+            
+            
+            
+      
+            
+      
+            
             
             
             
