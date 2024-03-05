@@ -115,3 +115,30 @@ $$
 可以用这个图来表示。
 
 ![20240304190846](https://cdn.risingentropy.top/images/posts/20240304190846.png)
+
+### 熵的链式法则
+链式法则定义如下：
+$$
+H(X_1,X_2,\cdots,X_n) = \sum\limits_{i=1}^{n}H(X_i|X_{i-1},\cdots,X_1)
+$$
+证明就重复用二元展开法则就ok
+
+### 条件互信息
+$$
+\begin{aligned}
+I(X;Y|Z) &= H(X|Z) - H(X|Y,Z)\\
+&=E\log \frac{p(X,Y|Z)}{p(X|Z)p(Y|Z)}
+\end{aligned}
+$$
+### 信息的链式法则
+$$
+I(X_1,X_2,\cdots,X_n;Y) = \sum\limits_{i=1}^{n}I(X_i;Y|X_{i-1},X_{i-2},\cdots,X_1)
+$$
+### 条件相关熵
+对于概率密度函数$p(x,y)$和$q(x,y)$而言，条件相关熵为：
+$$
+\begin{aligned}
+    D(p(y|x)||q(y|x)) &= \sum\limits_{x}p(x)\sum\limits_{y}p(y|x)\log \frac{p(y|x)}{q(y|x)}\\
+    &=E\log\frac{p(Y|X)}{q(Y|X)}
+\end{aligned}
+$$
